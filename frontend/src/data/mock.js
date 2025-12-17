@@ -76,7 +76,7 @@ export const courseContentData = {
   modules: [
     {
       number: 1,
-      title: "Fisiologia dos Agonistas GLP-1",
+      title: "Fisiologia dos Agonistas GLP-1 e GIP",
       icon: "Brain"
     },
     {
