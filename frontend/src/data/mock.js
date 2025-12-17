@@ -95,7 +95,7 @@ export const offerData = {
         "Acesso à mentoria completa",
         "Material didático em PDF",
         "Certificado de conclusão",
-        "Acesso vitalício"
+        "Acesso completo ao conteúdo"
       ],
       highlighted: false
     },
