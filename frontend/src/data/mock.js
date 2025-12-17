@@ -102,11 +102,12 @@ export const offerData = {
     {
       name: "Plano Intermediário",
       price: "R$ 997",
-      description: "Mentoria + 1 fase aprofundada",
+      description: "Mentoria + 1 Programa Prático",
       features: [
-        "Tudo do Plano Essencial",
-        "Planilhas de periodização",
-        "Suporte por 30 dias"
+        "Acesso a Mentoria completa",
+        "1 Programa Prático",
+        "Escolha de 1 PDF (Fase 1, 2 ou 3)",
+        "Certificado de Participação"
       ],
       highlighted: true
     },
