@@ -71,6 +71,42 @@ export const howItWorksData = {
   ]
 };
 
+export const courseContentData = {
+  title: "Conteúdo do Curso",
+  modules: [
+    {
+      number: 1,
+      title: "Fisiologia dos Agonistas GLP-1",
+      icon: "Brain"
+    },
+    {
+      number: 2,
+      title: "Análise fisiológica e corporal do cliente",
+      icon: "ClipboardList"
+    },
+    {
+      number: 3,
+      title: "Sinergia Nutricional Essencial",
+      icon: "Apple"
+    },
+    {
+      number: 4,
+      title: "Estruturação do Protocolo (Fases 1, 2 e 3)",
+      icon: "Layers"
+    },
+    {
+      number: 5,
+      title: "Estudos de Caso Reais",
+      icon: "Users"
+    },
+    {
+      number: 6,
+      title: "Precificação e Venda do Tratamento",
+      icon: "DollarSign"
+    }
+  ]
+};
+
 export const benefitsData = {
   title: "O Que Você Vai Conquistar",
   benefits: [
