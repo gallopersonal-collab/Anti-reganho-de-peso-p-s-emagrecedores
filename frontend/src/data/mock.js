@@ -101,7 +101,7 @@ export const exercises = [
   },
   {
     name: "Prancha",
-    image: "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80",
     muscles: "Core, Ombros, Glúteos"
   }
 ];
