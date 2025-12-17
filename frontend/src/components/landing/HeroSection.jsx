@@ -21,7 +21,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center gap-2 bg-[#457B9D]/30 border border-[#457B9D]/50 rounded-full px-4 py-2 mb-6">
               <span className="w-2 h-2 bg-[#F1FAEE] rounded-full animate-pulse" />
-              <span className="text-[#F1FAEE] text-sm font-medium">Mentoria Exclusiva para Profissionais</span>
+              <span className="text-[#F1FAEE] text-sm font-medium">Curso Exclusivo para Profissionais</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-[#F1FAEE] leading-tight mb-6">
@@ -63,7 +63,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
               <div className="bg-white rounded-3xl shadow-2xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500">
                 <div className="bg-gradient-to-br from-[#1D3557] to-[#457B9D] rounded-2xl p-6 text-white">
                   <h3 className="text-xl font-bold mb-2">Método Anti-Reganho</h3>
-                  <p className="text-sm opacity-80">Mentoria Completa</p>
+                  <p className="text-sm opacity-80">Curso Completo</p>
                   <div className="mt-4 space-y-2">
                     {['Fase 1: Durante Medicação', 'Fase 2: Desmame', 'Fase 3: Pós-Medicação'].map((phase, idx) => (
                       <div key={idx} className="flex items-center gap-2 text-sm">

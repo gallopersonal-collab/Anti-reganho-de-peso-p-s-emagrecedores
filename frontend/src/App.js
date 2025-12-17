@@ -37,7 +37,7 @@ const CHECKOUT_LINK = "#checkout"; // TODO: Replace with actual checkout link
 
 function App() {
   useEffect(() => {
-    console.log('[App] Mentoria Anti-Reganho Landing Page loaded');
+    console.log('[App] Curso Anti-Reganho Landing Page loaded');
   }, []);
 
   return (
