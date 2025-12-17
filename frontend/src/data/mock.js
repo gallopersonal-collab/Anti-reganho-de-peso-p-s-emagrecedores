@@ -90,9 +90,9 @@ export const offerData = {
     {
       name: "Plano Essencial",
       price: "R$ 797",
-      description: "Mentoria completa",
+      description: "Curso completo",
       features: [
-        "Acesso à mentoria completa",
+        "Acesso ao Curso completo",
         "Material didático em PDF",
         "Certificado de conclusão",
         "Acesso completo ao conteúdo"
@@ -102,9 +102,9 @@ export const offerData = {
     {
       name: "Plano Intermediário",
       price: "R$ 997",
-      description: "Mentoria + 1 Programa Prático",
+      description: "Curso completo + 1 Programa Prático",
       features: [
-        "Acesso a Mentoria completa",
+        "Acesso ao Curso completo",
         "1 Programa Prático",
         "Escolha de 1 PDF (Fase 1, 2 ou 3)",
         "Certificado de Participação"
