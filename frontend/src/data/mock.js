@@ -114,7 +114,7 @@ export const benefitsData = {
   benefits: [
     { text: "Aprenda um método validado para evitar o reganho de peso", icon: "CheckCircle" },
     { text: "Saiba exatamente o que fazer em cada fase da jornada", icon: "Map" },
-    { text: "Tenha protocolos prontos para aplicar imediatamente", icon: "FileText" },
+    { text: "Aprenda os protocolos para aplicar imediatamente", icon: "FileText" },
     { text: "Destaque-se no mercado como especialista", icon: "Star" },
     { text: "Fidelize alunos com resultados reais e duradouros", icon: "Heart" },
     { text: "Aumente seu faturamento com um serviço premium", icon: "DollarSign" }
