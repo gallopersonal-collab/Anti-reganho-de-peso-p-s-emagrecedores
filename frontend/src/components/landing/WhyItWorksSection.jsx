@@ -35,13 +35,13 @@ export const WhyItWorksSection = ({ items }) => {
             return (
               <div
                 key={index}
-                className="group bg-emerald-800/50 backdrop-blur-sm border border-emerald-700/50 rounded-2xl p-6 hover:bg-emerald-800 transition-all duration-300 hover:-translate-y-1"
+                className="group bg-emerald-800 border border-emerald-600/50 rounded-2xl p-6 hover:bg-emerald-700 transition-all duration-300 hover:-translate-y-1 shadow-lg"
               >
-                <div className="w-14 h-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-emerald-500/30 transition-colors">
-                  {IconComponent && <IconComponent className="w-7 h-7 text-emerald-400" />}
+                <div className="w-14 h-14 bg-emerald-500/30 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-emerald-500/40 transition-colors">
+                  {IconComponent && <IconComponent className="w-7 h-7 text-emerald-300" />}
                 </div>
                 
-                <p className="text-white font-medium leading-relaxed">
+                <p className="text-white font-medium leading-relaxed text-base">
                   {item.title}
                 </p>
               </div>
