@@ -1,69 +1,82 @@
-import React from 'react';
-import { Check, Users } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Dumbbell, GraduationCap, Award, TrendingUp, Users } from 'lucide-react';
 
-export const TargetAudienceSection = ({ items }) => {
+const iconMap = {
+  Dumbbell,
+  GraduationCap,
+  Award,
+  TrendingUp
+};
+
+export const TargetAudienceSection = ({ data }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    console.log('[TargetAudienceSection] Component mounted');
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          console.log('[TargetAudienceSection] Section visible');
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section
+      ref={sectionRef}
+      className={`py-16 md:py-24 bg-[#F1FAEE] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left - Image */}
-          <div className="relative order-2 lg:order-1">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-              <img
-                src="https://images.pexels.com/photos/8172947/pexels-photo-8172947.jpeg?w=800&q=80"
-                alt="Pessoas treinando"
-                className="w-full h-[500px] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent" />
-            </div>
-
-            {/* Floating Card */}
-            <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-6 max-w-[200px]">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
-                  <Users className="w-6 h-6 text-emerald-600" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-slate-900">30-60</p>
-                  <p className="text-xs text-slate-500">anos</p>
-                </div>
-              </div>
-              <p className="text-sm text-slate-600">Homens e mulheres</p>
-            </div>
-
-            {/* Decorative */}
-            <div className="absolute -top-6 -left-6 w-24 h-24 bg-emerald-100 rounded-full blur-2xl" />
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-[#457B9D]/20 text-[#1D3557] rounded-full px-4 py-2 mb-6">
+            <Users className="w-4 h-4" />
+            <span className="text-sm font-medium">Público-Alvo</span>
           </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1D3557] mb-4">
+            {data.title}
+          </h2>
+          <p className="text-lg text-[#1D3557]/70 max-w-2xl mx-auto">
+            {data.description}
+          </p>
+        </div>
 
-          {/* Right - Content */}
-          <div className="order-1 lg:order-2">
-            <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 rounded-full px-4 py-2 mb-6">
-              <Users className="w-4 h-4" />
-              <span className="text-sm font-medium">Público-Alvo</span>
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-              Para Quem é Esse Programa?
-            </h2>
-
-            <p className="text-lg text-slate-600 mb-10">
-              Se você se identifica com algum desses pontos, este programa foi feito para você.
-            </p>
-
-            <div className="space-y-4">
-              {items.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl hover:bg-emerald-50 transition-colors duration-300 group"
-                >
-                  <div className="flex-shrink-0 w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Check className="w-5 h-5 text-white" />
+        {/* Cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {data.items.map((item, index) => {
+            const IconComponent = iconMap[item.icon];
+            return (
+              <Card
+                key={index}
+                className="bg-white border-0 shadow-lg hover-lift overflow-hidden group"
+              >
+                <CardContent className="p-6">
+                  <div className="w-14 h-14 bg-[#457B9D]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#457B9D] transition-colors duration-300">
+                    {IconComponent && (
+                      <IconComponent className="w-7 h-7 text-[#457B9D] group-hover:text-white transition-colors duration-300" />
+                    )}
                   </div>
-                  <p className="text-slate-700 text-lg font-medium">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+                  <h3 className="text-lg font-bold text-[#1D3557] mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-[#1D3557]/70 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>
