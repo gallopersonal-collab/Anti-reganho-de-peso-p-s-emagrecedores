@@ -66,22 +66,22 @@ export const whatYouGet = [
 export const exercises = [
   {
     name: "Agachamento",
-    image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=600&q=80",
     muscles: "Quadríceps, Glúteos, Core"
   },
   {
     name: "Afundo",
-    image: "https://images.unsplash.com/photo-1434608519344-49d77a699e1d?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1599058917765-a780eda07a3e?w=600&q=80",
     muscles: "Quadríceps, Glúteos, Isquiotibiais"
   },
   {
     name: "Stiff",
-    image: "https://images.unsplash.com/photo-1598971639058-afc1019c8ef9?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80",
     muscles: "Isquiotibiais, Glúteos, Lombar"
   },
   {
     name: "Remada Curvada",
-    image: "https://images.unsplash.com/photo-1603287681836-b174ce5074c2?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",
     muscles: "Dorsais, Bíceps, Core"
   },
   {
@@ -91,7 +91,7 @@ export const exercises = [
   },
   {
     name: "Elevação Pélvica",
-    image: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80",
     muscles: "Glúteos, Isquiotibiais, Core"
   },
   {
