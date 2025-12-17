@@ -102,7 +102,7 @@ export const offerData = {
     {
       name: "Plano Intermediário",
       price: "R$ 997",
-      description: "Curso completo + 1 Programa Prático",
+      description: "",
       features: [
         "Acesso ao Curso completo",
         "Material didático em PDF",
