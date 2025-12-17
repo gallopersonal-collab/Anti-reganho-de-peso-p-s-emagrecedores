@@ -119,8 +119,6 @@ export const offerData = {
         "Tudo do Plano Intermediário",
         "3 Programas Personalizáveis em PDF",
         "1 para cada fase",
-        "Suporte por 60 dias",
-        "Grupo exclusivo",
         "Certificado de Participação"
       ],
       highlighted: false
