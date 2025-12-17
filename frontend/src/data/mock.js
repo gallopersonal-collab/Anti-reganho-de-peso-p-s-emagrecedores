@@ -117,9 +117,11 @@ export const offerData = {
       description: "Mentoria + 3 fases completas",
       features: [
         "Tudo do Plano Intermediário",
-        "Protocolos personalizáveis",
+        "3 Programas Personalizáveis em PDF",
+        "1 para cada fase",
         "Suporte por 60 dias",
-        "Grupo exclusivo"
+        "Grupo exclusivo",
+        "Certificado de Participação"
       ],
       highlighted: false
     }
