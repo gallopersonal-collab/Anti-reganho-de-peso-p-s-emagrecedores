@@ -112,7 +112,7 @@ export const offerData = {
       highlighted: true
     },
     {
-      name: "Plano Completo",
+      name: "Plano Premium",
       price: "R$ 1.097",
       description: "",
       features: [
