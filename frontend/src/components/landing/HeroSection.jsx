@@ -24,7 +24,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
               <span className="text-[#F1FAEE] text-sm font-medium">Curso Exclusivo para Profissionais</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-[#F1FAEE] leading-tight mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-[#F1FAEE] leading-tight mb-6">
               {data.headline}
             </h1>
 
