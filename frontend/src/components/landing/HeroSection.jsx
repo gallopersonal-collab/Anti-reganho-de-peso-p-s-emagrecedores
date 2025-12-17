@@ -34,8 +34,8 @@ export const HeroSection = ({ data, checkoutLink }) => {
 
             <Button
               onClick={() => {
-                console.log('[HeroSection] CTA clicked');
-                window.location.href = checkoutLink;
+                console.log('[HeroSection] CTA clicked - scrolling to plans');
+                document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
               }}
               size="lg"
               className="bg-[#457B9D] hover:bg-[#457B9D]/90 text-white font-bold px-8 py-6 text-lg rounded-xl shadow-lg shadow-[#457B9D]/30 transition-all hover:scale-105 pulse-cta"
