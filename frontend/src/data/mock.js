@@ -96,7 +96,7 @@ export const courseContentData = {
     },
     {
       number: 5,
-      title: "Estudos de Caso Reais",
+      title: "Estudos de Caso",
       icon: "Users"
     },
     {
