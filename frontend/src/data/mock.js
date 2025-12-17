@@ -142,7 +142,7 @@ export const offerData = {
   plans: [
     {
       name: "Plano Essencial",
-      price: "R$ 797",
+      price: "R$ 897",
       description: "",
       features: [
         "Acesso ao Curso completo",
@@ -153,7 +153,7 @@ export const offerData = {
     },
     {
       name: "Plano Intermediário",
-      price: "R$ 997",
+      price: "R$ 1.097",
       description: "",
       features: [
         "Acesso ao Curso completo",
@@ -166,7 +166,7 @@ export const offerData = {
     },
     {
       name: "Plano Premium",
-      price: "R$ 1.097",
+      price: "R$ 1.297",
       description: "",
       features: [
         "Acesso ao Curso completo",
