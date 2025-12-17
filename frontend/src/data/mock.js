@@ -240,7 +240,7 @@ export const faqData = {
     },
     {
       question: "É possível parcelar o valor?",
-      answer: "Sim! Oferecemos parcelamento em até 12x no cartão de crédito. O valor à vista tem desconto especial."
+      answer: "Sim! Oferecemos parcelamento em até 10x no cartão de crédito, mas você assume os juros do cartão. O valor à vista tem desconto especial."
     }
   ]
 };
