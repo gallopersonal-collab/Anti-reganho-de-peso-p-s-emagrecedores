@@ -106,7 +106,7 @@ export const offerData = {
       features: [
         "Acesso ao Curso completo",
         "Material didático em PDF",
-        "1 Programa Prático",
+        "1 Programa Personalizável",
         "Escolha de 1 PDF (Fase 1, 2 ou 3)",
         "Certificado de Participação"
       ],
