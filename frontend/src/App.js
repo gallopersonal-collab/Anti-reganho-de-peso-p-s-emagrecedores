@@ -63,6 +63,9 @@ function App() {
         <section id="como-funciona">
           <HowItWorksSection data={howItWorksData} />
         </section>
+
+        {/* Conteúdo do Curso */}
+        <CourseContentSection data={courseContentData} />
         
         {/* BLOCO 6 - Benefícios */}
         <section id="beneficios">
