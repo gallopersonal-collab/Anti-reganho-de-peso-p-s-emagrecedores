@@ -82,7 +82,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-[#457B9D]/30 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-center md:text-left">
-            © {currentYear} Método Anti-Reganho. Todos os direitos reservados.
+            © {currentYear} José Carlos Gallo - Método Anti-Reganho. Todos os direitos reservados.
           </p>
           <p className="text-sm">
             Desenvolvido por José Carlos Gallo
