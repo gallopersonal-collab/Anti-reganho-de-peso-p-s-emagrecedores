@@ -163,7 +163,8 @@ export const offerData = {
         "Escolha de 1 PDF (Fase 1, 2 ou 3)",
         "Certificado de Especialista no Método Anti-Reganho de peso pós emagrecedores"
       ],
-      highlighted: true
+      highlighted: true,
+      checkoutLink: "https://pag.ae/81jEzuaTM"
     },
     {
       name: "Plano Premium",
