@@ -121,6 +121,21 @@ export const benefitsData = {
   ]
 };
 
+export const anchorData = {
+  title: "Quanto Vale Este Conhecimento?",
+  description: "Se você pudesse cobrar R$ 3.000 a R$ 5.000 por cada programa aplicado com seus alunos, quanto investiria para dominar este método?",
+  originalValue: "R$ 5.997,00",
+  originalLabel: "Valor real do Plano Premium",
+  includes: [
+    "16 horas de curso presencial intensivo",
+    "6 módulos completos com metodologia exclusiva",
+    "3 Programas Personalizáveis em PDF",
+    "Certificado de Especialista reconhecido",
+    "Material didático completo"
+  ],
+  savings: "Economia de mais de 80%"
+};
+
 export const offerData = {
   title: "Escolha Seu Plano",
   subtitle: "Apenas 20 vagas disponíveis",
