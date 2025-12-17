@@ -39,7 +39,7 @@ export const Header = ({ kiwifyLink }) => {
             <span className={`font-semibold text-lg hidden sm:block transition-colors duration-300 ${
               isScrolled ? 'text-slate-800' : 'text-white'
             }`}>
-              Método Gallo
+              Método Anti-Reganho
             </span>
           </div>
 

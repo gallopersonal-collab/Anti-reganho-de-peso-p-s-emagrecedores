@@ -15,7 +15,7 @@ export const Footer = () => {
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                 <span className="text-white font-bold text-lg">JG</span>
               </div>
-              <span className="font-semibold text-lg text-white">Método Gallo</span>
+              <span className="font-semibold text-lg text-white">Método Anti-Reganho</span>
             </div>
             <p className="text-sm leading-relaxed">
               Programa de 4 semanas para manter o peso após Ozempic/Mounjaro. Criado por José Carlos Gallo.
@@ -49,11 +49,11 @@ export const Footer = () => {
             <h4 className="font-semibold text-white mb-4">Contato</h4>
             <div className="space-y-3">
               <a
-                href="mailto:contato@metodogallo.com.br"
+                href="mailto:contato@metodoreganho.com.br"
                 className="flex items-center gap-2 text-sm hover:text-emerald-400 transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                contato@metodogallo.com.br
+                contato@metodoreganho.com.br
               </a>
             </div>
 
@@ -78,7 +78,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-center md:text-left">
-            © {currentYear} Método Gallo. Todos os direitos reservados.
+            © {currentYear} Método Anti-Reganho. Todos os direitos reservados.
           </p>
           <p className="text-sm flex items-center gap-1">
             Feito com <Heart className="w-4 h-4 text-red-500 fill-current" /> por José Carlos Gallo
