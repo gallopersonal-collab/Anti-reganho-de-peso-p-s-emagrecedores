@@ -93,12 +93,6 @@ export const OfferSection = ({ data, checkoutLink }) => {
                 </Button>
               </CardContent>
 
-              {/* Badge */}
-              <div className="absolute top-4 right-4">
-                <div className="bg-[#F1FAEE] px-2 py-1 rounded text-xs font-semibold text-[#1D3557]">
-                  COMPLETO
-                </div>
-              </div>
             </Card>
           ))}
         </div>
