@@ -149,7 +149,8 @@ export const offerData = {
         "Material didático em PDF",
         "Certificado de Especialista no Método Anti-Reganho de peso pós emagrecedores"
       ],
-      highlighted: false
+      highlighted: false,
+      checkoutLink: "https://pag.ae/81jEwMmS6"
     },
     {
       name: "Plano Intermediário",
