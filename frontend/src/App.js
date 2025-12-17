@@ -8,6 +8,7 @@ import { ProblemSection } from "./components/landing/ProblemSection";
 import { UniversalInfoSection } from "./components/landing/UniversalInfoSection";
 import { TargetAudienceSection } from "./components/landing/TargetAudienceSection";
 import { HowItWorksSection } from "./components/landing/HowItWorksSection";
+import { CourseContentSection } from "./components/landing/CourseContentSection";
 import { BenefitsSection } from "./components/landing/BenefitsSection";
 import { OfferSection } from "./components/landing/OfferSection";
 import { BonusSection } from "./components/landing/BonusSection";
@@ -24,6 +25,7 @@ import {
   universalInfoData,
   targetAudienceData,
   howItWorksData,
+  courseContentData,
   benefitsData,
   offerData,
   bonusData,
