@@ -117,7 +117,7 @@ export const offerData = {
       price: "R$ 1.097",
       description: "",
       features: [
-        "Tudo do Plano Intermediário",
+        "Acesso ao Curso completo",
         "Material didático em PDF",
         "3 Programas Personalizáveis em PDF",
         "1 para cada fase",
