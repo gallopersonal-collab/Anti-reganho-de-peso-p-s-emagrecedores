@@ -90,7 +90,7 @@ export const offerData = {
     {
       name: "Plano Essencial",
       price: "R$ 797",
-      description: "Curso completo",
+      description: "",
       features: [
         "Acesso ao Curso completo",
         "Material didático em PDF",
