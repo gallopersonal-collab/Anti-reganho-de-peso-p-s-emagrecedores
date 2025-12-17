@@ -10,6 +10,7 @@ import { TargetAudienceSection } from "./components/landing/TargetAudienceSectio
 import { HowItWorksSection } from "./components/landing/HowItWorksSection";
 import { CourseContentSection } from "./components/landing/CourseContentSection";
 import { BenefitsSection } from "./components/landing/BenefitsSection";
+import { AnchorSection } from "./components/landing/AnchorSection";
 import { OfferSection } from "./components/landing/OfferSection";
 import { BonusSection } from "./components/landing/BonusSection";
 import { FutureSection } from "./components/landing/FutureSection";
@@ -27,6 +28,7 @@ import {
   howItWorksData,
   courseContentData,
   benefitsData,
+  anchorData,
   offerData,
   bonusData,
   futureData,
