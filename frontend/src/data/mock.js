@@ -94,7 +94,7 @@ export const offerData = {
       features: [
         "Acesso ao Curso completo",
         "Material didático em PDF",
-        "Certificado de conclusão"
+        "Certificado de Especialista no Método Anti-Reganho"
       ],
       highlighted: false
     },
@@ -107,7 +107,7 @@ export const offerData = {
         "Material didático em PDF",
         "1 Programa Personalizável",
         "Escolha de 1 PDF (Fase 1, 2 ou 3)",
-        "Certificado de Participação"
+        "Certificado de Especialista no Método Anti-Reganho"
       ],
       highlighted: true
     },
@@ -120,7 +120,7 @@ export const offerData = {
         "Material didático em PDF",
         "3 Programas Personalizáveis em PDF",
         "1 para cada fase",
-        "Certificado de Participação"
+        "Certificado de Especialista no Método Anti-Reganho"
       ],
       highlighted: false
     }
