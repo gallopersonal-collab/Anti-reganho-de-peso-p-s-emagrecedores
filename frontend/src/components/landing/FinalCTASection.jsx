@@ -42,8 +42,8 @@ export const FinalCTASection = ({ cta, checkoutLink }) => {
         {/* Main CTA Button */}
         <Button
           onClick={() => {
-            console.log('[FinalCTASection] CTA clicked');
-            window.location.href = checkoutLink;
+            console.log('[FinalCTASection] CTA clicked - scrolling to plans');
+            document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
           }}
           size="lg"
           className="bg-[#457B9D] hover:bg-[#457B9D]/90 text-white font-bold px-12 py-8 text-xl rounded-xl shadow-lg shadow-[#457B9D]/30 transition-all hover:scale-105 pulse-cta"
