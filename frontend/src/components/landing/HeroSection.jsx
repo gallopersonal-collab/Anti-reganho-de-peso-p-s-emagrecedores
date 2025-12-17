@@ -45,8 +45,29 @@ export const HeroSection = ({ data, checkoutLink }) => {
               <ArrowRight className="ml-2 w-5 h-5 bounce-arrow" />
             </Button>
 
+            {/* Course Dates */}
+            <div className="mt-8 bg-[#457B9D]/30 border border-[#457B9D]/50 rounded-xl p-4 inline-block">
+              <div className="flex flex-col sm:flex-row items-center gap-4 text-[#F1FAEE]">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">📅</span>
+                  <div>
+                    <p className="text-xs text-[#F1FAEE]/70">Datas do Curso</p>
+                    <p className="font-bold">{data.courseDates}</p>
+                  </div>
+                </div>
+                <div className="hidden sm:block w-px h-10 bg-[#F1FAEE]/30" />
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">🕐</span>
+                  <div>
+                    <p className="text-xs text-[#F1FAEE]/70">Horário</p>
+                    <p className="font-bold text-sm">{data.courseSchedule}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Trust indicators */}
-            <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-4">
+            <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-4">
               {['20 Vagas', 'Certificado', 'Suporte'].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-2 text-[#F1FAEE]/70 text-sm">
                   <CheckCircle className="w-4 h-4 text-[#457B9D]" />
