@@ -99,7 +99,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
                 <div className="mt-4 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-gray-500">A partir de</p>
-                    <p className="text-2xl font-bold text-[#1D3557]">R$ 797</p>
+                    <p className="text-2xl font-bold text-[#1D3557]">R$ 897</p>
                   </div>
                   <div className="bg-[#F1FAEE] px-3 py-1 rounded-full">
                     <span className="text-[#1D3557] text-xs font-semibold">ACESSO COMPLETO</span>
