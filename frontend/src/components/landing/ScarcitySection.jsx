@@ -72,8 +72,8 @@ export const ScarcitySection = ({ data, checkoutLink, cta }) => {
         {/* CTA */}
         <Button
           onClick={() => {
-            console.log('[ScarcitySection] CTA clicked');
-            window.location.href = checkoutLink;
+            console.log('[ScarcitySection] CTA clicked - scrolling to plans');
+            document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
           }}
           size="lg"
           className="bg-white hover:bg-white/90 text-red-600 font-bold px-12 py-7 text-lg rounded-xl shadow-lg transition-all hover:scale-105"
