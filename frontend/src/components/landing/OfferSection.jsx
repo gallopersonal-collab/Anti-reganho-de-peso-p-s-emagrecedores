@@ -84,7 +84,8 @@ export const OfferSection = ({ data, checkoutLink }) => {
                 <Button
                   onClick={() => {
                     console.log('[OfferSection] Plan selected:', plan.name);
-                    window.location.href = checkoutLink;
+                    const link = plan.checkoutLink || checkoutLink;
+                    window.open(link, '_blank');
                   }}
                   className={`w-full ${
                     plan.highlighted
