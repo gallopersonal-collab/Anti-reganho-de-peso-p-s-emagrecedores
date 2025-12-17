@@ -105,7 +105,6 @@ export const offerData = {
       description: "Mentoria + 1 fase aprofundada",
       features: [
         "Tudo do Plano Essencial",
-        "1 módulo de aprofundamento",
         "Planilhas de periodização",
         "Suporte por 30 dias"
       ],
@@ -117,7 +116,6 @@ export const offerData = {
       description: "Mentoria + 3 fases completas",
       features: [
         "Tudo do Plano Intermediário",
-        "3 módulos de aprofundamento",
         "Protocolos personalizáveis",
         "Suporte por 60 dias",
         "Grupo exclusivo"
