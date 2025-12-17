@@ -13,7 +13,7 @@ export const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">JG</span>
+                <span className="text-white font-bold text-lg">AR</span>
               </div>
               <span className="font-semibold text-lg text-white">Método Anti-Reganho</span>
             </div>

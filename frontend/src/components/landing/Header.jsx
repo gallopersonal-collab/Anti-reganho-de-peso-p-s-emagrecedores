@@ -34,7 +34,7 @@ export const Header = ({ kiwifyLink }) => {
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">JG</span>
+              <span className="text-white font-bold text-lg">AR</span>
             </div>
             <span className={`font-semibold text-lg hidden sm:block transition-colors duration-300 ${
               isScrolled ? 'text-slate-800' : 'text-white'
