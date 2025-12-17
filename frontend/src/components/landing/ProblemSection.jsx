@@ -48,8 +48,8 @@ export const ProblemSection = ({ data }) => {
             {/* Image */}
             <div className="w-full md:w-1/3 flex-shrink-0">
               <img
-                src="https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=400&q=80"
-                alt="Pessoa preocupada"
+                src="https://images.unsplash.com/photo-1573879541250-58ae8b322b40?w=400&q=80"
+                alt="Pessoa preocupada com peso na balança"
                 className="w-full h-48 md:h-64 object-cover rounded-2xl shadow-lg"
               />
             </div>
