@@ -2,7 +2,7 @@
 
 export const heroData = {
   headline: "O Curso de Especialista que Previne o Reganho de Peso após o uso de Ozempic, Wegovy ou Mounjaro — com um plano estratégico para cada fase da sua jornada",
-  subheadline: "Programa exclusivo em 3 etapas que acompanha sua transição durante o uso, desmame e pós-medicação. Desenvolvido por um Profissional de Educação Física especializado em emagrecimento definitivo.",
+  subheadline: "Método Exclusivo em 3 fases que acompanha a transição, do seu aluno, durante o uso, desmame e pós-medicação. Desenvolvido Pelo Professor José Carlos Gallo, Com Especialização em Fisiologia Clínica do exercício e Metabolismo Humano, pela Universidade de Konl-Alemanha.",
   cta: "Quero garantir minha vaga",
   heroImage: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80"
 };
