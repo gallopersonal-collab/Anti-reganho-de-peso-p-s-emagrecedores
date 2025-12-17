@@ -102,8 +102,9 @@ export const Header = ({ checkoutLink }) => {
               ))}
               <Button
                 onClick={() => {
-                  console.log('[Header] Mobile CTA clicked');
-                  window.location.href = checkoutLink;
+                  console.log('[Header] Mobile CTA clicked - scrolling to plans');
+                  document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMobileMenuOpen(false);
                 }}
                 className="mt-4 bg-[#457B9D] hover:bg-[#457B9D]/90 text-white font-semibold w-full"
               >
