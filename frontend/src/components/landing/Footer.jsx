@@ -22,7 +22,7 @@ export const Footer = () => {
               <span className="font-semibold text-lg text-[#F1FAEE]">Método Anti-Reganho</span>
             </div>
             <p className="text-sm leading-relaxed">
-              Curso de Especialista no Método Anti-Reganho de Peso para Profissionais de Educação Física que querem se especializar em acompanhamento de alunos que usam ou usaram medicamentos emagrecedores.
+              Curso de Especialista no Método Anti-Reganho de Peso para Personal Trainer e Profissionais de Educação Física que querem se especializar em acompanhamento de alunos que usam ou usaram medicamentos emagrecedores.
             </p>
           </div>
 
