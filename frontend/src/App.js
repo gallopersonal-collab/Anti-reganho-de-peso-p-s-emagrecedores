@@ -1,52 +1,59 @@
-import { useEffect } from "react";
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import React from "react";
+import "./App.css";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+// Landing Page Components
+import { Header } from "./components/landing/Header";
+import { HeroSection } from "./components/landing/HeroSection";
+import { ProblemSection } from "./components/landing/ProblemSection";
+import { ProgramSection } from "./components/landing/ProgramSection";
+import { WhatYouGetSection } from "./components/landing/WhatYouGetSection";
+import { ExercisesSection } from "./components/landing/ExercisesSection";
+import { TargetAudienceSection } from "./components/landing/TargetAudienceSection";
+import { TestimonialsSection } from "./components/landing/TestimonialsSection";
+import { WhyItWorksSection } from "./components/landing/WhyItWorksSection";
+import { AuthorSection } from "./components/landing/AuthorSection";
+import { OfferSection } from "./components/landing/OfferSection";
+import { GuaranteeSection } from "./components/landing/GuaranteeSection";
+import { Footer } from "./components/landing/Footer";
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
+// Mock Data
+import {
+  heroData,
+  problemData,
+  programWeeks,
+  whatYouGet,
+  exercises,
+  targetAudience,
+  testimonials,
+  whyItWorks,
+  authorData,
+  offerData,
+  guaranteeData,
+} from "./data/mock";
 
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+// Kiwify Link - Replace with actual link
+const KIWIFY_LINK = "https://kiwify.com.br"; // TODO: Replace with actual Kiwify checkout link
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Header kiwifyLink={KIWIFY_LINK} />
+      
+      <main>
+        <HeroSection data={{ ...heroData, kiwifyLink: KIWIFY_LINK }} />
+        <ProblemSection data={problemData} />
+        <ProgramSection weeks={programWeeks} kiwifyLink={KIWIFY_LINK} />
+        <WhatYouGetSection items={whatYouGet} />
+        <ExercisesSection exercises={exercises} />
+        <TargetAudienceSection items={targetAudience} />
+        <TestimonialsSection testimonials={testimonials} />
+        <WhyItWorksSection items={whyItWorks} />
+        <AuthorSection data={authorData} />
+        <OfferSection data={{ ...offerData, kiwifyLink: KIWIFY_LINK }} />
+        <GuaranteeSection data={guaranteeData} />
+      </main>
+
+      <Footer />
     </div>
   );
 }
