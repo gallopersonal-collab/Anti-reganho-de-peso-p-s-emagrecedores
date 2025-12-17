@@ -1,7 +1,7 @@
-// Mock data for Mentoria Anti-Reganho de Peso Landing Page
+// Mock data for Curso de Especialista no Método Anti-Reganho de Peso Landing Page
 
 export const heroData = {
-  headline: "A Mentoria que Previne o Reganho de Peso após o uso de Ozempic, Wegovy ou Mounjaro — com um plano estratégico para cada fase da sua jornada",
+  headline: "O Curso de Especialista que Previne o Reganho de Peso após o uso de Ozempic, Wegovy ou Mounjaro — com um plano estratégico para cada fase da sua jornada",
   subheadline: "Programa exclusivo em 3 etapas que acompanha sua transição durante o uso, desmame e pós-medicação. Desenvolvido por um Profissional de Educação Física especializado em emagrecimento definitivo.",
   cta: "Quero garantir minha vaga",
   heroImage: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80"
@@ -20,8 +20,8 @@ export const universalInfoData = {
 };
 
 export const targetAudienceData = {
-  title: "Para Quem É Esta Mentoria?",
-  description: "Esta mentoria é ideal para você que:",
+  title: "Para Quem É Este Curso?",
+  description: "Este curso é ideal para você que:",
   items: [
     {
       title: "Personal Trainer",
