@@ -64,8 +64,8 @@ export const Header = ({ checkoutLink }) => {
           <div className="flex items-center gap-4">
             <Button
               onClick={() => {
-                console.log('[Header] CTA clicked');
-                window.location.href = checkoutLink;
+                console.log('[Header] CTA clicked - scrolling to plans');
+                document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
               }}
               className="hidden sm:flex bg-[#457B9D] hover:bg-[#457B9D]/90 text-white font-semibold px-6 transition-transform hover:scale-105"
             >
