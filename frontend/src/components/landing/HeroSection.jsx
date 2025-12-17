@@ -47,7 +47,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
 
             {/* Trust indicators */}
             <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-4">
-              {['Acesso Vitalício', '20 Vagas', 'Certificado'].map((item, idx) => (
+              {['20 Vagas', 'Certificado', 'Suporte'].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-2 text-[#F1FAEE]/70 text-sm">
                   <CheckCircle className="w-4 h-4 text-[#457B9D]" />
                   <span>{item}</span>
@@ -81,7 +81,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
                     <p className="text-2xl font-bold text-[#1D3557]">R$ 797</p>
                   </div>
                   <div className="bg-[#F1FAEE] px-3 py-1 rounded-full">
-                    <span className="text-[#1D3557] text-xs font-semibold">ACESSO VITALÍCIO</span>
+                    <span className="text-[#1D3557] text-xs font-semibold">ACESSO COMPLETO</span>
                   </div>
                 </div>
               </div>

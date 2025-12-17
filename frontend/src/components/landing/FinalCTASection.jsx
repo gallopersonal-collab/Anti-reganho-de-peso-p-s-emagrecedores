@@ -56,7 +56,7 @@ export const FinalCTASection = ({ cta, checkoutLink }) => {
         {/* Trust indicators */}
         <div className="mt-10 flex flex-wrap justify-center gap-6">
           {[
-            { icon: Shield, text: 'Acesso Vitalício' },
+            { icon: Shield, text: 'Acesso Completo' },
             { icon: Clock, text: 'Suporte Dedicado' },
             { icon: Award, text: 'Certificado Incluso' }
           ].map((item, index) => (
