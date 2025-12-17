@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
-export const Header = ({ kiwifyLink }) => {
+export const Header = ({ checkoutLink }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    console.log('[Header] Component mounted');
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -15,6 +16,7 @@ export const Header = ({ kiwifyLink }) => {
   }, []);
 
   const scrollToSection = (id) => {
+    console.log('[Header] Scrolling to section:', id);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -26,19 +28,17 @@ export const Header = ({ kiwifyLink }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg'
+          ? 'bg-[#1D3557]/95 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-[#457B9D] flex items-center justify-center">
               <span className="text-white font-bold text-lg">AR</span>
             </div>
-            <span className={`font-semibold text-lg hidden sm:block transition-colors duration-300 ${
-              isScrolled ? 'text-slate-800' : 'text-white'
-            }`}>
+            <span className="font-semibold text-lg text-[#F1FAEE] hidden sm:block">
               Método Anti-Reganho
             </span>
           </div>
@@ -46,17 +46,15 @@ export const Header = ({ kiwifyLink }) => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {[
-              { label: 'Programa', id: 'programa' },
-              { label: 'Exercícios', id: 'exercicios' },
-              { label: 'Depoimentos', id: 'depoimentos' },
-              { label: 'Sobre', id: 'sobre' },
+              { label: 'Como Funciona', id: 'como-funciona' },
+              { label: 'Benefícios', id: 'beneficios' },
+              { label: 'Oferta', id: 'oferta' },
+              { label: 'FAQ', id: 'faq' },
             ].map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors hover:text-emerald-500 ${
-                  isScrolled ? 'text-slate-600' : 'text-white/90'
-                }`}
+                className="text-sm font-medium text-[#F1FAEE]/80 hover:text-[#F1FAEE] transition-colors"
               >
                 {item.label}
               </button>
@@ -65,18 +63,19 @@ export const Header = ({ kiwifyLink }) => {
 
           <div className="flex items-center gap-4">
             <Button
-              onClick={() => window.open(kiwifyLink, '_blank')}
-              className="hidden sm:flex bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 transition-transform hover:scale-105"
+              onClick={() => {
+                console.log('[Header] CTA clicked');
+                window.location.href = checkoutLink;
+              }}
+              className="hidden sm:flex bg-[#457B9D] hover:bg-[#457B9D]/90 text-white font-semibold px-6 transition-transform hover:scale-105"
             >
-              Começar Agora
+              Garantir Vaga
             </Button>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden p-2 rounded-lg transition-colors ${
-                isScrolled ? 'text-slate-800' : 'text-white'
-              }`}
+              className="md:hidden p-2 rounded-lg text-[#F1FAEE]"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -85,27 +84,30 @@ export const Header = ({ kiwifyLink }) => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white rounded-b-2xl shadow-xl pb-6 animate-in slide-in-from-top duration-200">
+          <div className="md:hidden bg-[#1D3557] rounded-b-2xl shadow-xl pb-6">
             <nav className="flex flex-col gap-2 px-4 pt-4">
               {[
-                { label: 'Programa', id: 'programa' },
-                { label: 'Exercícios', id: 'exercicios' },
-                { label: 'Depoimentos', id: 'depoimentos' },
-                { label: 'Sobre', id: 'sobre' },
+                { label: 'Como Funciona', id: 'como-funciona' },
+                { label: 'Benefícios', id: 'beneficios' },
+                { label: 'Oferta', id: 'oferta' },
+                { label: 'FAQ', id: 'faq' },
               ].map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left py-3 px-4 text-slate-700 font-medium rounded-lg hover:bg-slate-100 transition-colors"
+                  className="text-left py-3 px-4 text-[#F1FAEE] font-medium rounded-lg hover:bg-[#457B9D]/20 transition-colors"
                 >
                   {item.label}
                 </button>
               ))}
               <Button
-                onClick={() => window.open(kiwifyLink, '_blank')}
-                className="mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold w-full"
+                onClick={() => {
+                  console.log('[Header] Mobile CTA clicked');
+                  window.location.href = checkoutLink;
+                }}
+                className="mt-4 bg-[#457B9D] hover:bg-[#457B9D]/90 text-white font-semibold w-full"
               >
-                Começar Agora
+                Garantir Vaga
               </Button>
             </nav>
           </div>
