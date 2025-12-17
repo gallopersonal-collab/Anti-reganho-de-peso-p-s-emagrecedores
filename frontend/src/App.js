@@ -73,6 +73,9 @@ function App() {
         <section id="beneficios">
           <BenefitsSection data={benefitsData} />
         </section>
+
+        {/* Ancoragem de Preço */}
+        <AnchorSection data={anchorData} />
         
         {/* BLOCO 7 - Oferta */}
         <OfferSection data={offerData} checkoutLink={CHECKOUT_LINK} />
