@@ -94,8 +94,7 @@ export const offerData = {
       features: [
         "Acesso ao Curso completo",
         "Material didático em PDF",
-        "Certificado de conclusão",
-        "Acesso completo ao conteúdo"
+        "Certificado de conclusão"
       ],
       highlighted: false
     },
