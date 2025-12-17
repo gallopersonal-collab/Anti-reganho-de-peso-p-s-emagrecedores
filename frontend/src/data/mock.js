@@ -130,7 +130,7 @@ export const offerData = {
       features: [
         "Acesso ao Curso completo",
         "Material didático em PDF",
-        "Certificado de Especialista no Método Anti-Reganho"
+        "Certificado de Especialista no Método Anti-Reganho de peso pós emagrecedores"
       ],
       highlighted: false
     },
@@ -143,7 +143,7 @@ export const offerData = {
         "Material didático em PDF",
         "1 Programa Personalizável",
         "Escolha de 1 PDF (Fase 1, 2 ou 3)",
-        "Certificado de Especialista no Método Anti-Reganho"
+        "Certificado de Especialista no Método Anti-Reganho de peso pós emagrecedores"
       ],
       highlighted: true
     },
@@ -156,7 +156,7 @@ export const offerData = {
         "Material didático em PDF",
         "3 Programas Personalizáveis em PDF",
         "1 para cada fase",
-        "Certificado de Especialista no Método Anti-Reganho"
+        "Certificado de Especialista no Método Anti-Reganho de peso pós emagrecedores"
       ],
       highlighted: false
     }
