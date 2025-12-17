@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Mail, Instagram, Youtube } from 'lucide-react';
+import { MessageCircle, Instagram, Youtube } from 'lucide-react';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -53,11 +53,13 @@ export const Footer = () => {
             <h4 className="font-semibold text-[#F1FAEE] mb-4">Contato</h4>
             <div className="space-y-3">
               <a
-                href="mailto:contato@metodoreganho.com.br"
+                href="https://wa.me/5571992893333"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm hover:text-[#457B9D] transition-colors"
               >
-                <Mail className="w-4 h-4" />
-                contato@metodoreganho.com.br
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp 71 99289-3333
               </a>
             </div>
 
