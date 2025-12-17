@@ -194,10 +194,18 @@ export const futureData = {
 };
 
 export const scarcityData = {
-  title: "Vagas Limitadas",
+  title: "Este Curso Não É Para Todos",
   subtitle: "Apenas 20 vagas disponíveis",
-  description: "Sem previsão de abertura de nova turma. Garanta sua vaga agora.",
-  spots: 20
+  description: "Estamos selecionando apenas profissionais comprometidos com resultados. Se você não está disposto a aplicar o método com seus alunos, esta vaga deve ser de outra pessoa.",
+  spots: 20,
+  takeawayTitle: "Antes de Garantir Sua Vaga",
+  takeawayItems: [
+    "Este curso exige dedicação de 2 dias intensivos",
+    "Você precisará aplicar o método em até 30 dias",
+    "Não aceitamos profissionais que só querem \"mais um certificado\"",
+    "Buscamos quem quer realmente se destacar no mercado"
+  ],
+  urgencyNote: "As inscrições encerram em 26/12 às 23:59 ou quando as vagas acabarem"
 };
 
 export const faqData = {
