@@ -105,6 +105,7 @@ export const offerData = {
       description: "Curso completo + 1 Programa Prático",
       features: [
         "Acesso ao Curso completo",
+        "Material didático em PDF",
         "1 Programa Prático",
         "Escolha de 1 PDF (Fase 1, 2 ou 3)",
         "Certificado de Participação"
@@ -117,6 +118,7 @@ export const offerData = {
       description: "",
       features: [
         "Tudo do Plano Intermediário",
+        "Material didático em PDF",
         "3 Programas Personalizáveis em PDF",
         "1 para cada fase",
         "Certificado de Participação"
