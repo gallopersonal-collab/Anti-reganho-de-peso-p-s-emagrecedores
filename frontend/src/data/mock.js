@@ -114,7 +114,7 @@ export const offerData = {
     {
       name: "Plano Completo",
       price: "R$ 1.097",
-      description: "Mentoria + 3 fases completas",
+      description: "",
       features: [
         "Tudo do Plano Intermediário",
         "3 Programas Personalizáveis em PDF",
