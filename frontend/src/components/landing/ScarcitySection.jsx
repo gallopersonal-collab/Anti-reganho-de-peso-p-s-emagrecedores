@@ -99,7 +99,7 @@ export const ScarcitySection = ({ data, checkoutLink, cta }) => {
             <div className="flex flex-col gap-2 mb-6">
               <div className="flex items-center justify-center gap-2 text-white/80 text-sm">
                 <AlertTriangle className="w-4 h-4" />
-                <span>Turma única — não haverá reprise</span>
+                <span>Turma única — não haverá reprise com esse valor</span>
               </div>
               <div className="flex items-center justify-center gap-2 text-white/80 text-sm">
                 <Users className="w-4 h-4" />
