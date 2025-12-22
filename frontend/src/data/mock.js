@@ -127,7 +127,7 @@ export const anchorData = {
   originalValue: "R$ 5.997,00",
   originalLabel: "Valor real do Plano Premium",
   includes: [
-    "16 horas de curso presencial intensivo",
+    "32 horas de curso intensivo e online, com o professor José Carlos Gallo",
     "6 módulos completos com metodologia exclusiva",
     "3 Programas Personalizáveis em PDF",
     "Certificado de Especialista reconhecido",
