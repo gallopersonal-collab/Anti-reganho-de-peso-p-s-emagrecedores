@@ -42,7 +42,7 @@ export const BonusSection = ({ data }) => {
             <Gift className="w-4 h-4" />
             <span className="text-sm font-medium">Bônus Exclusivos</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1D3557] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#012578] mb-4">
             {data.title}
           </h2>
         </div>
@@ -66,11 +66,11 @@ export const BonusSection = ({ data }) => {
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-2xl">🎁</span>
-                        <h3 className="text-xl font-bold text-[#1D3557]">
+                        <h3 className="text-xl font-bold text-[#012578]">
                           {bonus.title}
                         </h3>
                       </div>
-                      <p className="text-[#1D3557]/70 leading-relaxed">
+                      <p className="text-[#012578]/70 leading-relaxed">
                         {bonus.description}
                       </p>
                     </div>

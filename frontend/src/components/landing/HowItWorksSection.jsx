@@ -39,13 +39,13 @@ export const HowItWorksSection = ({ data }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-[#1D3557]/10 text-[#1D3557] rounded-full px-4 py-2 mb-6">
+          <div className="inline-flex items-center gap-2 bg-[#012578]/10 text-[#012578] rounded-full px-4 py-2 mb-6">
             <span className="text-sm font-medium">Metodologia</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1D3557] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#012578] mb-4">
             {data.title}
           </h2>
-          <p className="text-lg text-[#1D3557]/70 max-w-2xl mx-auto">
+          <p className="text-lg text-[#012578]/70 max-w-2xl mx-auto">
             {data.description}
           </p>
         </div>
@@ -56,26 +56,26 @@ export const HowItWorksSection = ({ data }) => {
             const IconComponent = iconMap[phase.icon];
             return (
               <div key={index} className="relative">
-                <Card className="bg-[#F1FAEE] border-0 shadow-lg hover-lift h-full">
+                <Card className="bg-[#FFFFFF] border-0 shadow-lg hover-lift h-full">
                   <CardContent className="p-8">
                     {/* Phase number */}
                     <div className="absolute -top-4 left-8">
-                      <div className="w-8 h-8 bg-[#457B9D] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                      <div className="w-8 h-8 bg-[#1CAF35] rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
                         {phase.phase}
                       </div>
                     </div>
 
                     {/* Icon */}
-                    <div className="w-16 h-16 bg-[#1D3557] rounded-2xl flex items-center justify-center mb-6 mt-2">
+                    <div className="w-16 h-16 bg-[#012578] rounded-2xl flex items-center justify-center mb-6 mt-2">
                       {IconComponent && (
-                        <IconComponent className="w-8 h-8 text-[#F1FAEE]" />
+                        <IconComponent className="w-8 h-8 text-[#FFFFFF]" />
                       )}
                     </div>
 
-                    <h3 className="text-xl font-bold text-[#1D3557] mb-3">
+                    <h3 className="text-xl font-bold text-[#012578] mb-3">
                       {phase.title}
                     </h3>
-                    <p className="text-[#1D3557]/70 leading-relaxed">
+                    <p className="text-[#012578]/70 leading-relaxed">
                       {phase.description}
                     </p>
                   </CardContent>
@@ -84,7 +84,7 @@ export const HowItWorksSection = ({ data }) => {
                 {/* Arrow connector */}
                 {index < data.phases.length - 1 && (
                   <div className="hidden md:flex absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                    <ArrowRight className="w-8 h-8 text-[#457B9D]" />
+                    <ArrowRight className="w-8 h-8 text-[#1CAF35]" />
                   </div>
                 )}
               </div>

@@ -8,27 +8,27 @@ export const HeroSection = ({ data, checkoutLink }) => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center bg-[#1D3557] overflow-hidden">
+    <section className="relative min-h-screen flex items-center bg-[#012578] overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#457B9D] rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#457B9D] rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#1CAF35] rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#1CAF35] rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 bg-[#457B9D]/30 border border-[#457B9D]/50 rounded-full px-4 py-2 mb-6">
-              <span className="w-2 h-2 bg-[#F1FAEE] rounded-full animate-pulse" />
-              <span className="text-[#F1FAEE] text-sm font-medium">Curso Exclusivo para Profissionais</span>
+            <div className="inline-flex items-center gap-2 bg-[#1CAF35]/30 border border-[#1CAF35]/50 rounded-full px-4 py-2 mb-6">
+              <span className="w-2 h-2 bg-[#FFFFFF] rounded-full animate-pulse" />
+              <span className="text-[#FFFFFF] text-sm font-medium">Curso Exclusivo para Profissionais</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-[#F1FAEE] leading-tight mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-[#FFFFFF] leading-tight mb-6">
               {data.headline}
             </h1>
 
-            <p className="text-lg md:text-xl text-[#F1FAEE]/80 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-[#FFFFFF]/80 mb-8 leading-relaxed">
               {data.subheadline}
             </p>
 
@@ -38,7 +38,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
                 document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
               }}
               size="lg"
-              className="bg-[#457B9D] hover:bg-[#457B9D]/90 text-white font-bold px-8 py-6 text-lg rounded-xl shadow-lg shadow-[#457B9D]/30 transition-all hover:scale-105 pulse-cta"
+              className="bg-[#1CAF35] hover:bg-[#1CAF35]/90 text-white font-bold px-8 py-6 text-lg rounded-xl shadow-lg shadow-[#1CAF35]/30 transition-all hover:scale-105 pulse-cta"
             >
               <span className="mr-2">👉</span>
               {data.cta}
@@ -46,20 +46,20 @@ export const HeroSection = ({ data, checkoutLink }) => {
             </Button>
 
             {/* Course Dates */}
-            <div className="mt-8 bg-[#457B9D]/30 border border-[#457B9D]/50 rounded-xl p-4 inline-block">
-              <div className="flex flex-col sm:flex-row items-center gap-4 text-[#F1FAEE]">
+            <div className="mt-8 bg-[#1CAF35]/30 border border-[#1CAF35]/50 rounded-xl p-4 inline-block">
+              <div className="flex flex-col sm:flex-row items-center gap-4 text-[#FFFFFF]">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">📅</span>
                   <div>
-                    <p className="text-xs text-[#F1FAEE]/70">Datas do Curso</p>
+                    <p className="text-xs text-[#FFFFFF]/70">Datas do Curso</p>
                     <p className="font-bold">{data.courseDates}</p>
                   </div>
                 </div>
-                <div className="hidden sm:block w-px h-10 bg-[#F1FAEE]/30" />
+                <div className="hidden sm:block w-px h-10 bg-[#FFFFFF]/30" />
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🕐</span>
                   <div>
-                    <p className="text-xs text-[#F1FAEE]/70">Horário</p>
+                    <p className="text-xs text-[#FFFFFF]/70">Horário</p>
                     <p className="font-bold text-sm">{data.courseSchedule}</p>
                   </div>
                 </div>
@@ -69,8 +69,8 @@ export const HeroSection = ({ data, checkoutLink }) => {
             {/* Trust indicators */}
             <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-4">
               {['20 Vagas', 'Certificado', 'Suporte'].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-[#F1FAEE]/70 text-sm">
-                  <CheckCircle className="w-4 h-4 text-[#457B9D]" />
+                <div key={idx} className="flex items-center gap-2 text-[#FFFFFF]/70 text-sm">
+                  <CheckCircle className="w-4 h-4 text-[#1CAF35]" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -82,7 +82,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
             <div className="relative">
               {/* Main mockup card */}
               <div className="bg-white rounded-3xl shadow-2xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                <div className="bg-gradient-to-br from-[#1D3557] to-[#457B9D] rounded-2xl p-6 text-white">
+                <div className="bg-gradient-to-br from-[#012578] to-[#1CAF35] rounded-2xl p-6 text-white">
                   <h3 className="text-xl font-bold mb-2">Método Anti-Reganho</h3>
                   <p className="text-sm opacity-80">Curso Completo</p>
                   <div className="mt-4 space-y-2">
@@ -99,16 +99,16 @@ export const HeroSection = ({ data, checkoutLink }) => {
                 <div className="mt-4 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-gray-500">A partir de</p>
-                    <p className="text-2xl font-bold text-[#1D3557]">R$ 897</p>
+                    <p className="text-2xl font-bold text-[#012578]">R$ 897</p>
                   </div>
-                  <div className="bg-[#F1FAEE] px-3 py-1 rounded-full">
-                    <span className="text-[#1D3557] text-xs font-semibold">ACESSO COMPLETO</span>
+                  <div className="bg-[#FFFFFF] px-3 py-1 rounded-full">
+                    <span className="text-[#012578] text-xs font-semibold">ACESSO COMPLETO</span>
                   </div>
                 </div>
               </div>
 
               {/* Floating badge */}
-              <div className="absolute -top-4 -right-4 bg-[#457B9D] text-white px-4 py-2 rounded-full shadow-lg">
+              <div className="absolute -top-4 -right-4 bg-[#1CAF35] text-white px-4 py-2 rounded-full shadow-lg">
                 <span className="text-sm font-bold">20 VAGAS</span>
               </div>
             </div>

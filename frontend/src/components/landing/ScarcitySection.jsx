@@ -28,7 +28,7 @@ export const ScarcitySection = ({ data, checkoutLink, cta }) => {
   return (
     <section
       ref={sectionRef}
-      className={`py-16 md:py-24 bg-[#1D3557] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-16 md:py-24 bg-[#012578] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -39,11 +39,11 @@ export const ScarcitySection = ({ data, checkoutLink, cta }) => {
               <span className="text-sm font-medium">Importante</span>
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-[#F1FAEE] mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#FFFFFF] mb-4">
               {data.takeawayTitle || data.title}
             </h2>
 
-            <p className="text-[#F1FAEE]/80 mb-6">
+            <p className="text-[#FFFFFF]/80 mb-6">
               {data.description}
             </p>
 
@@ -53,19 +53,19 @@ export const ScarcitySection = ({ data, checkoutLink, cta }) => {
                 {data.takeawayItems.map((item, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <XCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-[#F1FAEE]/90 text-sm">{item}</span>
+                    <span className="text-[#FFFFFF]/90 text-sm">{item}</span>
                   </div>
                 ))}
               </div>
             )}
 
             {/* Who IS this for */}
-            <div className="bg-[#457B9D]/30 rounded-xl p-4 border border-[#457B9D]/50">
-              <p className="text-[#F1FAEE] font-semibold mb-2 flex items-center gap-2">
+            <div className="bg-[#1CAF35]/30 rounded-xl p-4 border border-[#1CAF35]/50">
+              <p className="text-[#FFFFFF] font-semibold mb-2 flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-green-400" />
                 Se você é esse profissional:
               </p>
-              <p className="text-[#F1FAEE]/80 text-sm">
+              <p className="text-[#FFFFFF]/80 text-sm">
                 Comprometido, focado em resultados e pronto para se tornar referência no mercado — então sua vaga está garantida.
               </p>
             </div>

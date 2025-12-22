@@ -28,14 +28,14 @@ export const FinalCTASection = ({ cta, checkoutLink }) => {
   return (
     <section
       ref={sectionRef}
-      className={`py-16 md:py-24 bg-[#1D3557] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-16 md:py-24 bg-[#012578] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#F1FAEE] mb-6">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#FFFFFF] mb-6">
           Pronto para Transformar Sua Carreira?
         </h2>
         
-        <p className="text-lg text-[#F1FAEE]/80 mb-8 max-w-2xl mx-auto">
+        <p className="text-lg text-[#FFFFFF]/80 mb-8 max-w-2xl mx-auto">
           Junte-se aos profissionais que estão se destacando no mercado com o Método Anti-Reganho de Peso.
         </p>
 
@@ -46,7 +46,7 @@ export const FinalCTASection = ({ cta, checkoutLink }) => {
             document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
           }}
           size="lg"
-          className="bg-[#457B9D] hover:bg-[#457B9D]/90 text-white font-bold px-12 py-8 text-xl rounded-xl shadow-lg shadow-[#457B9D]/30 transition-all hover:scale-105 pulse-cta"
+          className="bg-[#1CAF35] hover:bg-[#1CAF35]/90 text-white font-bold px-12 py-8 text-xl rounded-xl shadow-lg shadow-[#1CAF35]/30 transition-all hover:scale-105 pulse-cta"
         >
           <span className="mr-2 text-2xl">👉</span>
           {cta}
@@ -60,8 +60,8 @@ export const FinalCTASection = ({ cta, checkoutLink }) => {
             { icon: Clock, text: 'Suporte Dedicado' },
             { icon: Award, text: 'Certificado Incluso' }
           ].map((item, index) => (
-            <div key={index} className="flex items-center gap-2 text-[#F1FAEE]/70">
-              <item.icon className="w-5 h-5 text-[#457B9D]" />
+            <div key={index} className="flex items-center gap-2 text-[#FFFFFF]/70">
+              <item.icon className="w-5 h-5 text-[#1CAF35]" />
               <span className="text-sm">{item.text}</span>
             </div>
           ))}

@@ -43,14 +43,14 @@ export const CourseContentSection = ({ data }) => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-[#1D3557]/10 text-[#1D3557] rounded-full px-4 py-2 mb-6">
+          <div className="inline-flex items-center gap-2 bg-[#012578]/10 text-[#012578] rounded-full px-4 py-2 mb-6">
             <BookOpen className="w-4 h-4" />
             <span className="text-sm font-medium">Grade Curricular</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1D3557] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#012578] mb-4">
             {data.title}
           </h2>
-          <p className="text-lg text-[#1D3557]/70 max-w-2xl mx-auto">
+          <p className="text-lg text-[#012578]/70 max-w-2xl mx-auto">
             6 módulos completos para você dominar o Método Anti-Reganho de Peso
           </p>
         </div>
@@ -62,12 +62,12 @@ export const CourseContentSection = ({ data }) => {
             return (
               <Card
                 key={index}
-                className="bg-[#F1FAEE] border-0 shadow-lg hover-lift group overflow-hidden"
+                className="bg-[#FFFFFF] border-0 shadow-lg hover-lift group overflow-hidden"
               >
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     {/* Module Number */}
-                    <div className="flex-shrink-0 w-12 h-12 bg-[#1D3557] rounded-xl flex items-center justify-center text-white font-bold text-lg group-hover:bg-[#457B9D] transition-colors duration-300">
+                    <div className="flex-shrink-0 w-12 h-12 bg-[#012578] rounded-xl flex items-center justify-center text-white font-bold text-lg group-hover:bg-[#1CAF35] transition-colors duration-300">
                       {module.number}
                     </div>
                     
@@ -75,13 +75,13 @@ export const CourseContentSection = ({ data }) => {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         {IconComponent && (
-                          <IconComponent className="w-5 h-5 text-[#457B9D]" />
+                          <IconComponent className="w-5 h-5 text-[#1CAF35]" />
                         )}
-                        <span className="text-xs font-semibold text-[#457B9D] uppercase">
+                        <span className="text-xs font-semibold text-[#1CAF35] uppercase">
                           Módulo {module.number}
                         </span>
                       </div>
-                      <h3 className="text-[#1D3557] font-semibold leading-snug">
+                      <h3 className="text-[#012578] font-semibold leading-snug">
                         {module.title}
                       </h3>
                     </div>

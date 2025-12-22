@@ -27,19 +27,19 @@ export const AnchorSection = ({ data }) => {
   return (
     <section
       ref={sectionRef}
-      className={`py-16 md:py-24 bg-[#1D3557] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-16 md:py-24 bg-[#012578] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-[#457B9D]/30 text-[#F1FAEE] rounded-full px-4 py-2 mb-6">
+          <div className="inline-flex items-center gap-2 bg-[#1CAF35]/30 text-[#FFFFFF] rounded-full px-4 py-2 mb-6">
             <Tag className="w-4 h-4" />
             <span className="text-sm font-medium">Investimento</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#F1FAEE] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#FFFFFF] mb-4">
             {data.title}
           </h2>
-          <p className="text-lg text-[#F1FAEE]/80 max-w-2xl mx-auto">
+          <p className="text-lg text-[#FFFFFF]/80 max-w-2xl mx-auto">
             {data.description}
           </p>
         </div>
@@ -47,8 +47,8 @@ export const AnchorSection = ({ data }) => {
         {/* Anchor Price Card */}
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-2xl mx-auto">
           {/* Original Value Header */}
-          <div className="bg-gradient-to-r from-[#457B9D] to-[#1D3557] p-6 text-center">
-            <p className="text-[#F1FAEE]/80 text-sm mb-1">{data.originalLabel}</p>
+          <div className="bg-gradient-to-r from-[#1CAF35] to-[#012578] p-6 text-center">
+            <p className="text-[#FFFFFF]/80 text-sm mb-1">{data.originalLabel}</p>
             <div className="relative inline-block">
               <p className="text-5xl md:text-6xl font-bold text-white">
                 {data.originalValue}
@@ -60,16 +60,16 @@ export const AnchorSection = ({ data }) => {
 
           {/* What's Included */}
           <div className="p-8">
-            <p className="font-semibold text-[#1D3557] mb-4 text-center">
+            <p className="font-semibold text-[#012578] mb-4 text-center">
               O que está incluído neste valor:
             </p>
             <div className="space-y-3 mb-6">
               {data.includes.map((item, index) => (
                 <div key={index} className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-[#457B9D]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Check className="w-4 h-4 text-[#457B9D]" />
+                  <div className="w-6 h-6 bg-[#1CAF35]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Check className="w-4 h-4 text-[#1CAF35]" />
                   </div>
-                  <span className="text-[#1D3557]/80">{item}</span>
+                  <span className="text-[#012578]/80">{item}</span>
                 </div>
               ))}
             </div>
@@ -87,10 +87,10 @@ export const AnchorSection = ({ data }) => {
           </div>
 
           {/* Arrow Down */}
-          <div className="bg-[#F1FAEE] py-4 text-center">
+          <div className="bg-[#FFFFFF] py-4 text-center">
             <div className="inline-flex flex-col items-center">
-              <p className="text-[#1D3557] font-semibold mb-2">Veja os valores especiais abaixo</p>
-              <div className="w-10 h-10 bg-[#457B9D] rounded-full flex items-center justify-center animate-bounce">
+              <p className="text-[#012578] font-semibold mb-2">Veja os valores especiais abaixo</p>
+              <div className="w-10 h-10 bg-[#1CAF35] rounded-full flex items-center justify-center animate-bounce">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>

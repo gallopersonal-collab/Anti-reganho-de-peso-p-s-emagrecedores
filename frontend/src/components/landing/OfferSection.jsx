@@ -30,23 +30,23 @@ export const OfferSection = ({ data, checkoutLink }) => {
     <section
       ref={sectionRef}
       id="oferta"
-      className={`py-16 md:py-24 bg-[#F1FAEE] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-16 md:py-24 bg-[#FFFFFF] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-[#1D3557] text-white rounded-full px-4 py-2 mb-6">
+          <div className="inline-flex items-center gap-2 bg-[#012578] text-white rounded-full px-4 py-2 mb-6">
             <Crown className="w-4 h-4" />
             <span className="text-sm font-medium">Oferta Especial</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1D3557] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#012578] mb-4">
             {data.title}
           </h2>
           <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-4 py-2 rounded-full mb-4">
             <AlertTriangle className="w-4 h-4" />
             <span className="font-semibold">{data.subtitle}</span>
           </div>
-          <p className="text-[#1D3557]/60 text-sm max-w-xl mx-auto">
+          <p className="text-[#012578]/60 text-sm max-w-xl mx-auto">
             ⚠️ Inscrições encerram em <strong>15/01/2026 às 23:59</strong> — Após essa data, não será possível participar desta turma
           </p>
         </div>
@@ -58,26 +58,26 @@ export const OfferSection = ({ data, checkoutLink }) => {
               key={index}
               className={`relative overflow-hidden border-2 ${
                 plan.highlighted
-                  ? 'border-[#457B9D] shadow-2xl scale-105 z-10'
+                  ? 'border-[#1CAF35] shadow-2xl scale-105 z-10'
                   : 'border-transparent shadow-lg'
               } hover-lift`}
             >
               {plan.highlighted && (
-                <div className="absolute top-0 left-0 right-0 bg-[#457B9D] text-white text-center py-2 text-sm font-semibold">
+                <div className="absolute top-0 left-0 right-0 bg-[#1CAF35] text-white text-center py-2 text-sm font-semibold">
                   MAIS POPULAR
                 </div>
               )}
               <CardHeader className={`text-center ${plan.highlighted ? 'pt-12' : 'pt-6'} pb-4`}>
-                <h3 className="text-xl font-bold text-[#1D3557]">{plan.name}</h3>
-                <p className="text-sm text-[#1D3557]/60">{plan.description}</p>
-                <p className="text-4xl font-bold text-[#1D3557] mt-4">{plan.price}</p>
+                <h3 className="text-xl font-bold text-[#012578]">{plan.name}</h3>
+                <p className="text-sm text-[#012578]/60">{plan.description}</p>
+                <p className="text-4xl font-bold text-[#012578] mt-4">{plan.price}</p>
               </CardHeader>
               <CardContent className="pt-0">
                 <ul className="space-y-3 mb-6">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#457B9D] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#1D3557]/80 text-sm">{feature}</span>
+                      <Check className="w-5 h-5 text-[#1CAF35] flex-shrink-0 mt-0.5" />
+                      <span className="text-[#012578]/80 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -89,8 +89,8 @@ export const OfferSection = ({ data, checkoutLink }) => {
                   }}
                   className={`w-full ${
                     plan.highlighted
-                      ? 'bg-[#457B9D] hover:bg-[#457B9D]/90'
-                      : 'bg-[#1D3557] hover:bg-[#1D3557]/90'
+                      ? 'bg-[#1CAF35] hover:bg-[#1CAF35]/90'
+                      : 'bg-[#012578] hover:bg-[#012578]/90'
                   } text-white font-semibold py-6 rounded-xl transition-all hover:scale-105`}
                 >
                   Escolher Plano
@@ -109,7 +109,7 @@ export const OfferSection = ({ data, checkoutLink }) => {
               window.location.href = checkoutLink;
             }}
             size="lg"
-            className="bg-[#457B9D] hover:bg-[#457B9D]/90 text-white font-bold px-12 py-7 text-lg rounded-xl shadow-lg shadow-[#457B9D]/30 transition-all hover:scale-105 pulse-cta"
+            className="bg-[#1CAF35] hover:bg-[#1CAF35]/90 text-white font-bold px-12 py-7 text-lg rounded-xl shadow-lg shadow-[#1CAF35]/30 transition-all hover:scale-105 pulse-cta"
           >
             <span className="mr-2">👉</span>
             {data.cta}

@@ -35,14 +35,14 @@ export const ProblemSection = ({ data }) => {
             <AlertTriangle className="w-4 h-4" />
             <span className="text-sm font-medium">Atenção</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1D3557] mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#012578] mb-6">
             {data.title}
           </h2>
         </div>
 
-        <div className="bg-[#F1FAEE] rounded-3xl p-8 md:p-12 relative overflow-hidden">
+        <div className="bg-[#FFFFFF] rounded-3xl p-8 md:p-12 relative overflow-hidden">
           {/* Decorative */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#457B9D]/10 rounded-full blur-2xl" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#1CAF35]/10 rounded-full blur-2xl" />
           
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
             {/* Image */}
@@ -56,7 +56,7 @@ export const ProblemSection = ({ data }) => {
 
             {/* Text */}
             <div className="flex-1">
-              <p className="text-lg md:text-xl text-[#1D3557]/80 leading-relaxed">
+              <p className="text-lg md:text-xl text-[#012578]/80 leading-relaxed">
                 {data.text}
               </p>
             </div>

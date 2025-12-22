@@ -27,7 +27,7 @@ export const UniversalInfoSection = ({ data }) => {
   return (
     <section
       ref={sectionRef}
-      className={`py-16 md:py-24 bg-[#1D3557] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-16 md:py-24 bg-[#012578] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -38,12 +38,12 @@ export const UniversalInfoSection = ({ data }) => {
                 <div className="w-20 h-20 mx-auto bg-red-100 rounded-full flex items-center justify-center mb-4">
                   <TrendingUp className="w-10 h-10 text-red-500" />
                 </div>
-                <p className="text-6xl md:text-7xl font-bold text-[#1D3557] mb-2">{data.stat}</p>
-                <p className="text-[#457B9D] font-medium">{data.statLabel}</p>
+                <p className="text-6xl md:text-7xl font-bold text-[#012578] mb-2">{data.stat}</p>
+                <p className="text-[#1CAF35] font-medium">{data.statLabel}</p>
               </div>
               
               {/* Study badge */}
-              <div className="absolute -bottom-4 -right-4 bg-[#457B9D] text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+              <div className="absolute -bottom-4 -right-4 bg-[#1CAF35] text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
                 <FileText className="w-4 h-4" />
                 <span className="text-xs font-semibold">ESTUDO CIENTÍFICO</span>
               </div>
@@ -52,21 +52,21 @@ export const UniversalInfoSection = ({ data }) => {
 
           {/* Content */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#F1FAEE] mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#FFFFFF] mb-6">
               {data.title}
             </h2>
-            <p className="text-lg text-[#F1FAEE]/80 leading-relaxed">
+            <p className="text-lg text-[#FFFFFF]/80 leading-relaxed">
               {data.text}
             </p>
             
             {/* Visual indicator */}
-            <div className="mt-8 bg-[#457B9D]/30 rounded-2xl p-6">
-              <p className="text-[#F1FAEE] text-sm font-medium mb-3">Efeito Sanfona</p>
+            <div className="mt-8 bg-[#1CAF35]/30 rounded-2xl p-6">
+              <p className="text-[#FFFFFF] text-sm font-medium mb-3">Efeito Sanfona</p>
               <div className="flex items-center gap-2">
                 {[...Array(5)].map((_, i) => (
                   <div
                     key={i}
-                    className={`h-${i % 2 === 0 ? '8' : '12'} w-4 bg-[#F1FAEE]/${i % 2 === 0 ? '40' : '70'} rounded`}
+                    className={`h-${i % 2 === 0 ? '8' : '12'} w-4 bg-[#FFFFFF]/${i % 2 === 0 ? '40' : '70'} rounded`}
                     style={{ height: i % 2 === 0 ? '32px' : '48px' }}
                   />
                 ))}
