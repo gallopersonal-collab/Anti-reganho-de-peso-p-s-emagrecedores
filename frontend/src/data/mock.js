@@ -36,8 +36,8 @@ export const targetAudienceData = {
       icon: "GraduationCap"
     },
     {
-      title: "Especialista em Emagrecimento",
-      description: "Quer oferecer resultados duradouros e fidelizar clientes com metodologia comprovada",
+      title: "Nutricionistas Especialista em Emagrecimento",
+      description: "Que desejam oferecer resultados duradouros e fidelizar pacientes com metodologia comprovada",
       icon: "Award"
     },
     {
