@@ -73,16 +73,16 @@ export const ScarcitySection = ({ data, checkoutLink, cta }) => {
 
           {/* Right - Scarcity Box */}
           <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-3xl p-8 text-center shadow-2xl">
-            {/* Spots Counter */}
+            {/* Vagas Limitadas */}
             <div className="w-24 h-24 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-6">
               <div>
-                <p className="text-4xl font-bold text-white">{data.spots}</p>
-                <p className="text-white/70 text-xs">vagas</p>
+                <p className="text-lg font-bold text-white">Vagas</p>
+                <p className="text-lg font-bold text-white">Limitadas</p>
               </div>
             </div>
 
             <h3 className="text-2xl font-bold text-white mb-2">
-              {data.subtitle}
+              Garanta sua vaga agora
             </h3>
 
             {/* Urgency Note */}
