@@ -47,7 +47,7 @@ export const OfferSection = ({ data, checkoutLink }) => {
             <span className="font-semibold">{data.subtitle}</span>
           </div>
           <p className="text-[#1D3557]/60 text-sm max-w-xl mx-auto">
-            ⚠️ Inscrições encerram em <strong>26/12 às 23:59</strong> — Após essa data, não será possível participar desta turma
+            ⚠️ Inscrições encerram em <strong>15/01/2026 às 23:59</strong> — Após essa data, não será possível participar desta turma
           </p>
         </div>
 
