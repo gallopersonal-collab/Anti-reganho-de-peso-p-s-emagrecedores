@@ -19,30 +19,30 @@ code {
 
 @layer base {
   :root {
-    /* New Color Palette */
-    --color-primary: 213 56% 23%; /* #1D3557 */
-    --color-secondary: 200 37% 44%; /* #457B9D */
-    --color-accent: 120 47% 97%; /* #F1FAEE */
+    /* New Color Palette from Logo */
+    --color-primary: 218 97% 24%; /* #012578 */
+    --color-secondary: 133 79% 40%; /* #1CAF35 */
+    --color-accent: 0 0% 100%; /* #FFFFFF */
     
-    --background: 120 47% 97%;
-    --foreground: 213 56% 23%;
+    --background: 0 0% 100%;
+    --foreground: 218 97% 24%;
     --card: 0 0% 100%;
-    --card-foreground: 213 56% 23%;
+    --card-foreground: 218 97% 24%;
     --popover: 0 0% 100%;
-    --popover-foreground: 213 56% 23%;
-    --primary: 213 56% 23%;
-    --primary-foreground: 120 47% 97%;
-    --secondary: 200 37% 44%;
+    --popover-foreground: 218 97% 24%;
+    --primary: 218 97% 24%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 133 79% 40%;
     --secondary-foreground: 0 0% 100%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 120 47% 97%;
-    --accent-foreground: 213 56% 23%;
+    --accent: 133 79% 40%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 200 37% 44%;
+    --ring: 133 79% 40%;
     --radius: 0.75rem;
   }
 }
