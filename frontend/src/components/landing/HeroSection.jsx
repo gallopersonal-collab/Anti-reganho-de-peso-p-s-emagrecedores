@@ -21,7 +21,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center gap-2 bg-[#1CAF35]/30 border border-[#1CAF35]/50 rounded-full px-4 py-2 mb-6">
               <span className="w-2 h-2 bg-[#FFFFFF] rounded-full animate-pulse" />
-              <span className="text-[#FFFFFF] text-sm font-medium">Curso Exclusivo para Profissionais</span>
+              <span className="text-[#FFFFFF] text-sm font-medium">Curso Exclusivo para Personal Trainers, Profissionais de Educação Física e Nutricionistas</span>
             </div>
 
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-[#FFFFFF] leading-tight mb-6">
