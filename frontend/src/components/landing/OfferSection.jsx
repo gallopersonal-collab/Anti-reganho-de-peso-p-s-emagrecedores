@@ -42,10 +42,6 @@ export const OfferSection = ({ data, checkoutLink }) => {
           <h2 className="text-3xl md:text-4xl font-bold text-[#012578] mb-4">
             {data.title}
           </h2>
-          <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-4 py-2 rounded-full mb-4">
-            <AlertTriangle className="w-4 h-4" />
-            <span className="font-semibold">{data.subtitle}</span>
-          </div>
           <p className="text-[#012578] text-lg md:text-xl font-medium max-w-2xl mx-auto">
             ⚠️ Inscrições encerram em <strong>15/01/2026 às 23:59</strong> — Após essa data, não será possível participar desta turma
           </p>
