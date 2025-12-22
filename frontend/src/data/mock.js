@@ -130,7 +130,7 @@ export const anchorData = {
     "32 horas de curso intensivo e online, com o professor José Carlos Gallo",
     "6 módulos completos com metodologia exclusiva",
     "3 Programas Personalizáveis em PDF",
-    "Certificado de Especialista em Anti Reganho de Peso, pós emagrecedores",
+    "Certificado de Especialista no Método Anti Reganho de Peso, pós emagrecedores",
     "Material didático completo"
   ],
   savings: "Economia de mais de 80%"
