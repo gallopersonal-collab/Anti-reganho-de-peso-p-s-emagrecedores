@@ -46,7 +46,7 @@ export const OfferSection = ({ data, checkoutLink }) => {
             <AlertTriangle className="w-4 h-4" />
             <span className="font-semibold">{data.subtitle}</span>
           </div>
-          <p className="text-[#012578]/60 text-sm max-w-xl mx-auto">
+          <p className="text-[#012578] text-lg md:text-xl font-medium max-w-2xl mx-auto">
             ⚠️ Inscrições encerram em <strong>15/01/2026 às 23:59</strong> — Após essa data, não será possível participar desta turma
           </p>
         </div>
