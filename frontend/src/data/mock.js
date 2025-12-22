@@ -223,7 +223,7 @@ export const scarcityData = {
     "Não aceitamos profissionais que só querem \"mais um certificado\"",
     "Buscamos quem quer realmente se destacar no mercado"
   ],
-  urgencyNote: "As inscrições encerram em 26/12 às 23:59 ou quando as vagas acabarem"
+  urgencyNote: "As inscrições encerram em 15/01/2026 às 23:59 ou quando as vagas acabarem"
 };
 
 export const faqData = {
