@@ -60,7 +60,7 @@ export const OfferSection = ({ data, checkoutLink }) => {
             >
               {plan.highlighted && (
                 <div className="absolute top-0 left-0 right-0 bg-[#1CAF35] text-white text-center py-2 text-sm font-semibold">
-                  MAIS POPULAR
+                  MAIS COMPLETO
                 </div>
               )}
               <CardHeader className={`text-center ${plan.highlighted ? 'pt-12' : 'pt-6'} pb-4`}>
