@@ -5,7 +5,7 @@ export const heroData = {
   subheadline: "Método Exclusivo em 3 fases que acompanha a transição, do seu aluno, durante o uso, desmame e pós-medicação. Desenvolvido Pelo Professor José Carlos Gallo, Com Especialização em Fisiologia Clínica do exercício e Metabolismo Humano, pela Universidade de Konl-Alemanha.",
   cta: "Quero garantir minha vaga",
   heroImage: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80",
-  courseDates: "27 e 28/12",
+  courseDates: "17, 18, 24 e 25 de Janeiro de 2026",
   courseSchedule: "8:00h às 12:00h e das 13:00h às 17:00h"
 };
 
