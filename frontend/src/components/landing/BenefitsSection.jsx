@@ -36,7 +36,7 @@ export const BenefitsSection = ({ data }) => {
   return (
     <section
       ref={sectionRef}
-      className={`py-16 md:py-24 bg-[#1CAF35] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-16 md:py-24 bg-[#012578] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -60,7 +60,7 @@ export const BenefitsSection = ({ data }) => {
                 className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 bg-[#1CAF35] rounded-xl flex items-center justify-center flex-shrink-0">
                     {IconComponent && (
                       <IconComponent className="w-5 h-5 text-white" />
                     )}
