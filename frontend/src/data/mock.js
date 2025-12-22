@@ -163,7 +163,7 @@ export const offerData = {
         "Escolha de 1 PDF (Fase 1, 2 ou 3)",
         "Certificado de Especialista no Método Anti-Reganho de peso pós emagrecedores"
       ],
-      highlighted: true,
+      highlighted: false,
       checkoutLink: "https://pag.ae/81jEzuaTM"
     },
     {
@@ -177,7 +177,7 @@ export const offerData = {
         "1 para cada fase",
         "Certificado de Especialista no Método Anti-Reganho de peso pós emagrecedores"
       ],
-      highlighted: false,
+      highlighted: true,
       checkoutLink: "https://pag.ae/81jEBoRQr"
     }
   ],
