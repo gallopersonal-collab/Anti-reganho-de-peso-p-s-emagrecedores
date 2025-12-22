@@ -83,7 +83,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
               {/* Author Photo */}
               <div className="mb-6">
                 <img
-                  src="https://customer-assets.emergentagent.com/job_keep-results/artifacts/dauzkhco_GALLO%20BRA%C3%87OS%20CRUZADOA.jpeg"
+                  src="https://customer-assets.emergentagent.com/job_keep-results/artifacts/g3178qy9_IMAGEM%20GALLO%205.jpeg"
                   alt="Professor José Carlos Gallo"
                   className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto border-4 border-white/20"
                 />
