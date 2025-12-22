@@ -77,11 +77,23 @@ export const HeroSection = ({ data, checkoutLink }) => {
             </div>
           </div>
 
-          {/* Mockup */}
+          {/* Author Photo and Mockup */}
           <div className="relative hidden lg:block">
             <div className="relative">
+              {/* Author Photo */}
+              <div className="mb-6">
+                <img
+                  src="https://customer-assets.emergentagent.com/job_keep-results/artifacts/dauzkhco_GALLO%20BRA%C3%87OS%20CRUZADOA.jpeg"
+                  alt="Professor José Carlos Gallo"
+                  className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto border-4 border-white/20"
+                />
+                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-[#1CAF35] text-white px-6 py-2 rounded-full shadow-lg">
+                  <span className="text-sm font-bold">Prof. José Carlos Gallo</span>
+                </div>
+              </div>
+
               {/* Main mockup card */}
-              <div className="bg-white rounded-3xl shadow-2xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+              <div className="bg-white rounded-3xl shadow-2xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500 mt-8">
                 <div className="bg-gradient-to-br from-[#012578] to-[#1CAF35] rounded-2xl p-6 text-white">
                   <h3 className="text-xl font-bold mb-2">Método Anti-Reganho</h3>
                   <p className="text-sm opacity-80">Curso Completo</p>
