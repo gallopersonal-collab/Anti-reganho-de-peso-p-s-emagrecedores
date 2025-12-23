@@ -11,7 +11,7 @@ export const heroData = {
 
 export const problemData = {
   title: "O Problema",
-  text: "Seu aluno fez tudo certo: seguiu as orientações médicas, usou Ozempic, Wegovy ou Mounjaro e viu a balança finalmente descer. Mas agora bate o medo: \"E se eu recuperar todo o peso quando parar a medicação?\" Essa é a realidade de milhares de pessoas que conquistaram resultados incríveis, mas vivem com a sombra do efeito sanfona. A medicação ajudou, mas não ensinou seu corpo a manter o peso sozinho."
+  text: "Seu aluno fez tudo certo: seguiu as orientações médicas, usou Ozempic, Wegovy ou Mounjaro e viu a balança finalmente descer.\n\nMas agora bate o medo: \"E se eu recuperar todo o peso quando parar a medicação?\"\n\nEssa é a realidade de milhares de pessoas que conquistaram resultados incríveis, mas vivem com a sombra do efeito sanfona.\n\nA medicação ajudou, mas não ensinou seu corpo a manter o peso sozinho."
 };
 
 export const universalInfoData = {
