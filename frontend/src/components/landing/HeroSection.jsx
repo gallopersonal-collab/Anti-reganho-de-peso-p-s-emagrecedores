@@ -68,7 +68,7 @@ export const HeroSection = ({ data, checkoutLink }) => {
 
             {/* Trust indicators */}
             <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-4">
-              {['20 Vagas', 'Certificado', 'Suporte'].map((item, idx) => (
+              {['Certificado', 'Suporte'].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-2 text-[#FFFFFF]/70 text-sm">
                   <CheckCircle className="w-4 h-4 text-[#1CAF35]" />
                   <span>{item}</span>
