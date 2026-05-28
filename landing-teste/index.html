@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anti-reganho de peso — Lista VIP</title>
+  <meta name="description" content="Entre para a lista e receba o protocolo anti-reganho de peso pós-emagrecedores." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050506;
+      --bg2: #0d0d0f;
+      --white: #EDEDEF;
+      --gray: #8A8F98;
+      --gray-lt: #b0b5bf;
+      --gold: #C9A961;
+      --teal: #2DD4BF;
+      --teal-dim: rgba(45,212,191,0.12);
+      --green: #4ADE80;
+      --border: rgba(255,255,255,0.07);
+      --r: 14px;
+      --ease: cubic-bezier(0.16,1,0.3,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(ellipse at top, #0d0d0f 0%, var(--bg) 60%);
+      color: var(--white);
+      font-size: 16px;
+      line-height: 1.55;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      flex: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      width: 100%;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold);
+      display: block; text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal-dim);
+      border: 1px solid rgba(45,212,191,0.2);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 12px; font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 8px var(--teal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
+
+    h1 {
+      font-size: clamp(28px, 4.5vw, 42px);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    h1 span { color: var(--teal); }
+
+    .lede {
+      font-size: 17px;
+      color: var(--gray-lt);
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 520px;
+    }
+
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--teal), transparent);
+    }
+
+    form { display: flex; flex-direction: column; gap: 14px; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label {
+      font-size: 12px; font-weight: 600;
+      color: var(--gray-lt);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .field input {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 14px;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 15px;
+      transition: border-color .2s, background .2s;
+    }
+    .field input::placeholder { color: var(--gray); }
+    .field input:focus {
+      outline: none;
+      border-color: var(--teal);
+      background: rgba(45,212,191,0.04);
+    }
+
+    button[type=submit] {
+      margin-top: 8px;
+      background: var(--teal);
+      color: var(--bg);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform .2s var(--ease), box-shadow .2s;
+    }
+    button[type=submit]:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px -8px rgba(45,212,191,0.5);
+    }
+    button[type=submit]:active { transform: translateY(0); }
+
+    .footnote {
+      font-size: 12px;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 18px;
+      line-height: 1.6;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 18px 16px;
+      background: rgba(74,222,128,0.08);
+      border: 1px solid rgba(74,222,128,0.2);
+      border-radius: 10px;
+      color: var(--green);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .success.show { display: block; }
+
+    .honeypot { position: absolute; left: -5000px; }
+
+    footer {
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    footer p {
+      font-size: 11px;
+      color: rgba(138,143,152,0.5);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <span class="logo">Outsider School</span>
+
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Lista VIP · Vagas limitadas
+    </div>
+
+    <h1>O protocolo<br /><span>anti-reganho de peso</span></h1>
+
+    <p class="lede">
+      Pra quem usou emagrecedores e quer travar o resultado sem efeito-sanfona. Entre na lista e receba o material assim que liberarmos.
+    </p>
+
+    <div class="card">
+      <div id="success" class="success">
+        ✓ Recebemos seu cadastro. Em breve você recebe um e-mail.
+      </div>
+
+      <!-- Form Netlify: data-netlify="true" para o Netlify detectar e salvar -->
+      <form
+        name="captura"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        action="/?ok=1"
+      >
+        <input type="hidden" name="form-name" value="captura" />
+        <p class="honeypot">
+          <label>Não preencha este campo: <input name="bot-field" /></label>
+        </p>
+
+        <div class="field">
+          <label for="nome">Nome</label>
+          <input id="nome" type="text" name="nome" placeholder="Seu primeiro nome" required />
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" name="email" placeholder="voce@email.com" required />
+        </div>
+
+        <button type="submit">Quero entrar na lista</button>
+      </form>
+
+      <p class="footnote">
+        Seus dados ficam guardados com segurança. Sem spam, sem vender lista.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 · Outsider School</p>
+  </footer>
+
+  <script>
+    // Mostra mensagem de sucesso quando volta com ?ok=1
+    if (new URLSearchParams(location.search).get('ok') === '1') {
+      document.getElementById('success').classList.add('show');
+      document.querySelector('form').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
