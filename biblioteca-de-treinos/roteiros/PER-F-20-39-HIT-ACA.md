@@ -69,6 +69,54 @@ Mesociclo centrado em condicionamento de alta intensidade: 2 sessões de HIIT co
 | 3 | Desenvolvimento | HIIT 1: 12x 30/30 e sprints com 60s de descanso · HIIT 2: 6x 90s/90s + AMRAP 9 min mais rápido que Sem. 2 |
 | 4 | Pico + testes | Manter intensidade, cortar 1 bloco de cada sessão de HIIT; aplicar testes nos dias de HIIT; força em RPE 7 |
 
+## Como Executar os Exercícios
+
+### Treino HIIT 1
+**Bike — protocolo 30/30** — Ajuste o selim na altura do quadril; nos 30s de tiro, pedale em cadência alta com resistência desafiadora (RPE 9), mantendo o tronco estável e as mãos firmes no guidão; nos 30s leves, reduza a resistência e gire solto. Respiração ritmada e profunda. ⚠️ A potência cai? Reduza a resistência, não a postura.
+
+**Sprint na esteira ou corredor** — No corredor: acelere progressivamente nos primeiros passos, corra a 90–95% com braços ativos e tronco levemente inclinado à frente, e desacelere gradualmente. Na esteira: suba apenas com a esteira já na velocidade-alvo, segurando o apoio até estabilizar. ⚠️ Nunca salte para fora da esteira em movimento; desacelere antes de descer.
+
+**Remo — Tabata** — Sequência da remada: pernas empurram → tronco inclina levemente para trás → braços puxam ao final; retorne na ordem inversa. Nos 20s all-out, força máxima por remada com coluna neutra. Expire a cada puxada. ⚠️ Não puxe com os braços antes de estender as pernas; a força vem das pernas.
+
+### Treino Força A
+**Salto na caixa (40–50 cm)** — Pés na largura do quadril, agache rápido balançando os braços para trás e salte sobre a caixa aterrissando suave, com os joelhos alinhados e flexionados. Desça da caixa com um passo, nunca saltando de volta. Expire no salto. ⚠️ Aterrissagem silenciosa é o padrão de qualidade; caixa instável ou fadiga alta = reduzir altura.
+
+**Agachamento com barra** — Barra sobre o trapézio, pés na largura dos ombros, core travado com inspiração profunda antes de descer. Desça até o paralelo e suba com intenção de velocidade. Expire na subida. ⚠️ Use os apoios de segurança do rack; com RPE acima de 8, encerre a série.
+
+**Levantamento terra romeno** — Barra ou halteres à frente das coxas, joelhos semiflexionados. Empurre o quadril para trás descendo a carga rente às pernas (3s) até alongar os posteriores e suba contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Coluna neutra inegociável.
+
+**Agachamento búlgaro com halteres** — Pé de trás apoiado no banco, halteres ao lado do corpo. Desça flexionando o joelho da frente até próximo do paralelo e suba pelo calcanhar com velocidade controlada. Inspire na descida, expire na subida. ⚠️ Joelho da frente na linha do pé.
+
+**Elevação pélvica com barra** — Costas apoiadas no banco na altura das escápulas, barra acolchoada sobre o quadril. Suba o quadril até alinhar tronco e coxas, pause 1s no topo e desça controlando. Expire ao subir. ⚠️ Não hiperestenda a lombar no topo.
+
+**Prancha com toque de ombro** — Em prancha alta (mãos no chão), toque o ombro oposto com uma mão de cada vez mantendo o quadril imóvel. Respiração fluida. ⚠️ Afaste mais os pés se o quadril balançar; estabilidade vem antes de velocidade.
+
+### Treino HIIT 2
+**Remo — intervalos longos (90s/90s)** — Mesma técnica do remo Tabata, mas com pace constante e sustentável forte (RPE 8–9) pelos 90s; monitore o visor e mantenha o mesmo pace em todos os tiros. ⚠️ Começar rápido demais e despencar no final é o erro clássico — disciplina de pace.
+
+**Kettlebell swing (no AMRAP)** — Pés além da largura dos ombros, kettlebell à frente. Faça a dobradiça de quadril levando o peso entre as pernas e projete o quadril à frente com força — o kettlebell sobe até a linha dos ombros pelo impulso, não pelos braços. Expire com força na subida. ⚠️ Lombar neutra; é dobradiça, não agachamento.
+
+**Wall ball** — Segure a medicine ball junto ao peito, agache até o paralelo e, na subida, arremesse a bola contra o alvo na parede (~3 m), recebendo-a de volta já iniciando o próximo agachamento. Expire no arremesso. ⚠️ Receba a bola com os braços amortecendo junto ao peito, não com o rosto na trajetória.
+
+**Burpee** — Do em pé, apoie as mãos no chão, lance os pés para trás em prancha, (com ou sem flexão), retorne os pés e salte com extensão completa. Respiração contínua, expirando no salto. ⚠️ Em fadiga alta, retire o salto e mantenha o padrão da prancha firme.
+
+**Bike — finalizador 20/40** — Mesma técnica do 30/30: 20s em cadência e resistência altas (RPE 9), 40s girando leve. ⚠️ Último bloco do dia — qualidade do tiro vale mais que "sobreviver" pedalando mal.
+
+### Treino Força B
+**Arremesso de medicine ball na parede** — Em pé de frente para a parede, bola junto ao peito. Agache levemente e arremesse a bola com explosão total contra a parede, recebendo-a no rebote (ou deixando cair, se pesada). Expire no arremesso. ⚠️ Intenção máxima de velocidade em cada repetição — potência não admite repetição preguiçosa.
+
+**Supino reto com halteres** — Deitado no banco, halteres na linha do meio do peito, escápulas retraídas. Empurre até quase estender e desça controlando. Expire na subida. ⚠️ Punhos firmes; suba os halteres com os joelhos ao se posicionar.
+
+**Puxada frontal (ou barra fixa assistida)** — Pegada um pouco mais larga que os ombros. Puxe até a parte alta do peito aproximando as escápulas e retorne controlando (2s). Expire ao puxar. ⚠️ Sem balanço de tronco.
+
+**Push press com halteres** — Halteres nos ombros, pés na largura do quadril. Flexione levemente os joelhos e use o drive de pernas para impulsionar os halteres acima da cabeça, descendo controlado. Expire no drive. ⚠️ O impulso vem das pernas; finalize com os braços alinhados às orelhas, sem arquear a lombar.
+
+**Remada unilateral com haltere** — Joelho e mão apoiados no banco, costas paralelas ao chão. Puxe o halter em direção ao quadril e desça controlando. Expire ao puxar. ⚠️ Não gire o tronco.
+
+**Pallof press na polia** — Em pé, perpendicular à polia na altura do peito, manopla junto ao tronco com as duas mãos. Estenda os braços à frente resistindo à rotação, segure 1s e retorne. Expire ao estender. ⚠️ Quadril e ombros quadrados — o desafio é não girar.
+
+**Carregada de fazendeiro (farmer's carry)** — Halteres pesados ao lado do corpo, postura ereta. Caminhe em linha reta com passos firmes e core contraído, respiração fluida. ⚠️ Termine antes de perder a postura.
+
 ## Testes e Métricas de Performance
 - **Capacidade anaeróbia:** Tabata na bike (8x 20s/10s) — menor potência dos 8 tiros (quanto mais alta, melhor)
 - **Capacidade aeróbia:** 2000 m de remo no menor tempo possível (registrar pace médio)
