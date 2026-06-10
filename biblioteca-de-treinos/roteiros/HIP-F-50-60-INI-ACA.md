@@ -52,6 +52,53 @@ Mesociclo introdutório em full body (A/B/C) 3x/semana, desenhado para a mulher 
 - **Semana 3 — Progressão:** +2,5% de carga (ou o menor incremento da máquina) onde o topo da faixa foi atingido com folga; 2–3 repetições em reserva.
 - **Semana 4 — Intensificação:** +1 série nos dois primeiros exercícios de cada treino; última série de cada exercício com 2 repetições em reserva. Nada de falha muscular, cargas máximas ou técnicas avançadas nesta faixa etária e nível.
 
+## Como Executar os Exercícios
+
+### Treino A
+**Leg press horizontal ou 45°** — Sente-se com lombar e quadril totalmente apoiados, pés na plataforma na largura dos ombros. Desça controlando até ~90° de joelho (ou menos, se houver desconforto) e empurre sem travar os joelhos. Inspire na descida, expire ao empurrar. ⚠️ Quadril nunca sai do banco; levante-se devagar do equipamento.
+
+**Cadeira extensora** — Joelho alinhado ao eixo da máquina, rolete sobre os tornozelos. Estenda as pernas e retorne controlando (2s). Expire ao estender. ⚠️ Retorno lento; amplitude sem dor.
+
+**Supino reto na máquina** — Manoplas na altura do meio do peito, costas apoiadas. Empurre até quase estender e retorne controlando. Expire ao empurrar. ⚠️ Ombros baixos; amplitude confortável.
+
+**Puxada frontal na polia (pegada neutra)** — Coxas travadas, triângulo ou pegada paralela. Puxe até a parte alta do peito aproximando as escápulas e retorne controlando. Expire ao puxar. ⚠️ Sem inclinar o tronco para trás.
+
+**Cadeira abdutora** — Sentada com as costas apoiadas, joelhos contra as almofadas. Abra as pernas contra a resistência, pause 1s e retorne devagar. Expire ao abrir. ⚠️ Sem impulso de tronco.
+
+**Panturrilha sentada** — Almofada sobre as coxas, ponta dos pés no apoio. Suba os calcanhares ao máximo, pause 1s e desça alongando. Expire ao subir. ⚠️ Movimento completo e sem pressa.
+
+**Prancha com joelhos apoiados** — Antebraços e joelhos no chão, corpo alinhado do joelho à cabeça, abdômen contraído. Respire normalmente — nunca prenda a respiração. ⚠️ Quadril nem cai nem sobe; encerre antes de perder o alinhamento.
+
+### Treino B
+**Cadeira flexora** — Sentada com o joelho alinhado ao eixo, rolete acima dos calcanhares. Flexione puxando o rolete e retorne controlando. Expire ao flexionar. ⚠️ Quadril colado no banco.
+
+**Elevação pélvica na máquina** — Costas no apoio na altura das escápulas, almofada sobre o quadril, pés na largura do quadril. Suba o quadril contraindo os glúteos até alinhar tronco e coxas, pause 1s e desça controlando. Expire ao subir. ⚠️ Quem sobe é o quadril, não a lombar.
+
+**Remada baixa na polia (triângulo)** — Tronco ereto, puxe o triângulo ao abdômen aproximando as escápulas e retorne controlando. Expire ao puxar. ⚠️ Sem balanço de tronco.
+
+**Desenvolvimento de ombros na máquina** — Costas apoiadas, manoplas na altura dos ombros. Empurre até quase estender e desça até a linha das orelhas. Expire ao empurrar. ⚠️ Sem arquear a lombar nem prender a respiração.
+
+**Agachamento no banco (box squat) com halter leve** — De costas para um banco firme, halter junto ao peito. Desça em 3s até tocar levemente o banco (sem sentar de vez) e suba pelos calcanhares. Inspire na descida, expire na subida. ⚠️ O banco é o guia de profundidade segura; joelhos alinhados aos pés.
+
+**Rosca direta (máquina ou halteres)** — Cotovelos junto ao tronco. Flexione até os ombros e desça controlando. Expire ao subir. ⚠️ Sem balanço.
+
+**Abdominal na máquina (carga leve)** — Eixo na altura do umbigo. Flexione o tronco contraindo o abdômen e retorne devagar. Expire ao flexionar. ⚠️ Carga leve e amplitude controlada.
+
+### Treino C
+**Agachamento goblet com halter leve** — Halter na vertical junto ao peito, pés na largura dos ombros. Desça em 3s com o tronco ereto até a profundidade confortável e suba pelos calcanhares. Inspire na descida, expire na subida. ⚠️ Joelhos alinhados aos pés; a profundidade evolui com as semanas.
+
+**Glúteo na polia (coice) ou na máquina** — Tornozeleira na polia baixa, mãos apoiadas na estrutura, tronco levemente inclinado. Estenda a perna para trás contraindo o glúteo, pause 1s e retorne controlando. Expire ao estender. ⚠️ Sem arquear a lombar; o movimento termina quando o glúteo contrai.
+
+**Remada articulada na máquina** — Peito apoiado, puxe as manoplas aproximando as escápulas, pause 1s e retorne devagar. Expire ao puxar. ⚠️ Peito colado no apoio.
+
+**Crucifixo na máquina (peck deck)** — Costas apoiadas, braços nas manoplas na altura do peito. Feche em arco, pause 1s e retorne controlando. Expire ao fechar. ⚠️ Cotovelos não passam da linha do tronco no retorno.
+
+**Elevação lateral com halteres leves** — Cotovelos semiflexionados, eleve até a linha dos ombros e desça controlando. Expire ao subir. ⚠️ Carga leve; sem impulso.
+
+**Tríceps na polia (corda)** — Cotovelos colados ao tronco. Estenda separando as pontas da corda e retorne controlando. Expire ao estender. ⚠️ Cotovelos imóveis.
+
+**Panturrilha em pé (apoio no equipamento)** — Em pé com as mãos em apoio leve. Suba os calcanhares ao máximo, pause 1s e desça alongando. Expire ao subir. ⚠️ Use o apoio para equilíbrio durante toda a série.
+
 ## Diretrizes de Progressão de Carga
 - Progressão conservadora: priorize repetições antes de carga e use sempre o menor incremento disponível (meio pino, anilha de 1 kg).
 - A regra é nunca sair de uma série sem capacidade para mais 2 repetições com boa técnica.
