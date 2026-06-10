@@ -66,6 +66,66 @@ Executar em bi-sets (1A+1B, 2A+2B, 3A+3B): sem descanso dentro do par, 60s entre
 - **Semana 3 — Progressão:** avançar a variação (ex.: flexão completa → pés elevados; agachamento → pausado); descansos de A e B caem para 45s.
 - **Semana 4 — Intensificação:** treinos A e B viram tri-sets (agrupar exercícios 1–3 e 4–6); circuito C com 45s de trabalho/10s de transição; incluir HIIT final 2x na semana: 8 rodadas de 20s de mountain climber forte/40s de marcha leve.
 
+## Como Executar os Exercícios
+
+### Treino A
+**Flexão de braços (progressões)** — Mãos na largura dos ombros, corpo rígido em prancha da cabeça ao calcanhar. Desça o peito até próximo do chão e empurre de volta. Inspire na descida, expire na subida. Progressão: mãos elevadas (mesa) → completa no chão → pés elevados. ⚠️ Quadril não cai nem empina; punhos doloridos pedem apoio neutro.
+
+**Remada invertida na mesa firme** — Deitado sob uma mesa robusta, segure a borda com as duas mãos, corpo em linha. Puxe o peito em direção à mesa aproximando as escápulas e desça controlando. Expire ao puxar. ⚠️ Teste a estabilidade da mesa antes; joelhos flexionados facilitam, corpo reto dificulta. Alternativa: remada curvada com mochila carregada.
+
+**Flexão diamante** — Mãos juntas sob o peito formando um "diamante" com polegares e indicadores. Desça com os cotovelos próximos ao corpo e empurre de volta. Inspire na descida, expire na subida. ⚠️ Versão com joelhos apoiados se a completa comprometer a técnica.
+
+**Pike push-up** — Em posição de "V" invertido (quadril alto, pernas e braços estendidos), desça o topo da cabeça em direção ao chão flexionando os cotovelos e empurre de volta. Inspire na descida, expire na subida. ⚠️ O peso vai para os ombros; desça devagar e mantenha o pescoço neutro.
+
+**Tríceps no banco/cadeira (dips)** — Mãos na borda da cadeira atrás do corpo, pernas à frente. Desça flexionando os cotovelos até ~90° e empurre de volta. Inspire na descida, expire na subida. ⚠️ Ombros baixos, longe das orelhas; não desça além do confortável.
+
+**Prancha frontal** — Antebraços e pontas dos pés no chão, corpo alinhado, abdômen e glúteos contraídos. Respire normalmente. ⚠️ Quadril nem cai nem sobe.
+
+**Dead bug** — Deitado de costas, braços para o teto e joelhos a 90°. Estenda lentamente perna e braço opostos mantendo a lombar colada no solo, retorne e alterne. Expire ao estender. ⚠️ Lombar descolou = amplitude menor.
+
+### Treino B
+**Agachamento livre (progressões)** — Pés na largura dos ombros, braços à frente como contrapeso. Desça até o paralelo com o tronco ereto e suba pelos calcanhares. Inspire na descida, expire na subida. Progressão: paralelo → pausado 2s embaixo → pistol assistido (segurando um apoio). ⚠️ Joelhos alinhados aos pés.
+
+**Afundo alternado** — Passo amplo à frente, desça até o joelho de trás se aproximar do chão e empurre de volta, alternando. Inspire na descida, expire na subida. ⚠️ Apoio leve na parede se o equilíbrio oscilar; tronco ereto.
+
+**Ponte de glúteo unilateral** — Deitado de costas, um pé no chão e a outra perna estendida. Suba o quadril contraindo o glúteo da perna de apoio, pause 1s e desça controlando. Expire ao subir. ⚠️ Quadril sobe nivelado, sem girar.
+
+**Agachamento búlgaro com pé no sofá/cadeira** — Pé de trás apoiado no sofá, tronco ereto. Desça em amplitude confortável e suba pelo calcanhar da frente. Inspire na descida, expire na subida. ⚠️ Ajuste a distância antes da primeira série; joelho na linha do pé.
+
+**Good morning com peso corporal** — Em pé, mãos na nuca, joelhos semiflexionados. Empurre o quadril para trás inclinando o tronco com coluna neutra (3s) até sentir os posteriores, e suba contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ É o quadril que vai para trás; as costas não "dobram".
+
+**Panturrilha unilateral no degrau** — Ponta de um pé no degrau, calcanhar livre, mão em apoio leve. Suba ao máximo, pause 1s e desça alongando abaixo da linha do degrau. Expire ao subir. ⚠️ Movimento completo e controlado.
+
+**Prancha lateral** — Apoio no antebraço, corpo em linha, quadril alto. Respire normalmente. ⚠️ Joelhos apoiados se necessário.
+
+### Treino C (circuito)
+**Agachamento com salto (ou rápido sem salto)** — Desça ao paralelo e suba com explosão — saltando e aterrissando amortecido, ou apenas subindo rápido na versão de baixo impacto. Expire na subida. ⚠️ Histórico de dor no joelho = versão sem salto, sempre.
+
+**Flexão de braços** — Mesma técnica do Treino A, em ritmo de circuito. ⚠️ Caiu a técnica, suba para a versão inclinada e siga.
+
+**Mountain climber** — Em prancha alta, alterne os joelhos em direção ao peito em ritmo constante, quadril baixo e ombros sobre as mãos. Respiração acelerada e ritmada. ⚠️ Quadril empinado anula o trabalho de core.
+
+**Afundo reverso alternado** — Passo amplo para trás, desça até o joelho de trás se aproximar do chão e retorne, alternando. Inspire na descida, expire na subida. ⚠️ Versão mais amigável ao joelho que o afundo à frente — use-a como padrão no circuito.
+
+**Burpee adaptado (sem salto, com apoio)** — Agache e apoie as mãos no chão (ou num banco baixo), leve as pernas para trás uma de cada vez até a prancha, retorne e levante-se por completo. Respiração contínua. ⚠️ Sem salto e sem "quicar"; pressão alta não combina com prender a respiração.
+
+**Prancha com toque no ombro** — Em prancha alta, toque o ombro oposto com uma mão de cada vez mantendo o quadril imóvel. Respiração fluida. ⚠️ Afaste mais os pés para estabilizar.
+
+### Treino D (bi-sets)
+**Flexão com pegada larga** — Mãos bem além da largura dos ombros. Desça o peito até próximo do chão e empurre de volta. Inspire na descida, expire na subida. ⚠️ Corpo rígido; menos amplitude de cotovelo é normal nessa pegada.
+
+**Agachamento pausado (2s)** — Desça ao paralelo, segure 2s embaixo sem relaxar e suba pelos calcanhares. Inspire na descida, expire na subida. ⚠️ A pausa é ativa: tensão constante nas pernas.
+
+**Afundo lateral alternado** — Passo amplo para o lado, desça flexionando o joelho da perna de apoio com a outra estendida, e retorne ao centro. Inspire na descida, expire na subida. ⚠️ Joelho da perna de apoio na linha do pé; tronco inclina levemente à frente.
+
+**Ponte de glúteo com marcha** — Em ponte com o quadril elevado, eleve um pé de cada vez do chão mantendo o quadril nivelado. Respiração fluida. ⚠️ Quadril caiu ou girou = pausa e reinício.
+
+**Abdominal infra deitado + prancha** — Deitado, traga os joelhos ao peito enrolando o quadril e desça controlando sem tocar os pés no chão; na sequência, prancha frontal. Expire ao recolher os joelhos. ⚠️ Lombar pressionada contra o chão durante o infra.
+
+*(Pike push-up e remada invertida: mesma execução descrita no Treino A.)*
+
+**Finalizador HIIT (Semana 4)** — 20s de mountain climber em ritmo forte + 40s de marcha leve no lugar, 8 rodadas. Respiração contínua. ⚠️ Forte = RPE 8 com técnica íntegra; reduza o ritmo antes de degradar o padrão.
+
 ## Diretrizes de Progressão de Carga
 - Ordem de progressão sem pesos: mais repetições → variação mais difícil → cadência mais lenta (3–4s na descida) → menos descanso.
 - Considere "carga dominada" quando atingir o topo da faixa em todas as séries com técnica perfeita; só então avance a variação.
