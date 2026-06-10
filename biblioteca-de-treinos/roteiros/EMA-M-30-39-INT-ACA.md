@@ -70,6 +70,62 @@ Mesociclo de 4 semanas em divisão superior/inferior (A: superiores empurrar, B:
 | 3 | Progressão | +2,5–5% onde a técnica permitir; descansos dos isoladores em 40s; +1 série no primeiro exercício de cada treino |
 | 4 | Intensificação | Descansos de 30–45s em tudo; exercícios 4+5 dos treinos A e C em bi-set; cardio intervalado em todas as sessões (substituir contínuos por 30s/90s ou 1min/1min) |
 
+## Como Executar os Exercícios
+
+### Treino A
+**Supino reto com barra** — Deitado no banco, pés firmes no chão, pegada um pouco mais larga que os ombros, escápulas retraídas. Desça a barra controladamente até a linha do peitoral e empurre até a extensão sem travar os cotovelos. Inspire na descida, expire na subida. ⚠️ Não tire os glúteos do banco nem rebote a barra no peito.
+
+**Desenvolvimento com halteres sentado** — Sentado com encosto a ~80°, halteres na altura dos ombros, palmas à frente. Empurre verticalmente até quase estender os cotovelos e desça controlando até a linha das orelhas. Expire ao empurrar. ⚠️ Não arqueie a lombar; o apoio no encosto deve ser constante.
+
+**Supino inclinado com halteres** — Banco a 30–45°, halteres na linha da parte superior do peito. Empurre para cima até quase estender e desça controlando até alongar o peitoral. Expire ao empurrar. ⚠️ Punhos firmes e alinhados aos antebraços.
+
+**Elevação lateral com halteres** — Em pé, cotovelos semiflexionados, halteres ao lado do corpo. Eleve até a linha dos ombros e desça controlando. Expire ao subir. ⚠️ Sem impulso de tronco; carga leve e técnica perfeita.
+
+**Crucifixo na polia (crossover)** — Em pé entre as polias altas, tronco levemente inclinado, cotovelos semiflexionados. Traga as manoplas à frente do peito em arco até as mãos se aproximarem e retorne controlando. Expire ao fechar. ⚠️ Cotovelos fixos — se flexionarem, virou supino.
+
+**Tríceps na polia (corda)** — Em pé, cotovelos colados ao tronco. Estenda os antebraços para baixo separando as pontas da corda no final e retorne controlando. Expire ao estender. ⚠️ Os cotovelos não se afastam do corpo.
+
+### Treino B
+**Agachamento livre com barra** — Barra sobre o trapézio, pés na largura dos ombros, core travado com inspiração profunda. Desça até as coxas atingirem o paralelo e suba empurrando o chão pelos calcanhares. Expire na subida. ⚠️ Joelhos alinhados aos pés; use os apoios de segurança do rack.
+
+**Leg press 45°** — Lombar e quadril colados no banco, pés na largura dos ombros. Desça até ~90° de joelho e empurre sem travar os joelhos. Inspire na descida, expire ao empurrar. ⚠️ Não tire o quadril do banco no fundo.
+
+**Afundo caminhando com halteres** — Halteres ao lado do corpo, passo amplo à frente. Desça até o joelho de trás se aproximar do chão e impulsione pelo calcanhar da frente, emendando o próximo passo. Inspire na descida, expire na subida. ⚠️ Tronco ereto e joelho da frente na linha do pé.
+
+**Cadeira extensora** — Joelho alinhado ao eixo, rolete sobre os tornozelos. Estenda as pernas e retorne em 3s controlando. Expire ao estender. ⚠️ Retorno lento; não deixe a carga despencar.
+
+**Panturrilha em pé na máquina** — Ombros sob as almofadas, ponta dos pés no apoio. Suba os calcanhares ao máximo, segure 1s e desça alongando. Expire ao subir. ⚠️ Amplitude completa, sem quicar.
+
+**Abdominal na polia alta (crunch ajoelhado)** — Ajoelhado de costas para a polia segurando a corda junto à cabeça. Enrole o tronco em direção ao chão contraindo o abdômen e retorne controlando. Expire ao descer. ⚠️ Quadril fixo; quem flexiona é o tronco, não os braços.
+
+### Treino C
+**Puxada frontal na polia** — Sentado com as coxas travadas, pegada mais larga que os ombros. Puxe a barra até a parte alta do peito aproximando as escápulas e retorne controlando. Expire ao puxar. ⚠️ Não incline o tronco para trás para "ajudar". Na barra fixa assistida, mesmo padrão: peito alto e descida controlada.
+
+**Remada curvada com barra** — Tronco inclinado a ~45° com coluna neutra, joelhos semiflexionados. Puxe a barra em direção ao abdômen aproximando as escápulas e desça controlando. Expire ao puxar. ⚠️ Core travado; se a lombar arredondar, reduza a carga.
+
+**Remada baixa na polia (triângulo)** — Sentado, tronco ereto. Puxe o triângulo até o abdômen e retorne controlando sem deixar o tronco ser arrastado à frente. Expire ao puxar. ⚠️ Sem balanço de tronco.
+
+**Crucifixo invertido na máquina** — Peito apoiado no encosto, braços quase estendidos. Abra em arco até a linha dos ombros e retorne devagar. Expire ao abrir. ⚠️ Cotovelos em leve flexão fixa.
+
+**Rosca direta com barra** — Em pé, pegada supinada na largura dos ombros, cotovelos junto ao tronco. Flexione até a barra chegar aos ombros e desça controlando. Expire ao subir. ⚠️ Sem balanço de quadril.
+
+**Rosca martelo com halteres** — Em pé, palmas voltadas uma para a outra. Flexione os cotovelos mantendo a pegada neutra e desça controlando. Expire ao subir. ⚠️ Cotovelos fixos ao lado do tronco.
+
+### Treino D
+**Levantamento terra romeno com barra** — Em pé, barra à frente das coxas, joelhos semiflexionados. Empurre o quadril para trás descendo a barra rente às pernas até alongar os posteriores e suba contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Coluna neutra inegociável; capriche no bracing antes de cada série.
+
+**Mesa flexora** — Joelho no eixo da máquina, rolete acima dos calcanhares. Flexione trazendo o rolete aos glúteos e retorne devagar. Expire ao flexionar. ⚠️ Quadril colado no banco.
+
+**Elevação pélvica com barra** — Costas apoiadas no banco na altura das escápulas, barra acolchoada sobre o quadril. Suba o quadril até alinhar tronco e coxas, segure 1s e desça controlando. Expire ao subir. ⚠️ Não hiperestenda a lombar no topo; queixo levemente recolhido.
+
+**Agachamento búlgaro com halteres** — Pé de trás apoiado no banco, halteres ao lado do corpo. Desça flexionando o joelho da frente até a coxa se aproximar do paralelo e suba pelo calcanhar. Inspire na descida, expire na subida. ⚠️ Ajuste a distância do banco antes de pegar carga.
+
+**Farmer's walk** — Halteres pesados ao lado do corpo, postura ereta, ombros para trás. Caminhe em linha reta com passos firmes e core contraído, respiração fluida. ⚠️ Termine a série antes de perder a postura.
+
+**Prancha frontal** — Antebraços e pontas dos pés no chão, corpo alinhado, abdômen e glúteos contraídos. Respire normalmente. ⚠️ Não deixe o quadril cair nem subir.
+
+**Rotação de tronco na polia (lenhador)** — Em pé, perpendicular à polia alta, braços estendidos. Gire o tronco puxando a manopla em diagonal até o quadril oposto e controle o retorno. Expire na rotação. ⚠️ Gire o tronco, não apenas os braços.
+
 ## Diretrizes de Progressão de Carga
 - Dupla progressão: atinja o topo da faixa em todas as séries antes de subir 2,5–5%.
 - Compostos primeiro (agachamento, terra romeno, supino, remada, puxada); isoladores progridem quando a execução estiver impecável.
