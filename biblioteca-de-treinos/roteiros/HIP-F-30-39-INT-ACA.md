@@ -60,6 +60,61 @@ Mesociclo de especialização em inferiores: glúteos e coxas são treinados 3x 
 - **Semana 3 — Progressão:** +1 série no exercício 1 dos treinos A, C e D (total 5 séries); topo da faixa de repetições com 1 repetição em reserva.
 - **Semana 4 — Intensificação:** volte ao volume base e aplique: drop-set na última série da abdutora e da extensora; rest-pause (15s) na última série do hip thrust; bi-set abdutora + coice no Treino A. Última série dos compostos em falha controlada (0–1 em reserva).
 
+## Como Executar os Exercícios
+### Treino A
+**Elevação pélvica com barra (hip thrust)** — Apoie as escápulas na borda do banco, pés firmes no chão na largura do quadril e barra acolchoada sobre a dobra do quadril. Empurre pelos calcanhares e estenda o quadril até o tronco ficar paralelo ao chão, segure 1s contraindo o glúteo e desça controladamente. Expire ao subir, inspire ao descer. ⚠️ Termine o movimento com o glúteo, sem hiperestender a lombar no topo; queixo levemente recolhido.
+
+**Levantamento terra romeno com barra** — Em pé, barra à frente das coxas com pegada pronada, pés na largura do quadril e joelhos levemente flexionados. Empurre o quadril para trás descendo a barra rente às pernas até sentir alongar os posteriores, depois suba contraindo os glúteos até estender o quadril. Inspire na descida, expire na subida. ⚠️ Lombar neutra do início ao fim — o limite da descida é onde a coluna começaria a arredondar; barra sempre colada no corpo.
+
+**Búlgaro com halteres (passo longo)** — De costas para o banco, apoie o peito do pé de trás sobre ele e dê um passo longo à frente para enfatizar glúteos, segurando um halter em cada mão. Desça flexionando o joelho da frente até a coxa chegar perto do paralelo, com leve inclinação do tronco à frente, e suba empurrando pelo calcanhar. Inspire na descida, expire na subida. ⚠️ Joelho da frente alinhado com o pé — se faltar equilíbrio, reduza a carga.
+
+**Cadeira flexora** — Sentada com o encosto ajustado (joelhos alinhados ao eixo da máquina) e o rolo logo acima dos calcanhares. Flexione os joelhos puxando o rolo para baixo e retorne em 2 segundos controlando o peso. Expire ao flexionar, inspire ao retornar. ⚠️ Não deixe o quadril descolar do banco para "ajudar" o movimento.
+
+**Cadeira abdutora (tronco inclinado à frente)** — Sentada na máquina, incline o tronco à frente segurando os apoios laterais para enfatizar o glúteo máximo. Abra as pernas contra a resistência até a amplitude máxima, segure 1s e retorne devagar sem deixar as anilhas baterem. Expire ao abrir, inspire ao fechar. ⚠️ Mantenha a inclinação constante — não use o balanço do tronco como impulso.
+
+**Glúteo na polia (coice)** — Prenda a tornozeleira na polia baixa, apoie as mãos no equipamento e incline o tronco levemente à frente. Estenda a perna para trás e para cima contraindo o glúteo, segure 1s e retorne controlando o cabo. Expire ao estender, inspire ao voltar. ⚠️ O movimento sai do quadril, não da lombar — não hiperestenda a coluna no final.
+
+### Treino B
+**Puxada frontal na polia** — Sentada com as coxas travadas no apoio, pegada pronada um pouco mais larga que os ombros. Incline o tronco levemente para trás e puxe a barra até a parte alta do peito aproximando as escápulas; retorne controlando até quase estender os cotovelos. Expire ao puxar, inspire ao retornar. ⚠️ Não balance o tronco para "ajudar" nem puxe a barra atrás da nuca.
+
+**Supino reto com halteres** — Deitada no banco com os pés firmes no chão, halteres na linha do peito e escápulas retraídas. Empurre os halteres para cima até quase estender os cotovelos, aproximando-os levemente no topo, e desça controlando até alongar o peitoral. Inspire na descida, expire na subida. ⚠️ Cotovelos a ~45° do tronco — não os deixe abrir a 90°.
+
+**Remada baixa na polia (triângulo)** — Sentada com os pés apoiados, joelhos semiflexionados e tronco ereto segurando o triângulo. Puxe o triângulo até o abdômen levando os cotovelos para trás e aproximando as escápulas; retorne controlando até estender os braços. Expire ao puxar, inspire ao voltar. ⚠️ Evite balançar o tronco — o movimento é das costas, não da lombar.
+
+**Desenvolvimento na máquina** — Sentada com a lombar apoiada e as manoplas na altura dos ombros. Empurre para cima até quase estender os cotovelos e desça controladamente até as mãos voltarem à linha das orelhas. Expire ao empurrar, inspire ao descer. ⚠️ Não arqueie a lombar para empurrar mais peso.
+
+**Elevação lateral com halteres** — Em pé, halteres ao lado do corpo e cotovelos levemente flexionados. Eleve os braços pelas laterais até a linha dos ombros e desça em 2 segundos controlando. Expire ao subir, inspire ao descer. ⚠️ Não suba acima da linha dos ombros nem use balanço de tronco.
+
+**Rosca direta com halteres** — Em pé, halteres ao lado do corpo com as palmas voltadas à frente e cotovelos colados ao tronco. Flexione os cotovelos elevando os halteres até a altura dos ombros e desça controlando até quase estender os braços. Expire ao subir, inspire ao descer. ⚠️ Não balance o tronco nem deixe os cotovelos viajarem para frente.
+
+**Tríceps na polia (corda)** — Em pé, de frente para a polia alta, cotovelos colados ao tronco segurando a corda. Estenda os cotovelos para baixo separando as pontas da corda no final e retorne controlando. Expire ao estender, inspire ao voltar. ⚠️ Os cotovelos ficam fixos: se abrirem ou subirem, a carga está alta.
+
+### Treino C
+**Agachamento livre com barra** — Barra apoiada sobre o trapézio, pés na largura dos ombros com pontas levemente abertas, escápulas firmes contra a barra. Desça flexionando joelhos e quadril até as coxas chegarem ao paralelo, mantendo a coluna neutra, e suba empurrando o chão. Inspire e contraia o abdômen antes de descer, expire na subida. ⚠️ Agache dentro do rack com travas de segurança; joelhos acompanham a direção dos pés.
+
+**Leg press 45°** — Sente com lombar e quadril totalmente apoiados no encosto, pés na plataforma na largura dos ombros. Desça a plataforma controladamente até cerca de 90° nos joelhos e empurre de volta sem estender os joelhos por completo. Inspire na descida, expire ao empurrar. ⚠️ Não desça a ponto de a lombar enrolar e descolar do encosto.
+
+**Cadeira extensora** — Sentada com o encosto ajustado (joelhos alinhados ao eixo da máquina) e o rolo na frente dos tornozelos. Estenda os joelhos até quase a extensão completa, segure brevemente e desça em 2 segundos. Expire ao estender, inspire ao descer. ⚠️ Não "chute" o peso com impulso nem deixe as anilhas baterem na descida.
+
+**Afundo caminhando com halteres** — Em pé com um halter em cada mão, dê um passo à frente e desça até o joelho de trás quase tocar o chão, com tronco ereto. Suba empurrando pelo calcanhar da frente e emende o passo seguinte com a outra perna. Inspire na descida, expire na subida. ⚠️ Passos firmes e joelho alinhado com o pé — se o equilíbrio falhar, troque por passada estática.
+
+**Panturrilha em pé na máquina** — Ombros sob os apoios, pontas dos pés na plataforma e calcanhares livres. Suba na ponta dos pés o máximo que conseguir, segure 2s no topo e desça alongando a panturrilha por completo. Expire ao subir, inspire ao descer. ⚠️ Amplitude total sem quicar — o alongamento embaixo vale tanto quanto a contração em cima.
+
+**Abdominal na máquina** — Sentada com o ajuste posicionado para começar com leve alongamento do abdômen. Flexione o tronco aproximando as costelas do quadril e retorne devagar. Expire ao flexionar, inspire ao voltar. ⚠️ Não puxe com os braços nem com o pescoço: a força vem do abdômen.
+
+### Treino D
+**Hip thrust na máquina** — Ajuste o encosto na linha das escápulas, pés firmes na plataforma na largura do quadril e almofada/cinto sobre o quadril. Estenda o quadril até o tronco ficar paralelo ao chão, contraia o glúteo por 1s no topo e desça controladamente. Expire ao subir, inspire ao descer. ⚠️ Empurre pelos calcanhares e não hiperestenda a lombar no topo.
+
+**Agachamento sumô com halter** — Em pé com base bem aberta e pontas dos pés para fora, segure um halter na vertical entre as pernas. Agache levando o quadril para baixo com o tronco ereto até as coxas chegarem ao paralelo e suba contraindo glúteos e adutores. Inspire na descida, expire na subida. ⚠️ Joelhos sempre na direção das pontas dos pés — não os deixe desabar para dentro.
+
+**Stiff com halteres** — Em pé, halteres à frente das coxas e joelhos quase estendidos. Desça os halteres rente às pernas empurrando o quadril para trás até o alongamento máximo dos posteriores com a coluna neutra, e suba contraindo glúteos e posteriores. Inspire na descida, expire na subida. ⚠️ A amplitude termina onde a lombar começaria a arredondar — não force a descida até o chão.
+
+**Cadeira abdutora** — Sentada com a lombar apoiada no encosto e a parte externa dos joelhos contra os apoios. Abra as pernas contra a resistência até a amplitude máxima confortável, segure 1s e retorne devagar. Expire ao abrir, inspire ao fechar. ⚠️ Não use impulso: a volta lenta é metade do exercício.
+
+**Extensão de quadril no banco romano (glúteo)** — Posicione o quadril sobre o apoio do banco romano com os pés travados e os braços cruzados no peito. Desça o tronco controladamente e suba até o alinhamento do corpo contraindo glúteos e posteriores — pense em "empurrar o quadril contra o banco", não em arquear as costas. Inspire na descida, expire na subida. ⚠️ Suba apenas até o corpo ficar reto: hiperestender no topo transfere o trabalho para a lombar.
+
+**Prancha abdominal + prancha lateral** — Na prancha frontal, antebraços no chão alinhados aos ombros e corpo em linha reta, abdômen e glúteos contraídos. Na prancha lateral, apoie um antebraço no chão e empilhe os pés, elevando o quadril até alinhar o corpo; respire normalmente nas duas posições. ⚠️ Não deixe o quadril cair em nenhuma das versões — se a postura quebrar, encerre a série.
+
 ## Diretrizes de Progressão de Carga
 - Dupla progressão: suba repetições até o topo da faixa em todas as séries, depois aumente a carga (2,5–5% em inferiores) e recomece pela base.
 - No hip thrust, priorize a pausa de 1s no topo com extensão completa do quadril antes de aumentar carga.

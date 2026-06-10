@@ -58,6 +58,59 @@ Mesociclo único de 4 semanas para mulheres de 50 a 60 anos sedentárias, em ret
 - **Semana 3 — Progressão suave:** 3 séries nos exercícios principais (nº 1 e 4 de cada treino), RPE 6; reduzir gradualmente o apoio das mãos nos exercícios de equilíbrio, se seguro. Condicionamento de 15 min.
 - **Semana 4 — Consolidação:** manter o volume da Semana 3 com técnica estável, RPE 6–7 nos principais. Reavaliar equilíbrio, dores e disposição antes de avançar de programa.
 
+## Como Executar os Exercícios
+### Treino A
+**Leg press horizontal** — Sente-se com calma, segurando nos apoios laterais, e mantenha costas e cabeça totalmente apoiadas no encosto, com os pés na plataforma na largura dos ombros. Empurre a plataforma estendendo os joelhos sem travá-los e retorne de forma controlada até cerca de 90° de flexão. Expire ao empurrar, inspire ao retornar — nunca prenda a respiração. ⚠️ Não desça além do confortável nem deixe a lombar descolar do encosto.
+
+**Cadeira extensora** — Ajuste o encosto para que a dobra dos joelhos fique alinhada ao eixo de giro da máquina e o rolo apoie um pouco acima dos tornozelos; segure nas alças laterais para estabilizar. Estenda os joelhos até quase a extensão completa e desça devagar, controlando o peso na volta. Expire ao estender, inspire ao descer. ⚠️ Evite "chutar" o peso ou deixar as placas baterem; em caso de desconforto no joelho, reduza a amplitude.
+
+**Cadeira flexora** — Ajuste a máquina para que os joelhos fiquem alinhados ao eixo de giro e o rolo apoie atrás dos tornozelos. Flexione os joelhos puxando o rolo em direção aos glúteos e retorne lentamente à posição inicial. Expire ao flexionar, inspire ao voltar. ⚠️ Mantenha o quadril colado ao banco, sem arquear a lombar.
+
+**Remada baixa na máquina (pegada neutra)** — Sente-se com o peito apoiado no suporte (quando houver) e o tronco ereto, segurando as manoplas com as palmas voltadas uma para a outra. Puxe os cotovelos para trás, rente ao corpo, aproximando as escápulas, e retorne estendendo os braços com controle. Expire ao puxar, inspire ao voltar. ⚠️ Não use impulso do tronco — o movimento vem dos braços e das costas.
+
+**Panturrilha em pé com apoio das mãos** — Em pé, de frente para uma barra ou máquina firme, apoie as duas mãos para garantir o equilíbrio, com os pés na largura do quadril. Suba na ponta dos pés o mais alto que conseguir com conforto, segure 1 segundo e desça devagar. Expire ao subir, inspire ao descer. ⚠️ Mantenha sempre as mãos no apoio — o objetivo é fortalecer, não testar o equilíbrio aqui.
+
+**Equilíbrio unipodal com apoio leve das mãos** — Em pé ao lado de um apoio firme, toque-o levemente com os dedos e eleve um dos pés do chão, mantendo o tronco ereto e o olhar fixo em um ponto à frente. Sustente o tempo indicado respirando normalmente e troque de perna. ⚠️ Faça sempre ao alcance do apoio e com calçado estável; se oscilar, segure firme, recupere-se e recomece.
+
+### Treino B
+**Puxada na polia alta (pegada aberta)** — Sente-se com as coxas firmes sob o apoio e segure a barra com pegada um pouco mais aberta que a largura dos ombros. Puxe a barra até a parte alta do peito, aproximando as escápulas, e retorne controlando a subida da barra. Expire ao puxar, inspire ao subir. ⚠️ Não puxe a barra atrás da nuca nem incline o tronco exageradamente para trás.
+
+**Supino na máquina (chest press)** — Ajuste o banco para que as manoplas fiquem na altura do meio do peito, com costas e cabeça apoiadas no encosto. Empurre as manoplas à frente até quase estender os cotovelos e retorne devagar até sentir leve alongamento no peito. Expire ao empurrar, inspire ao voltar — sem prender o ar, principalmente se houver hipertensão. ⚠️ Mantenha os ombros relaxados (longe das orelhas) e não trave os cotovelos.
+
+**Crucifixo invertido na máquina** — Sente-se de frente para o encosto, com o peito apoiado e as manoplas na altura dos ombros. Abra os braços para trás em arco, até a linha do tronco, aproximando as escápulas, e retorne devagar. Expire ao abrir, inspire ao voltar. ⚠️ Mantenha os cotovelos levemente flexionados e evite usar impulso.
+
+**Desenvolvimento de ombros na máquina (amplitude confortável)** — Ajuste o banco para que as manoplas fiquem na altura dos ombros, com costas totalmente apoiadas. Empurre para cima até quase estender os cotovelos e desça devagar somente até a altura que não gere desconforto (por volta das orelhas). Expire ao subir, inspire ao descer, sem prender a respiração. ⚠️ Não force amplitude no ombro — trabalhe apenas no arco de movimento sem dor.
+
+**Rosca direta com halteres leves sentada** — Sente-se em um banco com encosto, costas apoiadas e pés firmes no chão, segurando os halteres ao lado do corpo com as palmas para frente. Flexione os cotovelos levando os halteres em direção aos ombros e desça com controle total. Expire ao subir, inspire ao descer. ⚠️ Fazer sentada protege o equilíbrio e a lombar — mantenha os cotovelos junto ao tronco, sem balançar.
+
+**Abdominal no solo com pés apoiados (amplitude parcial)** — Deite-se de costas com joelhos dobrados, pés apoiados no chão e mãos cruzadas no peito. Eleve apenas a cabeça e os ombros do chão, olhando para o teto, e desça devagar — a amplitude é curta de propósito. Expire ao subir, inspire ao descer. ⚠️ Não puxe o pescoço; para deitar e levantar do colchonete, role de lado e use as mãos como apoio.
+
+### Treino C
+**Sentar e levantar do banco (peso corporal)** — Fique em pé de costas para um banco firme, pés na largura dos ombros e braços estendidos à frente para equilibrar. Desça empurrando o quadril para trás até tocar levemente o banco (pode sentar por completo no início) e levante pressionando os calcanhares no chão. Inspire ao descer, expire ao subir. ⚠️ Desça sempre com controle, sem "despencar", e mantenha os joelhos na direção das pontas dos pés; se precisar, use as mãos nas coxas para ajudar a subir.
+
+**Cadeira abdutora** — Sente-se com as costas apoiadas no encosto e a parte externa das coxas contra os apoios. Abra as pernas contra a resistência até a amplitude confortável e retorne fechando devagar. Expire ao abrir, inspire ao fechar. ⚠️ Mantenha o tronco apoiado durante toda a série, sem inclinar para frente.
+
+**Remada na máquina (pegada pronada)** — Sente-se com o peito apoiado no suporte, segurando as manoplas com as palmas voltadas para baixo e cotovelos mais abertos. Puxe as manoplas em direção ao tronco, levando os cotovelos para trás na altura dos ombros, e retorne com controle. Expire ao puxar, inspire ao voltar. ⚠️ Não eleve os ombros em direção às orelhas durante a puxada.
+
+**Supino inclinado na máquina** — Ajuste o banco inclinado para que as manoplas fiquem na altura da parte superior do peito, com costas apoiadas. Empurre as manoplas para cima e à frente até quase estender os cotovelos e retorne devagar. Expire ao empurrar, inspire ao voltar. ⚠️ Mantenha os pés firmes no chão e não arqueie a lombar para "ajudar" o movimento.
+
+**Elevação pélvica no solo** — Deite-se de costas no colchonete, joelhos dobrados e pés apoiados no chão na largura do quadril. Eleve o quadril contraindo os glúteos até alinhar joelhos, quadril e ombros, segure 1 segundo e desça devagar. Expire ao subir, inspire ao descer. ⚠️ Suba só até onde for confortável, sem arquear excessivamente a lombar; role de lado para deitar e levantar do chão com segurança.
+
+**Caminhada em linha reta (calcanhar-ponta) com supervisão** — Em pé, ao lado de uma parede ou barra para apoio imediato, caminhe em linha reta encostando o calcanhar de um pé na ponta do outro a cada passo. Mantenha o tronco ereto, o olhar à frente e os braços levemente abertos para equilibrar, respirando normalmente. ⚠️ Faça sempre com supervisão e perto de um apoio; se oscilar, pare, segure-se e recomece com passos mais curtos.
+
+### Mobilidade e Alongamento Final
+**Alongamento de isquiotibiais sentada** — Sentada na ponta de um banco, estenda uma perna à frente com o calcanhar no chão e incline o tronco para frente a partir do quadril, mantendo a coluna alongada. Sustente 20–30 segundos sentindo tensão confortável atrás da coxa e troque de perna. Respire de forma lenta e contínua. ⚠️ Alongar sentada é mais seguro para o equilíbrio — incline-se até a tensão leve, nunca dor.
+
+**Panturrilhas na parede** — De frente para a parede, apoie as duas mãos nela e leve uma perna para trás com o calcanhar no chão e o joelho estendido. Avance suavemente o quadril até sentir o alongamento na panturrilha de trás e sustente 20–30 segundos por perna. Respiração lenta e tranquila. ⚠️ Mantenha as mãos na parede o tempo todo para garantir estabilidade.
+
+**Peitoral na porta** — Apoie o antebraço no batente da porta com o cotovelo na altura do ombro. Gire suavemente o tronco para o lado oposto até sentir o alongamento no peito e sustente 20–30 segundos de cada lado. Respiração lenta e tranquila. ⚠️ Se sentir formigamento no braço, reduza a intensidade do alongamento.
+
+**Flexores de quadril com apoio** — Em posição de afundo, com um joelho apoiado no colchonete e o outro pé à frente, segure em um banco ou apoio firme para equilibrar. Avance suavemente o quadril para frente até sentir o alongamento na frente do quadril da perna de trás e sustente 20–30 segundos por lado. Respire de forma lenta e contínua. ⚠️ Use sempre o apoio para entrar e sair da posição com segurança.
+
+**Gato-camelo suave** — Em quatro apoios, com mãos sob os ombros e joelhos sob o quadril, arredonde as costas para cima soltando a cabeça (gato) e depois deixe a barriga descer arqueando suavemente (camelo). Alterne lentamente, acompanhando a respiração: expire ao arredondar, inspire ao arquear. ⚠️ Movimento pequeno e sem dor — não force o final da amplitude.
+
+**Respiração diafragmática** — Sentada ou deitada confortavelmente, coloque uma mão sobre o abdômen. Inspire lentamente pelo nariz deixando a barriga expandir e expire devagar pela boca, esvaziando por completo, em 5 ciclos lentos. ⚠️ Se sentir tontura, respire em ritmo natural e reduza a profundidade.
+
 ## Diretrizes de Progressão de Carga
 - Aumente a carga apenas quando completar 15 repetições em todas as séries com técnica perfeita e folga clara — nesta faixa etária, a pressa é o maior risco.
 - Incrementos mínimos: a menor placa disponível da máquina (ou 2–5%).
