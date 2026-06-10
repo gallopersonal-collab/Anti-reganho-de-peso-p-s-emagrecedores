@@ -70,6 +70,62 @@ Mesociclo de 4 semanas em divisão superior/inferior (A: inferiores, B: superior
 | 3 | Progressão | +2,5% onde a técnica permitir; +1 série no primeiro exercício de A e C; cardio com leve aumento de inclinação/resistência |
 | 4 | Intensificação | Densidade: descansos de 40–45s; pausa de 1s na contração dos isoladores; cardio 18 min com 4 acelerações de 1 min (RPE 7); manter cargas da Semana 3 |
 
+## Como Executar os Exercícios
+
+### Treino A
+**Leg press 45°** — Sente-se com lombar e quadril bem encostados no banco, pés na plataforma na largura dos ombros. Destrave, desça a plataforma controlando até cerca de 90° de joelho e empurre de volta sem travar os joelhos. Inspire na descida, expire ao empurrar. ⚠️ Não tire o quadril do banco no fundo do movimento — isso arredonda a lombar.
+
+**Agachamento goblet com halter** — Segure um halter na vertical junto ao peito, cotovelos apontando para baixo, pés na largura dos ombros. Desça flexionando quadril e joelhos até a profundidade confortável, tronco ereto, e suba empurrando o chão. Inspire na descida, expire na subida. ⚠️ Calcanhares sempre no chão; reduza a profundidade se a lombar arredondar.
+
+**Cadeira extensora** — Sente-se com o joelho alinhado ao eixo da máquina e o rolete sobre os tornozelos. Estenda as pernas até quase a extensão completa e retorne controlando a descida (3s). Expire ao estender, inspire ao retornar. ⚠️ Não "chute" o peso; o retorno lento protege o joelho.
+
+**Cadeira abdutora** — Sentada com as costas apoiadas, joelhos contra as almofadas. Abra as pernas contra a resistência, segure 1s na abertura máxima e retorne devagar. Expire ao abrir, inspire ao fechar. ⚠️ Não use impulso do tronco; o movimento é só do quadril.
+
+**Panturrilha no leg press** — Apoie a ponta dos pés na borda inferior da plataforma, joelhos estendidos sem travar. Empurre com a ponta dos pés até a extensão máxima do tornozelo, segure 1s e desça alongando a panturrilha. Expire ao empurrar. ⚠️ Amplitude completa e controlada; não deixe a plataforma "quicar".
+
+**Equilíbrio unipodal com toque de halter** — Em pé sobre uma perna, halter leve na mão oposta. Incline o tronco à frente dobrando o quadril e toque o halter próximo ao chão, depois retorne à posição ereta. Respiração fluida e controlada. ⚠️ Fique perto de um apoio; joelho da perna de base levemente flexionado e alinhado ao pé.
+
+### Treino B
+**Supino máquina (chest press)** — Ajuste o banco para que as manoplas fiquem na altura do meio do peito, costas e cabeça apoiadas. Empurre as manoplas à frente até quase estender os cotovelos e retorne controlando. Expire ao empurrar, inspire ao voltar. ⚠️ Não deixe os ombros subirem em direção às orelhas.
+
+**Puxada frontal na polia** — Sentada com as coxas travadas, pegada um pouco mais larga que os ombros. Puxe a barra até a parte alta do peito aproximando as escápulas, depois retorne controlando até a extensão dos braços. Expire ao puxar. ⚠️ Não incline o tronco para trás para "ajudar" — o trabalho é das costas.
+
+**Desenvolvimento na máquina** — Sentada com as costas apoiadas, manoplas na altura dos ombros. Empurre para cima até quase estender os cotovelos e desça controlando até a altura das orelhas. Expire ao empurrar. ⚠️ Não arqueie a lombar; o apoio do encosto deve ser constante.
+
+**Remada baixa na máquina (apoio de peito)** — Peito firme no apoio, braços estendidos segurando as manoplas. Puxe em direção ao tronco aproximando as escápulas e retorne devagar. Expire ao puxar. ⚠️ Mantenha o peito colado no apoio; não use impulso do corpo.
+
+**Elevação lateral com halteres leves** — Em pé, halteres ao lado do corpo, cotovelos levemente flexionados. Eleve os braços até a altura dos ombros e desça controlando. Expire ao subir. ⚠️ Não balance o tronco nem ultrapasse a linha dos ombros.
+
+**Tríceps na polia (corda)** — Em pé, cotovelos colados ao tronco segurando a corda. Estenda os antebraços para baixo separando as pontas da corda no final, depois retorne controlando. Expire ao estender. ⚠️ Os cotovelos não se afastam do corpo durante o movimento.
+
+### Treino C
+**Elevação pélvica (máquina ou barra)** — Costas apoiadas no banco na altura das escápulas, pés firmes no chão na largura dos ombros, carga sobre o quadril. Suba o quadril contraindo os glúteos até alinhar tronco e coxas, segure 1s e desça controlando. Expire ao subir. ⚠️ Não hiperestenda a lombar no topo; quem sobe é o quadril, não as costas.
+
+**Stiff com halteres** — Em pé, halteres à frente das coxas, joelhos levemente flexionados. Desça os halteres deslizando próximos às pernas, empurrando o quadril para trás até sentir alongar os posteriores (amplitude confortável), e suba contraindo glúteos. Inspire na descida, expire na subida. ⚠️ Coluna neutra sempre; pare a descida antes de arredondar a lombar.
+
+**Mesa flexora** — Deitada de bruços com o joelho alinhado ao eixo da máquina e o rolete acima dos calcanhares. Flexione os joelhos trazendo o rolete em direção aos glúteos e retorne devagar. Expire ao flexionar. ⚠️ Não levante o quadril do banco durante a flexão.
+
+**Subida no step baixo com halteres** — De frente para o step, halteres leves nas mãos. Suba apoiando o pé inteiro na plataforma, estenda a perna de cima sem impulsionar com a de baixo e desça controlando. Expire ao subir. ⚠️ Joelho alinhado com o pé; use step baixo e mantenha-se próxima de um apoio.
+
+**Coice de glúteo na polia** — Tornozeleira na polia baixa, mãos apoiadas na estrutura, tronco levemente inclinado. Estenda a perna para trás contraindo o glúteo, segure 1s e retorne controlando. Expire ao estender. ⚠️ Não arqueie a lombar; o movimento termina quando o glúteo contrai, não quando as costas dobram.
+
+**Panturrilha sentada** — Sentada com a almofada sobre as coxas e a ponta dos pés no apoio. Eleve os calcanhares o máximo possível, segure 1s e desça alongando. Expire ao subir. ⚠️ Movimento completo e sem pressa, sem "quicar" no fundo.
+
+### Treino D
+**Supino inclinado na máquina** — Banco inclinado, manoplas na altura da parte superior do peito. Empurre à frente/acima até quase estender os cotovelos e retorne devagar. Expire ao empurrar. ⚠️ Ombros baixos e escápulas apoiadas no banco o tempo todo.
+
+**Remada na máquina articulada** — Peito apoiado, pegada neutra nas manoplas. Puxe em direção ao abdômen aproximando as escápulas e retorne controlando. Expire ao puxar. ⚠️ Não encolha os ombros; quem trabalha são as costas, não o trapézio superior.
+
+**Crucifixo invertido na máquina** — Sentada de frente para o encosto, braços quase estendidos segurando as manoplas. Abra os braços para trás em arco até a linha dos ombros e retorne devagar. Expire ao abrir. ⚠️ Cotovelos levemente flexionados e fixos; não jogue o tronco para trás.
+
+**Puxada frontal pegada supinada** — Pegada na largura dos ombros com as palmas voltadas para você. Puxe a barra até a parte alta do peito mantendo o tronco estável e retorne controlando. Expire ao puxar. ⚠️ Evite balançar; desça a barra sempre à frente do rosto.
+
+**Rosca direta na polia** — Em pé, cotovelos junto ao tronco segurando a barra na polia baixa. Flexione os cotovelos trazendo a barra aos ombros e desça controlando até quase estender. Expire ao subir. ⚠️ Cotovelos fixos; não desloque o quadril para ajudar.
+
+**Abdominal na máquina** — Ajuste o banco para que o eixo fique na altura do umbigo. Flexione o tronco à frente contraindo o abdômen em amplitude controlada e retorne devagar. Expire ao flexionar. ⚠️ O movimento vem do abdômen, não dos braços puxando as manoplas.
+
+**Prancha frontal** — Antebraços e pontas dos pés (ou joelhos) no chão, corpo alinhado da cabeça ao calcanhar. Contraia abdômen e glúteos e respire normalmente durante a isometria. ⚠️ Não deixe o quadril cair nem subir; encurte o tempo antes de perder o alinhamento.
+
 ## Diretrizes de Progressão de Carga
 - Progressão conservadora: passos de 2,5% (ou a menor placa disponível), somente com técnica impecável e sem dor articular.
 - Dupla progressão nos compostos: topo da faixa em todas as séries antes de subir carga.
