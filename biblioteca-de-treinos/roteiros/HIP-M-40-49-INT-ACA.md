@@ -59,6 +59,60 @@ Mesociclo intermediário em divisão superior/inferior (4x/semana) calibrado par
 - **Semana 3 — Progressão:** +1 série no primeiro exercício de cada treino; topo das faixas com 1–2 repetições em reserva.
 - **Semana 4 — Intensificação:** mantém o volume da semana 3; última série de cada exercício em 0–1 repetição em reserva e drop-set simples na última série dos isoladores de máquina (extensora, elevação lateral, crucifixo invertido). Compostos não vão à falha.
 
+## Como Executar os Exercícios
+
+### Treino A
+**Supino reto com halteres** — Deitado, pés firmes, halteres na linha do meio do peito, escápulas retraídas. Empurre até quase estender e desça controlando até amplitude confortável para o ombro. Inspire na descida, expire na subida. ⚠️ Suba os halteres à posição com os joelhos; punhos firmes e alinhados.
+
+**Supino inclinado na máquina** — Banco inclinado, manoplas na altura da parte superior do peito. Empurre até quase estender e retorne devagar. Expire ao empurrar. ⚠️ Ombros baixos e escápulas apoiadas.
+
+**Desenvolvimento na máquina** — Costas apoiadas, manoplas na altura dos ombros. Empurre até quase estender e desça até a linha das orelhas. Expire ao empurrar. ⚠️ Manguito aquecido antes; sem arquear a lombar.
+
+**Elevação lateral com halteres** — Cotovelos semiflexionados, eleve até a linha dos ombros e desça controlando. Expire ao subir. ⚠️ Carga leve; drop-set apenas na semana 4.
+
+**Tríceps na polia (corda)** — Cotovelos colados ao tronco. Estenda separando as pontas da corda e retorne controlando. Expire ao estender. ⚠️ Cotovelos imóveis.
+
+**Tríceps francês com halter** — Halter atrás da cabeça com as duas mãos, cotovelos para cima. Estenda os antebraços e desça controlando (2s). Expire ao estender. ⚠️ Cotovelos fechados, próximos da cabeça.
+
+### Treino B
+**Leg press 45°** — Lombar e quadril colados no banco, pés na largura dos ombros. Desça até ~90° e empurre sem travar. Inspire na descida, expire ao empurrar. ⚠️ Quadril sempre no banco; amplitude sem desconforto no joelho.
+
+**Agachamento no Smith ou hack machine** — Smith: barra no trapézio, pés levemente à frente. Hack: costas e ombros apoiados. Desça em 3s até a profundidade confortável e empurre pelos calcanhares. Inspire na descida, expire na subida. ⚠️ Joelhos alinhados aos pés.
+
+**Cadeira extensora** — Joelho no eixo, rolete nos tornozelos. Estenda e retorne em 2s. Expire ao estender. ⚠️ Retorno lento protege o joelho; drop-set só na semana 4.
+
+**Cadeira flexora** — Joelho no eixo, rolete acima dos calcanhares. Flexione e retorne controlando. Expire ao flexionar. ⚠️ Quadril no banco.
+
+**Panturrilha em pé na máquina** — Ponta dos pés no apoio. Suba ao máximo, pause 2s e desça alongando. Expire ao subir. ⚠️ Sem quicar.
+
+**Abdominal na máquina** — Eixo na altura do umbigo. Flexione contraindo o abdômen e retorne devagar. Expire ao flexionar. ⚠️ Movimento do abdômen, não dos braços.
+
+### Treino C
+**Puxada frontal na polia** — Coxas travadas, pegada mais larga que os ombros. Puxe a barra até a parte alta do peito aproximando as escápulas e retorne controlando. Expire ao puxar. ⚠️ Sem inclinar o tronco para trás.
+
+**Remada articulada na máquina** — Peito apoiado, pegada neutra. Puxe as manoplas aproximando as escápulas, pause 1s e retorne devagar. Expire ao puxar. ⚠️ Peito colado no apoio.
+
+**Remada baixa na polia (triângulo)** — Tronco ereto, puxe o triângulo ao abdômen, pause 1s e retorne controlando. Expire ao puxar. ⚠️ Sem balanço de tronco.
+
+**Crucifixo invertido na máquina** — Peito apoiado, abra em arco até a linha dos ombros e retorne devagar. Expire ao abrir. ⚠️ Cotovelos em leve flexão fixa; drop-set só na semana 4.
+
+**Rosca direta com barra W** — Pegada na barra W, cotovelos junto ao tronco. Flexione até os ombros e desça controlando. Expire ao subir. ⚠️ A barra W poupa os punhos — mantenha-os firmes e neutros.
+
+**Rosca martelo com halteres** — Pegada neutra, flexione e desça controlando. Expire ao subir. ⚠️ Cotovelos fixos.
+
+### Treino D
+**Levantamento terra romeno com halteres** — Halteres à frente das coxas, joelhos semiflexionados. Quadril para trás em 3s com os halteres rente às pernas, pause 1s no alongamento e suba contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Coluna neutra; amplitude limitada pela técnica.
+
+**Mesa flexora** — Joelho no eixo, rolete acima dos calcanhares. Flexione e retorne controlando. Expire ao flexionar. ⚠️ Quadril colado no banco.
+
+**Afundo com halteres (passada estática)** — Um pé à frente e outro atrás, halteres ao lado do corpo. Desça até o joelho de trás se aproximar do chão e suba pelo calcanhar da frente. Inspire na descida, expire na subida. ⚠️ Joelho da frente na linha do pé.
+
+**Elevação pélvica na máquina** — Costas no apoio na altura das escápulas, almofada sobre o quadril. Suba até alinhar tronco e coxas, pause 1s e desça controlando. Expire ao subir. ⚠️ Sem hiperextensão lombar no topo.
+
+**Panturrilha sentada** — Almofada nas coxas, ponta dos pés no apoio. Suba ao máximo, pause 2s e desça alongando. Expire ao subir. ⚠️ Sem pressa no fundo.
+
+**Prancha abdominal** — Antebraços e pontas dos pés no chão, corpo alinhado, abdômen e glúteos contraídos. Respire normalmente. ⚠️ Quadril nem cai nem sobe.
+
 ## Diretrizes de Progressão de Carga
 - Dupla progressão com incrementos conservadores: ~2,5% por vez; anilhas pequenas e meio pino são ferramentas, não vergonha.
 - Tendões aos 40+ adaptam mais devagar que músculos: se houver desconforto tendíneo, congele a carga por uma semana mesmo que a força permita subir.
