@@ -65,6 +65,70 @@ Mesociclo de definição com ênfase real em core: além da divisão superior/in
 - **Semana 3 — Progressão:** descanso dos isolados cai para 45s; última série a RIR 1; core com 1 série adicional no exercício mais fraco.
 - **Semana 4 — Intensificação:** bi-sets no core (prancha + crunch na polia; infra + crunch máquina) e nos isolados de membros; HIIT de baixo impacto na bicicleta (8x 20s forte/40s leve) após A e C no lugar do cardio contínuo.
 
+## Como Executar os Exercícios
+
+### Treino A
+**Supino inclinado com halteres** — Banco a 30–45°, halteres na linha da parte superior do peito, escápulas apoiadas. Empurre até quase estender e desça controlando até amplitude confortável para o ombro. Inspire na descida, expire na subida. ⚠️ Suba os halteres à posição com os joelhos; punhos firmes.
+
+**Supino na máquina (chest press)** — Manoplas na altura do meio do peito, costas apoiadas. Empurre até quase estender e retorne controlando. Expire ao empurrar. ⚠️ Ombros baixos e escápulas no banco.
+
+**Desenvolvimento de ombros na máquina** — Costas apoiadas, manoplas na altura dos ombros. Empurre até quase estender e desça até a linha das orelhas. Expire ao empurrar. ⚠️ Sem arquear a lombar.
+
+**Elevação lateral com halteres** — Cotovelos semiflexionados, eleve até a linha dos ombros e desça controlando. Expire ao subir. ⚠️ Carga leve; sem impulso.
+
+**Tríceps na polia (corda)** — Cotovelos colados ao tronco. Estenda separando as pontas da corda e retorne controlando. Expire ao estender. ⚠️ Cotovelos imóveis.
+
+**Prancha frontal** — Antebraços e pontas dos pés no chão, corpo alinhado, abdômen e glúteos contraídos. Respire normalmente — qualidade vem antes de tempo. ⚠️ Quadril nem cai nem sobe; coluna neutra sempre.
+
+**Abdominal na polia alta (crunch ajoelhado)** — Ajoelhado de costas para a polia, corda junto à cabeça. Enrole o tronco em direção ao chão contraindo o abdômen, pause 1s e retorne controlando. Expire ao descer. ⚠️ Quadril fixo; flexão vem do tronco, não dos braços.
+
+### Treino B
+**Leg press 45°** — Lombar e quadril colados no banco, pés na largura dos ombros. Desça até ~90° e empurre sem travar. Inspire na descida, expire ao empurrar. ⚠️ Quadril sempre no banco.
+
+**Agachamento goblet com halter** — Halter na vertical junto ao peito, tronco ereto. Desça até a profundidade confortável e suba pelos calcanhares. Inspire na descida, expire na subida. ⚠️ Joelhos alinhados aos pés.
+
+**Búlgaro com halteres (amplitude confortável)** — Pé de trás no banco, halteres ao lado do corpo. Desça em amplitude confortável e suba pelo calcanhar da frente. Inspire na descida, expire na subida. ⚠️ Ajuste a distância do banco antes da carga; joelho na linha do pé.
+
+**Cadeira extensora** — Joelho no eixo, rolete nos tornozelos. Estenda, pause 1s e retorne controlando. Expire ao estender. ⚠️ Retorno lento.
+
+**Panturrilha em pé** — Ponta dos pés no apoio. Suba ao máximo, pause 1s e desça alongando. Expire ao subir. ⚠️ Sem quicar.
+
+**Pallof press na polia (anti-rotação)** — Em pé, perpendicular à polia na altura do peito, manopla junto ao tronco com as duas mãos. Estenda os braços à frente resistindo à rotação, segure 2s e retorne. Expire ao estender. ⚠️ Quadril e ombros quadrados — o exercício é não girar.
+
+**Prancha lateral** — Apoio no antebraço, corpo em linha, quadril alto. Respire normalmente. ⚠️ Joelhos apoiados se necessário; quadril não cede.
+
+### Treino C
+**Puxada alta na polia (pegada neutra)** — Coxas travadas, triângulo ou pegada paralela. Puxe até a parte alta do peito aproximando as escápulas, pause 1s e retorne controlando. Expire ao puxar. ⚠️ Sem inclinar o tronco para trás.
+
+**Remada na máquina (apoio de tronco)** — Peito firme no apoio. Puxe as manoplas aproximando as escápulas, pause 1s e retorne devagar. Expire ao puxar. ⚠️ Peito colado no apoio.
+
+**Remada baixa na polia** — Tronco ereto, puxe o triângulo ao abdômen, pause 1s e retorne controlando. Expire ao puxar. ⚠️ Sem balanço.
+
+**Crucifixo invertido na máquina** — Peito apoiado, braços quase estendidos. Abra em arco até a linha dos ombros, pause 1s e retorne devagar. Expire ao abrir. ⚠️ Cotovelos em leve flexão fixa.
+
+**Rosca direta com halteres** — Cotovelos junto ao tronco. Flexione girando as palmas para cima e desça controlando. Expire ao subir. ⚠️ Sem balanço.
+
+**Abdominal infra no banco (elevação de joelhos)** — Sentado na borda do banco, mãos seguram atrás do corpo. Traga os joelhos ao peito contraindo o abdômen e estenda as pernas sem tocar o chão. Expire ao recolher. ⚠️ Joelhos flexionados protegem a lombar — não estenda as pernas por completo.
+
+**Abdominal crunch na máquina** — Eixo na altura do umbigo. Flexione contraindo o abdômen, pause 1s e retorne devagar. Expire ao flexionar. ⚠️ Movimento do abdômen, não dos braços.
+
+### Treino D
+**Levantamento terra romeno com halteres** — Halteres à frente das coxas, joelhos semiflexionados. Quadril para trás descendo os halteres rente às pernas (3s) até onde a coluna se mantém neutra, e suba contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Lombar neutra é o critério de amplitude.
+
+**Mesa flexora** — Joelho no eixo, rolete acima dos calcanhares. Flexione, pause 1s e retorne devagar. Expire ao flexionar. ⚠️ Quadril colado no banco.
+
+**Elevação pélvica na máquina** — Costas no apoio na altura das escápulas, almofada sobre o quadril. Suba até alinhar tronco e coxas, pause 1s e desça em 1s controlado. Expire ao subir. ⚠️ Sem hiperextensão lombar no topo.
+
+**Cadeira flexora** — Joelho no eixo, rolete acima dos calcanhares. Flexione, pause 1s e retorne controlando. Expire ao flexionar. ⚠️ Quadril no banco.
+
+**Panturrilha sentada** — Almofada nas coxas, ponta dos pés no apoio. Suba ao máximo, pause 1s e desça alongando. Expire ao subir. ⚠️ Sem pressa no fundo.
+
+**Dead bug** — Deitado de costas, braços para o teto e joelhos a 90°. Estenda lentamente perna e braço opostos mantendo a lombar colada no solo, retorne e alterne. Expire ao estender. ⚠️ Lombar descolou = amplitude menor.
+
+**Carregada do fazendeiro (farmer's walk)** — Halteres ao lado do corpo, postura ereta, ombros para trás. Caminhe com passos firmes e core contraído, respiração fluida. ⚠️ Termina antes de a postura ceder.
+
+**Finalizador metabólico (bicicleta + mountain climber lento)** — Bicicleta: 30s em ritmo forte (RPE 7–8) com cadência alta. Mountain climber lento: em prancha alta, traga um joelho de cada vez ao peito com o quadril baixo e controle total. Respiração contínua. ⚠️ A versão lenta é proposital — controle de core, não velocidade.
+
 ## Diretrizes de Progressão de Carga
 - Dupla progressão nos compostos: topo da faixa em todas as séries → +2,5–5% na sessão seguinte.
 - No core, progrida primeiro em qualidade (alinhamento, respiração), depois em tempo/repetições, e só então em carga (anilha na prancha, polia mais pesada).

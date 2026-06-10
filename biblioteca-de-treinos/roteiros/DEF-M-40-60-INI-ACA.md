@@ -54,6 +54,55 @@ O mesociclo constrói base muscular — prioridade nessa faixa etária pela qued
 - **Semana 3 — Progressão:** +5% adicionais onde a técnica permitir; descanso dos isolados cai para 45s (RIR 2). Cardio: 20 min.
 - **Semana 4 — Intensificação:** última série de cada exercício a RIR 1; finalizador metabólico no treino C; cardio mantido em 20 min. Sem técnicas avançadas neste nível.
 
+## Como Executar os Exercícios
+
+### Treino A
+**Leg press 45°** — Sente-se com lombar e quadril bem encostados no banco, pés na plataforma na largura dos ombros. Desça controlando até ~90° de joelho e empurre sem travar os joelhos. Inspire na descida, expire ao empurrar. ⚠️ Quadril sempre no banco; amplitude sem desconforto no joelho.
+
+**Agachamento no Smith (amplitude confortável)** — Barra sobre o trapézio, pés levemente à frente da linha da barra. Desça até a profundidade confortável e suba pelos calcanhares. Inspire na descida, expire na subida. ⚠️ Joelhos alinhados aos pés; profundidade evolui com as semanas, não na marra.
+
+**Supino na máquina (chest press)** — Manoplas na altura do meio do peito, costas apoiadas. Empurre até quase estender e retorne controlando. Expire ao empurrar. ⚠️ Ombros baixos; amplitude sem dor.
+
+**Remada baixa na polia (pegada neutra)** — Sentado, tronco ereto. Puxe o triângulo ao abdômen aproximando as escápulas, pause 1s e retorne controlando. Expire ao puxar. ⚠️ Sem balanço de tronco.
+
+**Cadeira flexora** — Joelho alinhado ao eixo, rolete acima dos calcanhares. Flexione, pause 1s e retorne controlando. Expire ao flexionar. ⚠️ Quadril colado no banco.
+
+**Tríceps na polia (corda)** — Cotovelos colados ao tronco. Estenda separando as pontas da corda e retorne controlando. Expire ao estender. ⚠️ Cotovelos imóveis.
+
+**Prancha frontal** — Antebraços e pontas dos pés (ou joelhos) no chão, corpo alinhado, abdômen e glúteos contraídos. Respire normalmente — nunca prenda a respiração. ⚠️ Quadril nem cai nem sobe.
+
+### Treino B
+**Puxada alta na polia (pegada neutra)** — Coxas travadas, triângulo ou pegada paralela. Puxe até a parte alta do peito, pause 1s e retorne controlando. Expire ao puxar. ⚠️ Não incline o tronco para trás.
+
+**Remada na máquina (apoio de tronco)** — Peito firme no apoio. Puxe as manoplas aproximando as escápulas, pause 1s e retorne devagar. Expire ao puxar. ⚠️ Peito colado no apoio.
+
+**Desenvolvimento de ombros na máquina** — Costas apoiadas, manoplas na altura dos ombros. Empurre até quase estender e desça até a linha das orelhas. Expire ao empurrar. ⚠️ Sem arquear a lombar; sem prender a respiração.
+
+**Cadeira extensora** — Joelho no eixo, rolete nos tornozelos. Estenda, pause 1s e retorne controlando. Expire ao estender. ⚠️ Retorno lento protege o joelho.
+
+**Stiff com halteres (amplitude parcial controlada)** — Halteres à frente das coxas, joelhos semiflexionados. Quadril para trás descendo os halteres rente às pernas (3s) só até onde a coluna se mantém neutra, e suba contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Amplitude parcial é proposital nessa fase — não busque o chão.
+
+**Rosca direta com halteres** — Cotovelos junto ao tronco. Flexione girando as palmas para cima e desça controlando. Expire ao subir. ⚠️ Sem balanço.
+
+**Abdominal crunch na máquina** — Eixo na altura do umbigo. Flexione o tronco contraindo o abdômen, pause 1s e retorne devagar. Expire ao flexionar. ⚠️ Movimento do abdômen, não dos braços.
+
+### Treino C
+**Supino inclinado com halteres** — Banco a 30–45°, halteres na linha da parte superior do peito. Empurre até quase estender e desça controlando até amplitude confortável. Expire na subida. ⚠️ Suba os halteres à posição com os joelhos; punhos firmes.
+
+**Agachamento goblet com halter** — Halter na vertical junto ao peito, pés na largura dos ombros. Desça com o tronco ereto até a profundidade confortável e suba pelos calcanhares. Inspire na descida, expire na subida. ⚠️ Joelhos alinhados aos pés.
+
+**Puxada alta na polia (pegada aberta)** — Pegada mais larga que os ombros. Puxe a barra até a parte alta do peito aproximando as escápulas e retorne controlando. Expire ao puxar. ⚠️ Sem inclinar o tronco para trás.
+
+**Crucifixo na máquina (peck deck)** — Costas apoiadas, braços nas manoplas na altura do peito. Feche em arco, pause 1s e retorne controlando. Expire ao fechar. ⚠️ Cotovelos não passam da linha do tronco no retorno.
+
+**Elevação lateral com halteres leves** — Cotovelos semiflexionados, eleve até a linha dos ombros e desça controlando. Expire ao subir. ⚠️ Carga leve; sem impulso.
+
+**Rosca martelo alternada** — Palmas voltadas uma para a outra, flexione um braço de cada vez e desça controlando. Expire ao subir. ⚠️ Cotovelos fixos.
+
+**Prancha lateral** — Apoio no antebraço (joelhos apoiados se necessário), corpo em linha, quadril alto. Respire normalmente. ⚠️ Encurte o tempo antes de o quadril ceder.
+
+**Finalizador de bicicleta (Semana 4)** — 40s em ritmo forte com resistência moderada e cadência alta, 20s girando leve; após as rodadas, 10 agachamentos goblet leves com técnica perfeita. ⚠️ Forte aos 40–60 significa RPE 7–8, não all-out; respire de forma contínua.
+
 ## Diretrizes de Progressão de Carga
 - Suba a carga apenas com o topo da faixa atingido em todas as séries, sem compensação postural.
 - Incrementos conservadores: 2–4 kg nos inferiores, 1–2 kg nos superiores; aos 40+ a consistência vence a pressa.
