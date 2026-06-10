@@ -46,7 +46,7 @@ Para quem compete — nem que seja consigo mesma. Treinos avançados de força, 
 
 ---
 
-## 💥 PER-F-20-39-AVA-ACA — HIIT e Condicionamento
+## 💥 PER-F-20-39-HIT-ACA — HIIT e Condicionamento
 
 **7. Turbo HIIT — Fôlego de Atleta**
 
