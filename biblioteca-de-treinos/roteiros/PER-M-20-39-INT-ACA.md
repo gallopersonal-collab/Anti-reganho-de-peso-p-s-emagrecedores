@@ -72,6 +72,70 @@ Mesociclo intermediário com 4 sessões: dois dias de força (inferiores e super
 | 3 | Desenvolvimento | RPE 8–9 nos básicos (1–2 reps na reserva); +1 tiro nos intervalados; circuito do Treino D mais rápido que na Semana 2 |
 | 4 | Pico + testes | Acessórios com 1 série a menos (deload parcial de volume); intensidade mantida; bateria de testes nos Treinos B e D |
 
+## Como Executar os Exercícios
+
+### Treino A
+**Salto na caixa (50 cm)** — Pés na largura do quadril, agache rápido com balanço de braços e salte buscando máxima altura, aterrissando suave no centro da caixa com joelhos alinhados. Desça com um passo. Expire no salto. ⚠️ Aterrissagem silenciosa; em fadiga, reduza a altura da caixa — pliometria não se faz cansado.
+
+**Agachamento com barra** — Barra sobre o trapézio, pés na largura dos ombros, bracing forte antes de cada repetição. Desça até o paralelo e suba com intenção máxima de velocidade. Expire na subida. ⚠️ Use os apoios de segurança do rack; a ~75% de 1RM a técnica não pode degradar.
+
+**Levantamento terra romeno** — Barra à frente das coxas, joelhos semiflexionados. Quadril para trás descendo a barra rente às pernas em 3s e subida contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Coluna neutra inegociável.
+
+**Agachamento búlgaro com halteres** — Pé de trás no banco, halteres ao lado do corpo. Desça até próximo do paralelo e suba pelo calcanhar com subida acelerada. Inspire na descida, expire na subida. ⚠️ Joelho da frente na linha do pé.
+
+**Elevação pélvica com barra** — Costas no banco na altura das escápulas, barra acolchoada sobre o quadril. Suba até alinhar tronco e coxas, pause 1s e desça controlando. Expire ao subir. ⚠️ Sem hiperextensão lombar no topo.
+
+**Panturrilha em pé com carga** — Ombros sob as almofadas (ou halteres nas mãos), ponta dos pés no apoio. Suba ao máximo, pause 1s e desça alongando. Expire ao subir. ⚠️ Amplitude completa, sem quicar.
+
+**Prancha lateral com elevação de perna** — Apoio no antebraço, corpo alinhado de lado, quadril elevado. Eleve a perna de cima e mantenha a isometria respirando normalmente. ⚠️ Quadril não cede; encurte o tempo antes de perder a linha.
+
+**Bike 20s/40s** — 20s em cadência e resistência altas (RPE 9), 40s girando leve. Tronco estável, respiração agressiva e ritmada. ⚠️ Potência constante em todos os tiros.
+
+### Treino B
+**Kettlebell swing pesado** — Pés além da largura dos ombros. Dobradiça de quadril levando o kettlebell entre as pernas e projeção potente do quadril à frente — o peso sobe à linha dos ombros pelo impulso, braços relaxados. Expire com força na subida. ⚠️ É dobradiça, não agachamento; lombar neutra o tempo todo.
+
+**Arremesso de medicine ball acima da cabeça** — Bola junto ao peito, agache levemente e arremesse-a verticalmente (ou contra a parede alta) com extensão total de quadril, joelhos e braços. Deixe a bola cair e resete. Expire no arremesso. ⚠️ Saia da trajetória da queda; intenção máxima em cada repetição.
+
+**Salto horizontal consecutivo** — Salte à frente o mais longe possível e, ao aterrissar estável, resete a postura e emende o próximo salto. Expire a cada salto. ⚠️ Qualidade de aterrissagem decide a série: joelhos alinhados, sem passos extras.
+
+**Push press com barra** — Barra apoiada nos ombros (rack position), pés na largura do quadril. Flexione levemente os joelhos e use o drive de pernas para impulsionar a barra acima da cabeça, finalizando com lockout firme e braços alinhados às orelhas. Expire no drive. ⚠️ Sem arquear a lombar no lockout; desça a barra controlada aos ombros.
+
+**Remada unilateral com haltere** — Joelho e mão no banco, costas paralelas ao chão. Puxe o halter ao quadril e desça controlando. Expire ao puxar. ⚠️ Sem rotação de tronco.
+
+**Pallof press na polia** — Perpendicular à polia na altura do peito, manopla junto ao tronco. Estenda os braços resistindo à rotação, pause 1s e retorne. Expire ao estender. ⚠️ Quadril e ombros quadrados.
+
+**Remo 6x 300 m** — Pernas → tronco → braços; retorno inverso. Pace forte e constante (RPE 8–9), anotando o pace de cada tiro. ⚠️ Disciplina de pace: variação máxima de 2–3s entre tiros.
+
+### Treino C
+**Flexão pliométrica** — Posição de flexão com tronco rígido. Desça rápido e empurre o chão com explosão suficiente para as mãos saírem do solo, amortecendo a queda com cotovelos levemente flexionados. Expire na subida. ⚠️ Se não conseguir sair do chão com qualidade, faça flexão com subida acelerada.
+
+**Supino reto com barra** — Pegada um pouco mais larga que os ombros, escápulas retraídas, pés firmes. Desça até a linha do peitoral e empurre com máxima intenção de velocidade. Inspire na descida, expire na subida. ⚠️ Anilhas de segurança ou parceiro nas séries de RPE 8.
+
+**Barra fixa (com carga se necessário)** — Pegada pronada, corpo suspenso. Puxe até o queixo passar a barra e desça controlando até quase estender. Expire ao subir. ⚠️ Sem kipping; adicione carga no cinto apenas com 8 reps limpas no peso corporal.
+
+**Desenvolvimento com halteres** — Halteres nos ombros. Empurre verticalmente até a extensão e desça controlando até a linha das orelhas. Expire ao empurrar. ⚠️ Core travado; sem arquear a lombar.
+
+**Remada curvada com barra** — Tronco a ~45°, coluna neutra. Puxe a barra ao abdômen aproximando as escápulas e desça controlando. Expire ao puxar. ⚠️ Bracing constante; sem impulso.
+
+**Rosca direta + tríceps na polia (bi-set)** — Rosca: cotovelos fixos, flexione até os ombros e desça controlado. Na sequência, sem descanso, tríceps na polia: cotovelos colados ao tronco, estenda até o fim. Expire em cada esforço. ⚠️ Carga moderada — o bi-set pune o ego.
+
+**Abdominal com carga na polia alta** — Ajoelhado de costas para a polia, corda junto à cabeça. Enrole o tronco em direção ao chão contraindo o abdômen e retorne controlando. Expire ao descer. ⚠️ Quadril fixo; flexão vem da coluna torácica.
+
+### Treino D
+**Sprint na esteira (ou corredor)** — Aqueça com 2–3 acelerações a 70–80%. No corredor: acelere progressivamente e corra 15s a 90–95% com braços ativos. Na esteira: entre apenas com a velocidade-alvo estabilizada, segurando o apoio até firmar a passada. ⚠️ Desacelere gradualmente; nunca salte da esteira em movimento.
+
+**Levantamento terra com barra hexagonal** — Dentro da barra, pés na largura do quadril. Bracing forte, empurre o chão e suba acelerando até a extensão completa do quadril; desça controlado. Expire na subida. ⚠️ Coluna neutra; a subida é explosiva, a descida nunca é largada.
+
+**Avanço com salto alternado (jump lunge)** — Da posição de afundo, salte trocando as pernas no ar e aterrisse já no afundo oposto, amortecendo. Expire a cada salto. ⚠️ Joelhos alinhados na aterrissagem; em fadiga, troque por afundo alternado rápido sem salto.
+
+**Wall ball** — Bola junto ao peito, agache ao paralelo e arremesse ao alvo na subida, recebendo-a já no próximo agachamento. Ritmo constante e potente. Expire no arremesso. ⚠️ Receba a bola com os braços, longe do rosto.
+
+**Carregada de fazendeiro pesada** — Halteres pesados ao lado do corpo, postura ereta. Passos curtos e firmes, core contraído, respiração fluida. ⚠️ A série termina quando a postura ameaça ceder.
+
+**Prancha com arrasto de anilha** — Em prancha alta com uma anilha ao lado, arraste-a com a mão oposta por baixo do corpo, alternando os lados, com o quadril imóvel. Respiração fluida. ⚠️ Afaste mais os pés para estabilizar; quadril não gira.
+
+**Circuito final (swings + wall balls + remo + slams)** — Técnicas conforme descrito acima; busque o menor tempo mantendo o padrão de cada movimento. ⚠️ Velocidade nunca compra técnica: rep feia não conta.
+
 ## Testes e Métricas de Performance
 - **Força:** 5RM no agachamento e 5RM no supino reto (Treinos A e C da Semana 4)
 - **Potência:** salto vertical com alcance (melhor de 3) e arremesso de medicine ball sentado (distância)
