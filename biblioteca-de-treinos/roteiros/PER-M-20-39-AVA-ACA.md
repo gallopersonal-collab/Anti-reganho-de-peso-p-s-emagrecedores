@@ -84,6 +84,83 @@ Mesociclo avançado de alto rendimento em 5 sessões: dois dias de força máxim
 | 3 | Desenvolvimento | Básicos a 87–90% (séries de 3 se necessário); +1 série no exercício explosivo principal de B e D |
 | 4 | Pico + testes | Volume de acessórios cortado em ~40%; básicos: 2 séries pesadas apenas; bateria de testes distribuída em B, C e E |
 
+## Como Executar os Exercícios
+
+### Treino A
+**Salto na caixa (60 cm)** — Pés na largura do quadril, contramovimento rápido com balanço de braços e salto de altura máxima, aterrissando suave no centro da caixa. Desça com um passo. Expire no salto. ⚠️ Caixa alta exige aterrissagem perfeita: joelhos alinhados, sem colapso; qualquer dúvida, reduza a altura.
+
+**Agachamento com barra (80–87% 1RM)** — Barra sobre o trapézio, bracing máximo (inspiração profunda + core travado) antes de cada rep. Desça ao paralelo com controle e suba com intenção máxima de velocidade. Expire no topo. ⚠️ Apoios de segurança do rack ajustados; nestas intensidades, técnica degradada encerra a série.
+
+**Levantamento terra** — Barra sobre o meio do pé, pegada na largura dos ombros, peito alto e coluna neutra. Trave o core, empurre o chão e suba acelerando até a extensão completa do quadril; desça com controle (não largue). Expire na subida. ⚠️ A barra sobe rente às pernas; lombar arredondada anula a repetição.
+
+**Agachamento búlgaro com halteres** — Pé de trás no banco, halteres ao lado do corpo. Desça até próximo do paralelo e suba acelerando pelo calcanhar. Inspire na descida, expire na subida. ⚠️ Joelho da frente na linha do pé.
+
+**Elevação pélvica com barra pesada** — Costas no banco na altura das escápulas, barra acolchoada sobre o quadril. Suba até alinhar tronco e coxas, pause 1s e desça controlando. Expire ao subir. ⚠️ Sem hiperextensão lombar.
+
+**Mesa flexora** — Joelho no eixo da máquina, rolete acima dos calcanhares. Flexione e retorne em 3s controlando. Expire ao flexionar. ⚠️ Quadril colado no banco.
+
+**Prancha com carga nas costas** — Prancha de antebraços com anilha na região torácica. Corpo alinhado, quadril travado, respiração normal. ⚠️ Se o quadril ceder, remova a carga.
+
+### Treino B
+**Sprint (20 m)** — Aquecimento com acelerações progressivas. Saída inclinada, primeiros passos curtos e potentes, transição para passada ampla com braços ativos a 95–100%. Desaceleração gradual. ⚠️ Recuperação completa entre tiros (2 min); sprint com fadiga residual é convite à lesão de posterior.
+
+**Salto com queda (depth jump, 40 cm)** — Desça da caixa com um passo (não salte), aterrisse com os dois pés e salte verticalmente no menor tempo de contato possível. Expire no salto. ⚠️ O contato com o solo deve ser curto e silencioso; máximo de qualidade, nunca quantidade.
+
+**Agachamento com salto (barra leve, ~30% 1RM)** — Barra firme no trapézio, desça a um quarto/meio agachamento e salte com extensão total, aterrissando amortecido e resetando. Expire no salto. ⚠️ Se a barra "descolar" das costas ou a velocidade cair, reduza a carga.
+
+**High pull com barra** — Barra na altura das coxas (hang), quadril para trás. Estenda quadril e joelhos com violência, encolhendo os ombros e puxando os cotovelos altos — a barra sobe até a linha do peito pelo drive de quadril. Expire na extensão. ⚠️ Não puxe com os braços primeiro; é o quadril que arremessa a barra.
+
+**Avanço com salto alternado** — Do afundo, salte trocando as pernas no ar e aterrisse no afundo oposto, amortecendo. Expire a cada troca. ⚠️ Joelhos alinhados; potência com aterrissagem limpa.
+
+**Pallof press na polia** — Perpendicular à polia, manopla junto ao tronco. Estenda os braços resistindo à rotação, pause e retorne. Expire ao estender. ⚠️ Quadril e ombros quadrados.
+
+**Bike sprint alático (15s/3min)** — 15s all-out com resistência alta e cadência máxima; 3 min girando muito leve para recuperação completa. ⚠️ Cada tiro deve ter a mesma potência do primeiro — se cair, encerre o bloco.
+
+### Treino C
+**Flexão pliométrica com palmas** — Tronco rígido, desça rápido e exploda do chão com força suficiente para bater palmas, amortecendo a queda. Expire na subida. ⚠️ Punhos e ombros aquecidos; sem qualidade, volte à flexão acelerada simples.
+
+**Supino reto com barra (80–87% 1RM)** — Escápulas retraídas, pés firmes, leve arco natural. Desça à linha do peitoral com controle e empurre com intenção máxima. Inspire na descida, expire na subida. ⚠️ Parceiro ou anilhas de segurança obrigatórios nestas intensidades.
+
+**Barra fixa com carga** — Cinto de carga ajustado, pegada pronada. Puxe até o queixo passar a barra e desça controlando. Expire ao subir. ⚠️ Amplitude completa; sem balanço.
+
+**Desenvolvimento militar com barra (80%)** — Em pé, barra na altura das clavículas, core e glúteos travados. Empurre verticalmente até o lockout com a cabeça passando "através" dos braços e desça controlado. Expire ao empurrar. ⚠️ Sem drive de pernas (isso é o push press) e sem arquear a lombar.
+
+**Remada curvada com barra** — Tronco a ~45°, coluna neutra. Puxe ao abdômen e desça controlando. Expire ao puxar. ⚠️ Bracing constante.
+
+**Rosca direta + tríceps testa (bi-set)** — Rosca: cotovelos fixos, suba e desça controlado. Sem descanso, tríceps testa: barra acima da testa, estenda os antebraços com cotovelos imóveis. Expire em cada esforço. ⚠️ Carga moderada no bi-set.
+
+**Abdominal na polia alta com carga** — Ajoelhado, corda junto à cabeça. Enrole o tronco em direção ao chão e retorne controlando. Expire ao descer. ⚠️ Quadril fixo.
+
+### Treino D
+**Arremesso de medicine ball na parede (chest pass)** — Em pé de frente para a parede, bola junto ao peito. Passo curto à frente e arremesso explosivo empurrando a bola com as duas mãos, recebendo no rebote. Expire no arremesso. ⚠️ Cada repetição com intenção máxima — potência não tolera rep morna.
+
+**Push press com barra** — Barra na rack position, leve flexão de joelhos e drive agressivo de pernas impulsionando a barra ao lockout. Desça controlada aos ombros. Expire no drive. ⚠️ Lockout com braços alinhados às orelhas; sem hiperextensão lombar.
+
+**Supino com barra em velocidade (~60% 1RM)** — Mesma técnica do supino pesado, mas com descida controlada e concêntrica na maior velocidade possível. Expire na subida. ⚠️ Se a barra desacelerar visivelmente, reduza a carga — o estímulo é velocidade.
+
+**Medicine ball slam** — Bola acima da cabeça com extensão total, arremesso violento contra o chão usando core e braços, pegando-a no quique. Expire no arremesso. ⚠️ Lombar neutra ao recolher a bola.
+
+**Remada explosiva na polia baixa** — Sentado, tronco estável. Puxe o triângulo ao abdômen com máxima aceleração e retorne em 2–3s controlando. Expire ao puxar. ⚠️ A explosão é da puxada, não do balanço de tronco.
+
+**Carregada de fazendeiro pesada** — Halteres pesados, postura ereta, passos curtos e firmes, core contraído. ⚠️ Termina antes de a postura ceder.
+
+**Remo 5x 200 m** — Pernas → tronco → braços. Pace muito forte (RPE 9) e constante; 2 min leves entre tiros. ⚠️ Coluna neutra mesmo em fadiga.
+
+### Treino E
+**Sled push (ou caminhada com carga pesada)** — Tronco inclinado ~45° empurrando o trenó, braços firmes, passos curtos e potentes com extensão completa de quadril. Respiração agressiva. ⚠️ Sem trenó: farmer's carry bem pesado. Lombar neutra sempre.
+
+**Wall ball** — Agache ao paralelo com a bola junto ao peito e arremesse ao alvo na subida, recebendo já no próximo agachamento. Expire no arremesso. ⚠️ Ritmo constante; bola longe do rosto.
+
+**Levantamento terra romeno com halteres** — Quadril para trás, halteres rente às pernas, descida em 3s e subida contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Acessório em RPE 7 — não vire teste de força.
+
+**Remada baixa na polia** — Tronco ereto, puxe o triângulo ao abdômen e retorne controlando. Expire ao puxar. ⚠️ Sem balanço.
+
+**Elevação lateral + face pull (bi-set)** — Elevação: cotovelos semiflexionados, suba até a linha dos ombros. Sem descanso, face pull: puxe a corda à altura do rosto abrindo os cotovelos e aproximando as escápulas. Expire em cada esforço. ⚠️ Cargas leves; dupla de saúde de ombro.
+
+**Prancha lateral com elevação de perna** — Apoio no antebraço, corpo em linha, quadril alto; eleve a perna de cima e sustente. Respiração normal. ⚠️ Quadril não cede.
+
+**Circuito cronometrado (swings + wall balls + remo + carry)** — Técnicas conforme descritas; busque o menor tempo com padrão impecável em cada estação. ⚠️ Rep feia não conta — qualidade é o critério do cronômetro.
+
 ## Testes e Métricas de Performance
 - **Força:** 3RM no agachamento, supino e terra (estimar 1RM: carga x reps x 0,0333 + carga)
 - **Potência:** salto vertical com alcance e broad jump (melhor de 3)
