@@ -56,12 +56,15 @@ Mesociclo introdutório em full body (A/B/C) 3x/semana, centrado nos padrões fu
 - Dupla progressão: repetições primeiro, carga depois (+2,5–5% nos compostos; ~2,5% nos isoladores), retornando à base da faixa.
 - Barras progridem com anilhas pequenas (1–2,5 kg por lado); não pule degraus para "acompanhar o colega".
 - Caderno ou aplicativo de registro é obrigatório: o histórico de cargas é o mapa do próximo mesociclo.
+- Após uma semana ou mais sem treinar, retome com 90% das últimas cargas registradas.
+- Cronometre os descansos: descansos encurtados por pressa derrubam o desempenho dos compostos e mascaram a progressão real.
 
 ## Observações de Segurança
 - Ego é o maior fator de lesão aos 20–29 anos: carga só sobe com técnica estável e amplitude completa.
 - No supino com barra, use sempre presilhas e, em séries pesadas, peça apoio (spotter).
 - No terra romeno e na remada curvada, coluna neutra é inegociável — reduza a carga ao primeiro sinal de arredondamento.
 - Respeite os dias de descanso (ex.: seg/qua/sex): músculo cresce na recuperação, não na sessão.
+- Sono de 7–9h e alimentação suficiente são parte do programa: sem eles, a janela de ganhos de novato é desperdiçada.
 
 ## Próximo Passo
 Repita 1–2 mesociclos com cargas atualizadas até dominar os básicos; a sequência natural da linha é o **Projeto Dominância (HIP-M-20-29-AVA-ACA)** quando o volume 3x/semana deixar de gerar progresso.

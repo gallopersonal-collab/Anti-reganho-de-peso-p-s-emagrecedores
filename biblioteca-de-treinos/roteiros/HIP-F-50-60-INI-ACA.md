@@ -56,6 +56,7 @@ Mesociclo introdutório em full body (A/B/C) 3x/semana, desenhado para a mulher 
 - Progressão conservadora: priorize repetições antes de carga e use sempre o menor incremento disponível (meio pino, anilha de 1 kg).
 - A regra é nunca sair de uma série sem capacidade para mais 2 repetições com boa técnica.
 - Consistência supera intensidade: 12 sessões completas no mês valem mais que qualquer recorde de carga.
+- Após qualquer pausa de uma semana ou mais, retome com 85–90% das últimas cargas registradas.
 
 ## Observações de Segurança
 - Densidade óssea e anti-sarcopenia são os objetivos clínicos do programa: carga progressiva e segura é o estímulo — impacto e cargas máximas não são necessários nem recomendados.
@@ -63,6 +64,7 @@ Mesociclo introdutório em full body (A/B/C) 3x/semana, desenhado para a mulher 
 - Evite manobra de Valsalva prolongada: expire na fase de esforço de cada repetição.
 - Hipertensão, osteoporose diagnosticada ou próteses articulares exigem liberação médica e adaptação individual do roteiro.
 - Dor articular que persista por mais de 48h: substitua o exercício e comunique o treinador.
+- Proteína adequada em todas as refeições (com orientação nutricional) potencializa o efeito anti-sarcopenia do treino.
 
 ## Próximo Passo
 Após 2 mesociclos consistentes, evolua para o **Força de Rainha (HIP-F-50-60-INT-ACA)**, que aumenta a frequência para 4x/semana com progressão igualmente segura.

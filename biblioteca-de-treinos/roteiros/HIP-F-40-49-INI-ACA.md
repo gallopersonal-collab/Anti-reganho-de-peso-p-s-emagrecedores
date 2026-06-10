@@ -56,12 +56,15 @@ Mesociclo introdutório em full body (A/B/C) 3x/semana para a mulher 40+ inician
 - Dupla progressão: primeiro repetições, depois carga (2,5–5% em inferiores, ~2,5% em superiores), sempre retornando à base da faixa.
 - Incrementos menores são bem-vindos: anilhas de 1 kg e ajustes de meio pino na máquina contam como progresso.
 - Não compare semanas com sono ruim ou estresse alto — nessas sessões, manter a carga já é progressão.
+- Se faltar uma semana inteira, retome com 90% das últimas cargas registradas e reconstrua.
+- Cronometre os descansos: encurtá-los por pressa reduz o estímulo de hipertrofia dos exercícios compostos.
 
 ## Observações de Segurança
 - Proteção articular é prioridade aos 40+: amplitude até onde houver controle e zero dor; joelhos e ombros agradecem cadência controlada na fase excêntrica.
 - Evite impacto e cargas axiais máximas neste primeiro mesociclo; o Smith e as máquinas oferecem estabilidade para aprender os padrões.
 - Aqueça sempre — sessões sem aquecimento aumentam risco de tendinopatias, mais comuns nesta faixa etária.
 - Dores articulares persistentes (mais de 48h) pedem substituição do exercício e avaliação profissional.
+- Acompanhe a ingestão de proteína (orientação nutricional): aos 40+ ela é determinante para converter treino em massa magra.
 
 ## Próximo Passo
 Após 1–2 mesociclos com progressão consistente, avance para o **Projeto Força Madura (HIP-F-40-49-INT-ACA)**, que adiciona um bloco de força aos básicos.

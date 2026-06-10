@@ -56,12 +56,15 @@ Mesociclo de 4 semanas em formato full body (A/B/C), priorizando o aprendizado d
 - Dupla progressão: primeiro suba repetições dentro da faixa; ao atingir o topo em todas as séries, aumente a carga (2,5–5% em inferiores, 2–2,5% em superiores) e recomece pela base da faixa.
 - Só aumente carga quando a técnica estiver estável — vídeo ou feedback do professor ajudam na fase inicial.
 - Registre cargas e repetições em todas as sessões; este histórico alimenta o próximo mesociclo.
+- Se faltar à academia por uma semana ou mais, retome com 90% das últimas cargas registradas.
+- Descansos podem ser cronometrados pelo celular: respeitá-los garante que a progressão venha do músculo, não da pressa.
 
 ## Observações de Segurança
 - Priorize amplitude controlada antes de carga: profundidade de agachamento até onde a coluna permanece neutra.
 - No terra romeno, mantenha a barra/halteres próximos ao corpo e evite arredondar a lombar.
 - Dores articulares agudas (joelho, ombro, lombar) não são normais: reduza carga ou substitua o exercício pela versão em máquina.
 - Respeite os dias de descanso entre sessões (ex.: seg/qua/sex) — músculo cresce na recuperação.
+- Hidratação e alimentação pré-treino (refeição leve 1–2h antes) melhoram o rendimento e a segurança da sessão.
 
 ## Próximo Passo
 Após este mesociclo, repita o ciclo com cargas atualizadas ou avance para um programa intermediário; na sequência da linha, o destino natural é o nível avançado **Projeto Escultura (HIP-F-20-29-AVA-ACA)** quando a base estiver consolidada.

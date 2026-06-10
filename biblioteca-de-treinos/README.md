@@ -5,6 +5,8 @@
 
 Coleção completa de nomes comerciais e resumos de apresentação para os programas de treinamento, organizados por objetivo, sexo, faixa etária, nível e ambiente. São **60 programas** com **120 nomes comerciais** (2 opções por programa), cada um com seu resumo de apresentação pronto para uso.
 
+> 📋 **Roteiros detalhados:** todos os 60 programas possuem roteiro completo de treino (4 semanas, exercícios, séries, repetições, descanso, cadência e progressão semanal) na pasta [**roteiros/**](roteiros/README.md).
+
 ---
 
 ## 📂 Índice de Categorias
