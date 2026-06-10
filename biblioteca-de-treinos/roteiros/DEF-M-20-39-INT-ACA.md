@@ -65,6 +65,70 @@ Mesociclo de definição em divisão superior/inferior 4x/semana: frequência 2x
 - **Semana 3 — Progressão:** manter ou subir carga; descanso dos isolados cai para 45s; última série a RIR 1. Cardio: 20–25 min.
 - **Semana 4 — Intensificação:** bi-sets nos isolados (crucifixo + elevação lateral; extensora + flexora; rosca + tríceps); última série dos compostos a RIR 0–1; HIIT 10x (30s forte/30s leve) na bicicleta ou esteira após A e C no lugar do cardio contínuo.
 
+## Como Executar os Exercícios
+
+### Treino A
+**Supino reto com barra** — Deitado, pés firmes no chão, pegada um pouco mais larga que os ombros, escápulas retraídas. Desça a barra até a linha do peitoral e empurre sem travar os cotovelos. Inspire na descida, expire na subida. ⚠️ Sem rebote no peito; anilhas de segurança ou parceiro nas séries pesadas.
+
+**Supino inclinado com halteres** — Banco a 30–45°, halteres na linha da parte superior do peito. Empurre até quase estender e desça controlando. Expire na subida. ⚠️ Punhos firmes e alinhados aos antebraços.
+
+**Desenvolvimento com halteres** — Sentado ou em pé, halteres na altura dos ombros. Empurre verticalmente até quase estender e desça até a linha das orelhas. Expire ao empurrar. ⚠️ Core travado; sem arquear a lombar.
+
+**Crucifixo na polia (crossover)** — Entre as polias altas, tronco levemente inclinado, cotovelos semiflexionados. Traga as manoplas à frente do peito em arco, pause 1s e retorne controlando. Expire ao fechar. ⚠️ Cotovelos fixos durante todo o arco.
+
+**Elevação lateral com halteres** — Cotovelos semiflexionados, eleve até a linha dos ombros e desça controlando. Expire ao subir. ⚠️ Sem impulso de tronco.
+
+**Tríceps na polia (corda)** — Cotovelos colados ao tronco, estenda separando as pontas da corda no final e retorne controlando. Expire ao estender. ⚠️ Cotovelos imóveis.
+
+**Tríceps francês com halter** — Sentado, halter seguro com as duas mãos atrás da cabeça, cotovelos apontando para cima. Estenda os antebraços até o topo e desça controlando. Expire ao estender. ⚠️ Cotovelos fechados, próximos da cabeça.
+
+### Treino B
+**Agachamento livre com barra** — Barra sobre o trapézio, pés na largura dos ombros, bracing antes de cada repetição. Desça ao paralelo e suba empurrando pelos calcanhares. Expire na subida. ⚠️ Joelhos alinhados; apoios de segurança do rack ajustados.
+
+**Leg press 45°** — Lombar e quadril colados no banco. Desça até ~90° de joelho e empurre sem travar. Inspire na descida, expire ao empurrar. ⚠️ Quadril sempre no banco.
+
+**Afundo caminhando com halteres** — Passo amplo, desça até o joelho de trás se aproximar do chão e impulsione pelo calcanhar emendando o próximo passo. Inspire na descida, expire na subida. ⚠️ Tronco ereto.
+
+**Cadeira extensora** — Joelho no eixo, rolete nos tornozelos. Estenda, pause 1s e retorne controlando. Expire ao estender. ⚠️ Sem "chutar" o peso.
+
+**Cadeira flexora** — Joelho no eixo, rolete acima dos calcanhares. Flexione, pause 1s e retorne devagar. Expire ao flexionar. ⚠️ Quadril no banco.
+
+**Panturrilha em pé** — Ombros sob as almofadas, ponta dos pés no apoio. Suba ao máximo, pause 1s e desça alongando. Expire ao subir. ⚠️ Sem quicar.
+
+**Abdominal na polia alta** — Ajoelhado, corda junto à cabeça. Enrole o tronco em direção ao chão contraindo o abdômen e retorne controlando. Expire ao descer. ⚠️ Quadril fixo.
+
+### Treino C
+**Barra fixa (ou puxada alta pesada)** — Pegada pronada um pouco mais larga que os ombros. Puxe até o queixo passar a barra (ou a barra tocar a parte alta do peito), pause 1s e desça controlando. Expire ao subir. ⚠️ Sem kipping; amplitude completa.
+
+**Remada curvada com barra** — Tronco a ~45°, coluna neutra. Puxe a barra ao abdômen aproximando as escápulas, pause 1s e desça controlando. Expire ao puxar. ⚠️ Bracing constante; sem impulso.
+
+**Remada baixa na polia (pegada neutra)** — Tronco ereto, puxe o triângulo ao abdômen, pause 1s e retorne controlando. Expire ao puxar. ⚠️ Sem balanço.
+
+**Pulldown com braços estendidos** — Em pé, barra na polia alta, braços quase estendidos. Puxe a barra em arco até as coxas mantendo os cotovelos fixos, pause 1s e retorne devagar. Expire ao puxar. ⚠️ Movimento só do ombro; cotovelos travados em leve flexão.
+
+**Crucifixo invertido na máquina** — Peito apoiado, braços quase estendidos. Abra em arco até a linha dos ombros, pause 1s e retorne devagar. Expire ao abrir. ⚠️ Cotovelos em leve flexão fixa.
+
+**Rosca direta na barra W** — Pegada na barra W, cotovelos junto ao tronco. Flexione até os ombros e desça controlando. Expire ao subir. ⚠️ Punhos neutros e firmes.
+
+**Rosca martelo alternada** — Palmas voltadas uma para a outra, flexione um braço de cada vez e desça controlando. Expire ao subir. ⚠️ Cotovelos fixos.
+
+### Treino D
+**Levantamento terra romeno com barra** — Barra à frente das coxas, joelhos semiflexionados. Quadril para trás descendo a barra rente às pernas (3s) e subida contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Coluna neutra inegociável.
+
+**Mesa flexora** — Joelho no eixo, rolete acima dos calcanhares. Flexione, pause 1s e retorne devagar. Expire ao flexionar. ⚠️ Quadril colado no banco.
+
+**Hack machine** — Costas e ombros apoiados, pés na plataforma na largura dos ombros. Desça controlando até ~90° e empurre sem travar os joelhos. Inspire na descida, expire ao empurrar. ⚠️ Calcanhares na plataforma; não desça além do confortável.
+
+**Búlgaro com halteres** — Pé de trás no banco, halteres ao lado do corpo. Desça até próximo do paralelo e suba pelo calcanhar. Inspire na descida, expire na subida. ⚠️ Joelho da frente na linha do pé.
+
+**Panturrilha sentada** — Almofada sobre as coxas, ponta dos pés no apoio. Suba ao máximo, pause 1s e desça alongando. Expire ao subir. ⚠️ Sem pressa no fundo.
+
+**Abdominal infra na barra fixa (elevação de joelhos)** — Pendurado na barra, eleve os joelhos em direção ao peito enrolando o quadril e desça controlando. Expire ao subir. ⚠️ Sem balanço; se balançar, pause entre as repetições.
+
+**Prancha frontal com toque no ombro** — Em prancha alta, toque o ombro oposto com uma mão de cada vez mantendo o quadril imóvel. Respiração fluida. ⚠️ Afaste mais os pés se o quadril balançar.
+
+**Finalizadores (kettlebell swing / battle rope / remo)** — Swing: dobradiça de quadril e projeção explosiva, braços relaxados. Battle rope: ondas alternadas com joelhos semiflexionados e core firme. Remo: pernas → tronco → braços em pace forte. ⚠️ Técnica íntegra até o último ciclo; lombar neutra no swing sempre.
+
 ## Diretrizes de Progressão de Carga
 - Dupla progressão: topo da faixa em todas as séries → +2,5% (superiores) ou +5% (inferiores) na sessão seguinte.
 - Em déficit, manter as cargas do início do mesociclo nos compostos já preserva massa; a progressão prioritária aqui é de densidade (mesmo trabalho em menos tempo).
