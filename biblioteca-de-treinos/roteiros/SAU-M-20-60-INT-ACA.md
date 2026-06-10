@@ -66,6 +66,56 @@ Mesociclo único de 4 semanas, nível intermediário, para alunos que já conclu
 - **Semana 3 — Progressão suave:** força com as séries cheias indicadas, RPE 6; mobilidade com pausas mais longas nas posições finais; condicionamento contínuo de 30 min, intervalado com 6 ciclos.
 - **Semana 4 — Consolidação:** manter o volume da Semana 3 com RPE 6–7 nos exercícios principais; comparar amplitudes e fôlego com a linha de base e preparar a transição de programa.
 
+## Como Executar os Exercícios
+
+### Treino A
+**Agachamento taça (goblet) com halter** — Segure o halter na vertical junto ao peito, cotovelos para baixo, pés na largura dos ombros. Desça mantendo o tronco ereto até a profundidade confortável, pause 1s e suba empurrando o chão pelos calcanhares. Inspire na descida, expire na subida. ⚠️ Joelhos alinhados aos pés; não prenda a respiração.
+
+**Leg press horizontal** — Sente-se com as costas totalmente apoiadas e pés na plataforma na largura dos ombros. Empurre estendendo os joelhos sem travar e retorne controlando até ~90° de flexão. Expire ao empurrar, inspire ao retornar. ⚠️ Não desça além do confortável nem tire a lombar do encosto.
+
+**Supino na máquina (chest press)** — Ajuste o banco para as manoplas ficarem na altura do meio do peito, costas apoiadas. Empurre à frente até quase estender os cotovelos e retorne controlando. Expire ao empurrar. ⚠️ Ombros baixos; amplitude sem desconforto.
+
+**Desenvolvimento de ombros com halteres sentado** — Sentado com encosto, halteres na altura dos ombros. Empurre verticalmente até quase estender e desça controlando até a linha das orelhas. Expire ao empurrar. ⚠️ Lombar apoiada; sem prender a respiração.
+
+**Caminhada do fazendeiro com halteres** — Halteres ao lado do corpo, postura ereta, ombros para trás. Caminhe em linha reta com passos firmes e core contraído, respirando de forma fluida. ⚠️ Não incline o tronco; encerre antes de perder a postura.
+
+**Prancha frontal** — Antebraços e pontas dos pés no chão, corpo alinhado da cabeça ao calcanhar, abdômen e glúteos contraídos. Respire normalmente. ⚠️ Quadril nem cai nem sobe; joelhos apoiados se necessário.
+
+### Treino B
+**Gato-camelo + rotação torácica ajoelhada** — Em quatro apoios, alterne arredondar as costas para o teto (expirando) e baixá-las arqueando suavemente (inspirando); depois, com uma mão atrás da cabeça, gire o tronco levando o cotovelo para o teto. Movimento lento e fluido. ⚠️ A rotação vem da coluna torácica, não da lombar.
+
+**Maior alongamento do mundo (afundo com rotação)** — Em afundo profundo com as mãos no chão, leve o cotovelo do lado da perna da frente em direção ao chão e depois gire o tronco abrindo o braço para o teto. Respire fundo em cada posição. ⚠️ Joelho de trás pode apoiar no chão; sem forçar além da tensão confortável.
+
+**Mobilidade de quadril 90/90 no solo** — Sentado com uma perna dobrada a 90° à frente e a outra a 90° ao lado. Incline o tronco sobre a perna da frente com a coluna longa, retorne e troque de lado girando os joelhos. Respiração lenta. ⚠️ Use as mãos como apoio; nada de dor no joelho.
+
+**Agachamento profundo com apoio** — Segurando um pilar ou estrutura firme, desça ao agachamento mais profundo que conseguir com os calcanhares no chão e permaneça na posição respirando. ⚠️ O apoio das mãos é parte do exercício; a profundidade evolui semana a semana.
+
+**Deslizamento de braços na parede (wall slide)** — De costas para a parede, lombar, escápulas e cabeça em contato, antebraços encostados na parede em "W". Deslize os braços para cima sem perder os contatos e retorne. Expire ao subir. ⚠️ Se algum contato se perder, reduza a amplitude.
+
+**Mobilidade de tornozelo no step (joelho à parede)** — Pé no step próximo a uma parede. Leve o joelho à frente em direção à parede mantendo o calcanhar pressionado no step, retorne e repita. Movimento lento. ⚠️ O calcanhar nunca sai do apoio.
+
+**Condicionamento contínuo (esteira, bike, remo ou elíptico)** — Ritmo constante em que ainda é possível conversar com frases curtas (RPE 5–6). Postura ereta e respiração ritmada do início ao fim. ⚠️ Se a conversa ficar impossível, reduza o ritmo — base aeróbica se constrói com constância, não com sofrimento.
+
+### Treino C
+**Levantamento terra romeno com halteres** — Em pé, halteres à frente das coxas, joelhos semiflexionados. Empurre o quadril para trás descendo os halteres rente às pernas até sentir alongar os posteriores, pause 1s e suba contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Coluna neutra sempre; amplitude só até onde a técnica permite.
+
+**Cadeira flexora** — Sentado com o joelho alinhado ao eixo da máquina e o rolete acima dos calcanhares. Flexione os joelhos puxando o rolete e retorne controlando. Expire ao flexionar. ⚠️ Quadril colado no banco.
+
+**Puxada na polia alta (pegada neutra)** — Sentado com as coxas travadas, pegada neutra no triângulo ou barra paralela. Puxe até a parte alta do peito aproximando as escápulas e retorne controlando. Expire ao puxar. ⚠️ Não incline o tronco para trás para "ajudar".
+
+**Remada baixa na máquina** — Peito apoiado (quando houver apoio), braços estendidos. Puxe as manoplas em direção ao tronco aproximando as escápulas e retorne devagar. Expire ao puxar. ⚠️ Sem encolher os ombros.
+
+**Elevação pélvica com anilha leve** — Deitado com as costas no chão ou apoiado no banco, anilha sobre o quadril, pés na largura do quadril. Suba o quadril contraindo os glúteos até alinhar tronco e coxas, segure 1s e desça controlando. Expire ao subir. ⚠️ Quem sobe é o quadril, não a lombar.
+
+**Pallof press na polia (anti-rotação)** — Em pé, perpendicular à polia na altura do peito, segurando a manopla com as duas mãos junto ao tronco. Estenda os braços à frente resistindo à rotação, segure 1s e retorne. Expire ao estender. ⚠️ Quadril e ombros permanecem quadrados para a frente — o desafio é não girar.
+
+### Treino D
+**Sequência de mobilidade do Treino B** — Execute os itens 1–6 do Treino B em uma volta, com as mesmas técnicas e atenção à respiração lenta. ⚠️ Use a sessão para buscar 1–2 cm a mais de amplitude confortável em relação à semana anterior.
+
+**Intervalado leve (bike, esteira ou remo)** — Alterne 2 min em ritmo moderado (RPE 6 — conversa difícil mas possível) com 2 min leves (RPE 4 — conversa fácil). Postura estável e respiração ritmada. ⚠️ O trecho "forte" é moderado por definição; não transforme em sprint.
+
+**Alongamento global final** — Cadeia posterior (sentado, alcançando os pés com coluna longa), flexores de quadril (afundo ajoelhado com quadril à frente) e respiração diafragmática deitado. Mantenha cada posição por 30–45s respirando lenta e profundamente. ⚠️ Tensão confortável, nunca dor.
+
 ## Diretrizes de Progressão de Carga
 - Nos exercícios de força, aumente a carga somente ao completar o topo da faixa em todas as séries com técnica perfeita; incrementos de 2–5%.
 - Na mobilidade, a progressão é de amplitude e tempo de permanência — tensão confortável, nunca dor; forçar amplitude é o erro mais comum do público masculino.
