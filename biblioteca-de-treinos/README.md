@@ -7,6 +7,8 @@ Coleção completa de nomes comerciais e resumos de apresentação para os progr
 
 > 📋 **Roteiros detalhados:** todos os 60 programas possuem roteiro completo de treino (4 semanas, exercícios, séries, repetições, descanso, cadência e progressão semanal) na pasta [**roteiros/**](roteiros/README.md).
 
+> 📄 **PDFs para alunos:** cada programa tem sua versão em PDF profissional, pronta para entregar ao aluno, na pasta [**pdfs/**](pdfs/) — com identidade visual por categoria. Para regenerar após editar um roteiro: `python3 scripts/gerar_pdfs.py <CÓDIGO>` (ou sem argumentos para todos).
+
 ---
 
 ## 📂 Índice de Categorias
