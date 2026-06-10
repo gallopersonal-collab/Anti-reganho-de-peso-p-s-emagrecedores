@@ -3,7 +3,7 @@
 **Biblioteca de Treinos Validados e Personalizáveis Pro™**
 *Professor José Carlos Gallo · Sistema Profissional para Personal*
 
-Roteiros completos dos **60 programas** da biblioteca. Cada roteiro contém: visão geral, aquecimento padrão, treinos da semana com tabelas de exercícios (séries, repetições, descanso e cadência), cardio/finalizador conforme o objetivo, progressão semana a semana, diretrizes de carga, observações de segurança por faixa etária e sugestão de próximo programa.
+Roteiros completos dos **60 programas** da biblioteca. Cada roteiro contém: visão geral, aquecimento padrão, treinos da semana com tabelas de exercícios (séries, repetições, descanso e cadência), cardio/finalizador conforme o objetivo, **como executar cada exercício** (posição inicial, execução, respiração e dica de segurança), progressão semana a semana, diretrizes de carga, observações de segurança por faixa etária e sugestão de próximo programa.
 
 **Formato padrão:**
 - ⏱️ **Duração:** 4 semanas (1 mesociclo encadeável) — Semana 1 adaptação · Semanas 2–3 progressão · Semana 4 intensificação
