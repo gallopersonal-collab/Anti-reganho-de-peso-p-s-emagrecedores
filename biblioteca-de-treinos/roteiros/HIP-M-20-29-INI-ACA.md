@@ -52,6 +52,53 @@ Mesociclo introdutório em full body (A/B/C) 3x/semana, centrado nos padrões fu
 - **Semana 3 — Progressão:** busque o topo das faixas em todas as séries com 1–2 repetições em reserva; quem atingir o topo sobe carga na sessão seguinte.
 - **Semana 4 — Intensificação:** +1 série nos exercícios 1 e 2 de cada treino; última série de cada exercício levada a 0–1 repetição em reserva com técnica preservada. Sem técnicas avançadas neste nível — a falha controlada já é estímulo suficiente.
 
+## Como Executar os Exercícios
+
+### Treino A
+**Agachamento no Smith ou livre com barra** — Barra sobre o trapézio (não sobre o pescoço), pés na largura dos ombros; no Smith, pés levemente à frente da linha da barra. Desça em 3s até próximo do paralelo e suba empurrando pelos calcanhares. Inspire na descida, expire na subida. ⚠️ Joelhos alinhados aos pés; no livre, ajuste os apoios de segurança do rack.
+
+**Supino reto com barra** — Deitado, pés firmes, pegada um pouco mais larga que os ombros, escápulas retraídas. Desça a barra até a linha do peitoral e empurre sem travar os cotovelos. Inspire na descida, expire na subida. ⚠️ Presilhas sempre; spotter nas séries pesadas; sem rebote no peito.
+
+**Puxada frontal na polia** — Coxas travadas, pegada mais larga que os ombros. Puxe a barra até a parte alta do peito aproximando as escápulas e retorne controlando. Expire ao puxar. ⚠️ Sem inclinar o tronco para trás para "ajudar".
+
+**Desenvolvimento na máquina** — Costas apoiadas, manoplas na altura dos ombros. Empurre até quase estender e desça até a linha das orelhas. Expire ao empurrar. ⚠️ Sem arquear a lombar.
+
+**Cadeira flexora** — Joelho alinhado ao eixo, rolete acima dos calcanhares. Flexione e retorne controlando (2s). Expire ao flexionar. ⚠️ Quadril colado no banco.
+
+**Tríceps na polia (corda)** — Cotovelos colados ao tronco. Estenda separando as pontas da corda no final e retorne controlando. Expire ao estender. ⚠️ Cotovelos imóveis.
+
+**Prancha abdominal** — Antebraços e pontas dos pés no chão, corpo alinhado, abdômen e glúteos contraídos. Respire normalmente. ⚠️ Quadril nem cai nem sobe.
+
+### Treino B
+**Leg press 45°** — Lombar e quadril colados no banco, pés na largura dos ombros. Desça até ~90° de joelho e empurre sem travar. Inspire na descida, expire ao empurrar. ⚠️ Quadril sempre no banco.
+
+**Remada curvada com barra (ou máquina)** — Tronco a ~45°, coluna neutra, joelhos semiflexionados. Puxe a barra ao abdômen aproximando as escápulas e desça controlando. Expire ao puxar. ⚠️ Coluna neutra inegociável; na dúvida, use a máquina com apoio de peito.
+
+**Supino inclinado com halteres** — Banco a 30–45°, halteres na linha da parte superior do peito. Empurre até quase estender e desça controlando. Expire na subida. ⚠️ Punhos firmes; suba os halteres com os joelhos.
+
+**Levantamento terra romeno com barra** — Barra à frente das coxas, joelhos semiflexionados. Quadril para trás descendo a barra rente às pernas (3s), pause 1s no alongamento e suba contraindo os glúteos. Inspire na descida, expire na subida. ⚠️ Lombar arredondada = carga excessiva; reduza imediatamente.
+
+**Elevação lateral com halteres** — Cotovelos semiflexionados, eleve até a linha dos ombros e desça controlando. Expire ao subir. ⚠️ Sem impulso de tronco.
+
+**Rosca direta com barra** — Pegada supinada na largura dos ombros, cotovelos junto ao tronco. Flexione até os ombros e desça controlando. Expire ao subir. ⚠️ Sem balanço de quadril.
+
+**Abdominal na máquina** — Eixo na altura do umbigo. Flexione o tronco contraindo o abdômen e retorne devagar. Expire ao flexionar. ⚠️ Movimento do abdômen, não dos braços.
+
+### Treino C
+**Agachamento goblet ou hack machine** — Goblet: halter na vertical junto ao peito, desça em 3s com o tronco ereto e suba pelos calcanhares. Hack: costas e ombros apoiados, pés na largura dos ombros, desça até ~90° e empurre sem travar. Inspire na descida, expire na subida. ⚠️ Calcanhares sempre apoiados.
+
+**Cadeira extensora** — Joelho no eixo, rolete nos tornozelos. Estenda e retorne controlando (2s). Expire ao estender. ⚠️ Sem "chutar" o peso.
+
+**Remada baixa na polia (triângulo)** — Tronco ereto, puxe o triângulo ao abdômen aproximando as escápulas e retorne controlando. Expire ao puxar. ⚠️ Sem balanço de tronco.
+
+**Supino reto na máquina** — Manoplas na altura do meio do peito, costas apoiadas. Empurre até quase estender e retorne controlando. Expire ao empurrar. ⚠️ Ombros baixos.
+
+**Crucifixo invertido na máquina** — Peito apoiado, braços quase estendidos. Abra em arco até a linha dos ombros e retorne devagar. Expire ao abrir. ⚠️ Cotovelos em leve flexão fixa.
+
+**Rosca martelo com halteres** — Palmas voltadas uma para a outra. Flexione mantendo a pegada neutra e desça controlando. Expire ao subir. ⚠️ Cotovelos fixos.
+
+**Panturrilha em pé na máquina** — Ombros sob as almofadas, ponta dos pés no apoio. Suba ao máximo, pause 1s e desça alongando. Expire ao subir. ⚠️ Amplitude completa, sem quicar.
+
 ## Diretrizes de Progressão de Carga
 - Dupla progressão: repetições primeiro, carga depois (+2,5–5% nos compostos; ~2,5% nos isoladores), retornando à base da faixa.
 - Barras progridem com anilhas pequenas (1–2,5 kg por lado); não pule degraus para "acompanhar o colega".
