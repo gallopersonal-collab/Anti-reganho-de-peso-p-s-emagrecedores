@@ -22,7 +22,7 @@ Marcadores `[INSERIR ...]` indicam onde entram dados que só você tem.
 
 ## B. Subheadline
 
-O Método P.E.S.O. leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.
+O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.
 
 ---
 
@@ -81,6 +81,8 @@ Fim de perder o aluno no terceiro mês.
 Fim de justificar o seu preço por hora enquanto entrega um trabalho que vale um programa inteiro.
 
 ### O mecanismo: as cinco fases do Método P.E.S.O.
+
+P.E.S.O. quer dizer **Programa de Emagrecimento Saudável Orientado**. O nome diz o que a coisa é. Um programa, com fases, orientado por número.
 
 O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.
 
@@ -182,7 +184,7 @@ O risco fica comigo. Você já carregou risco suficiente montando treino no escu
 
 ### Personal sem carteira de clientes: você monta seu primeiro programa de emagrecimento de R$ 4.000 em 8 semanas.
 
-O Método P.E.S.O. leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.
+O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.
 
 **[QUERO O MÉTODO P.E.S.O.]**
 
@@ -235,6 +237,8 @@ Fim de justificar o seu preço por hora enquanto entrega um trabalho que vale um
 ---
 
 ## As cinco fases do Método P.E.S.O.
+
+P.E.S.O. quer dizer **Programa de Emagrecimento Saudável Orientado**. O nome diz o que a coisa é. Um programa, com fases, orientado por número.
 
 O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.
 
