@@ -1,21 +1,20 @@
 # PESO — Copy da página de vendas
 
 Gerado pelo Forjador (Sistema 7 Minutos v2.1).
+Headline escolhida: opção 2. Garantia: 30 dias, confirmada.
 Marcadores `[INSERIR ...]` indicam onde entram dados que só você tem.
 
 ---
 
-## A. Promessa / Headline — três opções
+## A. Promessa / Headline
 
-**Opção 1 — foco no resultado técnico**
-
-> Personal trainer: você entrega 15 quilos em 8 semanas, sem remédio e sem suplemento.
-
-**Opção 2 — foco no dinheiro**
+**Escolhida:**
 
 > Personal sem carteira de clientes: você monta seu primeiro programa de emagrecimento de R$ 4.000 em 8 semanas.
 
-**Opção 3 — foco na virada de modelo**
+**Alternativas testáveis, se quiser rodar teste A/B:**
+
+> Personal trainer: você entrega 15 quilos em 8 semanas, sem remédio e sem suplemento.
 
 > Você é personal e cobra por hora. Em 8 semanas você passa a entregar um programa que tira 15 quilos.
 
@@ -23,14 +22,15 @@ Marcadores `[INSERIR ...]` indicam onde entram dados que só você tem.
 
 ## B. Subheadline
 
-O PESO reprograma o metabolismo do seu aluno com exercício modulado semana a semana, casado com a alimentação exata de cada fase. O resultado para de depender de sorte.
+O Método P.E.S.O. leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.
 
 ---
 
 ## C. Bullets de benefício
 
-- Você sabe o que vai acontecer com o aluno na semana 2, na 4 e na 8, antes de começar.
-- Você para de improvisar a periodização de emagrecimento no dia do treino.
+- Você sabe em qual fase o aluno está e o que vem depois, antes de começar.
+- Você calcula a orientação alimentar e a quantidade de água por número, sem chutar.
+- Você modula o programa de treinamento junto com o tipo de proteína de cada fase.
 - Você entrega resultado sem depender de Ozempic, de suplemento ou de dieta de fome.
 - Você troca a venda de hora-aula pela venda de programa fechado.
 - Você tem um preço que se sustenta, porque o que você entrega tem começo, meio e fim.
@@ -70,9 +70,9 @@ E hora tem teto. Você pode encher a agenda inteira e ainda assim não fechar a 
 
 ### O que muda quando isso resolve
 
-E se você tivesse um protocolo escrito, com fases definidas, que você aplica no aluno novo já na primeira consulta?
+E se você tivesse um protocolo escrito, com cinco fases definidas, que você aplica no aluno novo já na primeira consulta?
 
-E se você conseguisse dizer, com a segurança de quem já viu acontecer, o que vai mudar na balança dele até a oitava semana?
+E se você conseguisse dizer, com a segurança de quem já viu acontecer, em qual fase o aluno vai estar na semana 4 e o que a balança dele vai mostrar na semana 8?
 
 Fim de improvisar o treino no vestiário.
 
@@ -80,17 +80,27 @@ Fim de perder o aluno no terceiro mês.
 
 Fim de justificar o seu preço por hora enquanto entrega um trabalho que vale um programa inteiro.
 
-### O mecanismo: Exercício Modulado
+### O mecanismo: as cinco fases do Método P.E.S.O.
 
-O PESO trabalha em três passos que qualquer pessoa entende.
+O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.
 
-**1. Avaliar.** Você mede onde o metabolismo do aluno está hoje. O ponto de partida define tudo o que vem depois.
+**Fase 01.** Você define os tipos de proteína e modula o programa de treinamento para o ponto em que o aluno está. Calcula a orientação alimentar e a quantidade de água por número.
 
-**2. Modular.** Você ajusta o estímulo do exercício semana a semana, seguindo a resposta do corpo dele. O treino da semana 6 é diferente do treino da semana 1 por um motivo, e você sabe qual é.
+**Fase 02.** [INSERIR UMA LINHA — o que muda para o aluno nesta fase]
 
-**3. Combinar.** Você casa cada fase do treino com a alimentação exata daquela fase. É aqui que o metabolismo volta ao padrão de normalidade, sem remédio e sem suplemento.
+**Fase 03.** [INSERIR UMA LINHA — o que muda para o aluno nesta fase]
 
-Esse é o ciclo que faz o corpo do aluno responder de forma previsível. Chamamos de reprogramação metabólica porque é o que acontece: o organismo volta a fazer o que deveria estar fazendo.
+**Fase 04.** [INSERIR UMA LINHA — o que muda para o aluno nesta fase]
+
+**Fase 05.** Reprogramação concluída. O metabolismo do aluno volta a operar no padrão de normalidade, e o peso perdido para de querer voltar.
+
+Antes das fases, dois módulos de introdução explicam o terreno: como o emagrecimento funciona e o papel dos índices glicêmicos. Você entende o porquê antes de aplicar o como.
+
+### O seu caminho, em três passos
+
+1. Você entra no curso hoje.
+2. Você aplica as cinco fases no seu próximo aluno.
+3. Você cobra por programa, e não por hora.
 
 ### O que isso custaria pelo caminho antigo
 
@@ -110,7 +120,7 @@ Não vou pedir que você acredite em mim.
 
 [INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
 
-A média que os personais formados pelo PESO cobram por programa fica entre R$ 4.000 e R$ 5.000. [INSERIR: quantos personais já passaram pelo método] Alguns já fecharam programa por R$ 10.000.
+A média que os personais formados pelo P.E.S.O. cobram por programa fica entre R$ 4.000 e R$ 5.000. [INSERIR: quantos personais já passaram pelo método] Alguns já fecharam programa por R$ 10.000.
 
 Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.
 
@@ -118,9 +128,27 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 
 ## E. Oferta / Value Stack
 
+### O que tem dentro do curso
+
+| Módulo | Conteúdo |
+|---|---|
+| **Boas-vindas** | Introdução — Aula 01 |
+| **Módulo 01** | Introdução ao Método — Aula 02 · Índices Glicêmicos — Aula 03 |
+| **Apresentação** | Aula 01 do Método P.E.S.O. |
+| **Módulo 02 — Fase 01** | Aula 01: tipos de proteínas e modulação do programa de treinamento · Aula 02: cálculo da orientação alimentar e quantidades de água |
+| **Módulo 03 — Fase 02** | As aulas da segunda fase |
+| **Módulo 04 — Fase 03** | Aula 01: como é construída a Fase 03 |
+| **Módulo 05 — Fase 04** | Aula 01 da Fase 04 |
+| **Módulo 06 — Fase 05** | Aula 01: Reprogramação concluída |
+| **Módulo extra** | Entendendo a Fisiologia do Emagrecimento — 4 aulas |
+
+Aulas de 15 a 20 minutos. Você assiste entre um aluno e outro.
+
+### A conta
+
 | Item | O que faz por você | Valor |
 |---|---|---|
-| **Curso PESO completo** — 8 módulos em vídeo, aulas de 15 a 20 minutos | O método inteiro, do fundamento à prescrição, no formato que você assiste entre um aluno e outro | R$ 1.497 |
+| **Curso P.E.S.O. completo** — as cinco fases mais o módulo extra de fisiologia | O método inteiro, do fundamento à prescrição, em aulas curtas | R$ 1.497 |
 | **1 ano do software de avaliação, prescrição e periodização** | Você monta avaliação, prescrição e periodização de 3 clientes dentro da plataforma, sem planilha e sem papel | R$ 1.188 |
 
 **Valor total: R$ 2.685**
@@ -148,17 +176,15 @@ Se em 30 dias você achar que o método não vai mudar o seu jeito de trabalhar,
 
 O risco fica comigo. Você já carregou risco suficiente montando treino no escuro.
 
-> [CONFIRMAR: o prazo de 30 dias é uma sugestão. A lei brasileira já garante 7 dias para compra online, então 30 é o que diferencia sua oferta. Ajuste se você preferir outro prazo.]
-
 ---
 
 ## G. Página completa
 
-### Personal trainer: você entrega 15 quilos em 8 semanas, sem remédio e sem suplemento.
+### Personal sem carteira de clientes: você monta seu primeiro programa de emagrecimento de R$ 4.000 em 8 semanas.
 
-O PESO reprograma o metabolismo do seu aluno com exercício modulado semana a semana, casado com a alimentação exata de cada fase. O resultado para de depender de sorte.
+O Método P.E.S.O. leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.
 
-**[QUERO O MÉTODO PESO]**
+**[QUERO O MÉTODO P.E.S.O.]**
 
 ---
 
@@ -190,9 +216,9 @@ E hora tem teto. Você pode encher a agenda inteira e ainda assim não fechar a 
 
 ## O que muda quando isso resolve
 
-E se você tivesse um protocolo escrito, com fases definidas, que você aplica no aluno novo já na primeira consulta?
+E se você tivesse um protocolo escrito, com cinco fases definidas, que você aplica no aluno novo já na primeira consulta?
 
-E se você conseguisse dizer, com a segurança de quem já viu acontecer, o que vai mudar na balança dele até a oitava semana?
+E se você conseguisse dizer, com a segurança de quem já viu acontecer, em qual fase o aluno vai estar na semana 4 e o que a balança dele vai mostrar na semana 8?
 
 Fim de improvisar o treino no vestiário.
 
@@ -200,7 +226,7 @@ Fim de perder o aluno no terceiro mês.
 
 Fim de justificar o seu preço por hora enquanto entrega um trabalho que vale um programa inteiro.
 
-**[QUERO O MÉTODO PESO]**
+**[QUERO O MÉTODO P.E.S.O.]**
 
 ---
 
@@ -208,22 +234,39 @@ Fim de justificar o seu preço por hora enquanto entrega um trabalho que vale um
 
 ---
 
-## Como funciona: Exercício Modulado
+## As cinco fases do Método P.E.S.O.
 
-**1. Avaliar.** Você mede onde o metabolismo do aluno está hoje. O ponto de partida define tudo o que vem depois.
+O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.
 
-**2. Modular.** Você ajusta o estímulo do exercício semana a semana, seguindo a resposta do corpo dele. O treino da semana 6 é diferente do treino da semana 1 por um motivo, e você sabe qual é.
+**Fase 01.** Você define os tipos de proteína e modula o programa de treinamento para o ponto em que o aluno está. Calcula a orientação alimentar e a quantidade de água por número.
 
-**3. Combinar.** Você casa cada fase do treino com a alimentação exata daquela fase. É aqui que o metabolismo volta ao padrão de normalidade, sem remédio e sem suplemento.
+**Fase 02.** [INSERIR UMA LINHA]
 
-Esse é o ciclo que faz o corpo do aluno responder de forma previsível. Chamamos de reprogramação metabólica porque é o que acontece: o organismo volta a fazer o que deveria estar fazendo.
+**Fase 03.** [INSERIR UMA LINHA]
+
+**Fase 04.** [INSERIR UMA LINHA]
+
+**Fase 05.** Reprogramação concluída. O metabolismo do aluno volta a operar no padrão de normalidade, e o peso perdido para de querer voltar.
+
+Antes das fases, dois módulos de introdução explicam o terreno: como o emagrecimento funciona e o papel dos índices glicêmicos. Você entende o porquê antes de aplicar o como.
+
+---
+
+## O seu caminho, em três passos
+
+**1.** Você entra no curso hoje.
+
+**2.** Você aplica as cinco fases no seu próximo aluno.
+
+**3.** Você cobra por programa, e não por hora.
 
 ---
 
 ## O que você recebe
 
-- Você sabe o que vai acontecer com o aluno na semana 2, na 4 e na 8, antes de começar.
-- Você para de improvisar a periodização de emagrecimento no dia do treino.
+- Você sabe em qual fase o aluno está e o que vem depois, antes de começar.
+- Você calcula a orientação alimentar e a quantidade de água por número, sem chutar.
+- Você modula o programa de treinamento junto com o tipo de proteína de cada fase.
 - Você entrega resultado sem depender de Ozempic, de suplemento ou de dieta de fome.
 - Você troca a venda de hora-aula pela venda de programa fechado.
 - Você tem um preço que se sustenta, porque o que você entrega tem começo, meio e fim.
@@ -251,9 +294,27 @@ E existe o caminho de sempre: tentativa e erro. Esse é o mais caro. Você paga 
 
 [INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
 
-A média que os personais formados pelo PESO cobram por programa fica entre R$ 4.000 e R$ 5.000. Alguns já fecharam programa por R$ 10.000.
+A média que os personais formados pelo P.E.S.O. cobram por programa fica entre R$ 4.000 e R$ 5.000. Alguns já fecharam programa por R$ 10.000.
 
 Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.
+
+---
+
+## A grade completa
+
+| Módulo | Conteúdo |
+|---|---|
+| Boas-vindas | Introdução — Aula 01 |
+| Módulo 01 | Introdução ao Método · Índices Glicêmicos |
+| Apresentação | Aula 01 do Método P.E.S.O. |
+| Módulo 02 — Fase 01 | Tipos de proteínas e modulação do treinamento · Cálculo da orientação alimentar e quantidades de água |
+| Módulo 03 — Fase 02 | As aulas da segunda fase |
+| Módulo 04 — Fase 03 | Como é construída a Fase 03 |
+| Módulo 05 — Fase 04 | Aula 01 da Fase 04 |
+| Módulo 06 — Fase 05 | Reprogramação concluída |
+| Módulo extra | Entendendo a Fisiologia do Emagrecimento — 4 aulas |
+
+Aulas de 15 a 20 minutos.
 
 ---
 
@@ -261,7 +322,7 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 
 | Item | Valor |
 |---|---|
-| Curso PESO completo — 8 módulos em vídeo | R$ 1.497 |
+| Curso P.E.S.O. completo — as cinco fases mais o módulo extra | R$ 1.497 |
 | 1 ano do software de avaliação, prescrição e periodização | R$ 1.188 |
 | **Total** | **~~R$ 2.685~~** |
 
@@ -271,7 +332,7 @@ Parcelado.
 
 Um único programa vendido a R$ 4.000 devolve o valor do curso quase sete vezes. E o software fica com você por doze meses.
 
-**[QUERO O MÉTODO PESO]**
+**[QUERO O MÉTODO P.E.S.O.]**
 
 ---
 
@@ -291,12 +352,12 @@ O risco fica comigo. Você já carregou risco suficiente montando treino no escu
 [INSERIR SUA RESPOSTA — essa pergunta vai aparecer, e a resposta precisa respeitar os limites do CREF e do CRN.]
 
 **Quanto tempo leva para assistir tudo?**
-São 8 módulos em aulas de 15 a 20 minutos. Dá para assistir entre um aluno e outro.
+As aulas têm de 15 a 20 minutos. Dá para assistir entre um aluno e outro.
 
 **Funciona com aluno que usou Ozempic e parou?**
 [INSERIR SUA RESPOSTA]
 
-**Por quanto tempo tenho acesso?**
+**Por quanto tempo tenho acesso ao curso?**
 [INSERIR SUA RESPOSTA]
 
 **O software é meu para sempre?**
@@ -310,8 +371,8 @@ Você pode fechar esta página e continuar vendendo hora.
 
 Dá para viver assim. Muita gente vive.
 
-Ou você aplica o PESO no seu próximo aluno e descobre em oito semanas o que muda quando o resultado deixa de ser sorte.
+Ou você aplica as cinco fases do P.E.S.O. no seu próximo aluno e descobre em oito semanas o que muda quando o resultado deixa de ser sorte.
 
 São R$ 597. O primeiro programa que você vender paga isso várias vezes.
 
-**[QUERO O MÉTODO PESO]**
+**[QUERO O MÉTODO P.E.S.O.]**
