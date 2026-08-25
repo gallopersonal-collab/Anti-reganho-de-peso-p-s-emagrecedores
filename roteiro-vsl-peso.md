@@ -2,7 +2,7 @@
 
 Gerado pela skill `roteiro-vsl`. Voz: primeira pessoa, Professor José Carlos Gallo.
 Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10min30.
-Um slot pendente, marcado no texto: a escassez real (Bloco 8).
+Roteiro completo. Nenhum slot pendente.
 
 ---
 
@@ -152,15 +152,19 @@ Eu consigo fazer isso porque eu sei o que acontece quando o personal aplica a Fa
 
 ---
 
-## BLOCO 8 — ESCASSEZ REAL — ~25s
+## BLOCO 8 — ESCASSEZ REAL — ~30s
 
-**[MOTIVO REAL AQUI]** — este bloco só entra se você tiver um motivo verdadeiro para a pessoa agir hoje. Vale, por exemplo: a data em que o preço de 597 volta para 1.996; um número real de vagas na próxima mentoria ao vivo no Zoom; ou uma turma que fecha em data marcada. Diga o motivo em uma frase, diga a data, e siga.
+Antes de eu te dizer o que fazer, uma coisa importante.
 
-Se você não tiver nenhum desses, **corte este bloco inteiro** e vá direto para o CTA. Escassez inventada é a coisa que mais rápido derruba a confiança que os sete blocos anteriores construíram.
+Esse preço de quinhentos e noventa e sete reais vale para quem entrar esta semana. Só para os primeiros.
 
-`[NOTA DE GRAVAÇÃO]` Se usar, mostre a data escrita na tela enquanto fala. Tom de aviso, não de ameaça. Fale uma vez só e não repita.
+Depois disso ele volta para o valor cheio, mil novecentos e noventa e seis reais.
 
----
+Eu não vou ficar aqui te empurrando. Você viu o método, viu os resultados e viu a garantia. Se fez sentido para você, entra agora e resolve isso hoje.
+
+`[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa. Tom de aviso dado uma vez, sem pressão e sem urgência fabricada na voz. Diga e siga adiante.
+
+**Grave este bloco separado dos outros, num arquivo próprio.** Ele é o único do roteiro com data dentro. Quando a semana passar, você troca só este pedaço no vídeo e o resto continua valendo. E cumpra o que a frase diz: se o preço não subir no fim da semana, a promessa vira mentira e derruba a confiança que os sete blocos anteriores levaram nove minutos construindo.
 
 ## BLOCO 9 — CTA — ~50s
 
@@ -196,7 +200,7 @@ O botão está aí embaixo.
 
 ## Duração total estimada
 
-**~10min30**, com o Bloco 8 fora. Se você usar a escassez, some mais ~25s.
+**~11 minutos**, com todos os dez blocos.
 
 ## O que gravar primeiro
 
