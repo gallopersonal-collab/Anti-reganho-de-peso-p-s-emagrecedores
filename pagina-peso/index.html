@@ -167,6 +167,25 @@ ul.bullets li::before{
 .zona p{color:#c9d3dd;margin:0}
 .zona p:last-child{margin:0}
 
+/* Citação */
+.citacao{
+  border-left:4px solid var(--destaque);
+  padding:4px 0 4px 22px;margin:26px 0;
+}
+.citacao p{
+  font-size:clamp(1.08rem,2.9vw,1.28rem);line-height:1.45;
+  font-weight:600;letter-spacing:-.01em;margin:0 0 .6em;text-wrap:balance;
+}
+.citacao cite{font-style:normal;font-size:.88rem;color:var(--tinta-fraca)}
+
+/* Medos */
+.medos{display:grid;gap:14px;margin-top:8px}
+.medo{
+  background:var(--fundo);border:1px solid var(--borda);border-radius:12px;padding:18px 20px;
+}
+.medo h3{margin-bottom:.35em}
+.medo p{margin:0;color:var(--tinta-media)}
+
 /* Grade de módulos */
 table{width:100%;border-collapse:collapse;font-size:.94rem}
 .tabela-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -331,31 +350,31 @@ footer strong{color:#fff;font-weight:600}
   <div class="wrap rv">
     <h2>As cinco fases do Método P.E.S.O.</h2>
     <p>P.E.S.O. quer dizer <strong>Programa de Emagrecimento Saudável Orientado</strong>. O nome diz o que a coisa é. Um programa, com fases, orientado por número.</p>
-    <p>O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.</p>
+    <p>O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases. Cada uma tem objetivo próprio e traz avaliação, programa de exercícios e orientação alimentar personalizados. A periodização garante que o corpo receba o estímulo certo do começo ao fim.</p>
 
     <div class="fase" data-n="1">
-      <h3>O primeiro passo para o emagrecimento</h3>
-      <p>A reprogramação inicial do metabolismo. Você define os tipos de proteína, modula o treino para o ponto em que o aluno está, e calcula a orientação alimentar e a quantidade de água por número.</p>
+      <h3>Preparação para o emagrecimento</h3>
+      <p>A fase de arrumar a casa. Antes de reprogramar o metabolismo, o corpo precisa estar em condições de responder. Aqui você corrige a saúde intestinal, eleva o VO<sub>2</sub>máx até no mínimo 42 ml/kg/min, condiciona a via lipolítica, melhora a qualidade do sono, reduz a resistência à insulina e calcula a hidratação adequada.</p>
       <span class="dur">14 a 21 dias</span>
     </div>
     <div class="fase" data-n="2">
       <h3>Ensinando o corpo a queimar gordura</h3>
-      <p>O organismo é condicionado a usar gordura como combustível.</p>
+      <p>O exercício passa a ser modulado para alterar o componente gordo. Intensidade e volume do aeróbico na zona lipolítica são ajustados para maximizar a oxidação de gordura, e o treino de força segura a massa muscular no lugar.</p>
       <span class="dur">8 a 10 dias</span>
     </div>
     <div class="fase" data-n="3">
       <h3>Turbinando a queima de gordura</h3>
-      <p>A massa magra aumenta, e a queima acelera junto.</p>
+      <p>O metabolismo já está mais eficiente e o corpo mais condicionado. A periodização introduz estímulos novos, com variação de intensidade e volume, para elevar a taxa metabólica e a queima. A massa magra continua preservada.</p>
       <span class="dur">10 a 14 dias</span>
     </div>
     <div class="fase" data-n="4">
       <h3>Queimando gordura 24 horas</h3>
-      <p>O metabolismo passa a queimar gordura o dia inteiro, inclusive dormindo.</p>
+      <p>A aceleração continua, e a chave é a progressão. O corpo do aluno já passou por adaptação significativa, e agora suporta estímulos mais avançados que mantêm a perda de gordura em ritmo acelerado.</p>
       <span class="dur">12 a 14 dias</span>
     </div>
     <div class="fase" data-n="5">
-      <h3>Metabolismo reprogramado</h3>
-      <p>Fecha o ciclo e fixa o organismo na nova configuração. Esta fase é o que segura o resultado e evita o efeito sanfona.</p>
+      <h3>Manutenção inteligente</h3>
+      <p>A fase que decide se o resultado fica. Atingido o peso, o foco muda para consolidar. Treino e alimentação passam para um modelo de manutenção sustentável, os novos hábitos se solidificam, e o ciclo de reprogramação fecha com o aluno capaz de se manter sozinho.</p>
       <span class="dur">5 a 8 dias</span>
     </div>
 
@@ -397,6 +416,38 @@ footer strong{color:#fff;font-weight:600}
   </div>
 </section>
 
+<!-- 5c. O MODELO DE NEGÓCIO -->
+<section class="alt">
+  <div class="wrap rv">
+    <h2>Por que isso muda o seu preço</h2>
+
+    <p>O P.E.S.O. carrega junto um modelo de negócio, e a filosofia dele cabe numa frase: quem garante o resultado pode cobrar por ele.</p>
+
+    <div class="citacao">
+      <p>O emagrecimento efetivo é a soma do Exercício Físico Correto com a Nutrição Correta. Isso é igual a Garantia de Resultado, e Garantia de Resultado é igual a Valorização do Profissional.</p>
+      <cite>Prof. José Carlos Gallo</cite>
+    </div>
+
+    <p>Com um método que funciona na mão, você para de vender hora e passa a vender transformação. É por isso que os profissionais formados cobram de R$&nbsp;4.000 a R$&nbsp;9.000 por um programa completo de 60 dias.</p>
+
+    <h2 style="margin-top:1.8em">Os três medos que isso resolve</h2>
+    <div class="medos">
+      <div class="medo">
+        <h3>Como conseguir cliente</h3>
+        <p>O resultado do aluno vira propaganda. Quem emagrece 15 quilos conta para todo mundo, e a indicação chega sozinha.</p>
+      </div>
+      <div class="medo">
+        <h3>Como convencer a pagar</h3>
+        <p>A garantia de resultado justifica o investimento. O aluno entende o que recebe e por quanto tempo.</p>
+      </div>
+      <div class="medo">
+        <h3>Como entregar o prometido</h3>
+        <p>O método dá o passo a passo. Você aplica as cinco fases e sabe o que acontece em cada uma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 6b. PROVA SOCIAL -->
 <section>
   <div class="wrap rv">
@@ -429,6 +480,8 @@ footer strong{color:#fff;font-weight:600}
   <div class="wrap rv">
     <h2>A prova</h2>
     <div class="pendente"><strong>Espaço para o print.</strong> Substitua este bloco por uma imagem — conversa de aluno, tela de balança ou comprovante de venda de programa. Exemplo: <code>&lt;img src="print.jpg" alt="Mensagem de aluno relatando o resultado"&gt;</code></div>
+    <p>Nos anos 80, uma aluna me procurou precisando perder 15 quilos em três meses para o casamento dela. Eu garanti o resultado e cobrei o equivalente a R$&nbsp;10.000 por 28 sessões. Ela chegou ao dia com o peso que queria. A lógica que usei ali é a mesma que está neste curso.</p>
+
     <p>Mais de mil profissionais já aplicaram o Método P.E.S.O. A média que eles cobram por programa fica entre R$&nbsp;4.000 e R$&nbsp;5.000. Alguns já fecharam programa por R$&nbsp;10.000.</p>
     <p>Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.</p>
     <div style="margin-top:26px">

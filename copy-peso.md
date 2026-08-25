@@ -90,15 +90,15 @@ P.E.S.O. quer dizer **Programa de Emagrecimento Saudável Orientado**. O nome di
 
 O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.
 
-**Fase 1 — O primeiro passo para o emagrecimento.** A reprogramação inicial do metabolismo. Você define os tipos de proteína, modula o treino para o ponto em que o aluno está, e calcula a orientação alimentar e a quantidade de água por número. Dura de 14 a 21 dias.
+**Fase 1 — Preparação para o emagrecimento.** A fase de arrumar a casa. Antes de reprogramar o metabolismo, o corpo precisa estar em condições de responder. Aqui você corrige a saúde intestinal, eleva o VO2máx até no mínimo 42 ml/kg/min, condiciona a via lipolítica, melhora a qualidade do sono, reduz a resistência à insulina e calcula a hidratação adequada. Dura de 14 a 21 dias.
 
-**Fase 2 — Ensinando o corpo a queimar gordura.** O organismo é condicionado a usar gordura como combustível. Dura de 8 a 10 dias.
+**Fase 2 — Ensinando o corpo a queimar gordura.** O exercício passa a ser modulado para alterar o componente gordo. Intensidade e volume do aeróbico na zona lipolítica são ajustados para maximizar a oxidação de gordura, e o treino de força segura a massa muscular no lugar. Dura de 8 a 10 dias.
 
-**Fase 3 — Turbinando a queima de gordura.** A massa magra aumenta, e a queima acelera junto. Dura de 10 a 14 dias.
+**Fase 3 — Turbinando a queima de gordura.** O metabolismo já está mais eficiente e o corpo mais condicionado. A periodização introduz estímulos novos, com variação de intensidade e volume, para elevar a taxa metabólica e a queima. A massa magra continua preservada. Dura de 10 a 14 dias.
 
-**Fase 4 — Queimando gordura 24 horas.** O metabolismo passa a queimar gordura o dia inteiro, inclusive dormindo. Dura de 12 a 14 dias.
+**Fase 4 — Queimando gordura 24 horas.** A aceleração continua, e a chave é a progressão. O corpo do aluno já passou por adaptação significativa, e agora suporta estímulos mais avançados que mantêm a perda de gordura em ritmo acelerado. Dura de 12 a 14 dias.
 
-**Fase 5 — Metabolismo reprogramado.** Fecha o ciclo e fixa o organismo na nova configuração. Esta fase é o que segura o resultado e evita o efeito sanfona. Dura de 5 a 8 dias.
+**Fase 5 — Manutenção inteligente.** A fase que decide se o resultado fica. Atingido o peso, o foco muda para consolidar. Treino e alimentação passam para um modelo de manutenção sustentável, os novos hábitos se solidificam, e o ciclo de reprogramação fecha com o aluno capaz de se manter sozinho. Dura de 5 a 8 dias.
 
 Antes das fases, dois módulos de introdução explicam o terreno: como o emagrecimento funciona e o papel dos índices glicêmicos. Você entende o porquê antes de aplicar o como.
 
@@ -127,6 +127,23 @@ Treinar nessa faixa mantém a gordura corporal como combustível principal, melh
 2. Você aplica as cinco fases no seu próximo aluno.
 3. Você cobra por programa, e não por hora.
 
+### Por que isso muda o seu preço
+
+O P.E.S.O. carrega junto um modelo de negócio, e a filosofia dele cabe numa frase: quem garante o resultado pode cobrar por ele.
+
+> O emagrecimento efetivo é a soma do Exercício Físico Correto com a Nutrição Correta. Isso é igual a Garantia de Resultado, e Garantia de Resultado é igual a Valorização do Profissional.
+>
+> — Prof. José Carlos Gallo
+
+Com um método que funciona na mão, você para de vender hora e passa a vender transformação. É por isso que os profissionais formados cobram de R$ 4.000 a R$ 9.000 por um programa completo de 60 dias.
+
+**Os três medos que isso resolve:**
+
+- **Como conseguir cliente.** O resultado do aluno vira propaganda. Quem emagrece 15 quilos conta para todo mundo, e a indicação chega sozinha.
+- **Como convencer a pagar.** A garantia de resultado justifica o investimento. O aluno entende o que recebe e por quanto tempo.
+- **Como entregar o prometido.** O método dá o passo a passo. Você aplica as cinco fases e sabe o que acontece em cada uma.
+
+
 ### O que isso custaria pelo caminho antigo
 
 Uma pós-graduação em fisiologia do exercício e emagrecimento custa entre R$ 8.000 e R$ 15.000, e leva de doze a dezoito meses. No fim, você sai com teoria, e a montagem do protocolo continua sendo sua.
@@ -150,6 +167,8 @@ Não vou pedir que você acredite em mim.
 **Depoimento em vídeo — João Pedro, do Ceará.**
 
 [INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
+
+Nos anos 80, uma aluna me procurou precisando perder 15 quilos em três meses para o casamento dela. Eu garanti o resultado e cobrei o equivalente a R$ 10.000 por 28 sessões. Ela chegou ao dia com o peso que queria. A lógica que usei ali é a mesma que está neste curso.
 
 Mais de mil profissionais já aplicaram o Método P.E.S.O. A média que eles cobram por programa fica entre R$ 4.000 e R$ 5.000. Alguns já fecharam programa por R$ 10.000.
 
