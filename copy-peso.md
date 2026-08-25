@@ -97,6 +97,8 @@ P.E.S.O. quer dizer **Programa de Emagrecimento Saudável Orientado**. O nome di
 
 O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.
 
+**Cada fase corresponde a um módulo do curso.** Você assiste ao módulo e aplica a fase no seu aluno, na mesma semana.
+
 **Fase 1 — Preparação para o emagrecimento.** A fase de arrumar a casa. Antes de reprogramar o metabolismo, o corpo precisa estar em condições de responder. Aqui você corrige a saúde intestinal, eleva o VO2máx até no mínimo 42 ml/kg/min, condiciona a via lipolítica, melhora a qualidade do sono, reduz a resistência à insulina e calcula a hidratação adequada. Dura de 14 a 21 dias.
 
 **Fase 2 — Ensinando o corpo a queimar gordura.** O exercício passa a ser modulado para alterar o componente gordo. Intensidade e volume do aeróbico na zona lipolítica são ajustados para maximizar a oxidação de gordura, e o treino de força segura a massa muscular no lugar. Dura de 8 a 10 dias.
@@ -289,6 +291,8 @@ Fim de justificar o seu preço por hora enquanto entrega um trabalho que vale um
 P.E.S.O. quer dizer **Programa de Emagrecimento Saudável Orientado**. O nome diz o que a coisa é. Um programa, com fases, orientado por número.
 
 O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.
+
+**Cada fase corresponde a um módulo do curso.** Você assiste ao módulo e aplica a fase no seu aluno, na mesma semana.
 
 **Fase 1 — O primeiro passo para o emagrecimento.** A reprogramação inicial do metabolismo. Você define os tipos de proteína, modula o treino para o ponto em que o aluno está, e calcula a orientação alimentar e a quantidade de água por número. Dura de 14 a 21 dias.
 
