@@ -187,22 +187,6 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 
 ## E. Oferta / Value Stack
 
-### O que tem dentro do curso
-
-| Módulo | Conteúdo |
-|---|---|
-| **Boas-vindas** | Introdução — Aula 01 |
-| **Módulo 01** | Introdução ao Método — Aula 02 · Índices Glicêmicos — Aula 03 |
-| **Apresentação** | Aula 01 do Método P.E.S.O. |
-| **Módulo 02 — Fase 01** | Aula 01: tipos de proteínas e modulação do programa de treinamento · Aula 02: cálculo da orientação alimentar e quantidades de água |
-| **Módulo 03 — Fase 02** | As aulas da segunda fase |
-| **Módulo 04 — Fase 03** | Aula 01: como é construída a Fase 03 |
-| **Módulo 05 — Fase 04** | Aula 01 da Fase 04 |
-| **Módulo 06 — Fase 05** | Aula 01: Reprogramação concluída |
-| **Módulo extra** | Entendendo a Fisiologia do Emagrecimento — 4 aulas |
-
-Aulas de 15 a 20 minutos. Você assiste entre um aluno e outro.
-
 ### A conta
 
 | Item | O que faz por você | Valor |
@@ -371,24 +355,6 @@ E existe o caminho de sempre: tentativa e erro. Esse é o mais caro. Você paga 
 Mais de mil profissionais já aplicaram o Método P.E.S.O. Eles cobram de R$ 4.000 a R$ 9.000 por um programa completo de 60 dias.
 
 Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.
-
----
-
-## A grade completa
-
-| Módulo | Conteúdo |
-|---|---|
-| Boas-vindas | Introdução — Aula 01 |
-| Módulo 01 | Introdução ao Método · Índices Glicêmicos |
-| Apresentação | Aula 01 do Método P.E.S.O. |
-| Módulo 02 — Fase 01 | Tipos de proteínas e modulação do treinamento · Cálculo da orientação alimentar e quantidades de água |
-| Módulo 03 — Fase 02 | As aulas da segunda fase |
-| Módulo 04 — Fase 03 | Como é construída a Fase 03 |
-| Módulo 05 — Fase 04 | Aula 01 da Fase 04 |
-| Módulo 06 — Fase 05 | Reprogramação concluída |
-| Módulo extra | Entendendo a Fisiologia do Emagrecimento — 4 aulas |
-
-Aulas de 15 a 20 minutos.
 
 ---
 
