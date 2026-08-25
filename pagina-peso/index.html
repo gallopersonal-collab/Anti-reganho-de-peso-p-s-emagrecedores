@@ -203,6 +203,18 @@ ul.bullets li::before{
 .relato .quem{font-size:.9rem;color:var(--tinta-media);margin:0}
 .relato .quem b{color:var(--tinta)}
 
+/* Retrato do autor */
+.autor{display:grid;gap:24px;align-items:start}
+@media(min-width:640px){.autor{grid-template-columns:210px 1fr;gap:30px}}
+.retrato{margin:0}
+.retrato img{
+  display:block;width:100%;border-radius:14px;
+  aspect-ratio:1/1;object-fit:cover;background:var(--fundo-alt);
+}
+/* Logo do rodapé */
+.logo-rodape{max-width:230px;margin:0 0 18px}
+.logo-rodape img{display:block;width:100%;height:auto}
+
 /* Grade de módulos */
 table{width:100%;border-collapse:collapse;font-size:.94rem}
 .tabela-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -306,7 +318,13 @@ footer strong{color:#fff;font-weight:600}
 <!-- CREDENCIAL -->
 <section>
   <div class="wrap rv">
-    <p class="lead">Sou o professor <strong>José Carlos &ldquo;Gallo&rdquo; Lima de Souza</strong>, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.</p>
+    <div class="autor">
+      <figure class="retrato">
+        <img src="foto-gallo.jpg" alt="Professor José Carlos Gallo" loading="lazy"
+             onerror="this.closest('.retrato').remove()">
+      </figure>
+      <div>
+        <p class="lead">Sou o professor <strong>José Carlos &ldquo;Gallo&rdquo; Lima de Souza</strong>, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.</p>
 
     <ul class="credenciais">
       <li><b>CREF 002297-G/RJ</b></li>
@@ -316,6 +334,8 @@ footer strong{color:#fff;font-weight:600}
       <li>Palestrante em universidades e congressos no Brasil e no exterior</li>
       <li>Criador do <b>GPA Pro</b>, o software de avaliação corporal e prescrição de treinamento que acompanha este curso</li>
     </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -650,6 +670,7 @@ footer strong{color:#fff;font-weight:600}
 
 <footer>
   <div class="wrap">
+    <div class="logo-rodape"><img src="logo-gallo.png" alt="Gallo Personal Systems" loading="lazy" onerror="this.closest('.logo-rodape').remove()"></div>
     <p style="margin-bottom:.4em"><strong>Instituto Gallo Personal Systems</strong></p>
     <p style="margin:0">Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado. Prof. José Carlos Gallo.</p>
   </div>
