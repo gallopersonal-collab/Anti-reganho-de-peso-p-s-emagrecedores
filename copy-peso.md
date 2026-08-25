@@ -1,7 +1,7 @@
 # PESO — Copy da página de vendas
 
 Gerado pelo Forjador (Sistema 7 Minutos v2.1).
-Headline escolhida: opção 2. Garantia: 30 dias, confirmada.
+Headline escolhida: opção 2. Garantia: 30 dias. Preço: R$ 597, ancorado nos R$ 1.996,00 anteriores.
 Marcadores `[INSERIR ...]` indicam onde entram dados que só você tem.
 
 ---
@@ -161,27 +161,15 @@ Aulas de 15 a 20 minutos. Você assiste entre um aluno e outro.
 | **Curso de anúncios online** | Como atrair cliente novo de forma contínua pelas redes sociais | R$ 597 |
 | **1 ano do software de avaliação, prescrição e periodização** | Avaliação, prescrição e periodização de 3 clientes dentro da plataforma | R$ 1.188 |
 
-**Valor total: R$ 6.070**
+**Valor total dos itens: R$ 6.070**
 
-**Você paga R$ 597.** Parcelado.
+O Método P.E.S.O. já foi vendido por **R$ 1.996,00**.
+
+**Hoje ele sai por R$ 597.** Parcelado.
 
 > Um único programa vendido a R$ 4.000 devolve o que você investiu quase sete vezes.
 
-### Escolha o preço antes de publicar
-
-Os valores da coluna são âncoras que eu sugeri. Ajuste ao que você considera justo.
-
-O preço final está em aberto. Você me disse R$ 597. O seu PDF oficial diz 12 parcelas de R$ 166,40, ou seja, R$ 1.996,80. Use um dos dois blocos:
-
-**Bloco A — R$ 597**
-
-> De ~~R$ 6.070~~ por **R$ 597**. Parcelado.
-
-**Bloco B — R$ 1.996,80**
-
-> De ~~R$ 6.070~~ por **12 parcelas de R$ 166,40**.
-
-O Bloco B sustenta melhor o stack. Um desconto de dez vezes desperta desconfiança; um de três vezes soa como oferta de verdade.
+Os valores da coluna são âncoras sugeridas. Ajuste ao que você considera justo.
 
 ---
 
@@ -351,9 +339,11 @@ Aulas de 15 a 20 minutos.
 | Materiais de venda prontos | R$ 397 |
 | Curso de anúncios online | R$ 597 |
 | 1 ano do software de avaliação, prescrição e periodização | R$ 1.188 |
-| **Total** | **~~R$ 6.070~~** |
+| **Total** | **R$ 6.070** |
 
-# Você paga R$ 597
+### O Método P.E.S.O. já foi vendido por ~~R$ 1.996,00~~
+
+# Hoje ele sai por R$ 597
 
 Parcelado.
 
