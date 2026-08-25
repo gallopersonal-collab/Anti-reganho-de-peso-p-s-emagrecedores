@@ -36,7 +36,7 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 - Você troca a venda de hora-aula pela venda de programa fechado.
 - Você tem um preço que se sustenta, porque o que você entrega tem começo, meio e fim.
 - O aluno emagrece e conta para os amigos. A sua agenda enche pela porta certa.
-- Você monta avaliação, prescrição e periodização dentro de um software, em minutos.
+- Você monta avaliação, prescrição e periodização dentro do GPA Pro, em minutos.
 - Você deixa de perder o aluno no terceiro mês, quando o resultado costuma travar.
 - Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.
 - Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.
@@ -55,7 +55,7 @@ Sou o professor José Carlos "Gallo" Lima de Souza, fundador da Gallo Personal S
 - Especialização em **Avaliação Funcional e Controle da Atividade Física**, na Alemanha
 - Pós-graduação em **Fisiologia do Exercício e Avaliação Morfo-Funcional**
 - Palestrante em universidades e congressos no Brasil e no exterior
-- Criador do **software de avaliação corporal e prescrição de treinamento** que acompanha este curso
+- Criador do **GPA Pro**, o software de avaliação corporal e prescrição de treinamento que acompanha este curso
 
 ### Talvez você
 
@@ -211,7 +211,7 @@ Aulas de 15 a 20 minutos. Você assiste entre um aluno e outro.
 | **Mentorias de vendas periódicas** | Acompanhamento contínuo até você fechar programas de R$ 4.000 a R$ 9.000 | R$ 697 |
 | **Materiais de venda prontos** | O que você mostra na tela quando apresenta o programa ao cliente | R$ 397 |
 | **Curso de anúncios online** | Como atrair cliente novo de forma contínua pelas redes sociais | R$ 597 |
-| **1 ano do software de avaliação, prescrição e periodização** | Avaliação, prescrição e periodização de 3 clientes dentro da plataforma | R$ 1.188 |
+| **1 ano do GPA Pro** — software de avaliação, prescrição e periodização | Avaliação, prescrição e periodização de 3 clientes dentro da plataforma | R$ 1.188 |
 
 **Valor total dos itens: R$ 6.070**
 
@@ -252,7 +252,7 @@ Sou o professor José Carlos "Gallo" Lima de Souza, fundador da Gallo Personal S
 - Especialização em **Avaliação Funcional e Controle da Atividade Física**, na Alemanha
 - Pós-graduação em **Fisiologia do Exercício e Avaliação Morfo-Funcional**
 - Palestrante em universidades e congressos no Brasil e no exterior
-- Criador do **software de avaliação corporal e prescrição de treinamento** que acompanha este curso
+- Criador do **GPA Pro**, o software de avaliação corporal e prescrição de treinamento que acompanha este curso
 
 ---
 
@@ -338,7 +338,7 @@ Antes das fases, dois módulos de introdução explicam o terreno: como o emagre
 - Você troca a venda de hora-aula pela venda de programa fechado.
 - Você tem um preço que se sustenta, porque o que você entrega tem começo, meio e fim.
 - O aluno emagrece e conta para os amigos. A sua agenda enche pela porta certa.
-- Você monta avaliação, prescrição e periodização dentro de um software, em minutos.
+- Você monta avaliação, prescrição e periodização dentro do GPA Pro, em minutos.
 - Você deixa de perder o aluno no terceiro mês, quando o resultado costuma travar.
 - Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.
 - Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.
@@ -437,7 +437,7 @@ Não. O P.E.S.O. trabalha com exercício modulado e orientação alimentar calcu
 **Por quanto tempo tenho acesso ao curso?**
 Dois anos.
 
-**O software é meu para sempre?**
+**O GPA Pro é meu para sempre?**
 A assinatura é de um ano, sem custo. Depois disso você decide se continua.
 
 ---
