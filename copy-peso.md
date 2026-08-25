@@ -40,7 +40,6 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 - Você deixa de perder o aluno no terceiro mês, quando o resultado costuma travar.
 - Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.
 - Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.
-- Você aprende a atrair cliente novo pelas redes sociais, sem depender de indicação.
 
 ---
 
@@ -196,12 +195,10 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 | **Metodologia P.E.S.O.** — as cinco fases, mais os módulos de introdução e o extra de fisiologia | O método inteiro, do fundamento à prescrição | R$ 1.497 |
 | **Mentoria técnica ao vivo no Zoom com o Professor Gallo** | Você tira dúvida de prescrição com quem criou o método, olhando o seu caso | R$ 997 |
 | **Metodologia de Vendas** — aulas mais manual de vendas em PDF | O passo a passo da atração ao fechamento, para você vender o programa | R$ 697 |
-| **Mentorias de vendas periódicas** | Acompanhamento contínuo até você fechar programas de R$ 4.000 a R$ 9.000 | R$ 697 |
 | **Materiais de venda prontos** | O que você mostra na tela quando apresenta o programa ao cliente | R$ 397 |
-| **Curso de anúncios online** | Como atrair cliente novo de forma contínua pelas redes sociais | R$ 597 |
 | **1 ano do GPA Pro** — software de avaliação, prescrição e periodização | Avaliação, prescrição e periodização de 3 clientes dentro da plataforma | R$ 1.188 |
 
-**Valor total dos itens: R$ 6.070**
+**Valor total dos itens: R$ 4.776**
 
 O Método P.E.S.O. já foi vendido por **R$ 1.996,00**.
 
@@ -332,7 +329,6 @@ Antes das fases, dois módulos de introdução explicam o terreno: como o emagre
 - Você deixa de perder o aluno no terceiro mês, quando o resultado costuma travar.
 - Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.
 - Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.
-- Você aprende a atrair cliente novo pelas redes sociais, sem depender de indicação.
 
 ---
 
@@ -369,11 +365,9 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 | Metodologia P.E.S.O. — as cinco fases | R$ 1.497 |
 | Mentoria técnica ao vivo no Zoom com o Professor Gallo | R$ 997 |
 | Metodologia de Vendas — aulas mais manual em PDF | R$ 697 |
-| Mentorias de vendas periódicas | R$ 697 |
 | Materiais de venda prontos | R$ 397 |
-| Curso de anúncios online | R$ 597 |
 | 1 ano do software de avaliação, prescrição e periodização | R$ 1.188 |
-| **Total** | **R$ 6.070** |
+| **Total** | **R$ 4.776** |
 
 ### O Método P.E.S.O. já foi vendido por ~~R$ 1.996,00~~
 
