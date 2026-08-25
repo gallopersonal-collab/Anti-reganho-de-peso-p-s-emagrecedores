@@ -9,10 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
-/* ==========================================================================
-   TROQUE O LINK DO CHECKOUT AQUI  →  --checkout na linha abaixo não existe.
-   O link fica no <script> no fim do arquivo, na constante CHECKOUT_URL.
-   ========================================================================== */
 :root{
   --destaque:#1573d4;
   --destaque-escuro:#0f5aa8;
@@ -545,12 +541,9 @@ footer strong{color:#fff;font-weight:600}
 
 <script>
 /* ==========================================================================
-   >>> TROQUE O LINK DO CHECKOUT AQUI, NESTA LINHA. <<<
-   O link atual aponta para o EDITOR do checkout no painel Kiwify, que exige
-   login e não serve para o comprador. O link público tem a forma
-   https://pay.kiwify.com.br/XXXXXXXX
+   LINK DO CHECKOUT — alimenta os seis botoes da pagina. Troque so aqui.
    ========================================================================== */
-var CHECKOUT_URL = "https://dashboard.kiwify.com/checkout-builder/d3e008dd-f5d7-4695-a78c-bf13a48908af";
+var CHECKOUT_URL = "https://pay.kiwify.com.br/82Pzoh8";
 
 document.querySelectorAll(".js-checkout").forEach(function(a){ a.href = CHECKOUT_URL; });
 
