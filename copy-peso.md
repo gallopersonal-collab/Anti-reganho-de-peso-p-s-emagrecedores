@@ -48,7 +48,7 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 
 ### Quem está falando
 
-Sou o professor José Carlos Gallo, fundador da Gallo Personal Systems. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.
+Sou o professor José Carlos Gallo, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.
 
 ### Talvez você
 
@@ -133,7 +133,7 @@ O P.E.S.O. carrega junto um modelo de negócio, e a filosofia dele cabe numa fra
 
 > O emagrecimento efetivo é a soma do Exercício Físico Correto com a Nutrição Correta. Isso é igual a Garantia de Resultado, e Garantia de Resultado é igual a Valorização do Profissional.
 >
-> — Prof. José Carlos Gallo
+> — Prof. Dr. José Carlos Gallo
 
 Com um método que funciona na mão, você para de vender hora e passa a vender transformação. É por isso que os profissionais formados cobram de R$ 4.000 a R$ 9.000 por um programa completo de 60 dias.
 
@@ -170,7 +170,7 @@ Não vou pedir que você acredite em mim.
 
 Nos anos 80, uma aluna me procurou precisando perder 15 quilos em três meses para o casamento dela. Eu garanti o resultado e cobrei o equivalente a R$ 10.000 por 28 sessões. Ela chegou ao dia com o peso que queria. A lógica que usei ali é a mesma que está neste curso.
 
-Mais de mil profissionais já aplicaram o Método P.E.S.O. A média que eles cobram por programa fica entre R$ 4.000 e R$ 5.000. Alguns já fecharam programa por R$ 10.000.
+Mais de mil profissionais já aplicaram o Método P.E.S.O. Eles cobram de R$ 4.000 a R$ 9.000 por um programa completo de 60 dias.
 
 Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.
 
@@ -238,7 +238,7 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 
 ---
 
-Sou o professor José Carlos Gallo, fundador da Gallo Personal Systems. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.
+Sou o professor José Carlos Gallo, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.
 
 ---
 
@@ -350,7 +350,7 @@ E existe o caminho de sempre: tentativa e erro. Esse é o mais caro. Você paga 
 
 [INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
 
-Mais de mil profissionais já aplicaram o Método P.E.S.O. A média que eles cobram por programa fica entre R$ 4.000 e R$ 5.000. Alguns já fecharam programa por R$ 10.000.
+Mais de mil profissionais já aplicaram o Método P.E.S.O. Eles cobram de R$ 4.000 a R$ 9.000 por um programa completo de 60 dias.
 
 Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.
 
@@ -412,7 +412,7 @@ O risco fica comigo. Você já carregou risco suficiente montando treino no escu
 ## Perguntas que chegam sempre
 
 **Preciso ser nutricionista para aplicar a parte alimentar?**
-O P.E.S.O. trabalha com orientação alimentar geral, dentro do que a legislação permite ao profissional de educação física. A prescrição de dieta individualizada segue sendo atribuição do nutricionista, e o método respeita esse limite.
+O P.E.S.O. trabalha com orientação alimentar geral, dentro do que a legislação permite ao profissional de educação física. O método foi construído por quem é formado nas três áreas — educação física, fisioterapia e nutrição — e por isso conhece o limite de cada uma. A prescrição de dieta individualizada segue sendo atribuição do nutricionista.
 
 **Quanto tempo leva para assistir tudo?**
 As aulas têm de 15 a 20 minutos. Dá para assistir entre um aluno e outro.
