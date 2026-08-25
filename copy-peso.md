@@ -37,6 +37,9 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 - O aluno emagrece e conta para os amigos. A sua agenda enche pela porta certa.
 - Você monta avaliação, prescrição e periodização dentro de um software, em minutos.
 - Você deixa de perder o aluno no terceiro mês, quando o resultado costuma travar.
+- Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.
+- Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.
+- Você aprende a atrair cliente novo pelas redes sociais, sem depender de indicação.
 
 ---
 
@@ -150,23 +153,35 @@ Aulas de 15 a 20 minutos. Você assiste entre um aluno e outro.
 
 | Item | O que faz por você | Valor |
 |---|---|---|
-| **Curso P.E.S.O. completo** — as cinco fases mais o módulo extra de fisiologia | O método inteiro, do fundamento à prescrição, em aulas curtas | R$ 1.497 |
-| **1 ano do software de avaliação, prescrição e periodização** | Você monta avaliação, prescrição e periodização de 3 clientes dentro da plataforma, sem planilha e sem papel | R$ 1.188 |
+| **Metodologia P.E.S.O.** — as cinco fases, mais os módulos de introdução e o extra de fisiologia | O método inteiro, do fundamento à prescrição | R$ 1.497 |
+| **Mentoria técnica ao vivo no Zoom com o Professor Gallo** | Você tira dúvida de prescrição com quem criou o método, olhando o seu caso | R$ 997 |
+| **Metodologia de Vendas** — aulas mais manual de vendas em PDF | O passo a passo da atração ao fechamento, para você vender o programa | R$ 697 |
+| **Mentorias de vendas periódicas** | Acompanhamento contínuo até você fechar programas de R$ 4.000 a R$ 9.000 | R$ 697 |
+| **Materiais de venda prontos** | O que você mostra na tela quando apresenta o programa ao cliente | R$ 397 |
+| **Curso de anúncios online** | Como atrair cliente novo de forma contínua pelas redes sociais | R$ 597 |
+| **1 ano do software de avaliação, prescrição e periodização** | Avaliação, prescrição e periodização de 3 clientes dentro da plataforma | R$ 1.188 |
 
-**Valor total: R$ 2.685**
+**Valor total: R$ 6.070**
 
 **Você paga R$ 597.** Parcelado.
 
-> Um único programa vendido a R$ 4.000 devolve o valor do curso quase sete vezes. E o software fica com você por doze meses.
+> Um único programa vendido a R$ 4.000 devolve o que você investiu quase sete vezes.
 
-### Dois itens que eu recomendo somar ao stack
+### Escolha o preço antes de publicar
 
-Você tem material pronto que hoje está fora da oferta. Incluir fortalece a página:
+Os valores da coluna são âncoras que eu sugeri. Ajuste ao que você considera justo.
 
-- **Biblioteca de 60 programas de treino em PDF, com fotos de execução dos exercícios** — o personal entrega direto ao aluno dele, com a marca dele. Valor sugerido: R$ 497.
-- **Aula de precificação e venda do programa** — o pedaço que falta entre saber o método e cobrar R$ 4.000 por ele. Valor sugerido: R$ 397.
+O preço final está em aberto. Você me disse R$ 597. O seu PDF oficial diz 12 parcelas de R$ 166,40, ou seja, R$ 1.996,80. Use um dos dois blocos:
 
-Com os dois, o stack sobe para R$ 3.579 contra os mesmos R$ 597. Só inclua se você for entregar de verdade.
+**Bloco A — R$ 597**
+
+> De ~~R$ 6.070~~ por **R$ 597**. Parcelado.
+
+**Bloco B — R$ 1.996,80**
+
+> De ~~R$ 6.070~~ por **12 parcelas de R$ 166,40**.
+
+O Bloco B sustenta melhor o stack. Um desconto de dez vezes desperta desconfiança; um de três vezes soa como oferta de verdade.
 
 ---
 
@@ -277,6 +292,9 @@ Antes das fases, dois módulos de introdução explicam o terreno: como o emagre
 - O aluno emagrece e conta para os amigos. A sua agenda enche pela porta certa.
 - Você monta avaliação, prescrição e periodização dentro de um software, em minutos.
 - Você deixa de perder o aluno no terceiro mês, quando o resultado costuma travar.
+- Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.
+- Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.
+- Você aprende a atrair cliente novo pelas redes sociais, sem depender de indicação.
 
 ---
 
@@ -326,15 +344,20 @@ Aulas de 15 a 20 minutos.
 
 | Item | Valor |
 |---|---|
-| Curso P.E.S.O. completo — as cinco fases mais o módulo extra | R$ 1.497 |
+| Metodologia P.E.S.O. — as cinco fases | R$ 1.497 |
+| Mentoria técnica ao vivo no Zoom com o Professor Gallo | R$ 997 |
+| Metodologia de Vendas — aulas mais manual em PDF | R$ 697 |
+| Mentorias de vendas periódicas | R$ 697 |
+| Materiais de venda prontos | R$ 397 |
+| Curso de anúncios online | R$ 597 |
 | 1 ano do software de avaliação, prescrição e periodização | R$ 1.188 |
-| **Total** | **~~R$ 2.685~~** |
+| **Total** | **~~R$ 6.070~~** |
 
 # Você paga R$ 597
 
 Parcelado.
 
-Um único programa vendido a R$ 4.000 devolve o valor do curso quase sete vezes. E o software fica com você por doze meses.
+Um único programa vendido a R$ 4.000 devolve o que você investiu quase sete vezes.
 
 **[QUERO O MÉTODO P.E.S.O.]**
 
