@@ -152,19 +152,21 @@ Eu consigo fazer isso porque eu sei o que acontece quando o personal aplica a Fa
 
 ---
 
-## BLOCO 8 — ESCASSEZ REAL — ~30s
+## BLOCO 8 — ESCASSEZ REAL — ~40s
 
-Antes de eu te dizer o que fazer, uma coisa importante.
+Antes de eu te dizer o que fazer, tem uma coisa que você precisa saber.
 
-Esse preço de quinhentos e noventa e sete reais vale para quem entrar esta semana. Só para os primeiros.
+Junto com o curso vai a mentoria técnica ao vivo comigo, no Zoom. E aula ao vivo tem limite de gente. Eu preciso conseguir olhar o caso de cada um que está ali dentro.
 
-Depois disso ele volta para o valor cheio, mil novecentos e noventa e seis reais.
+Esse preço de quinhentos e noventa e sete reais vale enquanto tiver vaga na turma. Quando a turma fechar, ele volta para o valor cheio, mil novecentos e noventa e seis reais.
 
 Eu não vou ficar aqui te empurrando. Você viu o método, viu os resultados e viu a garantia. Se fez sentido para você, entra agora e resolve isso hoje.
 
-`[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa. Tom de aviso dado uma vez, sem pressão e sem urgência fabricada na voz. Diga e siga adiante.
+`[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa. Tom de quem está explicando uma limitação prática, sem urgência fabricada na voz. Fale a parte do limite de vagas devagar e siga adiante sem repetir.
 
-**Grave este bloco separado dos outros, num arquivo próprio.** Ele é o único do roteiro com data dentro. Quando a semana passar, você troca só este pedaço no vídeo e o resto continua valendo. E cumpra o que a frase diz: se o preço não subir no fim da semana, a promessa vira mentira e derruba a confiança que os sete blocos anteriores levaram nove minutos construindo.
+**Este bloco não tem data dentro, então ele não envelhece.** O vídeo pode ficar no ar meses e a frase continua verdadeira. A única condição é você cumprir: quando a turma da mentoria encher, o preço sobe de verdade até abrir a próxima.
+
+**Se você souber o número exato de vagas, diga o número.** Trocar "enquanto tiver vaga" por "são trinta vagas por turma" converte mais, porque a pessoa consegue enxergar o limite. Me passe o número e eu ajusto a frase.
 
 ## BLOCO 9 — CTA — ~50s
 
