@@ -119,9 +119,11 @@ E existe o caminho de sempre: tentativa e erro. Esse é o mais caro. Você paga 
 
 Não vou pedir que você acredite em mim.
 
-[INSERIR DEPOIMENTO EM VÍDEO 1 — nome do personal, cidade, quanto ele cobrava antes, quanto cobra hoje]
+**Depoimento em vídeo — Profa. Carla Borges, de Irati (PR).** Emagreceu 14 kg na aluna Jaci.
 
-[INSERIR DEPOIMENTO EM VÍDEO 2 — nome do personal, cidade, resultado de um aluno específico: peso inicial, peso final, prazo]
+**Depoimento em vídeo — Professor Paulo Roberto.** Duvidava do método antes de aplicar.
+
+**Depoimento em vídeo — Personal Gonzaga.** 10 kg de gordura em apenas 16 dias com o Método P.E.S.O.
 
 [INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
 
@@ -235,7 +237,7 @@ Fim de justificar o seu preço por hora enquanto entrega um trabalho que vale um
 
 ---
 
-[INSERIR DEPOIMENTO EM VÍDEO 1 — nome do personal, cidade, quanto cobrava antes, quanto cobra hoje]
+**Depoimento em vídeo — Profa. Carla Borges, de Irati (PR).** Emagreceu 14 kg na aluna Jaci.
 
 ---
 
@@ -286,7 +288,7 @@ Antes das fases, dois módulos de introdução explicam o terreno: como o emagre
 
 ---
 
-[INSERIR DEPOIMENTO EM VÍDEO 2 — nome do personal, cidade, resultado de um aluno específico]
+**Depoimento em vídeo — Professor Paulo Roberto.** Duvidava do método antes de aplicar.
 
 ---
 
