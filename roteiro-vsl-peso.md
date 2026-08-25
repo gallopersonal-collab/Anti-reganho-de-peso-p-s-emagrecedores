@@ -166,8 +166,6 @@ Eu não vou ficar aqui te empurrando. Você viu o método, viu os resultados e v
 
 **Este bloco não tem data dentro, então ele não envelhece.** O vídeo pode ficar no ar meses e a frase continua verdadeira. A única condição é você cumprir: quando a turma da mentoria encher, o preço sobe de verdade até abrir a próxima.
 
-**Se você souber o número exato de vagas, diga o número.** Trocar "enquanto tiver vaga" por "são trinta vagas por turma" converte mais, porque a pessoa consegue enxergar o limite. Me passe o número e eu ajusto a frase.
-
 ## BLOCO 9 — CTA — ~50s
 
 Então é o seguinte.
