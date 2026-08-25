@@ -1,17 +1,16 @@
 PÁGINA DE VENDAS — MÉTODO P.E.S.O.
 
-Antes de publicar, coloque estes dois arquivos NESTA MESMA PASTA,
-com exatamente estes nomes:
+A pasta já está completa. São cinco arquivos:
 
-  foto-gallo.jpg   — seu retrato. Quadrado fica melhor (ex: 800x800).
-                     Qualquer uma das duas fotos serve; a de camisa azul
-                     clara é mais acolhedora, a de terno escuro é mais formal.
+  index.html       — a página inteira, com todo o texto e o layout
+  foto-gallo.jpg   — o retrato do Professor Gallo, na seção de credencial
+  logo-gallo.jpg   — o logo Gallo Personal Systems, no rodapé
+  print-diego.jpg  — o print do WhatsApp, na seção de prova
+  LEIA-ME.txt      — este arquivo
 
-  logo-gallo.png   — o logo Gallo Personal Systems, de preferência com
-                     fundo transparente. Ele aparece no rodapé escuro.
-
-Se você publicar sem esses arquivos, a página funciona do mesmo jeito:
-o retrato e o logo simplesmente não aparecem, e o layout se ajusta.
+Os quatro primeiros precisam ficar sempre na MESMA PASTA, com estes
+nomes exatos. Se um deles faltar, a página continua funcionando: a
+imagem some e o layout se ajusta sozinho.
 
 COMO PUBLICAR
 
