@@ -371,11 +371,11 @@ O risco fica comigo. Você já carregou risco suficiente montando treino no escu
 **Quanto tempo leva para assistir tudo?**
 As aulas têm de 15 a 20 minutos. Dá para assistir entre um aluno e outro.
 
-**Funciona com aluno que usou Ozempic e parou?**
-[INSERIR SUA RESPOSTA]
+**O método usa remédio ou suplemento?**
+Não. O P.E.S.O. trabalha com exercício modulado e orientação alimentar calculada. Nenhuma das cinco fases depende de medicamento ou de suplementação.
 
 **Por quanto tempo tenho acesso ao curso?**
-[INSERIR SUA RESPOSTA]
+Dois anos.
 
 **O software é meu para sempre?**
 A assinatura é de um ano, sem custo. Depois disso você decide se continua.
