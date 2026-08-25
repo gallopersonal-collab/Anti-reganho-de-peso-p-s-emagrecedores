@@ -1,0 +1,197 @@
+# VSL — Método P.E.S.O.
+
+Gerado pela skill `roteiro-vsl`. Voz: primeira pessoa, Professor José Carlos Gallo.
+Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10 minutos.
+Dois slots pendentes, marcados no texto: a virada pessoal (Bloco 2) e a escassez real (Bloco 8).
+
+---
+
+## BLOCO 1 — LEAD / GANCHO — ~20s
+
+Se você é personal trainer e ainda vende o seu trabalho por hora-aula, pare o que você está fazendo e me escuta por três minutos.
+
+Eu vou te mostrar como montar um programa de emagrecimento que tira quinze quilos em oito semanas. E como cobrar quatro mil reais por ele.
+
+`[NOTA DE GRAVAÇÃO]` Rosto na câmera, plano fechado, sem vinheta e sem música na abertura. Tom de quem interrompe alguém no corredor. Fale um pouco mais rápido que o normal nestes primeiros quinze segundos.
+
+---
+
+## BLOCO 2 — HISTÓRIA / MECANISMO — ~1min10
+
+Meu nome é José Carlos Gallo. Sou formado em educação física, fisioterapia e nutrição.
+
+Estou nisso há trinta e seis anos. Fui um dos primeiros personal trainers do Brasil, numa época em que quase ninguém sabia o que era isso.
+
+Eu fui estudar avaliação funcional na Alemanha. Voltei com aparelho, com protocolo e com número.
+
+E mesmo assim eu perdia aluno.
+
+**[SUA VIRADA AQUI]** — conte, em três ou quatro frases, o caso do aluno que te fez perceber que faltava um método. Quem era. O que aconteceu com ele. O que você entendeu naquele dia. Fale como se estivesse contando para um amigo na mesa.
+
+Foi ali que eu parei de tratar emagrecimento como treino e passei a tratar como programa. Com fase, com começo e com fim.
+
+Foi assim que nasceu o P.E.S.O.
+
+`[NOTA DE GRAVAÇÃO]` Continue no rosto. Baixe o ritmo aqui, este bloco é conversa. Na parte da Alemanha, entre com uma foto sua da época ou um diploma, se você tiver. Na virada, volte para o rosto e olhe para a câmera.
+
+---
+
+## BLOCO 3 — AGITAÇÃO DO PROBLEMA — ~1min25
+
+Deixa eu te falar o que eu vejo todo dia.
+
+O personal abre o aplicativo do banco no meio do mês e faz a conta. Quantas horas-aula faltam para fechar.
+
+Ele soma. Divide. O número não muda.
+
+Foram anos de faculdade para chegar até ali. Estágio, prova prática, TCC. E o trabalho dele acaba vendido em blocos de uma hora, como tempo de estacionamento.
+
+Aí vem a parte que dói mais. O aluno emagrece seis quilos, some por dois meses e volta dez quilos mais pesado. E o personal fica sem saber o que dizer para ele.
+
+Enquanto isso, um colega menos preparado está com a agenda cheia.
+
+Se você já passou por isso, eu quero que você entenda uma coisa. A culpa não é sua.
+
+Ninguém te ensinou um método de emagrecimento na faculdade. Te ensinaram fisiologia. Te ensinaram anatomia. Te ensinaram a montar treino. Método de emagrecimento com fase, com número e com prazo, isso ninguém te deu.
+
+E sem método, sobra uma coisa só para vender. A sua hora.
+
+Hora tem teto. Você enche a agenda inteira e ainda assim não fecha a conta, porque o dia acaba.
+
+`[NOTA DE GRAVAÇÃO]` Na parte do aplicativo do banco, mostre na tela uma calculadora com a conta sendo feita, ou um texto simples com o número de horas. Tom firme, sem pena. Na frase "a culpa não é sua", pare, olhe para a câmera e diga devagar.
+
+---
+
+## BLOCO 4 — REVELAÇÃO DA SOLUÇÃO — ~1min55
+
+O que eu construí chama Método P.E.S.O. Programa de Emagrecimento Saudável Orientado.
+
+O nome diz o que a coisa é. Um programa, com fases, orientado por número.
+
+Funciona em três passos.
+
+Primeiro passo: você prepara o corpo antes de tentar emagrecer. Isso é a Fase 1, e leva de catorze a vinte e um dias. Você arruma a saúde intestinal, melhora o sono, reduz a resistência à insulina, calcula a água certa e leva o VO2 máximo para no mínimo quarenta e dois. Corpo despreparado não responde. É por isso que tanta gente trava na segunda semana.
+
+Segundo passo: você aplica as fases, uma de cada vez, modulando o treino e a orientação alimentar em cada uma. O aeróbico acontece dentro da zona lipolítica, entre sessenta e setenta por cento da frequência cardíaca máxima. É nessa faixa que a gordura vira o combustível principal. Acima disso o corpo troca de combustível e você deixa de queimar o que queria queimar.
+
+Terceiro passo: você fecha na Fase 5, a manutenção. É essa fase que decide se o resultado fica. O aluno sai de lá sabendo se manter sozinho.
+
+São cinco fases, e cada fase é um módulo do curso. Você assiste ao módulo de manhã e aplica no seu aluno na mesma semana.
+
+A média de quem passa pelas cinco fases é de quinze quilos em oito semanas. Sem Ozempic. Sem suplemento. Sem dieta de fome.
+
+E vai junto o GPA Pro, o software que eu criei. Você joga a avaliação dentro dele e ele te devolve a prescrição e a periodização prontas, em minutos.
+
+`[NOTA DE GRAVAÇÃO]` Este é o bloco de tela. Mostre as cinco fases em texto, uma aparecendo de cada vez, enquanto você fala. Na zona lipolítica, mostre a faixa de 60% a 70% escrita grande. No final, grave a tela do GPA Pro montando uma prescrição. Tom de professor, sem pressa.
+
+---
+
+## BLOCO 5 — PROVA — ~1min15
+
+Mais de mil profissionais já aplicaram o Método P.E.S.O.
+
+Eu vou te mostrar três coisas.
+
+A primeira é um print que eu recebi do personal Bruno Rigoni. O aluno dele, o Diego, mandou a mensagem no oitavo dia de programa. Cinco quilos e duzentos a menos, em oito dias.
+
+A segunda são os depoimentos. A professora Carla Borges, de Irati, no Paraná. O professor Paulo Roberto, que duvidava do método antes de aplicar. O personal Gonzaga. A Andrea Luiz, de Douradina, no Paraná. E o João Pedro, do Ceará. Estão todos gravados, cada um contando o que aconteceu com os alunos dele.
+
+A terceira é o preço que essa gente cobra hoje. Os profissionais formados no método cobram de quatro a nove mil reais por um programa completo de sessenta dias.
+
+Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum. Entrega um resultado que o aluno vê na balança e vê no espelho.
+
+`[NOTA DE GRAVAÇÃO]` Print do WhatsApp do Diego inteiro na tela, sem cortar, com o nome do Bruno visível. Nos depoimentos, corte de três a cinco segundos de cada vídeo, com o nome e a cidade escritos por cima. Tom de quem está mostrando, não de quem está vendendo.
+
+---
+
+## BLOCO 6 — OFERTA COM VALUE STACK — ~1min40
+
+Vamos ao que você recebe.
+
+A Metodologia P.E.S.O. completa. As cinco fases, os módulos de introdução e o módulo extra de fisiologia. Isso sozinho vale mil quatrocentos e noventa e sete reais.
+
+Mentoria técnica ao vivo comigo, no Zoom. Você leva o seu caso e tira dúvida de prescrição comigo, olhando o seu aluno. Novecentos e noventa e sete reais.
+
+A Metodologia de Vendas. Aulas mais um manual em PDF, com o passo a passo de como apresentar o programa e fechar o cliente. Seiscentos e noventa e sete reais.
+
+Os materiais de venda prontos. É o que você coloca na tela quando está apresentando o programa para o cliente. Trezentos e noventa e sete reais.
+
+E um ano do GPA Pro, o software de avaliação, prescrição e periodização. Mil cento e oitenta e oito reais.
+
+Soma tudo isso e dá quatro mil setecentos e setenta e seis reais.
+
+O Método P.E.S.O. já foi vendido por mil novecentos e noventa e seis reais.
+
+Hoje ele sai por quinhentos e noventa e sete. Parcelado.
+
+Faz a conta comigo. Um único programa vendido a quatro mil reais devolve o que você investiu quase sete vezes. Um só.
+
+São oito módulos, dez aulas, de quinze a vinte minutos cada. Você tem acesso por um ano.
+
+`[NOTA DE GRAVAÇÃO]` Monte a lista na tela, item por item, o valor de cada um entrando conforme você fala. Deixe a soma aparecer inteira, segure dois segundos, e só então risque e mostre o 597. Fale os valores devagar e sem entusiasmo forçado. O número faz o trabalho sozinho.
+
+---
+
+## BLOCO 7 — GARANTIA — ~40s
+
+Agora a parte em que eu tiro o risco de cima de você.
+
+Você tem trinta dias de garantia.
+
+Entra, assiste tudo, aplica no primeiro aluno. Se você achar que não serve para você, me manda um e-mail dentro dos trinta dias e eu devolvo o seu dinheiro. Sem pergunta, sem formulário e sem enrolação.
+
+Eu consigo fazer isso porque eu sei o que acontece quando o personal aplica a Fase 1 direito. Ele vê o aluno responder na primeira semana. E quem vê isso não pede dinheiro de volta.
+
+`[NOTA DE GRAVAÇÃO]` Rosto na câmera, sem nada na tela. Tom tranquilo, quase casual, de quem não está preocupado com o assunto. Este bloco perde a força se você parecer ansioso.
+
+---
+
+## BLOCO 8 — ESCASSEZ REAL — ~25s
+
+**[MOTIVO REAL AQUI]** — este bloco só entra se você tiver um motivo verdadeiro para a pessoa agir hoje. Vale, por exemplo: a data em que o preço de 597 volta para 1.996; um número real de vagas na próxima mentoria ao vivo no Zoom; ou uma turma que fecha em data marcada. Diga o motivo em uma frase, diga a data, e siga.
+
+Se você não tiver nenhum desses, **corte este bloco inteiro** e vá direto para o CTA. Escassez inventada é a coisa que mais rápido derruba a confiança que os sete blocos anteriores construíram.
+
+`[NOTA DE GRAVAÇÃO]` Se usar, mostre a data escrita na tela enquanto fala. Tom de aviso, não de ameaça. Fale uma vez só e não repita.
+
+---
+
+## BLOCO 9 — CTA — ~50s
+
+Então é o seguinte.
+
+Tem um botão logo abaixo deste vídeo. Clica nele.
+
+Ele te leva para a página de pagamento. Você escolhe se paga à vista ou parcelado, preenche os seus dados, e pronto.
+
+Assim que o pagamento é aprovado, você recebe um e-mail com o seu acesso à plataforma. Aí é só entrar e começar pelo módulo de introdução. No mesmo dia.
+
+Eu repito, porque é simples. Clica no botão abaixo do vídeo. Faz o pagamento. O acesso cai no seu e-mail.
+
+Quinhentos e noventa e sete reais, parcelado, com trinta dias de garantia.
+
+`[NOTA DE GRAVAÇÃO]` Aponte para baixo com a mão nas duas vezes em que falar do botão. Mostre uma seta na tela apontando para o botão. Fale devagar, quase soletrando o passo a passo.
+
+---
+
+## BLOCO 10 — FECHAMENTO — ~20s
+
+Uma última coisa, e eu te deixo em paz.
+
+Daqui a oito semanas você vai estar em algum lugar. Ou fazendo a mesma conta de horas-aula no aplicativo do banco. Ou com o primeiro programa de quatro mil reais fechado e assinado.
+
+As oito semanas começam hoje ou não começam.
+
+O botão está aí embaixo.
+
+`[NOTA DE GRAVAÇÃO]` Rosto, plano fechado, tela limpa. Diga as duas últimas frases devagar e pare de falar. Não emende agradecimento, não emende despedida. Corte o vídeo no silêncio.
+
+---
+
+## Duração total estimada
+
+**~10 minutos**, contando os dois slots preenchidos.
+
+## O que gravar primeiro
+
+Grave o **Bloco 2**, a sua história, antes de qualquer outro. É o único bloco que ninguém escreve por você, é o mais difícil de soar natural, e é ele que decide se a pessoa fica até o Bloco 6. Grave três vezes seguidas e fique com a terceira.
