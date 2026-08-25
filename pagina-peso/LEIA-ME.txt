@@ -1,23 +1,27 @@
 PÁGINA DE VENDAS — MÉTODO P.E.S.O.
 
-Antes de publicar, coloque estes dois arquivos NESTA MESMA PASTA,
-com exatamente estes nomes:
+A pasta já está completa. São quatro arquivos:
 
-  foto-gallo.jpg   — seu retrato. Quadrado fica melhor (ex: 800x800).
-                     Qualquer uma das duas fotos serve; a de camisa azul
-                     clara é mais acolhedora, a de terno escuro é mais formal.
+  index.html       — a página inteira, com todo o texto e o layout
+  foto-gallo.jpg   — o retrato do Professor Gallo, na seção de credencial
+  logo-gallo.jpg   — o logo Gallo Personal Systems, no rodapé
+  LEIA-ME.txt      — este arquivo
 
-  logo-gallo.png   — o logo Gallo Personal Systems, de preferência com
-                     fundo transparente. Ele aparece no rodapé escuro.
-
-Se você publicar sem esses arquivos, a página funciona do mesmo jeito:
-o retrato e o logo simplesmente não aparecem, e o layout se ajusta.
+Os três primeiros precisam ficar sempre na MESMA PASTA, com estes
+nomes exatos. Se um deles faltar, a página continua funcionando: a
+imagem some e o layout se ajusta sozinho.
 
 COMO PUBLICAR
 
 1. Abra netlify.com/drop no navegador
 2. Arraste a pasta inteira "pagina-peso" para a área indicada
 3. Pronto, a página sai no ar com um endereço próprio
+
+FALTA AINDA
+
+O print do WhatsApp do aluno Diego, do personal Bruno Rigoni. A frase
+dele já está na página como citação. O print entra como imagem quando
+você subir o arquivo.
 
 O link do checkout está no fim do index.html, na linha:
   var CHECKOUT_URL = "https://pay.kiwify.com.br/82Pzoh8";

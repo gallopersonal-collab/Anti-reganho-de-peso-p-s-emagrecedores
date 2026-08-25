@@ -213,7 +213,10 @@ ul.bullets li::before{
 }
 /* Logo do rodapé */
 .logo-rodape{max-width:230px;margin:0 0 18px}
-.logo-rodape img{display:block;width:100%;height:auto}
+.logo-rodape img{
+  display:block;width:100%;height:auto;border-radius:8px;
+  mix-blend-mode:lighten;
+}
 
 /* Grade de módulos */
 table{width:100%;border-collapse:collapse;font-size:.94rem}
@@ -655,7 +658,7 @@ footer strong{color:#fff;font-weight:600}
 
 <footer>
   <div class="wrap">
-    <div class="logo-rodape"><img src="logo-gallo.png" alt="Gallo Personal Systems" loading="lazy" onerror="this.closest('.logo-rodape').remove()"></div>
+    <div class="logo-rodape"><img src="logo-gallo.jpg" alt="Gallo Personal Systems" loading="lazy" onerror="this.closest('.logo-rodape').remove()"></div>
     <p style="margin-bottom:.4em"><strong>Instituto Gallo Personal Systems</strong></p>
     <p style="margin:0">Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado. Prof. José Carlos Gallo.</p>
   </div>
