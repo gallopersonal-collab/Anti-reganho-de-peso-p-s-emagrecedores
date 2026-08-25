@@ -125,6 +125,10 @@ Não vou pedir que você acredite em mim.
 
 **Depoimento em vídeo — Personal Gonzaga.** 10 kg de gordura em apenas 16 dias com o Método P.E.S.O.
 
+**Depoimento em vídeo — Andrea Luiz, de Douradina (PR).**
+
+**Depoimento em vídeo — João Pedro, do Ceará.**
+
 [INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
 
 Mais de mil profissionais já aplicaram o Método P.E.S.O. A média que eles cobram por programa fica entre R$ 4.000 e R$ 5.000. Alguns já fecharam programa por R$ 10.000.
