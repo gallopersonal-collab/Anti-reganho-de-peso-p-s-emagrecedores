@@ -403,7 +403,7 @@ As aulas têm de 15 a 20 minutos. Dá para assistir entre um aluno e outro.
 Não. O P.E.S.O. trabalha com exercício modulado e orientação alimentar calculada. Nenhuma das cinco fases depende de medicamento ou de suplementação.
 
 **Por quanto tempo tenho acesso ao curso?**
-Dois anos.
+Um ano.
 
 **O GPA Pro é meu para sempre?**
 A assinatura é de um ano, sem custo. Depois disso você decide se continua.
