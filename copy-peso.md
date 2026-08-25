@@ -2,7 +2,7 @@
 
 Gerado pelo Forjador (Sistema 7 Minutos v2.1).
 Headline escolhida: opção 2. Garantia: 30 dias. Preço: R$ 597, ancorado nos R$ 1.996,00 anteriores.
-Marcadores `[INSERIR ...]` indicam onde entram dados que só você tem.
+Todos os dados preenchidos. Nenhum marcador pendente.
 
 ---
 
