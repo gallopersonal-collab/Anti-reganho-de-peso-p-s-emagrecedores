@@ -50,7 +50,7 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 
 Sou o professor José Carlos "Gallo" Lima de Souza, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.
 
-- **CREF 002297-G/RJ**
+- **CREF 004702-G/BA**
 - Um dos **precursores do Personal Training no Brasil**
 - Especialização em **Avaliação Funcional e Controle da Atividade Física**, na Alemanha
 - Pós-graduação em **Fisiologia do Exercício e Avaliação Morfo-Funcional**
@@ -235,7 +235,7 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 
 Sou o professor José Carlos "Gallo" Lima de Souza, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.
 
-- **CREF 002297-G/RJ**
+- **CREF 004702-G/BA**
 - Um dos **precursores do Personal Training no Brasil**
 - Especialização em **Avaliação Funcional e Controle da Atividade Física**, na Alemanha
 - Pós-graduação em **Fisiologia do Exercício e Avaliação Morfo-Funcional**
