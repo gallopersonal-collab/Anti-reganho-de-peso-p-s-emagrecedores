@@ -173,7 +173,9 @@ Não vou pedir que você acredite em mim.
 
 **Depoimento em vídeo — João Pedro, do Ceará.**
 
-[INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
+> "Hoje caiu bem. 5,2 quilos a menos."
+>
+> — Diego, aluno do personal **Bruno Rigoni**, depois de 8 dias aplicando o Método P.E.S.O.
 
 Nos anos 80, uma aluna me procurou precisando perder 15 quilos em três meses para o casamento dela. Eu garanti o resultado e cobrei o equivalente a R$ 10.000 por 28 sessões. Ela chegou ao dia com o peso que queria. A lógica que usei ali é a mesma que está neste curso.
 
@@ -362,7 +364,9 @@ E existe o caminho de sempre: tentativa e erro. Esse é o mais caro. Você paga 
 
 ## A prova
 
-[INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
+> "Hoje caiu bem. 5,2 quilos a menos."
+>
+> — Diego, aluno do personal **Bruno Rigoni**, depois de 8 dias aplicando o Método P.E.S.O.
 
 Mais de mil profissionais já aplicaram o Método P.E.S.O. Eles cobram de R$ 4.000 a R$ 9.000 por um programa completo de 60 dias.
 
