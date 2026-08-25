@@ -366,7 +366,7 @@ O risco fica comigo. Você já carregou risco suficiente montando treino no escu
 ## Perguntas que chegam sempre
 
 **Preciso ser nutricionista para aplicar a parte alimentar?**
-[INSERIR SUA RESPOSTA — essa pergunta vai aparecer, e a resposta precisa respeitar os limites do CREF e do CRN.]
+O P.E.S.O. trabalha com orientação alimentar geral, dentro do que a legislação permite ao profissional de educação física. A prescrição de dieta individualizada segue sendo atribuição do nutricionista, e o método respeita esse limite.
 
 **Quanto tempo leva para assistir tudo?**
 As aulas têm de 15 a 20 minutos. Dá para assistir entre um aluno e outro.
