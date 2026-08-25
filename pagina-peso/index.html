@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Método P.E.S.O. — Seja um Personal Trainer Especialista em Emagrecimento</title>
+<meta name="description" content="O Método P.E.S.O. leva o aluno por cinco fases, com o treino modulado e a orientação alimentar de cada momento. Para o personal que quer vender programa em vez de hora-aula.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --destaque:#1573d4;
+  --destaque-escuro:#0f5aa8;
+  --tinta:#14181d;
+  --tinta-media:#4a545f;
+  --tinta-fraca:#79838f;
+  --fundo:#ffffff;
+  --fundo-alt:#f4f6f8;
+  --borda:#dfe4e9;
+  --max:720px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--tinta);
+  background:var(--fundo);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:84px;
+}
+img,iframe{max-width:100%}
+p{margin:0 0 1.1em}
+strong{font-weight:600}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+section.alt{background:var(--fundo-alt);border-top:1px solid var(--borda);border-bottom:1px solid var(--borda)}
+
+h1{
+  font-size:clamp(1.9rem,6.2vw,3rem);
+  line-height:1.12;
+  font-weight:800;
+  letter-spacing:-.022em;
+  margin:0 0 .55em;
+}
+h2{
+  font-size:clamp(1.4rem,4.4vw,2.05rem);
+  line-height:1.2;
+  font-weight:800;
+  letter-spacing:-.018em;
+  margin:0 0 .8em;
+}
+h3{font-size:1.08rem;font-weight:600;margin:0 0 .45em;line-height:1.35}
+.sub{font-size:clamp(1.02rem,2.7vw,1.2rem);color:var(--tinta-media);margin-bottom:1.9em}
+.lead{font-size:1.09rem}
+.tag{
+  display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--tinta-fraca);margin-bottom:1.1em;
+}
+
+/* Hero */
+.hero{padding:52px 0 44px}
+.hero h1{margin-bottom:.5em}
+
+/* CTA */
+.cta{
+  display:block;width:100%;text-align:center;
+  background:var(--destaque);color:#fff;text-decoration:none;
+  font-weight:700;font-size:1.06rem;line-height:1.3;
+  padding:19px 22px;border-radius:10px;
+  box-shadow:0 2px 0 var(--destaque-escuro);
+  transition:background .15s ease,transform .08s ease;
+}
+.cta:hover,.cta:focus-visible{background:var(--destaque-escuro)}
+.cta:active{transform:translateY(1px);box-shadow:0 1px 0 var(--destaque-escuro)}
+.cta-nota{
+  text-align:center;font-size:.85rem;color:var(--tinta-fraca);margin:.85em 0 0;
+}
+
+/* Faixa de prova */
+.faixa{background:var(--tinta);color:#fff;padding:22px 0}
+.faixa .wrap{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;text-align:center}
+.faixa div{flex:1 1 150px}
+.faixa b{display:block;font-size:1.45rem;font-weight:800;line-height:1.15}
+.faixa span{font-size:.83rem;color:#a8b3bf}
+
+/* Listas */
+ul.bullets{list-style:none;padding:0;margin:0}
+ul.bullets li{position:relative;padding-left:30px;margin-bottom:.85em}
+ul.bullets li::before{
+  content:"";position:absolute;left:6px;top:.62em;
+  width:8px;height:8px;border-radius:50%;background:var(--destaque);
+}
+
+/* Fases */
+.fase{
+  border-left:3px solid var(--borda);
+  padding:0 0 0 22px;margin:0 0 26px;position:relative;
+}
+.fase::before{
+  content:attr(data-n);
+  position:absolute;left:-16px;top:0;
+  width:29px;height:29px;border-radius:50%;
+  background:var(--tinta);color:#fff;
+  font-size:.85rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.fase h3{margin-bottom:.3em}
+.fase p{margin:0;color:var(--tinta-media)}
+.fase .dur{
+  display:inline-block;margin-top:.5em;font-size:.79rem;font-weight:600;
+  color:var(--tinta-fraca);border:1px solid var(--borda);
+  padding:2px 9px;border-radius:99px;background:var(--fundo);
+}
+
+/* Passos */
+.passos{display:grid;gap:14px;margin-top:8px}
+.passo{
+  background:var(--fundo);border:1px solid var(--borda);border-radius:12px;
+  padding:18px 20px;display:flex;gap:15px;align-items:flex-start;
+}
+.passo b{
+  flex:0 0 auto;width:27px;height:27px;border-radius:50%;
+  background:var(--destaque);color:#fff;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.passo p{margin:0}
+
+/* Depoimentos */
+.depo{
+  background:var(--fundo);border:1px solid var(--borda);border-radius:12px;
+  overflow:hidden;margin:0 0 20px;
+}
+.video{position:relative;width:100%;padding-top:56.25%;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.depo figcaption{padding:14px 18px;font-size:.92rem;color:var(--tinta-media)}
+.depo figcaption b{color:var(--tinta)}
+.grade-depo{display:grid;gap:20px}
+@media(min-width:640px){.grade-depo{grid-template-columns:1fr 1fr}}
+
+/* Zona lipolítica */
+.zona{
+  background:var(--tinta);color:#fff;border-radius:14px;
+  padding:26px 24px;margin:24px 0 0;
+}
+.zona h3{color:#fff;font-size:1rem;margin-bottom:.9em}
+.zona .faixas{display:grid;gap:16px;margin:0 0 18px}
+@media(min-width:560px){.zona .faixas{grid-template-columns:1fr 1fr}}
+.zona .faixa-n{
+  border:1px solid #333c46;border-radius:10px;padding:16px 18px;background:#1b2027;
+}
+.zona .faixa-n b{
+  display:block;font-size:1.55rem;font-weight:800;line-height:1.1;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+}
+.zona .faixa-n span{font-size:.85rem;color:#a8b3bf}
+.zona p{color:#c9d3dd;margin:0}
+.zona p:last-child{margin:0}
+
+/* Citação */
+.citacao{
+  border-left:4px solid var(--destaque);
+  padding:4px 0 4px 22px;margin:26px 0;
+}
+.citacao p{
+  font-size:clamp(1.08rem,2.9vw,1.28rem);line-height:1.45;
+  font-weight:600;letter-spacing:-.01em;margin:0 0 .6em;text-wrap:balance;
+}
+.citacao cite{font-style:normal;font-size:.88rem;color:var(--tinta-fraca)}
+
+/* Medos */
+.medos{display:grid;gap:14px;margin-top:8px}
+.medo{
+  background:var(--fundo);border:1px solid var(--borda);border-radius:12px;padding:18px 20px;
+}
+.medo h3{margin-bottom:.35em}
+.medo p{margin:0;color:var(--tinta-media)}
+
+/* Credenciais */
+.credenciais{
+  list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px;
+}
+.credenciais li{
+  position:relative;padding-left:26px;font-size:.95rem;color:var(--tinta-media);
+}
+.credenciais li::before{
+  content:"";position:absolute;left:0;top:.5em;
+  width:12px;height:7px;border-left:2px solid var(--destaque);
+  border-bottom:2px solid var(--destaque);transform:rotate(-45deg);
+}
+.credenciais li b{color:var(--tinta);font-weight:600}
+
+/* Relato de aluno */
+.relato{
+  background:var(--fundo);border:1px solid var(--borda);border-left:4px solid var(--destaque);
+  border-radius:12px;padding:22px 24px;margin:0 0 24px;
+}
+.relato .linha{font-size:1.12rem;font-weight:600;line-height:1.4;margin:0 0 .7em}
+.relato .quem{font-size:.9rem;color:var(--tinta-media);margin:0}
+.relato .quem b{color:var(--tinta)}
+
+/* Retrato do autor */
+.autor{display:grid;gap:24px;align-items:start}
+@media(min-width:640px){.autor{grid-template-columns:210px 1fr;gap:30px}}
+.retrato{margin:0}
+.retrato img{
+  display:block;width:100%;border-radius:14px;
+  aspect-ratio:1/1;object-fit:cover;background:var(--fundo-alt);
+}
+/* Logo do rodapé */
+.logo-rodape{max-width:230px;margin:0 0 18px}
+.logo-rodape img{display:block;width:100%;height:auto}
+
+/* Grade de módulos */
+table{width:100%;border-collapse:collapse;font-size:.94rem}
+.tabela-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--borda);vertical-align:top}
+th{font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;color:var(--tinta-fraca)}
+td.val{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
+tr.total td{border-bottom:none;border-top:2px solid var(--tinta);font-weight:800;padding-top:14px}
+
+/* Preço */
+.preco{text-align:center;margin:34px 0 10px}
+.preco .antes{font-size:1.02rem;color:var(--tinta-fraca)}
+.preco .antes s{text-decoration-thickness:2px}
+.preco .agora{
+  font-size:clamp(2.3rem,9vw,3.5rem);font-weight:800;
+  letter-spacing:-.03em;line-height:1.05;margin:.12em 0 .1em;
+}
+.preco .parcela{color:var(--tinta-media)}
+
+/* Garantia */
+.garantia{
+  border:2px solid var(--tinta);border-radius:14px;
+  padding:28px 24px;background:var(--fundo);
+}
+.garantia h2{margin-bottom:.5em}
+.selo{
+  display:inline-block;background:var(--tinta);color:#fff;
+  font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 12px;border-radius:99px;margin-bottom:14px;
+}
+
+/* FAQ */
+.faq{border-top:1px solid var(--borda)}
+.faq details{border-bottom:1px solid var(--borda)}
+.faq summary{
+  cursor:pointer;padding:17px 34px 17px 0;font-weight:600;
+  list-style:none;position:relative;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";position:absolute;right:6px;top:50%;
+  width:9px;height:9px;margin-top:-6px;
+  border-right:2px solid var(--tinta-fraca);border-bottom:2px solid var(--tinta-fraca);
+  transform:rotate(45deg);transition:transform .18s ease;
+}
+.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-2px}
+.faq .resposta{padding:0 0 18px;color:var(--tinta-media)}
+
+/* Barra fixa */
+.barra{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);
+  border-top:1px solid var(--borda);
+  padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+  transform:translateY(110%);transition:transform .25s ease;
+}
+.barra.visivel{transform:translateY(0)}
+.barra .interno{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:14px}
+.barra .valor{flex:0 0 auto;line-height:1.15}
+.barra .valor b{display:block;font-size:1.06rem;font-weight:800}
+.barra .valor span{font-size:.74rem;color:var(--tinta-fraca)}
+.barra .cta{flex:1 1 auto;padding:14px 16px;font-size:.98rem}
+@media(max-width:420px){.barra .valor{display:none}}
+
+/* Rodapé */
+footer{background:var(--tinta);color:#8e99a5;padding:34px 0;font-size:.86rem}
+footer strong{color:#fff;font-weight:600}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+  .barra{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 1. HERO -->
+<header class="hero">
+  <div class="wrap">
+    <p class="tag">Método P.E.S.O. · Gallo Personal Systems</p>
+    <h1>Personal sem carteira de clientes: você monta seu primeiro programa de emagrecimento de R$&nbsp;4.000 em 8 semanas.</h1>
+    <p class="sub">O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.</p>
+    <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
+    <p class="cta-nota">Acesso por 1 ano · Garantia de 30 dias</p>
+  </div>
+</header>
+
+<!-- 2. FAIXA DE PROVA -->
+<div class="faixa">
+  <div class="wrap">
+    <div><b>+1.000</b><span>profissionais já aplicaram</span></div>
+    <div><b>36 anos</b><span>de prática do Professor Gallo</span></div>
+    <div><b>5 fases</b><span>com duração definida</span></div>
+  </div>
+</div>
+
+<!-- CREDENCIAL -->
+<section>
+  <div class="wrap rv">
+    <div class="autor">
+      <figure class="retrato">
+        <img src="foto-gallo.jpg" alt="Professor José Carlos Gallo" loading="lazy"
+             onerror="this.closest('.retrato').remove()">
+      </figure>
+      <div>
+        <p class="lead">Sou o professor <strong>José Carlos &ldquo;Gallo&rdquo; Lima de Souza</strong>, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.</p>
+
+        <p>Minha mãe voltou do médico um dia e me disse que a pressão, o colesterol e a glicemia dela estavam altos, e que tudo aquilo era porque ela precisava emagrecer. Ela tinha contado ao médico que tinha um filho formado em educação física, e que esse filho ia cuidar disso. Naquele momento eu percebi que a faculdade tinha me ensinado atletismo, voleibol, basquete e natação, e não tinha me ensinado a emagrecer ninguém. Quem estava esperando por mim era a minha mãe, dentro de um grupo de risco.</p>
+
+        <p>Comecei a estudar por conta própria, sem saber direito por onde. Dois meses depois recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana. Foi ali que eu encontrei o que estava faltando, e foi dali que nasceu o Método P.E.S.O. A especialização na Alemanha, a pós em fisiologia do exercício e os 36 anos de prática vieram depois, todos construídos em cima daquele susto.</p>
+
+    <ul class="credenciais">
+      <li><b>CREF 004702-G/BA</b></li>
+      <li>Um dos <b>precursores do Personal Training no Brasil</b></li>
+      <li>Especialização em <b>Avaliação Funcional e Controle da Atividade Física</b>, na Alemanha</li>
+      <li>Pós-graduação em <b>Fisiologia do Exercício e Avaliação Morfo-Funcional</b></li>
+      <li>Palestrante em universidades e congressos no Brasil e no exterior</li>
+      <li>Criador do <b>GPA Pro</b>, o software de avaliação corporal e prescrição de treinamento que acompanha este curso</li>
+    </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. DOR -->
+<section class="alt">
+  <div class="wrap rv">
+    <h2>Talvez você</h2>
+    <p>Talvez você tenha aberto o app do banco esta semana e feito a conta de novo. Quantas horas-aula faltam para fechar o mês.</p>
+    <p>Você soma. Divide. O número não muda.</p>
+    <p>Foram anos de faculdade para chegar até aqui. Estágio, prova prática, TCC. E hoje o seu trabalho é vendido em blocos de uma hora, como se fosse tempo de estacionamento.</p>
+    <p>Talvez você já tenha visto um aluno emagrecer seis quilos e recuperar dez. Talvez tenha assistido a um colega menos preparado que você encher a agenda enquanto a sua tem buraco na terça e na quinta.</p>
+    <p>E talvez a parte mais pesada seja essa: você não sabe dizer o que ele faz de diferente.</p>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section>
+  <div class="wrap rv">
+    <h2>Tudo isso vem de uma causa só</h2>
+    <p>Você não tem um método de emagrecimento que funcione sempre. Você tem exercícios, tem leitura, tem experiência. Falta o processo que liga tudo isso e entrega o mesmo resultado em alunos diferentes.</p>
+    <p>Sem método, você vende a única coisa que sobra para vender. A sua hora.</p>
+    <p>E hora tem teto. Você pode encher a agenda inteira e ainda assim não fechar a conta, porque o dia acaba.</p>
+  </div>
+</section>
+
+<!-- 4. VIRADA -->
+<section class="alt">
+  <div class="wrap rv">
+    <h2>O que muda quando isso resolve</h2>
+    <p>E se você tivesse um protocolo escrito, com cinco fases definidas, que você aplica no aluno novo já na primeira consulta?</p>
+    <p>E se você conseguisse dizer, com a segurança de quem já viu acontecer, em qual fase o aluno vai estar na semana 4 e o que a balança dele vai mostrar na semana 8?</p>
+    <p>Fim de improvisar o treino no vestiário.</p>
+    <p>Fim de perder o aluno no terceiro mês.</p>
+    <p>Fim de justificar o seu preço por hora enquanto entrega um trabalho que vale um programa inteiro.</p>
+    <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
+  </div>
+</section>
+
+<!-- 6a. PROVA SOCIAL -->
+<section>
+  <div class="wrap rv">
+    <h2>Quem já aplicou</h2>
+    <div class="grade-depo">
+      <figure class="depo">
+        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/-310l7IwlxI" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <figcaption><b>Profa. Carla Borges</b> — Irati, PR. Emagreceu 14 kg na aluna Jaci.</figcaption>
+      </figure>
+      <figure class="depo">
+        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/ZIIFqX2z6SM" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <figcaption><b>Professor Paulo Roberto.</b> Duvidava do método antes de aplicar.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 5. COMO FUNCIONA -->
+<section class="alt">
+  <div class="wrap rv">
+    <h2>As cinco fases do Método P.E.S.O.</h2>
+    <p>P.E.S.O. quer dizer <strong>Programa de Emagrecimento Saudável Orientado</strong>. O nome diz o que a coisa é. Um programa, com fases, orientado por número.</p>
+    <p>O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases. Cada uma tem objetivo próprio e traz avaliação, programa de exercícios e orientação alimentar personalizados. A periodização garante que o corpo receba o estímulo certo do começo ao fim.</p>
+
+    <p><strong>Cada fase corresponde a um módulo do curso.</strong> Você assiste ao módulo e aplica a fase no seu aluno, na mesma semana.</p>
+
+    <div class="fase" data-n="1">
+      <h3>Preparação para o emagrecimento</h3>
+      <p>A fase de arrumar a casa. Antes de reprogramar o metabolismo, o corpo precisa estar em condições de responder. Aqui você corrige a saúde intestinal, eleva o VO<sub>2</sub>máx até no mínimo 42 ml/kg/min, condiciona a via lipolítica, melhora a qualidade do sono, reduz a resistência à insulina e calcula a hidratação adequada.</p>
+      <span class="dur">14 a 21 dias</span>
+    </div>
+    <div class="fase" data-n="2">
+      <h3>Ensinando o corpo a queimar gordura</h3>
+      <p>O exercício passa a ser modulado para alterar o componente gordo. Intensidade e volume do aeróbico na zona lipolítica são ajustados para maximizar a oxidação de gordura, e o treino de força segura a massa muscular no lugar.</p>
+      <span class="dur">8 a 10 dias</span>
+    </div>
+    <div class="fase" data-n="3">
+      <h3>Turbinando a queima de gordura</h3>
+      <p>O metabolismo já está mais eficiente e o corpo mais condicionado. A periodização introduz estímulos novos, com variação de intensidade e volume, para elevar a taxa metabólica e a queima. A massa magra continua preservada.</p>
+      <span class="dur">10 a 14 dias</span>
+    </div>
+    <div class="fase" data-n="4">
+      <h3>Queimando gordura 24 horas</h3>
+      <p>A aceleração continua, e a chave é a progressão. O corpo do aluno já passou por adaptação significativa, e agora suporta estímulos mais avançados que mantêm a perda de gordura em ritmo acelerado.</p>
+      <span class="dur">12 a 14 dias</span>
+    </div>
+    <div class="fase" data-n="5">
+      <h3>Manutenção inteligente</h3>
+      <p>A fase que decide se o resultado fica. Atingido o peso, o foco muda para consolidar. Treino e alimentação passam para um modelo de manutenção sustentável, os novos hábitos se solidificam, e o ciclo de reprogramação fecha com o aluno capaz de se manter sozinho.</p>
+      <span class="dur">5 a 8 dias</span>
+    </div>
+
+    <p>Antes das fases, dois módulos de introdução explicam o terreno: como o emagrecimento funciona e o papel dos índices glicêmicos. Você entende o porquê antes de aplicar o como.</p>
+
+    <h2 style="margin-top:1.8em">O seu caminho, em três passos</h2>
+    <div class="passos">
+      <div class="passo"><b>1</b><p>Você entra no curso hoje.</p></div>
+      <div class="passo"><b>2</b><p>Você aplica as cinco fases no seu próximo aluno.</p></div>
+      <div class="passo"><b>3</b><p>Você cobra por programa, e não por hora.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5b. COMO O EXERCÍCIO É PRESCRITO -->
+<section>
+  <div class="wrap rv">
+    <h2>Como o exercício é prescrito</h2>
+    <p>Prescrição de exercício tem seis componentes. O Método P.E.S.O. define cada um antes do aluno pisar na academia.</p>
+
+    <div class="passos">
+      <div class="passo"><b>1</b><p><strong>Modalidade.</strong> O tipo de exercício, escolhido pelo objetivo. Para queimar gordura, o trabalho aeróbico entra em primeiro plano.</p></div>
+      <div class="passo"><b>2</b><p><strong>Gasto calórico.</strong> Quanta energia a sessão gasta, para o balanço energético fechar negativo.</p></div>
+      <div class="passo"><b>3</b><p><strong>Intensidade.</strong> A variável mais crítica. É ela que decide qual substrato o corpo usa como combustível.</p></div>
+      <div class="passo"><b>4</b><p><strong>Frequência semanal.</strong> Quantas vezes o estímulo se repete. Para emagrecimento, o método trabalha com 5 a 7 dias.</p></div>
+      <div class="passo"><b>5</b><p><strong>Duração.</strong> O tempo de cada sessão de treino.</p></div>
+      <div class="passo"><b>6</b><p><strong>Progressão.</strong> O aumento planejado das variáveis, pelo princípio da sobrecarga, para o resultado não estagnar.</p></div>
+    </div>
+
+    <div class="zona">
+      <h3>A Zona Lipolítica</h3>
+      <p style="margin-bottom:1.1em">Queimar gordura exige oxigênio. Por isso o trabalho acontece na via aeróbia. Dentro dela existe uma faixa específica onde a gordura vira o combustível principal, e o método trabalha nessa faixa.</p>
+      <div class="faixas">
+        <div class="faixa-n"><b>60% a 70%</b><span>da Frequência Cardíaca Máxima</span></div>
+        <div class="faixa-n"><b>42% a 56%</b><span>da reserva do VO<sub>2</sub>máx</span></div>
+      </div>
+      <p>Treinar nessa faixa mantém a gordura corporal como combustível principal, melhora o condicionamento cardiovascular e estimula a produção de irisina. Tudo isso sem o estresse catabólico de um treino intenso demais.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5c. O MODELO DE NEGÓCIO -->
+<section class="alt">
+  <div class="wrap rv">
+    <h2>Por que isso muda o seu preço</h2>
+
+    <p>O P.E.S.O. carrega junto um modelo de negócio, e a filosofia dele cabe numa frase: quem garante o resultado pode cobrar por ele.</p>
+
+    <div class="citacao">
+      <p>O emagrecimento efetivo é a soma do Exercício Físico Correto com a Nutrição Correta. Isso é igual a Garantia de Resultado, e Garantia de Resultado é igual a Valorização do Profissional.</p>
+      <cite>Prof. Dr. José Carlos Gallo</cite>
+    </div>
+
+    <p>Com um método que funciona na mão, você para de vender hora e passa a vender transformação. É por isso que os profissionais formados cobram de R$&nbsp;4.000 a R$&nbsp;9.000 por um programa completo de 60 dias.</p>
+
+    <h2 style="margin-top:1.8em">Os três medos que isso resolve</h2>
+    <div class="medos">
+      <div class="medo">
+        <h3>Como conseguir cliente</h3>
+        <p>O resultado do aluno vira propaganda. Quem emagrece 15 quilos conta para todo mundo, e a indicação chega sozinha.</p>
+      </div>
+      <div class="medo">
+        <h3>Como convencer a pagar</h3>
+        <p>A garantia de resultado justifica o investimento. O aluno entende o que recebe e por quanto tempo.</p>
+      </div>
+      <div class="medo">
+        <h3>Como entregar o prometido</h3>
+        <p>O método dá o passo a passo. Você aplica as cinco fases e sabe o que acontece em cada uma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6b. PROVA SOCIAL -->
+<section>
+  <div class="wrap rv">
+    <h2>Mais quem aplicou</h2>
+    <div class="grade-depo">
+      <figure class="depo">
+        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/YiF7HzVdNY8" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <figcaption><b>Personal Gonzaga.</b> 10 kg de gordura em apenas 16 dias com o Método P.E.S.O.</figcaption>
+      </figure>
+      <figure class="depo">
+        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/hnbKFJGG_lI" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <figcaption><b>Andrea Luiz</b> — Douradina, PR.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRASTE -->
+<section class="alt">
+  <div class="wrap rv">
+    <h2>O que isso custaria pelo caminho antigo</h2>
+    <p>Uma pós-graduação em fisiologia do exercício e emagrecimento custa entre R$&nbsp;8.000 e R$&nbsp;15.000, e leva de doze a dezoito meses. No fim, você sai com teoria, e a montagem do protocolo continua sendo sua.</p>
+    <p>Uma mentoria individual com quem já tem método sai por R$&nbsp;3.000 a R$&nbsp;6.000, quando a pessoa aceita.</p>
+    <p>E existe o caminho de sempre: tentativa e erro. Esse é o mais caro. Você paga com anos de agenda pela metade e com os alunos que desistiram no meio do caminho.</p>
+  </div>
+</section>
+
+<!-- PROVA -->
+<section>
+  <div class="wrap rv">
+    <h2>A prova</h2>
+    <div class="relato">
+      <p class="linha">&ldquo;Hoje caiu bem. 5,2 quilos a menos.&rdquo;</p>
+      <p class="quem">Diego, aluno do personal <b>Bruno Rigoni</b>, depois de 8 dias aplicando o Método P.E.S.O. Relato enviado por mensagem, no oitavo dia de treinamento.</p>
+    </div>
+    <p>Nos anos 80, uma aluna me procurou precisando perder 15 quilos em três meses para o casamento dela. Eu garanti o resultado e cobrei o equivalente a R$&nbsp;10.000 por 28 sessões. Ela chegou ao dia com o peso que queria. A lógica que usei ali é a mesma que está neste curso.</p>
+
+    <p>Mais de mil profissionais já aplicaram o Método P.E.S.O. Eles cobram de R$&nbsp;4.000 a R$&nbsp;9.000 por um programa completo de 60 dias.</p>
+    <p>Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.</p>
+    <div style="margin-top:26px">
+      <figure class="depo">
+        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/iSPuO-jtcvg" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <figcaption><b>João Pedro</b> — Ceará.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 7. O QUE VOCÊ RECEBE -->
+<section class="alt">
+  <div class="wrap rv">
+    <h2>O que você recebe</h2>
+
+    <ul class="bullets">
+      <li>Você sabe em qual fase o aluno está e o que vem depois, antes de começar.</li>
+      <li>Você calcula a orientação alimentar e a quantidade de água por número, sem chutar.</li>
+      <li>Você modula o programa de treinamento junto com o tipo de proteína de cada fase.</li>
+      <li>Você entrega resultado sem depender de remédio, de suplemento ou de dieta de fome.</li>
+      <li>Você troca a venda de hora-aula pela venda de programa fechado.</li>
+      <li>Você tem um preço que se sustenta, porque o que você entrega tem começo, meio e fim.</li>
+      <li>O aluno emagrece e conta para os amigos. A sua agenda enche pela porta certa.</li>
+      <li>Você monta avaliação, prescrição e periodização dentro do GPA Pro, em minutos.</li>
+      <li>Você deixa de perder o aluno no terceiro mês, quando o resultado costuma travar.</li>
+      <li>Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.</li>
+      <li>Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.</li>
+    </ul>
+
+  </div>
+</section>
+
+<!-- 8. OFERTA -->
+<section>
+  <div class="wrap rv">
+    <h2>A oferta</h2>
+    <div class="tabela-scroll">
+      <table>
+        <thead><tr><th>Item</th><th class="val">Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Metodologia P.E.S.O. — as cinco fases</td><td class="val">R$ 1.497</td></tr>
+          <tr><td>Mentoria técnica ao vivo no Zoom com o Professor Gallo</td><td class="val">R$ 997</td></tr>
+          <tr><td>Metodologia de Vendas — aulas mais manual em PDF</td><td class="val">R$ 697</td></tr>
+          <tr><td>Materiais de venda prontos</td><td class="val">R$ 397</td></tr>
+          <tr><td>1 ano do <strong>GPA Pro</strong> — software de avaliação, prescrição e periodização</td><td class="val">R$ 1.188</td></tr>
+          <tr class="total"><td>Total</td><td class="val">R$ 4.776</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="preco">
+      <p class="antes">O Método P.E.S.O. já foi vendido por <s>R$&nbsp;1.996,00</s></p>
+      <p class="agora">R$ 597</p>
+      <p class="parcela">Parcelado. Acesso por 1 ano.</p>
+    </div>
+
+    <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
+    <p class="cta-nota">Um único programa vendido a R$&nbsp;4.000 devolve o que você investiu quase sete vezes.</p>
+  </div>
+</section>
+
+<!-- 9. GARANTIA -->
+<section class="alt">
+  <div class="wrap rv">
+    <div class="garantia">
+      <span class="selo">Garantia de 30 dias</span>
+      <h2>Você entra, assiste, aplica em um aluno.</h2>
+      <p>Se em 30 dias você achar que o método não vai mudar o seu jeito de trabalhar, você pede o reembolso e recebe o valor de volta. Sem formulário, sem entrevista de saída, sem pergunta atravessada.</p>
+      <p style="margin:0">O risco fica comigo. Você já carregou risco suficiente montando treino no escuro.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FAQ -->
+<section>
+  <div class="wrap rv">
+    <h2>Perguntas que chegam sempre</h2>
+    <div class="faq">
+      <details>
+        <summary>Preciso ser nutricionista para aplicar a parte alimentar?</summary>
+        <div class="resposta">O P.E.S.O. trabalha com orientação alimentar geral, dentro do que a legislação permite ao profissional de educação física. O método foi construído por quem é formado nas três áreas — educação física, fisioterapia e nutrição — e por isso conhece o limite de cada uma. A prescrição de dieta individualizada segue sendo atribuição do nutricionista.</div>
+      </details>
+      <details>
+        <summary>O método usa remédio ou suplemento?</summary>
+        <div class="resposta">Não. O P.E.S.O. trabalha com exercício modulado e orientação alimentar calculada. Nenhuma das cinco fases depende de medicamento ou de suplementação.</div>
+      </details>
+      <details>
+        <summary>Quanto tempo leva para assistir tudo?</summary>
+        <div class="resposta">As aulas têm de 15 a 20 minutos. Dá para assistir entre um aluno e outro.</div>
+      </details>
+      <details>
+        <summary>Por quanto tempo tenho acesso ao curso?</summary>
+        <div class="resposta">Um ano.</div>
+      </details>
+      <details>
+        <summary>O GPA Pro é meu para sempre?</summary>
+        <div class="resposta">A assinatura é de um ano, sem custo. Depois disso você decide se continua.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 11. CTA FINAL -->
+<section class="alt">
+  <div class="wrap rv">
+    <h2>Decida uma coisa só</h2>
+    <p>Você pode fechar esta página e continuar vendendo hora.</p>
+    <p>Dá para viver assim. Muita gente vive.</p>
+    <p>Ou você aplica as cinco fases do P.E.S.O. no seu próximo aluno e descobre em oito semanas o que muda quando o resultado deixa de ser sorte.</p>
+    <p>São R$&nbsp;597. O primeiro programa que você vender paga isso várias vezes.</p>
+    <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
+    <p class="cta-nota">Garantia de 30 dias. Acesso por 1 ano.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo-rodape"><img src="logo-gallo.png" alt="Gallo Personal Systems" loading="lazy" onerror="this.closest('.logo-rodape').remove()"></div>
+    <p style="margin-bottom:.4em"><strong>Instituto Gallo Personal Systems</strong></p>
+    <p style="margin:0">Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado. Prof. José Carlos Gallo.</p>
+  </div>
+</footer>
+
+<!-- BARRA FIXA -->
+<div class="barra" id="barra">
+  <div class="interno">
+    <div class="valor"><b>R$ 597</b><span>antes R$ 1.996</span></div>
+    <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   LINK DO CHECKOUT — alimenta os seis botoes da pagina. Troque so aqui.
+   ========================================================================== */
+var CHECKOUT_URL = "https://pay.kiwify.com.br/82Pzoh8";
+
+document.querySelectorAll(".js-checkout").forEach(function(a){ a.href = CHECKOUT_URL; });
+
+/* Barra fixa aparece depois do hero */
+(function(){
+  var barra = document.getElementById("barra");
+  var hero = document.querySelector(".hero");
+  if(!barra || !hero || !("IntersectionObserver" in window)){ if(barra) barra.classList.add("visivel"); return; }
+  new IntersectionObserver(function(e){
+    barra.classList.toggle("visivel", !e[0].isIntersecting);
+  },{threshold:0}).observe(hero);
+})();
+
+/* Reveal suave no scroll */
+(function(){
+  var alvos = document.querySelectorAll(".rv");
+  if(!("IntersectionObserver" in window)){
+    alvos.forEach(function(el){ el.classList.add("on"); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add("on"); obs.unobserve(e.target); }
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.06});
+  alvos.forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+</body>
+</html>
