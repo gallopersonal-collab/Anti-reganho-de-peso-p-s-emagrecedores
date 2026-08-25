@@ -31,6 +31,7 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 - Você sabe em qual fase o aluno está e o que vem depois, antes de começar.
 - Você calcula a orientação alimentar e a quantidade de água por número, sem chutar.
 - Você modula o programa de treinamento junto com o tipo de proteína de cada fase.
+- Você prescreve dentro da Zona Lipolítica, entre 60% e 70% da FCmáx, com critério em vez de chute.
 - Você entrega resultado sem depender de Ozempic, de suplemento ou de dieta de fome.
 - Você troca a venda de hora-aula pela venda de programa fechado.
 - Você tem um preço que se sustenta, porque o que você entrega tem começo, meio e fim.
@@ -100,6 +101,25 @@ O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo dif
 **Fase 5 — Metabolismo reprogramado.** Fecha o ciclo e fixa o organismo na nova configuração. Esta fase é o que segura o resultado e evita o efeito sanfona. Dura de 5 a 8 dias.
 
 Antes das fases, dois módulos de introdução explicam o terreno: como o emagrecimento funciona e o papel dos índices glicêmicos. Você entende o porquê antes de aplicar o como.
+
+### Como o exercício é prescrito
+
+Prescrição de exercício tem seis componentes. O Método P.E.S.O. define cada um antes do aluno pisar na academia.
+
+1. **Modalidade.** O tipo de exercício, escolhido pelo objetivo. Para queimar gordura, o trabalho aeróbico entra em primeiro plano.
+2. **Gasto calórico.** Quanta energia a sessão gasta, para o balanço energético fechar negativo.
+3. **Intensidade.** A variável mais crítica. É ela que decide qual substrato o corpo usa como combustível.
+4. **Frequência semanal.** Quantas vezes o estímulo se repete. Para emagrecimento, o método trabalha com 5 a 7 dias.
+5. **Duração.** O tempo de cada sessão de treino.
+6. **Progressão.** O aumento planejado das variáveis, pelo princípio da sobrecarga, para o resultado não estagnar.
+
+**A Zona Lipolítica.** Queimar gordura exige oxigênio. Por isso o trabalho acontece na via aeróbia. Dentro dela existe uma faixa específica onde a gordura vira o combustível principal, e o método trabalha nessa faixa:
+
+- **60% a 70%** da Frequência Cardíaca Máxima
+- **42% a 56%** da reserva do VO2máx
+
+Treinar nessa faixa mantém a gordura corporal como combustível principal, melhora o condicionamento cardiovascular e estimula a produção de irisina. Tudo isso sem o estresse catabólico de um treino intenso demais.
+
 
 ### O seu caminho, em três passos
 
@@ -280,6 +300,7 @@ Antes das fases, dois módulos de introdução explicam o terreno: como o emagre
 - Você sabe em qual fase o aluno está e o que vem depois, antes de começar.
 - Você calcula a orientação alimentar e a quantidade de água por número, sem chutar.
 - Você modula o programa de treinamento junto com o tipo de proteína de cada fase.
+- Você prescreve dentro da Zona Lipolítica, entre 60% e 70% da FCmáx, com critério em vez de chute.
 - Você entrega resultado sem depender de Ozempic, de suplemento ou de dieta de fome.
 - Você troca a venda de hora-aula pela venda de programa fechado.
 - Você tem um preço que se sustenta, porque o que você entrega tem começo, meio e fim.
