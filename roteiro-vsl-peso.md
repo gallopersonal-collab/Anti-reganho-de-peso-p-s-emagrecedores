@@ -1,8 +1,8 @@
 # VSL — Método P.E.S.O.
 
 Gerado pela skill `roteiro-vsl`. Voz: primeira pessoa, Professor José Carlos Gallo.
-Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10 minutos.
-Dois slots pendentes, marcados no texto: a virada pessoal (Bloco 2) e a escassez real (Bloco 8).
+Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10min30.
+Um slot pendente, marcado no texto: a escassez real (Bloco 8).
 
 ---
 
@@ -16,25 +16,31 @@ Eu vou te mostrar como montar um programa de emagrecimento que tira quinze quilo
 
 ---
 
-## BLOCO 2 — HISTÓRIA / MECANISMO — ~1min10
+## BLOCO 2 — HISTÓRIA / MECANISMO — ~1min40
 
-Meu nome é José Carlos Gallo. Sou formado em educação física, fisioterapia e nutrição.
+Meu nome é José Carlos Gallo. Sou formado em educação física, fisioterapia e nutrição, e estou nisso há trinta e seis anos.
 
-Estou nisso há trinta e seis anos. Fui um dos primeiros personal trainers do Brasil, numa época em que quase ninguém sabia o que era isso.
+Mas eu quero te contar como isso começou.
 
-Eu fui estudar avaliação funcional na Alemanha. Voltei com aparelho, com protocolo e com número.
+Minha mãe voltou do médico um dia e me disse assim:
 
-E mesmo assim eu perdia aluno.
+"Meu filho, acabei de chegar do médico. Ele disse que a minha pressão está alta, que o meu colesterol e a minha glicemia também estão altos, e que tudo isso é porque eu estou gorda e preciso emagrecer. Aí eu falei para ele que eu tenho um filho formado em educação física, e que você vai me emagrecer."
 
-**[SUA VIRADA AQUI]** — conte, em três ou quatro frases, o caso do aluno que te fez perceber que faltava um método. Quem era. O que aconteceu com ele. O que você entendeu naquele dia. Fale como se estivesse contando para um amigo na mesa.
+Eu fiquei mudo.
 
-Foi ali que eu parei de tratar emagrecimento como treino e passei a tratar como programa. Com fase, com começo e com fim.
+Porque naquele momento eu percebi que a faculdade não tinha me preparado para emagrecer ninguém. Ela me ensinou atletismo, voleibol, basquete e natação. Emagrecimento, não.
 
-Foi assim que nasceu o P.E.S.O.
+E não era um aluno qualquer esperando por mim. Era a minha mãe. Grupo de risco. Contando comigo.
 
-`[NOTA DE GRAVAÇÃO]` Continue no rosto. Baixe o ritmo aqui, este bloco é conversa. Na parte da Alemanha, entre com uma foto sua da época ou um diploma, se você tiver. Na virada, volte para o rosto e olhe para a câmera.
+Me bateu um desespero que eu não desejo para você.
 
----
+Comecei a estudar por conta própria, sozinho, sem saber direito por onde começar. Dois meses depois eu recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana.
+
+Foi ali que eu encontrei o que estava faltando. E foi dali que saiu o Método P.E.S.O.
+
+Depois vieram a especialização na Alemanha, a pós em fisiologia do exercício, e trinta e seis anos aplicando isso em gente de verdade.
+
+`[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa, do começo ao fim deste bloco. Na fala da sua mãe, mude o tom de voz — você está imitando ela, e a pessoa precisa ouvir que é outra pessoa falando. Depois de "Eu fiquei mudo", pare de verdade. Conte dois segundos em silêncio antes de continuar. Se você tiver uma foto da sua mãe daquela época, coloque na tela enquanto fala a frase dela e tire logo depois. Não force emoção. A história já é forte, e ela funciona melhor contada com calma.
 
 ## BLOCO 3 — AGITAÇÃO DO PROBLEMA — ~1min25
 
@@ -190,8 +196,8 @@ O botão está aí embaixo.
 
 ## Duração total estimada
 
-**~10 minutos**, contando os dois slots preenchidos.
+**~10min30**, com o Bloco 8 fora. Se você usar a escassez, some mais ~25s.
 
 ## O que gravar primeiro
 
-Grave o **Bloco 2**, a sua história, antes de qualquer outro. É o único bloco que ninguém escreve por você, é o mais difícil de soar natural, e é ele que decide se a pessoa fica até o Bloco 6. Grave três vezes seguidas e fique com a terceira.
+Grave o **Bloco 2**, a história da sua mãe, antes de qualquer outro. É o bloco que decide se a pessoa fica até a oferta, e é o mais difícil de soar natural. Grave três vezes seguidas e fique com a terceira. Se na segunda ou na terceira você mudar uma palavra sem querer, deixe mudada — você conhece essa história melhor que o roteiro.
