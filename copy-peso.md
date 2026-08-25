@@ -44,7 +44,7 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 
 ### Quem está falando
 
-Sou José Carlos Gallo, professor de educação física. Formei personais que hoje cobram de R$ 4.000 a R$ 10.000 por um único programa de emagrecimento.
+Sou o professor José Carlos Gallo, fundador da Gallo Personal Systems. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.
 
 ### Talvez você
 
@@ -86,15 +86,15 @@ P.E.S.O. quer dizer **Programa de Emagrecimento Saudável Orientado**. O nome di
 
 O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.
 
-**Fase 01.** Você define os tipos de proteína e modula o programa de treinamento para o ponto em que o aluno está. Calcula a orientação alimentar e a quantidade de água por número.
+**Fase 1 — O primeiro passo para o emagrecimento.** A reprogramação inicial do metabolismo. Você define os tipos de proteína, modula o treino para o ponto em que o aluno está, e calcula a orientação alimentar e a quantidade de água por número. Dura de 14 a 21 dias.
 
-**Fase 02.** [INSERIR UMA LINHA — o que muda para o aluno nesta fase]
+**Fase 2 — Ensinando o corpo a queimar gordura.** O organismo é condicionado a usar gordura como combustível. Dura de 8 a 10 dias.
 
-**Fase 03.** [INSERIR UMA LINHA — o que muda para o aluno nesta fase]
+**Fase 3 — Turbinando a queima de gordura.** A massa magra aumenta, e a queima acelera junto. Dura de 10 a 14 dias.
 
-**Fase 04.** [INSERIR UMA LINHA — o que muda para o aluno nesta fase]
+**Fase 4 — Queimando gordura 24 horas.** O metabolismo passa a queimar gordura o dia inteiro, inclusive dormindo. Dura de 12 a 14 dias.
 
-**Fase 05.** Reprogramação concluída. O metabolismo do aluno volta a operar no padrão de normalidade, e o peso perdido para de querer voltar.
+**Fase 5 — Metabolismo reprogramado.** Fecha o ciclo e fixa o organismo na nova configuração. Esta fase é o que segura o resultado e evita o efeito sanfona. Dura de 5 a 8 dias.
 
 Antes das fases, dois módulos de introdução explicam o terreno: como o emagrecimento funciona e o papel dos índices glicêmicos. Você entende o porquê antes de aplicar o como.
 
@@ -122,7 +122,7 @@ Não vou pedir que você acredite em mim.
 
 [INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
 
-A média que os personais formados pelo P.E.S.O. cobram por programa fica entre R$ 4.000 e R$ 5.000. [INSERIR: quantos personais já passaram pelo método] Alguns já fecharam programa por R$ 10.000.
+Mais de mil profissionais já aplicaram o Método P.E.S.O. A média que eles cobram por programa fica entre R$ 4.000 e R$ 5.000. Alguns já fecharam programa por R$ 10.000.
 
 Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.
 
@@ -190,7 +190,7 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 
 ---
 
-Sou José Carlos Gallo, professor de educação física. Formei personais que hoje cobram de R$ 4.000 a R$ 10.000 por um único programa de emagrecimento.
+Sou o professor José Carlos Gallo, fundador da Gallo Personal Systems. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.
 
 ---
 
@@ -242,15 +242,15 @@ P.E.S.O. quer dizer **Programa de Emagrecimento Saudável Orientado**. O nome di
 
 O emagrecimento do aluno acontece por etapas, e cada etapa pede um estímulo diferente. O P.E.S.O. organiza isso em cinco fases.
 
-**Fase 01.** Você define os tipos de proteína e modula o programa de treinamento para o ponto em que o aluno está. Calcula a orientação alimentar e a quantidade de água por número.
+**Fase 1 — O primeiro passo para o emagrecimento.** A reprogramação inicial do metabolismo. Você define os tipos de proteína, modula o treino para o ponto em que o aluno está, e calcula a orientação alimentar e a quantidade de água por número. Dura de 14 a 21 dias.
 
-**Fase 02.** [INSERIR UMA LINHA]
+**Fase 2 — Ensinando o corpo a queimar gordura.** O organismo é condicionado a usar gordura como combustível. Dura de 8 a 10 dias.
 
-**Fase 03.** [INSERIR UMA LINHA]
+**Fase 3 — Turbinando a queima de gordura.** A massa magra aumenta, e a queima acelera junto. Dura de 10 a 14 dias.
 
-**Fase 04.** [INSERIR UMA LINHA]
+**Fase 4 — Queimando gordura 24 horas.** O metabolismo passa a queimar gordura o dia inteiro, inclusive dormindo. Dura de 12 a 14 dias.
 
-**Fase 05.** Reprogramação concluída. O metabolismo do aluno volta a operar no padrão de normalidade, e o peso perdido para de querer voltar.
+**Fase 5 — Metabolismo reprogramado.** Fecha o ciclo e fixa o organismo na nova configuração. Esta fase é o que segura o resultado e evita o efeito sanfona. Dura de 5 a 8 dias.
 
 Antes das fases, dois módulos de introdução explicam o terreno: como o emagrecimento funciona e o papel dos índices glicêmicos. Você entende o porquê antes de aplicar o como.
 
@@ -298,7 +298,7 @@ E existe o caminho de sempre: tentativa e erro. Esse é o mais caro. Você paga 
 
 [INSERIR PRINT — conversa de aluno, tela de balança ou comprovante de venda de programa]
 
-A média que os personais formados pelo P.E.S.O. cobram por programa fica entre R$ 4.000 e R$ 5.000. Alguns já fecharam programa por R$ 10.000.
+Mais de mil profissionais já aplicaram o Método P.E.S.O. A média que eles cobram por programa fica entre R$ 4.000 e R$ 5.000. Alguns já fecharam programa por R$ 10.000.
 
 Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.
 
