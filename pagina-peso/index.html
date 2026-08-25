@@ -186,6 +186,20 @@ ul.bullets li::before{
 .medo h3{margin-bottom:.35em}
 .medo p{margin:0;color:var(--tinta-media)}
 
+/* Credenciais */
+.credenciais{
+  list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px;
+}
+.credenciais li{
+  position:relative;padding-left:26px;font-size:.95rem;color:var(--tinta-media);
+}
+.credenciais li::before{
+  content:"";position:absolute;left:0;top:.5em;
+  width:12px;height:7px;border-left:2px solid var(--destaque);
+  border-bottom:2px solid var(--destaque);transform:rotate(-45deg);
+}
+.credenciais li b{color:var(--tinta);font-weight:600}
+
 /* Grade de módulos */
 table{width:100%;border-collapse:collapse;font-size:.94rem}
 .tabela-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -289,7 +303,16 @@ footer strong{color:#fff;font-weight:600}
 <!-- CREDENCIAL -->
 <section>
   <div class="wrap rv">
-    <p class="lead">Sou o professor <strong>José Carlos Gallo</strong>, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.</p>
+    <p class="lead">Sou o professor <strong>José Carlos &ldquo;Gallo&rdquo; Lima de Souza</strong>, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.</p>
+
+    <ul class="credenciais">
+      <li><b>CREF 002297-G/RJ</b></li>
+      <li>Um dos <b>precursores do Personal Training no Brasil</b></li>
+      <li>Especialização em <b>Avaliação Funcional e Controle da Atividade Física</b>, na Alemanha</li>
+      <li>Pós-graduação em <b>Fisiologia do Exercício e Avaliação Morfo-Funcional</b></li>
+      <li>Palestrante em universidades e congressos no Brasil e no exterior</li>
+      <li>Criador do <b>software de avaliação corporal e prescrição de treinamento</b> que acompanha este curso</li>
+    </ul>
   </div>
 </section>
 
