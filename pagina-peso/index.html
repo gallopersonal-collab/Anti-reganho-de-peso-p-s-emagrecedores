@@ -7,301 +7,390 @@
 <meta name="description" content="O Método P.E.S.O. leva o aluno por cinco fases, com o treino modulado e a orientação alimentar de cada momento. Para o personal que quer vender programa em vez de hora-aula.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --destaque:#1573d4;
-  --destaque-escuro:#0f5aa8;
-  --tinta:#14181d;
-  --tinta-media:#4a545f;
-  --tinta-fraca:#79838f;
-  --fundo:#ffffff;
-  --fundo-alt:#f4f6f8;
-  --borda:#dfe4e9;
+  --papel:#EFF4F8;
+  --branco:#ffffff;
+  --tinta:#0C1B29;
+  --tinta-2:#455A6E;
+  --tinta-3:#78899B;
+  --linha:#D9E2EA;
+  --navy:#0B2338;
+  --navy-2:#14344E;
+  --acao:#0B6E4F;
+  --acao-2:#095B41;
+  --medida:#3BB0E5;
+  --medida-esc:#15789F;
   --max:720px;
+  --disp:Archivo,"Helvetica Neue",Arial,sans-serif;
+  --texto:"Source Serif 4",Georgia,"Times New Roman",serif;
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:var(--texto);
+  font-size:18px;
+  line-height:1.72;
   color:var(--tinta);
-  background:var(--fundo);
-  font-size:17px;
-  line-height:1.65;
+  background:var(--papel);
   -webkit-font-smoothing:antialiased;
-  padding-bottom:84px;
+  padding-bottom:86px;
 }
 img,iframe{max-width:100%}
-p{margin:0 0 1.1em}
+p{margin:0 0 1.15em}
 strong{font-weight:600}
+sub{font-size:.72em}
 
 .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-section{padding:56px 0}
-section.alt{background:var(--fundo-alt);border-top:1px solid var(--borda);border-bottom:1px solid var(--borda)}
+.secao{padding:58px 0;background:var(--papel)}
+.secao--branco{background:var(--branco)}
+.secao--navy{background:var(--navy);color:#DCE7F0}
 
-h1{
-  font-size:clamp(1.9rem,6.2vw,3rem);
-  line-height:1.12;
-  font-weight:800;
-  letter-spacing:-.022em;
-  margin:0 0 .55em;
-}
+h1,h2,h3,.disp{font-family:var(--disp);font-weight:800;letter-spacing:-.025em}
+h1{font-size:clamp(2rem,6.6vw,3.35rem);line-height:1.06;margin:0 0 .42em;text-wrap:balance}
 h2{
-  font-size:clamp(1.4rem,4.4vw,2.05rem);
-  line-height:1.2;
-  font-weight:800;
-  letter-spacing:-.018em;
-  margin:0 0 .8em;
+  font-size:clamp(1.5rem,4.7vw,2.2rem);line-height:1.14;font-weight:700;
+  letter-spacing:-.022em;margin:0 0 .75em;position:relative;padding-top:20px;
 }
-h3{font-size:1.08rem;font-weight:600;margin:0 0 .45em;line-height:1.35}
-.sub{font-size:clamp(1.02rem,2.7vw,1.2rem);color:var(--tinta-media);margin-bottom:1.9em}
-.lead{font-size:1.09rem}
-.tag{
-  display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--tinta-fraca);margin-bottom:1.1em;
+h2::before{
+  content:"";position:absolute;top:0;left:0;width:34px;height:3px;
+  background:var(--medida);border-radius:2px;
+}
+h2.sem-regua{padding-top:0}
+h2.sem-regua::before{display:none}
+h3{font-size:1.06rem;font-weight:700;letter-spacing:-.012em;margin:0 0 .4em;line-height:1.32}
+.lead{font-size:1.08rem}
+.sub{
+  font-size:clamp(1.06rem,2.8vw,1.22rem);line-height:1.55;
+  color:#B9CBDA;margin:0 0 1.7em;
 }
 
-/* Hero */
-.hero{padding:52px 0 44px}
-.hero h1{margin-bottom:.5em}
+.rotulo{
+  font-family:var(--disp);font-size:.7rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:#7FA0BC;margin:0 0 1.3em;
+}
 
-/* CTA */
+/* ---------- Hero ---------- */
+.hero{background:var(--navy);color:#fff;padding:46px 0 40px}
+.hero h1{color:#fff}
+
+/* Arco do protocolo — assinatura da pagina */
+.arco{margin:28px 0 0}
+.arco-barra{display:flex;gap:5px}
+.arco-barra span{
+  display:flex;align-items:center;justify-content:center;
+  min-width:0;height:52px;border-radius:7px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);
+  font-family:var(--disp);font-weight:700;font-size:.95rem;
+  color:var(--medida);
+  transform:scaleX(.4);transform-origin:left center;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.hero.on .arco-barra span{transform:none}
+.arco-legenda{
+  font-family:var(--disp);font-size:.78rem;font-weight:500;
+  letter-spacing:.04em;color:#7FA0BC;margin:11px 0 0;
+}
+
+/* ---------- CTA ---------- */
 .cta{
-  display:block;width:100%;text-align:center;
-  background:var(--destaque);color:#fff;text-decoration:none;
-  font-weight:700;font-size:1.06rem;line-height:1.3;
-  padding:19px 22px;border-radius:10px;
-  box-shadow:0 2px 0 var(--destaque-escuro);
+  display:block;width:100%;max-width:440px;text-align:center;
+  background:var(--acao);color:#fff;text-decoration:none;
+  font-family:var(--disp);font-weight:700;font-size:1.05rem;line-height:1.3;
+  letter-spacing:-.01em;
+  padding:19px 22px;border-radius:9px;
+  box-shadow:0 2px 0 var(--acao-2);
   transition:background .15s ease,transform .08s ease;
 }
-.cta:hover,.cta:focus-visible{background:var(--destaque-escuro)}
-.cta:active{transform:translateY(1px);box-shadow:0 1px 0 var(--destaque-escuro)}
+.cta:hover,.cta:focus-visible{background:var(--acao-2)}
+.cta:active{transform:translateY(1px);box-shadow:0 1px 0 var(--acao-2)}
+.cta:focus-visible{outline:3px solid var(--medida);outline-offset:3px}
 .cta-nota{
-  text-align:center;font-size:.85rem;color:var(--tinta-fraca);margin:.85em 0 0;
+  font-family:var(--disp);text-align:center;font-size:.82rem;font-weight:500;
+  color:var(--tinta-3);margin:.9em 0 0;
+}
+.hero .cta-nota{color:#7FA0BC}
+
+/* ---------- Faixa de numeros ---------- */
+.numeros{background:var(--branco);border-bottom:1px solid var(--linha);padding:26px 0}
+.numeros .wrap{display:flex;gap:16px}
+.numeros div{flex:1 1 0;min-width:0}
+@media(min-width:560px){.numeros .wrap{gap:26px}}
+.numeros b{
+  display:block;font-family:var(--disp);font-size:clamp(1.35rem,5.2vw,1.8rem);font-weight:800;
+  letter-spacing:-.03em;line-height:1.08;font-variant-numeric:tabular-nums;
+}
+.numeros span{
+  font-family:var(--disp);font-size:.8rem;font-weight:500;
+  color:var(--tinta-3);line-height:1.35;display:block;margin-top:3px;
 }
 
-/* Faixa de prova */
-.faixa{background:var(--tinta);color:#fff;padding:22px 0}
-.faixa .wrap{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;text-align:center}
-.faixa div{flex:1 1 150px}
-.faixa b{display:block;font-size:1.45rem;font-weight:800;line-height:1.15}
-.faixa span{font-size:.83rem;color:#a8b3bf}
-
-/* Listas */
-ul.bullets{list-style:none;padding:0;margin:0}
-ul.bullets li{position:relative;padding-left:30px;margin-bottom:.85em}
-ul.bullets li::before{
-  content:"";position:absolute;left:6px;top:.62em;
-  width:8px;height:8px;border-radius:50%;background:var(--destaque);
+/* ---------- Autor ---------- */
+.autor{display:grid;gap:24px;align-items:start}
+@media(min-width:660px){.autor{grid-template-columns:206px 1fr;gap:32px}}
+.retrato{margin:0;position:relative}
+.retrato img{
+  display:block;width:100%;border-radius:14px;
+  aspect-ratio:1/1;object-fit:cover;background:var(--linha);
 }
-
-/* Fases */
-.fase{
-  border-left:3px solid var(--borda);
-  padding:0 0 0 22px;margin:0 0 26px;position:relative;
-}
-.fase::before{
-  content:attr(data-n);
-  position:absolute;left:-16px;top:0;
-  width:29px;height:29px;border-radius:50%;
-  background:var(--tinta);color:#fff;
-  font-size:.85rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
-}
-.fase h3{margin-bottom:.3em}
-.fase p{margin:0;color:var(--tinta-media)}
-.fase .dur{
-  display:inline-block;margin-top:.5em;font-size:.79rem;font-weight:600;
-  color:var(--tinta-fraca);border:1px solid var(--borda);
-  padding:2px 9px;border-radius:99px;background:var(--fundo);
-}
-
-/* Passos */
-.passos{display:grid;gap:14px;margin-top:8px}
-.passo{
-  background:var(--fundo);border:1px solid var(--borda);border-radius:12px;
-  padding:18px 20px;display:flex;gap:15px;align-items:flex-start;
-}
-.passo b{
-  flex:0 0 auto;width:27px;height:27px;border-radius:50%;
-  background:var(--destaque);color:#fff;font-size:.85rem;
-  display:flex;align-items:center;justify-content:center;
-}
-.passo p{margin:0}
-
-/* Depoimentos */
-.depo{
-  background:var(--fundo);border:1px solid var(--borda);border-radius:12px;
-  overflow:hidden;margin:0 0 20px;
-}
-.video{position:relative;width:100%;padding-top:56.25%;background:#000}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.depo figcaption{padding:14px 18px;font-size:.92rem;color:var(--tinta-media)}
-.depo figcaption b{color:var(--tinta)}
-.grade-depo{display:grid;gap:20px}
-@media(min-width:640px){.grade-depo{grid-template-columns:1fr 1fr}}
-
-/* Zona lipolítica */
-.zona{
-  background:var(--tinta);color:#fff;border-radius:14px;
-  padding:26px 24px;margin:24px 0 0;
-}
-.zona h3{color:#fff;font-size:1rem;margin-bottom:.9em}
-.zona .faixas{display:grid;gap:16px;margin:0 0 18px}
-@media(min-width:560px){.zona .faixas{grid-template-columns:1fr 1fr}}
-.zona .faixa-n{
-  border:1px solid #333c46;border-radius:10px;padding:16px 18px;background:#1b2027;
-}
-.zona .faixa-n b{
-  display:block;font-size:1.55rem;font-weight:800;line-height:1.1;
-  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
-}
-.zona .faixa-n span{font-size:.85rem;color:#a8b3bf}
-.zona p{color:#c9d3dd;margin:0}
-.zona p:last-child{margin:0}
-
-/* Citação */
-.citacao{
-  border-left:4px solid var(--destaque);
-  padding:4px 0 4px 22px;margin:26px 0;
-}
-.citacao p{
-  font-size:clamp(1.08rem,2.9vw,1.28rem);line-height:1.45;
-  font-weight:600;letter-spacing:-.01em;margin:0 0 .6em;text-wrap:balance;
-}
-.citacao cite{font-style:normal;font-size:.88rem;color:var(--tinta-fraca)}
-
-/* Medos */
-.medos{display:grid;gap:14px;margin-top:8px}
-.medo{
-  background:var(--fundo);border:1px solid var(--borda);border-radius:12px;padding:18px 20px;
-}
-.medo h3{margin-bottom:.35em}
-.medo p{margin:0;color:var(--tinta-media)}
-
-/* Credenciais */
-.credenciais{
-  list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px;
-}
+.credenciais{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:9px}
 .credenciais li{
-  position:relative;padding-left:26px;font-size:.95rem;color:var(--tinta-media);
+  position:relative;padding-left:24px;font-size:.95rem;
+  line-height:1.5;color:var(--tinta-2);
 }
 .credenciais li::before{
-  content:"";position:absolute;left:0;top:.5em;
-  width:12px;height:7px;border-left:2px solid var(--destaque);
-  border-bottom:2px solid var(--destaque);transform:rotate(-45deg);
+  content:"";position:absolute;left:0;top:.62em;
+  width:9px;height:9px;border-radius:2px;
+  background:var(--medida);
 }
 .credenciais li b{color:var(--tinta);font-weight:600}
 
-/* Relato de aluno */
-.relato{
-  background:var(--fundo);border:1px solid var(--borda);border-left:4px solid var(--destaque);
-  border-radius:12px;padding:22px 24px;margin:0 0 24px;
+/* ---------- Fases ---------- */
+.escala-nota{
+  font-family:var(--disp);font-size:.78rem;font-weight:500;letter-spacing:.03em;
+  color:var(--tinta-3);margin:0 0 18px;
 }
-.relato .linha{font-size:1.12rem;font-weight:600;line-height:1.4;margin:0 0 .7em}
-.relato .quem{font-size:.9rem;color:var(--tinta-media);margin:0}
-.relato .quem b{color:var(--tinta)}
+.fase{
+  background:var(--branco);border:1px solid var(--linha);border-radius:14px;
+  padding:20px 22px;margin:0 0 14px;position:relative;
+}
+.fase-topo{display:flex;align-items:center;gap:11px;margin-bottom:.5em}
+.fase-n{
+  flex:0 0 auto;width:28px;height:28px;border-radius:7px;
+  background:var(--navy);color:#fff;
+  font-family:var(--disp);font-size:.86rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.fase h3{margin:0}
+.fase p{margin:0 0 16px;color:var(--tinta-2);font-size:1rem}
+.escala{position:relative;height:9px;background:#E2EAF1;border-radius:99px;overflow:hidden}
+.escala i{
+  position:absolute;top:0;bottom:0;left:var(--l);width:0;
+  background:var(--medida);border-radius:99px;
+  transition:width .75s cubic-bezier(.2,.8,.2,1);
+}
+.on .escala i{width:var(--w)}
+.escala-pe{
+  display:flex;justify-content:space-between;align-items:baseline;margin-top:7px;
+  font-family:var(--disp);font-size:.78rem;font-weight:600;
+  font-variant-numeric:tabular-nums;color:var(--medida-esc);
+}
+.escala-pe em{font-style:normal;font-weight:500;color:var(--tinta-3)}
 
-/* Print de prova */
+/* ---------- Passos ---------- */
+.passos{display:grid;gap:12px;margin:6px 0 0}
+.passo{
+  background:var(--branco);border:1px solid var(--linha);border-radius:12px;
+  padding:17px 19px;display:flex;gap:14px;align-items:flex-start;
+}
+.passo b{
+  flex:0 0 auto;width:26px;height:26px;border-radius:7px;
+  background:var(--acao);color:#fff;
+  font-family:var(--disp);font-size:.83rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.passo p{margin:0;font-size:1rem}
+
+/* ---------- Componentes da prescricao ---------- */
+.specs{display:grid;gap:0;margin:6px 0 0;border-top:1px solid var(--linha)}
+.specs > div{
+  padding:15px 0;border-bottom:1px solid var(--linha);
+  display:grid;gap:3px;
+}
+@media(min-width:620px){
+  .specs > div{grid-template-columns:170px 1fr;gap:20px;align-items:baseline}
+}
+.specs dt{
+  font-family:var(--disp);font-weight:700;font-size:.92rem;
+  letter-spacing:-.01em;color:var(--tinta);
+}
+.specs dd{margin:0;color:var(--tinta-2);font-size:1rem;line-height:1.6}
+
+/* ---------- Painel escuro (zona lipolitica) ---------- */
+.painel{
+  background:var(--navy);color:#C6D6E3;border-radius:16px;
+  padding:28px 24px;margin:26px 0 0;
+}
+.painel h3{color:#fff;font-size:.82rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin:0 0 1em;font-family:var(--disp)}
+.painel p{color:#B4C6D6;margin:0}
+.painel p + .medidas{margin-top:20px}
+.medidas{display:grid;gap:14px;margin:0 0 20px}
+@media(min-width:560px){.medidas{grid-template-columns:1fr 1fr}}
+.medida{
+  border:1px solid #24455F;border-radius:11px;padding:17px 19px;
+  background:var(--navy-2);
+}
+.medida b{
+  display:block;font-family:var(--disp);font-size:1.65rem;font-weight:800;
+  line-height:1.06;letter-spacing:-.03em;color:var(--medida);
+  font-variant-numeric:tabular-nums;
+}
+.medida span{
+  display:block;font-family:var(--disp);font-size:.8rem;font-weight:500;
+  color:#8FA9BF;margin-top:5px;line-height:1.35;
+}
+
+/* ---------- Citacao ---------- */
+.citacao{border-left:3px solid var(--medida);padding:2px 0 2px 21px;margin:26px 0}
+.citacao p{
+  font-size:clamp(1.1rem,3vw,1.3rem);line-height:1.45;font-weight:600;
+  letter-spacing:-.012em;margin:0 0 .55em;text-wrap:balance;
+}
+.citacao cite{
+  font-style:normal;font-family:var(--disp);font-size:.84rem;
+  font-weight:600;color:var(--tinta-3);
+}
+
+/* ---------- Medos ---------- */
+.medos{display:grid;gap:12px;margin:6px 0 0}
+@media(min-width:700px){.medos{grid-template-columns:repeat(3,1fr)}}
+.medo{background:var(--branco);border:1px solid var(--linha);border-radius:12px;padding:19px 20px}
+.medo p{margin:0;color:var(--tinta-2);font-size:.98rem}
+
+/* ---------- Depoimentos ---------- */
+.grade-depo{display:grid;gap:18px}
+@media(min-width:640px){.grade-depo{grid-template-columns:1fr 1fr}}
+.depo{
+  background:var(--branco);border:1px solid var(--linha);border-radius:13px;
+  overflow:hidden;margin:0;
+}
+.video{position:relative;width:100%;padding-top:56.25%;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.depo figcaption{padding:14px 17px;font-size:.93rem;line-height:1.5;color:var(--tinta-2)}
+.depo figcaption b{color:var(--tinta);font-weight:600}
+
+/* ---------- Relato e print ---------- */
+.relato{
+  background:var(--branco);border:1px solid var(--linha);
+  border-left:3px solid var(--medida);
+  border-radius:13px;padding:22px 24px;margin:0 0 22px;
+}
+.relato .linha{font-size:1.15rem;font-weight:600;line-height:1.42;margin:0 0 .6em}
+.relato .quem{font-size:.9rem;color:var(--tinta-2);margin:0;line-height:1.55}
+.relato .quem b{color:var(--tinta)}
 .print-prova{margin:0 0 26px;text-align:center}
 .print-prova img{
-  display:block;width:100%;max-width:310px;margin:0 auto;
-  border-radius:12px;border:1px solid var(--borda);
+  display:block;width:100%;max-width:300px;margin:0 auto;
+  border-radius:13px;border:1px solid var(--linha);
 }
 .print-prova figcaption{
-  font-size:.82rem;color:var(--tinta-fraca);
-  margin-top:10px;max-width:420px;margin-left:auto;margin-right:auto;
+  font-family:var(--disp);font-size:.79rem;font-weight:500;color:var(--tinta-3);
+  margin:10px auto 0;max-width:420px;
 }
 
-/* Retrato do autor */
-.autor{display:grid;gap:24px;align-items:start}
-@media(min-width:640px){.autor{grid-template-columns:210px 1fr;gap:30px}}
-.retrato{margin:0}
-.retrato img{
-  display:block;width:100%;border-radius:14px;
-  aspect-ratio:1/1;object-fit:cover;background:var(--fundo-alt);
-}
-/* Logo do rodapé */
-.logo-rodape{max-width:230px;margin:0 0 18px}
-.logo-rodape img{
-  display:block;width:100%;height:auto;border-radius:8px;
-  mix-blend-mode:lighten;
+/* ---------- Bullets ---------- */
+ul.bullets{list-style:none;padding:0;margin:0;display:grid;gap:.7em}
+ul.bullets li{position:relative;padding-left:28px;line-height:1.6}
+ul.bullets li::before{
+  content:"";position:absolute;left:2px;top:.58em;
+  width:11px;height:6px;
+  border-left:2px solid var(--acao);border-bottom:2px solid var(--acao);
+  transform:rotate(-45deg);
 }
 
-/* Grade de módulos */
-table{width:100%;border-collapse:collapse;font-size:.94rem}
-.tabela-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--borda);vertical-align:top}
-th{font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;color:var(--tinta-fraca)}
-td.val{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
-tr.total td{border-bottom:none;border-top:2px solid var(--tinta);font-weight:800;padding-top:14px}
-
-/* Preço */
-.preco{text-align:center;margin:34px 0 10px}
-.preco .antes{font-size:1.02rem;color:var(--tinta-fraca)}
+/* ---------- Oferta ---------- */
+.oferta{
+  background:var(--branco);border:1px solid var(--linha);border-radius:18px;
+  padding:8px 24px 24px;
+  box-shadow:0 1px 2px rgba(12,27,41,.05),0 18px 40px -20px rgba(12,27,41,.22);
+}
+.item{
+  display:flex;gap:16px;align-items:baseline;
+  padding:15px 0;border-bottom:1px solid var(--linha);
+}
+.item .nome{flex:1 1 auto;font-size:1rem;line-height:1.5}
+.item .v{
+  flex:0 0 auto;font-family:var(--disp);font-weight:700;font-size:.98rem;
+  font-variant-numeric:tabular-nums;color:var(--tinta-2);white-space:nowrap;
+}
+.item--total{border-bottom:none;padding-top:17px}
+.item--total .nome{
+  font-family:var(--disp);font-weight:700;font-size:.78rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-3);
+}
+.item--total .v{font-size:1.3rem;color:var(--tinta);letter-spacing:-.02em}
+.preco{
+  background:var(--navy);color:#fff;border-radius:13px;
+  padding:26px 22px;margin:18px 0 0;text-align:center;
+}
+.preco .antes{font-family:var(--disp);font-size:.92rem;font-weight:500;color:#8FA9BF;margin:0}
 .preco .antes s{text-decoration-thickness:2px}
 .preco .agora{
-  font-size:clamp(2.3rem,9vw,3.5rem);font-weight:800;
-  letter-spacing:-.03em;line-height:1.05;margin:.12em 0 .1em;
+  font-family:var(--disp);font-size:clamp(2.6rem,10vw,3.9rem);font-weight:800;
+  letter-spacing:-.04em;line-height:1;margin:.14em 0 .1em;
+  font-variant-numeric:tabular-nums;
 }
-.preco .parcela{color:var(--tinta-media)}
+.preco .parcela{font-family:var(--disp);font-size:.92rem;font-weight:500;color:#B4C6D6;margin:0 0 20px}
+.preco .cta{box-shadow:0 2px 0 var(--acao-2);margin:0 auto}
+.preco .cta-nota{color:#8FA9BF;margin-top:1em}
 
-/* Garantia */
+/* ---------- Garantia ---------- */
 .garantia{
-  border:2px solid var(--tinta);border-radius:14px;
-  padding:28px 24px;background:var(--fundo);
+  background:var(--branco);border:2px solid var(--navy);border-radius:16px;
+  padding:28px 24px;
 }
-.garantia h2{margin-bottom:.5em}
+.garantia h2{margin-bottom:.55em}
 .selo{
-  display:inline-block;background:var(--tinta);color:#fff;
-  font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  padding:5px 12px;border-radius:99px;margin-bottom:14px;
+  display:inline-block;background:var(--acao);color:#fff;
+  font-family:var(--disp);font-size:.72rem;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;
+  padding:6px 13px;border-radius:99px;margin-bottom:15px;
 }
 
-/* FAQ */
-.faq{border-top:1px solid var(--borda)}
-.faq details{border-bottom:1px solid var(--borda)}
+/* ---------- FAQ ---------- */
+.faq{border-top:1px solid var(--linha)}
+.faq details{border-bottom:1px solid var(--linha)}
 .faq summary{
-  cursor:pointer;padding:17px 34px 17px 0;font-weight:600;
+  cursor:pointer;padding:18px 36px 18px 0;
+  font-family:var(--disp);font-weight:600;font-size:1rem;letter-spacing:-.012em;
   list-style:none;position:relative;
 }
 .faq summary::-webkit-details-marker{display:none}
+.faq summary:focus-visible{outline:2px solid var(--medida);outline-offset:2px}
 .faq summary::after{
-  content:"";position:absolute;right:6px;top:50%;
+  content:"";position:absolute;right:7px;top:50%;
   width:9px;height:9px;margin-top:-6px;
-  border-right:2px solid var(--tinta-fraca);border-bottom:2px solid var(--tinta-fraca);
+  border-right:2px solid var(--medida-esc);border-bottom:2px solid var(--medida-esc);
   transform:rotate(45deg);transition:transform .18s ease;
 }
 .faq details[open] summary::after{transform:rotate(-135deg);margin-top:-2px}
-.faq .resposta{padding:0 0 18px;color:var(--tinta-media)}
+.faq .resposta{padding:0 0 19px;color:var(--tinta-2);font-size:1rem}
 
-/* Barra fixa */
+/* ---------- Barra fixa ---------- */
 .barra{
   position:fixed;left:0;right:0;bottom:0;z-index:60;
-  background:rgba(255,255,255,.97);
-  backdrop-filter:blur(8px);
-  border-top:1px solid var(--borda);
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(9px);
+  border-top:1px solid var(--linha);
   padding:11px 16px calc(11px + env(safe-area-inset-bottom));
-  transform:translateY(110%);transition:transform .25s ease;
+  transform:translateY(115%);transition:transform .25s ease;
 }
 .barra.visivel{transform:translateY(0)}
 .barra .interno{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:14px}
-.barra .valor{flex:0 0 auto;line-height:1.15}
-.barra .valor b{display:block;font-size:1.06rem;font-weight:800}
-.barra .valor span{font-size:.74rem;color:var(--tinta-fraca)}
-.barra .cta{flex:1 1 auto;padding:14px 16px;font-size:.98rem}
-@media(max-width:420px){.barra .valor{display:none}}
+.barra .valor{flex:0 0 auto;line-height:1.1;font-family:var(--disp)}
+.barra .valor b{display:block;font-size:1.1rem;font-weight:800;letter-spacing:-.03em}
+.barra .valor span{font-size:.72rem;font-weight:500;color:var(--tinta-3)}
+.barra .cta{flex:1 1 auto;max-width:none;padding:14px 16px;font-size:.97rem}
+@media(max-width:379px){.barra .valor{display:none}}
 
-/* Rodapé */
-footer{background:var(--tinta);color:#8e99a5;padding:34px 0;font-size:.86rem}
-footer strong{color:#fff;font-weight:600}
+/* ---------- Rodape ---------- */
+footer{background:var(--navy);color:#8FA9BF;padding:36px 0;font-size:.88rem}
+footer strong{color:#fff;font-weight:600;font-family:var(--disp)}
+.logo-rodape{max-width:225px;margin:0 0 18px}
+.logo-rodape img{display:block;width:100%;height:auto;border-radius:8px;mix-blend-mode:lighten}
 
-/* Reveal */
-.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+/* ---------- Reveal ---------- */
+.rv{opacity:0;transform:translateY(15px);transition:opacity .5s ease,transform .5s ease}
 .rv.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   .rv{opacity:1;transform:none;transition:none}
+  .escala i{transition:none;width:var(--w)}
+  .arco-barra span{transform:none;transition:none}
   html{scroll-behavior:auto}
   .barra{transition:none}
 }
@@ -310,18 +399,30 @@ footer strong{color:#fff;font-weight:600}
 <body>
 
 <!-- 1. HERO -->
-<header class="hero">
+<header class="hero rv" id="hero">
   <div class="wrap">
-    <p class="tag">Método P.E.S.O. · Gallo Personal Systems</p>
+    <p class="rotulo">Método P.E.S.O. · Gallo Personal Systems</p>
     <h1>Personal sem carteira de clientes: você monta seu primeiro programa de emagrecimento de R$&nbsp;4.000 em 8 semanas.</h1>
     <p class="sub">O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.</p>
+
     <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
     <p class="cta-nota">Acesso por 1 ano · Garantia de 30 dias</p>
+
+    <div class="arco" aria-hidden="true">
+      <div class="arco-barra">
+        <span style="flex:30.2 1 0">1</span>
+        <span style="flex:15.5 1 0">2</span>
+        <span style="flex:20.7 1 0">3</span>
+        <span style="flex:22.4 1 0">4</span>
+        <span style="flex:11.2 1 0">5</span>
+      </div>
+      <p class="arco-legenda">As cinco fases, na proporção real de duração · cerca de 60 dias</p>
+    </div>
   </div>
 </header>
 
-<!-- 2. FAIXA DE PROVA -->
-<div class="faixa">
+<!-- 2. FAIXA DE NÚMEROS -->
+<div class="numeros">
   <div class="wrap">
     <div><b>+1.000</b><span>profissionais já aplicaram</span></div>
     <div><b>36 anos</b><span>de prática do Professor Gallo</span></div>
@@ -330,7 +431,7 @@ footer strong{color:#fff;font-weight:600}
 </div>
 
 <!-- CREDENCIAL -->
-<section>
+<section class="secao">
   <div class="wrap rv">
     <div class="autor">
       <figure class="retrato">
@@ -344,21 +445,21 @@ footer strong{color:#fff;font-weight:600}
 
         <p>Comecei a estudar por conta própria, sem saber direito por onde. Dois meses depois recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana. Foi ali que eu encontrei o que estava faltando, e foi dali que nasceu o Método P.E.S.O. A especialização na Alemanha, a pós em fisiologia do exercício e os 36 anos de prática vieram depois, todos construídos em cima daquele susto.</p>
 
-    <ul class="credenciais">
-      <li><b>CREF 004702-G/BA</b></li>
-      <li>Um dos <b>precursores do Personal Training no Brasil</b></li>
-      <li>Especialização em <b>Avaliação Funcional e Controle da Atividade Física</b>, na Alemanha</li>
-      <li>Pós-graduação em <b>Fisiologia do Exercício e Avaliação Morfo-Funcional</b></li>
-      <li>Palestrante em universidades e congressos no Brasil e no exterior</li>
-      <li>Criador do <b>GPA Pro</b>, o software de avaliação corporal e prescrição de treinamento que acompanha este curso</li>
-    </ul>
+        <ul class="credenciais">
+          <li><b>CREF 004702-G/BA</b></li>
+          <li>Um dos <b>precursores do Personal Training no Brasil</b></li>
+          <li>Especialização em <b>Avaliação Funcional e Controle da Atividade Física</b>, na Alemanha</li>
+          <li>Pós-graduação em <b>Fisiologia do Exercício e Avaliação Morfo-Funcional</b></li>
+          <li>Palestrante em universidades e congressos no Brasil e no exterior</li>
+          <li>Criador do <b>GPA Pro</b>, o software de avaliação corporal e prescrição de treinamento que acompanha este curso</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 3. DOR -->
-<section class="alt">
+<section class="secao secao--branco">
   <div class="wrap rv">
     <h2>Talvez você</h2>
     <p>Talvez você tenha aberto o app do banco esta semana e feito a conta de novo. Quantas horas-aula faltam para fechar o mês.</p>
@@ -370,7 +471,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- DIAGNÓSTICO -->
-<section>
+<section class="secao">
   <div class="wrap rv">
     <h2>Tudo isso vem de uma causa só</h2>
     <p>Você não tem um método de emagrecimento que funcione sempre. Você tem exercícios, tem leitura, tem experiência. Falta o processo que liga tudo isso e entrega o mesmo resultado em alunos diferentes.</p>
@@ -380,7 +481,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- 4. VIRADA -->
-<section class="alt">
+<section class="secao secao--branco">
   <div class="wrap rv">
     <h2>O que muda quando isso resolve</h2>
     <p>E se você tivesse um protocolo escrito, com cinco fases definidas, que você aplica no aluno novo já na primeira consulta?</p>
@@ -393,7 +494,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- 6a. PROVA SOCIAL -->
-<section>
+<section class="secao">
   <div class="wrap rv">
     <h2>Quem já aplicou</h2>
     <div class="grade-depo">
@@ -410,7 +511,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- 5. COMO FUNCIONA -->
-<section class="alt">
+<section class="secao secao--branco">
   <div class="wrap rv">
     <h2>As cinco fases do Método P.E.S.O.</h2>
     <p>P.E.S.O. quer dizer <strong>Programa de Emagrecimento Saudável Orientado</strong>. O nome diz o que a coisa é. Um programa, com fases, orientado por número.</p>
@@ -418,35 +519,46 @@ footer strong{color:#fff;font-weight:600}
 
     <p><strong>Cada fase corresponde a um módulo do curso.</strong> Você assiste ao módulo e aplica a fase no seu aluno, na mesma semana.</p>
 
-    <div class="fase" data-n="1">
-      <h3>Preparação para o emagrecimento</h3>
+    <p class="escala-nota">Cada barra mostra a duração da fase, numa escala de 0 a 21 dias.</p>
+
+    <div class="fase">
+      <div class="fase-topo"><span class="fase-n">1</span><h3>Preparação para o emagrecimento</h3></div>
       <p>A fase de arrumar a casa. Antes de reprogramar o metabolismo, o corpo precisa estar em condições de responder. Aqui você corrige a saúde intestinal, eleva o VO<sub>2</sub>máx até no mínimo 42 ml/kg/min, condiciona a via lipolítica, melhora a qualidade do sono, reduz a resistência à insulina e calcula a hidratação adequada.</p>
-      <span class="dur">14 a 21 dias</span>
+      <div class="escala"><i style="--l:66.7%;--w:33.3%"></i></div>
+      <div class="escala-pe"><span>14 a 21 dias</span><em>a fase mais longa</em></div>
     </div>
-    <div class="fase" data-n="2">
-      <h3>Ensinando o corpo a queimar gordura</h3>
+
+    <div class="fase">
+      <div class="fase-topo"><span class="fase-n">2</span><h3>Ensinando o corpo a queimar gordura</h3></div>
       <p>O exercício passa a ser modulado para alterar o componente gordo. Intensidade e volume do aeróbico na zona lipolítica são ajustados para maximizar a oxidação de gordura, e o treino de força segura a massa muscular no lugar.</p>
-      <span class="dur">8 a 10 dias</span>
+      <div class="escala"><i style="--l:38.1%;--w:9.5%"></i></div>
+      <div class="escala-pe"><span>8 a 10 dias</span></div>
     </div>
-    <div class="fase" data-n="3">
-      <h3>Turbinando a queima de gordura</h3>
+
+    <div class="fase">
+      <div class="fase-topo"><span class="fase-n">3</span><h3>Turbinando a queima de gordura</h3></div>
       <p>O metabolismo já está mais eficiente e o corpo mais condicionado. A periodização introduz estímulos novos, com variação de intensidade e volume, para elevar a taxa metabólica e a queima. A massa magra continua preservada.</p>
-      <span class="dur">10 a 14 dias</span>
+      <div class="escala"><i style="--l:47.6%;--w:19%"></i></div>
+      <div class="escala-pe"><span>10 a 14 dias</span></div>
     </div>
-    <div class="fase" data-n="4">
-      <h3>Queimando gordura 24 horas</h3>
+
+    <div class="fase">
+      <div class="fase-topo"><span class="fase-n">4</span><h3>Queimando gordura 24 horas</h3></div>
       <p>A aceleração continua, e a chave é a progressão. O corpo do aluno já passou por adaptação significativa, e agora suporta estímulos mais avançados que mantêm a perda de gordura em ritmo acelerado.</p>
-      <span class="dur">12 a 14 dias</span>
+      <div class="escala"><i style="--l:57.1%;--w:9.5%"></i></div>
+      <div class="escala-pe"><span>12 a 14 dias</span></div>
     </div>
-    <div class="fase" data-n="5">
-      <h3>Manutenção inteligente</h3>
+
+    <div class="fase">
+      <div class="fase-topo"><span class="fase-n">5</span><h3>Manutenção inteligente</h3></div>
       <p>A fase que decide se o resultado fica. Atingido o peso, o foco muda para consolidar. Treino e alimentação passam para um modelo de manutenção sustentável, os novos hábitos se solidificam, e o ciclo de reprogramação fecha com o aluno capaz de se manter sozinho.</p>
-      <span class="dur">5 a 8 dias</span>
+      <div class="escala"><i style="--l:23.8%;--w:14.3%"></i></div>
+      <div class="escala-pe"><span>5 a 8 dias</span><em>a mais curta, e a que decide</em></div>
     </div>
 
-    <p>Antes das fases, dois módulos de introdução explicam o terreno: como o emagrecimento funciona e o papel dos índices glicêmicos. Você entende o porquê antes de aplicar o como.</p>
+    <p style="margin-top:1.5em">Antes das fases, dois módulos de introdução explicam o terreno: como o emagrecimento funciona e o papel dos índices glicêmicos. Você entende o porquê antes de aplicar o como.</p>
 
-    <h2 style="margin-top:1.8em">O seu caminho, em três passos</h2>
+    <h2 style="margin-top:1.9em">O seu caminho, em três passos</h2>
     <div class="passos">
       <div class="passo"><b>1</b><p>Você entra no curso hoje.</p></div>
       <div class="passo"><b>2</b><p>Você aplica as cinco fases no seu próximo aluno.</p></div>
@@ -456,26 +568,26 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- 5b. COMO O EXERCÍCIO É PRESCRITO -->
-<section>
+<section class="secao">
   <div class="wrap rv">
     <h2>Como o exercício é prescrito</h2>
     <p>Prescrição de exercício tem seis componentes. O Método P.E.S.O. define cada um antes do aluno pisar na academia.</p>
 
-    <div class="passos">
-      <div class="passo"><b>1</b><p><strong>Modalidade.</strong> O tipo de exercício, escolhido pelo objetivo. Para queimar gordura, o trabalho aeróbico entra em primeiro plano.</p></div>
-      <div class="passo"><b>2</b><p><strong>Gasto calórico.</strong> Quanta energia a sessão gasta, para o balanço energético fechar negativo.</p></div>
-      <div class="passo"><b>3</b><p><strong>Intensidade.</strong> A variável mais crítica. É ela que decide qual substrato o corpo usa como combustível.</p></div>
-      <div class="passo"><b>4</b><p><strong>Frequência semanal.</strong> Quantas vezes o estímulo se repete. Para emagrecimento, o método trabalha com 5 a 7 dias.</p></div>
-      <div class="passo"><b>5</b><p><strong>Duração.</strong> O tempo de cada sessão de treino.</p></div>
-      <div class="passo"><b>6</b><p><strong>Progressão.</strong> O aumento planejado das variáveis, pelo princípio da sobrecarga, para o resultado não estagnar.</p></div>
-    </div>
+    <dl class="specs">
+      <div><dt>Modalidade</dt><dd>O tipo de exercício, escolhido pelo objetivo. Para queimar gordura, o trabalho aeróbico entra em primeiro plano.</dd></div>
+      <div><dt>Gasto calórico</dt><dd>Quanta energia a sessão gasta, para o balanço energético fechar negativo.</dd></div>
+      <div><dt>Intensidade</dt><dd>A variável mais crítica. É ela que decide qual substrato o corpo usa como combustível.</dd></div>
+      <div><dt>Frequência semanal</dt><dd>Quantas vezes o estímulo se repete. Para emagrecimento, o método trabalha com 5 a 7 dias.</dd></div>
+      <div><dt>Duração</dt><dd>O tempo de cada sessão de treino.</dd></div>
+      <div><dt>Progressão</dt><dd>O aumento planejado das variáveis, pelo princípio da sobrecarga, para o resultado não estagnar.</dd></div>
+    </dl>
 
-    <div class="zona">
+    <div class="painel">
       <h3>A Zona Lipolítica</h3>
-      <p style="margin-bottom:1.1em">Queimar gordura exige oxigênio. Por isso o trabalho acontece na via aeróbia. Dentro dela existe uma faixa específica onde a gordura vira o combustível principal, e o método trabalha nessa faixa.</p>
-      <div class="faixas">
-        <div class="faixa-n"><b>60% a 70%</b><span>da Frequência Cardíaca Máxima</span></div>
-        <div class="faixa-n"><b>42% a 56%</b><span>da reserva do VO<sub>2</sub>máx</span></div>
+      <p>Queimar gordura exige oxigênio. Por isso o trabalho acontece na via aeróbia. Dentro dela existe uma faixa específica onde a gordura vira o combustível principal, e o método trabalha nessa faixa.</p>
+      <div class="medidas" style="margin-top:20px">
+        <div class="medida"><b>60% a 70%</b><span>da Frequência Cardíaca Máxima</span></div>
+        <div class="medida"><b>42% a 56%</b><span>da reserva do VO<sub>2</sub>máx</span></div>
       </div>
       <p>Treinar nessa faixa mantém a gordura corporal como combustível principal, melhora o condicionamento cardiovascular e estimula a produção de irisina. Tudo isso sem o estresse catabólico de um treino intenso demais.</p>
     </div>
@@ -483,7 +595,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- 5c. O MODELO DE NEGÓCIO -->
-<section class="alt">
+<section class="secao secao--branco">
   <div class="wrap rv">
     <h2>Por que isso muda o seu preço</h2>
 
@@ -496,7 +608,7 @@ footer strong{color:#fff;font-weight:600}
 
     <p>Com um método que funciona na mão, você para de vender hora e passa a vender transformação. É por isso que os profissionais formados cobram de R$&nbsp;4.000 a R$&nbsp;9.000 por um programa completo de 60 dias.</p>
 
-    <h2 style="margin-top:1.8em">Os três medos que isso resolve</h2>
+    <h2 style="margin-top:1.9em">Os três medos que isso resolve</h2>
     <div class="medos">
       <div class="medo">
         <h3>Como conseguir cliente</h3>
@@ -515,7 +627,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- 6b. PROVA SOCIAL -->
-<section>
+<section class="secao">
   <div class="wrap rv">
     <h2>Mais quem aplicou</h2>
     <div class="grade-depo">
@@ -532,7 +644,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- CONTRASTE -->
-<section class="alt">
+<section class="secao secao--branco">
   <div class="wrap rv">
     <h2>O que isso custaria pelo caminho antigo</h2>
     <p>Uma pós-graduação em fisiologia do exercício e emagrecimento custa entre R$&nbsp;8.000 e R$&nbsp;15.000, e leva de doze a dezoito meses. No fim, você sai com teoria, e a montagem do protocolo continua sendo sua.</p>
@@ -542,7 +654,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- PROVA -->
-<section>
+<section class="secao">
   <div class="wrap rv">
     <h2>A prova</h2>
     <div class="relato">
@@ -555,11 +667,13 @@ footer strong{color:#fff;font-weight:600}
            loading="lazy" onerror="this.closest('.print-prova').remove()">
       <figcaption>A conversa, como o personal Bruno Rigoni publicou.</figcaption>
     </figure>
+
     <p>Nos anos 80, uma aluna me procurou precisando perder 15 quilos em três meses para o casamento dela. Eu garanti o resultado e cobrei o equivalente a R$&nbsp;10.000 por 28 sessões. Ela chegou ao dia com o peso que queria. A lógica que usei ali é a mesma que está neste curso.</p>
 
     <p>Mais de mil profissionais já aplicaram o Método P.E.S.O. Eles cobram de R$&nbsp;4.000 a R$&nbsp;9.000 por um programa completo de 60 dias.</p>
     <p>Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega resultado que o aluno consegue ver na balança e no espelho.</p>
-    <div style="margin-top:26px">
+
+    <div style="margin-top:24px">
       <figure class="depo">
         <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/iSPuO-jtcvg" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         <figcaption><b>João Pedro</b> — Ceará.</figcaption>
@@ -569,10 +683,9 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- 7. O QUE VOCÊ RECEBE -->
-<section class="alt">
+<section class="secao secao--branco">
   <div class="wrap rv">
     <h2>O que você recebe</h2>
-
     <ul class="bullets">
       <li>Você sabe em qual fase o aluno está e o que vem depois, antes de começar.</li>
       <li>Você calcula a orientação alimentar e a quantidade de água por número, sem chutar.</li>
@@ -586,45 +699,57 @@ footer strong{color:#fff;font-weight:600}
       <li>Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.</li>
       <li>Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.</li>
     </ul>
-
   </div>
 </section>
 
 <!-- 8. OFERTA -->
-<section>
+<section class="secao">
   <div class="wrap rv">
     <h2>A oferta</h2>
-    <div class="tabela-scroll">
-      <table>
-        <thead><tr><th>Item</th><th class="val">Valor</th></tr></thead>
-        <tbody>
-          <tr><td>Metodologia P.E.S.O. — as cinco fases</td><td class="val">R$ 1.497</td></tr>
-          <tr><td>Mentoria técnica ao vivo no Zoom com o Professor Gallo</td><td class="val">R$ 997</td></tr>
-          <tr><td>Metodologia de Vendas — aulas mais manual em PDF</td><td class="val">R$ 697</td></tr>
-          <tr><td>Materiais de venda prontos</td><td class="val">R$ 397</td></tr>
-          <tr><td>1 ano do <strong>GPA Pro</strong> — software de avaliação, prescrição e periodização</td><td class="val">R$ 1.188</td></tr>
-          <tr class="total"><td>Total</td><td class="val">R$ 4.776</td></tr>
-        </tbody>
-      </table>
-    </div>
 
-    <div class="preco">
-      <p class="antes">O Método P.E.S.O. já foi vendido por <s>R$&nbsp;1.996,00</s></p>
-      <p class="agora">R$ 597</p>
-      <p class="parcela">Parcelado. Acesso por 1 ano.</p>
-    </div>
+    <div class="oferta">
+      <div class="item">
+        <span class="nome">Metodologia P.E.S.O. — as cinco fases</span>
+        <span class="v">R$ 1.497</span>
+      </div>
+      <div class="item">
+        <span class="nome">Mentoria técnica ao vivo no Zoom com o Professor Gallo</span>
+        <span class="v">R$ 997</span>
+      </div>
+      <div class="item">
+        <span class="nome">Metodologia de Vendas — aulas mais manual em PDF</span>
+        <span class="v">R$ 697</span>
+      </div>
+      <div class="item">
+        <span class="nome">Materiais de venda prontos</span>
+        <span class="v">R$ 397</span>
+      </div>
+      <div class="item">
+        <span class="nome">1 ano do <strong>GPA Pro</strong> — software de avaliação, prescrição e periodização</span>
+        <span class="v">R$ 1.188</span>
+      </div>
+      <div class="item item--total">
+        <span class="nome">Total</span>
+        <span class="v">R$ 4.776</span>
+      </div>
 
-    <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
-    <p class="cta-nota">Um único programa vendido a R$&nbsp;4.000 devolve o que você investiu quase sete vezes.</p>
+      <div class="preco">
+        <p class="antes">O Método P.E.S.O. já foi vendido por <s>R$&nbsp;1.996,00</s></p>
+        <p class="agora">R$ 597</p>
+        <p class="parcela">Parcelado. Acesso por 1 ano.</p>
+        <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
+        <p class="cta-nota">Um único programa vendido a R$&nbsp;4.000 devolve o que você investiu quase sete vezes.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- 9. GARANTIA -->
-<section class="alt">
+<section class="secao secao--branco">
   <div class="wrap rv">
     <div class="garantia">
       <span class="selo">Garantia de 30 dias</span>
-      <h2>Você entra, assiste, aplica em um aluno.</h2>
+      <h2 class="sem-regua">Você entra, assiste, aplica em um aluno.</h2>
       <p>Se em 30 dias você achar que o método não vai mudar o seu jeito de trabalhar, você pede o reembolso e recebe o valor de volta. Sem formulário, sem entrevista de saída, sem pergunta atravessada.</p>
       <p style="margin:0">O risco fica comigo. Você já carregou risco suficiente montando treino no escuro.</p>
     </div>
@@ -632,7 +757,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- 10. FAQ -->
-<section>
+<section class="secao">
   <div class="wrap rv">
     <h2>Perguntas que chegam sempre</h2>
     <div class="faq">
@@ -661,7 +786,7 @@ footer strong{color:#fff;font-weight:600}
 </section>
 
 <!-- 11. CTA FINAL -->
-<section class="alt">
+<section class="secao secao--branco">
   <div class="wrap rv">
     <h2>Decida uma coisa só</h2>
     <p>Você pode fechar esta página e continuar vendendo hora.</p>
@@ -691,7 +816,7 @@ footer strong{color:#fff;font-weight:600}
 
 <script>
 /* ==========================================================================
-   LINK DO CHECKOUT — alimenta os seis botoes da pagina. Troque so aqui.
+   LINK DO CHECKOUT — alimenta os cinco botoes da pagina. Troque so aqui.
    ========================================================================== */
 var CHECKOUT_URL = "https://pay.kiwify.com.br/82Pzoh8";
 
@@ -700,14 +825,14 @@ document.querySelectorAll(".js-checkout").forEach(function(a){ a.href = CHECKOUT
 /* Barra fixa aparece depois do hero */
 (function(){
   var barra = document.getElementById("barra");
-  var hero = document.querySelector(".hero");
+  var hero = document.getElementById("hero");
   if(!barra || !hero || !("IntersectionObserver" in window)){ if(barra) barra.classList.add("visivel"); return; }
   new IntersectionObserver(function(e){
     barra.classList.toggle("visivel", !e[0].isIntersecting);
   },{threshold:0}).observe(hero);
 })();
 
-/* Reveal suave no scroll */
+/* Reveal no scroll, e as barras de duracao crescem quando entram na tela */
 (function(){
   var alvos = document.querySelectorAll(".rv");
   if(!("IntersectionObserver" in window)){
