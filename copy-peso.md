@@ -206,7 +206,7 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 
 O Método P.E.S.O. já foi vendido por **R$ 1.996,00**.
 
-**Hoje ele sai por R$ 597.** Parcelado.
+**Hoje ele sai por R$ 597.** Ou 12x de R$ 61,74.
 
 > Um único programa vendido a R$ 4.000 devolve o que você investiu quase sete vezes.
 
@@ -381,7 +381,7 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 
 # Hoje ele sai por R$ 597
 
-Parcelado.
+Ou 12x de R$ 61,74.
 
 Um único programa vendido a R$ 4.000 devolve o que você investiu quase sete vezes.
 

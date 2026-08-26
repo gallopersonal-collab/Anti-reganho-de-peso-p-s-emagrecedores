@@ -357,10 +357,15 @@ mark{
 .preco .antes{font-family:var(--disp);font-size:.93rem;font-weight:600;color:#9A8F86;margin:0}
 .preco .antes s{text-decoration-thickness:2px}
 .preco .agora{
-  font-family:var(--disp);font-size:clamp(2.8rem,11vw,4.2rem);font-weight:900;
-  letter-spacing:-.045em;line-height:1;margin:.12em 0 .1em;font-variant-numeric:tabular-nums;
+  font-family:var(--disp);font-size:clamp(2.6rem,10.4vw,4rem);font-weight:900;
+  letter-spacing:-.045em;line-height:1;margin:.12em 0 .12em;font-variant-numeric:tabular-nums;
 }
-.preco .parcela{font-family:var(--disp);font-size:.95rem;font-weight:600;color:#CFC5BC;margin:0 0 22px}
+.preco .agora em{
+  display:block;font-style:normal;font-size:.31em;font-weight:700;
+  letter-spacing:.02em;color:var(--fogo);margin-bottom:.25em;
+}
+.preco .parcela{font-family:var(--disp);font-size:.97rem;font-weight:600;color:#CFC5BC;margin:0 0 22px}
+.preco .parcela b{color:#fff;font-weight:800}
 
 /* ---------- Garantia ---------- */
 .garantia{
@@ -408,10 +413,10 @@ mark{
 .barra.visivel{transform:translateY(0)}
 .barra .interno{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:14px}
 .barra .valor{flex:0 0 auto;line-height:1.1;font-family:var(--disp);color:#fff}
-.barra .valor b{display:block;font-size:1.12rem;font-weight:900;letter-spacing:-.04em}
+.barra .valor b{display:block;font-size:1rem;font-weight:900;letter-spacing:-.04em;white-space:nowrap}
 .barra .valor span{font-size:.72rem;font-weight:600;color:#9A8F86}
 .barra .cta{flex:1 1 auto;max-width:none;padding:14px 16px;font-size:.98rem;box-shadow:0 3px 0 var(--fogo-2)}
-@media(max-width:379px){.barra .valor{display:none}}
+@media(max-width:419px){.barra .valor{display:none}}
 
 /* ---------- Rodape ---------- */
 footer{background:var(--carvao-2);color:#9A8F86;padding:38px 0;font-size:.88rem}
@@ -460,7 +465,7 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
         <ul class="confianca">
           <li><svg class="ico ico-sm"><use href="#i-check"/></svg>Acesso por 1 ano</li>
           <li><svg class="ico ico-sm"><use href="#i-check"/></svg>Garantia de 30 dias</li>
-          <li><svg class="ico ico-sm"><use href="#i-check"/></svg>Parcelado</li>
+          <li><svg class="ico ico-sm"><use href="#i-check"/></svg>12x de R$ 61,74</li>
         </ul>
       </div>
       <figure class="hero-foto">
@@ -833,8 +838,8 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
 
       <div class="preco">
         <p class="antes">O Método P.E.S.O. já foi vendido por <s>R$&nbsp;1.996,00</s></p>
-        <p class="agora">R$ 597</p>
-        <p class="parcela">Parcelado. Acesso por 1 ano.</p>
+        <p class="agora"><em>12x de</em>R$ 61,74</p>
+        <p class="parcela">ou <b>R$ 597</b> à vista · Acesso por 1 ano.</p>
         <a class="cta js-checkout" href="#">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
         <p class="cta-nota">Um único programa vendido a R$&nbsp;4.000 devolve o que você investiu quase sete vezes.</p>
       </div>
@@ -910,7 +915,7 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
 <!-- BARRA FIXA -->
 <div class="barra" id="barra">
   <div class="interno">
-    <div class="valor"><b>R$ 597</b><span>antes R$ 1.996</span></div>
+    <div class="valor"><b>12x R$ 61,74</b><span>ou R$ 597 à vista</span></div>
     <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
   </div>
 </div>
