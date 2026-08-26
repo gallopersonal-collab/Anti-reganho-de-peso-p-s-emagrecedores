@@ -7,24 +7,24 @@
 <meta name="description" content="O Método P.E.S.O. leva o aluno por cinco fases, com o treino modulado e a orientação alimentar de cada momento. Para o personal que quer vender programa em vez de hora-aula.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --papel:#EFF4F8;
+  --papel:#F3F0ED;
   --branco:#ffffff;
-  --tinta:#0C1B29;
-  --tinta-2:#455A6E;
-  --tinta-3:#78899B;
-  --linha:#D9E2EA;
-  --navy:#0B2338;
-  --navy-2:#14344E;
-  --acao:#0B6E4F;
-  --acao-2:#095B41;
-  --medida:#3BB0E5;
-  --medida-esc:#15789F;
+  --tinta:#1A1512;
+  --tinta-2:#574F49;
+  --tinta-3:#8A817A;
+  --linha:#E3DDD7;
+  --carvao:#1A1512;
+  --carvao-2:#2C2521;
+  --fogo-a:#E0541C;
+  --fogo-2:#BE4211;
+  --fogo:#E0541C;
+  --fogo-esc:#B8430F;
   --max:720px;
   --disp:Archivo,"Helvetica Neue",Arial,sans-serif;
-  --texto:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --texto:Figtree,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
 *{box-sizing:border-box}
@@ -32,8 +32,8 @@ html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:var(--texto);
-  font-size:18px;
-  line-height:1.72;
+  font-size:17.5px;
+  line-height:1.65;
   color:var(--tinta);
   background:var(--papel);
   -webkit-font-smoothing:antialiased;
@@ -47,17 +47,17 @@ sub{font-size:.72em}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
 .secao{padding:58px 0;background:var(--papel)}
 .secao--branco{background:var(--branco)}
-.secao--navy{background:var(--navy);color:#DCE7F0}
+.secao--carvao{background:var(--carvao);color:#E7E1DB}
 
 h1,h2,h3,.disp{font-family:var(--disp);font-weight:800;letter-spacing:-.025em}
-h1{font-size:clamp(2rem,6.6vw,3.35rem);line-height:1.06;margin:0 0 .42em;text-wrap:balance}
+h1{font-size:clamp(2.1rem,7vw,3.6rem);font-weight:900;line-height:1.02;letter-spacing:-.033em;margin:0 0 .42em;text-wrap:balance}
 h2{
-  font-size:clamp(1.5rem,4.7vw,2.2rem);line-height:1.14;font-weight:700;
+  font-size:clamp(1.6rem,5vw,2.35rem);line-height:1.1;font-weight:800;
   letter-spacing:-.022em;margin:0 0 .75em;position:relative;padding-top:20px;
 }
 h2::before{
   content:"";position:absolute;top:0;left:0;width:34px;height:3px;
-  background:var(--medida);border-radius:2px;
+  background:var(--fogo);border-radius:2px;
 }
 h2.sem-regua{padding-top:0}
 h2.sem-regua::before{display:none}
@@ -65,18 +65,43 @@ h3{font-size:1.06rem;font-weight:700;letter-spacing:-.012em;margin:0 0 .4em;line
 .lead{font-size:1.08rem}
 .sub{
   font-size:clamp(1.06rem,2.8vw,1.22rem);line-height:1.55;
-  color:#B9CBDA;margin:0 0 1.7em;
+  color:#D3C9C1;margin:0 0 1.7em;
 }
 
 .rotulo{
   font-family:var(--disp);font-size:.7rem;font-weight:600;
   letter-spacing:.16em;text-transform:uppercase;
-  color:#7FA0BC;margin:0 0 1.3em;
+  color:#A79C93;margin:0 0 1.3em;
 }
 
 /* ---------- Hero ---------- */
-.hero{background:var(--navy);color:#fff;padding:46px 0 40px}
+.hero{background:var(--carvao);color:#fff;padding:44px 0 40px}
 .hero h1{color:#fff}
+.hero-grade{display:grid;gap:26px}
+/* No celular o retrato entra pequeno e redondo, ao lado do nome, para
+   nao empurrar o botao para baixo. No desktop vira retrato grande. */
+.hero-foto{display:flex;align-items:center;gap:13px;margin:26px 0 0}
+.hero-foto img{
+  flex:0 0 auto;width:56px;height:56px;border-radius:50%;
+  object-fit:cover;object-position:center 16%;
+}
+.hero-foto figcaption{
+  font-family:var(--disp);font-size:.84rem;font-weight:700;color:#fff;
+  line-height:1.35;
+}
+@media(min-width:900px){
+  .hero .wrap,.numeros .wrap{max-width:1000px}
+  .hero-grade{grid-template-columns:1fr 296px;gap:46px;align-items:center}
+  .hero-foto{display:block;margin:0}
+  .hero-foto img{
+    width:100%;height:auto;aspect-ratio:4/5;border-radius:16px;object-position:center 20%;
+  }
+  .hero-foto figcaption{margin-top:12px}
+}
+.hero-foto figcaption span{
+  display:block;font-weight:500;font-size:.76rem;color:var(--fogo);
+  letter-spacing:.03em;margin-top:2px;
+}
 
 /* Arco do protocolo — assinatura da pagina */
 .arco{margin:28px 0 0}
@@ -87,47 +112,48 @@ h3{font-size:1.06rem;font-weight:700;letter-spacing:-.012em;margin:0 0 .4em;line
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.16);
   font-family:var(--disp);font-weight:700;font-size:.95rem;
-  color:var(--medida);
+  color:var(--fogo);
   transform:scaleX(.4);transform-origin:left center;
   transition:transform .6s cubic-bezier(.2,.8,.2,1);
 }
 .hero.on .arco-barra span{transform:none}
 .arco-legenda{
   font-family:var(--disp);font-size:.78rem;font-weight:500;
-  letter-spacing:.04em;color:#7FA0BC;margin:11px 0 0;
+  letter-spacing:.04em;color:#A79C93;margin:11px 0 0;
 }
 
 /* ---------- CTA ---------- */
 .cta{
   display:block;width:100%;max-width:440px;text-align:center;
-  background:var(--acao);color:#fff;text-decoration:none;
+  background:var(--fogo-a);color:#fff;text-decoration:none;
   font-family:var(--disp);font-weight:700;font-size:1.05rem;line-height:1.3;
   letter-spacing:-.01em;
   padding:19px 22px;border-radius:9px;
-  box-shadow:0 2px 0 var(--acao-2);
+  box-shadow:0 2px 0 var(--fogo-2);
   transition:background .15s ease,transform .08s ease;
 }
-.cta:hover,.cta:focus-visible{background:var(--acao-2)}
-.cta:active{transform:translateY(1px);box-shadow:0 1px 0 var(--acao-2)}
-.cta:focus-visible{outline:3px solid var(--medida);outline-offset:3px}
+.cta:hover,.cta:focus-visible{background:var(--fogo-2)}
+.cta:active{transform:translateY(1px);box-shadow:0 1px 0 var(--fogo-2)}
+.cta:focus-visible{outline:3px solid var(--fogo);outline-offset:3px}
 .cta-nota{
   font-family:var(--disp);text-align:center;font-size:.82rem;font-weight:500;
   color:var(--tinta-3);margin:.9em 0 0;
 }
-.hero .cta-nota{color:#7FA0BC}
+.hero .cta-nota{color:#A79C93}
 
 /* ---------- Faixa de numeros ---------- */
-.numeros{background:var(--branco);border-bottom:1px solid var(--linha);padding:26px 0}
+.numeros{background:var(--carvao-2);padding:26px 0}
 .numeros .wrap{display:flex;gap:16px}
 .numeros div{flex:1 1 0;min-width:0}
 @media(min-width:560px){.numeros .wrap{gap:26px}}
 .numeros b{
-  display:block;font-family:var(--disp);font-size:clamp(1.35rem,5.2vw,1.8rem);font-weight:800;
-  letter-spacing:-.03em;line-height:1.08;font-variant-numeric:tabular-nums;
+  display:block;font-family:var(--disp);font-size:clamp(1.4rem,5.4vw,1.95rem);font-weight:900;
+  letter-spacing:-.035em;line-height:1.06;font-variant-numeric:tabular-nums;
+  color:var(--fogo);
 }
 .numeros span{
   font-family:var(--disp);font-size:.8rem;font-weight:500;
-  color:var(--tinta-3);line-height:1.35;display:block;margin-top:3px;
+  color:#A79C93;line-height:1.35;display:block;margin-top:3px;
 }
 
 /* ---------- Autor ---------- */
@@ -146,7 +172,7 @@ h3{font-size:1.06rem;font-weight:700;letter-spacing:-.012em;margin:0 0 .4em;line
 .credenciais li::before{
   content:"";position:absolute;left:0;top:.62em;
   width:9px;height:9px;border-radius:2px;
-  background:var(--medida);
+  background:var(--fogo);
 }
 .credenciais li b{color:var(--tinta);font-weight:600}
 
@@ -162,23 +188,23 @@ h3{font-size:1.06rem;font-weight:700;letter-spacing:-.012em;margin:0 0 .4em;line
 .fase-topo{display:flex;align-items:center;gap:11px;margin-bottom:.5em}
 .fase-n{
   flex:0 0 auto;width:28px;height:28px;border-radius:7px;
-  background:var(--navy);color:#fff;
+  background:var(--carvao);color:#fff;
   font-family:var(--disp);font-size:.86rem;font-weight:700;
   display:flex;align-items:center;justify-content:center;
 }
 .fase h3{margin:0}
 .fase p{margin:0 0 16px;color:var(--tinta-2);font-size:1rem}
-.escala{position:relative;height:9px;background:#E2EAF1;border-radius:99px;overflow:hidden}
+.escala{position:relative;height:9px;background:#E8E2DC;border-radius:99px;overflow:hidden}
 .escala i{
   position:absolute;top:0;bottom:0;left:var(--l);width:0;
-  background:var(--medida);border-radius:99px;
+  background:var(--fogo);border-radius:99px;
   transition:width .75s cubic-bezier(.2,.8,.2,1);
 }
 .on .escala i{width:var(--w)}
 .escala-pe{
   display:flex;justify-content:space-between;align-items:baseline;margin-top:7px;
   font-family:var(--disp);font-size:.78rem;font-weight:600;
-  font-variant-numeric:tabular-nums;color:var(--medida-esc);
+  font-variant-numeric:tabular-nums;color:var(--fogo-esc);
 }
 .escala-pe em{font-style:normal;font-weight:500;color:var(--tinta-3)}
 
@@ -190,7 +216,7 @@ h3{font-size:1.06rem;font-weight:700;letter-spacing:-.012em;margin:0 0 .4em;line
 }
 .passo b{
   flex:0 0 auto;width:26px;height:26px;border-radius:7px;
-  background:var(--acao);color:#fff;
+  background:var(--fogo-a);color:#fff;
   font-family:var(--disp);font-size:.83rem;font-weight:700;
   display:flex;align-items:center;justify-content:center;
 }
@@ -213,30 +239,30 @@ h3{font-size:1.06rem;font-weight:700;letter-spacing:-.012em;margin:0 0 .4em;line
 
 /* ---------- Painel escuro (zona lipolitica) ---------- */
 .painel{
-  background:var(--navy);color:#C6D6E3;border-radius:16px;
+  background:var(--carvao);color:#DCD4CD;border-radius:16px;
   padding:28px 24px;margin:26px 0 0;
 }
 .painel h3{color:#fff;font-size:.82rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin:0 0 1em;font-family:var(--disp)}
-.painel p{color:#B4C6D6;margin:0}
+.painel p{color:#C8BEB6;margin:0}
 .painel p + .medidas{margin-top:20px}
 .medidas{display:grid;gap:14px;margin:0 0 20px}
 @media(min-width:560px){.medidas{grid-template-columns:1fr 1fr}}
 .medida{
-  border:1px solid #24455F;border-radius:11px;padding:17px 19px;
-  background:var(--navy-2);
+  border:1px solid #3C332D;border-radius:11px;padding:17px 19px;
+  background:var(--carvao-2);
 }
 .medida b{
   display:block;font-family:var(--disp);font-size:1.65rem;font-weight:800;
-  line-height:1.06;letter-spacing:-.03em;color:var(--medida);
+  line-height:1.06;letter-spacing:-.03em;color:var(--fogo);
   font-variant-numeric:tabular-nums;
 }
 .medida span{
   display:block;font-family:var(--disp);font-size:.8rem;font-weight:500;
-  color:#8FA9BF;margin-top:5px;line-height:1.35;
+  color:#A79C93;margin-top:5px;line-height:1.35;
 }
 
 /* ---------- Citacao ---------- */
-.citacao{border-left:3px solid var(--medida);padding:2px 0 2px 21px;margin:26px 0}
+.citacao{border-left:3px solid var(--fogo);padding:2px 0 2px 21px;margin:26px 0}
 .citacao p{
   font-size:clamp(1.1rem,3vw,1.3rem);line-height:1.45;font-weight:600;
   letter-spacing:-.012em;margin:0 0 .55em;text-wrap:balance;
@@ -267,7 +293,7 @@ h3{font-size:1.06rem;font-weight:700;letter-spacing:-.012em;margin:0 0 .4em;line
 /* ---------- Relato e print ---------- */
 .relato{
   background:var(--branco);border:1px solid var(--linha);
-  border-left:3px solid var(--medida);
+  border-left:3px solid var(--fogo);
   border-radius:13px;padding:22px 24px;margin:0 0 22px;
 }
 .relato .linha{font-size:1.15rem;font-weight:600;line-height:1.42;margin:0 0 .6em}
@@ -289,7 +315,7 @@ ul.bullets li{position:relative;padding-left:28px;line-height:1.6}
 ul.bullets li::before{
   content:"";position:absolute;left:2px;top:.58em;
   width:11px;height:6px;
-  border-left:2px solid var(--acao);border-bottom:2px solid var(--acao);
+  border-left:2px solid var(--fogo-a);border-bottom:2px solid var(--fogo-a);
   transform:rotate(-45deg);
 }
 
@@ -315,28 +341,28 @@ ul.bullets li::before{
 }
 .item--total .v{font-size:1.3rem;color:var(--tinta);letter-spacing:-.02em}
 .preco{
-  background:var(--navy);color:#fff;border-radius:13px;
+  background:var(--carvao);color:#fff;border-radius:13px;
   padding:26px 22px;margin:18px 0 0;text-align:center;
 }
-.preco .antes{font-family:var(--disp);font-size:.92rem;font-weight:500;color:#8FA9BF;margin:0}
+.preco .antes{font-family:var(--disp);font-size:.92rem;font-weight:500;color:#A79C93;margin:0}
 .preco .antes s{text-decoration-thickness:2px}
 .preco .agora{
   font-family:var(--disp);font-size:clamp(2.6rem,10vw,3.9rem);font-weight:800;
   letter-spacing:-.04em;line-height:1;margin:.14em 0 .1em;
   font-variant-numeric:tabular-nums;
 }
-.preco .parcela{font-family:var(--disp);font-size:.92rem;font-weight:500;color:#B4C6D6;margin:0 0 20px}
-.preco .cta{box-shadow:0 2px 0 var(--acao-2);margin:0 auto}
-.preco .cta-nota{color:#8FA9BF;margin-top:1em}
+.preco .parcela{font-family:var(--disp);font-size:.92rem;font-weight:500;color:#C8BEB6;margin:0 0 20px}
+.preco .cta{box-shadow:0 2px 0 var(--fogo-2);margin:0 auto}
+.preco .cta-nota{color:#A79C93;margin-top:1em}
 
 /* ---------- Garantia ---------- */
 .garantia{
-  background:var(--branco);border:2px solid var(--navy);border-radius:16px;
+  background:var(--branco);border:2px solid var(--carvao);border-radius:16px;
   padding:28px 24px;
 }
 .garantia h2{margin-bottom:.55em}
 .selo{
-  display:inline-block;background:var(--acao);color:#fff;
+  display:inline-block;background:var(--fogo-a);color:#fff;
   font-family:var(--disp);font-size:.72rem;font-weight:700;
   letter-spacing:.13em;text-transform:uppercase;
   padding:6px 13px;border-radius:99px;margin-bottom:15px;
@@ -351,11 +377,11 @@ ul.bullets li::before{
   list-style:none;position:relative;
 }
 .faq summary::-webkit-details-marker{display:none}
-.faq summary:focus-visible{outline:2px solid var(--medida);outline-offset:2px}
+.faq summary:focus-visible{outline:2px solid var(--fogo);outline-offset:2px}
 .faq summary::after{
   content:"";position:absolute;right:7px;top:50%;
   width:9px;height:9px;margin-top:-6px;
-  border-right:2px solid var(--medida-esc);border-bottom:2px solid var(--medida-esc);
+  border-right:2px solid var(--fogo-esc);border-bottom:2px solid var(--fogo-esc);
   transform:rotate(45deg);transition:transform .18s ease;
 }
 .faq details[open] summary::after{transform:rotate(-135deg);margin-top:-2px}
@@ -379,7 +405,7 @@ ul.bullets li::before{
 @media(max-width:379px){.barra .valor{display:none}}
 
 /* ---------- Rodape ---------- */
-footer{background:var(--navy);color:#8FA9BF;padding:36px 0;font-size:.88rem}
+footer{background:var(--carvao);color:#A79C93;padding:36px 0;font-size:.88rem}
 footer strong{color:#fff;font-weight:600;font-family:var(--disp)}
 .logo-rodape{max-width:225px;margin:0 0 18px}
 .logo-rodape img{display:block;width:100%;height:auto;border-radius:8px;mix-blend-mode:lighten}
@@ -401,12 +427,20 @@ footer strong{color:#fff;font-weight:600;font-family:var(--disp)}
 <!-- 1. HERO -->
 <header class="hero rv" id="hero">
   <div class="wrap">
-    <p class="rotulo">Método P.E.S.O. · Gallo Personal Systems</p>
-    <h1>Personal sem carteira de clientes: você monta seu primeiro programa de emagrecimento de R$&nbsp;4.000 em 8 semanas.</h1>
-    <p class="sub">O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.</p>
+    <div class="hero-grade">
+      <div>
+        <p class="rotulo">Método P.E.S.O. · Gallo Personal Systems</p>
+        <h1>Personal sem carteira de clientes: você monta seu primeiro programa de emagrecimento de R$&nbsp;4.000 em 8 semanas.</h1>
+        <p class="sub">O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.</p>
 
-    <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
-    <p class="cta-nota">Acesso por 1 ano · Garantia de 30 dias</p>
+        <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
+        <p class="cta-nota">Acesso por 1 ano · Garantia de 30 dias</p>
+      </div>
+      <figure class="hero-foto">
+        <img src="foto-gallo.jpg" alt="Professor José Carlos Gallo" onerror="this.closest('.hero-foto').remove()">
+        <figcaption>Prof. José Carlos Gallo<span>36 anos · CREF 004702-G/BA</span></figcaption>
+      </figure>
+    </div>
 
     <div class="arco" aria-hidden="true">
       <div class="arco-barra">
@@ -434,10 +468,6 @@ footer strong{color:#fff;font-weight:600;font-family:var(--disp)}
 <section class="secao">
   <div class="wrap rv">
     <div class="autor">
-      <figure class="retrato">
-        <img src="foto-gallo.jpg" alt="Professor José Carlos Gallo" loading="lazy"
-             onerror="this.closest('.retrato').remove()">
-      </figure>
       <div>
         <p class="lead">Sou o professor <strong>José Carlos &ldquo;Gallo&rdquo; Lima de Souza</strong>, fundador da Gallo Personal Systems. Sou formado em educação física, fisioterapia e nutrição — as três áreas que o emagrecimento exige ao mesmo tempo. São 36 anos de prática e de estudo, e o Método P.E.S.O. já foi testado e validado por mais de mil profissionais.</p>
 
