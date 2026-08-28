@@ -152,19 +152,19 @@ Eu consigo fazer isso porque eu sei o que acontece quando o personal aplica a Fa
 
 ---
 
-## BLOCO 8 — ESCASSEZ REAL — ~40s
+## BLOCO 8 — POR QUE HOJE — ~40s
 
 Antes de eu te dizer o que fazer, tem uma coisa que você precisa saber.
 
-Junto com o curso vai a mentoria técnica ao vivo comigo, no Zoom. E aula ao vivo tem limite de gente. Eu preciso conseguir olhar o caso de cada um que está ali dentro.
+Eu não tenho contagem regressiva para te mostrar. O preço é esse, e ele não sobe amanhã porque eu resolvi apertar você.
 
-Esse preço de setecentos e noventa e sete reais vale enquanto tiver vaga na turma. Quando a turma fechar, ele volta para o valor cheio, mil novecentos e noventa e seis reais.
+O que corre é outra coisa. É o aluno que entra na sua sala esta semana e vai embora no terceiro mês, quando o resultado trava. Esse você perde uma vez só, e ele não volta para você dizer o que faltou.
 
 Eu não vou ficar aqui te empurrando. Você viu o método, viu os resultados e viu a garantia. Se fez sentido para você, entra agora e resolve isso hoje.
 
-`[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa. Tom de quem está explicando uma limitação prática, sem urgência fabricada na voz. Fale a parte do limite de vagas devagar e siga adiante sem repetir.
+`[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa. Tom tranquilo, de quem não está com pressa. A força deste bloco vem exatamente de você não fabricar urgência: fale a parte da contagem regressiva quase com desdém, e a parte do aluno perdido devagar.
 
-**Este bloco não tem data dentro, então ele não envelhece.** O vídeo pode ficar no ar meses e a frase continua verdadeira. A única condição é você cumprir: quando a turma da mentoria encher, o preço sobe de verdade até abrir a próxima.
+**Este bloco não tem data nem promessa dentro, então ele não envelhece e não cria dívida.** O vídeo pode ficar no ar meses sem que nada aqui vire mentira. Se um dia existir um limite de verdade — turma de mentoria cheia, preço que sobe em data marcada — vale a pena voltar aqui e dizer isso, porque escassez real converte. Escassez inventada só custa a confiança de quem descobre.
 
 ## BLOCO 9 — CTA — ~50s
 
