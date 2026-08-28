@@ -169,8 +169,14 @@ mark{
   transform-origin:left center;
   transition:transform .6s cubic-bezier(.2,.8,.2,1);
 }
-.js .arco-barra span{transform:scaleX(.4)}
-.js .hero.on .arco-barra span{transform:none}
+/* MOMENTO ASSINATURA: as cinco fases se constroem da esquerda para a direita,
+   cada uma na proporção real da sua duração. O movimento conta o mecanismo. */
+.js .arco-barra span{
+  transform:scaleX(0);opacity:0;
+  transition:transform .62s cubic-bezier(.16,.84,.28,1),opacity .28s ease;
+  transition-delay:calc(var(--i,0) * 95ms);
+}
+.js .hero.on .arco-barra span{transform:none;opacity:1}
 .arco-legenda{
   font-family:var(--disp);font-size:.78rem;font-weight:600;
   letter-spacing:.02em;color:#9A8F86;margin:11px 0 0;
@@ -281,7 +287,7 @@ mark{
   background:var(--fogo);border-radius:99px;
   transition:width .75s cubic-bezier(.2,.8,.2,1);
 }
-.js .escala i{width:0}
+.js .escala i{width:0;transition:width .85s cubic-bezier(.16,.84,.28,1) .2s}
 .js .on .escala i{width:var(--w)}
 .escala-pe{
   display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;
@@ -489,12 +495,41 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
 .logo-rodape img{display:block;width:100%;height:auto;border-radius:8px;mix-blend-mode:lighten}
 
 /* ---------- Reveal ---------- */
-.js .rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.js .rv{opacity:0;transform:translateY(18px);
+  transition:opacity .55s ease,transform .55s cubic-bezier(.16,.84,.28,1)}
 .js .rv.on{opacity:1;transform:none}
+
+/* Filhos que entram um a um, onde a ordem significa alguma coisa:
+   as três provas, os itens da oferta e os cinco cartões de fase. */
+.js .esc{opacity:0;transform:translateY(14px);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.16,.84,.28,1);
+  transition-delay:calc(var(--i,0) * 80ms)}
+.js .esc.on{opacity:1;transform:none}
+
+/* O preço: a âncora antiga é riscada, e só então o valor de hoje chega. */
+.js .preco .antes s{text-decoration:none;position:relative}
+.js .preco .antes s::after{
+  content:"";position:absolute;left:-2px;right:-2px;top:54%;height:2px;
+  background:currentColor;transform:scaleX(0);transform-origin:left center;
+  transition:transform .5s cubic-bezier(.16,.84,.28,1) .3s}
+.js .preco.on .antes s::after{transform:scaleX(1)}
+.js .preco .agora{opacity:0;transform:scale(.93);
+  transition:opacity .35s ease .68s,transform .55s cubic-bezier(.16,.84,.28,1) .68s}
+.js .preco.on .agora{opacity:1;transform:none}
+
+/* A medalha da garantia entra com um leve peso. */
+.js .medalha{opacity:0;transform:scale(.82);
+  transition:opacity .35s ease,transform .55s cubic-bezier(.2,1.1,.35,1)}
+.js .medalha.on{opacity:1;transform:none}
+
+.cta:hover{box-shadow:0 6px 18px rgba(242,98,31,.28)}
 @media(prefers-reduced-motion:reduce){
-  .rv{opacity:1;transform:none;transition:none}
-  .escala i{transition:none;width:var(--w)}
-  .arco-barra span{transform:none;transition:none}
+  .rv,.esc,.medalha,.preco .agora{opacity:1 !important;transform:none !important;transition:none !important}
+  .escala i{transition:none !important;width:var(--w) !important}
+  .arco-barra span{transform:none !important;opacity:1 !important;transition:none !important}
+  .preco .antes s{text-decoration:line-through}
+  .preco .antes s::after{display:none}
+  .cta:hover{box-shadow:none}
   html{scroll-behavior:auto}
   .barra{transition:none}
 }
@@ -1216,20 +1251,98 @@ document.querySelectorAll(".video[data-yt]").forEach(function(fachada){
   },{threshold:0}).observe(hero);
 })();
 
-/* Reveal no scroll, e as barras de duracao crescem quando entram na tela */
+/* ==========================================================================
+   MOVIMENTO
+
+   Uma peca de movimento com significado e o resto disciplinado. O arco das
+   cinco fases, no topo, se constroi da esquerda para a direita, cada barra
+   na proporcao real da duracao daquela fase. As barras dentro dos cartoes de
+   fase repetem a mesma linguagem mais abaixo. O movimento conta o mecanismo
+   do metodo em vez de enfeitar a pagina.
+
+   Tudo aqui depende da classe .js, entao sem javascript a pagina aparece
+   inteira e parada. Quem pede menos movimento no sistema nao recebe nenhum:
+   os numeros ja nascem no valor final e nada se move.
+   ========================================================================== */
 (function(){
-  var alvos = document.querySelectorAll(".rv");
-  if(!("IntersectionObserver" in window)){
-    alvos.forEach(function(el){ el.classList.add("on"); });
+  var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var observa = "IntersectionObserver" in window;
+
+  /* ---- numera os filhos que entram um a um ---- */
+  function escalona(seletor, filhos){
+    document.querySelectorAll(seletor).forEach(function(pai){
+      var lista = pai.querySelectorAll(filhos);
+      lista.forEach(function(el, i){
+        el.classList.add("esc");
+        el.style.setProperty("--i", i);
+      });
+    });
+  }
+  escalona(".numeros .wrap", "div");
+  escalona(".oferta", ".item");
+
+  /* As barras do arco tem animacao propria, entao aqui elas recebem so a
+     ordem do escalonamento. Marcar com .esc faria as duas brigarem. */
+  document.querySelectorAll(".arco-barra span").forEach(function(el, i){
+    el.style.setProperty("--i", i);
+  });
+
+  /* ---- contagem de numeros ---- */
+  function separaMilhar(n){
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  function conta(el){
+    var bruto = el.textContent;
+    var m = bruto.match(/([\d.]+)/);
+    if(!m){ return; }
+    var alvo = parseInt(m[1].replace(/\./g, ""), 10);
+    if(!isFinite(alvo) || alvo <= 0){ return; }
+    var antes = bruto.slice(0, m.index);
+    var depois = bruto.slice(m.index + m[1].length);
+    var dur = 900, t0 = null;
+    function passo(t){
+      if(t0 === null){ t0 = t; }
+      var p = Math.min(1, (t - t0) / dur);
+      var suave = 1 - Math.pow(1 - p, 3);
+      el.textContent = antes + separaMilhar(Math.round(alvo * suave)) + depois;
+      if(p < 1){ requestAnimationFrame(passo); }
+    }
+    el.textContent = antes + "0" + depois;
+    requestAnimationFrame(passo);
+  }
+
+  var contaveis = [];
+  document.querySelectorAll(".numeros b").forEach(function(el){ contaveis.push(el); });
+  var total = document.querySelector(".item--total .v");
+  if(total){ contaveis.push(total); }
+  var medalha = document.querySelector(".medalha b");
+  if(medalha){ contaveis.push(medalha); }
+
+  /* ---- sem movimento: tudo ja nasce pronto ---- */
+  if(quieto || !observa){
+    document.querySelectorAll(".rv, .esc, .medalha, .preco").forEach(function(el){
+      el.classList.add("on");
+    });
     return;
   }
+
+  /* ---- revela conforme entra na tela ---- */
   var obs = new IntersectionObserver(function(entradas){
     entradas.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add("on"); obs.unobserve(e.target); }
+      if(!e.isIntersecting){ return; }
+      var el = e.target;
+      el.classList.add("on");
+      if(contaveis.indexOf(el) > -1){ conta(el); }
+      obs.unobserve(el);
     });
-  },{rootMargin:"0px 0px -8% 0px",threshold:.06});
-  alvos.forEach(function(el){ obs.observe(el); });
+  }, {rootMargin:"0px 0px -8% 0px", threshold:.06});
+
+  document.querySelectorAll(".rv, .esc, .medalha, .preco").forEach(function(el){
+    obs.observe(el);
+  });
+  contaveis.forEach(function(el){ obs.observe(el); });
 })();
+
 </script>
 
 </body>
