@@ -5,6 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Método P.E.S.O. — Seja um Personal Trainer Especialista em Emagrecimento</title>
 <meta name="description" content="O Método P.E.S.O. leva o aluno por cinco fases, com o treino modulado e a orientação alimentar de cada momento. Para o personal que quer vender programa em vez de hora-aula.">
+<meta name="robots" content="index,follow">
+
+<!-- Marca a pagina como "javascript ligado". As animacoes de entrada so
+     escondem os blocos se esta linha rodar. Se o navegador do visitante
+     bloquear javascript, a pagina aparece inteira, parada, e continua
+     vendendo — em vez de abrir em branco. -->
+<script>document.documentElement.className+=" js";</script>
+<meta name="author" content="Prof. José Carlos Gallo — Instituto Gallo Personal Systems">
+<meta name="theme-color" content="#17120F">
+
+<!-- ==========================================================================
+     COMO O LINK APARECE NO WHATSAPP E NO INSTAGRAM
+     Quando alguém colar o endereço da página numa conversa, é isto que aparece:
+     o título, a frase e a imagem og-peso.png.
+
+     Depois de publicar, se quiser deixar 100% garantido em qualquer rede,
+     troque as duas linhas marcadas com >>> pelo endereço completo da página.
+     Exemplo: content="https://metodopeso.com.br/og-peso.png"
+     ========================================================================== -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Instituto Gallo Personal Systems">
+<meta property="og:title" content="Método P.E.S.O. — pare de vender hora-aula, passe a vender programa">
+<meta property="og:description" content="Cinco fases, com o treino modulado e a orientação alimentar de cada momento. Mais de mil profissionais já aplicaram. 12x de R$ 61,74.">
+<meta property="og:image" content="og-peso.png"><!-- >>> endereço completo aqui -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Método P.E.S.O. — pare de vender hora-aula, passe a vender programa">
+<meta name="twitter:description" content="Cinco fases, com o treino modulado e a orientação alimentar de cada momento. Mais de mil profissionais já aplicaram. 12x de R$ 61,74.">
+<meta name="twitter:image" content="og-peso.png"><!-- >>> endereço completo aqui -->
+
+<!-- Ícone da aba do navegador: o "P" do P.E.S.O. em laranja, desenhado aqui mesmo -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317120F'/%3E%3Ctext x='32' y='45' font-family='Arial,Helvetica,sans-serif' font-size='38' font-weight='bold' fill='%23F2621F' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -130,10 +166,11 @@ mark{
   height:50px;border-radius:8px;
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
   font-family:var(--disp);font-weight:800;font-size:.95rem;color:var(--fogo);
-  transform:scaleX(.4);transform-origin:left center;
+  transform-origin:left center;
   transition:transform .6s cubic-bezier(.2,.8,.2,1);
 }
-.hero.on .arco-barra span{transform:none}
+.js .arco-barra span{transform:scaleX(.4)}
+.js .hero.on .arco-barra span{transform:none}
 .arco-legenda{
   font-family:var(--disp);font-size:.78rem;font-weight:600;
   letter-spacing:.02em;color:#9A8F86;margin:11px 0 0;
@@ -240,11 +277,12 @@ mark{
 .fase p{margin:0 0 16px;color:var(--tinta-2);font-size:.99rem}
 .escala{position:relative;height:10px;background:#EDE6DF;border-radius:99px;overflow:hidden}
 .escala i{
-  position:absolute;top:0;bottom:0;left:var(--l);width:0;
+  position:absolute;top:0;bottom:0;left:var(--l);width:var(--w);
   background:var(--fogo);border-radius:99px;
   transition:width .75s cubic-bezier(.2,.8,.2,1);
 }
-.on .escala i{width:var(--w)}
+.js .escala i{width:0}
+.js .on .escala i{width:var(--w)}
 .escala-pe{
   display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;
   font-family:var(--disp);font-size:.79rem;font-weight:800;
@@ -425,8 +463,8 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
 .logo-rodape img{display:block;width:100%;height:auto;border-radius:8px;mix-blend-mode:lighten}
 
 /* ---------- Reveal ---------- */
-.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
-.rv.on{opacity:1;transform:none}
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.js .rv.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   .rv{opacity:1;transform:none;transition:none}
   .escala i{transition:none;width:var(--w)}
@@ -435,6 +473,131 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
   .barra{transition:none}
 }
 </style>
+
+<!-- ==========================================================================
+     ESPACO DO PIXEL E DO ANALYTICS
+
+     Se um dia voce for anunciar no Instagram, no Facebook ou no Google, os
+     codigos ficam logo abaixo, cada um dentro do seu proprio comentario.
+
+     Para LIGAR um deles:
+       1. troque SEU_NUMERO_DE_PIXEL_AQUI (ou SUA_TAG_AQUI) pelo seu numero
+       2. apague a linha logo ACIMA do bloco, a que abre o comentario, e a
+          linha logo ABAIXO dele, a que fecha o comentario. Sao as duas linhas
+          curtas que cercam o codigo.
+
+     A pagina ja avisa sozinha os dois sistemas quando alguem clica em
+     "Quero o Metodo P.E.S.O." — o evento InitiateCheckout no Pixel e o
+     begin_checkout no Analytics. Enquanto os blocos estiverem desligados,
+     nada e enviado e a pagina funciona igual.
+     ========================================================================== -->
+
+<!-- PIXEL DA META (Facebook e Instagram) ================================== -->
+<!--
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','SEU_NUMERO_DE_PIXEL_AQUI');
+fbq('track','PageView');
+</script>
+-->
+
+<!-- GOOGLE ANALYTICS ===================================================== -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=SUA_TAG_AQUI"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','SUA_TAG_AQUI');
+</script>
+-->
+
+<!-- Ficha do curso para o Google entender do que a pagina trata -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Course",
+      "name": "Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado",
+      "description": "Curso de metodologia de emagrecimento em cinco fases para personal trainers, com treino modulado, orientação alimentar calculada e modelo de venda por programa.",
+      "inLanguage": "pt-BR",
+      "provider": {
+        "@type": "Organization",
+        "name": "Instituto Gallo Personal Systems"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Prof. José Carlos Gallo",
+        "jobTitle": "Professor de Educação Física, Fisioterapeuta e Nutricionista",
+        "identifier": "CREF 004702-G/BA"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "597.00",
+        "priceCurrency": "BRL",
+        "availability": "https://schema.org/InStock",
+        "category": "Curso online",
+        "url": "https://pay.kiwify.com.br/82Pzoh8"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "courseWorkload": "PT10H"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Preciso ser nutricionista para aplicar a parte alimentar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O P.E.S.O. trabalha com orientação alimentar geral, dentro do que a legislação permite ao profissional de educação física. O método foi construído por quem é formado nas três áreas — educação física, fisioterapia e nutrição — e por isso conhece o limite de cada uma. A prescrição de dieta individualizada segue sendo atribuição do nutricionista."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O método usa remédio ou suplemento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não. O P.E.S.O. trabalha com exercício modulado e orientação alimentar calculada. Nenhuma das cinco fases depende de medicamento ou de suplementação."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto tempo leva para assistir tudo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "As aulas têm de 15 a 20 minutos. Dá para assistir entre um aluno e outro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Por quanto tempo tenho acesso ao curso?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Um ano."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O GPA Pro é meu para sempre?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A assinatura é de um ano, sem custo. Depois disso você decide se continua."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -460,7 +623,7 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
         <h1>Personal sem carteira de clientes: você monta seu primeiro programa de emagrecimento de <mark>R$&nbsp;4.000 em 8 semanas</mark>.</h1>
         <p class="hero-sub">O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o aluno por cinco fases, cada uma com o treino modulado e a orientação alimentar calculada para aquele momento. O resultado para de depender de sorte.</p>
 
-        <a class="cta js-checkout" href="#">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
+        <a class="cta js-checkout" href="https://pay.kiwify.com.br/82Pzoh8">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
 
         <ul class="confianca">
           <li><svg class="ico ico-sm"><use href="#i-check"/></svg>Acesso por 1 ano</li>
@@ -567,7 +730,7 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
     </div>
 
     <div class="cta-centro">
-      <a class="cta js-checkout" href="#">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
+      <a class="cta js-checkout" href="https://pay.kiwify.com.br/82Pzoh8">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
     </div>
   </div>
 </section>
@@ -840,7 +1003,7 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
         <p class="antes">O Método P.E.S.O. já foi vendido por <s>R$&nbsp;1.996,00</s></p>
         <p class="agora"><em>12x de</em>R$ 61,74</p>
         <p class="parcela">ou <b>R$ 597</b> à vista · Acesso por 1 ano.</p>
-        <a class="cta js-checkout" href="#">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
+        <a class="cta js-checkout" href="https://pay.kiwify.com.br/82Pzoh8">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
         <p class="cta-nota">Um único programa vendido a R$&nbsp;4.000 devolve o que você investiu quase sete vezes.</p>
       </div>
     </div>
@@ -898,7 +1061,7 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
     <p>Ou você aplica as cinco fases do P.E.S.O. no seu próximo aluno e descobre em oito semanas o que muda quando o resultado deixa de ser sorte.</p>
     <p>São R$&nbsp;597. O primeiro programa que você vender paga isso várias vezes.</p>
     <div class="cta-centro" style="margin-top:28px">
-      <a class="cta js-checkout" href="#">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
+      <a class="cta js-checkout" href="https://pay.kiwify.com.br/82Pzoh8">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
       <p class="cta-nota">Garantia de 30 dias. Acesso por 1 ano.</p>
     </div>
   </div>
@@ -916,17 +1079,52 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
 <div class="barra" id="barra">
   <div class="interno">
     <div class="valor"><b>12x R$ 61,74</b><span>ou R$ 597 à vista</span></div>
-    <a class="cta js-checkout" href="#">Quero o Método P.E.S.O.</a>
+    <a class="cta js-checkout" href="https://pay.kiwify.com.br/82Pzoh8">Quero o Método P.E.S.O.</a>
   </div>
 </div>
 
 <script>
 /* ==========================================================================
-   LINK DO CHECKOUT — alimenta os cinco botoes da pagina. Troque so aqui.
-   ========================================================================== */
-var CHECKOUT_URL = "https://pay.kiwify.com.br/82Pzoh8";
+   LINK DO CHECKOUT
 
-document.querySelectorAll(".js-checkout").forEach(function(a){ a.href = CHECKOUT_URL; });
+   O endereco da Kiwify esta escrito nos cinco botoes, ali em cima no HTML,
+   dentro de href="...". Ele fica no proprio HTML de proposito: assim o botao
+   funciona mesmo que o javascript falhe ou seja bloqueado.
+
+   PARA TROCAR O CHECKOUT: use "Substituir tudo" no seu editor de texto,
+   trocando  https://pay.kiwify.com.br/82Pzoh8  pelo endereco novo. Ele
+   aparece cinco vezes no arquivo, e o Substituir tudo pega as cinco.
+
+   RASTREIO DO ANUNCIO
+   Se a pessoa chegou pelo link de um anuncio, o endereco dela traz etiquetas
+   no fim (utm_source, utm_campaign, src...). O codigo abaixo copia essas
+   etiquetas para o link do checkout, e assim a Kiwify mostra qual anuncio
+   gerou cada venda. Sem etiqueta nenhuma, o link continua como esta no HTML.
+   ========================================================================== */
+var ETIQUETAS = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","src","sck","fbclid","gclid","ttclid"];
+
+document.querySelectorAll(".js-checkout").forEach(function(a){
+  a.setAttribute("rel","noopener");
+
+  try{
+    var deLa = new URLSearchParams(window.location.search);
+    var destino = new URL(a.href);
+    ETIQUETAS.forEach(function(nome){
+      var valor = deLa.get(nome);
+      if(valor && !destino.searchParams.has(nome)){ destino.searchParams.set(nome, valor); }
+    });
+    a.href = destino.toString();
+  }catch(e){
+    /* Se algo der errado aqui, o botao continua com o link que veio do HTML. */
+  }
+
+  a.addEventListener("click", function(){
+    /* Avisa o Pixel e o Analytics, se estiverem instalados. Se nao estiverem,
+       nada acontece e o clique segue normal para o checkout. */
+    if(typeof window.fbq === "function"){ window.fbq("track","InitiateCheckout"); }
+    if(typeof window.gtag === "function"){ window.gtag("event","begin_checkout",{currency:"BRL", value:597}); }
+  });
+});
 
 /* Barra fixa aparece depois do hero */
 (function(){
