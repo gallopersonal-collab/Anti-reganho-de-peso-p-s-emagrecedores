@@ -1,7 +1,7 @@
 # PESO — Copy da página de vendas
 
 Gerado pelo Forjador (Sistema 7 Minutos v2.1).
-Headline escolhida: opção 2. Garantia: 30 dias. Preço: R$ 597, ancorado nos R$ 1.996,00 anteriores.
+Headline escolhida: opção 2. Garantia: 30 dias. Preço: R$ 797, ancorado nos R$ 1.996,00 anteriores.
 Todos os dados preenchidos. Nenhum marcador pendente.
 
 ---
@@ -36,7 +36,7 @@ O Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado — leva o 
 - Você troca a venda de hora-aula pela venda de programa fechado.
 - Você tem um preço que se sustenta, porque o que você entrega tem começo, meio e fim.
 - O aluno emagrece e conta para os amigos. A sua agenda enche pela porta certa.
-- Você monta avaliação, prescrição e periodização dentro do GPA Pro, em minutos.
+- Você monta avaliação, prescrição e periodização dentro do GPA STUDIO PRO, em minutos.
 - Você deixa de perder o aluno no terceiro mês, quando o resultado costuma travar.
 - Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.
 - Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.
@@ -58,7 +58,7 @@ Comecei a estudar por conta própria, sem saber direito por onde. Dois meses dep
 - Especialização em **Avaliação Funcional e Controle da Atividade Física**, na Alemanha
 - Pós-graduação em **Fisiologia do Exercício e Avaliação Morfo-Funcional**
 - Palestrante em universidades e congressos no Brasil e no exterior
-- Criador do **GPA Pro**, o software de avaliação corporal e prescrição de treinamento que acompanha este curso
+- Criador do **GPA STUDIO PRO**, o software de avaliação corporal e prescrição de treinamento que acompanha este curso
 
 ### Talvez você
 
@@ -200,15 +200,15 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 | **Mentoria técnica ao vivo no Zoom com o Professor Gallo** | Você tira dúvida de prescrição com quem criou o método, olhando o seu caso | R$ 997 |
 | **Metodologia de Vendas** — aulas mais manual de vendas em PDF | O passo a passo da atração ao fechamento, para você vender o programa | R$ 697 |
 | **Materiais de venda prontos** | O que você mostra na tela quando apresenta o programa ao cliente | R$ 397 |
-| **1 ano do GPA Pro** — software de avaliação, prescrição e periodização | Avaliação, prescrição e periodização de 3 clientes dentro da plataforma | R$ 1.188 |
+| **1 ano do GPA STUDIO PRO**, com 3 licenças de alunos — software de avaliação, prescrição e periodização | Você já cria os seus 3 primeiros programas dentro da plataforma e vende | R$ 1.188 |
 
 **Valor total dos itens: R$ 4.776**
 
 O Método P.E.S.O. já foi vendido por **R$ 1.996,00**.
 
-**Hoje ele sai por R$ 597.** Ou 12x de R$ 61,74.
+**Hoje ele sai por R$ 797.** Ou 12x de R$ 82,43.
 
-> Um único programa vendido a R$ 4.000 devolve o que você investiu quase sete vezes.
+> Um único programa vendido a R$ 4.000 devolve cinco vezes o que você investiu.
 
 Os valores da coluna são âncoras sugeridas. Ajuste ao que você considera justo.
 
@@ -245,7 +245,7 @@ Comecei a estudar por conta própria, sem saber direito por onde. Dois meses dep
 - Especialização em **Avaliação Funcional e Controle da Atividade Física**, na Alemanha
 - Pós-graduação em **Fisiologia do Exercício e Avaliação Morfo-Funcional**
 - Palestrante em universidades e congressos no Brasil e no exterior
-- Criador do **GPA Pro**, o software de avaliação corporal e prescrição de treinamento que acompanha este curso
+- Criador do **GPA STUDIO PRO**, o software de avaliação corporal e prescrição de treinamento que acompanha este curso
 
 ---
 
@@ -333,7 +333,7 @@ Antes das fases, dois módulos de introdução explicam o terreno: como o emagre
 - Você troca a venda de hora-aula pela venda de programa fechado.
 - Você tem um preço que se sustenta, porque o que você entrega tem começo, meio e fim.
 - O aluno emagrece e conta para os amigos. A sua agenda enche pela porta certa.
-- Você monta avaliação, prescrição e periodização dentro do GPA Pro, em minutos.
+- Você monta avaliação, prescrição e periodização dentro do GPA STUDIO PRO, em minutos.
 - Você deixa de perder o aluno no terceiro mês, quando o resultado costuma travar.
 - Você tira dúvida de prescrição direto com quem criou o método, olhando o seu caso.
 - Você tem o roteiro e os materiais prontos para apresentar o programa e fechar o cliente.
@@ -379,11 +379,11 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 
 ### O Método P.E.S.O. já foi vendido por ~~R$ 1.996,00~~
 
-# Hoje ele sai por R$ 597
+# Hoje ele sai por R$ 797
 
-Ou 12x de R$ 61,74.
+Ou 12x de R$ 82,43.
 
-Um único programa vendido a R$ 4.000 devolve o que você investiu quase sete vezes.
+Um único programa vendido a R$ 4.000 devolve cinco vezes o que você investiu.
 
 **[QUERO O MÉTODO P.E.S.O.]**
 
@@ -413,7 +413,7 @@ Não. O P.E.S.O. trabalha com exercício modulado e orientação alimentar calcu
 **Por quanto tempo tenho acesso ao curso?**
 Um ano.
 
-**O GPA Pro é meu para sempre?**
+**O GPA STUDIO PRO é meu para sempre?**
 A assinatura é de um ano, sem custo. Depois disso você decide se continua.
 
 ---
@@ -426,6 +426,6 @@ Dá para viver assim. Muita gente vive.
 
 Ou você aplica as cinco fases do P.E.S.O. no seu próximo aluno e descobre em oito semanas o que muda quando o resultado deixa de ser sorte.
 
-São R$ 597. O primeiro programa que você vender paga isso várias vezes.
+São R$ 797. O primeiro programa que você vender paga isso várias vezes.
 
 **[QUERO O MÉTODO P.E.S.O.]**

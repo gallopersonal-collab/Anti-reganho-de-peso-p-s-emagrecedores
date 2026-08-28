@@ -86,9 +86,9 @@ São cinco fases, e cada fase é um módulo do curso. Você assiste ao módulo d
 
 A média de quem passa pelas cinco fases é de quinze quilos em oito semanas. Sem Ozempic. Sem suplemento. Sem dieta de fome.
 
-E vai junto o GPA Pro, o software que eu criei. Você joga a avaliação dentro dele e ele te devolve a prescrição e a periodização prontas, em minutos.
+E vão juntas três licenças do GPA STUDIO PRO, o software que eu criei. Você joga a avaliação dentro dele e ele te devolve a prescrição e a periodização prontas, em minutos.
 
-`[NOTA DE GRAVAÇÃO]` Este é o bloco de tela. Mostre as cinco fases em texto, uma aparecendo de cada vez, enquanto você fala. Na zona lipolítica, mostre a faixa de 60% a 70% escrita grande. No final, grave a tela do GPA Pro montando uma prescrição. Tom de professor, sem pressa.
+`[NOTA DE GRAVAÇÃO]` Este é o bloco de tela. Mostre as cinco fases em texto, uma aparecendo de cada vez, enquanto você fala. Na zona lipolítica, mostre a faixa de 60% a 70% escrita grande. No final, grave a tela do GPA STUDIO PRO montando uma prescrição. Tom de professor, sem pressa.
 
 ---
 
@@ -122,19 +122,19 @@ A Metodologia de Vendas. Aulas mais um manual em PDF, com o passo a passo de com
 
 Os materiais de venda prontos. É o que você coloca na tela quando está apresentando o programa para o cliente. Trezentos e noventa e sete reais.
 
-E um ano do GPA Pro, o software de avaliação, prescrição e periodização. Mil cento e oitenta e oito reais.
+E um ano do GPA STUDIO PRO, o software de avaliação, prescrição e periodização, com três licenças de alunos, para você já criar os seus três primeiros programas e vender. Mil cento e oitenta e oito reais.
 
 Soma tudo isso e dá quatro mil setecentos e setenta e seis reais.
 
 O Método P.E.S.O. já foi vendido por mil novecentos e noventa e seis reais.
 
-Hoje ele sai por quinhentos e noventa e sete. Parcelado.
+Hoje ele sai por setecentos e noventa e sete. Parcelado.
 
-Faz a conta comigo. Um único programa vendido a quatro mil reais devolve o que você investiu quase sete vezes. Um só.
+Faz a conta comigo. Um único programa vendido a quatro mil reais devolve cinco vezes o que você investiu. Um só.
 
 São oito módulos, dez aulas, de quinze a vinte minutos cada. Você tem acesso por um ano.
 
-`[NOTA DE GRAVAÇÃO]` Monte a lista na tela, item por item, o valor de cada um entrando conforme você fala. Deixe a soma aparecer inteira, segure dois segundos, e só então risque e mostre o 597. Fale os valores devagar e sem entusiasmo forçado. O número faz o trabalho sozinho.
+`[NOTA DE GRAVAÇÃO]` Monte a lista na tela, item por item, o valor de cada um entrando conforme você fala. Deixe a soma aparecer inteira, segure dois segundos, e só então risque e mostre o 797. Fale os valores devagar e sem entusiasmo forçado. O número faz o trabalho sozinho.
 
 ---
 
@@ -158,7 +158,7 @@ Antes de eu te dizer o que fazer, tem uma coisa que você precisa saber.
 
 Junto com o curso vai a mentoria técnica ao vivo comigo, no Zoom. E aula ao vivo tem limite de gente. Eu preciso conseguir olhar o caso de cada um que está ali dentro.
 
-Esse preço de quinhentos e noventa e sete reais vale enquanto tiver vaga na turma. Quando a turma fechar, ele volta para o valor cheio, mil novecentos e noventa e seis reais.
+Esse preço de setecentos e noventa e sete reais vale enquanto tiver vaga na turma. Quando a turma fechar, ele volta para o valor cheio, mil novecentos e noventa e seis reais.
 
 Eu não vou ficar aqui te empurrando. Você viu o método, viu os resultados e viu a garantia. Se fez sentido para você, entra agora e resolve isso hoje.
 
@@ -178,7 +178,7 @@ Assim que o pagamento é aprovado, você recebe um e-mail com o seu acesso à pl
 
 Eu repito, porque é simples. Clica no botão abaixo do vídeo. Faz o pagamento. O acesso cai no seu e-mail.
 
-Quinhentos e noventa e sete reais, parcelado, com trinta dias de garantia.
+Setecentos e noventa e sete reais, parcelado, com trinta dias de garantia.
 
 `[NOTA DE GRAVAÇÃO]` Aponte para baixo com a mão nas duas vezes em que falar do botão. Mostre uma seta na tela apontando para o botão. Fale devagar, quase soletrando o passo a passo.
 
