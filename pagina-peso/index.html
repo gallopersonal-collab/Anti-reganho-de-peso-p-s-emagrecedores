@@ -346,8 +346,34 @@ mark{
   background:var(--branco);border:1px solid var(--linha);border-radius:15px;
   overflow:hidden;margin:0;box-shadow:0 1px 2px rgba(26,21,18,.05);
 }
-.video{position:relative;width:100%;padding-top:56.25%;background:var(--carvao)}
+/* Miniatura no lugar do video. O video do YouTube so e carregado quando a
+   pessoa clica no play — a pagina abre bem mais leve no celular. */
+.video{position:relative;display:block;width:100%;padding-top:56.25%;background:var(--carvao);
+  overflow:hidden;cursor:pointer;text-decoration:none}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+  display:block;transition:transform .4s ease,opacity .3s ease}
+.video .play{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:66px;height:46px;border-radius:12px;background:rgba(23,18,15,.72);
+  border:1px solid rgba(255,255,255,.22);
+  transition:background .25s ease,transform .25s ease;
+}
+.video .play::after{
+  content:"";position:absolute;left:50%;top:50%;
+  transform:translate(-42%,-50%);
+  border-style:solid;border-width:9px 0 9px 15px;
+  border-color:transparent transparent transparent #fff;
+}
+.video:hover .play,.video:focus-visible .play{background:var(--fogo);transform:translate(-50%,-50%) scale(1.06)}
+.video:hover img{transform:scale(1.035)}
+.video:focus-visible{outline:3px solid var(--fogo);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media(prefers-reduced-motion:reduce){
+  .video img,.video .play{transition:none}
+  .video:hover img{transform:none}
+}
 .depo figcaption{padding:15px 18px;font-size:.93rem;line-height:1.45;color:var(--tinta-2)}
 .depo figcaption b{display:block;color:var(--tinta);font-weight:800;font-family:var(--disp);
   font-size:.97rem;letter-spacing:-.015em;margin-bottom:2px}
@@ -742,11 +768,21 @@ gtag('config','SUA_TAG_AQUI');
     <h2>Quem já aplicou</h2>
     <div class="grade-depo">
       <figure class="depo">
-        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/-310l7IwlxI" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <a class="video" href="https://www.youtube.com/watch?v=-310l7IwlxI" data-yt="-310l7IwlxI"
+           title="Depoimento de profissional formado no Método P.E.S.O." target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/-310l7IwlxI/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360" onerror="this.remove()">
+          <span class="play" aria-hidden="true"></span>
+          <span class="sr">Assistir ao depoimento</span>
+        </a>
         <figcaption><b>Profa. Carla Borges</b>Irati, PR. Emagreceu 14 kg na aluna Jaci.</figcaption>
       </figure>
       <figure class="depo">
-        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/ZIIFqX2z6SM" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <a class="video" href="https://www.youtube.com/watch?v=ZIIFqX2z6SM" data-yt="ZIIFqX2z6SM"
+           title="Depoimento de profissional formado no Método P.E.S.O." target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/ZIIFqX2z6SM/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360" onerror="this.remove()">
+          <span class="play" aria-hidden="true"></span>
+          <span class="sr">Assistir ao depoimento</span>
+        </a>
         <figcaption><b>Professor Paulo Roberto</b>Duvidava do método antes de aplicar.</figcaption>
       </figure>
     </div>
@@ -880,11 +916,21 @@ gtag('config','SUA_TAG_AQUI');
     <h2>Mais quem aplicou</h2>
     <div class="grade-depo">
       <figure class="depo">
-        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/YiF7HzVdNY8" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <a class="video" href="https://www.youtube.com/watch?v=YiF7HzVdNY8" data-yt="YiF7HzVdNY8"
+           title="Depoimento de profissional formado no Método P.E.S.O." target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/YiF7HzVdNY8/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360" onerror="this.remove()">
+          <span class="play" aria-hidden="true"></span>
+          <span class="sr">Assistir ao depoimento</span>
+        </a>
         <figcaption><b>Personal Gonzaga</b>10 kg de gordura em apenas 16 dias com o Método P.E.S.O.</figcaption>
       </figure>
       <figure class="depo">
-        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/hnbKFJGG_lI" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <a class="video" href="https://www.youtube.com/watch?v=hnbKFJGG_lI" data-yt="hnbKFJGG_lI"
+           title="Depoimento de profissional formado no Método P.E.S.O." target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/hnbKFJGG_lI/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360" onerror="this.remove()">
+          <span class="play" aria-hidden="true"></span>
+          <span class="sr">Assistir ao depoimento</span>
+        </a>
         <figcaption><b>Andrea Luiz</b>Douradina, PR.</figcaption>
       </figure>
     </div>
@@ -936,7 +982,12 @@ gtag('config','SUA_TAG_AQUI');
 
     <div style="margin-top:24px">
       <figure class="depo">
-        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/iSPuO-jtcvg" title="Depoimento de profissional formado no Método P.E.S.O." loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <a class="video" href="https://www.youtube.com/watch?v=iSPuO-jtcvg" data-yt="iSPuO-jtcvg"
+           title="Depoimento de profissional formado no Método P.E.S.O." target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/iSPuO-jtcvg/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360" onerror="this.remove()">
+          <span class="play" aria-hidden="true"></span>
+          <span class="sr">Assistir ao depoimento</span>
+        </a>
         <figcaption><b>João Pedro</b>Ceará.</figcaption>
       </figure>
     </div>
@@ -1123,6 +1174,35 @@ document.querySelectorAll(".js-checkout").forEach(function(a){
        nada acontece e o clique segue normal para o checkout. */
     if(typeof window.fbq === "function"){ window.fbq("track","InitiateCheckout"); }
     if(typeof window.gtag === "function"){ window.gtag("event","begin_checkout",{currency:"BRL", value:597}); }
+  });
+});
+
+/* ==========================================================================
+   DEPOIMENTOS EM VIDEO
+
+   A pagina mostra so a miniatura de cada depoimento. O video do YouTube e
+   carregado quando a pessoa clica no play, e nao antes. Sao cinco videos:
+   carregar os cinco de uma vez deixava a pagina pesada no celular.
+
+   Se o javascript nao rodar, a miniatura continua sendo um link comum e
+   abre o video no YouTube, numa aba nova.
+   ========================================================================== */
+document.querySelectorAll(".video[data-yt]").forEach(function(fachada){
+  fachada.addEventListener("click", function(e){
+    e.preventDefault();
+
+    var quadro = document.createElement("iframe");
+    quadro.src = "https://www.youtube-nocookie.com/embed/" + fachada.dataset.yt
+               + "?autoplay=1&rel=0";
+    quadro.title = fachada.getAttribute("title") || "Depoimento";
+    quadro.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    quadro.allowFullscreen = true;
+
+    var caixa = document.createElement("div");
+    caixa.className = "video";
+    caixa.appendChild(quadro);
+
+    fachada.replaceWith(caixa);
   });
 });
 

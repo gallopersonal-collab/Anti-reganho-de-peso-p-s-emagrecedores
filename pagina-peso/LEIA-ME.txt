@@ -67,3 +67,19 @@ a instrução de como ligar está escrita ali.
 A página já avisa os dois sistemas quando alguém clica em "Quero o Método
 P.E.S.O." — o evento InitiateCheckout no Pixel e o begin_checkout no
 Analytics. Enquanto estiverem desligados, nada é enviado.
+
+
+OS DEPOIMENTOS EM VÍDEO
+
+A página mostra só a miniatura de cada depoimento, com um botão de play. O
+vídeo do YouTube só é carregado quando a pessoa clica. São cinco vídeos:
+carregar os cinco de uma vez deixava a página pesada de abrir no celular.
+
+As miniaturas vêm do próprio YouTube, então não há arquivo novo na pasta.
+Se o javascript não rodar no aparelho de alguém, a miniatura continua sendo
+um link comum e abre o vídeo no YouTube, numa aba nova.
+
+PARA TROCAR UM DEPOIMENTO: no index.html, procure pelo código do vídeo
+antigo (a parte depois do "v=" no endereço do YouTube) e troque pelo código
+do vídeo novo. Ele aparece três vezes seguidas na mesma linha — no href, no
+data-yt e no endereço da miniatura. Troque os três.
