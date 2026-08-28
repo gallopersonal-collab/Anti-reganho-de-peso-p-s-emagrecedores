@@ -1,7 +1,7 @@
 # VSL — Método P.E.S.O.
 
 Gerado pela skill `roteiro-vsl`. Voz: primeira pessoa, Professor José Carlos Gallo.
-Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10min40 (1.492 palavras faladas).
+Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10min40 (1.498 palavras faladas).
 Roteiro completo. Nenhum slot pendente.
 
 ---
@@ -34,11 +34,11 @@ E não era um aluno qualquer esperando por mim. Era a minha mãe. Grupo de risco
 
 Me bateu um desespero que eu não desejo para você.
 
-Comecei a estudar por conta própria, sozinho, sem saber direito por onde começar. Dois meses depois eu recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana.
+Comecei a estudar por conta própria, sozinho, sem saber direito por onde começar. Dois meses depois eu recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana, na Alemanha.
 
 Foi ali que eu encontrei o que estava faltando. E foi dali que saiu o Método P.E.S.O.
 
-Depois vieram a especialização na Alemanha, a pós em fisiologia do exercício, e trinta e seis anos aplicando isso em gente de verdade.
+Depois vieram a especialização em avaliação funcional pela Gama Filho, a pós em fisiologia do exercício, e trinta e seis anos aplicando isso em gente de verdade.
 
 `[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa, do começo ao fim deste bloco. Na fala da sua mãe, mude o tom de voz — você está imitando ela, e a pessoa precisa ouvir que é outra pessoa falando. Depois de "Eu fiquei mudo", pare de verdade. Conte dois segundos em silêncio antes de continuar. Se você tiver uma foto da sua mãe daquela época, coloque na tela enquanto fala a frase dela e tire logo depois. Não force emoção. A história já é forte, e ela funciona melhor contada com calma.
 
@@ -200,7 +200,7 @@ O botão está aí embaixo.
 
 ## Duração total estimada
 
-**~10min40**, com todos os dez blocos. São 1.492 palavras faladas, a 140 por minuto — sem contar títulos nem notas de gravação.
+**~10min40**, com todos os dez blocos. São 1.498 palavras faladas, a 140 por minuto — sem contar títulos nem notas de gravação.
 
 ## O que gravar primeiro
 

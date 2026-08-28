@@ -51,11 +51,11 @@ Sou o professor José Carlos "Gallo" Lima de Souza, fundador da Gallo Personal S
 
 Minha mãe voltou do médico um dia e me disse que a pressão, o colesterol e a glicemia dela estavam altos, e que tudo aquilo era porque ela precisava emagrecer. Ela tinha contado ao médico que tinha um filho formado em educação física, e que esse filho ia cuidar disso. Naquele momento eu percebi que a faculdade tinha me ensinado atletismo, voleibol, basquete e natação, e não tinha me ensinado a emagrecer ninguém. Quem estava esperando por mim era a minha mãe, dentro de um grupo de risco.
 
-Comecei a estudar por conta própria, sem saber direito por onde. Dois meses depois recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana. Foi ali que eu encontrei o que estava faltando, e foi dali que nasceu o Método P.E.S.O. A especialização na Alemanha, a pós em fisiologia do exercício e os 36 anos de prática vieram depois, todos construídos em cima daquele susto.
+Comecei a estudar por conta própria, sem saber direito por onde. Dois meses depois recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana, na Alemanha. Foi ali que eu encontrei o que estava faltando, e foi dali que nasceu o Método P.E.S.O. A especialização em avaliação funcional, a pós em fisiologia do exercício e os 36 anos de prática vieram depois, todos construídos em cima daquele susto.
 
 - **CREF 004702-G/BA**
 - Um dos **precursores do Personal Training no Brasil**
-- Especialização em **Avaliação Funcional e Controle da Atividade Física**, na Alemanha
+- Especialização em **Avaliação Funcional e Controle da Atividade Física**, pela Universidade Gama Filho
 - Pós-graduação em **Fisiologia do Exercício e Avaliação Morfo-Funcional**
 - Palestrante em universidades e congressos no Brasil e no exterior
 - Criador do **GPA STUDIO PRO**, o software de avaliação corporal e prescrição de treinamento que acompanha este curso
@@ -238,11 +238,11 @@ Sou o professor José Carlos "Gallo" Lima de Souza, fundador da Gallo Personal S
 
 Minha mãe voltou do médico um dia e me disse que a pressão, o colesterol e a glicemia dela estavam altos, e que tudo aquilo era porque ela precisava emagrecer. Ela tinha contado ao médico que tinha um filho formado em educação física, e que esse filho ia cuidar disso. Naquele momento eu percebi que a faculdade tinha me ensinado atletismo, voleibol, basquete e natação, e não tinha me ensinado a emagrecer ninguém. Quem estava esperando por mim era a minha mãe, dentro de um grupo de risco.
 
-Comecei a estudar por conta própria, sem saber direito por onde. Dois meses depois recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana. Foi ali que eu encontrei o que estava faltando, e foi dali que nasceu o Método P.E.S.O. A especialização na Alemanha, a pós em fisiologia do exercício e os 36 anos de prática vieram depois, todos construídos em cima daquele susto.
+Comecei a estudar por conta própria, sem saber direito por onde. Dois meses depois recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana, na Alemanha. Foi ali que eu encontrei o que estava faltando, e foi dali que nasceu o Método P.E.S.O. A especialização em avaliação funcional, a pós em fisiologia do exercício e os 36 anos de prática vieram depois, todos construídos em cima daquele susto.
 
 - **CREF 004702-G/BA**
 - Um dos **precursores do Personal Training no Brasil**
-- Especialização em **Avaliação Funcional e Controle da Atividade Física**, na Alemanha
+- Especialização em **Avaliação Funcional e Controle da Atividade Física**, pela Universidade Gama Filho
 - Pós-graduação em **Fisiologia do Exercício e Avaliação Morfo-Funcional**
 - Palestrante em universidades e congressos no Brasil e no exterior
 - Criador do **GPA STUDIO PRO**, o software de avaliação corporal e prescrição de treinamento que acompanha este curso
