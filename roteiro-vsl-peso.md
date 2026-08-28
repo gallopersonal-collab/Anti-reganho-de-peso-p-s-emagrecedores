@@ -1,7 +1,7 @@
 # VSL — Método P.E.S.O.
 
 Gerado pela skill `roteiro-vsl`. Voz: primeira pessoa, Professor José Carlos Gallo.
-Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10min40 (1.498 palavras faladas).
+Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10min40 (1.500 palavras faladas).
 Roteiro completo. Nenhum slot pendente.
 
 ---
@@ -34,7 +34,7 @@ E não era um aluno qualquer esperando por mim. Era a minha mãe. Grupo de risco
 
 Me bateu um desespero que eu não desejo para você.
 
-Comecei a estudar por conta própria, sozinho, sem saber direito por onde começar. Dois meses depois eu recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana, na Alemanha.
+Comecei a estudar por conta própria, sozinho, sem saber direito por onde começar. Dois meses depois eu recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana, em Colônia, na Alemanha.
 
 Foi ali que eu encontrei o que estava faltando. E foi dali que saiu o Método P.E.S.O.
 
@@ -200,7 +200,7 @@ O botão está aí embaixo.
 
 ## Duração total estimada
 
-**~10min40**, com todos os dez blocos. São 1.498 palavras faladas, a 140 por minuto — sem contar títulos nem notas de gravação.
+**~10min40**, com todos os dez blocos. São 1.500 palavras faladas, a 140 por minuto — sem contar títulos nem notas de gravação.
 
 ## O que gravar primeiro
 
