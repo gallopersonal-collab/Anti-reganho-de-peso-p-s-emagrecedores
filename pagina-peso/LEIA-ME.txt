@@ -25,7 +25,7 @@ O LINK DO CHECKOUT
 
 O endereço da Kiwify está escrito dentro dos cinco botões, no index.html:
 
-  https://pay.kiwify.com.br/82Pzoh8
+  https://pay.kiwify.com.br/Sr5xECq
 
 Ele fica no HTML de propósito, e não só no javascript: assim o botão leva
 ao checkout mesmo que o javascript falhe no celular de alguém.
