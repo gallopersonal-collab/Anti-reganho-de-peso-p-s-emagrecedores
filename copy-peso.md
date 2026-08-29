@@ -200,7 +200,7 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 | **Mentoria técnica ao vivo no Zoom com o Professor Gallo** | Você tira dúvida de prescrição com quem criou o método, olhando o seu caso | R$ 997 |
 | **Metodologia de Vendas** — aulas mais manual de vendas em PDF | O passo a passo da atração ao fechamento, para você vender o programa | R$ 697 |
 | **Materiais de venda prontos** | O que você mostra na tela quando apresenta o programa ao cliente | R$ 397 |
-| **1 ano do GPA Pro** — software de avaliação, prescrição e periodização | Avaliação, prescrição e periodização de 3 clientes dentro da plataforma | R$ 1.188 |
+| **1 ano do GPA Pro** — software de avaliação, prescrição e periodização, com três licenças de alunos | Você já elabora os três primeiros programas dentro da plataforma e vende | R$ 1.188 |
 
 **Valor total dos itens: R$ 4.776**
 
@@ -374,7 +374,7 @@ Nem todo mundo chega nesse número. Quem chega tem uma coisa em comum: entrega r
 | Mentoria técnica ao vivo no Zoom com o Professor Gallo | R$ 997 |
 | Metodologia de Vendas — aulas mais manual em PDF | R$ 697 |
 | Materiais de venda prontos | R$ 397 |
-| 1 ano do software de avaliação, prescrição e periodização | R$ 1.188 |
+| 1 ano do GPA Pro — avaliação, prescrição e periodização, com três licenças de alunos | R$ 1.188 |
 | **Total** | **R$ 4.776** |
 
 ### O Método P.E.S.O. já foi vendido por ~~R$ 1.996,00~~
