@@ -43,26 +43,29 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Instrument+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --papel:#F5F1ED;
+  --papel:#F4F1EC;
   --branco:#ffffff;
-  --tinta:#1A1512;
-  --tinta-2:#5A5049;
-  --tinta-3:#8C8279;
-  --linha:#E6DFD8;
-  --carvao:#17120F;
-  --carvao-2:#241D18;
-  --carvao-3:#352A22;
+  --tinta:#15100D;
+  --tinta-2:#544A43;
+  --tinta-3:#8A7F76;
+  --linha:#E4DCD3;
+  --carvao:#141010;
+  --carvao-2:#1E1816;
+  --carvao-3:#2E2622;
   --fogo:#F2621F;
   --fogo-2:#D14E12;
-  --fogo-luz:#FFEDE4;
+  --fogo-luz:#FDEDE4;
   --verde:#1B8A5A;
   --verde-luz:#E4F4EC;
-  --max:760px;
+  --max:1120px;      /* largura do bloco da secao */
+  --medida:36rem;    /* largura de leitura do texto corrido (~74 caracteres) */
+  --rail:170px;      /* coluna da etiqueta lateral, no desktop */
   --disp:Archivo,"Helvetica Neue",Arial,sans-serif;
-  --texto:Figtree,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --texto:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --dado:"DM Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -72,298 +75,366 @@ body{
   -webkit-font-smoothing:antialiased;padding-bottom:88px;
 }
 img,iframe{max-width:100%}
-p{margin:0 0 1.1em}
-strong{font-weight:700}
+img{height:auto}
+p{margin:0 0 1.15em}
+strong{font-weight:600}
 sub{font-size:.72em}
 
-.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-.secao{padding:60px 0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+.secao{padding:78px 0}
 .secao--branco{background:var(--branco)}
-.secao--escura{background:var(--carvao);color:#E8E1DA}
+.secao--escura{background:var(--carvao);color:#E8E1DA;padding:96px 0}
 .secao--escura h2,.secao--escura h3{color:#fff}
 .secao--escura p{color:#CFC5BC}
 
-h1,h2,h3,.disp{font-family:var(--disp);letter-spacing:-.03em;font-weight:800}
-h1{font-size:clamp(2.15rem,7.2vw,3.7rem);font-weight:900;line-height:1.01;margin:0 0 .4em;text-wrap:balance}
-h2{font-size:clamp(1.65rem,5.2vw,2.5rem);font-weight:900;line-height:1.08;margin:0 0 .7em;text-wrap:balance}
-h3{font-size:1.08rem;font-weight:800;letter-spacing:-.02em;margin:0 0 .35em;line-height:1.3}
-.lead{font-size:1.14rem;line-height:1.55;font-weight:500}
+h1,h2,h3,.disp{font-family:var(--disp);letter-spacing:-.032em;font-weight:800}
+h1{font-size:clamp(2.2rem,7vw,3.85rem);font-weight:900;line-height:.99;margin:0 0 .38em;text-wrap:balance}
+h2{font-size:clamp(1.7rem,5vw,2.6rem);font-weight:900;line-height:1.05;margin:0 0 .62em;max-width:14em;text-wrap:balance}
+h3{font-size:1.1rem;font-weight:800;letter-spacing:-.022em;margin:0 0 .35em;line-height:1.3}
+.lead{font-size:1.16rem;line-height:1.55;font-weight:500}
 
-/* Marcacao de destaque na headline */
-mark{
-  background:none;color:var(--fogo);
-  box-shadow:inset 0 -.14em 0 rgba(242,98,31,.28);
+/* ==========================================================================
+   ESTRUTURA ASSIMETRICA
+   No desktop cada secao vira duas colunas: uma trilha estreita a esquerda,
+   onde a etiqueta da secao fica grudada enquanto o texto rola, e a coluna
+   de leitura a direita. E isso que tira a pagina da cara de documento:
+   documento tem uma coluna so.
+   ========================================================================== */
+.secao > .wrap > p,
+.secao > .wrap > .lead,
+.secao > .wrap > ul:not([class]),
+.secao > .wrap > ol{max-width:var(--medida)}
+
+@media(min-width:1000px){
+  .secao > .wrap{
+    display:grid;grid-template-columns:var(--rail) minmax(0,1fr);
+    column-gap:54px;row-gap:0;align-items:start;
+  }
+  .secao > .wrap > *{grid-column:2;min-width:0}
+  .secao > .wrap > .selo-secao{
+    grid-column:1;grid-row:1 / span 40;
+    position:sticky;top:44px;align-self:start;margin:10px 0 0;
+  }
 }
 
-/* Selo de secao */
+/* Etiqueta de secao: fio de fogo + rotulo em fonte de dado.
+   Substitui a pilula arredondada, que aparece em qualquer pagina. */
 .selo-secao{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--disp);font-size:.72rem;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;
-  background:var(--fogo-luz);color:var(--fogo-2);
-  padding:7px 14px;border-radius:99px;margin:0 0 18px;
+  position:relative;display:block;font-family:var(--dado);font-size:.7rem;font-weight:500;
+  letter-spacing:.17em;text-transform:uppercase;
+  color:var(--tinta-3);background:none;padding:13px 0 0;margin:0 0 22px;
+  border-top:0;max-width:15em;line-height:1.45;
 }
-.secao--escura .selo-secao{background:rgba(242,98,31,.16);color:var(--fogo)}
+.selo-secao::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--fogo);transform-origin:left center;
+}
+.selo-secao .ico{display:none}
+.secao--escura .selo-secao,.garantia .selo-secao{color:#9A8F86;background:none}
+.garantia .selo-secao{margin-left:auto;margin-right:auto;max-width:18em}
 
 /* Icones */
 .ico{width:22px;height:22px;flex:0 0 auto;fill:none;stroke:currentColor;
   stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
 .ico-sm{width:17px;height:17px}
 
+/* Marcacao de destaque na headline */
+mark{
+  background:none;color:var(--fogo);
+  box-shadow:inset 0 -.13em 0 rgba(242,98,31,.3);
+}
+
 /* ---------- Hero ---------- */
 .hero{
-  background:var(--carvao);color:#fff;padding:40px 0 44px;position:relative;overflow:hidden;
+  background:var(--carvao);color:#fff;padding:46px 0 0;position:relative;overflow:hidden;
 }
 .hero::before{
-  content:"";position:absolute;top:-190px;right:-140px;width:520px;height:520px;
-  background:radial-gradient(circle,rgba(242,98,31,.30),rgba(242,98,31,0) 68%);
+  content:"";position:absolute;top:-210px;right:-150px;width:600px;height:600px;
+  background:radial-gradient(circle,rgba(242,98,31,.26),rgba(242,98,31,0) 66%);
   pointer-events:none;
 }
 .hero .wrap{position:relative}
 .hero h1{color:#fff}
-.hero-grade{display:grid;gap:26px}
-.hero-sub{font-size:clamp(1.04rem,2.7vw,1.18rem);line-height:1.55;color:#C6BCB3;margin:0 0 1.5em}
+.hero-grade{display:grid;gap:28px}
+.hero-sub{font-size:clamp(1.05rem,2.7vw,1.19rem);line-height:1.55;color:#BFB4AA;margin:0 0 1.6em;max-width:34em}
 .pilula{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--disp);font-size:.73rem;font-weight:800;
-  letter-spacing:.13em;text-transform:uppercase;
-  border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);
-  color:#E8E1DA;padding:7px 14px;border-radius:99px;margin:0 0 20px;
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--dado);font-size:.7rem;font-weight:400;
+  letter-spacing:.16em;text-transform:uppercase;
+  border:0;background:none;color:#9A8F86;padding:0;margin:0 0 26px;
 }
 .pilula .ponto{width:7px;height:7px;border-radius:50%;background:var(--fogo)}
 
 /* Linha de confianca sob o botao */
 .confianca{
-  display:flex;flex-wrap:wrap;gap:9px 20px;margin:16px 0 0;padding:0;list-style:none;
+  display:flex;flex-wrap:wrap;gap:10px 22px;margin:18px 0 0;padding:0;list-style:none;
 }
 .confianca li{
   display:flex;align-items:center;gap:7px;
-  font-family:var(--disp);font-size:.8rem;font-weight:600;color:#BDB2A8;
+  font-family:var(--dado);font-size:.74rem;font-weight:400;letter-spacing:.03em;color:#A79C92;
 }
 .confianca .ico{color:var(--verde)}
 
 /* Retrato do hero */
-.hero-foto{display:flex;align-items:center;gap:13px;margin:24px 0 0}
-.hero-foto img{flex:0 0 auto;width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:center 16%}
-.hero-foto figcaption{font-family:var(--disp);font-size:.85rem;font-weight:800;color:#fff;line-height:1.3}
+.hero-foto{display:flex;align-items:center;gap:14px;margin:26px 0 0}
+.hero-foto img{flex:0 0 auto;width:60px;height:60px;border-radius:50%;object-fit:cover;object-position:center 16%}
+.hero-foto figcaption{font-family:var(--disp);font-size:.88rem;font-weight:800;color:#fff;line-height:1.3}
 .hero-foto figcaption span{
-  display:block;font-weight:600;font-size:.76rem;color:var(--fogo);
-  letter-spacing:.03em;margin-top:3px;
+  display:block;font-family:var(--dado);font-weight:400;font-size:.7rem;color:var(--fogo);
+  letter-spacing:.09em;margin-top:5px;text-transform:uppercase;
 }
 @media(min-width:920px){
-  .hero .wrap{max-width:1040px}
-  .hero-grade{grid-template-columns:1fr 300px;gap:48px;align-items:center}
+  .hero{padding-top:64px}
+  .hero .wrap{max-width:1120px}
+  .hero-grade{grid-template-columns:1fr 330px;gap:60px;align-items:center}
   .hero-foto{display:block;margin:0}
-  .hero-foto img{width:100%;height:auto;aspect-ratio:4/5;border-radius:18px;object-position:center 20%}
-  .hero-foto figcaption{margin-top:13px}
+  .hero-foto img{width:100%;height:auto;aspect-ratio:4/5;border-radius:3px;object-position:center 20%}
+  .hero-foto figcaption{margin-top:15px}
 }
 
-/* ---------- Arco das fases ---------- */
-.arco{margin:26px 0 0}
-.arco-barra{display:flex;gap:5px}
+/* ---------- A LINHA DAS FASES  (elemento assinatura) ----------
+   Cinco blocos numa unica regua, cada um com a largura real da sua fase.
+   E a mesma regua que reaparece dentro de cada cartao de fase mais abaixo:
+   o mecanismo do metodo virou o desenho da pagina. */
+.arco{margin:44px 0 0;padding:0 0 30px}
+@media(min-width:920px){.arco{margin-top:64px;padding-bottom:40px}
+  .hero .wrap .arco{max-width:1120px}}
+.arco-barra{
+  display:flex;gap:0;background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.11);border-radius:3px;overflow:hidden;
+}
 .arco-barra span{
-  display:flex;align-items:center;justify-content:center;min-width:0;
-  height:50px;border-radius:8px;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
-  font-family:var(--disp);font-weight:800;font-size:.95rem;color:var(--fogo);
+  display:flex;align-items:flex-end;min-width:0;position:relative;
+  height:66px;padding:0 0 9px 12px;
+  font-family:var(--dado);font-weight:500;font-size:.78rem;letter-spacing:.06em;color:#8C8078;
+  border-left:1px solid rgba(255,255,255,.11);
   transform-origin:left center;
   transition:transform .6s cubic-bezier(.2,.8,.2,1);
 }
-/* MOMENTO ASSINATURA: as cinco fases se constroem da esquerda para a direita,
-   cada uma na proporção real da sua duração. O movimento conta o mecanismo. */
+.arco-barra span:first-child{border-left:0}
+.arco-barra span::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--fogo);
+}
 .js .arco-barra span{
   transform:scaleX(0);opacity:0;
   transition:transform .62s cubic-bezier(.16,.84,.28,1),opacity .28s ease;
   transition-delay:calc(var(--i,0) * 95ms);
 }
 .js .hero.on .arco-barra span{transform:none;opacity:1}
+@media(max-width:719px){.arco-barra span{height:52px;padding-left:10px}}
 .arco-legenda{
-  font-family:var(--disp);font-size:.78rem;font-weight:600;
-  letter-spacing:.02em;color:#9A8F86;margin:11px 0 0;
+  font-size:.84rem;font-weight:400;line-height:1.5;color:#8C8078;margin:14px 0 0;
 }
 
 /* ---------- CTA ---------- */
 .cta{
-  display:inline-flex;align-items:center;justify-content:center;gap:11px;
-  width:100%;max-width:440px;text-align:center;
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;max-width:430px;text-align:center;
   background:var(--fogo);color:#fff;text-decoration:none;
-  font-family:var(--disp);font-weight:800;font-size:1.06rem;line-height:1.25;
-  letter-spacing:-.015em;padding:20px 24px;border-radius:11px;
-  box-shadow:0 4px 0 var(--fogo-2),0 12px 26px -10px rgba(242,98,31,.55);
-  transition:background .15s ease,transform .08s ease,box-shadow .08s ease;
+  font-family:var(--disp);font-weight:800;font-size:1.05rem;line-height:1.25;
+  letter-spacing:-.018em;padding:21px 26px;border-radius:5px;
+  box-shadow:0 10px 24px -12px rgba(242,98,31,.85);
+  transition:background .18s ease,transform .18s cubic-bezier(.16,.84,.28,1),box-shadow .18s ease;
 }
-.cta .ico{width:19px;height:19px;stroke-width:2.6}
-.cta:hover,.cta:focus-visible{background:var(--fogo-2)}
-.cta:active{transform:translateY(2px);box-shadow:0 2px 0 var(--fogo-2)}
+.cta .ico{width:19px;height:19px;stroke-width:2.6;transition:transform .22s cubic-bezier(.16,.84,.28,1)}
+.cta:hover,.cta:focus-visible{background:var(--fogo-2);transform:translateY(-2px);box-shadow:0 16px 32px -14px rgba(242,98,31,.95)}
+.cta:hover .ico,.cta:focus-visible .ico{transform:translateX(4px)}
+.cta:active{transform:translateY(0)}
 .cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .cta-nota{
-  font-family:var(--disp);font-size:.83rem;font-weight:600;
-  color:var(--tinta-3);margin:.95em 0 0;
+  font-size:.86rem;font-weight:400;line-height:1.5;
+  color:var(--tinta-3);margin:1.1em 0 0;max-width:34rem;
 }
-.secao--escura .cta-nota,.hero .cta-nota{color:#9A8F86}
+.secao--escura .cta-nota,.hero .cta-nota{color:#8C8078}
 .cta-centro{text-align:center}
 .cta-centro .cta{margin:0 auto}
 
 /* ---------- Faixa de numeros ---------- */
-.numeros{background:var(--carvao-2);padding:24px 0}
-.numeros .wrap{display:flex;gap:16px}
-.numeros div{flex:1 1 0;min-width:0}
-.numeros b{
-  display:block;font-family:var(--disp);font-size:clamp(1.4rem,5.4vw,2rem);
-  font-weight:900;letter-spacing:-.04em;line-height:1.04;
+.numeros{background:var(--carvao);padding:0;border-top:1px solid var(--carvao-3)}
+.numeros .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1120px}
+.numeros .wrap > div{padding:30px 0 28px 22px;border-left:1px solid rgba(255,255,255,.09);min-width:0}
+.numeros .wrap > div:first-child{border-left:0;padding-left:0}
+@media(max-width:719px){
+  .numeros .wrap{grid-template-columns:1fr}
+  .numeros .wrap > div{padding:18px 0;border-left:0;border-top:1px solid rgba(255,255,255,.09);
+    display:flex;align-items:baseline;gap:14px}
+  .numeros .wrap > div:first-child{border-top:0}
+  .numeros .wrap > div > b{flex:0 0 auto}
+  .numeros .wrap > div > span{margin-top:0}
+}
+.numeros .wrap > div > b{
+  display:block;font-family:var(--disp);font-size:clamp(1.5rem,5.4vw,2.15rem);
+  font-weight:900;letter-spacing:-.045em;line-height:1;
   font-variant-numeric:tabular-nums;color:var(--fogo);
 }
-.numeros span{
-  display:block;font-family:var(--disp);font-size:.79rem;font-weight:600;
-  color:#9A8F86;line-height:1.3;margin-top:4px;
+.numeros .wrap > div > span{
+  display:block;font-family:var(--dado);font-size:.67rem;font-weight:400;
+  letter-spacing:.13em;text-transform:uppercase;
+  color:#8C8078;line-height:1.45;margin-top:9px;
 }
-@media(min-width:920px){.numeros .wrap{max-width:1040px;gap:26px}}
 
 /* ---------- Cartoes ---------- */
 .cartao{
-  background:var(--branco);border:1px solid var(--linha);border-radius:15px;
-  padding:20px 22px;
+  background:var(--branco);border:1px solid var(--linha);border-radius:14px;
+  padding:22px 24px;
 }
 .secao--branco .cartao{background:var(--papel);border-color:transparent}
-.grade{display:grid;gap:13px}
+.grade{display:grid;gap:14px}
 @media(min-width:640px){.grade-2{grid-template-columns:1fr 1fr}}
 @media(min-width:720px){.grade-3{grid-template-columns:repeat(3,1fr)}}
 
 .cartao-ico--ok{background:var(--verde-luz);color:var(--verde)}
 .cartao-ico{
-  width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-  background:var(--fogo-luz);color:var(--fogo-2);margin:0 0 13px;
+  width:42px;height:42px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  background:var(--fogo-luz);color:var(--fogo-2);margin:0 0 15px;
 }
 .cartao p{margin:0;color:var(--tinta-2);font-size:.99rem}
 
 /* Item com check */
-.checks{list-style:none;padding:0;margin:0;display:grid;gap:11px}
-@media(min-width:640px){.checks-2{grid-template-columns:1fr 1fr;gap:11px 20px}}
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+@media(min-width:640px){.checks-2{grid-template-columns:1fr 1fr;gap:12px 22px}}
 .checks li{display:flex;gap:11px;align-items:flex-start;line-height:1.5}
 .checks .ico{color:var(--verde);margin-top:3px}
 
 /* Bloco de destaque dentro do texto */
 .destaque-bloco{
-  background:var(--carvao);color:#fff;border-radius:15px;
-  padding:24px 24px;margin:22px 0;
-  font-family:var(--disp);font-size:clamp(1.12rem,3.2vw,1.4rem);
-  font-weight:800;letter-spacing:-.022em;line-height:1.3;
+  background:var(--carvao);color:#fff;border-radius:3px;
+  border-left:4px solid var(--fogo);
+  padding:26px 28px;margin:26px 0;max-width:var(--medida);
+  font-family:var(--disp);font-size:clamp(1.15rem,3.2vw,1.45rem);
+  font-weight:800;letter-spacing:-.026em;line-height:1.3;
 }
 .destaque-bloco span{color:var(--fogo)}
 
 /* ---------- Credenciais ---------- */
-.credenciais{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:10px}
-@media(min-width:640px){.credenciais{grid-template-columns:1fr 1fr;gap:10px 18px}}
+.credenciais{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:11px}
+@media(min-width:640px){.credenciais{grid-template-columns:1fr 1fr;gap:11px 20px}}
 .credenciais li{
   display:flex;gap:10px;align-items:flex-start;
   font-size:.94rem;line-height:1.45;color:var(--tinta-2);
 }
 .credenciais .ico{color:var(--fogo);margin-top:2px}
-.credenciais li b{color:var(--tinta);font-weight:700}
+.credenciais li b{color:var(--tinta);font-weight:600}
 
 /* ---------- Fases ---------- */
 .escala-nota{
-  font-family:var(--disp);font-size:.79rem;font-weight:600;
-  color:var(--tinta-3);margin:0 0 16px;display:flex;align-items:center;gap:8px;
+  font-size:.88rem;line-height:1.55;color:var(--tinta-3);margin:0 0 22px;max-width:var(--medida);
+  display:flex;align-items:flex-start;gap:10px;
 }
-.escala-nota .ico{color:var(--fogo)}
+.escala-nota .ico{color:var(--fogo);margin-top:3px}
 .fase{
-  background:var(--branco);border:1px solid var(--linha);border-radius:15px;
-  padding:20px 22px;margin:0 0 13px;
-  box-shadow:0 1px 2px rgba(26,21,18,.04);
+  background:var(--branco);border:1px solid var(--linha);border-radius:14px;
+  padding:22px 24px;margin:0 0 14px;
+  box-shadow:0 1px 2px rgba(21,16,13,.04);
+  transition:border-color .3s ease,box-shadow .3s ease,transform .3s cubic-bezier(.16,.84,.28,1);
 }
-.fase-topo{display:flex;align-items:center;gap:12px;margin-bottom:.55em}
+.fase:hover{border-color:#D8CCC0;box-shadow:0 10px 30px -18px rgba(21,16,13,.4);transform:translateY(-2px)}
+.fase-topo{display:flex;align-items:center;gap:14px;margin-bottom:.55em}
 .fase-n{
-  flex:0 0 auto;width:34px;height:34px;border-radius:10px;
+  flex:0 0 auto;width:34px;height:34px;border-radius:3px;
   background:var(--fogo);color:#fff;
-  font-family:var(--disp);font-size:.98rem;font-weight:900;
+  font-family:var(--dado);font-size:.86rem;font-weight:500;
   display:flex;align-items:center;justify-content:center;
 }
 .fase h3{margin:0}
-.fase p{margin:0 0 16px;color:var(--tinta-2);font-size:.99rem}
-.escala{position:relative;height:10px;background:#EDE6DF;border-radius:99px;overflow:hidden}
+.fase p{margin:0 0 18px;color:var(--tinta-2);font-size:.99rem}
+/* A regua: risquinhos de 10 em 10 por cima da faixa, para ela se ler como
+   escala de tempo e nao como barra de progresso de download. */
+.escala{
+  position:relative;height:12px;background:#EBE3DB;border-radius:2px;overflow:hidden;
+}
+.escala::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(90deg,
+    rgba(21,16,13,.16) 0 1px,transparent 1px 10%);
+}
 .escala i{
   position:absolute;top:0;bottom:0;left:var(--l);width:var(--w);
-  background:var(--fogo);border-radius:99px;
+  background:var(--fogo);border-radius:2px;
   transition:width .75s cubic-bezier(.2,.8,.2,1);
 }
 .js .escala i{width:0;transition:width .85s cubic-bezier(.16,.84,.28,1) .2s}
 .js .on .escala i{width:var(--w)}
 .escala-pe{
-  display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;
-  font-family:var(--disp);font-size:.79rem;font-weight:800;
+  display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;
+  font-family:var(--dado);font-size:.71rem;font-weight:500;letter-spacing:.05em;
   font-variant-numeric:tabular-nums;color:var(--fogo-2);
 }
-.escala-pe em{font-style:normal;font-weight:600;color:var(--tinta-3)}
+.escala-pe em{font-style:normal;font-weight:400;color:var(--tinta-3);text-transform:uppercase;letter-spacing:.1em}
 
 /* ---------- Passos ---------- */
-.passo{background:var(--branco);border:1px solid var(--linha);border-radius:15px;padding:20px 22px}
+.passo{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:22px 24px}
 .secao--branco .passo{background:var(--papel);border-color:transparent}
 .passo b{
-  display:block;font-family:var(--disp);font-size:2rem;font-weight:900;
-  color:var(--fogo);line-height:1;letter-spacing:-.04em;margin-bottom:8px;
+  display:block;font-family:var(--dado);font-size:.78rem;font-weight:500;
+  letter-spacing:.12em;color:var(--fogo);line-height:1;margin-bottom:14px;
+  padding-bottom:12px;border-bottom:1px solid var(--linha);
 }
-.passo p{margin:0;font-size:1rem;font-weight:600}
+.secao--branco .passo b{border-bottom-color:#E4DCD3}
+.passo p{margin:0;font-size:1rem;font-weight:500}
 
 /* ---------- Painel escuro ---------- */
-.painel{background:var(--carvao);color:#CFC5BC;border-radius:17px;padding:28px 24px;margin:26px 0 0}
-.painel h3{color:#fff;font-size:1.2rem;margin:0 0 .7em}
+.painel{background:var(--carvao);color:#CFC5BC;border-radius:16px;padding:32px 28px;margin:30px 0 0}
+.painel h3{color:#fff;font-size:1.24rem;margin:0 0 .7em}
 .painel p{color:#BFB4AA;margin:0}
-.medidas{display:grid;gap:13px;margin:20px 0}
+.medidas{display:grid;gap:14px;margin:22px 0}
 @media(min-width:560px){.medidas{grid-template-columns:1fr 1fr}}
-.medida{border:1px solid var(--carvao-3);border-radius:12px;padding:18px 19px;background:var(--carvao-2)}
+.medida{border:1px solid var(--carvao-3);border-radius:3px;padding:20px 21px;background:var(--carvao-2)}
 .medida b{
-  display:block;font-family:var(--disp);font-size:1.7rem;font-weight:900;
-  line-height:1.04;letter-spacing:-.04em;color:var(--fogo);font-variant-numeric:tabular-nums;
+  display:block;font-family:var(--disp);font-size:1.8rem;font-weight:900;
+  line-height:1.02;letter-spacing:-.045em;color:var(--fogo);font-variant-numeric:tabular-nums;
 }
-.medida span{display:block;font-family:var(--disp);font-size:.8rem;font-weight:600;color:#9A8F86;margin-top:6px;line-height:1.3}
+.medida span{display:block;font-family:var(--dado);font-size:.67rem;font-weight:400;
+  letter-spacing:.12em;text-transform:uppercase;color:#8C8078;margin-top:9px;line-height:1.45}
 
 /* ---------- Citacao ---------- */
 .citacao{
-  background:var(--branco);border:1px solid var(--linha);border-radius:15px;
-  padding:26px 24px 24px;margin:24px 0;position:relative;
+  background:none;border:0;border-left:3px solid var(--fogo);border-radius:0;
+  padding:4px 0 4px 26px;margin:30px 0;position:relative;max-width:var(--medida);
 }
-.secao--branco .citacao{background:var(--papel);border-color:transparent}
-.citacao::before{
-  content:"\201C";position:absolute;top:2px;left:18px;
-  font-family:var(--disp);font-size:4.2rem;font-weight:900;color:var(--fogo);opacity:.22;line-height:1;
-}
+.secao--branco .citacao{background:none}
+.citacao::before{display:none}
 .citacao p{
-  position:relative;font-size:clamp(1.08rem,3vw,1.28rem);line-height:1.42;
-  font-weight:700;letter-spacing:-.018em;margin:0 0 .6em;
+  position:relative;font-family:var(--disp);font-size:clamp(1.15rem,3vw,1.45rem);line-height:1.3;
+  font-weight:800;letter-spacing:-.028em;margin:0 0 .7em;
 }
-.citacao cite{font-style:normal;font-family:var(--disp);font-size:.85rem;font-weight:700;color:var(--fogo-2)}
+.citacao cite{font-style:normal;font-family:var(--dado);font-size:.71rem;font-weight:400;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--tinta-3)}
 
 /* ---------- Custo do caminho antigo ---------- */
-.custo{display:flex;gap:14px;align-items:flex-start;background:var(--branco);
-  border:1px solid var(--linha);border-radius:15px;padding:19px 21px}
+.custo{display:flex;gap:15px;align-items:flex-start;background:var(--branco);
+  border:1px solid var(--linha);border-radius:14px;padding:20px 22px}
 .secao--branco .custo{background:var(--papel);border-color:transparent}
 .custo .ico{color:#C0392B;margin-top:3px}
 .custo p{margin:0;color:var(--tinta-2);font-size:.99rem}
 .custo .preco-antigo{
-  display:block;font-family:var(--disp);font-weight:900;font-size:1.06rem;
-  color:var(--tinta);margin-bottom:3px;letter-spacing:-.02em;
+  display:block;font-family:var(--dado);font-weight:500;font-size:.95rem;
+  color:var(--tinta);margin-bottom:5px;letter-spacing:.02em;
 }
 
 /* ---------- Depoimentos ---------- */
-.grade-depo{display:grid;gap:16px}
+/* Depoimento solto, fora da grade de dois, nao pode ocupar a coluna inteira. */
+.wrap > div > .depo{max-width:36rem}
+.grade-depo{display:grid;gap:18px}
 @media(min-width:640px){.grade-depo{grid-template-columns:1fr 1fr}}
 .depo{
-  background:var(--branco);border:1px solid var(--linha);border-radius:15px;
-  overflow:hidden;margin:0;box-shadow:0 1px 2px rgba(26,21,18,.05);
+  background:var(--branco);border:1px solid var(--linha);border-radius:14px;
+  overflow:hidden;margin:0;box-shadow:0 1px 2px rgba(21,16,13,.05);
+  transition:box-shadow .3s ease,transform .3s cubic-bezier(.16,.84,.28,1);
 }
+.depo:hover{box-shadow:0 14px 34px -20px rgba(21,16,13,.45);transform:translateY(-3px)}
 /* Miniatura no lugar do video. O video do YouTube so e carregado quando a
    pessoa clica no play — a pagina abre bem mais leve no celular. */
 .video{position:relative;display:block;width:100%;padding-top:56.25%;background:var(--carvao);
   overflow:hidden;cursor:pointer;text-decoration:none}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
-  display:block;transition:transform .4s ease,opacity .3s ease}
+  display:block;transition:transform .5s cubic-bezier(.16,.84,.28,1),opacity .3s ease}
 .video .play{
   position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:66px;height:46px;border-radius:12px;background:rgba(23,18,15,.72);
-  border:1px solid rgba(255,255,255,.22);
-  transition:background .25s ease,transform .25s ease;
+  width:64px;height:44px;border-radius:4px;background:rgba(20,16,16,.7);
+  border:1px solid rgba(255,255,255,.24);
+  transition:background .25s ease,transform .25s cubic-bezier(.16,.84,.28,1);
 }
 .video .play::after{
   content:"";position:absolute;left:50%;top:50%;
@@ -371,142 +442,156 @@ mark{
   border-style:solid;border-width:9px 0 9px 15px;
   border-color:transparent transparent transparent #fff;
 }
-.video:hover .play,.video:focus-visible .play{background:var(--fogo);transform:translate(-50%,-50%) scale(1.06)}
-.video:hover img{transform:scale(1.035)}
+.video:hover .play,.video:focus-visible .play{background:var(--fogo);transform:translate(-50%,-50%) scale(1.09)}
+.video:hover img{transform:scale(1.045)}
 .video:focus-visible{outline:3px solid var(--fogo);outline-offset:2px}
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
-@media(prefers-reduced-motion:reduce){
-  .video img,.video .play{transition:none}
-  .video:hover img{transform:none}
-}
-.depo figcaption{padding:15px 18px;font-size:.93rem;line-height:1.45;color:var(--tinta-2)}
+.depo figcaption{padding:17px 20px;font-size:.93rem;line-height:1.45;color:var(--tinta-2)}
 .depo figcaption b{display:block;color:var(--tinta);font-weight:800;font-family:var(--disp);
-  font-size:.97rem;letter-spacing:-.015em;margin-bottom:2px}
+  font-size:.99rem;letter-spacing:-.02em;margin-bottom:3px}
 
 /* ---------- Relato e print ---------- */
 .relato{
-  background:var(--carvao);color:#fff;border-radius:16px;padding:26px 24px;margin:0 0 22px;
+  background:var(--carvao);color:#fff;border-radius:16px;padding:30px 28px;margin:0 0 24px;
+  max-width:40rem;
 }
 .relato .linha{
-  font-family:var(--disp);font-size:clamp(1.2rem,3.6vw,1.55rem);font-weight:900;
-  letter-spacing:-.028em;line-height:1.24;margin:0 0 .65em;color:#fff;
+  font-family:var(--disp);font-size:clamp(1.22rem,3.6vw,1.6rem);font-weight:900;
+  letter-spacing:-.032em;line-height:1.22;margin:0 0 .7em;color:#fff;
 }
 .relato .quem{font-size:.9rem;color:#BFB4AA;margin:0;line-height:1.5}
-.relato .quem b{color:var(--fogo);font-weight:700}
-.print-prova{margin:0 0 24px;text-align:center}
-.print-prova img{display:block;width:100%;max-width:300px;margin:0 auto;border-radius:14px;border:1px solid var(--linha)}
-.print-prova figcaption{font-family:var(--disp);font-size:.79rem;font-weight:600;color:var(--tinta-3);margin:10px auto 0;max-width:420px}
+.relato .quem b{color:var(--fogo);font-weight:600}
+.print-prova{margin:0 0 26px;text-align:center;max-width:40rem}
+.print-prova img{display:block;width:100%;max-width:300px;height:auto;margin:0 auto;border-radius:14px;border:1px solid var(--linha)}
+.print-prova figcaption{font-size:.86rem;color:var(--tinta-3);margin:12px auto 0;max-width:420px;line-height:1.5}
 
 /* ---------- Oferta ---------- */
 .oferta{
-  background:var(--branco);border:1px solid var(--linha);border-radius:20px;padding:10px 22px 22px;
-  box-shadow:0 2px 4px rgba(26,21,18,.05),0 24px 48px -24px rgba(26,21,18,.30);
+  background:var(--branco);border:1px solid var(--linha);border-radius:18px;padding:12px 26px 26px;
+  max-width:44rem;
+  box-shadow:0 2px 4px rgba(21,16,13,.05),0 30px 60px -30px rgba(21,16,13,.35);
 }
-.item{display:flex;gap:13px;align-items:flex-start;padding:15px 0;border-bottom:1px solid var(--linha)}
+.item{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--linha)}
 .item .ico{color:var(--verde);margin-top:3px}
 .item .nome{flex:1 1 auto;font-size:.99rem;line-height:1.45}
-.item .v{flex:0 0 auto;font-family:var(--disp);font-weight:800;font-size:.98rem;
-  font-variant-numeric:tabular-nums;color:var(--tinta-2);white-space:nowrap}
+.item .v{flex:0 0 auto;font-family:var(--dado);font-weight:500;font-size:.9rem;
+  font-variant-numeric:tabular-nums;color:var(--tinta-2);white-space:nowrap;letter-spacing:.02em}
 .tag-bonus{
-  display:inline-block;font-family:var(--disp);font-size:.63rem;font-weight:900;
-  letter-spacing:.12em;text-transform:uppercase;background:var(--verde-luz);color:var(--verde);
-  padding:3px 8px;border-radius:99px;margin-left:7px;vertical-align:1px;
+  display:inline-block;font-family:var(--dado);font-size:.62rem;font-weight:500;
+  letter-spacing:.13em;text-transform:uppercase;background:var(--verde-luz);color:var(--verde);
+  padding:3px 8px;border-radius:2px;margin-left:8px;vertical-align:1px;
 }
-.item--total{border-bottom:none;padding-top:17px}
-.item--total .nome{font-family:var(--disp);font-weight:800;font-size:.78rem;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-3)}
-.item--total .v{font-size:1.32rem;color:var(--tinta);letter-spacing:-.03em}
-.preco{background:var(--carvao);color:#fff;border-radius:15px;padding:28px 22px;margin:18px 0 0;text-align:center;position:relative;overflow:hidden}
+.item--total{border-bottom:none;padding-top:19px}
+.item--total .nome{font-family:var(--dado);font-weight:400;font-size:.72rem;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--tinta-3)}
+.item--total .v{font-family:var(--disp);font-weight:900;font-size:1.35rem;color:var(--tinta);letter-spacing:-.035em}
+.preco{background:var(--carvao);color:#fff;border-radius:14px;padding:34px 24px;margin:22px 0 0;text-align:center;position:relative;overflow:hidden}
 .preco::before{
-  content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);
-  width:380px;height:300px;
-  background:radial-gradient(circle,rgba(242,98,31,.26),rgba(242,98,31,0) 70%);
+  content:"";position:absolute;top:-130px;left:50%;transform:translateX(-50%);
+  width:420px;height:330px;
+  background:radial-gradient(circle,rgba(242,98,31,.24),rgba(242,98,31,0) 70%);
 }
 .preco > *{position:relative}
-.preco .antes{font-family:var(--disp);font-size:.93rem;font-weight:600;color:#9A8F86;margin:0}
+.preco .antes{font-family:var(--dado);font-size:.78rem;font-weight:400;letter-spacing:.09em;
+  text-transform:uppercase;color:#8C8078;margin:0}
 .preco .antes s{text-decoration-thickness:2px}
 .preco .agora{
-  font-family:var(--disp);font-size:clamp(2.6rem,10.4vw,4rem);font-weight:900;
-  letter-spacing:-.045em;line-height:1;margin:.12em 0 .12em;font-variant-numeric:tabular-nums;
+  font-family:var(--disp);font-size:clamp(2.7rem,10.4vw,4.2rem);font-weight:900;
+  letter-spacing:-.05em;line-height:1;margin:.16em 0 .14em;font-variant-numeric:tabular-nums;
 }
 .preco .agora em{
-  display:block;font-style:normal;font-size:.31em;font-weight:700;
-  letter-spacing:.02em;color:var(--fogo);margin-bottom:.25em;
+  display:block;font-family:var(--dado);font-style:normal;font-size:.2em;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--fogo);margin-bottom:.7em;
 }
-.preco .parcela{font-family:var(--disp);font-size:.97rem;font-weight:600;color:#CFC5BC;margin:0 0 22px}
-.preco .parcela b{color:#fff;font-weight:800}
+.preco .parcela{font-family:var(--dado);font-size:.88rem;font-weight:400;letter-spacing:.03em;color:#BFB4AA;margin:0 0 26px}
+.preco .parcela b{color:#fff;font-weight:500}
 
 /* ---------- Garantia ---------- */
 .garantia{
-  background:var(--branco);border:1px solid var(--linha);border-radius:20px;padding:30px 24px;
-  text-align:center;box-shadow:0 2px 4px rgba(26,21,18,.05);
+  background:var(--branco);border:1px solid var(--linha);border-radius:18px;padding:36px 28px;
+  max-width:44rem;
+  text-align:center;box-shadow:0 2px 4px rgba(21,16,13,.05);
 }
 .medalha{
-  width:96px;height:96px;margin:0 auto 18px;border-radius:50%;
+  width:98px;height:98px;margin:0 auto 22px;border-radius:50%;
   background:var(--verde-luz);color:var(--verde);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   border:2px solid var(--verde);
 }
-.medalha b{font-family:var(--disp);font-size:1.7rem;font-weight:900;line-height:1;letter-spacing:-.04em}
-.medalha span{font-family:var(--disp);font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
-.garantia .selo-secao{background:var(--verde-luz);color:var(--verde)}
+.medalha b{font-family:var(--disp);font-size:1.75rem;font-weight:900;line-height:1;letter-spacing:-.045em}
+.medalha span{font-family:var(--dado);font-size:.6rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;margin-top:5px}
 .garantia p{color:var(--tinta-2)}
 .garantia p:last-child{margin:0}
 
 /* ---------- FAQ ---------- */
-.faq{display:grid;gap:10px}
-.faq details{background:var(--branco);border:1px solid var(--linha);border-radius:13px;overflow:hidden}
-.secao--branco .faq details{background:var(--papel);border-color:transparent}
+.faq{display:grid;gap:0;border-top:1px solid var(--linha)}
+.faq details{background:none;border:0;border-bottom:1px solid var(--linha);border-radius:0;overflow:hidden}
+.secao--branco .faq details{background:none}
 .faq summary{
-  cursor:pointer;padding:17px 46px 17px 20px;
-  font-family:var(--disp);font-weight:700;font-size:1rem;letter-spacing:-.018em;
-  list-style:none;position:relative;
+  cursor:pointer;padding:20px 48px 20px 0;
+  font-family:var(--disp);font-weight:700;font-size:1.03rem;letter-spacing:-.022em;
+  list-style:none;position:relative;transition:color .2s ease;
 }
+.faq summary:hover{color:var(--fogo-2)}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary:focus-visible{outline:2px solid var(--fogo);outline-offset:-2px}
 .faq summary::after{
-  content:"";position:absolute;right:20px;top:50%;width:10px;height:10px;margin-top:-7px;
-  border-right:2.4px solid var(--fogo);border-bottom:2.4px solid var(--fogo);
-  transform:rotate(45deg);transition:transform .18s ease;
+  content:"";position:absolute;right:8px;top:50%;width:8px;height:8px;margin-top:-6px;
+  border-right:2px solid var(--fogo);border-bottom:2px solid var(--fogo);
+  transform:rotate(45deg);transition:transform .22s cubic-bezier(.16,.84,.28,1);
 }
-.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-2px}
-.faq .resposta{padding:0 20px 19px;color:var(--tinta-2);font-size:.99rem}
+.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-1px}
+.faq details[open] summary{color:var(--fogo-2)}
+.faq .resposta{padding:0 0 22px;color:var(--tinta-2);font-size:.99rem;max-width:var(--medida)}
 
 /* ---------- Barra fixa ---------- */
 .barra{
   position:fixed;left:0;right:0;bottom:0;z-index:60;
-  background:rgba(23,18,15,.97);backdrop-filter:blur(9px);
-  padding:11px 16px calc(11px + env(safe-area-inset-bottom));
-  transform:translateY(115%);transition:transform .25s ease;
+  background:rgba(20,16,16,.97);backdrop-filter:blur(10px);
+  border-top:1px solid var(--carvao-3);
+  padding:12px 18px calc(12px + env(safe-area-inset-bottom));
+  transform:translateY(115%);transition:transform .3s cubic-bezier(.16,.84,.28,1);
 }
 .barra.visivel{transform:translateY(0)}
-.barra .interno{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:14px}
-.barra .valor{flex:0 0 auto;line-height:1.1;font-family:var(--disp);color:#fff}
-.barra .valor b{display:block;font-size:1rem;font-weight:900;letter-spacing:-.04em;white-space:nowrap}
-.barra .valor span{font-size:.72rem;font-weight:600;color:#9A8F86}
-.barra .cta{flex:1 1 auto;max-width:none;padding:14px 16px;font-size:.98rem;box-shadow:0 3px 0 var(--fogo-2)}
+.barra .interno{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:16px}
+.barra .valor{flex:0 0 auto;line-height:1.2;color:#fff}
+.barra .valor b{display:block;font-family:var(--disp);font-size:1.05rem;font-weight:900;letter-spacing:-.045em;white-space:nowrap}
+.barra .valor span{font-family:var(--dado);font-size:.66rem;font-weight:400;letter-spacing:.09em;text-transform:uppercase;color:#8C8078}
+.barra .cta{flex:1 1 auto;max-width:none;padding:15px 18px;font-size:.98rem;box-shadow:none}
+.barra .cta:hover{transform:none;box-shadow:0 8px 20px -10px rgba(242,98,31,.9)}
 @media(max-width:419px){.barra .valor{display:none}}
 
 /* ---------- Rodape ---------- */
-footer{background:var(--carvao-2);color:#9A8F86;padding:38px 0;font-size:.88rem}
+footer{background:var(--carvao-2);color:#8C8078;padding:44px 0;font-size:.88rem;border-top:1px solid var(--carvao-3)}
 footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
-.logo-rodape{max-width:225px;margin:0 0 18px}
-.logo-rodape img{display:block;width:100%;height:auto;border-radius:8px;mix-blend-mode:lighten}
+.logo-rodape{max-width:225px;margin:0 0 20px}
+.logo-rodape img{display:block;width:100%;height:auto;border-radius:3px;mix-blend-mode:lighten}
 
-/* ---------- Reveal ---------- */
-.js .rv{opacity:0;transform:translateY(18px);
-  transition:opacity .55s ease,transform .55s cubic-bezier(.16,.84,.28,1)}
+/* ==========================================================================
+   MOVIMENTO
+   Tudo abaixo esta preso na classe .js, que so existe quando o JavaScript
+   esta ligado. Com o JavaScript desligado, nada disso vale e a pagina
+   aparece inteira, parada. NAO tire o ".js " da frente destas regras.
+   ========================================================================== */
+.js .rv{opacity:0;transform:translateY(20px);
+  transition:opacity .6s ease,transform .6s cubic-bezier(.16,.84,.28,1)}
 .js .rv.on{opacity:1;transform:none}
 
+/* O fio de fogo da etiqueta e riscado da esquerda para a direita quando a
+   secao entra. E o mesmo gesto da regua das fases, repetido pagina abaixo. */
+.js .selo-secao::before{transform:scaleX(0);
+  transition:transform .6s cubic-bezier(.16,.84,.28,1) .12s}
+.js .rv.on .selo-secao::before{transform:none}
+
 /* Filhos que entram um a um, onde a ordem significa alguma coisa:
-   as três provas, os itens da oferta e os cinco cartões de fase. */
+   as tres provas, os itens da oferta e os cinco cartoes de fase. */
 .js .esc{opacity:0;transform:translateY(14px);
   transition:opacity .5s ease,transform .5s cubic-bezier(.16,.84,.28,1);
   transition-delay:calc(var(--i,0) * 80ms)}
 .js .esc.on{opacity:1;transform:none}
 
-/* O preço: a âncora antiga é riscada, e só então o valor de hoje chega. */
+/* O preco: a ancora antiga e riscada, e so entao o valor de hoje chega. */
 .js .preco .antes s{text-decoration:none;position:relative}
 .js .preco .antes s::after{
   content:"";position:absolute;left:-2px;right:-2px;top:54%;height:2px;
@@ -522,14 +607,18 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
   transition:opacity .35s ease,transform .55s cubic-bezier(.2,1.1,.35,1)}
 .js .medalha.on{opacity:1;transform:none}
 
-.cta:hover{box-shadow:0 6px 18px rgba(242,98,31,.28)}
 @media(prefers-reduced-motion:reduce){
   .rv,.esc,.medalha,.preco .agora{opacity:1 !important;transform:none !important;transition:none !important}
+  .selo-secao::before{transform:none !important;transition:none !important}
   .escala i{transition:none !important;width:var(--w) !important}
   .arco-barra span{transform:none !important;opacity:1 !important;transition:none !important}
   .preco .antes s{text-decoration:line-through}
   .preco .antes s::after{display:none}
-  .cta:hover{box-shadow:none}
+  .cta,.cta .ico,.fase,.depo,.video img,.video .play,.faq summary::after{transition:none !important}
+  .cta:hover,.fase:hover,.depo:hover{transform:none;box-shadow:0 10px 24px -12px rgba(242,98,31,.85)}
+  .fase:hover,.depo:hover{box-shadow:0 1px 2px rgba(21,16,13,.05)}
+  .cta:hover .ico{transform:none}
+  .video:hover img{transform:none}
   html{scroll-behavior:auto}
   .barra{transition:none}
 }
@@ -1312,7 +1401,7 @@ document.querySelectorAll(".video[data-yt]").forEach(function(fachada){
   }
 
   var contaveis = [];
-  document.querySelectorAll(".numeros b").forEach(function(el){ contaveis.push(el); });
+  document.querySelectorAll(".numeros .wrap > div > b").forEach(function(el){ contaveis.push(el); });
   var total = document.querySelector(".item--total .v");
   if(total){ contaveis.push(total); }
   var medalha = document.querySelector(".medalha b");
