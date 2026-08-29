@@ -13,7 +13,7 @@
      vendendo — em vez de abrir em branco. -->
 <script>document.documentElement.className+=" js";</script>
 <meta name="author" content="Prof. José Carlos Gallo — Instituto Gallo Personal Systems">
-<meta name="theme-color" content="#17120F">
+<meta name="theme-color" content="#15100D">
 
 <!-- ==========================================================================
      COMO O LINK APARECE NO WHATSAPP E NO INSTAGRAM
@@ -43,129 +43,307 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..112,500..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* ==========================================================================
+   O SISTEMA VISUAL
+
+   A pagina e um estudio escuro com atos iluminados. O fundo padrao e o
+   carvao; a luz entra de proposito, nos trechos em que o texto precisa de ar.
+   Cada ato tem um formato proprio, entao da para saber onde voce esta pela
+   silhueta da secao, antes mesmo de ler.
+
+   As cores de superficie, de texto e de borda sao variaveis que trocam de
+   valor conforme a secao e clara ou escura. Um cartao, uma citacao ou um
+   acordeao e escrito uma vez so e se adapta aos dois lados.
+   ========================================================================== */
 :root{
-  --papel:#F5F1ED;
+  /* Escuro */
+  --noite:#0D0A08;
+  --carvao:#15100D;
+  --carvao-2:#1C1613;
+  --carvao-3:#271F1A;
+
+  /* Claro */
+  --areia:#FBF8F5;
   --branco:#ffffff;
-  --tinta:#1A1512;
-  --tinta-2:#5A5049;
-  --tinta-3:#8C8279;
-  --linha:#E6DFD8;
-  --carvao:#17120F;
-  --carvao-2:#241D18;
-  --carvao-3:#352A22;
+
+  /* Tinta */
+  --tinta:#15100D;
+  --tinta-corpo:#302823;
+  --tinta-2:#5C534B;
+  --tinta-3:#8F857C;
+  --linha:#EBE4DC;
+
+  /* Fogo, a cor da marca */
   --fogo:#F2621F;
-  --fogo-2:#D14E12;
-  --fogo-luz:#FFEDE4;
-  --verde:#1B8A5A;
-  --verde-luz:#E4F4EC;
+  --fogo-alto:#FF8340;
+  --fogo-2:#CF4B10;
+  --fogo-3:#A63A08;
+  --fogo-luz:#FFF1E8;
+
+  --verde:#12855A;
+  --verde-claro:#4FD3A0;
+  --verde-luz:#E6F5EE;
+
+  /* Medidas: a coluna de leitura e o palco largo */
+  --medida:700px;
+  --palco:1140px;
   --max:760px;
+
+  /* Cantos, numa escala e nao num valor so */
+  --r1:10px;
+  --r2:16px;
+  --r3:22px;
+  --r4:28px;
+
   --disp:Archivo,"Helvetica Neue",Arial,sans-serif;
   --texto:Figtree,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+
+  /* Grao. Uma textura de estudio, quase invisivel, que tira o achatado
+     das areas escuras grandes. */
+  --grao:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;font-family:var(--texto);font-size:17.5px;line-height:1.62;
-  color:var(--tinta);background:var(--papel);
+  margin:0;font-family:var(--texto);font-size:17px;line-height:1.68;
+  color:var(--tinta-corpo);background:var(--carvao);
   -webkit-font-smoothing:antialiased;padding-bottom:88px;
 }
 img,iframe{max-width:100%}
-p{margin:0 0 1.1em}
+p{margin:0 0 1.15em}
 strong{font-weight:700}
 sub{font-size:.72em}
 
-.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-.secao{padding:60px 0}
-.secao--branco{background:var(--branco)}
-.secao--escura{background:var(--carvao);color:#E8E1DA}
-.secao--escura h2,.secao--escura h3{color:#fff}
-.secao--escura p{color:#CFC5BC}
+/* --------------------------------------------------------------------------
+   CONTEXTO CLARO E CONTEXTO ESCURO
 
-h1,h2,h3,.disp{font-family:var(--disp);letter-spacing:-.03em;font-weight:800}
-h1{font-size:clamp(2.15rem,7.2vw,3.7rem);font-weight:900;line-height:1.01;margin:0 0 .4em;text-wrap:balance}
-h2{font-size:clamp(1.65rem,5.2vw,2.5rem);font-weight:900;line-height:1.08;margin:0 0 .7em;text-wrap:balance}
-h3{font-size:1.08rem;font-weight:800;letter-spacing:-.02em;margin:0 0 .35em;line-height:1.3}
-.lead{font-size:1.14rem;line-height:1.55;font-weight:500}
-
-/* Marcacao de destaque na headline */
-mark{
-  background:none;color:var(--fogo);
-  box-shadow:inset 0 -.14em 0 rgba(242,98,31,.28);
+   Toda secao declara o seu jogo de superficies. Os componentes la embaixo
+   usam essas variaveis, e nao cores fixas.
+   -------------------------------------------------------------------------- */
+.secao,.numeros,footer,.hero{
+  --sup:#ffffff;
+  --sup-bd:rgba(21,16,13,.07);
+  --sup-sh:0 1px 2px rgba(21,16,13,.04),0 18px 36px -24px rgba(21,16,13,.30);
+  --txt:var(--tinta);
+  --txt-corpo:var(--tinta-corpo);
+  --txt-2:var(--tinta-2);
+  --txt-3:var(--tinta-3);
+  --bd:var(--linha);
+  --trilho:#E9E0D8;
+  --marca:var(--fogo-2);
+  --marca-luz:var(--fogo-luz);
+  --realce-bg:var(--carvao);
+  --realce-fg:#ffffff;
+  --ok:var(--verde);
+  --ok-luz:var(--verde-luz);
 }
+.secao--escura,.secao--noite,.numeros,footer,.hero{
+  --sup:linear-gradient(168deg,#251E19,#1A1411);
+  --sup-bd:rgba(255,255,255,.075);
+  --sup-sh:inset 0 1px 0 rgba(255,255,255,.045),0 24px 48px -28px #000;
+  --txt:#ffffff;
+  --txt-corpo:#CDC3BA;
+  --txt-2:#BAAFA5;
+  --txt-3:#A79C92;
+  --bd:rgba(255,255,255,.10);
+  --trilho:rgba(255,255,255,.10);
+  --marca:var(--fogo-alto);
+  --marca-luz:rgba(242,98,31,.15);
+  --realce-bg:linear-gradient(100deg,rgba(242,98,31,.16),rgba(242,98,31,.02));
+  --realce-fg:#ffffff;
+  --ok:var(--verde-claro);
+  --ok-luz:rgba(79,211,160,.13);
+}
+
+/* --------------------------------------------------------------------------
+   RITMO DAS SECOES
+
+   O espaco nao e o mesmo em toda parte. A secao comum respira; a faixa de
+   numeros e apertada; o climax da oferta e o fechamento tem mais ar.
+   Uma secao marcada como "cola" e a continuacao da anterior: ela perde o
+   respiro de cima e as duas passam a ler como um bloco so, com uma batida
+   interna, em vez de duas lajes empilhadas.
+   -------------------------------------------------------------------------- */
+.wrap{max-width:var(--medida);margin:0 auto;padding:0 22px}
+.palco{max-width:var(--palco);margin:0 auto;padding:0 22px}
+
+.secao{
+  position:relative;isolation:isolate;
+  padding:clamp(64px,8.5vw,112px) 0;
+  background:var(--areia);color:var(--txt-corpo);
+}
+.secao--escura{background:var(--carvao)}
+.secao--noite{background:var(--noite)}
+.secao--climax{padding:clamp(76px,10vw,136px) 0}
+.secao--cola{padding-top:0}
+.secao--escura+.secao--escura,
+.secao--noite+.secao--noite,
+.secao--escura+.secao--noite,
+.secao--noite+.secao--escura{border-top:0}
+
+/* Fio de luz no alto de cada virada de ato claro para escuro */
+.secao--escura::before,.secao--noite::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;z-index:2;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.10) 22%,rgba(242,98,31,.34) 50%,rgba(255,255,255,.10) 78%,transparent);
+}
+.secao--cola::before{display:none}
+
+/* Grao sobre as areas escuras */
+.secao--escura::after,.secao--noite::after,.hero::after,.numeros::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:var(--grao);opacity:.045;
+}
+
+/* --------------------------------------------------------------------------
+   TIPOGRAFIA
+
+   Uma familia so, Archivo, usada em tres larguras diferentes: estreita nos
+   selos, normal nos titulos, larga nos numeros. E o que da voz de estudio
+   sem carregar mais uma fonte.
+   -------------------------------------------------------------------------- */
+h1,h2,h3,.disp{font-family:var(--disp);font-weight:800;color:var(--txt)}
+h1{
+  font-size:clamp(2.5rem,7.6vw,4.5rem);font-weight:900;font-stretch:96%;
+  line-height:.96;letter-spacing:-.038em;margin:0 0 .34em;text-wrap:balance;
+}
+h2{
+  font-size:clamp(1.95rem,5.4vw,3rem);font-weight:900;font-stretch:96%;
+  line-height:1.03;letter-spacing:-.034em;margin:0 0 .62em;text-wrap:balance;
+}
+h3{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;margin:0 0 .4em;line-height:1.32}
+.lead{font-size:1.24rem;line-height:1.55;font-weight:500;color:var(--txt);letter-spacing:-.012em}
+.secao p{color:var(--txt-corpo)}
+
+/* Centraliza a abertura dos atos de prova, oferta, garantia e fechamento */
+.secao--palco-centro{text-align:center}
+.secao--palco-centro .wrap>p{margin-left:auto;margin-right:auto;max-width:60ch}
+.secao--palco-centro .cta-centro{text-align:center}
+
+mark{
+  background:none;color:var(--fogo-alto);
+  box-shadow:inset 0 -.13em 0 rgba(242,98,31,.34);
+}
+.secao:not(.secao--escura):not(.secao--noite) mark{color:var(--fogo-2)}
 
 /* Selo de secao */
 .selo-secao{
   display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--disp);font-size:.72rem;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;
-  background:var(--fogo-luz);color:var(--fogo-2);
-  padding:7px 14px;border-radius:99px;margin:0 0 18px;
+  font-family:var(--disp);font-size:.7rem;font-weight:700;font-stretch:80%;
+  letter-spacing:.2em;text-transform:uppercase;
+  background:var(--marca-luz);color:var(--marca);
+  padding:8px 15px;border-radius:99px;margin:0 0 20px;
+  border:1px solid transparent;
 }
-.secao--escura .selo-secao{background:rgba(242,98,31,.16);color:var(--fogo)}
+.secao--escura .selo-secao,.secao--noite .selo-secao{border-color:rgba(242,98,31,.24)}
 
 /* Icones */
 .ico{width:22px;height:22px;flex:0 0 auto;fill:none;stroke:currentColor;
   stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
 .ico-sm{width:17px;height:17px}
 
-/* ---------- Hero ---------- */
-.hero{
-  background:var(--carvao);color:#fff;padding:40px 0 44px;position:relative;overflow:hidden;
+/* --------------------------------------------------------------------------
+   BARRA DE PROGRESSO
+
+   A pagina e longa. O fio no alto diz o quanto ja passou. So aparece com
+   javascript ligado, e some para quem pede menos movimento.
+   -------------------------------------------------------------------------- */
+.progresso{display:none}
+.js .progresso{
+  display:block;position:fixed;left:0;top:0;height:2px;z-index:80;
+  width:100%;transform:scaleX(0);transform-origin:left center;
+  background:linear-gradient(90deg,var(--fogo-2),var(--fogo-alto));
 }
+
+/* --------------------------------------------------------------------------
+   HERO
+   -------------------------------------------------------------------------- */
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  background:var(--carvao);color:#fff;
+  padding:clamp(44px,6vw,72px) 0 clamp(48px,6vw,76px);
+}
+/* Duas luzes de estudio, uma quente atras do titulo e outra fria no rodape
+   do bloco, para o preto nao ficar chapado. */
 .hero::before{
-  content:"";position:absolute;top:-190px;right:-140px;width:520px;height:520px;
-  background:radial-gradient(circle,rgba(242,98,31,.30),rgba(242,98,31,0) 68%);
+  content:"";position:absolute;z-index:-1;top:-260px;right:-180px;width:720px;height:720px;
+  background:radial-gradient(circle,rgba(242,98,31,.34),rgba(242,98,31,.06) 46%,rgba(242,98,31,0) 70%);
   pointer-events:none;
 }
-.hero .wrap{position:relative}
-.hero h1{color:#fff}
-.hero-grade{display:grid;gap:26px}
-.hero-sub{font-size:clamp(1.04rem,2.7vw,1.18rem);line-height:1.55;color:#C6BCB3;margin:0 0 1.5em}
-.pilula{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--disp);font-size:.73rem;font-weight:800;
-  letter-spacing:.13em;text-transform:uppercase;
-  border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);
-  color:#E8E1DA;padding:7px 14px;border-radius:99px;margin:0 0 20px;
+.hero .brilho-frio{
+  position:absolute;z-index:-1;left:-220px;bottom:-320px;width:640px;height:640px;
+  background:radial-gradient(circle,rgba(120,150,190,.13),rgba(120,150,190,0) 68%);
+  pointer-events:none;
 }
-.pilula .ponto{width:7px;height:7px;border-radius:50%;background:var(--fogo)}
+.hero .wrap{position:relative;max-width:var(--palco)}
+.hero h1{color:#fff}
+.hero-grade{display:grid;gap:30px}
+.hero-sub{
+  font-size:clamp(1.06rem,2.7vw,1.22rem);line-height:1.58;
+  color:#C6BCB3;margin:0 0 1.6em;max-width:54ch;
+}
+.pilula{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--disp);font-size:.7rem;font-weight:700;font-stretch:80%;
+  letter-spacing:.19em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  color:#E8E1DA;padding:8px 15px;border-radius:99px;margin:0 0 24px;
+}
+.pilula .ponto{
+  width:7px;height:7px;border-radius:50%;background:var(--fogo);
+  box-shadow:0 0 0 3px rgba(242,98,31,.22);
+}
 
 /* Linha de confianca sob o botao */
 .confianca{
-  display:flex;flex-wrap:wrap;gap:9px 20px;margin:16px 0 0;padding:0;list-style:none;
+  display:flex;flex-wrap:wrap;gap:10px 22px;margin:18px 0 0;padding:0;list-style:none;
 }
 .confianca li{
-  display:flex;align-items:center;gap:7px;
-  font-family:var(--disp);font-size:.8rem;font-weight:600;color:#BDB2A8;
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--disp);font-size:.82rem;font-weight:600;color:#BDB2A8;
 }
-.confianca .ico{color:var(--verde)}
+.confianca .ico{color:var(--verde-claro)}
 
-/* Retrato do hero */
-.hero-foto{display:flex;align-items:center;gap:13px;margin:24px 0 0}
-.hero-foto img{flex:0 0 auto;width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:center 16%}
-.hero-foto figcaption{font-family:var(--disp);font-size:.85rem;font-weight:800;color:#fff;line-height:1.3}
+/* Retrato do hero, com um fio de fogo deslocado atras */
+.hero-foto{display:flex;align-items:center;gap:14px;margin:26px 0 0;position:relative}
+.hero-foto img{
+  flex:0 0 auto;width:60px;height:60px;border-radius:50%;object-fit:cover;object-position:center 16%;
+  border:2px solid rgba(255,255,255,.14);
+}
+.hero-foto figcaption{font-family:var(--disp);font-size:.88rem;font-weight:800;color:#fff;line-height:1.3}
 .hero-foto figcaption span{
-  display:block;font-weight:600;font-size:.76rem;color:var(--fogo);
-  letter-spacing:.03em;margin-top:3px;
+  display:block;font-weight:600;font-size:.76rem;color:var(--fogo-alto);
+  letter-spacing:.04em;margin-top:4px;
 }
 @media(min-width:920px){
-  .hero .wrap{max-width:1040px}
-  .hero-grade{grid-template-columns:1fr 300px;gap:48px;align-items:center}
+  .hero-grade{grid-template-columns:1fr 330px;gap:60px;align-items:center}
   .hero-foto{display:block;margin:0}
-  .hero-foto img{width:100%;height:auto;aspect-ratio:4/5;border-radius:18px;object-position:center 20%}
-  .hero-foto figcaption{margin-top:13px}
+  .hero-foto::before{
+    content:"";position:absolute;inset:18px -14px -16px 18px;
+    border:1px solid rgba(242,98,31,.45);border-radius:var(--r3);
+  }
+  .hero-foto img{
+    position:relative;width:100%;height:auto;aspect-ratio:4/5;
+    border-radius:var(--r3);object-position:center 20%;border:0;
+    box-shadow:0 30px 60px -30px #000;
+  }
+  .hero-foto figcaption{position:relative;margin-top:16px}
 }
 
-/* ---------- Arco das fases ---------- */
-.arco{margin:26px 0 0}
-.arco-barra{display:flex;gap:5px}
+/* --------------------------------------------------------------------------
+   ARCO DAS FASES
+   -------------------------------------------------------------------------- */
+.arco{margin:32px 0 0}
+.arco-barra{display:flex;gap:6px}
 .arco-barra span{
   display:flex;align-items:center;justify-content:center;min-width:0;
-  height:50px;border-radius:8px;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
-  font-family:var(--disp);font-weight:800;font-size:.95rem;color:var(--fogo);
+  height:56px;border-radius:var(--r1);
+  background:linear-gradient(180deg,rgba(242,98,31,.20),rgba(242,98,31,.05));
+  border:1px solid rgba(242,98,31,.30);
+  font-family:var(--disp);font-weight:900;font-stretch:104%;font-size:1rem;color:var(--fogo-alto);
   transform-origin:left center;
   transition:transform .6s cubic-bezier(.2,.8,.2,1);
 }
@@ -178,330 +356,521 @@ mark{
 }
 .js .hero.on .arco-barra span{transform:none;opacity:1}
 .arco-legenda{
-  font-family:var(--disp);font-size:.78rem;font-weight:600;
-  letter-spacing:.02em;color:#9A8F86;margin:11px 0 0;
+  font-family:var(--disp);font-size:.78rem;font-weight:600;font-stretch:88%;
+  letter-spacing:.05em;color:#9A8F86;margin:13px 0 0;
 }
 
-/* ---------- CTA ---------- */
+/* --------------------------------------------------------------------------
+   CTA
+   -------------------------------------------------------------------------- */
 .cta{
-  display:inline-flex;align-items:center;justify-content:center;gap:11px;
-  width:100%;max-width:440px;text-align:center;
-  background:var(--fogo);color:#fff;text-decoration:none;
-  font-family:var(--disp);font-weight:800;font-size:1.06rem;line-height:1.25;
-  letter-spacing:-.015em;padding:20px 24px;border-radius:11px;
-  box-shadow:0 4px 0 var(--fogo-2),0 12px 26px -10px rgba(242,98,31,.55);
-  transition:background .15s ease,transform .08s ease,box-shadow .08s ease;
+  position:relative;overflow:hidden;
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;max-width:460px;text-align:center;
+  background:linear-gradient(180deg,var(--fogo-alto),var(--fogo-2));
+  color:#fff;text-decoration:none;
+  font-family:var(--disp);font-weight:800;font-stretch:98%;font-size:1.08rem;line-height:1.25;
+  letter-spacing:-.012em;padding:21px 26px;border-radius:var(--r2);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    0 3px 0 var(--fogo-3),
+    0 16px 34px -12px rgba(242,98,31,.60);
+  transition:filter .16s ease,transform .08s ease,box-shadow .16s ease;
 }
-.cta .ico{width:19px;height:19px;stroke-width:2.6}
-.cta:hover,.cta:focus-visible{background:var(--fogo-2)}
-.cta:active{transform:translateY(2px);box-shadow:0 2px 0 var(--fogo-2)}
+.cta .ico{width:19px;height:19px;stroke-width:2.6;position:relative}
+.cta>*{position:relative}
+/* Brilho que atravessa o botao ao passar o mouse: afordancia, nao enfeite */
+.cta::after{
+  content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.26),transparent);
+  transform:translateX(0);transition:transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.cta:hover::after,.cta:focus-visible::after{transform:translateX(360%)}
+.cta:hover,.cta:focus-visible{filter:brightness(1.06)}
+.cta:active{transform:translateY(3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 0 0 var(--fogo-3)}
 .cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.cta-nota{
-  font-family:var(--disp);font-size:.83rem;font-weight:600;
-  color:var(--tinta-3);margin:.95em 0 0;
+/* No celular o botao aperta um pouco para o texto caber numa linha so. */
+@media(max-width:520px){
+  .cta{font-size:1rem;padding:19px 16px;gap:9px}
+  .preco{padding:32px 18px}
 }
-.secao--escura .cta-nota,.hero .cta-nota{color:#9A8F86}
-.cta-centro{text-align:center}
+.cta-nota{
+  font-family:var(--disp);font-size:.85rem;font-weight:600;
+  color:var(--txt-3);margin:1em 0 0;
+}
 .cta-centro .cta{margin:0 auto}
+.cta-centro{text-align:center}
 
-/* ---------- Faixa de numeros ---------- */
-.numeros{background:var(--carvao-2);padding:24px 0}
-.numeros .wrap{display:flex;gap:16px}
-.numeros div{flex:1 1 0;min-width:0}
+/* --------------------------------------------------------------------------
+   FAIXA DE NUMEROS
+
+   Uma tira apertada, de ponta a ponta, com fios entre os numeros. Ela existe
+   para cortar o ritmo depois do hero, e nao para ser mais uma secao.
+   -------------------------------------------------------------------------- */
+.numeros{
+  position:relative;isolation:isolate;
+  background:var(--noite);padding:clamp(26px,4vw,38px) 0;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.numeros .wrap{display:flex;gap:0;max-width:var(--palco)}
+.numeros div{flex:1 1 0;min-width:0;padding:0 clamp(10px,2.4vw,26px)}
+.numeros div+div{border-left:1px solid rgba(255,255,255,.09)}
+.numeros div:first-child{padding-left:0}
+.numeros div:last-child{padding-right:0}
 .numeros b{
-  display:block;font-family:var(--disp);font-size:clamp(1.4rem,5.4vw,2rem);
-  font-weight:900;letter-spacing:-.04em;line-height:1.04;
-  font-variant-numeric:tabular-nums;color:var(--fogo);
+  display:block;font-family:var(--disp);font-size:clamp(1.5rem,5.6vw,2.4rem);
+  font-weight:900;font-stretch:104%;letter-spacing:-.045em;line-height:1.02;
+  font-variant-numeric:tabular-nums;
+  background:linear-gradient(180deg,#FFB88A,var(--fogo));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .numeros span{
-  display:block;font-family:var(--disp);font-size:.79rem;font-weight:600;
-  color:#9A8F86;line-height:1.3;margin-top:4px;
+  display:block;font-family:var(--disp);font-size:.78rem;font-weight:600;font-stretch:88%;
+  color:#9A8F86;line-height:1.35;margin-top:7px;letter-spacing:.02em;
 }
-@media(min-width:920px){.numeros .wrap{max-width:1040px;gap:26px}}
 
-/* ---------- Cartoes ---------- */
+/* --------------------------------------------------------------------------
+   CARTOES E LISTAS
+   -------------------------------------------------------------------------- */
 .cartao{
-  background:var(--branco);border:1px solid var(--linha);border-radius:15px;
-  padding:20px 22px;
+  background:var(--sup);border:1px solid var(--sup-bd);border-radius:var(--r2);
+  padding:26px 26px;box-shadow:var(--sup-sh);
+  transition:transform .2s ease,box-shadow .2s ease;
 }
-.secao--branco .cartao{background:var(--papel);border-color:transparent}
-.grade{display:grid;gap:13px}
+.grade{display:grid;gap:16px}
 @media(min-width:640px){.grade-2{grid-template-columns:1fr 1fr}}
 @media(min-width:720px){.grade-3{grid-template-columns:repeat(3,1fr)}}
+/* O PALCO
 
-.cartao-ico--ok{background:var(--verde-luz);color:var(--verde)}
-.cartao-ico{
-  width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-  background:var(--fogo-luz);color:var(--fogo-2);margin:0 0 13px;
+   O texto corrido fica na coluna de leitura. Os blocos — grades, fases,
+   oferta — saem dela e ocupam o palco largo, cada um na largura que o
+   conteudo dele pede. E essa diferenca de largura que tira a pagina do
+   formato de documento: nem tudo esta na mesma coluna. */
+@media(min-width:900px){
+  .secao .wrap>.grade,
+  .secao .wrap>.grade-depo,
+  .secao .wrap>.checks-2,
+  .secao .wrap>.fase,
+  .secao .wrap>.oferta{
+    --larg:var(--palco);
+    width:calc(100vw - 44px);max-width:var(--larg);
+    margin-left:calc(50% - min(50vw - 22px, var(--larg) / 2));
+  }
+  /* Os depoimentos sao videos verticais: esticar a grade so aumenta a
+     tarja preta dos lados da miniatura. */
+  .secao .wrap>.grade-depo{--larg:880px}
+  .secao .wrap>.checks-2{--larg:980px}
+  .secao .wrap>.oferta{--larg:900px}
 }
-.cartao p{margin:0;color:var(--tinta-2);font-size:.99rem}
+
+.cartao-ico{
+  width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  background:var(--marca-luz);color:var(--marca);margin:0 0 15px;
+}
+.cartao-ico--ok{background:var(--ok-luz);color:var(--ok)}
+.cartao p{margin:0;color:var(--txt-corpo);font-size:1rem}
+.cartao h3{color:var(--txt)}
 
 /* Item com check */
-.checks{list-style:none;padding:0;margin:0;display:grid;gap:11px}
-@media(min-width:640px){.checks-2{grid-template-columns:1fr 1fr;gap:11px 20px}}
-.checks li{display:flex;gap:11px;align-items:flex-start;line-height:1.5}
-.checks .ico{color:var(--verde);margin-top:3px}
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+@media(min-width:640px){.checks-2{grid-template-columns:1fr 1fr;gap:14px 26px}}
+.checks li{display:flex;gap:12px;align-items:flex-start;line-height:1.55;color:var(--txt-corpo)}
+.checks .ico{color:var(--ok);margin-top:4px}
 
 /* Bloco de destaque dentro do texto */
 .destaque-bloco{
-  background:var(--carvao);color:#fff;border-radius:15px;
-  padding:24px 24px;margin:22px 0;
-  font-family:var(--disp);font-size:clamp(1.12rem,3.2vw,1.4rem);
-  font-weight:800;letter-spacing:-.022em;line-height:1.3;
+  background:var(--realce-bg);color:var(--realce-fg);border-radius:var(--r3);
+  padding:28px 30px;margin:28px 0;
+  font-family:var(--disp);font-size:clamp(1.16rem,3.2vw,1.5rem);
+  font-weight:800;font-stretch:98%;letter-spacing:-.026em;line-height:1.28;
 }
-.destaque-bloco span{color:var(--fogo)}
+.destaque-bloco span{color:var(--fogo-alto)}
+.secao--escura .destaque-bloco,.secao--noite .destaque-bloco{
+  border:1px solid rgba(242,98,31,.24);border-left:3px solid var(--fogo);
+}
 
-/* ---------- Credenciais ---------- */
-.credenciais{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:10px}
-@media(min-width:640px){.credenciais{grid-template-columns:1fr 1fr;gap:10px 18px}}
+/* --------------------------------------------------------------------------
+   CREDENCIAIS
+   -------------------------------------------------------------------------- */
+.credenciais{list-style:none;padding:0;margin:30px 0 0;display:grid;gap:12px}
+@media(min-width:640px){.credenciais{grid-template-columns:1fr 1fr;gap:12px 24px}}
 .credenciais li{
-  display:flex;gap:10px;align-items:flex-start;
-  font-size:.94rem;line-height:1.45;color:var(--tinta-2);
+  display:flex;gap:11px;align-items:flex-start;
+  font-size:.95rem;line-height:1.5;color:var(--txt-2);
 }
-.credenciais .ico{color:var(--fogo);margin-top:2px}
-.credenciais li b{color:var(--tinta);font-weight:700}
+.credenciais .ico{color:var(--marca);margin-top:3px}
+.credenciais li b{color:var(--txt);font-weight:700}
 
-/* ---------- Fases ---------- */
+/* --------------------------------------------------------------------------
+   FASES
+
+   O painel do mecanismo. Aqui a pagina vira quadro de leitura de dados: cada
+   fase e um cartao com a sua barra na escala real de duracao.
+   -------------------------------------------------------------------------- */
 .escala-nota{
-  font-family:var(--disp);font-size:.79rem;font-weight:600;
-  color:var(--tinta-3);margin:0 0 16px;display:flex;align-items:center;gap:8px;
+  font-family:var(--disp);font-size:.79rem;font-weight:600;font-stretch:88%;
+  color:var(--txt-3);margin:0 0 20px;display:flex;align-items:center;gap:9px;
+  letter-spacing:.03em;
 }
-.escala-nota .ico{color:var(--fogo)}
+.escala-nota .ico{color:var(--marca)}
 .fase{
-  background:var(--branco);border:1px solid var(--linha);border-radius:15px;
-  padding:20px 22px;margin:0 0 13px;
-  box-shadow:0 1px 2px rgba(26,21,18,.04);
+  background:var(--sup);border:1px solid var(--sup-bd);border-radius:var(--r2);
+  padding:24px 26px;margin:0 0 14px;box-shadow:var(--sup-sh);
 }
-.fase-topo{display:flex;align-items:center;gap:12px;margin-bottom:.55em}
+@media(min-width:900px){
+  .secao .wrap>.fase{
+    display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:0 40px;align-items:center;
+  }
+  .fase>.fase-topo{grid-column:1;margin-bottom:.35em}
+  .fase>p{grid-column:1;margin:0}
+  /* A barra encosta no rodape da primeira linha e a leitura dela comeca no
+     topo da segunda, para as duas lerem como uma peca so. */
+  .fase>.escala{grid-column:2;grid-row:1;align-self:end}
+  .fase>.escala-pe{grid-column:2;grid-row:2;align-self:start;margin-top:11px}
+}
+.fase-topo{display:flex;align-items:center;gap:14px;margin-bottom:.6em}
 .fase-n{
-  flex:0 0 auto;width:34px;height:34px;border-radius:10px;
-  background:var(--fogo);color:#fff;
-  font-family:var(--disp);font-size:.98rem;font-weight:900;
+  flex:0 0 auto;width:38px;height:38px;border-radius:12px;
+  background:linear-gradient(180deg,var(--fogo-alto),var(--fogo-2));color:#fff;
+  font-family:var(--disp);font-size:1.02rem;font-weight:900;font-stretch:104%;
   display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px -6px rgba(242,98,31,.6);
 }
-.fase h3{margin:0}
-.fase p{margin:0 0 16px;color:var(--tinta-2);font-size:.99rem}
-.escala{position:relative;height:10px;background:#EDE6DF;border-radius:99px;overflow:hidden}
+.fase h3{margin:0;color:var(--txt);font-size:1.14rem}
+.fase p{margin:0 0 18px;color:var(--txt-corpo);font-size:1rem}
+.escala{
+  position:relative;height:15px;background:var(--trilho);border-radius:99px;overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.30);
+}
+/* Marcas de 3 em 3 dias ao longo dos 21. Sem elas a barra flutua e o
+   comprimento nao quer dizer nada. */
+.escala::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:repeating-linear-gradient(90deg,
+    transparent 0 calc(100% / 7 - 1px),
+    var(--bd) calc(100% / 7 - 1px) calc(100% / 7));
+}
 .escala i{
-  position:absolute;top:0;bottom:0;left:var(--l);width:var(--w);
-  background:var(--fogo);border-radius:99px;
+  position:absolute;z-index:1;top:0;bottom:0;left:var(--l);width:var(--w);
+  background:linear-gradient(90deg,var(--fogo-2),var(--fogo-alto));border-radius:99px;
+  box-shadow:0 0 20px -1px rgba(242,98,31,.65);
   transition:width .75s cubic-bezier(.2,.8,.2,1);
 }
 .js .escala i{width:0;transition:width .85s cubic-bezier(.16,.84,.28,1) .2s}
 .js .on .escala i{width:var(--w)}
 .escala-pe{
-  display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;
-  font-family:var(--disp);font-size:.79rem;font-weight:800;
-  font-variant-numeric:tabular-nums;color:var(--fogo-2);
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:10px;
+  font-family:var(--disp);font-size:.8rem;font-weight:800;font-stretch:92%;
+  font-variant-numeric:tabular-nums;color:var(--marca);
 }
-.escala-pe em{font-style:normal;font-weight:600;color:var(--tinta-3)}
+.escala-pe em{font-style:normal;font-weight:600;font-size:.92em;color:var(--txt-3);text-align:right}
 
-/* ---------- Passos ---------- */
-.passo{background:var(--branco);border:1px solid var(--linha);border-radius:15px;padding:20px 22px}
-.secao--branco .passo{background:var(--papel);border-color:transparent}
+/* --------------------------------------------------------------------------
+   PASSOS
+   -------------------------------------------------------------------------- */
+.passo{
+  background:var(--sup);border:1px solid var(--sup-bd);border-radius:var(--r2);
+  padding:26px 26px;box-shadow:var(--sup-sh);
+}
 .passo b{
-  display:block;font-family:var(--disp);font-size:2rem;font-weight:900;
-  color:var(--fogo);line-height:1;letter-spacing:-.04em;margin-bottom:8px;
+  display:block;font-family:var(--disp);font-size:2.4rem;font-weight:900;font-stretch:104%;
+  color:var(--marca);line-height:1;letter-spacing:-.05em;margin-bottom:12px;
+  font-variant-numeric:tabular-nums;
 }
-.passo p{margin:0;font-size:1rem;font-weight:600}
+.passo p{margin:0;font-size:1.02rem;font-weight:600;color:var(--txt)}
 
-/* ---------- Painel escuro ---------- */
-.painel{background:var(--carvao);color:#CFC5BC;border-radius:17px;padding:28px 24px;margin:26px 0 0}
-.painel h3{color:#fff;font-size:1.2rem;margin:0 0 .7em}
-.painel p{color:#BFB4AA;margin:0}
-.medidas{display:grid;gap:13px;margin:20px 0}
+/* --------------------------------------------------------------------------
+   PAINEL
+   -------------------------------------------------------------------------- */
+.painel{
+  background:var(--sup);border:1px solid var(--sup-bd);color:var(--txt-corpo);
+  border-radius:var(--r3);padding:32px 30px;margin:32px 0 0;box-shadow:var(--sup-sh);
+}
+.painel h3{color:var(--txt);font-size:1.26rem;margin:0 0 .7em}
+.painel p{color:var(--txt-corpo);margin:0}
+.medidas{display:grid;gap:14px;margin:24px 0}
 @media(min-width:560px){.medidas{grid-template-columns:1fr 1fr}}
-.medida{border:1px solid var(--carvao-3);border-radius:12px;padding:18px 19px;background:var(--carvao-2)}
+.medida{
+  border:1px solid var(--bd);border-radius:var(--r2);padding:20px 21px;
+  background:linear-gradient(180deg,rgba(242,98,31,.09),rgba(242,98,31,.02));
+}
 .medida b{
-  display:block;font-family:var(--disp);font-size:1.7rem;font-weight:900;
-  line-height:1.04;letter-spacing:-.04em;color:var(--fogo);font-variant-numeric:tabular-nums;
+  display:block;font-family:var(--disp);font-size:1.9rem;font-weight:900;font-stretch:104%;
+  line-height:1.02;letter-spacing:-.045em;color:var(--marca);font-variant-numeric:tabular-nums;
 }
-.medida span{display:block;font-family:var(--disp);font-size:.8rem;font-weight:600;color:#9A8F86;margin-top:6px;line-height:1.3}
+.medida span{
+  display:block;font-family:var(--disp);font-size:.8rem;font-weight:600;font-stretch:88%;
+  color:var(--txt-3);margin-top:7px;line-height:1.35;
+}
 
-/* ---------- Citacao ---------- */
+/* --------------------------------------------------------------------------
+   CITACAO
+   -------------------------------------------------------------------------- */
 .citacao{
-  background:var(--branco);border:1px solid var(--linha);border-radius:15px;
-  padding:26px 24px 24px;margin:24px 0;position:relative;
+  background:var(--sup);border:1px solid var(--sup-bd);border-radius:var(--r3);
+  padding:34px 30px 28px;margin:28px 0;position:relative;box-shadow:var(--sup-sh);
 }
-.secao--branco .citacao{background:var(--papel);border-color:transparent}
 .citacao::before{
-  content:"\201C";position:absolute;top:2px;left:18px;
-  font-family:var(--disp);font-size:4.2rem;font-weight:900;color:var(--fogo);opacity:.22;line-height:1;
+  content:"\201C";position:absolute;top:4px;left:22px;
+  font-family:var(--disp);font-size:5rem;font-weight:900;color:var(--fogo);opacity:.24;line-height:1;
 }
 .citacao p{
-  position:relative;font-size:clamp(1.08rem,3vw,1.28rem);line-height:1.42;
-  font-weight:700;letter-spacing:-.018em;margin:0 0 .6em;
+  position:relative;font-family:var(--disp);
+  font-size:clamp(1.14rem,3vw,1.4rem);line-height:1.34;
+  font-weight:800;font-stretch:98%;letter-spacing:-.026em;margin:0 0 .7em;color:var(--txt);
 }
-.citacao cite{font-style:normal;font-family:var(--disp);font-size:.85rem;font-weight:700;color:var(--fogo-2)}
+.citacao cite{
+  font-style:normal;font-family:var(--disp);font-size:.82rem;font-weight:700;font-stretch:88%;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--marca);
+}
 
-/* ---------- Custo do caminho antigo ---------- */
-.custo{display:flex;gap:14px;align-items:flex-start;background:var(--branco);
-  border:1px solid var(--linha);border-radius:15px;padding:19px 21px}
-.secao--branco .custo{background:var(--papel);border-color:transparent}
-.custo .ico{color:#C0392B;margin-top:3px}
-.custo p{margin:0;color:var(--tinta-2);font-size:.99rem}
+/* --------------------------------------------------------------------------
+   CUSTO DO CAMINHO ANTIGO
+   -------------------------------------------------------------------------- */
+.custo{
+  display:flex;gap:16px;align-items:flex-start;background:var(--sup);
+  border:1px solid var(--sup-bd);border-radius:var(--r2);padding:22px 24px;
+  box-shadow:var(--sup-sh);
+}
+.custo .ico{color:#E5674F;margin-top:4px}
+.custo p{margin:0;color:var(--txt-corpo);font-size:1rem}
 .custo .preco-antigo{
-  display:block;font-family:var(--disp);font-weight:900;font-size:1.06rem;
-  color:var(--tinta);margin-bottom:3px;letter-spacing:-.02em;
+  display:block;font-family:var(--disp);font-weight:900;font-stretch:98%;font-size:1.1rem;
+  color:var(--txt);margin-bottom:5px;letter-spacing:-.028em;
 }
 
-/* ---------- Depoimentos ---------- */
-.grade-depo{display:grid;gap:16px}
+/* --------------------------------------------------------------------------
+   DEPOIMENTOS
+   -------------------------------------------------------------------------- */
+.grade-depo{display:grid;gap:20px}
 @media(min-width:640px){.grade-depo{grid-template-columns:1fr 1fr}}
 .depo{
-  background:var(--branco);border:1px solid var(--linha);border-radius:15px;
-  overflow:hidden;margin:0;box-shadow:0 1px 2px rgba(26,21,18,.05);
+  background:var(--sup);border:1px solid var(--sup-bd);border-radius:var(--r2);
+  overflow:hidden;margin:0;box-shadow:var(--sup-sh);
+  transition:transform .2s ease,box-shadow .2s ease;
 }
+.depo:hover{transform:translateY(-3px)}
 /* Miniatura no lugar do video. O video do YouTube so e carregado quando a
    pessoa clica no play — a pagina abre bem mais leve no celular. */
-.video{position:relative;display:block;width:100%;padding-top:56.25%;background:var(--carvao);
+.video{position:relative;display:block;width:100%;padding-top:56.25%;background:var(--noite);
   overflow:hidden;cursor:pointer;text-decoration:none}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
   display:block;transition:transform .4s ease,opacity .3s ease}
 .video .play{
   position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:66px;height:46px;border-radius:12px;background:rgba(23,18,15,.72);
-  border:1px solid rgba(255,255,255,.22);
+  width:72px;height:50px;border-radius:14px;background:rgba(13,10,8,.72);
+  border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(3px);
   transition:background .25s ease,transform .25s ease;
 }
 .video .play::after{
   content:"";position:absolute;left:50%;top:50%;
   transform:translate(-42%,-50%);
-  border-style:solid;border-width:9px 0 9px 15px;
+  border-style:solid;border-width:10px 0 10px 16px;
   border-color:transparent transparent transparent #fff;
 }
-.video:hover .play,.video:focus-visible .play{background:var(--fogo);transform:translate(-50%,-50%) scale(1.06)}
-.video:hover img{transform:scale(1.035)}
+.video:hover .play,.video:focus-visible .play{background:var(--fogo);transform:translate(-50%,-50%) scale(1.07)}
+.video:hover img{transform:scale(1.04)}
 .video:focus-visible{outline:3px solid var(--fogo);outline-offset:2px}
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
-@media(prefers-reduced-motion:reduce){
-  .video img,.video .play{transition:none}
-  .video:hover img{transform:none}
+.depo figcaption{padding:17px 20px;font-size:.94rem;line-height:1.5;color:var(--txt-2);text-align:left}
+.depo figcaption b{
+  display:block;color:var(--txt);font-weight:800;font-family:var(--disp);font-stretch:96%;
+  font-size:1rem;letter-spacing:-.02em;margin-bottom:3px;
 }
-.depo figcaption{padding:15px 18px;font-size:.93rem;line-height:1.45;color:var(--tinta-2)}
-.depo figcaption b{display:block;color:var(--tinta);font-weight:800;font-family:var(--disp);
-  font-size:.97rem;letter-spacing:-.015em;margin-bottom:2px}
 
-/* ---------- Relato e print ---------- */
+/* --------------------------------------------------------------------------
+   RELATO E PRINT
+   -------------------------------------------------------------------------- */
 .relato{
-  background:var(--carvao);color:#fff;border-radius:16px;padding:26px 24px;margin:0 0 22px;
+  position:relative;overflow:hidden;
+  background:linear-gradient(150deg,var(--carvao-3),var(--carvao));
+  border:1px solid rgba(255,255,255,.08);
+  color:#fff;border-radius:var(--r3);padding:34px 30px;margin:0 0 26px;text-align:left;
+  box-shadow:0 30px 60px -34px rgba(21,16,13,.6);
 }
+.relato::before{
+  content:"";position:absolute;top:-140px;right:-100px;width:380px;height:380px;
+  background:radial-gradient(circle,rgba(242,98,31,.22),rgba(242,98,31,0) 68%);
+}
+.relato>*{position:relative}
 .relato .linha{
-  font-family:var(--disp);font-size:clamp(1.2rem,3.6vw,1.55rem);font-weight:900;
-  letter-spacing:-.028em;line-height:1.24;margin:0 0 .65em;color:#fff;
+  font-family:var(--disp);font-size:clamp(1.28rem,3.6vw,1.75rem);font-weight:900;font-stretch:98%;
+  letter-spacing:-.032em;line-height:1.2;margin:0 0 .7em;color:#fff;
 }
-.relato .quem{font-size:.9rem;color:#BFB4AA;margin:0;line-height:1.5}
-.relato .quem b{color:var(--fogo);font-weight:700}
-.print-prova{margin:0 0 24px;text-align:center}
-.print-prova img{display:block;width:100%;max-width:300px;margin:0 auto;border-radius:14px;border:1px solid var(--linha)}
-.print-prova figcaption{font-family:var(--disp);font-size:.79rem;font-weight:600;color:var(--tinta-3);margin:10px auto 0;max-width:420px}
+.relato .quem{font-size:.92rem;color:#BFB4AA;margin:0;line-height:1.55}
+.relato .quem b{color:var(--fogo-alto);font-weight:700}
+.print-prova{margin:0 0 28px;text-align:center}
+.print-prova img{
+  display:block;width:100%;max-width:310px;margin:0 auto;border-radius:var(--r2);
+  border:1px solid var(--bd);box-shadow:var(--sup-sh);
+}
+.print-prova figcaption{
+  font-family:var(--disp);font-size:.79rem;font-weight:600;font-stretch:88%;
+  color:var(--txt-3);margin:12px auto 0;max-width:420px;letter-spacing:.03em;
+}
 
-/* ---------- Oferta ---------- */
+/* --------------------------------------------------------------------------
+   OFERTA
+
+   O bloco de oferta e um objeto, e nao mais uma secao de texto: superficie
+   propria, canto grande, sombra funda e o preco num painel aceso dentro dele.
+   -------------------------------------------------------------------------- */
 .oferta{
-  background:var(--branco);border:1px solid var(--linha);border-radius:20px;padding:10px 22px 22px;
-  box-shadow:0 2px 4px rgba(26,21,18,.05),0 24px 48px -24px rgba(26,21,18,.30);
+  background:var(--sup);border:1px solid var(--sup-bd);border-radius:var(--r4);
+  padding:14px 28px 28px;text-align:left;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 40px 80px -40px #000;
 }
-.item{display:flex;gap:13px;align-items:flex-start;padding:15px 0;border-bottom:1px solid var(--linha)}
-.item .ico{color:var(--verde);margin-top:3px}
-.item .nome{flex:1 1 auto;font-size:.99rem;line-height:1.45}
-.item .v{flex:0 0 auto;font-family:var(--disp);font-weight:800;font-size:.98rem;
-  font-variant-numeric:tabular-nums;color:var(--tinta-2);white-space:nowrap}
+@media(min-width:900px){
+  .secao .wrap>.oferta{padding:18px 40px 40px}
+}
+.item{display:flex;gap:15px;align-items:flex-start;padding:17px 0;border-bottom:1px solid var(--bd)}
+.item .ico{color:var(--ok);margin-top:4px}
+.item .nome{flex:1 1 auto;font-size:1rem;line-height:1.5;color:var(--txt-corpo)}
+.item .nome strong{color:var(--txt)}
+.item .v{
+  flex:0 0 auto;font-family:var(--disp);font-weight:800;font-stretch:98%;font-size:1rem;
+  font-variant-numeric:tabular-nums;color:var(--txt-2);white-space:nowrap;
+}
 .tag-bonus{
-  display:inline-block;font-family:var(--disp);font-size:.63rem;font-weight:900;
-  letter-spacing:.12em;text-transform:uppercase;background:var(--verde-luz);color:var(--verde);
-  padding:3px 8px;border-radius:99px;margin-left:7px;vertical-align:1px;
+  display:inline-block;font-family:var(--disp);font-size:.62rem;font-weight:900;font-stretch:88%;
+  letter-spacing:.14em;text-transform:uppercase;background:var(--ok-luz);color:var(--ok);
+  padding:4px 9px;border-radius:99px;margin-left:8px;vertical-align:1px;
 }
-.item--total{border-bottom:none;padding-top:17px}
-.item--total .nome{font-family:var(--disp);font-weight:800;font-size:.78rem;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-3)}
-.item--total .v{font-size:1.32rem;color:var(--tinta);letter-spacing:-.03em}
-.preco{background:var(--carvao);color:#fff;border-radius:15px;padding:28px 22px;margin:18px 0 0;text-align:center;position:relative;overflow:hidden}
+.item--total{border-bottom:none;padding-top:19px}
+.item--total .nome{
+  font-family:var(--disp);font-weight:800;font-stretch:80%;font-size:.76rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--txt-3);
+}
+.item--total .v{font-size:1.4rem;color:var(--txt);letter-spacing:-.035em}
+
+/* O preco e uma janela acesa dentro do bilhete: fundo mais fundo que o
+   cartao em volta, aro de fogo e um claro vindo de cima. */
+.preco{
+  background:
+    radial-gradient(120% 88% at 50% -8%,rgba(242,98,31,.26),rgba(242,98,31,0) 60%),
+    linear-gradient(180deg,#100C0A,#070605);
+  border:1px solid rgba(242,98,31,.36);
+  border-radius:var(--r3);padding:38px 26px;margin:26px 0 0;text-align:center;
+  position:relative;overflow:hidden;color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 70px -20px rgba(242,98,31,.50);
+}
 .preco::before{
-  content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);
-  width:380px;height:300px;
-  background:radial-gradient(circle,rgba(242,98,31,.26),rgba(242,98,31,0) 70%);
+  content:"";position:absolute;top:-1px;left:18%;right:18%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,166,110,.75),transparent);
 }
 .preco > *{position:relative}
-.preco .antes{font-family:var(--disp);font-size:.93rem;font-weight:600;color:#9A8F86;margin:0}
+.preco .antes{font-family:var(--disp);font-size:.94rem;font-weight:600;color:#9A8F86;margin:0}
 .preco .antes s{text-decoration-thickness:2px}
 .preco .agora{
-  font-family:var(--disp);font-size:clamp(2.6rem,10.4vw,4rem);font-weight:900;
-  letter-spacing:-.045em;line-height:1;margin:.12em 0 .12em;font-variant-numeric:tabular-nums;
+  font-family:var(--disp);font-size:clamp(2.8rem,10.4vw,4.4rem);font-weight:900;font-stretch:104%;
+  letter-spacing:-.05em;line-height:1;margin:.14em 0;font-variant-numeric:tabular-nums;color:#fff;
 }
 .preco .agora em{
-  display:block;font-style:normal;font-size:.31em;font-weight:700;
-  letter-spacing:.02em;color:var(--fogo);margin-bottom:.25em;
+  display:block;font-style:normal;font-size:.3em;font-weight:700;font-stretch:88%;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--fogo-alto);margin-bottom:.3em;
 }
-.preco .parcela{font-family:var(--disp);font-size:.97rem;font-weight:600;color:#CFC5BC;margin:0 0 22px}
+.preco .parcela{font-family:var(--disp);font-size:.99rem;font-weight:600;color:#CFC5BC;margin:0 0 26px}
 .preco .parcela b{color:#fff;font-weight:800}
+.preco .cta-nota{color:#9A8F86}
 
-/* ---------- Garantia ---------- */
+/* --------------------------------------------------------------------------
+   GARANTIA
+   -------------------------------------------------------------------------- */
 .garantia{
-  background:var(--branco);border:1px solid var(--linha);border-radius:20px;padding:30px 24px;
-  text-align:center;box-shadow:0 2px 4px rgba(26,21,18,.05);
+  background:var(--sup);border:1px solid var(--sup-bd);border-radius:var(--r4);
+  padding:40px 30px;text-align:center;box-shadow:var(--sup-sh);
 }
+.garantia h2{font-size:clamp(1.6rem,4.4vw,2.3rem)}
 .medalha{
-  width:96px;height:96px;margin:0 auto 18px;border-radius:50%;
-  background:var(--verde-luz);color:var(--verde);
+  width:104px;height:104px;margin:0 auto 22px;border-radius:50%;
+  background:radial-gradient(circle at 50% 32%,rgba(79,211,160,.22),rgba(79,211,160,.06));
+  color:var(--ok);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  border:2px solid var(--verde);
+  border:2px solid var(--ok);
+  box-shadow:0 0 0 8px var(--ok-luz),0 20px 40px -20px rgba(18,133,90,.5);
 }
-.medalha b{font-family:var(--disp);font-size:1.7rem;font-weight:900;line-height:1;letter-spacing:-.04em}
-.medalha span{font-family:var(--disp);font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
-.garantia .selo-secao{background:var(--verde-luz);color:var(--verde)}
-.garantia p{color:var(--tinta-2)}
+.medalha b{
+  font-family:var(--disp);font-size:1.9rem;font-weight:900;font-stretch:104%;
+  line-height:1;letter-spacing:-.045em;font-variant-numeric:tabular-nums;
+}
+.medalha span{
+  font-family:var(--disp);font-size:.64rem;font-weight:800;font-stretch:80%;
+  letter-spacing:.2em;text-transform:uppercase;margin-top:5px;
+}
+.garantia .selo-secao{background:var(--ok-luz);color:var(--ok);border-color:transparent}
+.garantia p{color:var(--txt-corpo)}
 .garantia p:last-child{margin:0}
 
-/* ---------- FAQ ---------- */
-.faq{display:grid;gap:10px}
-.faq details{background:var(--branco);border:1px solid var(--linha);border-radius:13px;overflow:hidden}
-.secao--branco .faq details{background:var(--papel);border-color:transparent}
+/* --------------------------------------------------------------------------
+   FAQ
+   -------------------------------------------------------------------------- */
+.faq{display:grid;gap:12px}
+.faq details{
+  background:var(--sup);border:1px solid var(--sup-bd);border-radius:var(--r2);
+  overflow:hidden;box-shadow:var(--sup-sh);
+}
 .faq summary{
-  cursor:pointer;padding:17px 46px 17px 20px;
-  font-family:var(--disp);font-weight:700;font-size:1rem;letter-spacing:-.018em;
+  cursor:pointer;padding:20px 52px 20px 24px;color:var(--txt);
+  font-family:var(--disp);font-weight:700;font-stretch:98%;font-size:1.03rem;letter-spacing:-.02em;
   list-style:none;position:relative;
 }
 .faq summary::-webkit-details-marker{display:none}
 .faq summary:focus-visible{outline:2px solid var(--fogo);outline-offset:-2px}
 .faq summary::after{
-  content:"";position:absolute;right:20px;top:50%;width:10px;height:10px;margin-top:-7px;
-  border-right:2.4px solid var(--fogo);border-bottom:2.4px solid var(--fogo);
+  content:"";position:absolute;right:24px;top:50%;width:10px;height:10px;margin-top:-7px;
+  border-right:2.4px solid var(--marca);border-bottom:2.4px solid var(--marca);
   transform:rotate(45deg);transition:transform .18s ease;
 }
 .faq details[open] summary::after{transform:rotate(-135deg);margin-top:-2px}
-.faq .resposta{padding:0 20px 19px;color:var(--tinta-2);font-size:.99rem}
+.faq .resposta{padding:0 24px 22px;color:var(--txt-corpo);font-size:1rem}
 
-/* ---------- Barra fixa ---------- */
+/* --------------------------------------------------------------------------
+   BARRA FIXA
+   -------------------------------------------------------------------------- */
 .barra{
   position:fixed;left:0;right:0;bottom:0;z-index:60;
-  background:rgba(23,18,15,.97);backdrop-filter:blur(9px);
-  padding:11px 16px calc(11px + env(safe-area-inset-bottom));
-  transform:translateY(115%);transition:transform .25s ease;
+  background:rgba(13,10,8,.94);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,.09);
+  padding:12px 18px calc(12px + env(safe-area-inset-bottom));
+  transform:translateY(115%);transition:transform .28s cubic-bezier(.2,.8,.2,1);
 }
 .barra.visivel{transform:translateY(0)}
-.barra .interno{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:14px}
-.barra .valor{flex:0 0 auto;line-height:1.1;font-family:var(--disp);color:#fff}
-.barra .valor b{display:block;font-size:1rem;font-weight:900;letter-spacing:-.04em;white-space:nowrap}
-.barra .valor span{font-size:.72rem;font-weight:600;color:#9A8F86}
-.barra .cta{flex:1 1 auto;max-width:none;padding:14px 16px;font-size:.98rem;box-shadow:0 3px 0 var(--fogo-2)}
+.barra .interno{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:16px}
+.barra .valor{flex:0 0 auto;line-height:1.15;font-family:var(--disp);color:#fff}
+.barra .valor b{
+  display:block;font-size:1.04rem;font-weight:900;font-stretch:100%;
+  letter-spacing:-.04em;white-space:nowrap;
+}
+.barra .valor span{font-size:.73rem;font-weight:600;color:#9A8F86}
+.barra .cta{flex:1 1 auto;max-width:none;padding:15px 18px;font-size:1rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 2px 0 var(--fogo-3)}
 @media(max-width:419px){.barra .valor{display:none}}
 
-/* ---------- Rodape ---------- */
-footer{background:var(--carvao-2);color:#9A8F86;padding:38px 0;font-size:.88rem}
-footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
-.logo-rodape{max-width:225px;margin:0 0 18px}
-.logo-rodape img{display:block;width:100%;height:auto;border-radius:8px;mix-blend-mode:lighten}
+/* --------------------------------------------------------------------------
+   RODAPE
+   -------------------------------------------------------------------------- */
+footer{
+  background:var(--noite);color:#8A7F76;padding:52px 0;font-size:.89rem;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+footer strong{color:#fff;font-weight:800;font-family:var(--disp);font-stretch:96%}
+.logo-rodape{max-width:230px;margin:0 0 22px}
+.logo-rodape img{display:block;width:100%;height:auto;border-radius:var(--r1);mix-blend-mode:lighten}
 
-/* ---------- Reveal ---------- */
-.js .rv{opacity:0;transform:translateY(18px);
-  transition:opacity .55s ease,transform .55s cubic-bezier(.16,.84,.28,1)}
+/* --------------------------------------------------------------------------
+   MOVIMENTO
+
+   Tudo o que esconde conteudo mora atras da classe .js. Sem javascript, a
+   pagina aparece inteira e parada, e continua vendendo.
+   -------------------------------------------------------------------------- */
+.js .rv{opacity:0;transform:translateY(22px);
+  transition:opacity .6s ease,transform .6s cubic-bezier(.16,.84,.28,1)}
 .js .rv.on{opacity:1;transform:none}
 
 /* Filhos que entram um a um, onde a ordem significa alguma coisa:
    as três provas, os itens da oferta e os cinco cartões de fase. */
-.js .esc{opacity:0;transform:translateY(14px);
+.js .esc{opacity:0;transform:translateY(16px);
   transition:opacity .5s ease,transform .5s cubic-bezier(.16,.84,.28,1);
   transition-delay:calc(var(--i,0) * 80ms)}
 .js .esc.on{opacity:1;transform:none}
@@ -522,16 +891,30 @@ footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
   transition:opacity .35s ease,transform .55s cubic-bezier(.2,1.1,.35,1)}
 .js .medalha.on{opacity:1;transform:none}
 
-.cta:hover{box-shadow:0 6px 18px rgba(242,98,31,.28)}
+/* A luz do hero respira devagar. Nao esconde nada: e so o ar da sala. */
+@keyframes deriva{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to{transform:translate3d(-46px,38px,0) scale(1.1)}
+}
+.hero::before{animation:deriva 19s ease-in-out infinite alternate}
+.hero .brilho-frio{animation:deriva 27s ease-in-out infinite alternate-reverse}
+
+/* Levantar o cartao ao passar o mouse e resposta ao toque, nao enfeite. */
+.cartao:hover,.depo:hover{box-shadow:var(--sup-sh),0 24px 44px -26px rgba(0,0,0,.5)}
+.cartao:hover{transform:translateY(-3px)}
+
 @media(prefers-reduced-motion:reduce){
   .rv,.esc,.medalha,.preco .agora{opacity:1 !important;transform:none !important;transition:none !important}
   .escala i{transition:none !important;width:var(--w) !important}
   .arco-barra span{transform:none !important;opacity:1 !important;transition:none !important}
   .preco .antes s{text-decoration:line-through}
   .preco .antes s::after{display:none}
-  .cta:hover{box-shadow:none}
+  .hero::before,.hero .brilho-frio{animation:none !important}
+  .cta::after{display:none}
+  .cta,.cartao,.depo,.video img,.video .play,.barra{transition:none !important}
+  .cartao:hover,.depo:hover,.video:hover img{transform:none !important}
+  .js .progresso{display:none}
   html{scroll-behavior:auto}
-  .barra{transition:none}
 }
 </style>
 
@@ -662,6 +1045,9 @@ gtag('config','SUA_TAG_AQUI');
 </head>
 <body>
 
+<!-- Fio de progresso da leitura. So existe com javascript ligado. -->
+<div class="progresso" id="progresso" aria-hidden="true"></div>
+
 <svg style="display:none" aria-hidden="true">
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
@@ -677,6 +1063,7 @@ gtag('config','SUA_TAG_AQUI');
 
 <!-- 1. HERO -->
 <header class="hero rv" id="hero">
+  <span class="brilho-frio" aria-hidden="true"></span>
   <div class="wrap">
     <div class="hero-grade">
       <div>
@@ -742,7 +1129,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 3. DOR -->
-<section class="secao secao--branco">
+<section class="secao secao--escura">
   <div class="wrap rv">
     <p class="selo-secao"><svg class="ico ico-sm"><use href="#i-alvo"/></svg>O problema</p>
     <h2>Talvez você</h2>
@@ -756,7 +1143,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- DIAGNÓSTICO -->
-<section class="secao">
+<section class="secao secao--escura secao--cola">
   <div class="wrap rv">
     <h2>Tudo isso vem de uma causa só</h2>
     <p>Você não tem um método de emagrecimento que funcione sempre. Você tem exercícios, tem leitura, tem experiência. Falta o processo que liga tudo isso e entrega o mesmo resultado em alunos diferentes.</p>
@@ -768,14 +1155,14 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 4. VIRADA -->
-<section class="secao secao--branco">
+<section class="secao">
   <div class="wrap rv">
     <p class="selo-secao"><svg class="ico ico-sm"><use href="#i-raio"/></svg>A virada</p>
     <h2>O que muda quando isso resolve</h2>
     <p>E se você tivesse um protocolo escrito, com cinco fases definidas, que você aplica no aluno novo já na primeira consulta?</p>
     <p>E se você conseguisse dizer, com a segurança de quem já viu acontecer, em qual fase o aluno vai estar na semana 4 e o que a balança dele vai mostrar na semana 8?</p>
 
-    <div class="grade grade-3" style="margin:24px 0 28px">
+    <div class="grade grade-3" style="margin-top:24px;margin-bottom:28px">
       <div class="cartao">
         <div class="cartao-ico cartao-ico--ok"><svg class="ico"><use href="#i-check"/></svg></div>
         <p><strong>Fim de improvisar o treino no vestiário.</strong></p>
@@ -797,7 +1184,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 6a. PROVA SOCIAL -->
-<section class="secao">
+<section class="secao secao--cola secao--palco-centro">
   <div class="wrap rv">
     <p class="selo-secao"><svg class="ico ico-sm"><use href="#i-pessoas"/></svg>Prova</p>
     <h2>Quem já aplicou</h2>
@@ -825,7 +1212,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 5. AS CINCO FASES -->
-<section class="secao secao--branco">
+<section class="secao secao--noite">
   <div class="wrap rv">
     <p class="selo-secao"><svg class="ico ico-sm"><use href="#i-regua"/></svg>O método</p>
     <h2>As cinco fases do Método P.E.S.O.</h2>
@@ -883,7 +1270,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 5b. COMO O EXERCÍCIO É PRESCRITO -->
-<section class="secao">
+<section class="secao secao--noite secao--cola">
   <div class="wrap rv">
     <h2>Como o exercício é prescrito</h2>
     <p>Prescrição de exercício tem seis componentes. O Método P.E.S.O. define cada um antes do aluno pisar na academia.</p>
@@ -910,7 +1297,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 5c. O MODELO DE NEGÓCIO -->
-<section class="secao secao--branco">
+<section class="secao">
   <div class="wrap rv">
     <p class="selo-secao"><svg class="ico ico-sm"><use href="#i-etiqueta"/></svg>O seu preço</p>
     <h2>Por que isso muda o seu preço</h2>
@@ -946,7 +1333,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 6b. PROVA SOCIAL -->
-<section class="secao">
+<section class="secao secao--cola secao--palco-centro">
   <div class="wrap rv">
     <h2>Mais quem aplicou</h2>
     <div class="grade-depo">
@@ -973,7 +1360,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- CONTRASTE -->
-<section class="secao secao--branco">
+<section class="secao secao--escura">
   <div class="wrap rv">
     <h2>O que isso custaria pelo caminho antigo</h2>
     <div class="grade" style="margin-top:20px">
@@ -1030,7 +1417,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 7. O QUE VOCÊ RECEBE -->
-<section class="secao secao--branco">
+<section class="secao secao--escura">
   <div class="wrap rv">
     <h2>O que você recebe</h2>
     <ul class="checks checks-2" style="margin-top:20px">
@@ -1050,7 +1437,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 8. OFERTA -->
-<section class="secao">
+<section class="secao secao--noite secao--climax secao--palco-centro">
   <div class="wrap rv">
     <h2>A oferta</h2>
 
@@ -1097,7 +1484,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 9. GARANTIA -->
-<section class="secao secao--branco">
+<section class="secao secao--noite secao--cola">
   <div class="wrap rv">
     <div class="garantia">
       <div class="medalha"><b>30</b><span>dias</span></div>
@@ -1139,7 +1526,7 @@ gtag('config','SUA_TAG_AQUI');
 </section>
 
 <!-- 11. CTA FINAL -->
-<section class="secao secao--escura">
+<section class="secao secao--noite secao--climax secao--palco-centro">
   <div class="wrap rv">
     <h2>Decida uma coisa só</h2>
     <p>Você pode fechar esta página e continuar vendendo hora.</p>
@@ -1240,6 +1627,35 @@ document.querySelectorAll(".video[data-yt]").forEach(function(fachada){
     fachada.replaceWith(caixa);
   });
 });
+
+/* ==========================================================================
+   FIO DE PROGRESSO
+
+   A pagina e longa. O fio no alto mostra o quanto ja passou, e nada mais.
+   Sem javascript ele nem aparece, e quem pede menos movimento no sistema
+   tambem nao o ve.
+   ========================================================================== */
+(function(){
+  var fio = document.getElementById("progresso");
+  if(!fio){ return; }
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    fio.remove(); return;
+  }
+  var pedido = false;
+  function pinta(){
+    pedido = false;
+    var alto = document.documentElement.scrollHeight - window.innerHeight;
+    var parte = alto > 0 ? Math.min(1, window.scrollY / alto) : 0;
+    fio.style.transform = "scaleX(" + parte + ")";
+  }
+  addEventListener("scroll", function(){
+    if(pedido){ return; }
+    pedido = true;
+    requestAnimationFrame(pinta);
+  }, {passive:true});
+  addEventListener("resize", pinta, {passive:true});
+  pinta();
+})();
 
 /* Barra fixa aparece depois do hero */
 (function(){
