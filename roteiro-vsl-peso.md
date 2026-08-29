@@ -1,7 +1,7 @@
 # VSL — Método P.E.S.O.
 
 Gerado pela skill `roteiro-vsl`. Voz: primeira pessoa, Professor José Carlos Gallo.
-Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10min30.
+Ritmo de cálculo: 140 palavras por minuto. Duração total estimada: ~10min40 (1.500 palavras faladas).
 Roteiro completo. Nenhum slot pendente.
 
 ---
@@ -34,11 +34,11 @@ E não era um aluno qualquer esperando por mim. Era a minha mãe. Grupo de risco
 
 Me bateu um desespero que eu não desejo para você.
 
-Comecei a estudar por conta própria, sozinho, sem saber direito por onde começar. Dois meses depois eu recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana.
+Comecei a estudar por conta própria, sozinho, sem saber direito por onde começar. Dois meses depois eu recebi uma bolsa para uma especialização em fisiologia clínica e do exercício, com base em metabologia humana, em Colônia, na Alemanha.
 
 Foi ali que eu encontrei o que estava faltando. E foi dali que saiu o Método P.E.S.O.
 
-Depois vieram a especialização na Alemanha, a pós em fisiologia do exercício, e trinta e seis anos aplicando isso em gente de verdade.
+Depois vieram a especialização em avaliação funcional pela Gama Filho, a pós em fisiologia do exercício, e trinta e seis anos aplicando isso em gente de verdade.
 
 `[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa, do começo ao fim deste bloco. Na fala da sua mãe, mude o tom de voz — você está imitando ela, e a pessoa precisa ouvir que é outra pessoa falando. Depois de "Eu fiquei mudo", pare de verdade. Conte dois segundos em silêncio antes de continuar. Se você tiver uma foto da sua mãe daquela época, coloque na tela enquanto fala a frase dela e tire logo depois. Não force emoção. A história já é forte, e ela funciona melhor contada com calma.
 
@@ -86,9 +86,9 @@ São cinco fases, e cada fase é um módulo do curso. Você assiste ao módulo d
 
 A média de quem passa pelas cinco fases é de quinze quilos em oito semanas. Sem Ozempic. Sem suplemento. Sem dieta de fome.
 
-E vai junto o GPA Pro, o software que eu criei. Você joga a avaliação dentro dele e ele te devolve a prescrição e a periodização prontas, em minutos.
+E vão juntas três licenças do GPA STUDIO PRO, o software que eu criei. Você joga a avaliação dentro dele e ele te devolve a prescrição e a periodização prontas, em minutos.
 
-`[NOTA DE GRAVAÇÃO]` Este é o bloco de tela. Mostre as cinco fases em texto, uma aparecendo de cada vez, enquanto você fala. Na zona lipolítica, mostre a faixa de 60% a 70% escrita grande. No final, grave a tela do GPA Pro montando uma prescrição. Tom de professor, sem pressa.
+`[NOTA DE GRAVAÇÃO]` Este é o bloco de tela. Mostre as cinco fases em texto, uma aparecendo de cada vez, enquanto você fala. Na zona lipolítica, mostre a faixa de 60% a 70% escrita grande. No final, grave a tela do GPA STUDIO PRO montando uma prescrição. Tom de professor, sem pressa.
 
 ---
 
@@ -122,19 +122,19 @@ A Metodologia de Vendas. Aulas mais um manual em PDF, com o passo a passo de com
 
 Os materiais de venda prontos. É o que você coloca na tela quando está apresentando o programa para o cliente. Trezentos e noventa e sete reais.
 
-E um ano do GPA Pro, o software de avaliação, prescrição e periodização. Mil cento e oitenta e oito reais.
+E um ano do GPA STUDIO PRO, o software de avaliação, prescrição e periodização, com três licenças de alunos, para você já criar os seus três primeiros programas e vender. Mil cento e oitenta e oito reais.
 
 Soma tudo isso e dá quatro mil setecentos e setenta e seis reais.
 
 O Método P.E.S.O. já foi vendido por mil novecentos e noventa e seis reais.
 
-Hoje ele sai por quinhentos e noventa e sete. Parcelado.
+Hoje ele sai por setecentos e noventa e sete. Parcelado.
 
-Faz a conta comigo. Um único programa vendido a quatro mil reais devolve o que você investiu quase sete vezes. Um só.
+Faz a conta comigo. Um único programa vendido a quatro mil reais devolve cinco vezes o que você investiu. Um só.
 
 São oito módulos, dez aulas, de quinze a vinte minutos cada. Você tem acesso por um ano.
 
-`[NOTA DE GRAVAÇÃO]` Monte a lista na tela, item por item, o valor de cada um entrando conforme você fala. Deixe a soma aparecer inteira, segure dois segundos, e só então risque e mostre o 597. Fale os valores devagar e sem entusiasmo forçado. O número faz o trabalho sozinho.
+`[NOTA DE GRAVAÇÃO]` Monte a lista na tela, item por item, o valor de cada um entrando conforme você fala. Deixe a soma aparecer inteira, segure dois segundos, e só então risque e mostre o 797. Fale os valores devagar e sem entusiasmo forçado. O número faz o trabalho sozinho.
 
 ---
 
@@ -152,19 +152,19 @@ Eu consigo fazer isso porque eu sei o que acontece quando o personal aplica a Fa
 
 ---
 
-## BLOCO 8 — ESCASSEZ REAL — ~40s
+## BLOCO 8 — POR QUE HOJE — ~40s
 
 Antes de eu te dizer o que fazer, tem uma coisa que você precisa saber.
 
-Junto com o curso vai a mentoria técnica ao vivo comigo, no Zoom. E aula ao vivo tem limite de gente. Eu preciso conseguir olhar o caso de cada um que está ali dentro.
+Eu não tenho contagem regressiva para te mostrar. O preço é esse, e ele não sobe amanhã porque eu resolvi apertar você.
 
-Esse preço de quinhentos e noventa e sete reais vale enquanto tiver vaga na turma. Quando a turma fechar, ele volta para o valor cheio, mil novecentos e noventa e seis reais.
+O que corre é outra coisa. É o aluno que entra na sua sala esta semana e vai embora no terceiro mês, quando o resultado trava. Esse você perde uma vez só, e ele não volta para você dizer o que faltou.
 
 Eu não vou ficar aqui te empurrando. Você viu o método, viu os resultados e viu a garantia. Se fez sentido para você, entra agora e resolve isso hoje.
 
-`[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa. Tom de quem está explicando uma limitação prática, sem urgência fabricada na voz. Fale a parte do limite de vagas devagar e siga adiante sem repetir.
+`[NOTA DE GRAVAÇÃO]` Rosto na câmera, tela limpa. Tom tranquilo, de quem não está com pressa. A força deste bloco vem exatamente de você não fabricar urgência: fale a parte da contagem regressiva quase com desdém, e a parte do aluno perdido devagar.
 
-**Este bloco não tem data dentro, então ele não envelhece.** O vídeo pode ficar no ar meses e a frase continua verdadeira. A única condição é você cumprir: quando a turma da mentoria encher, o preço sobe de verdade até abrir a próxima.
+**Este bloco não tem data nem promessa dentro, então ele não envelhece e não cria dívida.** O vídeo pode ficar no ar meses sem que nada aqui vire mentira. Se um dia existir um limite de verdade — turma de mentoria cheia, preço que sobe em data marcada — vale a pena voltar aqui e dizer isso, porque escassez real converte. Escassez inventada só custa a confiança de quem descobre.
 
 ## BLOCO 9 — CTA — ~50s
 
@@ -178,7 +178,7 @@ Assim que o pagamento é aprovado, você recebe um e-mail com o seu acesso à pl
 
 Eu repito, porque é simples. Clica no botão abaixo do vídeo. Faz o pagamento. O acesso cai no seu e-mail.
 
-Quinhentos e noventa e sete reais, parcelado, com trinta dias de garantia.
+Setecentos e noventa e sete reais, parcelado, com trinta dias de garantia.
 
 `[NOTA DE GRAVAÇÃO]` Aponte para baixo com a mão nas duas vezes em que falar do botão. Mostre uma seta na tela apontando para o botão. Fale devagar, quase soletrando o passo a passo.
 
@@ -200,7 +200,7 @@ O botão está aí embaixo.
 
 ## Duração total estimada
 
-**~11 minutos**, com todos os dez blocos.
+**~10min40**, com todos os dez blocos. São 1.500 palavras faladas, a 140 por minuto — sem contar títulos nem notas de gravação.
 
 ## O que gravar primeiro
 

@@ -1,16 +1,18 @@
 PÁGINA DE VENDAS — MÉTODO P.E.S.O.
 
-A pasta já está completa. São cinco arquivos:
+A pasta já está completa. São seis arquivos:
 
   index.html       — a página inteira, com todo o texto e o layout
   foto-gallo.jpg   — o retrato do Professor Gallo, na seção de credencial
   logo-gallo.jpg   — o logo Gallo Personal Systems, no rodapé
   print-diego.jpg  — o print do WhatsApp, na seção de prova
+  og-peso.png      — a imagem que aparece quando o link é colado no WhatsApp
   LEIA-ME.txt      — este arquivo
 
-Os quatro primeiros precisam ficar sempre na MESMA PASTA, com estes
-nomes exatos. Se um deles faltar, a página continua funcionando: a
-imagem some e o layout se ajusta sozinho.
+Os cinco primeiros precisam ficar sempre na MESMA PASTA, com estes nomes
+exatos. Se um deles faltar, a página continua funcionando: a imagem some e
+o layout se ajusta sozinho.
+
 
 COMO PUBLICAR
 
@@ -18,5 +20,66 @@ COMO PUBLICAR
 2. Arraste a pasta inteira "pagina-peso" para a área indicada
 3. Pronto, a página sai no ar com um endereço próprio
 
-O link do checkout está no fim do index.html, na linha:
-  var CHECKOUT_URL = "https://pay.kiwify.com.br/82Pzoh8";
+
+O LINK DO CHECKOUT
+
+O endereço da Kiwify está escrito dentro dos cinco botões, no index.html:
+
+  https://pay.kiwify.com.br/Sr5xECq
+
+Ele fica no HTML de propósito, e não só no javascript: assim o botão leva
+ao checkout mesmo que o javascript falhe no celular de alguém.
+
+PARA TROCAR: abra o index.html num editor de texto e use "Substituir tudo"
+(Ctrl+H no Bloco de Notas, Cmd+Shift+H em outros). Troque o endereço acima
+pelo novo. Ele aparece cinco vezes, e o Substituir tudo pega as cinco.
+
+
+COMO O LINK APARECE NO WHATSAPP
+
+Quando alguém colar o endereço da página numa conversa, aparece o título, a
+frase de chamada e a imagem og-peso.png. Isso já está configurado.
+
+Se quiser deixar 100% garantido em qualquer rede social, depois de publicar
+abra o index.html, procure as duas linhas marcadas com >>> e troque
+"og-peso.png" pelo endereço completo. Exemplo:
+
+  content="https://seuendereco.com.br/og-peso.png"
+
+
+RASTREAR DE QUAL ANÚNCIO VEIO A VENDA
+
+Já está pronto. Quando você anunciar, use links com etiqueta no fim:
+
+  https://seuendereco.com.br/?utm_source=instagram&utm_campaign=stories-maio
+
+A página copia essas etiquetas para o link do checkout sozinha, e a Kiwify
+mostra na venda de qual anúncio o comprador veio. Funciona com utm_source,
+utm_medium, utm_campaign, utm_content, utm_term, src, sck, fbclid e gclid.
+
+
+PIXEL DA META E GOOGLE ANALYTICS
+
+Se um dia for anunciar, os dois códigos já estão no index.html, desligados,
+cada um dentro de um comentário. Procure por "ESPACO DO PIXEL" no arquivo:
+a instrução de como ligar está escrita ali.
+
+A página já avisa os dois sistemas quando alguém clica em "Quero o Método
+P.E.S.O." — o evento InitiateCheckout no Pixel e o begin_checkout no
+Analytics. Enquanto estiverem desligados, nada é enviado.
+
+
+OS DEPOIMENTOS EM VÍDEO
+
+A página mostra só a miniatura de cada depoimento, com um botão de play. O
+vídeo do YouTube só é carregado quando a pessoa clica. São cinco vídeos:
+carregar os cinco de uma vez deixava a página pesada de abrir no celular.
+
+As miniaturas vêm do próprio YouTube, então não há arquivo novo na pasta.
+Se o javascript não rodar no aparelho de alguém, a miniatura continua sendo
+um link comum e abre o vídeo no YouTube, numa aba nova.
+
+PARA TROCAR UM DEPOIMENTO: no index.html, procure pelo código do vídeo
+antigo (a parte depois do "v=" no endereço do YouTube) e troque pelo código
+do vídeo novo. Ele aparece três vezes seguidas na mesma linha — no href, no
+data-yt e no endereço da miniatura. Troque os três.
