@@ -1,0 +1,111 @@
+QUIZ DE DIAGNÓSTICO — MÉTODO P.E.S.O.
+
+A pasta já está completa. São quatro arquivos:
+
+  index.html      — o quiz inteiro: as perguntas, os três resultados e a oferta
+  foto-gallo.jpg  — o retrato do Professor Gallo, na parte de quem está falando
+  og-peso.png     — a imagem que aparece quando o link é colado no WhatsApp
+  LEIA-ME.txt     — este arquivo
+
+Os três primeiros precisam ficar sempre na MESMA PASTA, com estes nomes
+exatos. Se uma das imagens faltar, o quiz continua funcionando: ela some e o
+layout se ajusta sozinho.
+
+
+COMO PUBLICAR
+
+1. Abra netlify.com/drop no navegador
+2. Arraste a pasta inteira "pagina-quiz" para a área indicada
+3. Pronto, o quiz sai no ar com um endereço próprio
+
+
+OS DEPOIMENTOS SÓ TOCAM DENTRO DA PÁGINA DEPOIS DE PUBLICADO
+=============================================================
+
+Isto não é defeito, e é a dúvida que aparece primeiro.
+
+Se você abrir o index.html com dois cliques, direto da pasta, a página roda
+sem endereço na internet. O YouTube exige um endereço para autorizar o vídeo
+a tocar embutido, não encontra nenhum, e recusa.
+
+Para você não bater numa tela de erro, nesse caso o quiz faz outra coisa: o
+clique no depoimento ABRE O YOUTUBE NUMA ABA NOVA. Às vezes o YouTube pede
+login nessa aba — isso é coisa dele, não da página.
+
+Publicado na hospedagem, o quiz passa a ter endereço e os cinco depoimentos
+tocam dentro da própria página, sem sair dela.
+
+A página de vendas se comporta exatamente do mesmo jeito, pelo mesmo motivo.
+Se você abrir as duas do arquivo, as duas abrem aba. Se publicar as duas, as
+duas tocam embutido. O que muda o comportamento é onde o arquivo está, e não
+qual das duas peças é.
+
+
+O LINK DO CHECKOUT
+
+O endereço da Kiwify está escrito dentro dos dois botões, no index.html:
+
+  https://pay.kiwify.com.br/Sr5xECq
+
+PARA TROCAR: abra o index.html num editor de texto e use "Substituir tudo"
+(Ctrl+H no Bloco de Notas). O endereço aparece duas vezes e o Substituir tudo
+pega as duas.
+
+
+DE ONDE VEIO CADA VENDA
+
+O quiz assina o próprio nome no link do checkout. Toda venda que sair daqui
+chega na Kiwify com
+
+  sck = peso-quiz
+
+A página de vendas assina peso-a, e a outra versão dela assina peso-b. É
+assim que você vai saber qual das três fechou a venda, já que as três mandam
+para o mesmo checkout.
+
+Se a pessoa chegou por um anúncio que já trazia um sck, ele é mantido e o
+nome do quiz entra depois dele, assim:
+
+  sck = suacampanha--peso-quiz
+
+Nada se perde: você continua vendo a campanha E a peça.
+
+
+DUAS LINHAS PARA TROCAR QUANDO VOCÊ TIVER O DOMÍNIO
+====================================================
+
+Procure por  >>>  dentro do index.html. São três lugares:
+
+1 e 2. A imagem do WhatsApp (og:image), que hoje está com o nome do arquivo
+       e ficaria mais garantida com o endereço completo. Exemplo:
+       https://seudominio.com.br/og-peso.png
+
+3.     O link do recado que aparece se alguém estiver com o JavaScript
+       desligado. Hoje ele aponta para "../pagina-peso/index.html", o que só
+       funciona se o quiz e a página estiverem na mesma hospedagem, um do
+       lado do outro. Como o teste põe cada peça num endereço próprio, troque
+       pelo endereço completo da página de vendas.
+
+
+O QUE ACONTECE SEM JAVASCRIPT
+
+Um quiz é pergunta e resposta: sem JavaScript ele não tem como funcionar.
+Então, em vez de abrir uma tela morta, aparece um recado curto explicando e
+um botão que leva para a página de vendas, que funciona parada. Ninguém fica
+sem caminho.
+
+
+AS SETE PERGUNTAS E OS TRÊS RESULTADOS
+
+O quiz classifica o visitante em um de três perfis:
+
+  O Escravo da Hora-Aula
+  O que Perde no Terceiro Mês
+  O que Cobra Bem e Não Escala
+
+Os três levam à mesma oferta; o que muda é o diagnóstico e o depoimento em
+destaque, escolhido para responder àquele perfil.
+
+Para mudar o texto de um diagnóstico, procure por  var PERFIS =  dentro do
+index.html. Cada perfil tem o nome, o diagnóstico, o que aquilo custa, a
+virada e o código do vídeo em destaque, todos escritos por extenso.
