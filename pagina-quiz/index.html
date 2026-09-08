@@ -476,6 +476,11 @@ html:not(.js) .tela,html:not(.js) .barra{display:none}
     <p class="selo"><span class="ponto"></span>Método P.E.S.O.</p>
     <h1>O diagnóstico precisa de JavaScript para funcionar.</h1>
     <p class="abertura-sub">O seu navegador está com o JavaScript desligado, e o quiz depende dele para montar as perguntas. Mas o conteúdo todo está na página do método, e ela funciona sem nada disso.</p>
+    <!-- >>> ENDEREÇO DA PÁGINA DE VENDAS
+         Este link é relativo: ele só funciona se o quiz e a página estiverem
+         na mesma hospedagem, um do lado do outro. Se o quiz for para um
+         endereço próprio (que é o caso do teste de três pontas), troque por
+         o endereço completo. Exemplo: https://metodopeso.com.br -->
     <a class="cta" href="../pagina-peso/index.html">Ver o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
   </div>
 </div>
@@ -1006,6 +1011,7 @@ function revela(){
    etiquetas para o link do checkout, e assim a Kiwify mostra qual anuncio
    gerou cada venda.
    ========================================================================== */
+var ORIGEM = "peso-quiz";
 var ETIQUETAS = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","src","sck","fbclid","gclid","ttclid"];
 
 document.querySelectorAll(".js-checkout").forEach(function(a){
@@ -1017,6 +1023,16 @@ document.querySelectorAll(".js-checkout").forEach(function(a){
       var valor = deLa.get(nome);
       if(valor && !destino.searchParams.has(nome)){ destino.searchParams.set(nome, valor); }
     });
+
+    /* CARIMBO DE ORIGEM
+       Esta é a quiz de diagnóstico. As três peças mandam para o mesmo checkout, então
+       sem isto a venda chega igual na Kiwify e não dá para saber qual delas
+       fechou. Aqui a página assina o próprio nome no campo sck.
+       Se a pessoa já chegou com um sck do anúncio, ele é mantido e o nome
+       da página entra depois dele: "campanha--peso-quiz". Nada se perde. */
+    var jaVeio = destino.searchParams.get("sck");
+    destino.searchParams.set("sck", jaVeio ? jaVeio + "--" + ORIGEM : ORIGEM);
+
     a.href = destino.toString();
   }catch(e){
     /* Se algo der errado aqui, o botao continua com o link que veio do HTML. */
