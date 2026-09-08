@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico para Personal Trainer — Método P.E.S.O.</title>
+<meta name="description" content="Sete perguntas sobre como você trabalha hoje. No fim, o diagnóstico do que está segurando o seu faturamento como personal trainer.">
+<meta name="robots" content="index,follow">
+
+<!-- Marca a pagina como "javascript ligado". O quiz e fluxo e estado: sem
+     javascript ele nao funciona. Por isso, mais abaixo, existe um <noscript>
+     que manda a pessoa direto para a pagina do Metodo P.E.S.O., em vez de
+     deixar ela numa tela morta. -->
+<script>document.documentElement.className+=" js";</script>
+<meta name="author" content="Prof. José Carlos Gallo — Instituto Gallo Personal Systems">
+<meta name="theme-color" content="#15100D">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Instituto Gallo Personal Systems">
+<meta property="og:title" content="O que está segurando o seu faturamento como personal?">
+<meta property="og:description" content="Sete perguntas, dois minutos, sem cadastro. No fim, o diagnóstico de qual dos três padrões está te travando.">
+<meta property="og:image" content="og-peso.png"><!-- >>> endereço completo aqui -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="O que está segurando o seu faturamento como personal?">
+<meta name="twitter:description" content="Sete perguntas, dois minutos, sem cadastro.">
+<meta name="twitter:image" content="og-peso.png"><!-- >>> endereço completo aqui -->
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315100D'/%3E%3Ctext x='32' y='45' font-family='Arial,Helvetica,sans-serif' font-size='38' font-weight='bold' fill='%23F2621F' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..112,500..900&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   O quiz usa o mesmo sistema visual da pagina de vendas: estudio escuro,
+   as mesmas cores, a mesma familia de fonte em tres larguras. O funil
+   inteiro precisa parecer a mesma marca.
+   ========================================================================== */
+:root{
+  --noite:#0D0A08;
+  --carvao:#15100D;
+  --carvao-2:#1C1613;
+  --carvao-3:#271F1A;
+  --areia:#FBF8F5;
+  --tinta:#15100D;
+  --tinta-corpo:#302823;
+  --tinta-2:#5C534B;
+  --tinta-3:#8F857C;
+  --linha:#EBE4DC;
+  --fogo:#F2621F;
+  --fogo-alto:#FF8340;
+  --fogo-2:#CF4B10;
+  --fogo-3:#A63A08;
+  --verde:#12855A;
+  --verde-claro:#4FD3A0;
+  --medida:660px;
+  --palco:1000px;
+  --r1:10px;
+  --r2:16px;
+  --r3:22px;
+  --r4:28px;
+  --disp:Archivo,"Helvetica Neue",Arial,sans-serif;
+  --texto:Figtree,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --grao:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+/* O quiz troca de tela pelo atributo hidden. Como .tela declara display:flex,
+   ela venceria a regra [hidden]{display:none} do proprio navegador e as tres
+   telas apareceriam empilhadas. Esta linha resolve, e precisa vir antes. */
+[hidden]{display:none !important}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--texto);font-size:17px;line-height:1.68;
+  color:#CDC3BA;background:var(--carvao);
+  -webkit-font-smoothing:antialiased;
+}
+img,iframe{max-width:100%}
+p{margin:0 0 1.15em}
+
+h1,h2,h3{font-family:var(--disp);font-weight:900;color:#fff;letter-spacing:-.034em}
+h1{font-size:clamp(1.95rem,6.4vw,3.1rem);line-height:1.02;margin:0 0 .5em;text-wrap:balance}
+h2{font-size:clamp(1.5rem,4.6vw,2.1rem);line-height:1.06;margin:0 0 .6em;text-wrap:balance}
+h3{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;margin:0 0 .4em;line-height:1.32}
+
+.wrap{max-width:var(--medida);margin:0 auto;padding:0 22px}
+.palco{max-width:var(--palco);margin:0 auto;padding:0 22px}
+
+.selo{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--disp);font-size:.68rem;font-weight:700;font-stretch:80%;
+  letter-spacing:.19em;text-transform:uppercase;
+  border:1px solid rgba(242,98,31,.24);background:rgba(242,98,31,.13);
+  color:var(--fogo-alto);padding:8px 15px;border-radius:99px;margin:0 0 22px;
+}
+.selo .ponto{width:7px;height:7px;border-radius:50%;background:var(--fogo);
+  box-shadow:0 0 0 3px rgba(242,98,31,.22)}
+
+.ico{width:22px;height:22px;flex:0 0 auto;fill:none;stroke:currentColor;
+  stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.ico-sm{width:17px;height:17px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- Telas ---------- */
+.tela{
+  position:relative;isolation:isolate;
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(48px,8vw,80px) 0;
+}
+.tela::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:var(--grao);opacity:.045;
+}
+.tela--abertura::before{
+  content:"";position:absolute;z-index:-1;top:-240px;right:-180px;width:680px;height:680px;
+  background:radial-gradient(circle,rgba(242,98,31,.32),rgba(242,98,31,.05) 46%,rgba(242,98,31,0) 70%);
+  pointer-events:none;
+}
+/* A tela de resultado e longa: ela rola, entao nao trava na altura da janela. */
+.tela--resultado{min-height:0;display:block;padding-bottom:120px}
+
+/* ---------- Abertura ---------- */
+.abertura-sub{
+  font-size:clamp(1.04rem,2.7vw,1.2rem);line-height:1.58;color:#C6BCB3;
+  margin:0 0 1.7em;max-width:52ch;
+}
+.sem-cadastro{
+  display:flex;flex-wrap:wrap;gap:10px 22px;margin:20px 0 0;padding:0;list-style:none;
+}
+.sem-cadastro li{
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--disp);font-size:.82rem;font-weight:600;color:#BDB2A8;
+}
+.sem-cadastro .ico{color:var(--verde-claro)}
+
+/* ---------- Progresso ---------- */
+.progresso{margin:0 0 34px}
+.progresso-texto{
+  font-family:var(--disp);font-size:.72rem;font-weight:700;font-stretch:80%;
+  letter-spacing:.2em;text-transform:uppercase;color:#A79C92;margin:0 0 11px;
+}
+.progresso-trilho{height:4px;background:rgba(255,255,255,.10);border-radius:99px;overflow:hidden}
+.progresso-fio{
+  height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--fogo-2),var(--fogo-alto));
+  transition:width .45s cubic-bezier(.2,.8,.2,1);
+}
+
+/* ---------- Pergunta ---------- */
+.pergunta h2{margin-bottom:1.1em}
+.opcoes{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.opcao{
+  display:flex;align-items:flex-start;gap:15px;width:100%;text-align:left;
+  font-family:var(--texto);font-size:1.04rem;line-height:1.5;color:#E4DBD3;
+  background:linear-gradient(168deg,#251E19,#1A1411);
+  border:1px solid rgba(255,255,255,.09);border-radius:var(--r2);
+  padding:20px 22px;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045);
+  transition:border-color .18s ease,transform .12s ease,box-shadow .18s ease;
+}
+.opcao .letra{
+  flex:0 0 auto;width:30px;height:30px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--disp);font-size:.88rem;font-weight:900;
+  background:rgba(255,255,255,.07);color:#A79C92;
+  transition:background .18s ease,color .18s ease;
+}
+.opcao:hover,.opcao:focus-visible{
+  border-color:rgba(242,98,31,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 14px 30px -18px rgba(242,98,31,.5);
+}
+.opcao:hover .letra,.opcao:focus-visible .letra{background:var(--fogo);color:#fff}
+.opcao:active{transform:translateY(2px)}
+.opcao:focus-visible{outline:3px solid var(--fogo-alto);outline-offset:3px}
+
+.voltar{
+  margin:26px 0 0;background:none;border:0;cursor:pointer;padding:8px 4px;
+  font-family:var(--disp);font-size:.84rem;font-weight:600;color:#8E837A;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.voltar:hover,.voltar:focus-visible{color:var(--fogo-alto)}
+.voltar:focus-visible{outline:2px solid var(--fogo-alto);outline-offset:3px;border-radius:6px}
+
+/* ---------- Resultado ---------- */
+.res-topo{
+  position:relative;isolation:isolate;overflow:hidden;
+  background:var(--noite);padding:clamp(56px,9vw,96px) 0 clamp(40px,6vw,64px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.res-topo::before{
+  content:"";position:absolute;z-index:-1;top:-220px;left:50%;transform:translateX(-50%);
+  width:760px;height:620px;
+  background:radial-gradient(circle,rgba(242,98,31,.28),rgba(242,98,31,0) 68%);
+}
+.res-perfil{
+  font-family:var(--disp);font-size:clamp(2rem,7vw,3.4rem);font-weight:900;font-stretch:98%;
+  line-height:.98;letter-spacing:-.042em;color:#fff;margin:0 0 .45em;text-wrap:balance;
+}
+.res-diag{
+  font-family:var(--disp);font-size:clamp(1.2rem,3.4vw,1.62rem);font-weight:800;font-stretch:98%;
+  line-height:1.3;letter-spacing:-.026em;color:var(--fogo-alto);margin:0;
+  border-left:3px solid var(--fogo);padding-left:20px;
+}
+.secao{position:relative;isolation:isolate;padding:clamp(52px,7.5vw,88px) 0}
+.secao::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:var(--grao);opacity:.045;
+}
+.secao--claro{background:var(--areia);color:var(--tinta-corpo)}
+.secao--claro h2,.secao--claro h3{color:var(--tinta)}
+.secao--noite{background:var(--noite)}
+
+.custa{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.custa li{display:flex;gap:13px;align-items:flex-start;line-height:1.55}
+.custa .ico{color:#E5674F;margin-top:4px}
+
+/* Quem esta falando: em trafego frio, isso precisa vir cedo. */
+.autoridade{
+  display:flex;gap:20px;align-items:center;
+  background:linear-gradient(168deg,#251E19,#1A1411);
+  border:1px solid rgba(255,255,255,.075);border-radius:var(--r3);
+  padding:24px 26px;margin:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 24px 48px -28px #000;
+}
+.autoridade img{
+  flex:0 0 auto;width:74px;height:74px;border-radius:50%;object-fit:cover;object-position:center 16%;
+  border:2px solid rgba(242,98,31,.4);
+}
+.autoridade b{
+  display:block;font-family:var(--disp);font-size:1.04rem;font-weight:800;color:#fff;
+  letter-spacing:-.02em;margin-bottom:4px;
+}
+.autoridade span{display:block;font-size:.9rem;line-height:1.5;color:#A79C92}
+
+.virada{
+  background:linear-gradient(100deg,rgba(242,98,31,.16),rgba(242,98,31,.02));
+  border:1px solid rgba(242,98,31,.24);border-left:3px solid var(--fogo);
+  border-radius:var(--r3);padding:28px 30px;margin:0;
+  font-family:var(--disp);font-size:clamp(1.14rem,3.2vw,1.44rem);
+  font-weight:800;font-stretch:98%;letter-spacing:-.026em;line-height:1.3;color:#fff;
+}
+
+/* As cinco fases, na proporcao real da duracao. Mesma linguagem da pagina. */
+.fases{margin:34px 0 0}
+.fases-barra{display:flex;gap:6px}
+.fases-barra span{
+  display:flex;align-items:center;justify-content:center;min-width:0;height:54px;
+  border-radius:var(--r1);
+  background:linear-gradient(180deg,rgba(242,98,31,.20),rgba(242,98,31,.05));
+  border:1px solid rgba(242,98,31,.30);
+  font-family:var(--disp);font-weight:900;font-stretch:104%;font-size:1rem;color:var(--fogo-alto);
+  transform-origin:left center;
+}
+.js .fases-barra span{
+  transform:scaleX(0);opacity:0;
+  transition:transform .62s cubic-bezier(.16,.84,.28,1),opacity .28s ease;
+  transition-delay:calc(var(--i,0) * 95ms);
+}
+.js .fases.on .fases-barra span{transform:none;opacity:1}
+.fases-legenda{
+  font-family:var(--disp);font-size:.78rem;font-weight:600;font-stretch:88%;
+  letter-spacing:.05em;color:#9A8F86;margin:13px 0 0;
+}
+
+/* ---------- Depoimentos ---------- */
+.depo{
+  background:linear-gradient(168deg,#251E19,#1A1411);
+  border:1px solid rgba(255,255,255,.075);border-radius:var(--r2);
+  overflow:hidden;margin:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 24px 48px -28px #000;
+}
+.video{position:relative;display:block;width:100%;padding-top:56.25%;background:var(--noite);
+  overflow:hidden;cursor:pointer;text-decoration:none}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+  display:block;transition:transform .4s ease}
+.video .play{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:72px;height:50px;border-radius:14px;background:rgba(13,10,8,.72);
+  border:1px solid rgba(255,255,255,.24);
+  transition:background .25s ease,transform .25s ease;
+}
+.video .play::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-42%,-50%);
+  border-style:solid;border-width:10px 0 10px 16px;
+  border-color:transparent transparent transparent #fff;
+}
+.video:hover .play,.video:focus-visible .play{background:var(--fogo);transform:translate(-50%,-50%) scale(1.07)}
+.video:hover img{transform:scale(1.04)}
+.video:focus-visible{outline:3px solid var(--fogo);outline-offset:2px}
+.depo figcaption{padding:17px 20px;font-size:.94rem;line-height:1.5;color:#BAAFA5}
+.depo figcaption b{
+  display:block;color:#fff;font-weight:800;font-family:var(--disp);font-stretch:96%;
+  font-size:1rem;letter-spacing:-.02em;margin-bottom:3px;
+}
+.mais-depo{display:grid;gap:16px;margin:22px 0 0}
+@media(min-width:620px){.mais-depo{grid-template-columns:1fr 1fr}}
+
+/* No desktop, a prosa fica na coluna de leitura e os blocos saem dela:
+   a oferta, o depoimento em destaque e a grade de miniaturas ocupam o palco.
+   E essa diferenca de largura que tira a cara de documento. */
+@media(min-width:900px){
+  .wrap>.oferta,
+  .wrap>#res-depo,
+  .wrap>.mais-depo{
+    width:calc(100vw - 44px);max-width:var(--palco);
+    margin-left:calc(50% - min(50vw - 22px, var(--palco) / 2));
+  }
+  .wrap>.mais-depo{grid-template-columns:repeat(4,1fr)}
+  .oferta{padding:18px 38px 38px}
+  /* O depoimento em destaque sai da coluna de leitura, mas nao vira outdoor:
+     a 1140px o video de 16:9 passaria de 600px de altura e engoliria a tela. */
+  .wrap>#res-depo{max-width:780px}
+}
+.mais-depo .depo figcaption{padding:13px 15px;font-size:.86rem}
+.mais-depo .depo figcaption b{font-size:.92rem}
+
+/* ---------- Oferta ---------- */
+.oferta{
+  background:linear-gradient(168deg,#251E19,#1A1411);
+  border:1px solid rgba(255,255,255,.075);border-radius:var(--r4);
+  padding:14px 26px 26px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 40px 80px -40px #000;
+}
+.item{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.10)}
+.item .ico{color:var(--verde-claro);margin-top:4px}
+.item .nome{flex:1 1 auto;font-size:1rem;line-height:1.5;color:#CDC3BA}
+.item .nome strong{color:#fff}
+.item:last-of-type{border-bottom:none}
+.tag-bonus{
+  display:inline-block;font-family:var(--disp);font-size:.62rem;font-weight:900;font-stretch:88%;
+  letter-spacing:.14em;text-transform:uppercase;background:rgba(79,211,160,.13);color:var(--verde-claro);
+  padding:4px 9px;border-radius:99px;margin-left:8px;vertical-align:1px;
+}
+.preco{
+  background:linear-gradient(165deg,#221B16,#120E0C);
+  border:1px solid rgba(242,98,31,.24);border-radius:var(--r3);
+  padding:32px 22px;margin:20px 0 0;text-align:center;position:relative;overflow:hidden;
+}
+.preco::before{
+  content:"";position:absolute;top:-150px;left:50%;transform:translateX(-50%);
+  width:460px;height:360px;
+  background:radial-gradient(circle,rgba(242,98,31,.30),rgba(242,98,31,0) 70%);
+}
+.preco>*{position:relative}
+.preco .antes{font-family:var(--disp);font-size:.94rem;font-weight:600;color:#9A8F86;margin:0}
+.preco .antes s{text-decoration-thickness:2px}
+.preco .agora{
+  font-family:var(--disp);font-size:clamp(2.7rem,10vw,4.2rem);font-weight:900;font-stretch:104%;
+  letter-spacing:-.05em;line-height:1;margin:.14em 0;font-variant-numeric:tabular-nums;color:#fff;
+}
+.preco .agora em{
+  display:block;font-style:normal;font-size:.3em;font-weight:700;font-stretch:88%;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--fogo-alto);margin-bottom:.3em;
+}
+.preco .parcela{font-family:var(--disp);font-size:.99rem;font-weight:600;color:#CFC5BC;margin:0 0 24px}
+.preco .parcela b{color:#fff;font-weight:800}
+
+/* ---------- Garantia ---------- */
+.garantia{
+  display:flex;gap:20px;align-items:flex-start;
+  border:1px solid rgba(79,211,160,.28);border-radius:var(--r3);
+  background:rgba(79,211,160,.06);padding:24px 26px;margin:24px 0 0;
+}
+.garantia .medalha{
+  flex:0 0 auto;width:66px;height:66px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:2px solid var(--verde-claro);color:var(--verde-claro);
+  background:radial-gradient(circle at 50% 32%,rgba(79,211,160,.20),rgba(79,211,160,.04));
+}
+.garantia .medalha b{font-family:var(--disp);font-size:1.3rem;font-weight:900;line-height:1;letter-spacing:-.04em}
+.garantia .medalha span{font-family:var(--disp);font-size:.55rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-top:3px}
+.garantia p{margin:0;font-size:.98rem;line-height:1.55;color:#BAAFA5}
+.garantia p b{color:#fff}
+
+/* ---------- CTA ---------- */
+.cta{
+  position:relative;overflow:hidden;
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;max-width:460px;text-align:center;
+  background:linear-gradient(180deg,var(--fogo-alto),var(--fogo-2));
+  color:#fff;text-decoration:none;
+  font-family:var(--disp);font-weight:800;font-stretch:98%;font-size:1.08rem;line-height:1.25;
+  letter-spacing:-.012em;padding:21px 26px;border-radius:var(--r2);border:0;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 3px 0 var(--fogo-3),0 16px 34px -12px rgba(242,98,31,.60);
+  transition:filter .16s ease,transform .08s ease,box-shadow .16s ease;
+}
+.cta>*{position:relative}
+.cta .ico{width:19px;height:19px;stroke-width:2.6;position:relative}
+.cta::after{
+  content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.26),transparent);
+  transition:transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.cta:hover::after,.cta:focus-visible::after{transform:translateX(360%)}
+.cta:hover,.cta:focus-visible{filter:brightness(1.06)}
+.cta:active{transform:translateY(3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 0 0 var(--fogo-3)}
+.cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.cta-centro{text-align:center}
+.cta-centro .cta{margin:0 auto}
+.cta-nota{font-family:var(--disp);font-size:.85rem;font-weight:600;color:#9A8F86;margin:1em 0 0}
+
+/* O botao do grupo: secundario de proposito. Ele existe para quem nao
+   comprou hoje, e nao pode competir com o checkout. */
+.cta--calmo{
+  background:none;border:1px solid rgba(255,255,255,.22);color:#E4DBD3;
+  box-shadow:none;font-size:1rem;padding:17px 24px;
+}
+.cta--calmo:hover,.cta--calmo:focus-visible{border-color:var(--verde-claro);color:#fff;filter:none}
+.cta--calmo:active{transform:translateY(2px);box-shadow:none}
+.cta--calmo::after{display:none}
+.cta--calmo .ico{color:var(--verde-claro)}
+
+/* ---------- Barra fixa ---------- */
+.barra{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:rgba(13,10,8,.94);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,.09);
+  padding:12px 18px calc(12px + env(safe-area-inset-bottom));
+  transform:translateY(115%);transition:transform .28s cubic-bezier(.2,.8,.2,1);
+}
+.barra.visivel{transform:translateY(0)}
+.barra .interno{max-width:var(--medida);margin:0 auto;display:flex;align-items:center;gap:16px}
+.barra .valor{flex:0 0 auto;line-height:1.15;font-family:var(--disp);color:#fff}
+.barra .valor b{display:block;font-size:1.04rem;font-weight:900;letter-spacing:-.04em;white-space:nowrap}
+.barra .valor span{font-size:.73rem;font-weight:600;color:#9A8F86}
+.barra .cta{flex:1 1 auto;max-width:none;padding:15px 18px;font-size:1rem;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 2px 0 var(--fogo-3)}
+@media(max-width:419px){.barra .valor{display:none}}
+
+footer{
+  background:var(--noite);color:#8A7F76;padding:44px 0;font-size:.88rem;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+footer strong{color:#fff;font-weight:800;font-family:var(--disp)}
+
+/* ---------- Movimento ----------
+   Tudo o que esconde conteudo mora atras da classe .js. Sem javascript o
+   quiz nao roda de qualquer jeito, e o <noscript> ja mandou a pessoa para
+   a pagina de vendas. */
+.js .aparece{opacity:0;transform:translateY(16px)}
+.js .aparece.on{opacity:1;transform:none;
+  transition:opacity .5s ease,transform .5s cubic-bezier(.16,.84,.28,1)}
+
+@media(prefers-reduced-motion:reduce){
+  .aparece,.js .aparece{opacity:1 !important;transform:none !important;transition:none !important}
+  .fases-barra span{transform:none !important;opacity:1 !important;transition:none !important}
+  .progresso-fio{transition:none}
+  .cta::after{display:none}
+  .cta,.opcao,.video img,.video .play,.barra{transition:none !important}
+  .opcao:active,.cta:active,.video:hover img{transform:none !important}
+  html{scroll-behavior:auto}
+}
+
+/* Sem javascript: esconde o quiz e mostra o recado. */
+.sem-js{display:none}
+html:not(.js) .sem-js{display:flex}
+html:not(.js) .tela,html:not(.js) .barra{display:none}
+</style>
+</head>
+<body>
+
+<!-- ==========================================================================
+     SEM JAVASCRIPT
+
+     Um quiz e fluxo e estado: sem javascript ele nao tem como funcionar.
+     Em vez de deixar a pessoa numa tela morta, mandamos ela para a pagina
+     de vendas, que funciona parada.
+     ========================================================================== -->
+<noscript>
+  <style>.sem-js{display:flex !important}</style>
+</noscript>
+<div class="sem-js tela tela--abertura">
+  <div class="wrap">
+    <p class="selo"><span class="ponto"></span>Método P.E.S.O.</p>
+    <h1>O diagnóstico precisa de JavaScript para funcionar.</h1>
+    <p class="abertura-sub">O seu navegador está com o JavaScript desligado, e o quiz depende dele para montar as perguntas. Mas o conteúdo todo está na página do método, e ela funciona sem nada disso.</p>
+    <a class="cta" href="../pagina-peso/index.html">Ver o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
+  </div>
+</div>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-volta" viewBox="0 0 24 24"><path d="M19 12H6M11 18l-6-6 6-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 2.6 4.4 6v6.1c0 4.9 3.2 8.6 7.6 9.7 4.4-1.1 7.6-4.8 7.6-9.7V6L12 2.6z"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-11.9 7.6L3 21l1.9-5.9A8.4 8.4 0 1121 11.5z"/></symbol>
+</svg>
+
+<!-- ========================= TELA 0 — ABERTURA ========================= -->
+<section class="tela tela--abertura" id="tela-abertura">
+  <div class="wrap">
+    <p class="selo"><span class="ponto"></span>Diagnóstico · 7 perguntas · 2 minutos</p>
+    <h1>O que está segurando o seu faturamento como personal?</h1>
+    <p class="abertura-sub">Sete perguntas sobre como você trabalha hoje. No fim, você vê qual dos três padrões está te travando — e o que muda quando ele sai do caminho.</p>
+    <button class="cta" type="button" id="comecar">Começar o diagnóstico <svg class="ico"><use href="#i-seta"/></svg></button>
+    <ul class="sem-cadastro">
+      <li><svg class="ico ico-sm"><use href="#i-check"/></svg>Sem cadastro</li>
+      <li><svg class="ico ico-sm"><use href="#i-check"/></svg>Sem e-mail</li>
+      <li><svg class="ico ico-sm"><use href="#i-check"/></svg>O resultado aparece na hora</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= TELA 1..7 — PERGUNTAS ========================= -->
+<section class="tela" id="tela-pergunta" hidden>
+  <div class="wrap">
+    <div class="progresso">
+      <p class="progresso-texto" id="progresso-texto">Pergunta 1 de 7</p>
+      <div class="progresso-trilho"><div class="progresso-fio" id="progresso-fio"></div></div>
+    </div>
+    <div class="pergunta">
+      <h2 id="pergunta-texto"></h2>
+      <ul class="opcoes" id="opcoes"></ul>
+      <button class="voltar" type="button" id="voltar">
+        <svg class="ico ico-sm"><use href="#i-volta"/></svg>Voltar
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= TELA 8 — RESULTADO ========================= -->
+<div class="tela tela--resultado" id="tela-resultado" hidden>
+
+  <header class="res-topo">
+    <div class="wrap">
+      <p class="selo"><span class="ponto"></span>Seu diagnóstico</p>
+      <h1 class="res-perfil" id="res-perfil"></h1>
+      <p class="res-diag" id="res-diag"></p>
+    </div>
+  </header>
+
+  <section class="secao">
+    <div class="wrap">
+      <h2>O que isso te custa</h2>
+      <ul class="custa" id="res-custa"></ul>
+    </div>
+  </section>
+
+  <section class="secao secao--noite">
+    <div class="wrap">
+      <h2>Quem está te dizendo isso</h2>
+      <figure class="autoridade">
+        <img src="foto-gallo.jpg" alt="Professor José Carlos Gallo" onerror="this.remove()">
+        <figcaption>
+          <b>Prof. José Carlos Gallo</b>
+          <span>36 anos de prática · CREF 004702-G/BA · Formado em educação física, fisioterapia e nutrição · Mais de mil profissionais já aplicaram o Método P.E.S.O.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="wrap">
+      <h2>O que muda</h2>
+      <p class="virada" id="res-virada"></p>
+
+      <div class="fases" id="fases">
+        <div class="fases-barra">
+          <span style="flex:17.5" aria-hidden="true">1</span>
+          <span style="flex:9" aria-hidden="true">2</span>
+          <span style="flex:12" aria-hidden="true">3</span>
+          <span style="flex:13" aria-hidden="true">4</span>
+          <span style="flex:6.5" aria-hidden="true">5</span>
+        </div>
+        <p class="fases-legenda">As cinco fases do Método P.E.S.O., na proporção real de duração · cerca de 60 dias</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- O depoimento casado com o perfil, logo antes da oferta. -->
+  <section class="secao secao--noite">
+    <div class="wrap">
+      <h2 id="res-depo-titulo">Quem já passou por isso</h2>
+      <div id="res-depo"></div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="wrap">
+      <h2>O Método P.E.S.O.</h2>
+
+      <div class="oferta">
+        <div class="item">
+          <svg class="ico ico-sm"><use href="#i-check"/></svg>
+          <span class="nome">Metodologia P.E.S.O. — as cinco fases</span>
+        </div>
+        <div class="item">
+          <svg class="ico ico-sm"><use href="#i-check"/></svg>
+          <span class="nome">Mentoria técnica ao vivo no Zoom com o Professor Gallo</span>
+        </div>
+        <div class="item">
+          <svg class="ico ico-sm"><use href="#i-check"/></svg>
+          <span class="nome">Metodologia de Vendas — aulas mais manual em PDF</span>
+        </div>
+        <div class="item">
+          <svg class="ico ico-sm"><use href="#i-check"/></svg>
+          <span class="nome">Materiais de venda prontos</span>
+        </div>
+        <div class="item">
+          <svg class="ico ico-sm"><use href="#i-check"/></svg>
+          <span class="nome">1 ano do <strong>GPA STUDIO PRO</strong>, com 3 licenças de alunos — software de avaliação, prescrição e periodização<span class="tag-bonus">Bônus</span></span>
+        </div>
+
+        <div class="preco">
+          <p class="antes">O Método P.E.S.O. já foi vendido por <s>R$&nbsp;1.996,00</s></p>
+          <p class="agora"><em>12x de</em>R$ 82,43</p>
+          <p class="parcela">ou <b>R$ 797</b> à vista · Acesso por 1 ano.</p>
+          <a class="cta js-checkout" href="https://pay.kiwify.com.br/Sr5xECq">Quero o Método P.E.S.O. <svg class="ico"><use href="#i-seta"/></svg></a>
+          <p class="cta-nota">Um único programa vendido a R$&nbsp;4.000 devolve cinco vezes o que você investiu.</p>
+        </div>
+
+        <div class="garantia">
+          <div class="medalha"><b>30</b><span>dias</span></div>
+          <p><b>Você entra, assiste, aplica em um aluno.</b> Se em 30 dias você achar que o método não vai mudar o seu jeito de trabalhar, você pede o reembolso e recebe o valor de volta. Sem formulário, sem entrevista de saída, sem pergunta atravessada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mais prova, para quem rolou passando pelo botao sem clicar. -->
+  <section class="secao secao--noite">
+    <div class="wrap">
+      <h2>Outros que aplicaram</h2>
+      <div class="mais-depo" id="mais-depo"></div>
+
+      <div class="cta-centro" style="margin-top:38px">
+        <a class="cta cta--calmo" href="https://chat.whatsapp.com/Iup4bcguUkAKoLxUhjiVKs?mode=gi_t" target="_blank" rel="noopener">
+          <svg class="ico"><use href="#i-zap"/></svg>Ainda não é hora? Entra no grupo
+        </a>
+        <p class="cta-nota">O Professor Gallo tira dúvida de prescrição por lá.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p style="margin-bottom:.4em"><strong>Instituto Gallo Personal Systems</strong></p>
+      <p style="margin:0">Método P.E.S.O. — Programa de Emagrecimento Saudável Orientado. Prof. José Carlos Gallo.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- BARRA FIXA -->
+<div class="barra" id="barra">
+  <div class="interno">
+    <div class="valor"><b>12x R$ 82,43</b><span>ou R$ 797 à vista</span></div>
+    <a class="cta js-checkout" href="https://pay.kiwify.com.br/Sr5xECq">Quero o Método P.E.S.O.</a>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   O DIAGNOSTICO
+
+   Sete perguntas, tres alternativas cada. Cada alternativa distribui pontos
+   entre os tres perfis. Vence o maior. Empate resolve na ordem em que os
+   perfis estao escritos aqui: escravo, terceiro, escala.
+
+   Nenhuma alternativa e a "certa" de proposito. Quiz com resposta
+   claramente premiada faz a pessoa se autoavaliar em vez de se revelar.
+   ========================================================================== */
+var PERGUNTAS = [
+  {
+    t: "Como você cobra hoje?",
+    o: [
+      ["Por hora ou por aula avulsa.",                             {escravo:3}],
+      ["Mensalidade fixa. O aluno paga todo mês.",                 {escravo:1, terceiro:2}],
+      ["Pacote fechado, com prazo e preço definidos na entrada.",  {escala:3}]
+    ]
+  },
+  {
+    t: "Um aluno novo entra hoje. O que ele recebe na primeira semana?",
+    o: [
+      ["Uma ficha de treino montada para ele.",                    {escravo:3}],
+      ["Avaliação e um treino, e a gente vai ajustando pelo caminho.", {terceiro:3}],
+      ["Um programa com as fases já definidas até o fim.",         {escala:3}]
+    ]
+  },
+  {
+    t: "De cada 10 alunos que começam com você, quantos ainda estão lá no quarto mês?",
+    o: [
+      ["Menos de 3.",                                              {terceiro:3}],
+      ["Entre 3 e 6.",                                             {terceiro:2, escravo:1}],
+      ["Mais de 6.",                                               {escala:2}]
+    ]
+  },
+  {
+    t: "O peso do aluno para de cair na quinta semana. O que você faz?",
+    o: [
+      ["Aperto a dieta e aumento o aeróbico.",                     {terceiro:2, escravo:1}],
+      ["Converso, remotivo, peço mais constância.",                {terceiro:3}],
+      ["Troco o estímulo. Eu já esperava que travasse aqui.",      {escala:3}]
+    ]
+  },
+  {
+    t: "A orientação alimentar do seu aluno sai de onde?",
+    o: [
+      ["Não mexo com isso. Não é a minha área.",                   {escravo:3}],
+      ["Da minha experiência. Oriento no geral.",                  {terceiro:2, escravo:1}],
+      ["De cálculo. Eu tenho o número de cada aluno.",             {escala:3}]
+    ]
+  },
+  {
+    t: "Se você ficasse um mês inteiro sem trabalhar, a sua renda...",
+    o: [
+      ["Zerava.",                                                  {escravo:3}],
+      ["Caía bastante, mas não zerava.",                           {escravo:1, terceiro:2}],
+      ["Continuava entrando. Os programas seguem.",                {escala:3}]
+    ]
+  },
+  {
+    t: "Um aluno te pede hoje um programa de 60 dias, com resultado definido, por R$ 4.000. Você...",
+    o: [
+      ["Não saberia o que entregar por esse valor.",               {escravo:3}],
+      ["Montaria, mas não sei se entregaria o resultado.",         {terceiro:3}],
+      ["Entrego. Já vendi programa assim.",                        {escala:3}]
+    ]
+  }
+];
+
+/* Os tres perfis. A ordem aqui e a ordem do desempate. */
+var PERFIS = [
+  {
+    id: "escravo",
+    nome: "O Escravo da Hora-Aula",
+    diag: "Você não vende resultado. Vende presença. E presença tem um teto: são 24 horas por dia, e você já está usando quase todas.",
+    custa: [
+      "No dia em que você não aparece, não entra dinheiro. Férias, gripe e imprevisto saem do seu bolso.",
+      "O seu preço é comparado com o do personal da esquina, porque vocês dois vendem exatamente a mesma coisa: uma hora.",
+      "Quando o aluno quer mais, a única coisa que você tem para vender é mais uma hora."
+    ],
+    virada: "O que separa você de cobrar R$ 4.000 por um programa não é mais experiência. É ter um programa para vender — com começo, meio e fim, definidos antes do aluno entrar.",
+    video: "-310l7IwlxI"
+  },
+  {
+    id: "terceiro",
+    nome: "O que Perde no Terceiro Mês",
+    diag: "O aluno não some porque falta disciplina. Ele some porque o corpo dele parou de responder ao mesmo estímulo — e você não tinha a fase seguinte pronta.",
+    custa: [
+      "Você recomeça a carteira a cada trimestre, e nunca sai do lugar.",
+      "O aluno que sairia satisfeito e indicaria três amigos sai frustrado e não indica ninguém.",
+      "Você trabalha mais para faturar o mesmo, porque metade do seu esforço é repor quem saiu."
+    ],
+    virada: "O travamento não é imprevisto. Ele é previsível, tem hora marcada, e existe uma fase desenhada para ele. Quem sabe disso muda o estímulo antes — e não perde o aluno no terceiro mês.",
+    video: "YiF7HzVdNY8"
+  },
+  {
+    id: "escala",
+    nome: "O que Cobra Bem e Não Escala",
+    diag: "Você tem talento. Não tem método. Talento não se ensina, não se delega e não se repete — e no dia em que você quiser dobrar, é você que trava.",
+    custa: [
+      "Cada aluno depende de você pessoalmente. Não dá para colocar ninguém no seu lugar.",
+      "Você não consegue treinar alguém para te ajudar, porque o que você faz está na sua cabeça e não no papel.",
+      "O seu negócio não vale nada sem você dentro dele."
+    ],
+    virada: "Método é o que transforma o que você faz bem em algo que se repete — com você, com um assistente, com dez alunos ao mesmo tempo.",
+    video: "ZIIFqX2z6SM"
+  }
+];
+
+/* Os cinco depoimentos. O do perfil vai para o destaque; os outros quatro
+   viram miniatura la embaixo, depois do botao. */
+var DEPOIMENTOS = {
+  "-310l7IwlxI": {nome:"Profa. Carla Borges", texto:"Irati, PR. Emagreceu 14 kg na aluna Jaci."},
+  "ZIIFqX2z6SM": {nome:"Professor Paulo Roberto", texto:"Duvidava do método antes de aplicar."},
+  "YiF7HzVdNY8": {nome:"Personal Gonzaga", texto:"10 kg de gordura em apenas 16 dias com o Método P.E.S.O."},
+  "hnbKFJGG_lI": {nome:"Andrea Luiz", texto:"Douradina, PR."},
+  "iSPuO-jtcvg": {nome:"João Pedro", texto:"Ceará."}
+};
+
+/* ========================================================================== */
+
+var telaAbertura = document.getElementById("tela-abertura");
+var telaPergunta = document.getElementById("tela-pergunta");
+var telaResultado = document.getElementById("tela-resultado");
+var barra = document.getElementById("barra");
+var elPergunta = document.getElementById("pergunta-texto");
+var elOpcoes = document.getElementById("opcoes");
+var elProgTexto = document.getElementById("progresso-texto");
+var elProgFio = document.getElementById("progresso-fio");
+var btnVoltar = document.getElementById("voltar");
+
+var LETRAS = ["A","B","C"];
+var respostas = [];
+var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function mostra(qual){
+  telaAbertura.hidden  = qual !== "abertura";
+  telaPergunta.hidden  = qual !== "pergunta";
+  telaResultado.hidden = qual !== "resultado";
+  barra.classList.toggle("visivel", qual === "resultado");
+}
+
+function desenhaPergunta(i){
+  var p = PERGUNTAS[i];
+  elPergunta.textContent = p.t;
+  elProgTexto.textContent = "Pergunta " + (i + 1) + " de " + PERGUNTAS.length;
+  elProgFio.style.width = ((i / PERGUNTAS.length) * 100) + "%";
+  btnVoltar.hidden = false;
+
+  elOpcoes.innerHTML = "";
+  p.o.forEach(function(alternativa, j){
+    var li = document.createElement("li");
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "opcao";
+    b.innerHTML = '<span class="letra" aria-hidden="true">' + LETRAS[j] + "</span>";
+    var txt = document.createElement("span");
+    txt.textContent = alternativa[0];
+    b.appendChild(txt);
+    b.addEventListener("click", function(){ responde(i, j); });
+    li.appendChild(b);
+    elOpcoes.appendChild(li);
+  });
+
+  /* No celular, o topo da pergunta precisa estar visivel a cada troca. */
+  window.scrollTo(0, 0);
+  var primeira = elOpcoes.querySelector(".opcao");
+  if(primeira){ primeira.focus({preventScroll:true}); }
+}
+
+function responde(i, j){
+  respostas[i] = j;
+  /* Se a pessoa voltou e trocou uma resposta, o que vinha depois some. */
+  respostas.length = i + 1;
+  /* i e o indice da pergunta (base 0); o passo dela e i+1. Entao a proxima
+     pergunta e o passo i+2 — e depois da ultima, i+2 cai no resultado. */
+  vai(i + 2);
+}
+
+/* O historico do navegador acompanha o quiz: no Android, o botao voltar
+   volta uma pergunta em vez de sair da pagina. */
+function vai(passo, semHistorico){
+  if(!semHistorico){
+    history.pushState({passo:passo}, "", "#p" + passo);
+  }
+  aplica(passo);
+}
+
+function aplica(passo){
+  if(passo <= 0){
+    mostra("abertura");
+    window.scrollTo(0, 0);
+  } else if(passo <= PERGUNTAS.length){
+    mostra("pergunta");
+    desenhaPergunta(passo - 1);
+  } else {
+    mostra("resultado");
+    desenhaResultado();
+    window.scrollTo(0, 0);
+  }
+}
+
+addEventListener("popstate", function(e){
+  var passo = (e.state && typeof e.state.passo === "number") ? e.state.passo : 0;
+  aplica(passo);
+});
+
+document.getElementById("comecar").addEventListener("click", function(){ vai(1); });
+btnVoltar.addEventListener("click", function(){ history.back(); });
+
+/* ---------- Apuracao ---------- */
+function apura(){
+  var pontos = {escravo:0, terceiro:0, escala:0};
+  respostas.forEach(function(j, i){
+    var ganhos = PERGUNTAS[i].o[j][1];
+    for(var k in ganhos){ pontos[k] += ganhos[k]; }
+  });
+  /* Vence o maior. Empate fica com quem vem primeiro na lista de perfis. */
+  var vencedor = PERFIS[0];
+  PERFIS.forEach(function(perfil){
+    if(pontos[perfil.id] > pontos[vencedor.id]){ vencedor = perfil; }
+  });
+  return vencedor;
+}
+
+/* Fachada de video: mostra so a miniatura. O YouTube so carrega quando a
+   pessoa clica. Sao cinco videos — carregar todos de uma vez deixaria a
+   tela de resultado pesada no celular. */
+function montaDepo(id, dados){
+  var fig = document.createElement("figure");
+  fig.className = "depo";
+  fig.innerHTML =
+    '<a class="video" href="https://www.youtube.com/watch?v=' + id + '" data-yt="' + id + '" ' +
+       'title="Depoimento de ' + dados.nome + '" target="_blank" rel="noopener">' +
+      '<img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="" loading="lazy" ' +
+           'decoding="async" width="480" height="360" onerror="this.remove()">' +
+      '<span class="play" aria-hidden="true"></span>' +
+      '<span class="sr">Assistir ao depoimento</span>' +
+    "</a>" +
+    "<figcaption></figcaption>";
+  var cap = fig.querySelector("figcaption");
+  var b = document.createElement("b");
+  b.textContent = dados.nome;
+  cap.appendChild(b);
+  cap.appendChild(document.createTextNode(dados.texto));
+  return fig;
+}
+
+function desenhaResultado(){
+  var perfil = apura();
+
+  document.getElementById("res-perfil").textContent = perfil.nome;
+  document.getElementById("res-diag").textContent = perfil.diag;
+  document.getElementById("res-virada").textContent = perfil.virada;
+
+  var lista = document.getElementById("res-custa");
+  lista.innerHTML = "";
+  perfil.custa.forEach(function(linha){
+    var li = document.createElement("li");
+    li.innerHTML = '<svg class="ico ico-sm"><use href="#i-x"/></svg>';
+    var s = document.createElement("span");
+    s.textContent = linha;
+    li.appendChild(s);
+    lista.appendChild(li);
+  });
+
+  /* O depoimento que responde a este diagnostico, em destaque. O conteiner
+     fica de pe e so o miolo troca: assim refazer o quiz nao quebra nada. */
+  var destaque = document.getElementById("res-depo");
+  destaque.innerHTML = "";
+  destaque.appendChild(montaDepo(perfil.video, DEPOIMENTOS[perfil.video]));
+
+  /* Os outros quatro, em miniatura, depois do botao. */
+  var mais = document.getElementById("mais-depo");
+  mais.innerHTML = "";
+  Object.keys(DEPOIMENTOS).forEach(function(id){
+    if(id === perfil.video){ return; }
+    mais.appendChild(montaDepo(id, DEPOIMENTOS[id]));
+  });
+
+  ligaVideos();
+  revela();
+
+  if(typeof window.fbq === "function"){ window.fbq("trackCustom","QuizConcluido",{perfil:perfil.id}); }
+  if(typeof window.gtag === "function"){ window.gtag("event","quiz_concluido",{perfil:perfil.id}); }
+}
+
+/* Troca a miniatura pelo video de verdade no clique. Sem javascript, o
+   link continua sendo um link comum e abre no YouTube. */
+function ligaVideos(){
+  document.querySelectorAll(".video[data-yt]").forEach(function(fachada){
+    if(fachada.dataset.ligado){ return; }
+    fachada.dataset.ligado = "1";
+    fachada.addEventListener("click", function(e){
+      /* Aberta direto do disco, com dois cliques, a pagina nao tem dominio.
+         O YouTube recusa a incorporacao nesse caso e mostra o "Erro 153".
+         Entao aqui a gente nao faz nada: o link continua sendo um link e
+         abre o video no YouTube, numa aba nova. Publicada na hospedagem,
+         a pagina tem dominio e o video toca embutido, como deve. */
+      if(location.protocol === "file:"){ return; }
+
+      e.preventDefault();
+      var quadro = document.createElement("iframe");
+      quadro.src = "https://www.youtube-nocookie.com/embed/" + fachada.dataset.yt + "?autoplay=1&rel=0";
+      quadro.title = fachada.getAttribute("title") || "Depoimento";
+      quadro.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      quadro.allowFullscreen = true;
+      var caixa = document.createElement("div");
+      caixa.className = "video";
+      caixa.appendChild(quadro);
+      fachada.replaceWith(caixa);
+    });
+  });
+}
+
+/* As cinco fases se constroem da esquerda para a direita, cada uma na
+   proporcao real da sua duracao. O mesmo gesto da pagina de vendas. */
+function revela(){
+  var fases = document.getElementById("fases");
+  fases.querySelectorAll(".fases-barra span").forEach(function(el, i){
+    el.style.setProperty("--i", i);
+  });
+
+  var alvos = [fases].concat([].slice.call(document.querySelectorAll(".tela--resultado .aparece")));
+
+  if(quieto || !("IntersectionObserver" in window)){
+    alvos.forEach(function(el){ el.classList.add("on"); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){
+      if(!e.isIntersecting){ return; }
+      e.target.classList.add("on");
+      obs.unobserve(e.target);
+    });
+  }, {rootMargin:"0px 0px -8% 0px", threshold:.06});
+  alvos.forEach(function(el){ obs.observe(el); });
+}
+
+/* ==========================================================================
+   LINK DO CHECKOUT
+
+   O endereco da Kiwify esta escrito nos dois botoes, dentro de href="...".
+   Ele fica no proprio HTML de proposito.
+
+   PARA TROCAR O CHECKOUT: use "Substituir tudo" no seu editor de texto,
+   trocando  https://pay.kiwify.com.br/Sr5xECq  pelo endereco novo.
+
+   RASTREIO DO ANUNCIO
+   Se a pessoa chegou pelo link de um anuncio, o endereco dela traz etiquetas
+   no fim (utm_source, utm_campaign, src...). O codigo abaixo copia essas
+   etiquetas para o link do checkout, e assim a Kiwify mostra qual anuncio
+   gerou cada venda.
+   ========================================================================== */
+var ETIQUETAS = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","src","sck","fbclid","gclid","ttclid"];
+
+document.querySelectorAll(".js-checkout").forEach(function(a){
+  a.setAttribute("rel","noopener");
+  try{
+    var deLa = new URLSearchParams(window.location.search);
+    var destino = new URL(a.href);
+    ETIQUETAS.forEach(function(nome){
+      var valor = deLa.get(nome);
+      if(valor && !destino.searchParams.has(nome)){ destino.searchParams.set(nome, valor); }
+    });
+    a.href = destino.toString();
+  }catch(e){
+    /* Se algo der errado aqui, o botao continua com o link que veio do HTML. */
+  }
+  a.addEventListener("click", function(){
+    if(typeof window.fbq === "function"){ window.fbq("track","InitiateCheckout"); }
+    if(typeof window.gtag === "function"){ window.gtag("event","begin_checkout",{currency:"BRL", value:797}); }
+  });
+});
+
+/* Se a pessoa recarregar a pagina no meio, ela volta para a abertura:
+   sem as respostas nao da para montar resultado nenhum. */
+history.replaceState({passo:0}, "", location.pathname + location.search);
+aplica(0);
+</script>
+
+</body>
+</html>
