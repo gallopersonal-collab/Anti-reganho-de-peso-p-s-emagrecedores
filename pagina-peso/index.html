@@ -1611,6 +1611,13 @@ document.querySelectorAll(".js-checkout").forEach(function(a){
    ========================================================================== */
 document.querySelectorAll(".video[data-yt]").forEach(function(fachada){
   fachada.addEventListener("click", function(e){
+    /* Aberta direto do disco, com dois cliques, a pagina nao tem dominio.
+       O YouTube recusa a incorporacao nesse caso e mostra o "Erro 153".
+       Entao aqui a gente nao faz nada: o link continua sendo um link e abre
+       o video no YouTube, numa aba nova. Publicada na hospedagem, a pagina
+       tem dominio e o video toca embutido, como deve. */
+    if(location.protocol === "file:"){ return; }
+
     e.preventDefault();
 
     var quadro = document.createElement("iframe");
