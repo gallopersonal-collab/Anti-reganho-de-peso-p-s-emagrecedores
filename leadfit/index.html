@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LeadFit — Plataforma de Captação</title>
+    <meta name="description" content="LeadFit: perfil geolocalizado, landing page, funil automatizado, CRM e checkout direto para Personal Trainers encherem a agenda de alunos pagantes." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green-900: #064E3B;
+            --green-700: #047857;
+            --green-500: #10B981;
+            --green-100: #D1FAE5;
+            --gray-900: #111827;
+            --gray-800: #1F2937;
+            --gray-700: #374151;
+            --gray-600: #4B5563;
+            --gray-400: #9CA3AF;
+            --gray-200: #E5E7EB;
+            --gray-50: #F9FAFB;
+            --white: #FFFFFF;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --radius: 16px;
+            --radius-sm: 8px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--green-700);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gray-900);
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-desktop a {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-desktop a:hover {
+            color: var(--green-700);
+        }
+
+        .nav-desktop a.btn-primary {
+            color: var(--white);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--green-700);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--green-900);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--green-700);
+            border: 2px solid var(--green-700);
+        }
+
+        .btn-outline:hover {
+            background: var(--green-100);
+        }
+
+        .btn-lg {
+            padding: 14px 32px;
+            font-size: 1rem;
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 3px;
+            background: var(--gray-700);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px 24px;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+
+        .mobile-menu a.btn-primary {
+            color: var(--white);
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 64px 24px;
+        }
+
+        .section-sm {
+            padding: 40px 24px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-sub {
+            font-size: 1.05rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            padding-top: 24px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            color: var(--gray-900);
+        }
+
+        .hero h1 .highlight {
+            color: var(--green-700);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            margin: 20px 0 32px;
+            max-width: 520px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .hero-stat h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--green-700);
+        }
+
+        .hero-stat p {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            margin: 0;
+        }
+
+        .hero-visual {
+            background: linear-gradient(135deg, var(--green-900), var(--green-700));
+            border-radius: var(--radius);
+            padding: 40px;
+            color: var(--white);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .hero-visual .badge {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: fit-content;
+            margin-bottom: 24px;
+        }
+
+        .hero-visual h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .hero-visual .funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .funnel-step {
+            background: rgba(255,255,255,0.1);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+
+        .funnel-step .num {
+            background: var(--green-500);
+            color: var(--white);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== FUNIL SECTION ===== */
+        .funnel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .funnel-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-top: 4px solid var(--green-500);
+        }
+
+        .funnel-card .icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--green-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.5rem;
+        }
+
+        .funnel-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .funnel-card p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        .funnel-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--green-500);
+        }
+
+        /* ===== FEATURES ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .feature-card .icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--green-100);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .feature-card p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* ===== PRICING ===== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--green-500);
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'MAIS ESCOLHIDO';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--green-500);
+            color: var(--white);
+            padding: 4px 16px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gray-900);
+            margin: 16px 0 8px;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray-400);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin: 24px 0;
+        }
+
+        .pricing-card ul li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-card ul li::before {
+            content: '✓';
+            color: var(--green-500);
+            font-weight: 700;
+        }
+
+        /* ===== CRM ===== */
+        .crm-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .crm-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .crm-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .crm-header .badge-count {
+            background: var(--green-100);
+            color: var(--green-700);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .crm-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .crm-scroll {
+            overflow-x: auto;
+        }
+
+        .crm-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .crm-table th {
+            text-align: left;
+            padding: 14px 24px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .crm-table td {
+            padding: 14px 24px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .crm-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status {
+            display: inline-flex;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status.lead { background: #FEF3C7; color: #92400E; }
+        .status.trial { background: #DBEAFE; color: #1E40AF; }
+        .status.converted { background: var(--green-100); color: var(--green-900); }
+
+        .stage-select {
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--gray-200);
+            font-size: 0.8rem;
+            font-family: inherit;
+        }
+
+        .crm-empty {
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--gray-400);
+        }
+
+        .crm-empty .icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        /* ===== CHECKOUT SIMULATOR ===== */
+        .checkout-box {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 32px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .checkout-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--green-500);
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+        }
+
+        .checkout-summary {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin: 20px 0;
+        }
+
+        .checkout-summary .row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            padding: 4px 0;
+        }
+
+        .checkout-summary .total {
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-top: 1px solid var(--gray-200);
+            padding-top: 8px;
+            margin-top: 8px;
+        }
+
+        .toast {
+            display: none;
+            background: var(--green-700);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 0.85rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-visual {
+                min-height: 300px;
+                padding: 28px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .funnel-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .funnel-arrow {
+                transform: rotate(90deg);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-desktop {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section {
+                padding: 40px 16px;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .hero-stats {
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .crm-table th,
+            .crm-table td {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+
+            .checkout-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">Lead<span>Fit.</span></div>
+
+            <nav class="nav-desktop">
+                <a href="#funil">Funil</a>
+                <a href="#recursos">Recursos</a>
+                <a href="#crm">CRM</a>
+                <a href="#planos">Planos</a>
+                <a href="#checkout" class="btn btn-primary">Assinar Agora</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== MOBILE NAV ===== -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="#funil">Funil</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#crm">CRM</a>
+        <a href="#planos">Planos</a>
+        <a href="#checkout" class="btn btn-primary btn-block">Assinar Agora</a>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="section">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>
+                    Sua máquina de
+                    <span class="highlight">novos alunos</span>
+                </h1>
+                <p>
+                    Chega de depender só do boca a boca. O LeadFit coloca seu perfil na frente de
+                    centenas de pessoas que buscam treinamento na sua região — e transforma
+                    curiosos em clientes pagantes.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#checkout" class="btn btn-primary btn-lg">Começar Agora</a>
+                    <a href="#funil" class="btn btn-outline btn-lg">Ver Como Funciona</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <h3>+47%</h3>
+                        <p>mais leads/mês</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>3.2x</h3>
+                        <p>retorno sobre investimento</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3>12min</h3>
+                        <p>setup inicial</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="badge">🔥 Funil Ativo</div>
+                <h2>Veja como seus leads chegam até você</h2>
+                <div class="funnel">
+                    <div class="funnel-step"><span class="num">1</span> Descoberta (busca geolocalizada)</div>
+                    <div class="funnel-step"><span class="num">2</span> Lead capturado na Landing Page</div>
+                    <div class="funnel-step"><span class="num">3</span> Aula Experimental agendada</div>
+                    <div class="funnel-step"><span class="num">4</span> Conversão em plano</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FUNIL ===== -->
+    <section class="section" id="funil">
+        <div class="text-center">
+            <h2 class="section-title">⚡ Funil de Vendas Automatizado</h2>
+            <p class="section-sub mx-auto">
+                Da descoberta ao checkout, cada etapa é desenhada para maximizar conversão
+                sem que você precise mexer um dedo.
+            </p>
+        </div>
+
+        <div class="funnel-grid">
+            <div class="funnel-card">
+                <div class="icon">🔍</div>
+                <h3>Descoberta</h3>
+                <p>Perfil público otimizado para buscas geolocalizadas. Apareça para quem procura treino perto de você.</p>
+            </div>
+            <div class="funnel-card">
+                <div class="icon">📝</div>
+                <h3>Landing Page</h3>
+                <p>Página de vendas personalizada com seus planos, fotos e depoimentos. Pronta em minutos.</p>
+            </div>
+            <div class="funnel-card">
+                <div class="icon">💳</div>
+                <h3>Checkout + CRM</h3>
+                <p>Checkout direto para contratação imediata. CRM leve para follow-up de leads e agendamento de aulas experimentais.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RECURSOS ===== -->
+    <section class="section" id="recursos">
+        <div class="text-center">
+            <h2 class="section-title">🔧 Tudo que você precisa para crescer</h2>
+            <p class="section-sub mx-auto">
+                Foco no que realmente importa: encher sua agenda com alunos pagantes.
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">📍</div>
+                <div>
+                    <h3>Busca Geolocalizada</h3>
+                    <p>Seu perfil aparece nos resultados de busca para potenciais alunos na sua região.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🔄</div>
+                <div>
+                    <h3>Funil Automatizado</h3>
+                    <p>Lead → Aula Experimental → Conversão. Cada lead segue o fluxo sem esforço manual.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🌐</div>
+                <div>
+                    <h3>Landing Page Integrada</h3>
+                    <p>Página de vendas personalizada com seus planos, fotos e depoimentos de alunos.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <div>
+                    <h3>CRM Simplificado</h3>
+                    <p>Gestão de contatos, estágio do lead e follow-up em um só lugar.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon">💳</div>
+                <div>
+                    <h3>Checkout Direto</h3>
+                    <p>Contratação imediata de planos sem burocracia. Aceita cartão e PIX.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📈</div>
+                <div>
+                    <h3>Métrica de Conversão</h3>
+                    <p>Acompanhe quantos leads entram, quantos agendam aula e quantos convertem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CRM ===== -->
+    <section class="section" id="crm">
+        <div class="text-center">
+            <h2 class="section-title">📋 CRM de Leads</h2>
+            <p class="section-sub mx-auto">
+                Acompanhe cada lead em tempo real. Saiba quem está no funil, quem agendou aula
+                experimental e quem converteu.
+            </p>
+        </div>
+
+        <div class="crm-container">
+            <div class="crm-header">
+                <div class="crm-title">
+                    <h3>Meus Leads</h3>
+                    <span class="badge-count" id="leadCount">0 leads</span>
+                </div>
+                <button class="btn btn-primary" id="addLeadBtn">+ Novo Lead</button>
+            </div>
+
+            <div class="crm-scroll">
+                <table class="crm-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Contato</th>
+                            <th>Estágio</th>
+                            <th>Data</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="crmBody"></tbody>
+                </table>
+            </div>
+
+            <div class="crm-empty" id="crmEmpty">
+                <div class="icon">📭</div>
+                <p>Nenhum lead ainda. Seus leads aparecerão aqui automaticamente.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PLANOS ===== -->
+    <section class="section" id="planos">
+        <div class="text-center">
+            <h2 class="section-title">💰 Planos</h2>
+            <p class="section-sub mx-auto">
+                Invista no crescimento da sua agenda. Cancele quando quiser.
+            </p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>LeadFit Starter</h3>
+                <div class="price">R$ 47 <span>/mês</span></div>
+                <ul>
+                    <li>Perfil público geolocalizado</li>
+                    <li>Landing Page personalizada</li>
+                    <li>Funil de vendas automatizado</li>
+                    <li>CRM com até 50 leads</li>
+                    <li>Suporte por e-mail</li>
+                </ul>
+                <a href="#checkout" class="btn btn-outline btn-block">Assinar</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <h3>LeadFit Pro</h3>
+                <div class="price">R$ 67 <span>/mês</span></div>
+                <ul>
+                    <li>Tudo do Starter</li>
+                    <li>CRM com leads ilimitados</li>
+                    <li>Checkout direto (cartão + PIX)</li>
+                    <li>Relatórios de conversão</li>
+                    <li>Suporte prioritário</li>
+                </ul>
+                <a href="#checkout" class="btn btn-primary btn-block">Assinar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CHECKOUT ===== -->
+    <section class="section" id="checkout">
+        <div class="text-center">
+            <h2 class="section-title">🚀 Fechar Assinatura</h2>
+            <p class="section-sub mx-auto">
+                Preencha os dados abaixo e comece a receber leads ainda hoje.
+            </p>
+        </div>
+
+        <div class="checkout-box">
+            <h3>Dados da Assinatura</h3>
+
+            <div class="form-group">
+                <label for="checkoutName">Nome completo</label>
+                <input type="text" id="checkoutName" placeholder="Seu nome" />
+            </div>
+
+            <div class="form-group">
+                <label for="checkoutEmail">E-mail</label>
+                <input type="email" id="checkoutEmail" placeholder="seu@email.com" />
+            </div>
+
+            <div class="form-group">
+                <label for="checkoutPhone">WhatsApp</label>
+                <input type="tel" id="checkoutPhone" placeholder="(11) 99999-9999" />
+            </div>
+
+            <div class="form-group">
+                <label for="checkoutPlan">Plano</label>
+                <select id="checkoutPlan">
+                    <option value="starter">LeadFit Starter — R$ 47/mês</option>
+                    <option value="pro" selected>LeadFit Pro — R$ 67/mês</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="checkoutPayment">Forma de pagamento</label>
+                <select id="checkoutPayment">
+                    <option value="card">Cartão de Crédito</option>
+                    <option value="pix">PIX</option>
+                </select>
+            </div>
+
+            <div class="checkout-summary">
+                <div class="row"><span>Plano</span><span id="summaryPlan">LeadFit Pro</span></div>
+                <div class="row"><span>Pagamento</span><span id="summaryPayment">Cartão de Crédito</span></div>
+                <div class="row total"><span>Total</span><span id="summaryTotal">R$ 67/mês</span></div>
+            </div>
+
+            <button class="btn btn-primary btn-block btn-lg" id="checkoutBtn">Finalizar Assinatura</button>
+            <div class="toast" id="checkoutToast">✅ Assinatura realizada com sucesso! Bem-vindo ao LeadFit.</div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p>© 2026 LeadFit — Plataforma de Captação para Personal Trainers</p>
+    </footer>
+
+    <script>
+        // ===== MOBILE MENU =====
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            hamburger.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // ===== CRM STATE =====
+        let leads = [
+            { id: 1, name: 'Carlos Silva', contact: '(11) 98888-0001', stage: 'lead', date: '14/07/2026' },
+            { id: 2, name: 'Marina Oliveira', contact: '(11) 97777-0002', stage: 'trial', date: '13/07/2026' },
+            { id: 3, name: 'Rafael Costa', contact: '(11) 96666-0003', stage: 'converted', date: '10/07/2026' },
+        ];
+
+        const stageLabels = { lead: 'Lead', trial: 'Aula Exp.', converted: 'Convertido' };
+        const stageClass  = { lead: 'lead', trial: 'trial', converted: 'converted' };
+        const stageOrder  = ['lead', 'trial', 'converted'];
+
+        function escapeHTML(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function renderCRM() {
+            const tbody = document.getElementById('crmBody');
+            const empty = document.getElementById('crmEmpty');
+            const count = document.getElementById('leadCount');
+
+            count.textContent = leads.length + ' leads';
+
+            if (leads.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+                return;
+            }
+
+            empty.style.display = 'none';
+            tbody.innerHTML = leads.map(l => `
+                <tr>
+                    <td><strong>${escapeHTML(l.name)}</strong></td>
+                    <td>${escapeHTML(l.contact)}</td>
+                    <td><span class="status ${stageClass[l.stage]}">${stageLabels[l.stage]}</span></td>
+                    <td>${escapeHTML(l.date)}</td>
+                    <td>
+                        <select class="stage-select" aria-label="Estágio do lead" onchange="advanceLead(${l.id}, this.value)">
+                            ${stageOrder.map(s => `<option value="${s}" ${s === l.stage ? 'selected' : ''}>${stageLabels[s]}</option>`).join('')}
+                        </select>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function advanceLead(id, newStage) {
+            const lead = leads.find(l => l.id === id);
+            if (lead) {
+                lead.stage = newStage;
+                renderCRM();
+            }
+        }
+
+        document.getElementById('addLeadBtn').addEventListener('click', () => {
+            const name = prompt('Nome do lead:');
+            if (!name) return;
+            const contact = prompt('WhatsApp ou e-mail:') || '(11) 99999-0000';
+            const today = new Date().toLocaleDateString('pt-BR');
+            const newId = leads.length ? Math.max(...leads.map(l => l.id)) + 1 : 1;
+            leads.push({ id: newId, name, contact, stage: 'lead', date: today });
+            renderCRM();
+        });
+
+        renderCRM();
+
+        // ===== CHECKOUT =====
+        const planSelect = document.getElementById('checkoutPlan');
+        const paymentSelect = document.getElementById('checkoutPayment');
+        const summaryPlan = document.getElementById('summaryPlan');
+        const summaryPayment = document.getElementById('summaryPayment');
+        const summaryTotal = document.getElementById('summaryTotal');
+        const toast = document.getElementById('checkoutToast');
+
+        function updateSummary() {
+            const plan = planSelect.value;
+            const payment = paymentSelect.value;
+            const label = plan === 'pro' ? 'LeadFit Pro' : 'LeadFit Starter';
+            const price = plan === 'pro' ? 'R$ 67/mês' : 'R$ 47/mês';
+            summaryPlan.textContent = label;
+            summaryPayment.textContent = payment === 'card' ? 'Cartão de Crédito' : 'PIX';
+            summaryTotal.textContent = price;
+        }
+
+        planSelect.addEventListener('change', updateSummary);
+        paymentSelect.addEventListener('change', updateSummary);
+        updateSummary();
+
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            const name = document.getElementById('checkoutName').value.trim();
+            const email = document.getElementById('checkoutEmail').value.trim();
+            if (!name || !email) {
+                alert('Preencha nome e e-mail para continuar.');
+                return;
+            }
+
+            // Adiciona como lead convertido
+            const today = new Date().toLocaleDateString('pt-BR');
+            const newId = leads.length ? Math.max(...leads.map(l => l.id)) + 1 : 1;
+            leads.push({
+                id: newId,
+                name,
+                contact: document.getElementById('checkoutPhone').value || email,
+                stage: 'converted',
+                date: today
+            });
+            renderCRM();
+
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+
+            // Limpa formulário
+            document.getElementById('checkoutName').value = '';
+            document.getElementById('checkoutEmail').value = '';
+            document.getElementById('checkoutPhone').value = '';
+        });
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
