@@ -22,6 +22,7 @@
     --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body {
     background: var(--ink);
     color: var(--text);
@@ -355,8 +356,9 @@
         T(1000, 364, 'Personal Trainer', { size: 26, fill: C.muted })) +
       G(2, T(690, 440, 'Palestrante internacional', { size: 30, fill: C.text, weight: 700 }) +
         chipRow(['América do Sul', 'Europa'], 462, { x: 690, size: 24, color: C.ice, stroke: C.ice, fill: 'rgba(127,168,255,.1)' })) +
-      G(3, T(690, 572, '5 metodologias próprias', { size: 30, fill: C.text, weight: 700 }) +
-        chipRow(['Método P.E.S.O.', 'Método Anti Aging', 'Gallo Rubber Systems'], 594, { x: 690, size: 22, color: C.amber, stroke: C.amber, fill: 'rgba(244,182,63,.1)' }, 12)) +
+      G(3, T(690, 560, '5 metodologias próprias', { size: 30, fill: C.text, weight: 700 }) +
+        chipRow(['Método P.E.S.O.', 'Método Customizado', 'Método Anti Aging'], 578, { x: 690, size: 20, color: C.amber, stroke: C.amber, fill: 'rgba(244,182,63,.1)' }, 12) +
+        chipRow(['Anti-Reganho de Peso Pós-Emagrecedores', 'Gallo Rubber Systems'], 630, { x: 690, size: 20, color: C.amber, stroke: C.amber, fill: 'rgba(244,182,63,.1)' }, 12)) +
       G(4, `<rect x="130" y="592" width="460" height="62" rx="12" fill="${C.amber}"/>` +
         T(360, 636, 'EU ATENDI ALUNO.', { size: 38, anchor: 'middle', cls: 'd', fill: C.ink })) +
       G(5, T(360, 580, 'noite após noite, montando treino do zero', { size: 22, anchor: 'middle', fill: C.silver, style: 'font-style:italic' }))
@@ -567,12 +569,12 @@
         'Se você se identificou com qualquer uma dessas situações, <b>continue assistindo</b>.',
         'Porque o que eu vou mostrar foi feito exatamente para você.'] }] },
     { n: 3, t: 'Credibilidade', tc: '3:00 – 5:00', dir: 'Foto/vídeo de congressos, atendimentos, metodologias.',
-      edit: 'Lower third com nome e títulos. Intercalar fotos de congressos (América do Sul e Europa) e de atendimentos. Chips das metodologias entrando conforme a fala.',
+      edit: 'Lower third com nome e títulos. Intercalar fotos de congressos (América do Sul e Europa) e de atendimentos. Chips das 5 metodologias entrando conforme a fala. Este bloco usa a gravação real do Prof. Gallo.',
       frames: [{ s: 'cred', lines: [
-        'Meu nome é <b>Prof. José Carlos Gallo</b>.',
+        'Eu sou <b>Prof. José Carlos Gallo</b>.',
         'Sou Fisiologista Clínico do Exercício, Personal Trainer com mais de <b>36 anos</b> de experiência.',
         'Palestrante internacional: já passei pelos principais congressos da América do Sul e da Europa.',
-        'Desenvolvi cinco metodologias próprias, incluindo o Método P.E.S.O., o Método Anti Aging e o Gallo Rubber Systems.',
+        'Desenvolvi cinco metodologias próprias: P.E.S.O., Customizado, Anti Aging, Anti-Reganho de Peso Pós-Emagrecedores e Gallo Rubber Systems.',
         'Mas mais importante do que qualquer título: <b>eu atendi aluno</b>.',
         'Eu sentei na frente de um computador montando treino do zero, noite após noite, exatamente como você faz hoje.',
         'E foi por isso que eu criei o que estou prestes a te mostrar.'] }] },
@@ -653,7 +655,7 @@
   ];
 
   // ---------- Narration: audio chunks + per-line start times (aligned to the pauses in the voice) ----------
-  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 26.48, "starts": [0, 2.44, 10.39, 16.14, 21.41]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 49.52, "starts": [0, 2.17, 9.84, 15.41, 21.87, 28.7, 33.52, 39.74, 45.56]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 43.76, "starts": [0, 2.7, 9.98, 17.07, 26.46, 31.36, 40.19]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 69.52, "starts": [0, 8.38, 16.29, 18.23, 25.93, 32.91, 43.37, 45.31, 58.34, 61.77]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 60.56, "starts": [0, 3.81, 10.46, 18.48, 26.6, 29.61, 39.73, 48.65, 53.19]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 43.2, "starts": [0, 2.3, 6.84, 10.01, 16.39, 20.11, 25.25, 33.98]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 50.64, "starts": [0, 2.58, 12.06, 15.45, 22.34, 28.58, 31.24, 39, 41.81]}, {"file": "audio/b0809.mp3", "blocks": [8, 9], "dur": 51.36, "starts": [0, 4.26, 7.54, 10.49, 14.29, 17.23, 22.08, 29.35, 34.61, 41.05, 44.23]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 14.16, "starts": [0, 3.75, 6.06, 12.51]}];
+  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 26.48, "starts": [0, 2.44, 10.39, 16.14, 21.41]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 49.52, "starts": [0, 2.17, 9.84, 15.41, 21.87, 28.7, 33.52, 39.74, 45.56]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 51.552, "starts": [0, 3.09, 9.53, 17.23, 30.96, 35.95, 45.24]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 69.52, "starts": [0, 8.38, 16.29, 18.23, 25.93, 32.91, 43.37, 45.31, 58.34, 61.77]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 60.56, "starts": [0, 3.81, 10.46, 18.48, 26.6, 29.61, 39.73, 48.65, 53.19]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 43.2, "starts": [0, 2.3, 6.84, 10.01, 16.39, 20.11, 25.25, 33.98]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 50.64, "starts": [0, 2.58, 12.06, 15.45, 22.34, 28.58, 31.24, 39, 41.81]}, {"file": "audio/b0809.mp3", "blocks": [8, 9], "dur": 51.36, "starts": [0, 4.26, 7.54, 10.49, 14.29, 17.23, 22.08, 29.35, 34.61, 41.05, 44.23]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 14.16, "starts": [0, 3.75, 6.06, 12.51]}];
   const plain = s => s.replace(/<[^>]+>/g, '');
   const LINES = []; let t = 0, frameCount = 0;
   const flat = BLOCKS.flatMap((b, bi) => b.frames.flatMap((f, fi) => f.lines.map((html, li) => ({ bi, fi, li, html, text: plain(html) }))));
