@@ -179,7 +179,7 @@
       <span>Roteiro: <b>15–20 min</b></span>
       <span>Animatic com voz: <b id="totalTime">—</b></span>
       <span><b>10</b> blocos · <b id="totalFrames">—</b> cenas ilustradas</span>
-      <span>Voz provisória gerada por IA</span>
+      <span>Voz do Prof. Gallo</span>
     </div>
   </header>
 
@@ -219,7 +219,7 @@
       <li>Mostrar o produto na tela sempre que citar os programas.</li>
       <li>Legendas em todas as cenas, para retenção no celular sem som.</li>
       <li>CTA na tela nos blocos 9 e 10, com seta e botão animado.</li>
-      <li>A narração é uma voz provisória gerada por IA, para validar ritmo e roteiro. Na versão final, grave a voz do Prof. Gallo e mantenha a trilha baixa, sem competir com a fala.</li>
+      <li>Narração na voz do Prof. Gallo: o bloco 3 é a gravação original; os demais blocos usam a voz dele clonada a partir dessa gravação. Mantenha a trilha baixa, sem competir com a fala.</li>
       <li>O animatic dura menos que os 15–20 min do roteiro porque não conta pausas, B-roll e telas gravadas. Use-o como guia de ritmo e de arte para o editor.</li>
     </ul>
   </div>
@@ -655,7 +655,7 @@
   ];
 
   // ---------- Narration: audio chunks + per-line start times (aligned to the pauses in the voice) ----------
-  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 26.48, "starts": [0, 2.44, 10.39, 16.14, 21.41]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 49.52, "starts": [0, 2.17, 9.84, 15.41, 21.87, 28.7, 33.52, 39.74, 45.56]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 51.552, "starts": [0, 3.09, 9.53, 17.23, 30.96, 35.95, 45.24]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 69.52, "starts": [0, 8.38, 16.29, 18.23, 25.93, 32.91, 43.37, 45.31, 58.34, 61.77]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 60.56, "starts": [0, 3.81, 10.46, 18.48, 26.6, 29.61, 39.73, 48.65, 53.19]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 43.2, "starts": [0, 2.3, 6.84, 10.01, 16.39, 20.11, 25.25, 33.98]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 50.64, "starts": [0, 2.58, 12.06, 15.45, 22.34, 28.58, 31.24, 39, 41.81]}, {"file": "audio/b0809.mp3", "blocks": [8, 9], "dur": 51.36, "starts": [0, 4.26, 7.54, 10.49, 14.29, 17.23, 22.08, 29.35, 34.61, 41.05, 44.23]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 14.16, "starts": [0, 3.75, 6.06, 12.51]}];
+  const AUDIO = [{"file": "audio/b01.wav", "blocks": [1], "dur": 25.38, "starts": [0.0, 2.48, 10.64, 15.64, 20.76]}, {"file": "audio/b02.wav", "blocks": [2], "dur": 46.9, "starts": [0.0, 2.3, 9.98, 17.26, 23.44, 28.0, 33.84, 38.76, 43.7]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 51.552, "starts": [0.0, 3.12, 9.74, 17.38, 29.7, 36.1, 45.38]}, {"file": "audio/b04.wav", "blocks": [4], "dur": 43.28, "starts": [0.0, 4.14, 10.46, 11.4, 15.82, 19.66, 25.02, 27.42, 33.56, 37.42]}, {"file": "audio/b05.wav", "blocks": [5], "dur": 41.78, "starts": [0.0, 2.18, 6.28, 12.04, 16.68, 19.0, 26.32, 31.9, 35.68]}, {"file": "audio/b06.wav", "blocks": [6], "dur": 44.4, "starts": [0.0, 3.06, 7.62, 10.18, 15.6, 19.44, 25.2, 35.14]}, {"file": "audio/b07.wav", "blocks": [7], "dur": 33.9, "starts": [0.0, 1.74, 8.66, 10.64, 15.08, 20.14, 21.68, 26.12, 27.96]}, {"file": "audio/b08.wav", "blocks": [8], "dur": 27.6, "starts": [0.0, 5.34, 9.86, 13.7, 18.62, 21.94]}, {"file": "audio/b09.wav", "blocks": [9], "dur": 25.88, "starts": [0.0, 6.64, 11.4, 17.2, 19.86]}, {"file": "audio/b10.wav", "blocks": [10], "dur": 15.38, "starts": [0.0, 4.0, 6.46, 13.86]}];
   const plain = s => s.replace(/<[^>]+>/g, '');
   const LINES = []; let t = 0, frameCount = 0;
   const flat = BLOCKS.flatMap((b, bi) => b.frames.flatMap((f, fi) => f.lines.map((html, li) => ({ bi, fi, li, html, text: plain(html) }))));
