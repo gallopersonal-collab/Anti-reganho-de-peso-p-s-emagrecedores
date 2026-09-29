@@ -173,20 +173,13 @@
 
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow">Instituto Gallo Personal · Animatic da VSL</div>
+    <div class="eyebrow">Instituto Gallo Personal</div>
     <h1>Biblioteca de Treinos Lucrativos e Personalizáveis <span>Pro™</span></h1>
-    <div class="meta">
-      <span>Roteiro: <b>15–20 min</b></span>
-      <span>Animatic com voz: <b id="totalTime">—</b></span>
-      <span><b>10</b> blocos · <b id="totalFrames">—</b> cenas ilustradas</span>
-      <span>Voz do Prof. Gallo</span>
-    </div>
   </header>
 
   <section class="player" aria-label="Player da VSL">
     <div class="stage" id="stage">
       <div class="frame" id="frame"></div>
-      <div class="chap" id="chap"><i></i><span></span></div>
       <div class="caption" id="caption" aria-live="polite"><span></span></div>
       <button class="bigplay" id="bigplay" aria-label="Assistir a VSL">
         <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg>Assistir</span>
@@ -204,25 +197,8 @@
       <button class="btn" id="cc" aria-pressed="true">Legendas</button>
       <button class="btn" id="fs">Tela cheia</button>
     </div>
-    <div class="hint">Espaço: play/pausa · ← →: frase anterior/próxima · clique num bloco para pular</div>
   </section>
 
-  <h2>Storyboard</h2>
-  <p class="intro">Cada bloco com a direção de câmera do roteiro, o texto falado, as cenas ilustradas e a orientação de edição. Clique numa miniatura para abrir a cena no player.</p>
-  <div class="board" id="board"></div>
-
-  <div class="notes">
-    <div class="lab" style="margin-top:0">Notas de produção</div>
-    <ul>
-      <li>Abertura sem introdução longa: gancho nos primeiros 5 segundos.</li>
-      <li>Tom de autoridade e empatia, nunca arrogância.</li>
-      <li>Mostrar o produto na tela sempre que citar os programas.</li>
-      <li>Legendas em todas as cenas, para retenção no celular sem som.</li>
-      <li>CTA na tela nos blocos 9 e 10, com seta e botão animado.</li>
-      <li>Narração na voz clonada do Prof. Gallo, com o mesmo ritmo de fala em todos os blocos. Mantenha a trilha baixa, sem competir com a fala.</li>
-      <li>O animatic dura menos que os 15–20 min do roteiro porque não conta pausas, B-roll e telas gravadas. Use-o como guia de ritmo e de arte para o editor.</li>
-    </ul>
-  </div>
 </div>
 
 <script>
@@ -281,22 +257,18 @@
         Array.from({ length: 12 }, (_, i) => { const a = i * Math.PI / 6; return `<line x1="${300 + Math.sin(a) * 160}" y1="${360 - Math.cos(a) * 160}" x2="${300 + Math.sin(a) * 176}" y2="${360 - Math.cos(a) * 176}" stroke="${C.muted}" stroke-width="${i % 3 ? 4 : 8}" stroke-linecap="round"/>`; }).join('') +
         `<g class="spin" style="transform-origin:300px 360px"><line x1="300" y1="360" x2="300" y2="255" stroke="${C.silver}" stroke-width="12" stroke-linecap="round"/></g>` +
         `<g class="spin-fast" style="transform-origin:300px 360px"><line x1="300" y1="360" x2="300" y2="220" stroke="${C.amber}" stroke-width="6" stroke-linecap="round"/></g>` +
-        `<circle cx="300" cy="360" r="14" fill="${C.amber}"/>` +
-        T(300, 610, '22:47', { size: 64, anchor: 'middle', cls: 'm', fill: C.silver })) +
+        `<circle cx="300" cy="360" r="14" fill="${C.amber}"/>` ) +
       // paper stack
       G(0, `<rect x="600" y="160" width="330" height="430" rx="10" fill="#C3CEDF" transform="rotate(-6 765 375)"/>` +
         `<rect x="600" y="160" width="330" height="430" rx="10" fill="#D9E1EE" transform="rotate(3 765 375)"/>` +
         `<rect x="600" y="160" width="330" height="430" rx="10" fill="${C.paper}"/>` +
         `<rect x="600" y="160" width="330" height="70" rx="10" fill="${C.ice}"/>` +
-        T(625, 205, 'TREINO A · ALUNO 14', { size: 26, fill: C.ink, weight: 700 }) +
         [0, 1, 2, 3, 4, 5, 6].map(i => `<rect x="625" y="${260 + i * 44}" width="${[240, 200, 260, 180, 230, 150, 210][i]}" height="14" rx="7" fill="#A9B6CC"/><rect x="${880}" y="${258 + i * 44}" width="26" height="18" rx="4" fill="#CBD4E3"/>`).join('')) +
       // alternatives
-      G(1, chipRow(['+1 aluno atendido', '+1 consultoria fechada', 'descanso'], 60, { size: 26, fill: 'rgba(127,168,255,.12)', stroke: C.ice, color: C.ice })) +
       // phone
       G(2, `<rect x="1120" y="150" width="280" height="500" rx="40" fill="#0B1428" stroke="${C.line}" stroke-width="6"/>` +
         `<rect x="1138" y="190" width="244" height="420" rx="14" fill="#0E2A24"/>` +
         `<rect x="1138" y="190" width="244" height="56" rx="14" fill="#123A31"/>` +
-        T(1160, 226, 'Aluno 14', { size: 22, fill: C.text, weight: 700 }) +
         `<rect x="1180" y="290" width="186" height="120" rx="14" fill="#1F5C4B"/>` +
         pdfIcon(1196, 306, 56, 72, C.paper, C.red) +
         T(1264, 336, 'Treino.pdf', { size: 20, fill: C.text, weight: 700 }) +
@@ -478,8 +450,7 @@
         mark(10, '10h+', C.red, 3) +
         G(4, `<rect x="160" y="400" width="1280" height="130" rx="18" fill="${C.panel}" stroke="${C.line}" stroke-width="2"/>` +
           T(210, 482, '10 h/semana  ×  R$ 80/h  ×  4,3 semanas', { size: 40, fill: C.silver, cls: 'm' })) +
-        G(5, T(1400, 482, '= R$ 3.440/mês', { size: 44, fill: C.red, cls: 'm', anchor: 'end' }) +
-          T(1440, 556, 'exemplo · use o valor da sua hora', { size: 20, fill: C.muted, anchor: 'end' })) +
+        G(5, T(1400, 482, '= R$ 3.440/mês', { size: 44, fill: C.red, cls: 'm', anchor: 'end' })) +
         G(6, T(160, 620, 'TEMPO LIBERADO', { size: 40, cls: 'd', fill: C.amber }) +
           `<path d="M430 606h60m-16-14l16 14-16 14" stroke="${C.amber}" stroke-width="4" fill="none" stroke-linecap="round"/>` +
           T(510, 620, 'mais alunos · mais vendas · crescimento', { size: 30, fill: C.text, weight: 600 })) +
@@ -675,12 +646,10 @@
   });
   const TOTAL = t;
   const fmt = s => { s = Math.max(0, Math.round(s)); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
-  document.getElementById('totalTime').textContent = fmt(TOTAL).replace(':', 'min') + 's';
-  document.getElementById('totalFrames').textContent = frameCount;
 
   // ---------- Elements ----------
   const $ = id => document.getElementById(id);
-  const stage = $('stage'), frameEl = $('frame'), capEl = $('caption').firstElementChild, chapEl = $('chap').lastElementChild;
+  const stage = $('stage'), frameEl = $('frame'), capEl = $('caption').firstElementChild;
   let uid = 0;
   const render = key => S[key](++uid);
 
@@ -689,7 +658,7 @@
     const el = document.createElement('button');
     el.className = 'seg'; el.style.flex = b.dur.toFixed(2);
     el.setAttribute('aria-label', `Bloco ${b.n}: ${b.t}`);
-    el.innerHTML = `<span class="fill"></span><span class="n">${b.n}</span>`;
+    el.innerHTML = `<span class="fill"></span>`;
     el.addEventListener('click', () => seek(b.start, true));
     $('timeline').appendChild(el);
     return el;
@@ -777,7 +746,6 @@
       }, cur >= 0 ? 220 : 0);
     } else apply();
     capEl.innerHTML = L.html;
-    chapEl.textContent = `Bloco ${b.n} · ${b.t}`;
     segs.forEach((s, j) => s.classList.toggle('cur', j === L.bi));
     cur = i;
   }
@@ -853,28 +821,6 @@
     else if (e.key === 'ArrowLeft') { e.preventDefault(); $('prev').click(); }
   });
 
-  // ---------- Storyboard ----------
-  const board = $('board');
-  BLOCKS.forEach(b => {
-    const card = document.createElement('article');
-    card.className = 'card';
-    const thumbs = b.frames.map((f, fi) => `<button class="thumb all" data-b="${b.n - 1}" data-f="${fi}" aria-label="Abrir cena ${fi + 1} do bloco ${b.n} no player">${render(f.s)}</button>`).join('');
-    const narr = b.frames.flatMap(f => f.lines).map(l => `<p>${l}</p>`).join('');
-    card.innerHTML = `<div class="thumbs">${thumbs}</div>
-      <div>
-        <div class="card-head"><span class="bn">Bloco ${b.n}</span><h3>${b.t}</h3><span class="tc">${b.tc}</span></div>
-        <div class="lab">Na tela</div><p class="dir">${b.dir}</p>
-        <div class="lab">Fala</div><div class="narr">${narr}</div>
-        <div class="lab">Edição</div><p class="edit">${b.edit}</p>
-      </div>`;
-    board.appendChild(card);
-  });
-  board.addEventListener('click', e => {
-    const th = e.target.closest('.thumb'); if (!th) return;
-    const L = LINES.find(x => x.bi === +th.dataset.b && x.fi === +th.dataset.f);
-    seek(L.start, false);
-    stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
 
   seek(0, false);
 })();
