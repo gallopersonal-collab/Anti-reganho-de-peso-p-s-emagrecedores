@@ -165,6 +165,11 @@
     .timeline .n { display: none; }
     .hint { display: none; }
   }
+  .render-mode body { padding: 0; margin: 0; }
+  .render-mode .wrap { max-width: none; display: block; }
+  .render-mode header.top, .render-mode .timeline, .render-mode .controls, .render-mode .bigplay { display: none !important; }
+  .render-mode .stage { width: 100vw; height: 100vh; aspect-ratio: auto; border: 0; border-radius: 0; }
+  .render-mode .frame { transition: none; }
   @media (prefers-reduced-motion: reduce) {
     .rv, .frame { transition: none; }
     .spin, .spin-fast, .bob, .pulse { animation: none; }
@@ -821,6 +826,32 @@
     else if (e.key === 'ArrowLeft') { e.preventDefault(); $('prev').click(); }
   });
 
+
+  // ---------- Render mode (MP4 export): draws the exact frame for time t ----------
+  if (location.hash === '#render') {
+    document.documentElement.classList.add('render-mode');
+    let rKey = '', rStart = 0, rLines = [];
+    const ease = p => 1 - Math.pow(1 - p, 3);
+    window.__TOTAL = TOTAL;
+    window.__renderAt = t => {
+      const L = LINES[idxAt(t)], f = BLOCKS[L.bi].frames[L.fi], key = L.bi + ':' + L.fi;
+      if (key !== rKey) {
+        rKey = key; frameEl.innerHTML = render(f.s);
+        rLines = LINES.filter(x => x.bi === L.bi && x.fi === L.fi); rStart = rLines[0].start;
+      }
+      frameEl.style.opacity = Math.max(0, Math.min(1, (t - rStart) / 0.35));
+      frameEl.querySelectorAll('.rv').forEach(el => {
+        const ln = rLines[+el.dataset.at];
+        const t0 = (ln ? ln.start : Infinity) + (parseFloat(el.style.transitionDelay) || 0) / 1000;
+        const p = ease(Math.max(0, Math.min(1, (t - t0) / 0.55)));
+        el.style.transition = 'none'; el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * 14}px)`;
+      });
+      frameEl.querySelectorAll('.spin, .spin-fast, .bob, .pulse').forEach(el => {
+        el.style.animationPlayState = 'paused'; el.style.animationDelay = `${-(t - rStart)}s`;
+      });
+      capEl.innerHTML = L.html;
+    };
+  }
 
   seek(0, false);
 })();
