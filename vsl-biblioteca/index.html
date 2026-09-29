@@ -219,7 +219,7 @@
       <li>Mostrar o produto na tela sempre que citar os programas.</li>
       <li>Legendas em todas as cenas, para retenção no celular sem som.</li>
       <li>CTA na tela nos blocos 9 e 10, com seta e botão animado.</li>
-      <li>Narração na voz do Prof. Gallo: o bloco 3 é a gravação original; os demais blocos usam a voz dele clonada a partir dessa gravação. Mantenha a trilha baixa, sem competir com a fala.</li>
+      <li>Narração na voz clonada do Prof. Gallo, com o mesmo ritmo de fala em todos os blocos. Mantenha a trilha baixa, sem competir com a fala.</li>
       <li>O animatic dura menos que os 15–20 min do roteiro porque não conta pausas, B-roll e telas gravadas. Use-o como guia de ritmo e de arte para o editor.</li>
     </ul>
   </div>
@@ -569,12 +569,12 @@
         'Se você se identificou com qualquer uma dessas situações, <b>continue assistindo</b>.',
         'Porque o que eu vou mostrar foi feito exatamente para você.'] }] },
     { n: 3, t: 'Credibilidade', tc: '3:00 – 5:00', dir: 'Foto/vídeo de congressos, atendimentos, metodologias.',
-      edit: 'Lower third com nome e títulos. Intercalar fotos de congressos (América do Sul e Europa) e de atendimentos. Chips das 5 metodologias entrando conforme a fala. Este bloco usa a gravação real do Prof. Gallo.',
+      edit: 'Lower third com nome e títulos. Intercalar fotos de congressos (América do Sul e Europa) e de atendimentos. Chips das 5 metodologias entrando conforme a fala.',
       frames: [{ s: 'cred', lines: [
-        'Eu sou <b>Prof. José Carlos Gallo</b>.',
+        'Meu nome é <b>Prof. José Carlos Gallo</b>.',
         'Sou Fisiologista Clínico do Exercício, Personal Trainer com mais de <b>36 anos</b> de experiência.',
         'Palestrante internacional: já passei pelos principais congressos da América do Sul e da Europa.',
-        'Desenvolvi cinco metodologias próprias: P.E.S.O., Customizado, Anti Aging, Anti-Reganho de Peso Pós-Emagrecedores e Gallo Rubber Systems.',
+        'Desenvolvi cinco metodologias próprias, incluindo o Método P.E.S.O., o Método Anti Aging e o Gallo Rubber Systems.',
         'Mas mais importante do que qualquer título: <b>eu atendi aluno</b>.',
         'Eu sentei na frente de um computador montando treino do zero, noite após noite, exatamente como você faz hoje.',
         'E foi por isso que eu criei o que estou prestes a te mostrar.'] }] },
@@ -655,7 +655,7 @@
   ];
 
   // ---------- Narration: audio chunks + per-line start times (aligned to the pauses in the voice) ----------
-  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 25.44, "starts": [0.0, 2.48, 10.64, 15.64, 20.76]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 46.968, "starts": [0.0, 2.3, 9.98, 17.26, 23.44, 28.0, 33.84, 38.76, 43.7]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 51.6, "starts": [0.0, 3.12, 9.74, 17.38, 29.7, 36.1, 45.38]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 43.344, "starts": [0.0, 4.14, 10.46, 11.4, 15.82, 19.66, 25.02, 27.42, 33.56, 37.42]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 41.832, "starts": [0.0, 2.18, 6.28, 12.04, 16.68, 19.0, 26.32, 31.9, 35.68]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 44.448, "starts": [0.0, 3.06, 7.62, 10.18, 15.6, 19.44, 25.2, 35.14]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 33.96, "starts": [0.0, 1.74, 8.66, 10.64, 15.08, 20.14, 21.68, 26.12, 27.96]}, {"file": "audio/b08.mp3", "blocks": [8], "dur": 27.648, "starts": [0.0, 5.34, 9.86, 13.7, 18.62, 21.94]}, {"file": "audio/b09.mp3", "blocks": [9], "dur": 25.944, "starts": [0.0, 6.64, 11.4, 17.2, 19.86]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 15.432, "starts": [0.0, 4.0, 6.46, 13.86]}];
+  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 24.984, "starts": [0.0, 2.44, 10.47, 15.4, 20.44]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 46.968, "starts": [0.0, 2.28, 9.9, 17.12, 23.25, 27.78, 33.57, 38.45, 43.35]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 34.968, "starts": [0.0, 2.26, 7.18, 12.66, 20.46, 24.45, 31.81]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 43.344, "starts": [0.0, 4.17, 10.54, 11.49, 15.95, 19.82, 25.22, 27.64, 33.83, 37.72]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 50.424, "starts": [0.0, 2.63, 7.57, 14.51, 20.1, 22.9, 31.72, 38.45, 43.0]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 40.944, "starts": [0.0, 2.82, 7.03, 9.39, 14.39, 17.93, 23.24, 32.41]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 42.504, "starts": [0.0, 2.18, 10.85, 13.34, 18.9, 25.24, 27.17, 32.74, 35.05]}, {"file": "audio/b08.mp3", "blocks": [8], "dur": 21.24, "starts": [0.0, 4.11, 7.58, 10.53, 14.32, 16.87]}, {"file": "audio/b09.mp3", "blocks": [9], "dur": 27.408, "starts": [0.0, 7.03, 12.07, 18.21, 21.02]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 14.28, "starts": [0.0, 3.71, 6.0, 12.87]}];
   const plain = s => s.replace(/<[^>]+>/g, '');
   const LINES = []; let t = 0, frameCount = 0;
   const flat = BLOCKS.flatMap((b, bi) => b.frames.flatMap((f, fi) => f.lines.map((html, li) => ({ bi, fi, li, html, text: plain(html) }))));
