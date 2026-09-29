@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body>
+<title>VSL Biblioteca Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --ink: #081021;
+    --navy: #0F1A33;
+    --panel: #16223F;
+    --line: #2A3A60;
+    --silver: #D5DEEC;
+    --text: #F1F4FA;
+    --muted: #8E9BB8;
+    --ice: #7FA8FF;
+    --amber: #F4B63F;
+    --red: #E0645A;
+    --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --body: "Source Sans 3", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.5;
+    padding-inline: 16px;
+    padding-block: 28px 64px;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 28px; }
+
+  header.top { display: grid; gap: 10px; }
+  .eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ice); font-weight: 700; }
+  h1 {
+    font-family: var(--display); font-weight: 800; text-transform: uppercase;
+    font-size: clamp(34px, 6vw, 62px); line-height: .95; margin: 0; letter-spacing: .01em;
+    text-wrap: balance;
+  }
+  h1 span { color: var(--amber); }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--muted); font-size: 14px; }
+  .meta b { color: var(--silver); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  /* ---------- Player ---------- */
+  .player { display: grid; gap: 12px; }
+  .stage {
+    position: relative; width: 100%; aspect-ratio: 16 / 9; max-width: 100%;
+    background: radial-gradient(120% 90% at 70% 10%, #13224A 0%, var(--navy) 45%, #060C1A 100%);
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    container-type: inline-size;
+  }
+  .stage:fullscreen { border-radius: 0; border: 0; }
+  .frame { position: absolute; inset: 0; transition: opacity .35s ease; }
+  .frame.fading { opacity: 0; }
+  .frame svg, .thumb svg { display: block; width: 100%; height: 100%; }
+  svg text { font-family: var(--body); }
+  svg .d { font-family: var(--display); font-weight: 800; letter-spacing: .01em; }
+  svg .m { font-family: var(--mono); font-weight: 700; }
+
+  .rv { opacity: 0; transform: translateY(14px); transform-box: fill-box; transition: opacity .55s ease, transform .55s ease; }
+  .rv.on, .all .rv { opacity: 1; transform: none; }
+  .spin { animation: spin 6s linear infinite; }
+  .spin-fast { animation: spin 1.4s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .bob { animation: bob 1.1s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(16px); } }
+  .pulse { animation: pulse 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes pulse { 50% { transform: scale(1.04); } }
+  .all .spin, .all .spin-fast, .all .bob, .all .pulse { animation: none; }
+
+  .chap {
+    position: absolute; left: 2.2cqw; top: 2cqw; display: flex; gap: .8cqw; align-items: center;
+    font-size: 1.35cqw; letter-spacing: .12em; text-transform: uppercase; font-weight: 700;
+    color: var(--silver); background: rgba(8,16,33,.72); border: 1px solid var(--line);
+    padding: .5cqw 1.1cqw; border-radius: 99px;
+  }
+  .chap i { width: .8cqw; height: .8cqw; border-radius: 50%; background: var(--red); display: block; }
+  .caption {
+    position: absolute; left: 50%; bottom: 3cqw; transform: translateX(-50%);
+    width: min(86%, 86cqw); text-align: center; pointer-events: none;
+  }
+  .caption span {
+    display: inline; font-size: 2.55cqw; line-height: 1.45; font-weight: 600; color: #fff;
+    background: rgba(3,7,16,.82); padding: .25cqw .8cqw; border-radius: .5cqw;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
+  .caption span b { color: var(--amber); font-weight: 700; }
+  .stage.nocap .caption { display: none; }
+  .bigplay {
+    position: absolute; inset: 0; display: grid; place-items: center; background: rgba(6,12,26,.35);
+    border: 0; cursor: pointer; color: var(--ink);
+  }
+  .bigplay span {
+    display: flex; align-items: center; gap: 1.2cqw; background: var(--amber); border-radius: 99px;
+    padding: 1.4cqw 2.8cqw 1.4cqw 2.2cqw; font-family: var(--display); font-weight: 800;
+    font-size: 2.6cqw; letter-spacing: .04em; text-transform: uppercase; box-shadow: 0 1cqw 3cqw rgba(0,0,0,.45);
+  }
+  .bigplay svg { width: 2.4cqw; height: 2.4cqw; }
+  .bigplay:focus-visible span { outline: 3px solid #fff; outline-offset: 4px; }
+
+  .timeline { display: flex; gap: 3px; height: 30px; align-items: stretch; }
+  .seg {
+    position: relative; border: 0; padding: 0; background: var(--panel); border-radius: 4px; cursor: pointer;
+    overflow: hidden; min-width: 8px;
+  }
+  .seg .fill { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--ice); opacity: .9; }
+  .seg .n { position: relative; font-size: 11px; font-weight: 700; color: var(--silver); font-variant-numeric: tabular-nums; }
+  .seg.cur { outline: 2px solid var(--amber); outline-offset: 1px; }
+  .seg:focus-visible { outline: 2px solid #fff; }
+
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px;
+    background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 10px;
+    font: 600 14px/1 var(--body); cursor: pointer;
+  }
+  .btn:hover { border-color: var(--ice); }
+  .btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+  .btn.primary { background: var(--amber); color: var(--ink); border-color: var(--amber); }
+  .btn[aria-pressed="true"] { border-color: var(--ice); color: var(--ice); }
+  .btn svg { width: 16px; height: 16px; }
+  .time { font: 500 14px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 4px; }
+  .spacer { flex: 1; }
+  .hint { color: var(--muted); font-size: 13px; }
+
+  /* ---------- Storyboard ---------- */
+  h2 {
+    font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: 34px;
+    margin: 12px 0 0; letter-spacing: .02em;
+  }
+  .intro { color: var(--muted); max-width: 68ch; margin: 0; }
+  .board { display: grid; gap: 18px; }
+  .card {
+    display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 22px;
+    padding: 18px; background: var(--navy); border: 1px solid var(--line); border-radius: 14px;
+  }
+  .thumbs { display: grid; gap: 8px; align-content: start; }
+  .thumb {
+    aspect-ratio: 16/9; max-width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--line);
+    background: radial-gradient(120% 90% at 70% 10%, #13224A 0%, var(--navy) 45%, #060C1A 100%);
+    cursor: pointer; padding: 0;
+  }
+  .thumb:focus-visible { outline: 2px solid var(--amber); }
+  .card-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+  .card h3 {
+    font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: 26px; margin: 0;
+    letter-spacing: .02em;
+  }
+  .tc { font: 500 13px var(--mono); color: var(--amber); font-variant-numeric: tabular-nums; }
+  .bn { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .lab { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ice); font-weight: 700; margin: 14px 0 4px; }
+  .dir { color: var(--silver); font-style: italic; margin: 0; }
+  .narr { margin: 0; color: var(--text); max-width: 68ch; }
+  .narr p { margin: 0 0 6px; }
+  .edit { margin: 0; color: var(--muted); max-width: 68ch; }
+  .notes { background: var(--navy); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; }
+  .notes ul { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 6px; color: var(--silver); }
+
+  @media (max-width: 760px) {
+    .card { grid-template-columns: 1fr; }
+    .timeline .n { display: none; }
+    .hint { display: none; }
+  }
+  .render-mode body { padding: 0; margin: 0; }
+  .render-mode .wrap { max-width: none; display: block; }
+  .render-mode header.top, .render-mode .timeline, .render-mode .controls, .render-mode .bigplay { display: none !important; }
+  .render-mode .stage { width: 100vw; height: 100vh; aspect-ratio: auto; border: 0; border-radius: 0; }
+  .render-mode .frame { transition: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .rv, .frame { transition: none; }
+    .spin, .spin-fast, .bob, .pulse { animation: none; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Instituto Gallo Personal</div>
+    <h1>Biblioteca de Treinos Lucrativos e Personalizáveis <span>Pro™</span></h1>
+  </header>
+
+  <section class="player" aria-label="Player da VSL">
+    <div class="stage" id="stage">
+      <div class="frame" id="frame"></div>
+      <div class="caption" id="caption" aria-live="polite"><span></span></div>
+      <button class="bigplay" id="bigplay" aria-label="Assistir a VSL">
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg>Assistir</span>
+      </button>
+    </div>
+    <div class="timeline" id="timeline" role="group" aria-label="Blocos da VSL"></div>
+    <div class="controls">
+      <button class="btn primary" id="play" aria-label="Reproduzir"><svg viewBox="0 0 24 24" fill="currentColor" id="playIcon"><path d="M6 4l15 8-15 8z"/></svg><span id="playLabel">Play</span></button>
+      <button class="btn" id="prev" aria-label="Frase anterior"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+      <button class="btn" id="next" aria-label="Próxima frase"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+      <span class="time" id="time">00:00 / 00:00</span>
+      <span class="spacer"></span>
+      <button class="btn" id="voice" aria-pressed="true">Narração</button>
+      <button class="btn" id="music" aria-pressed="true">Trilha</button>
+      <button class="btn" id="cc" aria-pressed="true">Legendas</button>
+      <button class="btn" id="fs">Tela cheia</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(() => {
+  // ---------- SVG helpers ----------
+  const C = { ink:'#081021', navy:'#0F1A33', panel:'#16223F', line:'#2A3A60', silver:'#D5DEEC', text:'#F1F4FA', muted:'#8E9BB8', ice:'#7FA8FF', amber:'#F4B63F', red:'#E0645A', paper:'#EEF2F8' };
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const rv = at => at == null ? '' : ` class="rv" data-at="${at}"`;
+  const T = (x, y, s, o = {}) => {
+    const { size = 28, fill = C.text, anchor = 'start', at, cls = '', weight = '', style = '' } = o;
+    const k = [cls, at != null ? 'rv' : ''].filter(Boolean).join(' ');
+    return `<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" text-anchor="${anchor}"${k ? ` class="${k}"` : ''}${at != null ? ` data-at="${at}"` : ''}${weight ? ` font-weight="${weight}"` : ''}${style ? ` style="${style}"` : ''}>${esc(s)}</text>`;
+  };
+  const G = (at, inner, extra = '') => `<g${rv(at)} ${extra}>${inner}</g>`;
+  const wrap = (text, max) => {
+    const out = []; let cur = '';
+    text.split(' ').forEach(w => { if ((cur + ' ' + w).trim().length > max) { out.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); });
+    if (cur) out.push(cur); return out;
+  };
+  const TL = (x, y, lines, o = {}) => {
+    const { size = 26, lh = 1.3, fill = C.text, weight = '', anchor = 'start', cls = '' } = o;
+    return `<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" text-anchor="${anchor}"${weight ? ` font-weight="${weight}"` : ''}${cls ? ` class="${cls}"` : ''}>` +
+      lines.map((l, i) => `<tspan x="${x}" dy="${i ? size * lh : 0}">${esc(l)}</tspan>`).join('') + `</text>`;
+  };
+  const chipW = (label, size) => Math.round(label.length * size * 0.54 + size * 1.7);
+  const chip = (x, y, label, o = {}) => {
+    const { size = 24, fill = C.panel, stroke = C.line, color = C.silver } = o;
+    const w = chipW(label, size), h = Math.round(size * 1.9);
+    return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${h / 2}" fill="${fill}" stroke="${stroke}" stroke-width="2"/>` +
+      `<text x="${x + w / 2}" y="${y + h / 2 + size * 0.36}" font-size="${size}" fill="${color}" text-anchor="middle" font-weight="600">${esc(label)}</text>`;
+  };
+  const chipRow = (labels, y, o = {}, gap = 14) => {
+    const size = o.size || 24;
+    const ws = labels.map(l => chipW(l, size));
+    const tot = ws.reduce((a, b) => a + b, 0) + gap * (labels.length - 1);
+    let x = o.x != null ? o.x : (1600 - tot) / 2;
+    return labels.map((l, i) => { const s = chip(x, y, l, o); x += ws[i] + gap; return s; }).join('');
+  };
+  const check = (x, y, s = 1, col = C.amber) =>
+    `<g transform="translate(${x} ${y}) scale(${s})"><circle cx="16" cy="16" r="16" fill="${col}"/><path d="M8 16.5l5.5 5.5L24.5 10.5" fill="none" stroke="${C.ink}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+  const pdfIcon = (x, y, w, h, col = C.silver, band = C.ice) => {
+    const f = Math.min(w, h) * 0.28;
+    return `<path d="M${x} ${y}h${w - f}l${f} ${f}v${h - f}h-${w}z" fill="${col}"/>` +
+      `<path d="M${x + w - f} ${y}v${f}h${f}" fill="#B9C5DA"/>` +
+      `<rect x="${x + w * .16}" y="${y + h * .42}" width="${w * .68}" height="${h * .08}" rx="2" fill="${band}"/>` +
+      `<rect x="${x + w * .16}" y="${y + h * .6}" width="${w * .5}" height="${h * .06}" rx="2" fill="#9AA8C2"/>` +
+      `<rect x="${x + w * .16}" y="${y + h * .74}" width="${w * .58}" height="${h * .06}" rx="2" fill="#9AA8C2"/>`;
+  };
+  const svg = inner => `<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img">${inner}</svg>`;
+
+  // ---------- Scene illustrations ----------
+  const S = {
+    gancho: () => svg(
+      // clock
+      G(0, `<circle cx="300" cy="360" r="190" fill="${C.panel}" stroke="${C.line}" stroke-width="6"/>` +
+        Array.from({ length: 12 }, (_, i) => { const a = i * Math.PI / 6; return `<line x1="${300 + Math.sin(a) * 160}" y1="${360 - Math.cos(a) * 160}" x2="${300 + Math.sin(a) * 176}" y2="${360 - Math.cos(a) * 176}" stroke="${C.muted}" stroke-width="${i % 3 ? 4 : 8}" stroke-linecap="round"/>`; }).join('') +
+        `<g class="spin" style="transform-origin:300px 360px"><line x1="300" y1="360" x2="300" y2="255" stroke="${C.silver}" stroke-width="12" stroke-linecap="round"/></g>` +
+        `<g class="spin-fast" style="transform-origin:300px 360px"><line x1="300" y1="360" x2="300" y2="220" stroke="${C.amber}" stroke-width="6" stroke-linecap="round"/></g>` +
+        `<circle cx="300" cy="360" r="14" fill="${C.amber}"/>` ) +
+      // paper stack
+      G(0, `<rect x="600" y="160" width="330" height="430" rx="10" fill="#C3CEDF" transform="rotate(-6 765 375)"/>` +
+        `<rect x="600" y="160" width="330" height="430" rx="10" fill="#D9E1EE" transform="rotate(3 765 375)"/>` +
+        `<rect x="600" y="160" width="330" height="430" rx="10" fill="${C.paper}"/>` +
+        `<rect x="600" y="160" width="330" height="70" rx="10" fill="${C.ice}"/>` +
+        [0, 1, 2, 3, 4, 5, 6].map(i => `<rect x="625" y="${260 + i * 44}" width="${[240, 200, 260, 180, 230, 150, 210][i]}" height="14" rx="7" fill="#A9B6CC"/><rect x="${880}" y="${258 + i * 44}" width="26" height="18" rx="4" fill="#CBD4E3"/>`).join('')) +
+      // alternatives
+      // phone
+      G(2, `<rect x="1120" y="150" width="280" height="500" rx="40" fill="#0B1428" stroke="${C.line}" stroke-width="6"/>` +
+        `<rect x="1138" y="190" width="244" height="420" rx="14" fill="#0E2A24"/>` +
+        `<rect x="1138" y="190" width="244" height="56" rx="14" fill="#123A31"/>` +
+        `<rect x="1180" y="290" width="186" height="120" rx="14" fill="#1F5C4B"/>` +
+        pdfIcon(1196, 306, 56, 72, C.paper, C.red) +
+        T(1264, 336, 'Treino.pdf', { size: 20, fill: C.text, weight: 700 }) +
+        T(1264, 362, '2 páginas', { size: 17, fill: '#A7C9BE' }) +
+        T(1356, 398, '22:51', { size: 15, fill: '#A7C9BE', anchor: 'end' })) +
+      G(3, T(1356, 436, '✓✓ visualizado', { size: 18, fill: C.muted, anchor: 'end' }) +
+        `<rect x="1160" y="470" width="200" height="44" rx="12" fill="#16392F" stroke="#2F5C4F" stroke-dasharray="6 6" stroke-width="2"/>` +
+        T(1260, 499, 'sem resposta', { size: 18, fill: '#7FA396', anchor: 'middle' })) +
+      G(4, T(800, 700, 'ISSO ACABA HOJE.', { size: 78, anchor: 'middle', cls: 'd', fill: C.amber }))
+    ),
+
+    dor: () => {
+      const panel = (x, title, at) => G(at, `<rect x="${x}" y="110" width="440" height="500" rx="20" fill="${C.panel}" stroke="${C.line}" stroke-width="3"/>` +
+        T(x + 220, 160, title, { size: 26, anchor: 'middle', fill: C.silver, weight: 700 }));
+      return svg(
+        panel(80, '22h · do zero', 1) +
+        G(1, `<circle cx="450" cy="230" r="34" fill="#E9E3C9"/><circle cx="466" cy="220" r="30" fill="${C.panel}"/>` +
+          [[140, 210], [190, 250], [390, 300], [160, 290]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3" fill="${C.silver}"/>`).join('') +
+          `<rect x="150" y="300" width="300" height="190" rx="12" fill="#0B1428" stroke="${C.muted}" stroke-width="4"/>` +
+          `<path d="M120 500h360l-24 28H144z" fill="${C.muted}"/>` +
+          T(175, 335, 'Série  Reps  Carga', { size: 18, fill: C.ice, cls: 'm' }) +
+          [0, 1, 2, 3].map(i => `<rect x="175" y="${352 + i * 30}" width="${[220, 180, 240, 120][i]}" height="12" rx="6" fill="#33456E"/>`).join('')) +
+        G(2, `<g transform="rotate(-8 300 560)"><rect x="150" y="530" width="300" height="60" rx="8" fill="none" stroke="${C.red}" stroke-width="5"/>` +
+          T(300, 572, 'DO ZERO. DE NOVO.', { size: 30, anchor: 'middle', cls: 'd', fill: C.red }) + `</g>`) +
+
+        panel(580, 'o mesmo modelo para todos', 3) +
+        G(3, [2, 1, 0].map(i => `<g transform="translate(${650 + i * 40} ${200 + i * 36})"><rect width="220" height="280" rx="8" fill="${[C.paper, '#D9E1EE', '#C3CEDF'][i]}" stroke="#9AA8C2"/>` +
+          `<rect width="220" height="44" rx="8" fill="#9AA8C2"/>` +
+          `<text x="14" y="30" font-size="20" font-weight="700" fill="${C.ink}">Aluno ${['A', 'B', 'C'][i]}</text>` +
+          [0, 1, 2, 3, 4].map(j => `<rect x="14" y="${66 + j * 36}" width="${[170, 140, 180, 120, 160][j]}" height="12" rx="6" fill="#A9B6CC"/>`).join('') + `</g>`).join('')) +
+        G(4, T(800, 585, '“ninguém vai perceber…”', { size: 26, anchor: 'middle', fill: C.muted, style: 'font-style:italic' })) +
+
+        panel(1080, 'largado no arquivo', 5) +
+        G(5, `<path d="M1150 300h110l24 28h166v220H1150z" fill="#26375C"/>` +
+          `<g transform="rotate(-10 1290 300)"><rect x="1210" y="230" width="190" height="230" rx="6" fill="${C.paper}"/>` +
+          `<rect x="1226" y="254" width="120" height="12" rx="6" fill="#A9B6CC"/><rect x="1226" y="280" width="90" height="12" rx="6" fill="#A9B6CC"/>` +
+          `<rect x="1226" y="306" width="140" height="12" rx="6" stroke="#A9B6CC" stroke-dasharray="6 6" fill="none" stroke-width="2"/></g>` +
+          `<path d="M1150 360h300v188H1150z" fill="#324876"/>` +
+          T(1300, 430, 'modelo_v3_FINAL(2).pdf', { size: 19, anchor: 'middle', fill: C.silver, cls: 'm' }) +
+          `<rect x="1190" y="460" width="220" height="16" rx="8" fill="#1C2A4A"/><rect x="1190" y="460" width="96" height="16" rx="8" fill="${C.amber}"/>` +
+          T(1300, 506, '44% concluído', { size: 20, anchor: 'middle', fill: C.muted })) +
+        G(6, T(1300, 585, 'sem a cara profissional', { size: 24, anchor: 'middle', fill: C.red, weight: 700 })) +
+        G(7, T(800, 700, 'FEITO EXATAMENTE PARA VOCÊ.', { size: 70, anchor: 'middle', cls: 'd', fill: C.amber }))
+      );
+    },
+
+    cred: (uid) => svg(
+      `<defs><clipPath id="ph${uid}"><rect x="100" y="100" width="520" height="580" rx="24"/></clipPath>` +
+      `<linearGradient id="gr${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#081021" stop-opacity="0"/><stop offset="1" stop-color="#081021" stop-opacity=".85"/></linearGradient></defs>` +
+      G(0, `<image href="foto-gallo.jpg" x="100" y="100" width="520" height="580" preserveAspectRatio="xMidYMid slice" clip-path="url(#ph${uid})"/>` +
+        `<rect x="100" y="100" width="520" height="580" rx="24" fill="url(#gr${uid})"/>` +
+        `<rect x="100" y="100" width="520" height="580" rx="24" fill="none" stroke="${C.line}" stroke-width="3"/>`) +
+      G(0, T(690, 170, 'PROF. JOSÉ CARLOS GALLO', { size: 58, cls: 'd', fill: C.text })) +
+      G(1, T(690, 350, '36+', { size: 170, cls: 'd', fill: C.ice }) +
+        T(1000, 290, 'anos de experiência', { size: 34, fill: C.text, weight: 700 }) +
+        T(1000, 330, 'Fisiologista Clínico do Exercício', { size: 26, fill: C.muted }) +
+        T(1000, 364, 'Personal Trainer', { size: 26, fill: C.muted })) +
+      G(2, T(690, 440, 'Palestrante internacional', { size: 30, fill: C.text, weight: 700 }) +
+        chipRow(['América do Sul', 'Europa'], 462, { x: 690, size: 24, color: C.ice, stroke: C.ice, fill: 'rgba(127,168,255,.1)' })) +
+      G(3, T(690, 560, '5 metodologias próprias', { size: 30, fill: C.text, weight: 700 }) +
+        chipRow(['Método P.E.S.O.', 'Método Customizado', 'Método Anti Aging'], 578, { x: 690, size: 20, color: C.amber, stroke: C.amber, fill: 'rgba(244,182,63,.1)' }, 12) +
+        chipRow(['Anti-Reganho de Peso Pós-Emagrecedores', 'Gallo Rubber Systems'], 630, { x: 690, size: 20, color: C.amber, stroke: C.amber, fill: 'rgba(244,182,63,.1)' }, 12)) +
+      G(4, `<rect x="130" y="592" width="460" height="62" rx="12" fill="${C.amber}"/>` +
+        T(360, 636, 'EU ATENDI ALUNO.', { size: 38, anchor: 'middle', cls: 'd', fill: C.ink })) +
+      G(5, T(360, 580, 'noite após noite, montando treino do zero', { size: 22, anchor: 'middle', fill: C.silver, style: 'font-style:italic' }))
+    ),
+
+    biblioteca: () => {
+      const cols = [C.ice, C.silver, C.amber, '#9FD3C7', '#E7A0C1'];
+      let tiles = '';
+      for (let i = 0; i < 68; i++) {
+        const c = i % 17, r = Math.floor(i / 17), x = 109 + c * 82, y = 200 + r * 86;
+        tiles += `<g class="rv" data-at="1" style="transition-delay:${i * 12}ms">${pdfIcon(x, y, 70, 74, C.paper, cols[(c + r) % 5])}</g>`;
+      }
+      return svg(
+        G(0, T(109, 118, 'BIBLIOTECA DE TREINOS', { size: 64, cls: 'd', fill: C.text }) +
+          T(109, 162, 'LUCRATIVOS E PERSONALIZÁVEIS PRO™', { size: 30, cls: 'd', fill: C.ice })) +
+        G(1, T(1491, 130, '68', { size: 104, cls: 'd', fill: C.amber, anchor: 'end' }) +
+          T(1491, 164, 'programas completos', { size: 22, fill: C.silver, anchor: 'end', weight: 600 })) +
+        tiles +
+        G(3, chipRow(['Masculino', 'Feminino', 'Academia', 'Casa', 'Iniciante', 'Intermediário', 'Avançado'], 556, { size: 22 }, 10)) +
+        G(4, chipRow(['Emagrecimento', 'Hipertrofia', 'Definição', 'Saúde', 'Performance'], 612, { size: 22, color: C.ice, stroke: C.ice, fill: 'rgba(127,168,255,.1)' }, 10)) +
+        G(5, T(800, 700, 'Fisiologia do exercício · Biomecânica · Progressão · Segurança', { size: 26, anchor: 'middle', fill: C.silver, weight: 600 })) +
+        G(6, `<g transform="rotate(-4 1330 700)"><rect x="1190" y="660" width="290" height="60" rx="8" fill="none" stroke="${C.amber}" stroke-width="4"/>` +
+          T(1335, 701, 'CIÊNCIA APLICADA', { size: 32, cls: 'd', fill: C.amber, anchor: 'middle' }) + `</g>`)
+      );
+    },
+
+    codigo: () => {
+      const segs = [['HIP', 'Hipertrofia'], ['M', 'Masculino'], ['30-39', '30 a 39 anos'], ['ACA', 'Academia'], ['08S', '8 semanas']];
+      const size = 104, cw = size * 0.6;
+      const full = segs.map(s => s[0]).join('-');
+      let x = (1600 - full.length * cw) / 2, code = '', labels = '';
+      segs.forEach(([s, l], i) => {
+        const w = s.length * cw, cx = x + w / 2;
+        code += T(x, 420, s, { size, cls: 'm', fill: C.text });
+        labels += `<g class="rv" data-at="2" style="transition-delay:${i * 180}ms"><path d="M${x + 4} 450v16h${w - 8}v-16" fill="none" stroke="${C.amber}" stroke-width="4"/>` +
+          `<line x1="${cx}" y1="466" x2="${cx}" y2="${i % 2 ? 540 : 500}" stroke="${C.amber}" stroke-width="3"/>` +
+          T(cx, i % 2 ? 574 : 534, l, { size: 28, anchor: 'middle', fill: C.amber, weight: 700 }) + `</g>`;
+        x += w;
+        if (i < segs.length - 1) { code += T(x, 420, '-', { size, cls: 'm', fill: C.muted }); x += cw; }
+      });
+      const steps = ['abre a biblioteca', 'olha o código', 'sabe em segundos'];
+      return svg(
+        G(0, steps.map((s, i) => {
+          const cx = 400 + i * 400;
+          return `<circle cx="${cx}" cy="150" r="42" fill="${C.panel}" stroke="${C.ice}" stroke-width="3"/>` +
+            T(cx, 164, String(i + 1), { size: 40, anchor: 'middle', cls: 'd', fill: C.ice }) +
+            T(cx, 230, s, { size: 26, anchor: 'middle', fill: C.silver, weight: 600 }) +
+            (i < 2 ? `<path d="M${cx + 62} 150h270" stroke="${C.line}" stroke-width="4" stroke-dasharray="10 10"/>` : '');
+        }).join('')) +
+        G(1, `<rect x="${(1600 - full.length * cw) / 2 - 40}" y="310" width="${full.length * cw + 80}" height="140" rx="18" fill="${C.panel}" stroke="${C.line}" stroke-width="3"/>` + code) +
+        labels +
+        G(2, T(800, 690, 'DIRETO AO PONTO.', { size: 60, anchor: 'middle', cls: 'd', fill: C.text }))
+      );
+    },
+
+    recebe: () => {
+      const items = [
+        ['68 programas completos em PDF editável', 1], ['Masculino e feminino', 1],
+        ['Academia e casa', 2], ['Peso corporal, elásticos e poucos equipamentos', 2]
+      ];
+      const ph = (x, y, w, h, label, rx = 8) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="none" stroke="#9AA8C2" stroke-width="2" stroke-dasharray="8 6"/>` +
+        `<g class="rv" data-at="3"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${C.amber}"/>` +
+        T(x + w / 2, y + h / 2 + 7, label, { size: 20, anchor: 'middle', fill: C.ink, weight: 700 }) + `</g>`;
+      return svg(
+        G(0, T(110, 130, 'O QUE VOCÊ RECEBE', { size: 64, cls: 'd', fill: C.text })) +
+        items.map(([t, at], i) => G(at, check(110, 200 + i * 86) + TL(162, 226 + i * 86, wrap(t, 34), { size: 30, weight: 600, lh: 1.1 }))).join('') +
+        // PDF mockup
+        G(0, `<rect x="1000" y="80" width="440" height="590" rx="14" fill="${C.paper}"/>` +
+          `<rect x="1000" y="80" width="440" height="120" rx="14" fill="${C.navy}"/>` +
+          `<rect x="1000" y="180" width="440" height="20" fill="${C.navy}"/>` +
+          [0, 1, 2, 3, 4, 5].map(j => `<rect x="1030" y="${360 + j * 38}" width="${[300, 240, 330, 200, 280, 250][j]}" height="14" rx="7" fill="#A9B6CC"/>`).join('') +
+          T(1030, 336, 'HIP-M-30-39-ACA-08S', { size: 22, cls: 'm', fill: C.navy })) +
+        `<g>${ph(1024, 100, 150, 80, 'SEU LOGO')}${ph(1190, 104, 226, 34, 'Seu nome · CREF', 6)}${ph(1190, 146, 170, 30, 'Sua foto ✓', 6)}` +
+        `${ph(1300, 222, 116, 116, 'Aluno', 58)}${ph(1030, 600, 180, 44, '@seuinsta', 22)}${ph(1224, 600, 190, 44, 'WhatsApp', 22)}</g>` +
+        G(4, `<g transform="rotate(-8 1220 700)"><rect x="1070" y="680" width="300" height="62" rx="8" fill="${C.ink}" stroke="${C.amber}" stroke-width="4"/>` +
+          T(1220, 723, 'SUA MARCA', { size: 36, anchor: 'middle', cls: 'd', fill: C.amber }) + `</g>`)
+      );
+    },
+
+    curso: () => {
+      const mods = ['Boas-vindas', 'Identificação', 'Seleção', 'Personalização', 'Vendas', 'Redes sociais', 'Escala'];
+      return svg(
+        G(0, `<rect x="110" y="110" width="120" height="150" rx="8" fill="${C.ice}"/><rect x="110" y="110" width="22" height="150" fill="#5B84DA"/>` +
+          T(180, 196, 'M', { size: 54, anchor: 'middle', cls: 'd', fill: C.ink }) +
+          T(260, 170, 'Manual de Utilização', { size: 36, fill: C.text, weight: 700 }) +
+          T(260, 212, 'passo a passo da biblioteca', { size: 24, fill: C.muted })) +
+        G(0, `<rect x="820" y="110" width="170" height="120" rx="12" fill="${C.panel}" stroke="${C.line}" stroke-width="3"/>` +
+          `<path d="M890 146v48l40-24z" fill="${C.amber}"/><rect x="860" y="236" width="90" height="14" rx="4" fill="${C.line}"/>` +
+          T(1020, 170, 'Curso completo', { size: 36, fill: C.text, weight: 700 }) +
+          T(1020, 212, 'escolher · editar · vender · divulgar', { size: 24, fill: C.muted })) +
+        G(1, `<line x1="170" y1="390" x2="1430" y2="390" stroke="${C.line}" stroke-width="6"/>` +
+          mods.map((m, i) => {
+            const x = 170 + i * 210;
+            return `<g class="rv" data-at="1" style="transition-delay:${i * 140}ms"><circle cx="${x}" cy="390" r="36" fill="${C.navy}" stroke="${C.ice}" stroke-width="4"/>` +
+              T(x, 404, String(i + 1), { size: 38, anchor: 'middle', cls: 'd', fill: C.ice }) +
+              T(x, 466, m, { size: 24, anchor: 'middle', fill: C.silver, weight: 600 }) + `</g>`;
+          }).join('')) +
+        G(2, `<circle cx="160" cy="590" r="38" fill="none" stroke="${C.amber}" stroke-width="6" stroke-dasharray="180 60"/><path d="M186 548l14 18-22 6z" fill="${C.amber}"/>` +
+          T(220, 582, 'Atualizações futuras', { size: 32, fill: C.text, weight: 700 }) +
+          T(220, 618, 'quando disponibilizadas', { size: 22, fill: C.muted })) +
+        G(3, [['Canva', 850], ['Editores gratuitos', 1030]].map(([t, x]) => check(x, 556) + T(x + 44, 582, t, { size: 28, fill: C.text, weight: 600 })).join('') +
+          T(850, 632, 'Não precisa saber editar PDF: o curso ensina.', { size: 22, fill: C.muted }))
+      );
+    },
+
+    custo: () => {
+      const gx = h => 160 + h * 106.67;
+      const ticks = Array.from({ length: 13 }, (_, h) => `<line x1="${gx(h)}" y1="300" x2="${gx(h)}" y2="${h % 2 ? 310 : 318}" stroke="${C.muted}" stroke-width="2"/>` + (h % 2 ? '' : T(gx(h), 346, h + 'h', { size: 20, anchor: 'middle', fill: C.muted, cls: 'm' }))).join('');
+      const mark = (h, label, col, at) => G(at, `<line x1="${gx(h)}" y1="222" x2="${gx(h)}" y2="296" stroke="${col}" stroke-width="4"/>` +
+        `<circle cx="${gx(h)}" cy="214" r="10" fill="${col}"/>` + T(gx(h), 196, label, { size: 26, anchor: 'middle', fill: col, weight: 700 }));
+      return svg(
+        G(0, T(160, 120, 'QUANTAS HORAS POR SEMANA VOCÊ MONTA TREINO?', { size: 52, cls: 'd', fill: C.text })) +
+        G(1, `<rect x="160" y="250" width="1280" height="46" rx="23" fill="${C.panel}" stroke="${C.line}" stroke-width="2"/>` + ticks) +
+        G(2, `<rect x="160" y="250" width="${gx(5) - 160}" height="46" rx="23" fill="rgba(127,168,255,.35)"/>`) +
+        mark(2, '2h', C.ice, 2) + mark(5, '5h', C.ice, 2) +
+        G(3, `<rect x="160" y="250" width="${gx(10) - 160}" height="46" rx="23" fill="rgba(224,100,90,.55)"/>`) +
+        mark(10, '10h+', C.red, 3) +
+        G(4, `<rect x="160" y="400" width="1280" height="130" rx="18" fill="${C.panel}" stroke="${C.line}" stroke-width="2"/>` +
+          T(210, 482, '10 h/semana  ×  R$ 80/h  ×  4,3 semanas', { size: 40, fill: C.silver, cls: 'm' })) +
+        G(5, T(1400, 482, '= R$ 3.440/mês', { size: 44, fill: C.red, cls: 'm', anchor: 'end' })) +
+        G(6, T(160, 620, 'TEMPO LIBERADO', { size: 40, cls: 'd', fill: C.amber }) +
+          `<path d="M430 606h60m-16-14l16 14-16 14" stroke="${C.amber}" stroke-width="4" fill="none" stroke-linecap="round"/>` +
+          T(510, 620, 'mais alunos · mais vendas · crescimento', { size: 30, fill: C.text, weight: 600 })) +
+        G(7, T(160, 676, 'A biblioteca elimina o repetitivo. Seu conhecimento continua sendo seu.', { size: 26, fill: C.silver }))
+      );
+    },
+
+    objecoes: () => {
+      const cards = [
+        ['“Mas eu já monto meus treinos.”', 'Não substitui o que você sabe: acelera. Você personaliza um modelo profissional em minutos.', 0, 1],
+        ['“Vou perder minha identidade?”', 'Não. Cada programa leva sua marca, sua foto, seu logotipo e suas cores.', 2, 3],
+        ['“Não sei editar PDF.”', 'O curso ensina passo a passo. Funciona com o Canva, que você já usa.', 5, 6],
+        ['“Sou iniciante. É para mim?”', 'Especialmente para você. A seleção é fácil desde o começo e o treinamento acompanha tudo.', 7, 8]
+      ];
+      return svg(cards.map(([q, a, aq, aa], i) => {
+        const x = i % 2 ? 820 : 100, y = i < 2 ? 70 : 380;
+        return G(aq, `<rect x="${x}" y="${y}" width="680" height="280" rx="20" fill="${C.panel}" stroke="${C.line}" stroke-width="3"/>` +
+          T(x + 36, y + 70, q, { size: 36, fill: C.text, weight: 700 })) +
+          G(aa, check(x + 36, y + 110) + TL(x + 86, y + 136, wrap(a, 44), { size: 27, fill: C.silver, lh: 1.32 }) +
+            `<rect x="${x}" y="${y}" width="680" height="280" rx="20" fill="none" stroke="${C.amber}" stroke-width="3"/>`);
+      }).join(''));
+    },
+
+    prova: () => {
+      const rows = [['↓', 'Redução drástica de tempo montando treino'], ['↑', 'Aumento na percepção de valor pelo aluno'],
+        ['↑', 'Mais alunos atendidos sem trabalhar mais horas'], ['↑', 'Consultoria online mais escalável'], ['↑', 'Entrega mais profissional, que justifica cobrar mais']];
+      return svg(
+        G(0, T(160, 120, 'O QUE OS PERSONAL TRAINERS RELATAM', { size: 56, cls: 'd', fill: C.text })) +
+        rows.map(([ic, t], i) => G(i + 1, `<rect x="160" y="${160 + i * 104}" width="1280" height="86" rx="16" fill="${C.panel}" stroke="${C.line}" stroke-width="2"/>` +
+          `<circle cx="210" cy="${203 + i * 104}" r="28" fill="${ic === '↓' ? C.ice : C.amber}"/>` +
+          T(210, 216 + i * 104, ic, { size: 38, anchor: 'middle', fill: C.ink, weight: 700 }) +
+          T(262, 214 + i * 104, t, { size: 32, fill: C.text, weight: 600 }))).join('')
+      );
+    },
+
+    oferta: () => svg(
+      G(0, [2, 1, 0].map(i => `<g transform="translate(${170 + i * 34} ${150 + i * 28})"><rect width="360" height="460" rx="14" fill="${[C.navy, '#1A2A52', '#223566'][i]}" stroke="${C.ice}" stroke-width="${i ? 1 : 3}"/></g>`).join('') +
+        T(210, 250, 'BIBLIOTECA', { size: 56, cls: 'd', fill: C.text }) +
+        T(210, 300, 'DE TREINOS PRO™', { size: 40, cls: 'd', fill: C.ice }) +
+        T(210, 470, '68', { size: 150, cls: 'd', fill: C.amber }) +
+        T(210, 512, 'programas editáveis', { size: 26, fill: C.silver, weight: 600 }) +
+        T(210, 552, '+ manual + curso', { size: 24, fill: C.muted })) +
+      G(1, TL(740, 190, ['Investimento recuperado', 'no primeiro atendimento', 'em que você economiza tempo.'], { size: 40, weight: 700, lh: 1.2 })) +
+      G(2, `<g class="pulse"><rect x="740" y="380" width="720" height="112" rx="56" fill="${C.amber}"/>` +
+        T(1100, 450, 'QUERO MINHA BIBLIOTECA PRO', { size: 44, anchor: 'middle', cls: 'd', fill: C.ink }) + `</g>` +
+        `<g class="bob"><path d="M1100 520v70m-26-26l26 26 26-26" stroke="${C.amber}" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>` +
+        T(1100, 640, 'valor e condições no botão abaixo deste vídeo', { size: 24, anchor: 'middle', fill: C.silver })) +
+      G(4, T(740, 700, 'Trabalhe com um sistema, não contra o relógio.', { size: 30, fill: C.ice, weight: 700 }))
+    ),
+
+    fechamento: () => svg(
+      G(0, T(110, 200, 'VOCÊ ESTUDOU PARA ISSO.', { size: 46, cls: 'd', fill: C.silver }) +
+        T(110, 262, 'VOCÊ TEM O CONHECIMENTO.', { size: 46, cls: 'd', fill: C.silver })) +
+      G(1, T(110, 370, 'AGORA VOCÊ VAI TER', { size: 60, cls: 'd', fill: C.text }) +
+        T(110, 450, 'O SISTEMA.', { size: 84, cls: 'd', fill: C.amber })) +
+      G(2, `<rect x="880" y="130" width="600" height="252" rx="16" fill="#030A1E" stroke="${C.line}" stroke-width="2"/>` +
+        `<image href="logo-gallo.jpg" x="895" y="160" width="570" height="239" preserveAspectRatio="xMidYMid meet"/>` +
+        T(1180, 440, 'Prof. José Carlos Gallo', { size: 32, anchor: 'middle', fill: C.text, weight: 700 }) +
+        T(1180, 478, 'Instituto Gallo Personal', { size: 24, anchor: 'middle', fill: C.muted })) +
+      G(3, T(1180, 530, '@gallopersonalsystems', { size: 30, anchor: 'middle', fill: C.ice, cls: 'm' }) +
+        `<g class="pulse"><rect x="110" y="540" width="620" height="96" rx="48" fill="${C.amber}"/>` +
+        T(420, 602, 'QUERO MINHA BIBLIOTECA PRO', { size: 38, anchor: 'middle', cls: 'd', fill: C.ink }) + `</g>` +
+        `<g class="bob"><path d="M420 650v40m-18-18l18 18 18-18" stroke="${C.amber}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`)
+    )
+  };
+
+  // ---------- Script ----------
+  const BLOCKS = [
+    { n: 1, t: 'Gancho', tc: '0:00 – 0:45', dir: 'Prof. Gallo em frente à câmera, direto.',
+      edit: 'Corte seco, sem vinheta. Nos 3 primeiros segundos, texto na tela: “Você passa HORAS montando treino.” Zoom lento na câmera.',
+      frames: [{ s: 'gancho', lines: [
+        'Você passa <b>horas</b> montando treino.',
+        'Horas que você poderia estar atendendo mais um aluno, fechando mais uma consultoria, ou simplesmente descansando.',
+        'E no final do dia, você entrega uma folha impressa ou um PDF no WhatsApp...',
+        '...e o aluno mal olha direito para o que você passou tanto tempo construindo.',
+        'O que eu vou mostrar nos próximos minutos resolve isso <b>de uma vez por todas</b>.'] }] },
+    { n: 2, t: 'Identificação da dor', tc: '0:45 – 3:00', dir: 'Câmera, tom empático mas direto.',
+      edit: 'Alternar câmera com as três vinhetas: notebook às 22h, o mesmo modelo para todos, o arquivo abandonado. Uma vinheta por situação.',
+      frames: [{ s: 'dor', lines: [
+        'Eu sei exatamente como é.',
+        'Você termina o atendimento das 22h, abre o computador e ainda precisa montar o treino de amanhã.',
+        'Séries, repetições, progressão, exercício por exercício... <b>do zero. De novo.</b>',
+        'Ou então você tem aquele modelo que você repete para todo mundo, e torce para que ninguém perceba.',
+        'E fica com aquela sensação de que poderia estar entregando mais.',
+        'Talvez você já até tentou criar seus próprios modelos. Começou, ficou pela metade...',
+        '...não ficou com a cara profissional que você queria, e largou no arquivo.',
+        'Se você se identificou com qualquer uma dessas situações, <b>continue assistindo</b>.',
+        'Porque o que eu vou mostrar foi feito exatamente para você.'] }] },
+    { n: 3, t: 'Credibilidade', tc: '3:00 – 5:00', dir: 'Foto/vídeo de congressos, atendimentos, metodologias.',
+      edit: 'Lower third com nome e títulos. Intercalar fotos de congressos (América do Sul e Europa) e de atendimentos. Chips das 5 metodologias entrando conforme a fala.',
+      frames: [{ s: 'cred', lines: [
+        'Meu nome é <b>Prof. José Carlos Gallo</b>.',
+        'Sou Fisiologista Clínico do Exercício, Personal Trainer com mais de <b>36 anos</b> de experiência.',
+        'Palestrante internacional: já passei pelos principais congressos da América do Sul e da Europa.',
+        'Desenvolvi cinco metodologias próprias, incluindo o Método P.E.S.O., o Método Anti Aging e o Gallo Rubber Systems.',
+        'Mas mais importante do que qualquer título: <b>eu atendi aluno</b>.',
+        'Eu sentei na frente de um computador montando treino do zero, noite após noite, exatamente como você faz hoje.',
+        'E foi por isso que eu criei o que estou prestes a te mostrar.'] }] },
+    { n: 4, t: 'Apresentação da solução', tc: '5:00 – 7:30', dir: 'Tela mostrando os PDFs, a organização, os programas.',
+      edit: 'Gravação de tela navegando nas pastas e abrindo PDFs reais. Na fala do código, decompor HIP-M-30-39-ACA-08S na tela, segmento por segmento.',
+      frames: [{ s: 'biblioteca', lines: [
+        'Apresento a <b>Biblioteca de Treinos Lucrativos e Personalizáveis Pro™</b>.',
+        'São <b>68 programas</b> de musculação completos, prontos, editáveis e organizados profissionalmente.',
+        'Para você usar amanhã.',
+        'Masculino e feminino. Academia e casa. Iniciante, intermediário e avançado.',
+        'Emagrecimento, hipertrofia, definição, saúde e performance.',
+        'Cada programa foi estruturado considerando fisiologia do exercício, biomecânica, progressão e segurança.',
+        'Não é achismo, é <b>ciência aplicada</b>.'] },
+      { s: 'codigo', lines: [
+        'E tudo identificado de forma clara: você abre a biblioteca, olha o código do programa, e em segundos já sabe o que está pegando.',
+        'Por exemplo: <b>HIP-M-30-39-ACA-08S</b>.',
+        'Hipertrofia, masculino, 30 a 39 anos, academia, 8 semanas. É isso. Direto ao ponto.'] }] },
+    { n: 5, t: 'O que você recebe', tc: '7:30 – 10:00', dir: 'Tela com os itens aparecendo enquanto fala.',
+      edit: 'Checklist entrando item a item. Mostrar um PDF sendo personalizado no Canva: logo, nome, foto, @ e WhatsApp preenchendo os espaços.',
+      frames: [{ s: 'recebe', lines: [
+        'Quando você adquire a Biblioteca Pro, você recebe:',
+        '68 programas completos em PDF editável. Programas masculinos e femininos.',
+        'Treinos para academia e para casa, incluindo versões com peso corporal, elásticos e poucos equipamentos.',
+        'Você coloca seu nome, seu logo, sua foto, seu Instagram, seu WhatsApp, a foto do seu aluno.',
+        'É <b>sua marca</b> em cima de um produto profissional.'] },
+      { s: 'curso', lines: [
+        'Você recebe também o <b>Manual de Utilização</b> e um curso completo ensinando como escolher, editar, personalizar, vender e divulgar.',
+        'Com módulos de boas-vindas, identificação, seleção, personalização, vendas, redes sociais e escala.',
+        'E mais: atualizações futuras quando disponibilizadas.',
+        'Você não precisa saber editar PDF. O curso ensina. Funciona com <b>Canva</b> e editores gratuitos.'] }] },
+    { n: 6, t: 'O custo de não ter', tc: '10:00 – 11:30', dir: 'Câmera, tom mais firme.',
+      edit: 'Câmera mais fechada. A conta aparece na tela enquanto ele fala. R$ 80/h é exemplo: ajuste para o valor médio da hora do seu público.',
+      frames: [{ s: 'custo', lines: [
+        'Deixa eu te fazer uma pergunta direta.',
+        'Quantas horas você gasta por semana montando treino do zero?',
+        'Duas horas? Cinco horas?',
+        'Para alguns profissionais que eu conheço, são <b>mais de dez horas semanais</b> só nisso.',
+        'Agora multiplica essas horas pelo seu valor de hora.',
+        'Quanto você está perdendo todo mês só porque ainda não tem um sistema?',
+        'Não é o treino que você monta que vale dinheiro. É o <b>tempo que você libera</b> para atender mais, vender mais, crescer.',
+        'A Biblioteca não substitui seu conhecimento. Ela elimina o trabalho repetitivo para que você faça o que realmente importa.'] }] },
+    { n: 7, t: 'Objeções', tc: '11:30 – 13:30', dir: 'Câmera direta, responde uma a uma.',
+      edit: 'Cada objeção entra como cartão na tela antes da resposta. A resposta acende o contorno do cartão.',
+      frames: [{ s: 'objecoes', lines: [
+        '“Mas eu já monto meus treinos.”',
+        'Ótimo. A Biblioteca não vai substituir o que você sabe. Vai acelerar: você personaliza um modelo profissional em minutos.',
+        '“Vou perder minha identidade como profissional?”',
+        'Não. Cada programa leva sua marca, sua foto, seu logotipo, suas cores.',
+        'É seu produto com sua cara, só que construído sobre uma base profissional validada.',
+        '“Não sei editar PDF.”',
+        'Sem problema. O curso ensina passo a passo. Funciona com Canva, que você provavelmente já usa.',
+        '“Sou iniciante, será que é para mim?”',
+        '<b>Especialmente para você.</b> A biblioteca foi organizada para facilitar a seleção desde o começo, e o treinamento acompanha tudo.'] }] },
+    { n: 8, t: 'Prova social', tc: '13:30 – 14:30', dir: 'Depoimentos em tela ou narração de casos.',
+      edit: 'Inserir prints ou vídeos de depoimentos reais, com autorização, sobre cada linha. Sem depoimento, não citar número.',
+      frames: [{ s: 'prova', lines: [
+        'Personal Trainers que aplicaram a Biblioteca relatam:',
+        'Redução drástica de tempo montando treino.',
+        'Aumento na percepção de valor pelo aluno.',
+        'Mais alunos atendidos sem trabalhar mais horas.',
+        'Consultoria online mais escalável.',
+        'E uma entrega muito mais profissional, que <b>justifica cobrar mais</b>.'] }] },
+    { n: 9, t: 'Oferta e CTA', tc: '14:30 – 16:00', dir: 'Mostrar a página de vendas ou o produto na tela.',
+      edit: 'Página de vendas na tela. Botão animado com seta apontando para baixo a partir daqui até o fim do vídeo.',
+      frames: [{ s: 'oferta', lines: [
+        'A Biblioteca de Treinos Lucrativos e Personalizáveis Pro™ está disponível por um investimento...',
+        '...que é recuperado no primeiro atendimento em que você economizar tempo.',
+        'Você vai encontrar o valor e as condições de pagamento <b>no botão abaixo</b> dessa página.',
+        '<b>Clique agora</b> e faça seu acesso.',
+        'Já na primeira semana você vai sentir a diferença de trabalhar com um sistema, e não contra o relógio.'] }] },
+    { n: 10, t: 'Fechamento', tc: '16:00 – 16:30', dir: 'Câmera, tom de autoridade e parceria.',
+      edit: 'Encerrar com o logo e @gallopersonalsystems. Manter botão e seta na tela até o último frame.',
+      frames: [{ s: 'fechamento', lines: [
+        'Você estudou para isso. Você tem o conhecimento.',
+        'Agora você vai ter <b>o sistema</b>.',
+        'Eu sou Prof. José Carlos Gallo, e esse é meu compromisso com a sua evolução profissional.',
+        'Te vejo do outro lado.'] }] }
+  ];
+
+  // ---------- Narration: audio chunks + per-line start times (aligned to the pauses in the voice) ----------
+  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 22.682, "starts": [0.0, 2.09, 9.57, 14.2, 18.4]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 41.804, "starts": [0.0, 1.57, 8.71, 14.87, 20.71, 24.57, 30.08, 34.39, 38.94]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 32.596, "starts": [0.0, 1.92, 6.6, 11.56, 18.88, 22.68, 29.46]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 40.88, "starts": [0.0, 3.72, 9.74, 10.65, 14.89, 18.39, 23.45, 25.75, 31.65, 35.35]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 42.633, "starts": [0.0, 2.06, 6.43, 12.28, 17.21, 19.68, 27.21, 33.1, 36.79]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 36.69, "starts": [0.0, 1.94, 5.94, 8.0, 12.31, 15.49, 20.44, 28.71]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 35.043, "starts": [0.0, 1.47, 8.73, 10.84, 15.43, 20.57, 22.21, 26.94, 28.82]}, {"file": "audio/b08.mp3", "blocks": [8], "dur": 23.375, "starts": [0.0, 4.44, 8.21, 11.5, 15.38, 18.45]}, {"file": "audio/b09.mp3", "blocks": [9], "dur": 23.619, "starts": [0.0, 6.06, 10.0, 15.14, 17.67]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 13.528, "starts": [0.0, 3.3, 5.57, 12.18]}];
+  const plain = s => s.replace(/<[^>]+>/g, '');
+  const LINES = []; let t = 0, frameCount = 0;
+  const flat = BLOCKS.flatMap((b, bi) => b.frames.flatMap((f, fi) => f.lines.map((html, li) => ({ bi, fi, li, html, text: plain(html) }))));
+  BLOCKS.forEach(b => frameCount += b.frames.length);
+  AUDIO.forEach(c => {
+    c.off = t;
+    c.starts.forEach((s, i) => {
+      const L = flat[LINES.length];
+      const end = i + 1 < c.starts.length ? c.starts[i + 1] : c.dur;
+      LINES.push({ ...L, start: t + s, dur: end - s, chunk: AUDIO.indexOf(c) });
+    });
+    t += c.dur;
+  });
+  BLOCKS.forEach((b, bi) => {
+    const ls = LINES.filter(L => L.bi === bi);
+    b.start = ls[0].start; b.dur = ls[ls.length - 1].start + ls[ls.length - 1].dur - b.start;
+  });
+  const TOTAL = t;
+  const fmt = s => { s = Math.max(0, Math.round(s)); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
+
+  // ---------- Elements ----------
+  const $ = id => document.getElementById(id);
+  const stage = $('stage'), frameEl = $('frame'), capEl = $('caption').firstElementChild;
+  let uid = 0;
+  const render = key => S[key](++uid);
+
+  // timeline
+  const segs = BLOCKS.map(b => {
+    const el = document.createElement('button');
+    el.className = 'seg'; el.style.flex = b.dur.toFixed(2);
+    el.setAttribute('aria-label', `Bloco ${b.n}: ${b.t}`);
+    el.innerHTML = `<span class="fill"></span>`;
+    el.addEventListener('click', () => seek(b.start, true));
+    $('timeline').appendChild(el);
+    return el;
+  });
+
+  // ---------- Background music (generated live with Web Audio: soft pad, A minor) ----------
+  const Music = (() => {
+    let ctx = null, master = null, timer = null, nextAt = 0, step = 0, on = true;
+    const CHORDS = [[45, 52, 57, 60], [41, 48, 53, 57], [48, 55, 60, 64], [43, 50, 55, 59]]; // Am F C G
+    const hz = m => 440 * Math.pow(2, (m - 69) / 12);
+    const LEN = 4.2;
+    function chord(at, notes) {
+      notes.forEach((m, i) => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = i === 0 ? 'sine' : 'triangle'; o.frequency.value = hz(m); o.detune.value = (i % 2 ? 4 : -4);
+        g.gain.setValueAtTime(0, at);
+        g.gain.linearRampToValueAtTime(i === 0 ? 0.5 : 0.22, at + 1.4);
+        g.gain.setValueAtTime(i === 0 ? 0.5 : 0.22, at + LEN - 0.4);
+        g.gain.linearRampToValueAtTime(0, at + LEN + 1.2);
+        o.connect(g).connect(master); o.start(at); o.stop(at + LEN + 1.3);
+      });
+    }
+    function schedule() { while (nextAt < ctx.currentTime + 1.5) { chord(nextAt, CHORDS[step++ % 4]); nextAt += LEN; } }
+    return {
+      play() {
+        if (!on) return;
+        try {
+          if (!ctx) {
+            ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1100;
+            master = ctx.createGain(); master.gain.value = 0.05; master.connect(lp).connect(ctx.destination);
+          }
+          ctx.resume(); nextAt = Math.max(nextAt, ctx.currentTime + 0.05); schedule();
+          clearInterval(timer); timer = setInterval(schedule, 500);
+        } catch (e) {}
+      },
+      pause() { clearInterval(timer); try { ctx && ctx.suspend(); } catch (e) {} },
+      set(v) { on = v; if (!v) this.pause(); },
+      level(narrating) { if (master) master.gain.setTargetAtTime(narrating ? 0.05 : 0.11, ctx.currentTime, 0.3); }
+    };
+  })();
+
+  // ---------- Playback ----------
+  let cur = -1, curFrameKey = '', playing = false, pos = 0, last = 0;
+  let voiceOn = true, musicOn = true, active = -1; // active = audio chunk currently playing
+  AUDIO.forEach(c => {
+    c.el = new Audio(); c.el.preload = 'auto';
+    c.el.addEventListener('error', () => { c.bad = true; });
+    // Load into memory so seeking works on any host; fall back to the plain file URL.
+    fetch(c.file).then(r => r.ok ? r.blob() : Promise.reject()).then(bl => { c.el.src = URL.createObjectURL(bl); })
+      .catch(() => { c.el.src = c.file; });
+  });
+
+  const idxAt = p => { let i = 0; while (i < LINES.length - 1 && LINES[i + 1].start <= p + 1e-6) i++; return i; };
+  const chunkAt = p => { let k = 0; while (k < AUDIO.length - 1 && AUDIO[k + 1].off <= p + 1e-6) k++; return k; };
+
+  function stopAudio() { AUDIO.forEach(c => { try { c.el.pause(); } catch (e) {} }); active = -1; }
+  function startAudio() {
+    stopAudio();
+    if (!voiceOn || !playing) return;
+    const k = chunkAt(pos), c = AUDIO[k];
+    if (c.bad) return;
+    const go = () => {
+      if (!playing || !voiceOn || chunkAt(pos) !== k) return;
+      try {
+        c.el.currentTime = Math.max(0, pos - c.off);
+        const r = c.el.play(); active = k;
+        if (r && r.catch) r.catch(() => { active = -1; });
+      } catch (e) { active = -1; }
+    };
+    if (c.el.readyState >= 1) go(); else c.el.addEventListener('loadedmetadata', go, { once: true });
+  }
+
+  function showLine(i) {
+    const L = LINES[i], b = BLOCKS[L.bi], f = b.frames[L.fi];
+    const key = L.bi + ':' + L.fi;
+    const apply = () => frameEl.querySelectorAll('.rv').forEach(el => el.classList.toggle('on', +el.dataset.at <= L.li));
+    if (key !== curFrameKey) {
+      curFrameKey = key;
+      frameEl.classList.add('fading');
+      setTimeout(() => {
+        frameEl.innerHTML = render(f.s);
+        frameEl.classList.remove('fading');
+        requestAnimationFrame(() => requestAnimationFrame(apply));
+      }, cur >= 0 ? 220 : 0);
+    } else apply();
+    capEl.innerHTML = L.html;
+    segs.forEach((s, j) => s.classList.toggle('cur', j === L.bi));
+    cur = i;
+  }
+
+  function paint() {
+    BLOCKS.forEach((b, j) => {
+      const r = Math.min(1, Math.max(0, (pos - b.start) / b.dur));
+      segs[j].firstElementChild.style.width = (r * 100) + '%';
+    });
+    $('time').textContent = `${fmt(pos)} / ${fmt(TOTAL)}`;
+  }
+
+  function seek(p, keepPlaying) {
+    pos = Math.min(Math.max(0, p), TOTAL - 0.01);
+    const i = idxAt(pos);
+    if (i !== cur) showLine(i);
+    paint();
+    if (!keepPlaying) setPlaying(false); else if (playing) startAudio();
+  }
+
+  function tick(now) {
+    if (!playing) return;
+    const dt = Math.min(0.25, (now - last) / 1000); last = now;
+    if (active >= 0) {
+      const c = AUDIO[active];
+      if (c.el.ended || c.el.currentTime >= c.dur - 0.03) {
+        pos = c.off + c.dur;
+        if (active + 1 < AUDIO.length) { pos += 0.001; startAudio(); } else active = -1;
+      } else pos = c.off + c.el.currentTime; // the voice is the clock
+    } else pos += dt;
+    if (pos >= TOTAL) { pos = TOTAL - 0.01; paint(); setPlaying(false); return; }
+    const i = idxAt(pos);
+    if (i !== cur) showLine(i);
+    paint();
+    requestAnimationFrame(tick);
+  }
+
+  function setPlaying(v) {
+    if (v && pos >= TOTAL - 0.05) { pos = 0; showLine(0); }
+    playing = v;
+    $('bigplay').hidden = v;
+    $('playLabel').textContent = v ? 'Pausa' : 'Play';
+    $('play').setAttribute('aria-label', v ? 'Pausar' : 'Reproduzir');
+    $('playIcon').innerHTML = v ? '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>' : '<path d="M6 4l15 8-15 8z"/>';
+    if (v) {
+      last = performance.now(); startAudio();
+      if (musicOn) { Music.play(); Music.level(voiceOn); }
+      requestAnimationFrame(tick);
+    } else { stopAudio(); Music.pause(); }
+  }
+
+  const toggle = (id, fn) => $(id).addEventListener('click', e => {
+    const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+    e.currentTarget.setAttribute('aria-pressed', on); fn(on);
+  });
+  $('play').addEventListener('click', () => setPlaying(!playing));
+  $('bigplay').addEventListener('click', () => setPlaying(true));
+  $('prev').addEventListener('click', () => seek(LINES[Math.max(0, cur - (pos - LINES[cur].start > 1 ? 0 : 1))].start, playing));
+  $('next').addEventListener('click', () => seek(LINES[Math.min(LINES.length - 1, cur + 1)].start, playing));
+  toggle('cc', on => stage.classList.toggle('nocap', !on));
+  toggle('voice', on => { voiceOn = on; if (playing) { if (on) startAudio(); else stopAudio(); Music.level(on); } });
+  toggle('music', on => { musicOn = on; Music.set(on); if (on && playing) { Music.play(); Music.level(voiceOn); } });
+  $('fs').addEventListener('click', () => {
+    try {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else { const r = stage.requestFullscreen && stage.requestFullscreen(); if (r && r.catch) r.catch(() => {}); }
+    } catch (e) {}
+  });
+  document.addEventListener('keydown', e => {
+    if (e.target.closest('button') && (e.key === ' ' || e.key === 'Enter')) return;
+    if (e.key === ' ') { e.preventDefault(); setPlaying(!playing); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); $('next').click(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); $('prev').click(); }
+  });
+
+
+  // ---------- Render mode (MP4 export): draws the exact frame for time t ----------
+  if (location.hash === '#render') {
+    document.documentElement.classList.add('render-mode');
+    let rKey = '', rStart = 0, rLines = [];
+    const ease = p => 1 - Math.pow(1 - p, 3);
+    window.__TOTAL = TOTAL;
+    window.__renderAt = t => {
+      const L = LINES[idxAt(t)], f = BLOCKS[L.bi].frames[L.fi], key = L.bi + ':' + L.fi;
+      if (key !== rKey) {
+        rKey = key; frameEl.innerHTML = render(f.s);
+        rLines = LINES.filter(x => x.bi === L.bi && x.fi === L.fi); rStart = rLines[0].start;
+      }
+      frameEl.style.opacity = Math.max(0, Math.min(1, (t - rStart) / 0.35));
+      frameEl.querySelectorAll('.rv').forEach(el => {
+        const ln = rLines[+el.dataset.at];
+        const t0 = (ln ? ln.start : Infinity) + (parseFloat(el.style.transitionDelay) || 0) / 1000;
+        const p = ease(Math.max(0, Math.min(1, (t - t0) / 0.55)));
+        el.style.transition = 'none'; el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * 14}px)`;
+      });
+      frameEl.querySelectorAll('.spin, .spin-fast, .bob, .pulse').forEach(el => {
+        el.style.animationPlayState = 'paused'; el.style.animationDelay = `${-(t - rStart)}s`;
+      });
+      capEl.innerHTML = L.html;
+    };
+  }
+
+  seek(0, false);
+})();
+</script>
+
+</body></html>
