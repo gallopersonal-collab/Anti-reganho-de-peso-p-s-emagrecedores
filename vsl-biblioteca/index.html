@@ -56,7 +56,7 @@
   .stage:fullscreen { border-radius: 0; border: 0; }
   .frame { position: absolute; inset: 0; transition: opacity .35s ease; }
   .frame.fading { opacity: 0; }
-  .frame svg, .thumb svg { display: block; width: 100%; height: 100%; }
+  .frame > svg, .thumb > svg { display: block; width: 100%; height: 100%; }
   svg text { font-family: var(--body); }
   svg .d { font-family: var(--display); font-weight: 800; letter-spacing: .01em; }
   svg .m { font-family: var(--mono); font-weight: 700; }
@@ -71,6 +71,10 @@
   .pulse { animation: pulse 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
   @keyframes pulse { 50% { transform: scale(1.04); } }
   .all .spin, .all .spin-fast, .all .bob, .all .pulse { animation: none; }
+  .kb { animation: kb 26s linear both; transform-box: fill-box; transform-origin: 50% 45%; }
+  @keyframes kb { from { transform: scale(1); } to { transform: scale(1.12); } }
+  .fvid { position: absolute; object-fit: cover; border-radius: 1.1cqw; border: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 2cqw 5cqw rgba(0,0,0,.55); background: #000; }
 
   .chap {
     position: absolute; left: 2.2cqw; top: 2cqw; display: flex; gap: .8cqw; align-items: center;
@@ -170,9 +174,18 @@
   .render-mode header.top, .render-mode .timeline, .render-mode .controls, .render-mode .bigplay { display: none !important; }
   .render-mode .stage { width: 100vw; height: 100vh; aspect-ratio: auto; border: 0; border-radius: 0; }
   .render-mode .frame { transition: none; }
+  .render-v body { width: 1080px; height: 1920px; overflow: hidden;
+    background: radial-gradient(120% 70% at 50% 40%, #13224A 0%, var(--navy) 50%, #060C1A 100%); }
+  .render-v .stage { position: absolute; top: 590px; left: 0; width: 1080px; height: 608px; }
+  .render-v .vtop { position: absolute; top: 170px; left: 60px; right: 60px; text-align: center; display: grid; gap: 22px; }
+  .render-v .vtop .eyebrow { font-size: 26px; }
+  .render-v .vtop h1 { font-size: 74px; line-height: .98; }
+  .render-v .vtop p { margin: 0; color: var(--silver); font-size: 30px; font-weight: 600; }
+  .render-v #caption { position: absolute; top: 1270px; bottom: auto; left: 60px; width: 960px; transform: none; }
+  .render-v #caption span { font-size: 54px; line-height: 1.38; padding: 4px 16px; border-radius: 10px; }
   @media (prefers-reduced-motion: reduce) {
     .rv, .frame { transition: none; }
-    .spin, .spin-fast, .bob, .pulse { animation: none; }
+    .spin, .spin-fast, .bob, .pulse, .kb { animation: none; }
   }
 </style>
 
@@ -254,35 +267,40 @@
   };
   const svg = inner => `<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img">${inner}</svg>`;
 
+  // ---------- Photo helpers ----------
+  // photo: draws an image into box [x,y,w,h], cropped to crop=[cx,cy,cw,ch] (image pixels), optional slow zoom
+  const photo = (href, iw, ih, crop, box, kb) => {
+    const [x, y, w, h] = box, [cx, cy, cw, ch] = crop || [0, 0, iw, ih];
+    return `<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="${cx} ${cy} ${cw} ${ch}" preserveAspectRatio="xMidYMid slice">` +
+      `<g${kb ? ' class="kb"' : ''}><image href="${href}" width="${iw}" height="${ih}"/></g></svg>`;
+  };
+  // backdrop: blurred, darkened full-frame version of an image
+  const backdrop = (uid, href, iw, ih, crop, op = 0.5) =>
+    `<defs><filter id="bl${uid}" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="26"/></filter></defs>` +
+    `<g filter="url(#bl${uid})" opacity="${op}">${photo(href, iw, ih, crop, [-60, -60, 1720, 1020])}</g>` +
+    `<rect width="1600" height="900" fill="#060C1A" opacity=".45"/>`;
+  // poster: sharp rounded image with slow zoom
+  const poster = (uid, href, iw, ih, px, py, ph) => {
+    const pw = Math.round(ph * iw / ih);
+    return `<defs><clipPath id="pc${uid}"><rect x="${px}" y="${py}" width="${pw}" height="${ph}" rx="18"/></clipPath></defs>` +
+      `<rect x="${px + 10}" y="${py + 18}" width="${pw}" height="${ph}" rx="18" fill="#000" opacity=".45"/>` +
+      `<g clip-path="url(#pc${uid})">${photo(href, iw, ih, null, [px, py, pw, ph], true)}</g>` +
+      `<rect x="${px}" y="${py}" width="${pw}" height="${ph}" rx="18" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="2"/>`;
+  };
+  const shade = (uid, dir = 'b') => dir === 'b'
+    ? `<defs><linearGradient id="sh${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#060C1A" stop-opacity="0"/><stop offset="1" stop-color="#060C1A" stop-opacity=".92"/></linearGradient></defs><rect width="1600" height="900" fill="url(#sh${uid})"/>`
+    : `<defs><linearGradient id="sl${uid}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#060C1A" stop-opacity=".92"/><stop offset=".6" stop-color="#060C1A" stop-opacity=".55"/><stop offset="1" stop-color="#060C1A" stop-opacity=".1"/></linearGradient></defs><rect width="1600" height="900" fill="url(#sl${uid})"/>`;
+  const vid = (src, x, y, w, h) =>
+    `<video class="fvid" muted playsinline preload="auto" style="left:${x / 16}%;top:${y / 9}%;width:${w / 16}%;height:${h / 9}%">` +
+    `<source src="${src}.webm" type="video/webm"><source src="${src}.mp4" type="video/mp4"></video>`;
+
   // ---------- Scene illustrations ----------
   const S = {
-    gancho: () => svg(
-      // clock
-      G(0, `<circle cx="300" cy="360" r="190" fill="${C.panel}" stroke="${C.line}" stroke-width="6"/>` +
-        Array.from({ length: 12 }, (_, i) => { const a = i * Math.PI / 6; return `<line x1="${300 + Math.sin(a) * 160}" y1="${360 - Math.cos(a) * 160}" x2="${300 + Math.sin(a) * 176}" y2="${360 - Math.cos(a) * 176}" stroke="${C.muted}" stroke-width="${i % 3 ? 4 : 8}" stroke-linecap="round"/>`; }).join('') +
-        `<g class="spin" style="transform-origin:300px 360px"><line x1="300" y1="360" x2="300" y2="255" stroke="${C.silver}" stroke-width="12" stroke-linecap="round"/></g>` +
-        `<g class="spin-fast" style="transform-origin:300px 360px"><line x1="300" y1="360" x2="300" y2="220" stroke="${C.amber}" stroke-width="6" stroke-linecap="round"/></g>` +
-        `<circle cx="300" cy="360" r="14" fill="${C.amber}"/>` ) +
-      // paper stack
-      G(0, `<rect x="600" y="160" width="330" height="430" rx="10" fill="#C3CEDF" transform="rotate(-6 765 375)"/>` +
-        `<rect x="600" y="160" width="330" height="430" rx="10" fill="#D9E1EE" transform="rotate(3 765 375)"/>` +
-        `<rect x="600" y="160" width="330" height="430" rx="10" fill="${C.paper}"/>` +
-        `<rect x="600" y="160" width="330" height="70" rx="10" fill="${C.ice}"/>` +
-        [0, 1, 2, 3, 4, 5, 6].map(i => `<rect x="625" y="${260 + i * 44}" width="${[240, 200, 260, 180, 230, 150, 210][i]}" height="14" rx="7" fill="#A9B6CC"/><rect x="${880}" y="${258 + i * 44}" width="26" height="18" rx="4" fill="#CBD4E3"/>`).join('')) +
-      // alternatives
-      // phone
-      G(2, `<rect x="1120" y="150" width="280" height="500" rx="40" fill="#0B1428" stroke="${C.line}" stroke-width="6"/>` +
-        `<rect x="1138" y="190" width="244" height="420" rx="14" fill="#0E2A24"/>` +
-        `<rect x="1138" y="190" width="244" height="56" rx="14" fill="#123A31"/>` +
-        `<rect x="1180" y="290" width="186" height="120" rx="14" fill="#1F5C4B"/>` +
-        pdfIcon(1196, 306, 56, 72, C.paper, C.red) +
-        T(1264, 336, 'Treino.pdf', { size: 20, fill: C.text, weight: 700 }) +
-        T(1264, 362, '2 páginas', { size: 17, fill: '#A7C9BE' }) +
-        T(1356, 398, '22:51', { size: 15, fill: '#A7C9BE', anchor: 'end' })) +
-      G(3, T(1356, 436, '✓✓ visualizado', { size: 18, fill: C.muted, anchor: 'end' }) +
-        `<rect x="1160" y="470" width="200" height="44" rx="12" fill="#16392F" stroke="#2F5C4F" stroke-dasharray="6 6" stroke-width="2"/>` +
-        T(1260, 499, 'sem resposta', { size: 18, fill: '#7FA396', anchor: 'middle' })) +
-      G(4, T(800, 700, 'ISSO ACABA HOJE.', { size: 78, anchor: 'middle', cls: 'd', fill: C.amber }))
+    gancho: (uid) => svg(
+      photo('img/b1-personal-noite.jpg', 1254, 1254, [0, 110, 1254, 705], [0, 0, 1600, 900], true) +
+      shade(uid, 'b') +
+      G(4, `<rect x="560" y="628" width="480" height="4" rx="2" fill="${C.amber}"/>` +
+        T(800, 710, 'ISSO ACABA HOJE.', { size: 84, anchor: 'middle', cls: 'd', fill: C.amber }))
     ),
 
     dor: () => {
@@ -341,26 +359,23 @@
       G(5, T(360, 580, 'noite após noite, montando treino do zero', { size: 22, anchor: 'middle', fill: C.silver, style: 'font-style:italic' }))
     ),
 
-    biblioteca: () => {
-      const cols = [C.ice, C.silver, C.amber, '#9FD3C7', '#E7A0C1'];
-      let tiles = '';
-      for (let i = 0; i < 68; i++) {
-        const c = i % 17, r = Math.floor(i / 17), x = 109 + c * 82, y = 200 + r * 86;
-        tiles += `<g class="rv" data-at="1" style="transition-delay:${i * 12}ms">${pdfIcon(x, y, 70, 74, C.paper, cols[(c + r) % 5])}</g>`;
-      }
-      return svg(
-        G(0, T(109, 118, 'BIBLIOTECA DE TREINOS', { size: 64, cls: 'd', fill: C.text }) +
-          T(109, 162, 'LUCRATIVOS E PERSONALIZÁVEIS PRO™', { size: 30, cls: 'd', fill: C.ice })) +
-        G(1, T(1491, 130, '68', { size: 104, cls: 'd', fill: C.amber, anchor: 'end' }) +
-          T(1491, 164, 'programas completos', { size: 22, fill: C.silver, anchor: 'end', weight: 600 })) +
-        tiles +
-        G(3, chipRow(['Masculino', 'Feminino', 'Academia', 'Casa', 'Iniciante', 'Intermediário', 'Avançado'], 556, { size: 22 }, 10)) +
-        G(4, chipRow(['Emagrecimento', 'Hipertrofia', 'Definição', 'Saúde', 'Performance'], 612, { size: 22, color: C.ice, stroke: C.ice, fill: 'rgba(127,168,255,.1)' }, 10)) +
-        G(5, T(800, 700, 'Fisiologia do exercício · Biomecânica · Progressão · Segurança', { size: 26, anchor: 'middle', fill: C.silver, weight: 600 })) +
-        G(6, `<g transform="rotate(-4 1330 700)"><rect x="1190" y="660" width="290" height="60" rx="8" fill="none" stroke="${C.amber}" stroke-width="4"/>` +
-          T(1335, 701, 'CIÊNCIA APLICADA', { size: 32, cls: 'd', fill: C.amber, anchor: 'middle' }) + `</g>`)
-      );
-    },
+    biblioteca: (uid) => svg(
+      backdrop(uid, 'img/b4-biblioteca.jpg', 1145, 1374, null, 0.55) +
+      shade(uid, 'l') +
+      G(0, poster(uid, 'img/b4-biblioteca.jpg', 1145, 1374, 930, 40, 700)) +
+      G(0, T(90, 140, 'BIBLIOTECA DE TREINOS', { size: 60, cls: 'd', fill: C.text }) +
+        T(90, 184, 'LUCRATIVOS E PERSONALIZÁVEIS PRO™', { size: 28, cls: 'd', fill: C.ice })) +
+      G(1, T(90, 350, '68', { size: 160, cls: 'd', fill: C.amber }) +
+        T(290, 300, 'programas completos,', { size: 30, fill: C.text, weight: 700 }) +
+        T(290, 340, 'prontos e editáveis', { size: 30, fill: C.silver, weight: 600 })) +
+      G(3, chipRow(['Masculino', 'Feminino', 'Academia', 'Casa'], 400, { x: 90, size: 20 }, 10) +
+        chipRow(['Iniciante', 'Intermediário', 'Avançado'], 452, { x: 90, size: 20 }, 10)) +
+      G(4, chipRow(['Emagrecimento', 'Hipertrofia', 'Definição'], 516, { x: 90, size: 20, color: C.ice, stroke: C.ice, fill: 'rgba(127,168,255,.12)' }, 10) +
+        chipRow(['Saúde', 'Performance'], 568, { x: 90, size: 20, color: C.ice, stroke: C.ice, fill: 'rgba(127,168,255,.12)' }, 10)) +
+      G(5, T(90, 660, 'Fisiologia · Biomecânica · Progressão · Segurança', { size: 24, fill: C.silver, weight: 600 })) +
+      G(6, `<g transform="rotate(-3 240 712)"><rect x="92" y="684" width="296" height="58" rx="8" fill="rgba(6,12,26,.6)" stroke="${C.amber}" stroke-width="4"/>` +
+        T(240, 725, 'CIÊNCIA APLICADA', { size: 32, cls: 'd', fill: C.amber, anchor: 'middle' }) + `</g>`)
+    ),
 
     codigo: () => {
       const segs = [['HIP', 'Hipertrofia'], ['M', 'Masculino'], ['30-39', '30 a 39 anos'], ['ACA', 'Academia'], ['08S', '8 semanas']];
@@ -441,6 +456,20 @@
       );
     },
 
+    custoVideo: (uid) => svg(
+      backdrop(uid, 'img/b6-agenda.jpg', 1248, 832, [420, 170, 828, 466], 0.6) +
+      shade(uid, 'l') +
+      G(0, T(110, 300, 'UMA PERGUNTA', { size: 84, cls: 'd', fill: C.text }) +
+        T(110, 384, 'DIRETA.', { size: 84, cls: 'd', fill: C.amber })) +
+      G(1, TL(110, 470, ['Quantas horas por semana', 'você gasta montando', 'treino do zero?'], { size: 42, weight: 700, lh: 1.22 }))
+    ) + vid('video/b6-pergunta', 1060, 40, 394, 700),
+
+    custo2: (uid) => S.custo().replace('<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img">',
+      '<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img">' +
+      `<g opacity=".28">${photo('img/b6-agenda.jpg', 1248, 832, [420, 170, 828, 466], [0, 0, 1600, 900], true)}</g>` +
+      `<rect width="1600" height="900" fill="#060C1A" opacity=".35"/>`)
+      .replace(/data-at="(\d+)"/g, (m, k) => `data-at="${Math.max(0, k - 2)}"`),
+
     custo: () => {
       const gx = h => 160 + h * 106.67;
       const ticks = Array.from({ length: 13 }, (_, h) => `<line x1="${gx(h)}" y1="300" x2="${gx(h)}" y2="${h % 2 ? 310 : 318}" stroke="${C.muted}" stroke-width="2"/>` + (h % 2 ? '' : T(gx(h), 346, h + 'h', { size: 20, anchor: 'middle', fill: C.muted, cls: 'm' }))).join('');
@@ -454,8 +483,8 @@
         G(3, `<rect x="160" y="250" width="${gx(10) - 160}" height="46" rx="23" fill="rgba(224,100,90,.55)"/>`) +
         mark(10, '10h+', C.red, 3) +
         G(4, `<rect x="160" y="400" width="1280" height="130" rx="18" fill="${C.panel}" stroke="${C.line}" stroke-width="2"/>` +
-          T(210, 482, '10 h/semana  ×  R$ 80/h  ×  4,3 semanas', { size: 40, fill: C.silver, cls: 'm' })) +
-        G(5, T(1400, 482, '= R$ 3.440/mês', { size: 44, fill: C.red, cls: 'm', anchor: 'end' })) +
+          T(200, 482, '10 h/semana × R$ 80/h × 4,3 semanas', { size: 36, fill: C.silver, cls: 'm' })) +
+        G(5, T(1410, 482, '= R$ 3.440/mês', { size: 42, fill: C.red, cls: 'm', anchor: 'end' })) +
         G(6, T(160, 620, 'TEMPO LIBERADO', { size: 40, cls: 'd', fill: C.amber }) +
           `<path d="M430 606h60m-16-14l16 14-16 14" stroke="${C.amber}" stroke-width="4" fill="none" stroke-linecap="round"/>` +
           T(510, 620, 'mais alunos · mais vendas · crescimento', { size: 30, fill: C.text, weight: 600 })) +
@@ -479,25 +508,24 @@
       }).join(''));
     },
 
-    prova: () => {
+    prova: (uid) => {
       const rows = [['↓', 'Redução drástica de tempo montando treino'], ['↑', 'Aumento na percepção de valor pelo aluno'],
-        ['↑', 'Mais alunos atendidos sem trabalhar mais horas'], ['↑', 'Consultoria online mais escalável'], ['↑', 'Entrega mais profissional, que justifica cobrar mais']];
+        ['↑', 'Mais alunos sem trabalhar mais horas'], ['↑', 'Consultoria online mais escalável'], ['↑', 'Entrega profissional que justifica cobrar mais']];
       return svg(
-        G(0, T(160, 120, 'O QUE OS PERSONAL TRAINERS RELATAM', { size: 56, cls: 'd', fill: C.text })) +
-        rows.map(([ic, t], i) => G(i + 1, `<rect x="160" y="${160 + i * 104}" width="1280" height="86" rx="16" fill="${C.panel}" stroke="${C.line}" stroke-width="2"/>` +
-          `<circle cx="210" cy="${203 + i * 104}" r="28" fill="${ic === '↓' ? C.ice : C.amber}"/>` +
-          T(210, 216 + i * 104, ic, { size: 38, anchor: 'middle', fill: C.ink, weight: 700 }) +
-          T(262, 214 + i * 104, t, { size: 32, fill: C.text, weight: 600 }))).join('')
+        backdrop(uid, 'img/b8-antes-depois.jpg', 941, 1672, [0, 350, 941, 530], 0.5) +
+        shade(uid, 'l') +
+        G(0, poster(uid, 'img/b8-antes-depois.jpg', 941, 1672, 1150, 40, 700)) +
+        G(0, T(90, 120, 'O QUE OS PERSONAL TRAINERS RELATAM', { size: 50, cls: 'd', fill: C.text })) +
+        rows.map(([ic, t], i) => G(i + 1, `<rect x="90" y="${160 + i * 104}" width="950" height="86" rx="16" fill="rgba(22,34,63,.82)" stroke="${C.line}" stroke-width="2"/>` +
+          `<circle cx="140" cy="${203 + i * 104}" r="28" fill="${ic === '↓' ? C.ice : C.amber}"/>` +
+          T(140, 216 + i * 104, ic, { size: 38, anchor: 'middle', fill: C.ink, weight: 700 }) +
+          T(192, 214 + i * 104, t, { size: 30, fill: C.text, weight: 600 }))).join('')
       );
     },
 
-    oferta: () => svg(
-      G(0, [2, 1, 0].map(i => `<g transform="translate(${170 + i * 34} ${150 + i * 28})"><rect width="360" height="460" rx="14" fill="${[C.navy, '#1A2A52', '#223566'][i]}" stroke="${C.ice}" stroke-width="${i ? 1 : 3}"/></g>`).join('') +
-        T(210, 250, 'BIBLIOTECA', { size: 56, cls: 'd', fill: C.text }) +
-        T(210, 300, 'DE TREINOS PRO™', { size: 40, cls: 'd', fill: C.ice }) +
-        T(210, 470, '68', { size: 150, cls: 'd', fill: C.amber }) +
-        T(210, 512, 'programas editáveis', { size: 26, fill: C.silver, weight: 600 }) +
-        T(210, 552, '+ manual + curso', { size: 24, fill: C.muted })) +
+    oferta: (uid) => svg(
+      backdrop(uid, 'img/b9-oferta.jpg', 1254, 1254, [0, 280, 1254, 705], 0.5) +
+      G(0, poster(uid, 'img/b9-oferta.jpg', 1254, 1254, 70, 70, 620)) +
       G(1, TL(740, 190, ['Investimento recuperado', 'no primeiro atendimento', 'em que você economiza tempo.'], { size: 40, weight: 700, lh: 1.2 })) +
       G(2, `<g class="pulse"><rect x="740" y="380" width="720" height="112" rx="56" fill="${C.amber}"/>` +
         T(1100, 450, 'QUERO MINHA BIBLIOTECA PRO', { size: 44, anchor: 'middle', cls: 'd', fill: C.ink }) + `</g>` +
@@ -583,9 +611,10 @@
         'Você não precisa saber editar PDF. O curso ensina. Funciona com <b>Canva</b> e editores gratuitos.'] }] },
     { n: 6, t: 'O custo de não ter', tc: '10:00 – 11:30', dir: 'Câmera, tom mais firme.',
       edit: 'Câmera mais fechada. A conta aparece na tela enquanto ele fala. R$ 80/h é exemplo: ajuste para o valor médio da hora do seu público.',
-      frames: [{ s: 'custo', lines: [
+      frames: [{ s: 'custoVideo', lines: [
         'Deixa eu te fazer uma pergunta direta.',
-        'Quantas horas você gasta por semana montando treino do zero?',
+        'Quantas horas você gasta por semana montando treino do zero?'] },
+      { s: 'custo2', lines: [
         'Duas horas? Cinco horas?',
         'Para alguns profissionais que eu conheço, são <b>mais de dez horas semanais</b> só nisso.',
         'Agora multiplica essas horas pelo seu valor de hora.',
@@ -747,6 +776,8 @@
       setTimeout(() => {
         frameEl.innerHTML = render(f.s);
         frameEl.classList.remove('fading');
+        const v = frameEl.querySelector('video');
+        if (v) { v.currentTime = Math.max(0, pos - LINES.find(x => x.bi === L.bi && x.fi === L.fi).start); if (playing) v.play().catch(() => {}); }
         requestAnimationFrame(() => requestAnimationFrame(apply));
       }, cur >= 0 ? 220 : 0);
     } else apply();
@@ -799,7 +830,8 @@
       last = performance.now(); startAudio();
       if (musicOn) { Music.play(); Music.level(voiceOn); }
       requestAnimationFrame(tick);
-    } else { stopAudio(); Music.pause(); }
+      frameEl.querySelectorAll('video').forEach(v => v.play().catch(() => {}));
+    } else { stopAudio(); Music.pause(); frameEl.querySelectorAll('video').forEach(v => v.pause()); }
   }
 
   const toggle = (id, fn) => $(id).addEventListener('click', e => {
@@ -828,8 +860,15 @@
 
 
   // ---------- Render mode (MP4 export): draws the exact frame for time t ----------
-  if (location.hash === '#render') {
+  if (location.hash === '#render' || location.hash === '#render-v') {
     document.documentElement.classList.add('render-mode');
+    if (location.hash === '#render-v') {
+      document.documentElement.classList.add('render-v');
+      const top = document.createElement('div'); top.className = 'vtop';
+      top.innerHTML = '<div class="eyebrow">Instituto Gallo Personal</div><h1>Biblioteca de Treinos <span>Pro™</span></h1><p>Prof. José Carlos Gallo</p>';
+      document.querySelector('.wrap').appendChild(top);
+      document.querySelector('.wrap').appendChild(document.getElementById('caption'));
+    }
     let rKey = '', rStart = 0, rLines = [];
     const ease = p => 1 - Math.pow(1 - p, 3);
     window.__TOTAL = TOTAL;
@@ -846,10 +885,19 @@
         const p = ease(Math.max(0, Math.min(1, (t - t0) / 0.55)));
         el.style.transition = 'none'; el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * 14}px)`;
       });
-      frameEl.querySelectorAll('.spin, .spin-fast, .bob, .pulse').forEach(el => {
+      frameEl.querySelectorAll('.spin, .spin-fast, .bob, .pulse, .kb').forEach(el => {
         el.style.animationPlayState = 'paused'; el.style.animationDelay = `${-(t - rStart)}s`;
       });
       capEl.innerHTML = L.html;
+      const v = frameEl.querySelector('video');
+      if (!v) return;
+      return (async () => {
+        if (v.readyState < 2) await new Promise(r => { v.addEventListener('loadeddata', r, { once: true }); setTimeout(r, 3000); });
+        const want = Math.max(0, Math.min(t - rStart, (v.duration || 5) - 0.05));
+        if (Math.abs(v.currentTime - want) > 0.001) {
+          await new Promise(r => { v.addEventListener('seeked', r, { once: true }); v.currentTime = want; setTimeout(r, 2000); });
+        }
+      })();
     };
   }
 
