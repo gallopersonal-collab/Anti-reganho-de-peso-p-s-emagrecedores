@@ -741,32 +741,42 @@
   // ---------- Playback ----------
   let cur = -1, curFrameKey = '', playing = false, pos = 0, last = 0;
   let voiceOn = true, musicOn = true, active = -1; // active = audio chunk currently playing
-  AUDIO.forEach(c => {
-    c.el = new Audio(); c.el.preload = 'auto';
-    c.el.addEventListener('error', () => { c.bad = true; });
+  // One shared <audio> element for every block: phones only let an element that a tap started keep playing,
+  // so a fresh element per block went silent (and froze the clock) at the first block change.
+  const V = new Audio(); V.preload = 'auto';
+  let loaded = -1, synced = false; // loaded = block whose file is in V; synced = V positioned and driving the clock
+  V.addEventListener('error', () => { if (loaded >= 0) AUDIO[loaded].bad = true; });
+  function setChunk(k, cb) {
+    if (loaded === k && V.readyState >= 1) { if (cb) cb(); return; }
+    loaded = k; V.src = AUDIO[k].url;
+    if (cb) V.addEventListener('loadedmetadata', () => { if (loaded === k) cb(); }, { once: true });
+  }
+  AUDIO.forEach((c, k) => {
+    c.url = c.file;
     // Load into memory so seeking works on any host; fall back to the plain file URL.
-    fetch(c.file).then(r => r.ok ? r.blob() : Promise.reject()).then(bl => { c.el.src = URL.createObjectURL(bl); })
-      .catch(() => { c.el.src = c.file; });
+    fetch(c.file).then(r => r.ok ? r.blob() : Promise.reject()).then(bl => { c.url = URL.createObjectURL(bl); })
+      .catch(() => {}).then(() => { if (k === 0 && loaded < 0) setChunk(0); });
   });
 
   const idxAt = p => { let i = 0; while (i < LINES.length - 1 && LINES[i + 1].start <= p + 1e-6) i++; return i; };
   const chunkAt = p => { let k = 0; while (k < AUDIO.length - 1 && AUDIO[k + 1].off <= p + 1e-6) k++; return k; };
 
-  function stopAudio() { AUDIO.forEach(c => { try { c.el.pause(); } catch (e) {} }); active = -1; }
+  function stopAudio() { try { V.pause(); } catch (e) {} active = -1; synced = false; }
   function startAudio() {
     stopAudio();
     if (!voiceOn || !playing) return;
     const k = chunkAt(pos), c = AUDIO[k];
     if (c.bad) return;
-    const go = () => {
+    active = k;
+    setChunk(k, () => {
       if (!playing || !voiceOn || chunkAt(pos) !== k) return;
-      try {
-        c.el.currentTime = Math.max(0, pos - c.off);
-        const r = c.el.play(); active = k;
-        if (r && r.catch) r.catch(() => { active = -1; });
-      } catch (e) { active = -1; }
-    };
-    if (c.el.readyState >= 1) go(); else c.el.addEventListener('loadedmetadata', go, { once: true });
+      try { V.currentTime = Math.max(0, pos - c.off); } catch (e) {}
+      synced = true;
+    });
+    try {
+      const r = V.play();
+      if (r && r.catch) r.catch(() => { if (active === k) { active = -1; synced = false; } });
+    } catch (e) { active = -1; synced = false; }
   }
 
   function showLine(i) {
@@ -808,12 +818,13 @@
   function tick(now) {
     if (!playing) return;
     const dt = Math.min(0.25, (now - last) / 1000); last = now;
-    if (active >= 0) {
+    if (active >= 0 && synced) {
       const c = AUDIO[active];
-      if (c.el.ended || c.el.currentTime >= c.dur - 0.03) {
+      if (V.ended || V.currentTime >= c.dur - 0.03) {
         pos = c.off + c.dur;
-        if (active + 1 < AUDIO.length) { pos += 0.001; startAudio(); } else active = -1;
-      } else pos = c.off + c.el.currentTime; // the voice is the clock
+        if (active + 1 < AUDIO.length) { pos += 0.001; startAudio(); } else { active = -1; synced = false; }
+      } else if (!V.paused && V.readyState >= 2) pos = c.off + V.currentTime; // the voice is the clock
+      else pos += dt; // audio not running (blocked or buffering): keep the picture moving
     } else pos += dt;
     if (pos >= TOTAL) { pos = TOTAL - 0.01; paint(); setPlaying(false); return; }
     const i = idxAt(pos);
@@ -841,6 +852,7 @@
     const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
     e.currentTarget.setAttribute('aria-pressed', on); fn(on);
   });
+  document.addEventListener('pointerdown', () => { if (playing && voiceOn && (!synced || V.paused)) startAudio(); });
   $('play').addEventListener('click', () => setPlaying(!playing));
   $('bigplay').addEventListener('click', () => setPlaying(true));
   $('prev').addEventListener('click', () => seek(LINES[Math.max(0, cur - (pos - LINES[cur].start > 1 ? 0 : 1))].start, playing));
