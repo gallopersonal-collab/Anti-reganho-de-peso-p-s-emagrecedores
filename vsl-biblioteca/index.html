@@ -663,7 +663,7 @@
   ];
 
   // ---------- Narration: audio chunks + per-line start times (aligned to the pauses in the voice) ----------
-  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 22.682, "starts": [0.0, 2.09, 9.57, 14.2, 18.4]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 41.804, "starts": [0.0, 1.57, 8.71, 14.87, 20.71, 24.57, 30.08, 34.39, 38.94]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 49.852, "starts": [0.0, 2.94, 10.52, 17.3, 20.22, 26.0, 34.3, 38.7, 42.18, 46.12]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 40.88, "starts": [0.0, 3.72, 9.74, 10.65, 14.89, 18.39, 23.45, 25.75, 31.65, 35.35]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 42.633, "starts": [0.0, 2.06, 6.43, 12.28, 17.21, 19.68, 27.21, 33.1, 36.79]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 36.69, "starts": [0.0, 1.94, 5.94, 8.0, 12.31, 15.49, 20.44, 28.71]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 35.043, "starts": [0.0, 1.47, 8.73, 10.84, 15.43, 20.57, 22.21, 26.94, 28.82]}, {"file": "audio/b08.mp3", "blocks": [8], "dur": 23.375, "starts": [0.0, 4.44, 8.21, 11.5, 15.38, 18.45]}, {"file": "audio/b09.mp3", "blocks": [9], "dur": 23.619, "starts": [0.0, 6.06, 10.0, 15.14, 17.67]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 13.528, "starts": [0.0, 3.3, 5.57, 12.18]}];
+  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 22.682, "starts": [0.0, 2.39, 9.58, 14.36, 18.5]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 41.804, "starts": [0.0, 1.76, 8.83, 14.98, 21.07, 24.57, 30.08, 34.38, 38.92]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 49.852, "starts": [0.0, 2.75, 10.43, 17.3, 20.1, 26.57, 34.53, 38.67, 42.21, 46.11]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 40.88, "starts": [0.0, 3.88, 9.88, 10.65, 14.89, 18.47, 23.47, 25.81, 31.65, 35.53]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 42.633, "starts": [0.0, 2.06, 6.6, 12.42, 17.29, 19.77, 27.41, 33.04, 36.84]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 36.69, "starts": [0.0, 2.11, 5.95, 8.14, 12.55, 15.6, 20.52, 28.67]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 35.043, "starts": [0.0, 1.54, 8.76, 11.55, 15.49, 20.67, 22.21, 27.43, 28.82]}, {"file": "audio/b08.mp3", "blocks": [8], "dur": 23.375, "starts": [0.0, 4.9, 8.53, 11.62, 15.49, 18.93]}, {"file": "audio/b09.mp3", "blocks": [9], "dur": 23.619, "starts": [0.0, 6.43, 10.22, 15.31, 17.71]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 13.528, "starts": [0.0, 3.39, 5.64, 12.27]}];
   const plain = s => s.replace(/<[^>]+>/g, '');
   const LINES = []; let t = 0, frameCount = 0;
   const flat = BLOCKS.flatMap((b, bi) => b.frames.flatMap((f, fi) => f.lines.map((html, li) => ({ bi, fi, li, html, text: plain(html) }))));
@@ -740,6 +740,7 @@
 
   // ---------- Playback ----------
   let cur = -1, curFrameKey = '', playing = false, pos = 0, last = 0;
+  let curVid = null, curVidStart = 0; // video of the current scene, kept on the voice clock
   let voiceOn = true, musicOn = true, active = -1; // active = audio chunk currently playing
   // One shared <audio> element for every block: phones only let an element that a tap started keep playing,
   // so a fresh element per block went silent (and froze the clock) at the first block change.
@@ -790,7 +791,8 @@
         frameEl.innerHTML = render(f.s);
         frameEl.classList.remove('fading');
         const v = frameEl.querySelector('video');
-        if (v) { v.currentTime = Math.max(0, pos - LINES.find(x => x.bi === L.bi && x.fi === L.fi).start); if (playing) v.play().catch(() => {}); }
+        curVid = v; curVidStart = LINES.find(x => x.bi === L.bi && x.fi === L.fi).start;
+        if (v) { v.currentTime = Math.max(0, pos - curVidStart); if (playing) v.play().catch(() => {}); }
         requestAnimationFrame(() => requestAnimationFrame(apply));
       }, cur >= 0 ? 220 : 0);
     } else apply();
@@ -826,6 +828,11 @@
       } else if (!V.paused && V.readyState >= 2) pos = c.off + V.currentTime; // the voice is the clock
       else pos += dt; // audio not running (blocked or buffering): keep the picture moving
     } else pos += dt;
+    if (curVid && playing) {
+      const want = Math.max(0, pos - curVidStart);
+      if (curVid.paused) curVid.play().catch(() => {});
+      else if (Math.abs(curVid.currentTime - want) > 0.2 && want < (curVid.duration || 1e9)) curVid.currentTime = want;
+    }
     if (pos >= TOTAL) { pos = TOTAL - 0.01; paint(); setPlaying(false); return; }
     const i = idxAt(pos);
     if (i !== cur) showLine(i);
