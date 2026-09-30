@@ -341,7 +341,7 @@
     cred: (uid) => svg(
       `<defs><clipPath id="ph${uid}"><rect x="100" y="100" width="520" height="580" rx="24"/></clipPath>` +
       `<linearGradient id="gr${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#081021" stop-opacity="0"/><stop offset="1" stop-color="#081021" stop-opacity=".85"/></linearGradient></defs>` +
-      G(0, `<image href="foto-gallo.jpg" x="100" y="100" width="520" height="580" preserveAspectRatio="xMidYMid slice" clip-path="url(#ph${uid})"/>` +
+      G(0, `<g clip-path="url(#ph${uid})">${photo('img/gallo-retrato.jpg', 941, 1672, [0, 10, 941, 1049], [100, 100, 520, 580], true)}</g>` +
         `<rect x="100" y="100" width="520" height="580" rx="24" fill="url(#gr${uid})"/>` +
         `<rect x="100" y="100" width="520" height="580" rx="24" fill="none" stroke="${C.line}" stroke-width="3"/>`) +
       G(0, T(690, 170, 'PROF. JOSÉ CARLOS GALLO', { size: 58, cls: 'd', fill: C.text })) +
@@ -534,19 +534,22 @@
       G(4, T(740, 700, 'Trabalhe com um sistema, não contra o relógio.', { size: 30, fill: C.ice, weight: 700 }))
     ),
 
-    fechamento: () => svg(
+    fechamento: (uid) => svg(
+      backdrop(uid, 'img/gallo-retrato.jpg', 941, 1672, [0, 300, 941, 530], 0.35) +
+      G(0, poster(uid, 'img/gallo-retrato.jpg', 941, 1672, 1130, 40, 650)) +
+      G(2, `<defs><linearGradient id="fg${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#060C1A" stop-opacity="0"/><stop offset="1" stop-color="#060C1A" stop-opacity=".92"/></linearGradient></defs>` +
+        `<rect x="1130" y="490" width="366" height="200" fill="url(#fg${uid})"/>` +
+        T(1313, 646, 'PROF. JOSÉ CARLOS GALLO', { size: 34, anchor: 'middle', cls: 'd', fill: C.text }) +
+        T(1313, 676, 'Instituto Gallo Personal', { size: 22, anchor: 'middle', fill: C.silver, weight: 600 })) +
       G(0, T(110, 200, 'VOCÊ ESTUDOU PARA ISSO.', { size: 46, cls: 'd', fill: C.silver }) +
         T(110, 262, 'VOCÊ TEM O CONHECIMENTO.', { size: 46, cls: 'd', fill: C.silver })) +
       G(1, T(110, 370, 'AGORA VOCÊ VAI TER', { size: 60, cls: 'd', fill: C.text }) +
         T(110, 450, 'O SISTEMA.', { size: 84, cls: 'd', fill: C.amber })) +
-      G(2, `<rect x="880" y="130" width="600" height="252" rx="16" fill="#030A1E" stroke="${C.line}" stroke-width="2"/>` +
-        `<image href="logo-gallo.jpg" x="895" y="160" width="570" height="239" preserveAspectRatio="xMidYMid meet"/>` +
-        T(1180, 440, 'Prof. José Carlos Gallo', { size: 32, anchor: 'middle', fill: C.text, weight: 700 }) +
-        T(1180, 478, 'Instituto Gallo Personal', { size: 24, anchor: 'middle', fill: C.muted })) +
-      G(3, T(1180, 530, '@gallopersonalsystems', { size: 30, anchor: 'middle', fill: C.ice, cls: 'm' }) +
-        `<g class="pulse"><rect x="110" y="540" width="620" height="96" rx="48" fill="${C.amber}"/>` +
-        T(420, 602, 'QUERO MINHA BIBLIOTECA PRO', { size: 38, anchor: 'middle', cls: 'd', fill: C.ink }) + `</g>` +
-        `<g class="bob"><path d="M420 650v40m-18-18l18 18 18-18" stroke="${C.amber}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`)
+      G(2, `<rect x="110" y="490" width="340" height="142" rx="14" fill="#030A1E" stroke="${C.line}" stroke-width="2"/>` +
+        `<image href="logo-gallo.jpg" x="120" y="500" width="320" height="122" preserveAspectRatio="xMidYMid meet"/>`) +
+      G(3, T(480, 572, '@gallopersonalsystems', { size: 26, fill: C.ice, cls: 'm' }) +
+        `<g class="pulse"><rect x="110" y="652" width="620" height="86" rx="43" fill="${C.amber}"/>` +
+        T(420, 708, 'QUERO MINHA BIBLIOTECA PRO', { size: 36, anchor: 'middle', cls: 'd', fill: C.ink }) + `</g>`)
     )
   };
 
