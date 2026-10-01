@@ -341,6 +341,21 @@
       );
     },
 
+    dorFoto: (uid) => svg(
+      backdrop(uid, 'img/b2-dor.jpg', 1024, 1536, null, 0.5) +
+      shade(uid, 'l') +
+      G(0, poster(uid, 'img/b2-dor.jpg', 1024, 1536, 930, 40, 820)) +
+      G(0, T(100, 290, 'EU SEI', { size: 110, cls: 'd', fill: C.text }) +
+        T(100, 400, 'EXATAMENTE', { size: 110, cls: 'd', fill: C.text }) +
+        T(100, 510, 'COMO É.', { size: 110, cls: 'd', fill: C.amber })) +
+      G(1, T(100, 600, '22H', { size: 120, cls: 'd', fill: C.amber }) +
+        T(340, 562, 'atendimento encerrado,', { size: 36, fill: C.text, weight: 700 }) +
+        T(340, 610, 'computador aberto,', { size: 36, fill: C.text, weight: 700 }) +
+        T(340, 658, 'treino de amanhã do zero.', { size: 36, fill: C.silver, weight: 600 }))
+    ),
+
+    dor2: () => S.dor().replace(/data-at="(\d+)"/g, (m, k) => `data-at="${Math.max(0, k - 2)}"`),
+
     cred: (uid) => svg(
       G(0, T(690, 170, 'PROF. JOSÉ CARLOS GALLO', { size: 58, cls: 'd', fill: C.text })) +
       G(1, T(690, 350, '36+', { size: 170, cls: 'd', fill: C.ice }) +
@@ -414,16 +429,12 @@
       return svg(
         G(0, T(110, 130, 'O QUE VOCÊ RECEBE', { size: 64, cls: 'd', fill: C.text })) +
         items.map(([t, at], i) => G(at, check(110, 200 + i * 86) + TL(162, 226 + i * 86, wrap(t, 34), { size: 30, weight: 600, lh: 1.1 }))).join('') +
-        // PDF mockup
-        G(0, `<rect x="1000" y="80" width="440" height="590" rx="14" fill="${C.paper}"/>` +
-          `<rect x="1000" y="80" width="440" height="120" rx="14" fill="${C.navy}"/>` +
-          `<rect x="1000" y="180" width="440" height="20" fill="${C.navy}"/>` +
-          [0, 1, 2, 3, 4, 5].map(j => `<rect x="1030" y="${360 + j * 38}" width="${[300, 240, 330, 200, 280, 250][j]}" height="14" rx="7" fill="#A9B6CC"/>`).join('') +
-          T(1030, 336, 'HIP-M-30-39-ACA-08S', { size: 22, cls: 'm', fill: C.navy })) +
-        `<g>${ph(1024, 100, 150, 80, 'SEU LOGO')}${ph(1190, 104, 226, 34, 'Seu nome · CREF', 6)}${ph(1190, 146, 170, 30, 'Sua foto ✓', 6)}` +
-        `${ph(1300, 222, 116, 116, 'Aluno', 58)}${ph(1030, 600, 180, 44, '@seuinsta', 22)}${ph(1224, 600, 190, 44, 'WhatsApp', 22)}</g>` +
-        G(4, `<g transform="rotate(-8 1220 700)"><rect x="1070" y="680" width="300" height="62" rx="8" fill="${C.ink}" stroke="${C.amber}" stroke-width="4"/>` +
-          T(1220, 723, 'SUA MARCA', { size: 36, anchor: 'middle', cls: 'd', fill: C.amber }) + `</g>`)
+        G(3, T(110, 610, 'VOCÊ PERSONALIZA COM:', { size: 28, cls: 'd', fill: C.silver }) +
+          chipRow(['Seu logo', 'Seu nome', 'Sua foto'], 630, { x: 110, size: 24, color: C.amber, stroke: C.amber, fill: 'rgba(244,182,63,.1)' }, 12) +
+          chipRow(['@seuinsta', 'WhatsApp', 'Foto do aluno'], 686, { x: 110, size: 24, color: C.amber, stroke: C.amber, fill: 'rgba(244,182,63,.1)' }, 12))
+      ) + vid('video/b5-programas', 1020, 50, 420, 757, 'border-radius:1.2cqw') + ovl(
+        G(4, `<g transform="rotate(-8 1230 560)"><rect x="1070" y="528" width="320" height="66" rx="8" fill="${C.ink}" stroke="${C.amber}" stroke-width="4"/>` +
+          T(1230, 574, 'SUA MARCA', { size: 38, anchor: 'middle', cls: 'd', fill: C.amber }) + `</g>`)
       );
     },
 
@@ -479,13 +490,19 @@
         mark(2, '2h', C.ice, 2) + mark(5, '5h', C.ice, 2) +
         G(3, `<rect x="160" y="250" width="${gx(10) - 160}" height="46" rx="23" fill="rgba(224,100,90,.55)"/>`) +
         mark(10, '10h+', C.red, 3) +
-        G(4, `<rect x="160" y="400" width="1280" height="130" rx="18" fill="${C.panel}" stroke="${C.line}" stroke-width="2"/>` +
-          T(200, 482, '10 h/semana × R$ 80/h × 4,3 semanas', { size: 36, fill: C.silver, cls: 'm' })) +
-        G(5, T(1410, 482, '= R$ 3.440/mês', { size: 42, fill: C.red, cls: 'm', anchor: 'end' })) +
-        G(6, T(160, 620, 'TEMPO LIBERADO', { size: 40, cls: 'd', fill: C.amber }) +
-          `<path d="M430 606h60m-16-14l16 14-16 14" stroke="${C.amber}" stroke-width="4" fill="none" stroke-linecap="round"/>` +
-          T(510, 620, 'mais alunos · mais vendas · crescimento', { size: 30, fill: C.text, weight: 600 })) +
-        G(7, T(160, 676, 'A biblioteca elimina o repetitivo. Seu conhecimento continua sendo seu.', { size: 26, fill: C.silver }))
+        G(4, `<rect x="160" y="372" width="1280" height="226" rx="22" fill="${C.panel}" stroke="${C.amber}" stroke-width="4"/>` +
+          T(200, 446, '10 h/semana', { size: 54, fill: C.amber, cls: 'm', weight: 700 }) +
+          T(584, 446, '×', { size: 54, fill: C.muted, cls: 'm' }) +
+          T(650, 446, 'R$ 80/h', { size: 54, fill: C.amber, cls: 'm', weight: 700 }) +
+          T(902, 446, '×', { size: 54, fill: C.muted, cls: 'm' }) +
+          T(968, 446, '4,3 semanas', { size: 54, fill: C.amber, cls: 'm', weight: 700 })) +
+        G(5, `<rect x="160" y="472" width="1280" height="126" rx="0" fill="rgba(224,100,90,.18)"/>` +
+          T(200, 574, '= R$ 3.440/MÊS', { size: 104, fill: C.red, cls: 'd' }) +
+          T(1410, 566, 'perdidos', { size: 40, fill: C.text, weight: 700, anchor: 'end' })) +
+        G(6, T(160, 656, 'TEMPO LIBERADO', { size: 40, cls: 'd', fill: C.amber }) +
+          `<path d="M430 642h60m-16-14l16 14-16 14" stroke="${C.amber}" stroke-width="4" fill="none" stroke-linecap="round"/>` +
+          T(510, 656, 'mais alunos · mais vendas · crescimento', { size: 30, fill: C.text, weight: 600 })) +
+        G(7, T(160, 704, 'A biblioteca elimina o repetitivo. Seu conhecimento continua sendo seu.', { size: 26, fill: C.silver }))
       );
     },
 
@@ -533,11 +550,6 @@
 
     fechamento: (uid) => svg(
       backdrop(uid, 'img/gallo-retrato.jpg', 941, 1672, [0, 300, 941, 530], 0.35) +
-      G(0, poster(uid, 'img/gallo-retrato.jpg', 941, 1672, 1130, 40, 650)) +
-      G(2, `<defs><linearGradient id="fg${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#060C1A" stop-opacity="0"/><stop offset="1" stop-color="#060C1A" stop-opacity=".92"/></linearGradient></defs>` +
-        `<rect x="1130" y="490" width="366" height="200" fill="url(#fg${uid})"/>` +
-        T(1313, 646, 'PROF. JOSÉ CARLOS GALLO', { size: 34, anchor: 'middle', cls: 'd', fill: C.text }) +
-        T(1313, 676, 'Instituto Gallo Personal', { size: 22, anchor: 'middle', fill: C.silver, weight: 600 })) +
       G(0, T(110, 200, 'VOCÊ ESTUDOU PARA ISSO.', { size: 46, cls: 'd', fill: C.silver }) +
         T(110, 262, 'VOCÊ TEM O CONHECIMENTO.', { size: 46, cls: 'd', fill: C.silver })) +
       G(1, T(110, 370, 'AGORA VOCÊ VAI TER', { size: 60, cls: 'd', fill: C.text }) +
@@ -547,6 +559,13 @@
       G(3, T(480, 572, '@gallopersonalsystems', { size: 26, fill: C.ice, cls: 'm' }) +
         `<g class="pulse"><rect x="110" y="652" width="620" height="86" rx="43" fill="${C.amber}"/>` +
         T(420, 708, 'QUERO MINHA BIBLIOTECA PRO', { size: 36, anchor: 'middle', cls: 'd', fill: C.ink }) + `</g>`)
+    ) + vid('video/b10-fechamento', 1130, 40, 366, 650, 'border:0;box-shadow:0 2cqw 5cqw rgba(0,0,0,.55);border-radius:1.1cqw') + ovl(
+      `<defs><clipPath id="vc${uid}"><rect x="1130" y="40" width="366" height="650" rx="18"/></clipPath>` +
+      `<linearGradient id="fg${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#060C1A" stop-opacity="0"/><stop offset="1" stop-color="#060C1A" stop-opacity=".92"/></linearGradient></defs>` +
+      `<g clip-path="url(#vc${uid})"><rect x="1130" y="520" width="366" height="170" fill="url(#fg${uid})"/></g>` +
+      `<rect x="1130" y="40" width="366" height="650" rx="18" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="2"/>` +
+      T(1313, 646, 'PROF. JOSÉ CARLOS GALLO', { size: 32, anchor: 'middle', cls: 'd', fill: C.text }) +
+      T(1313, 676, 'Instituto Gallo Personal', { size: 22, anchor: 'middle', fill: C.silver, weight: 600 })
     )
   };
 
@@ -562,9 +581,10 @@
         'O que eu vou mostrar nos próximos minutos resolve isso <b>de uma vez por todas</b>.'] }] },
     { n: 2, t: 'Identificação da dor', tc: '0:45 – 3:00', dir: 'Câmera, tom empático mas direto.',
       edit: 'Alternar câmera com as três vinhetas: notebook às 22h, o mesmo modelo para todos, o arquivo abandonado. Uma vinheta por situação.',
-      frames: [{ s: 'dor', lines: [
+      frames: [{ s: 'dorFoto', lines: [
         'Eu sei exatamente como é.',
-        'Você termina o atendimento das 22h, abre o computador e ainda precisa montar o treino de amanhã.',
+        'Você termina o atendimento das 22h, abre o computador e ainda precisa montar o treino de amanhã.'] },
+      { s: 'dor2', lines: [
         'Séries, repetições, progressão, exercício por exercício... <b>do zero. De novo.</b>',
         'Ou então você tem aquele modelo que você repete para todo mundo, e torce para que ninguém perceba.',
         'E fica com aquela sensação de que poderia estar entregando mais.',
@@ -658,12 +678,12 @@
       frames: [{ s: 'fechamento', lines: [
         'Você estudou para isso. Você tem o conhecimento.',
         'Agora você vai ter <b>o sistema</b>.',
-        'Eu sou Prof. José Carlos Gallo, e esse é meu compromisso com a sua evolução profissional.',
-        'Te vejo do outro lado.'] }] }
+        'Eu sou o professor José Carlos Gallo, e esse é o meu compromisso com a sua evolução profissional.',
+        'Clique no link abaixo e te vejo do outro lado.'] }] }
   ];
 
   // ---------- Narration: audio chunks + per-line start times (aligned to the pauses in the voice) ----------
-  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 22.682, "starts": [0.0, 2.39, 9.58, 14.36, 18.5]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 41.804, "starts": [0.0, 1.76, 8.83, 14.98, 21.07, 24.57, 30.08, 34.38, 38.92]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 49.852, "starts": [0.0, 2.75, 10.43, 17.3, 20.1, 26.57, 34.53, 38.67, 42.21, 46.11]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 40.88, "starts": [0.0, 3.88, 9.88, 10.65, 14.89, 18.47, 23.47, 25.81, 31.65, 35.53]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 42.633, "starts": [0.0, 2.06, 6.6, 12.42, 17.29, 19.77, 27.41, 33.04, 36.84]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 36.69, "starts": [0.0, 2.11, 5.95, 8.14, 12.55, 15.6, 20.52, 28.67]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 35.043, "starts": [0.0, 1.54, 8.76, 11.55, 15.49, 20.67, 22.21, 27.43, 28.82]}, {"file": "audio/b08.mp3", "blocks": [8], "dur": 23.375, "starts": [0.0, 4.9, 8.53, 11.62, 15.49, 18.93]}, {"file": "audio/b09.mp3", "blocks": [9], "dur": 23.619, "starts": [0.0, 6.43, 10.22, 15.31, 17.71]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 13.528, "starts": [0.0, 3.39, 5.64, 12.27]}];
+  const AUDIO = [{"file": "audio/b01.mp3", "blocks": [1], "dur": 22.682, "starts": [0.0, 2.39, 9.58, 14.36, 18.5]}, {"file": "audio/b02.mp3", "blocks": [2], "dur": 41.804, "starts": [0.0, 1.76, 8.83, 14.98, 21.07, 24.57, 30.08, 34.38, 38.92]}, {"file": "audio/b03.mp3", "blocks": [3], "dur": 49.852, "starts": [0.0, 2.75, 10.43, 17.3, 20.1, 26.57, 34.53, 38.67, 42.21, 46.11]}, {"file": "audio/b04.mp3", "blocks": [4], "dur": 40.88, "starts": [0.0, 3.88, 9.88, 10.65, 14.89, 18.47, 23.47, 25.81, 31.65, 35.53]}, {"file": "audio/b05.mp3", "blocks": [5], "dur": 42.633, "starts": [0.0, 2.06, 6.6, 12.42, 17.29, 19.77, 27.41, 33.04, 36.84]}, {"file": "audio/b06.mp3", "blocks": [6], "dur": 36.69, "starts": [0.0, 2.11, 5.95, 8.14, 12.55, 15.6, 20.52, 28.67]}, {"file": "audio/b07.mp3", "blocks": [7], "dur": 35.043, "starts": [0.0, 1.54, 8.76, 11.55, 15.49, 20.67, 22.21, 27.43, 28.82]}, {"file": "audio/b08.mp3", "blocks": [8], "dur": 23.375, "starts": [0.0, 4.9, 8.53, 11.62, 15.49, 18.93]}, {"file": "audio/b09.mp3", "blocks": [9], "dur": 23.619, "starts": [0.0, 6.43, 10.22, 15.31, 17.71]}, {"file": "audio/b10.mp3", "blocks": [10], "dur": 14.627, "starts": [0.0, 3.31, 5.29, 11.56]}];
   const plain = s => s.replace(/<[^>]+>/g, '');
   const LINES = []; let t = 0, frameCount = 0;
   const flat = BLOCKS.flatMap((b, bi) => b.frames.flatMap((f, fi) => f.lines.map((html, li) => ({ bi, fi, li, html, text: plain(html) }))));
