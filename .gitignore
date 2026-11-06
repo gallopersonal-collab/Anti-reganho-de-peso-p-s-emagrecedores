@@ -89,3 +89,6 @@ android-sdk/ -e
 # Environment files
 *.env
 *.env.*
+
+# HTML intermediário dos programas antirreganho (gerado)
+programas-antirreganho/html/
