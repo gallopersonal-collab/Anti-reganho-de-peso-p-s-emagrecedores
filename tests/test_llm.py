@@ -8,12 +8,14 @@ import pytest
 
 os.environ.setdefault("MONGO_URL", "mongodb://localhost:27017")
 os.environ.setdefault("DB_NAME", "test_db")
+os.environ["LLM_ACCESS_PASSWORD"] = "senha-teste"
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 import server  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 
-client = TestClient(server.app)
+client = TestClient(server.app, headers={"X-Access-Password": "senha-teste"})
+anon = TestClient(server.app)
 RealAsyncClient = httpx.AsyncClient
 
 
@@ -156,3 +158,27 @@ def test_captions_empty_output(monkeypatch):
 ])
 def test_captions_validation(payload):
     assert client.post("/api/llm/legendas", json=payload).status_code == 422
+
+
+@pytest.mark.parametrize("method,path", [
+    ("get", "/api/llm/config"),
+    ("post", "/api/llm/chat"),
+    ("post", "/api/llm/legendas"),
+])
+def test_password_required(monkeypatch, method, path):
+    calls = use_upstream(monkeypatch, ok_handler)
+    body = {"messages": [{"role": "user", "content": "oi"}], "tema": "massa magra"}
+    kw = {} if method == "get" else {"json": body}
+    assert getattr(anon, method)(path, **kw).status_code == 401
+    assert getattr(anon, method)(path, headers={"X-Access-Password": "errada"}, **kw).status_code == 401
+    assert calls == []
+
+
+def test_password_not_configured_fails_closed(monkeypatch):
+    monkeypatch.setattr(server, "LLM_ACCESS_PASSWORD", "")
+    r = client.post("/api/llm/legendas", json={"tema": "massa magra"})
+    assert r.status_code == 503
+
+
+def test_status_routes_stay_public():
+    assert anon.get("/api/").status_code == 200

@@ -127,6 +127,17 @@ backend:
         - working: true
           agent: "main"
           comment: "Monta o prompt no backend (tema, objetivo, tom, quantidade 1-5) e devolve lista de legendas; aceita JSON ou separador '---'. 6 testes novos em tests/test_llm.py (18 no total) passando."
+  - task: "Senha nas rotas /api/llm/*"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Header X-Access-Password comparado com LLM_ACCESS_PASSWORD (hmac.compare_digest). Sem a variável -> 503 (fecha por padrão). 23 testes passando."
 
 frontend:
   - task: "Página /legendas (gerador de legendas)"
@@ -140,11 +151,22 @@ frontend:
         - working: true
           agent: "main"
           comment: "Rota /legendas via react-router-dom; landing segue em /. Testado com Playwright (build de produção + backend real + provedor LLM simulado): 3 legendas renderizadas, sem erros de página, landing intacta."
+  - task: "Tela de senha em /legendas"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/LegendasPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Playwright: senha errada mostra erro; senha certa abre o formulário e persiste ao recarregar (sessionStorage); Sair volta à tela de senha; API sem senha -> 401."
 
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 2
+  test_sequence: 3
   run_ui: false
 
 test_plan:
