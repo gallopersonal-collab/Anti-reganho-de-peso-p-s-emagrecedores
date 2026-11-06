@@ -101,3 +101,35 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Endpoint de LLM configurável no backend: FreeLLMAPI local em testes, API paga em produção, trocando só variáveis de ambiente."
+
+backend:
+  - task: "Endpoint LLM configurável (/api/llm/chat e /api/llm/config)"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Proxy OpenAI-compatível via LLM_BASE_URL (padrão http://localhost:3001/v1), LLM_API_KEY, LLM_MODEL (padrão auto), LLM_TIMEOUT. Erros do provedor -> 502, inacessível -> 503, timeout -> 504. /config nunca expõe a chave. 12 testes em tests/test_llm.py passando com provedor simulado (httpx.MockTransport); não testado contra um FreeLLMAPI real."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Endpoint LLM configurável (/api/llm/chat e /api/llm/config)"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "main"
+      message: "Novo endpoint LLM. Testes usam provedor simulado; Mongo não é necessário para eles."
