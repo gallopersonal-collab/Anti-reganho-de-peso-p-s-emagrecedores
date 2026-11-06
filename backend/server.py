@@ -7,6 +7,8 @@ import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Literal, Optional
+import json
+import re
 import uuid
 import httpx
 from datetime import datetime, timezone
@@ -65,6 +67,20 @@ class LLMChat(BaseModel):
     usage: Optional[dict] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+class CaptionCreate(BaseModel):
+    tema: str = Field(min_length=3, max_length=500)
+    objetivo: Literal["engajamento", "autoridade", "venda"] = "engajamento"
+    tom: Literal["direto", "inspirador", "tecnico"] = "direto"
+    quantidade: int = Field(default=3, ge=1, le=5)
+
+class CaptionResult(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    legendas: List[str]
+    model: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 class LLMConfig(BaseModel):
     base_url: str
     model: str
@@ -104,16 +120,14 @@ async def get_llm_config():
     # Never expose the key itself, only whether it is set.
     return LLMConfig(base_url=LLM_BASE_URL, model=LLM_MODEL, api_key_configured=bool(LLM_API_KEY))
 
-@api_router.post("/llm/chat", response_model=LLMChat)
-async def llm_chat(input: LLMChatCreate):
-    payload = {
-        "model": input.model or LLM_MODEL,
-        "messages": [m.model_dump() for m in input.messages],
-    }
-    if input.temperature is not None:
-        payload["temperature"] = input.temperature
-    if input.max_tokens is not None:
-        payload["max_tokens"] = input.max_tokens
+async def call_llm(messages: List[dict], model: Optional[str] = None,
+                   temperature: Optional[float] = None, max_tokens: Optional[int] = None):
+    """Call the configured OpenAI-compatible provider. Returns (content, served_model, usage)."""
+    payload = {"model": model or LLM_MODEL, "messages": messages}
+    if temperature is not None:
+        payload["temperature"] = temperature
+    if max_tokens is not None:
+        payload["max_tokens"] = max_tokens
 
     headers = {"Authorization": f"Bearer {LLM_API_KEY}"} if LLM_API_KEY else {}
     try:
@@ -135,7 +149,68 @@ async def llm_chat(input: LLMChatCreate):
     except (ValueError, KeyError, IndexError, TypeError):
         raise HTTPException(status_code=502, detail="Invalid response from LLM provider")
 
-    return LLMChat(content=content, model=data.get("model") or payload["model"], usage=data.get("usage"))
+    return content, data.get("model") or payload["model"], data.get("usage")
+
+@api_router.post("/llm/chat", response_model=LLMChat)
+async def llm_chat(input: LLMChatCreate):
+    content, model, usage = await call_llm(
+        [m.model_dump() for m in input.messages], input.model, input.temperature, input.max_tokens
+    )
+    return LLMChat(content=content, model=model, usage=usage)
+
+CAPTION_OBJETIVOS = {
+    "engajamento": "gerar comentários e salvamentos, terminando com uma pergunta para o público",
+    "autoridade": "posicionar o Prof. José Carlos Gallo como referência técnica, com um dado ou conceito de fisiologia",
+    "venda": "levar o leitor a clicar no link da bio para o Curso de Especialista em Anti-Reganho de Peso",
+}
+CAPTION_TONS = {
+    "direto": "direto e objetivo, frases curtas",
+    "inspirador": "inspirador, sem clichês motivacionais",
+    "tecnico": "técnico, com termos de fisiologia explicados de forma simples",
+}
+CAPTION_SYSTEM = (
+    "Você escreve legendas de Instagram em português do Brasil para o Instituto Gallo Personal, "
+    "que capacita Personal Trainers e Profissionais de Educação Física. O produto em foco é o Curso de "
+    "Especialista em Anti-Reganho de Peso após Ozempic, Wegovy ou Mounjaro, do Prof. José Carlos Gallo. "
+    "O público são profissionais de Educação Física, não o paciente final. "
+    "Regras: primeira linha é um gancho forte; parágrafos curtos; no máximo 2 emojis; 3 a 5 hashtags no final; "
+    "não prometa resultados garantidos nem faça recomendação médica sobre medicamentos. "
+    'Responda SOMENTE com JSON no formato {"legendas": ["...", "..."]}.'
+)
+
+def parse_captions(content: str, quantidade: int) -> List[str]:
+    """Extract captions from the model output: JSON first, '---' separators as fallback."""
+    text = content.strip()
+    match = re.search(r"\{.*\}|\[.*\]", text, re.DOTALL)
+    if match:
+        try:
+            parsed = json.loads(match.group(0))
+            items = parsed.get("legendas") if isinstance(parsed, dict) else parsed
+            if isinstance(items, list):
+                captions = [str(c).strip() for c in items if str(c).strip()]
+                if captions:
+                    return captions[:quantidade]
+        except ValueError:
+            pass
+    captions = [c.strip() for c in re.split(r"\n\s*-{3,}\s*\n", text) if c.strip()]
+    return captions[:quantidade]
+
+@api_router.post("/llm/legendas", response_model=CaptionResult)
+async def generate_captions(input: CaptionCreate):
+    user_prompt = (
+        f"Tema do post: {input.tema}\n"
+        f"Objetivo: {CAPTION_OBJETIVOS[input.objetivo]}.\n"
+        f"Tom: {CAPTION_TONS[input.tom]}.\n"
+        f"Escreva {input.quantidade} legenda(s) diferentes entre si."
+    )
+    content, model, _ = await call_llm(
+        [{"role": "system", "content": CAPTION_SYSTEM}, {"role": "user", "content": user_prompt}],
+        temperature=0.8,
+    )
+    captions = parse_captions(content, input.quantidade)
+    if not captions:
+        raise HTTPException(status_code=502, detail="LLM returned no captions")
+    return CaptionResult(legendas=captions, model=model)
 
 # Include the router in the main app
 app.include_router(api_router)

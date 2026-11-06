@@ -116,16 +116,41 @@ backend:
         - working: true
           agent: "main"
           comment: "Proxy OpenAI-compatível via LLM_BASE_URL (padrão http://localhost:3001/v1), LLM_API_KEY, LLM_MODEL (padrão auto), LLM_TIMEOUT. Erros do provedor -> 502, inacessível -> 503, timeout -> 504. /config nunca expõe a chave. 12 testes em tests/test_llm.py passando com provedor simulado (httpx.MockTransport); não testado contra um FreeLLMAPI real."
+  - task: "Gerador de legendas (/api/llm/legendas)"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Monta o prompt no backend (tema, objetivo, tom, quantidade 1-5) e devolve lista de legendas; aceita JSON ou separador '---'. 6 testes novos em tests/test_llm.py (18 no total) passando."
+
+frontend:
+  - task: "Página /legendas (gerador de legendas)"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/LegendasPage.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Rota /legendas via react-router-dom; landing segue em /. Testado com Playwright (build de produção + backend real + provedor LLM simulado): 3 legendas renderizadas, sem erros de página, landing intacta."
 
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 1
+  test_sequence: 2
   run_ui: false
 
 test_plan:
   current_focus:
-    - "Endpoint LLM configurável (/api/llm/chat e /api/llm/config)"
+    - "Gerador de legendas (/api/llm/legendas)"
+    - "Página /legendas (gerador de legendas)"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
