@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from pathlib import Path
@@ -117,3 +118,41 @@ def test_chat_upstream_timeout(monkeypatch):
 ])
 def test_chat_validation(payload):
     assert client.post("/api/llm/chat", json=payload).status_code == 422
+
+
+def caption_handler(content):
+    return lambda request: httpx.Response(200, json={
+        "model": "m1", "choices": [{"message": {"role": "assistant", "content": content}}],
+    })
+
+
+def test_captions_json(monkeypatch):
+    calls = use_upstream(monkeypatch, caption_handler('Aqui: {"legendas": ["L1", "L2", "L3", "L4"]}'))
+    r = client.post("/api/llm/legendas", json={"tema": "desmame do Ozempic", "objetivo": "venda", "quantidade": 3})
+    assert r.status_code == 200, r.text
+    assert r.json()["legendas"] == ["L1", "L2", "L3"]
+    sent = json.loads(calls[0].content)
+    assert sent["messages"][0]["role"] == "system"
+    assert "desmame do Ozempic" in sent["messages"][1]["content"]
+    assert "link da bio" in sent["messages"][1]["content"]
+
+
+def test_captions_separator_fallback(monkeypatch):
+    use_upstream(monkeypatch, caption_handler("Legenda A\n---\nLegenda B"))
+    r = client.post("/api/llm/legendas", json={"tema": "massa magra", "quantidade": 2})
+    assert r.json()["legendas"] == ["Legenda A", "Legenda B"]
+
+
+def test_captions_empty_output(monkeypatch):
+    use_upstream(monkeypatch, caption_handler("   "))
+    r = client.post("/api/llm/legendas", json={"tema": "massa magra"})
+    assert r.status_code == 502
+
+
+@pytest.mark.parametrize("payload", [
+    {"tema": "x"},
+    {"tema": "valido", "quantidade": 9},
+    {"tema": "valido", "objetivo": "outro"},
+])
+def test_captions_validation(payload):
+    assert client.post("/api/llm/legendas", json=payload).status_code == 422
