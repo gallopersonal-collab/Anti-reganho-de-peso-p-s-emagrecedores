@@ -19,6 +19,15 @@ anon = TestClient(server.app)
 RealAsyncClient = httpx.AsyncClient
 
 
+@pytest.fixture(autouse=True)
+def reset_attempts():
+    server._failed_by_ip.clear()
+    server._failed_global.clear()
+    yield
+    server._failed_by_ip.clear()
+    server._failed_global.clear()
+
+
 def use_upstream(monkeypatch, handler):
     """Route the backend's outbound LLM call to an in-memory fake provider."""
     calls = []
@@ -182,3 +191,52 @@ def test_password_not_configured_fails_closed(monkeypatch):
 
 def test_status_routes_stay_public():
     assert anon.get("/api/").status_code == 200
+
+
+def wrong(ip="1.1.1.1"):
+    return anon.get("/api/llm/config", headers={"X-Access-Password": "errada", "X-Forwarded-For": ip})
+
+
+def test_lockout_after_max_failed_attempts(monkeypatch):
+    monkeypatch.setattr(server, "LLM_MAX_FAILED_ATTEMPTS", 3)
+    assert [wrong().status_code for _ in range(3)] == [401, 401, 401]
+    r = wrong()
+    assert r.status_code == 429
+    assert 1 <= int(r.headers["retry-after"]) <= server.LLM_LOCKOUT_SECONDS + 1
+    # even the right password is refused while locked out
+    ok = anon.get("/api/llm/config", headers={"X-Access-Password": "senha-teste", "X-Forwarded-For": "1.1.1.1"})
+    assert ok.status_code == 429
+    # another IP is not affected
+    other = anon.get("/api/llm/config", headers={"X-Access-Password": "senha-teste", "X-Forwarded-For": "2.2.2.2"})
+    assert other.status_code == 200
+
+
+def test_lockout_expires(monkeypatch):
+    monkeypatch.setattr(server, "LLM_MAX_FAILED_ATTEMPTS", 2)
+    clock = [1000.0]
+    monkeypatch.setattr(server.time, "monotonic", lambda: clock[0])
+    wrong(); wrong()
+    assert wrong().status_code == 429
+    clock[0] += server.LLM_LOCKOUT_SECONDS
+    assert wrong().status_code == 401
+
+
+def test_success_resets_ip_counter(monkeypatch):
+    monkeypatch.setattr(server, "LLM_MAX_FAILED_ATTEMPTS", 3)
+    wrong(); wrong()
+    ok = anon.get("/api/llm/config", headers={"X-Access-Password": "senha-teste", "X-Forwarded-For": "1.1.1.1"})
+    assert ok.status_code == 200
+    assert [wrong().status_code for _ in range(3)] == [401, 401, 401]
+
+
+def test_global_cap_blocks_ip_rotation(monkeypatch):
+    monkeypatch.setattr(server, "LLM_GLOBAL_MAX_FAILED", 4)
+    assert [wrong(f"9.9.9.{i}").status_code for i in range(4)] == [401] * 4
+    assert wrong("9.9.9.200").status_code == 429
+
+
+def test_spoofed_forwarded_prefix_is_ignored(monkeypatch):
+    monkeypatch.setattr(server, "LLM_MAX_FAILED_ATTEMPTS", 2)
+    for fake in ("5.5.5.1", "5.5.5.2", "5.5.5.3"):
+        r = wrong(f"{fake}, 1.1.1.1")
+    assert r.status_code == 429
