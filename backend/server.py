@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, Depends, Header, HTTPException
+from fastapi import FastAPI, APIRouter, Depends, Header, HTTPException, Request
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -10,6 +10,8 @@ from typing import List, Literal, Optional
 import hmac
 import json
 import re
+import time
+from collections import deque
 import uuid
 import httpx
 from datetime import datetime, timezone
@@ -33,6 +35,16 @@ LLM_TIMEOUT = float(os.environ.get('LLM_TIMEOUT', '60'))
 # Password for the /api/llm/* routes (sent by the client as X-Access-Password).
 # Fail closed: if it is not set, the LLM routes refuse every request.
 LLM_ACCESS_PASSWORD = os.environ.get('LLM_ACCESS_PASSWORD', '')
+# Brute-force protection for that password: after LLM_MAX_FAILED_ATTEMPTS wrong
+# tries from one IP within LLM_LOCKOUT_SECONDS, that IP gets 429 until the window
+# passes. LLM_GLOBAL_MAX_FAILED caps wrong tries from all IPs together in the same
+# window, so rotating IPs (or a spoofed X-Forwarded-For) cannot bypass the limit.
+# Counters live in memory: they reset on restart and are per process.
+LLM_MAX_FAILED_ATTEMPTS = int(os.environ.get('LLM_MAX_FAILED_ATTEMPTS', '5'))
+LLM_GLOBAL_MAX_FAILED = int(os.environ.get('LLM_GLOBAL_MAX_FAILED', '50'))
+LLM_LOCKOUT_SECONDS = int(os.environ.get('LLM_LOCKOUT_SECONDS', '900'))
+_failed_by_ip = {}
+_failed_global = deque()
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -119,11 +131,51 @@ async def get_status_checks():
     
     return status_checks
 
-async def require_llm_access(x_access_password: str = Header(default="")):
+def _client_ip(request: Request) -> str:
+    # Behind the hosting proxy, the last X-Forwarded-For entry is the address the
+    # nearest proxy saw; the client cannot overwrite it, only prepend to it.
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        return forwarded.split(",")[-1].strip()
+    return request.client.host if request.client else "unknown"
+
+def _prune(attempts: deque, now: float) -> None:
+    while attempts and now - attempts[0] >= LLM_LOCKOUT_SECONDS:
+        attempts.popleft()
+
+def _retry_after(attempts: deque, now: float) -> int:
+    return max(1, int(LLM_LOCKOUT_SECONDS - (now - attempts[0])) + 1)
+
+async def require_llm_access(request: Request, x_access_password: str = Header(default="")):
     if not LLM_ACCESS_PASSWORD:
         raise HTTPException(status_code=503, detail="LLM access password not configured")
+
+    now = time.monotonic()
+    ip = _client_ip(request)
+    if len(_failed_by_ip) > 1000:
+        for key in list(_failed_by_ip):
+            _prune(_failed_by_ip[key], now)
+            if not _failed_by_ip[key]:
+                del _failed_by_ip[key]
+    ip_attempts = _failed_by_ip.setdefault(ip, deque())
+    _prune(ip_attempts, now)
+    _prune(_failed_global, now)
+
+    for attempts, limit in ((ip_attempts, LLM_MAX_FAILED_ATTEMPTS), (_failed_global, LLM_GLOBAL_MAX_FAILED)):
+        if len(attempts) >= limit:
+            raise HTTPException(
+                status_code=429,
+                detail="Too many failed password attempts",
+                headers={"Retry-After": str(_retry_after(attempts, now))},
+            )
+
     if not hmac.compare_digest(x_access_password.encode(), LLM_ACCESS_PASSWORD.encode()):
+        ip_attempts.append(now)
+        _failed_global.append(now)
+        logger.warning("Failed LLM password attempt from %s (%d in window)", ip, len(ip_attempts))
         raise HTTPException(status_code=401, detail="Invalid access password")
+
+    _failed_by_ip.pop(ip, None)
 
 @api_router.get("/llm/config", response_model=LLMConfig, dependencies=[Depends(require_llm_access)])
 async def get_llm_config():
@@ -231,6 +283,7 @@ app.add_middleware(
     allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["Retry-After"],
 )
 
 # Configure logging

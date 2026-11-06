@@ -138,6 +138,17 @@ backend:
         - working: true
           agent: "main"
           comment: "Header X-Access-Password comparado com LLM_ACCESS_PASSWORD (hmac.compare_digest). Sem a variável -> 503 (fecha por padrão). 23 testes passando."
+  - task: "Limite de tentativas de senha (/api/llm/*)"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "5 erros por IP em 15 min -> 429 com Retry-After; teto global de 50 erros na janela contra rotação de IP; acerto zera o contador do IP. Contadores em memória. 28 testes passando."
 
 frontend:
   - task: "Página /legendas (gerador de legendas)"
@@ -162,11 +173,22 @@ frontend:
         - working: true
           agent: "main"
           comment: "Playwright: senha errada mostra erro; senha certa abre o formulário e persiste ao recarregar (sessionStorage); Sair volta à tela de senha; API sem senha -> 401."
+  - task: "Mensagem de bloqueio por tentativas em /legendas"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/LegendasPage.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Playwright cross-origin (3000 -> 8001), limite 3: tentativas 1-3 -> 401, 4ª -> 429 com 'Tente de novo em 15 min.'; senha certa também bloqueada durante a janela."
 
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 3
+  test_sequence: 4
   run_ui: false
 
 test_plan:

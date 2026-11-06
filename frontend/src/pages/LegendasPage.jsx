@@ -37,6 +37,12 @@ const salvarSenha = (v) => {
   try { v ? sessionStorage.setItem(SENHA_KEY, v) : sessionStorage.removeItem(SENHA_KEY); } catch { /* ignore */ }
 };
 
+const msgBloqueio = (err) => {
+  const segundos = Number(err.response?.headers?.['retry-after']) || 0;
+  const minutos = Math.max(1, Math.ceil(segundos / 60));
+  return `Muitas tentativas de senha. Tente de novo em ${minutos} min.`;
+};
+
 const ERROS = {
   503: 'O provedor de IA está fora do ar. O FreeLLMAPI está rodando?',
   504: 'O provedor de IA demorou demais. Tente de novo.',
@@ -58,7 +64,8 @@ const TelaSenha = ({ onEntrar }) => {
     } catch (err) {
       const status = err.response?.status;
       toast.error(
-        status === 401 ? 'Senha incorreta.'
+        status === 429 ? msgBloqueio(err)
+          : status === 401 ? 'Senha incorreta.'
           : status === 503 ? 'A senha ainda não foi configurada no servidor.'
           : 'Não foi possível conectar ao servidor.'
       );
@@ -146,6 +153,10 @@ export const LegendasPage = () => {
       setLegendas(data.legendas);
     } catch (err) {
       const status = err.response?.status;
+      if (status === 429) {
+        toast.error(msgBloqueio(err));
+        return;
+      }
       if (status === 401) {
         salvarSenha('');
         setSenha('');
