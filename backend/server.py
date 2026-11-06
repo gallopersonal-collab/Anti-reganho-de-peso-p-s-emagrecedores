@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, Depends, Header, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -7,6 +7,7 @@ import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Literal, Optional
+import hmac
 import json
 import re
 import uuid
@@ -29,6 +30,9 @@ LLM_BASE_URL = os.environ.get('LLM_BASE_URL', 'http://localhost:3001/v1').rstrip
 LLM_API_KEY = os.environ.get('LLM_API_KEY', '')
 LLM_MODEL = os.environ.get('LLM_MODEL', 'auto')
 LLM_TIMEOUT = float(os.environ.get('LLM_TIMEOUT', '60'))
+# Password for the /api/llm/* routes (sent by the client as X-Access-Password).
+# Fail closed: if it is not set, the LLM routes refuse every request.
+LLM_ACCESS_PASSWORD = os.environ.get('LLM_ACCESS_PASSWORD', '')
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -115,7 +119,13 @@ async def get_status_checks():
     
     return status_checks
 
-@api_router.get("/llm/config", response_model=LLMConfig)
+async def require_llm_access(x_access_password: str = Header(default="")):
+    if not LLM_ACCESS_PASSWORD:
+        raise HTTPException(status_code=503, detail="LLM access password not configured")
+    if not hmac.compare_digest(x_access_password.encode(), LLM_ACCESS_PASSWORD.encode()):
+        raise HTTPException(status_code=401, detail="Invalid access password")
+
+@api_router.get("/llm/config", response_model=LLMConfig, dependencies=[Depends(require_llm_access)])
 async def get_llm_config():
     # Never expose the key itself, only whether it is set.
     return LLMConfig(base_url=LLM_BASE_URL, model=LLM_MODEL, api_key_configured=bool(LLM_API_KEY))
@@ -151,7 +161,7 @@ async def call_llm(messages: List[dict], model: Optional[str] = None,
 
     return content, data.get("model") or payload["model"], data.get("usage")
 
-@api_router.post("/llm/chat", response_model=LLMChat)
+@api_router.post("/llm/chat", response_model=LLMChat, dependencies=[Depends(require_llm_access)])
 async def llm_chat(input: LLMChatCreate):
     content, model, usage = await call_llm(
         [m.model_dump() for m in input.messages], input.model, input.temperature, input.max_tokens
@@ -195,7 +205,7 @@ def parse_captions(content: str, quantidade: int) -> List[str]:
     captions = [c.strip() for c in re.split(r"\n\s*-{3,}\s*\n", text) if c.strip()]
     return captions[:quantidade]
 
-@api_router.post("/llm/legendas", response_model=CaptionResult)
+@api_router.post("/llm/legendas", response_model=CaptionResult, dependencies=[Depends(require_llm_access)])
 async def generate_captions(input: CaptionCreate):
     user_prompt = (
         f"Tema do post: {input.tema}\n"
