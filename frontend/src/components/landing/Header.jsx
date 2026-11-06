@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Header = ({ checkoutLink }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -59,6 +60,12 @@ export const Header = ({ checkoutLink }) => {
                 {item.label}
               </button>
             ))}
+            <Link
+              to="/legendas"
+              className="text-sm font-medium text-[#FFFFFF]/80 hover:text-[#FFFFFF] transition-colors"
+            >
+              Legendas
+            </Link>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -100,6 +107,13 @@ export const Header = ({ checkoutLink }) => {
                   {item.label}
                 </button>
               ))}
+              <Link
+                to="/legendas"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-left py-3 px-4 text-[#FFFFFF] font-medium rounded-lg hover:bg-[#1CAF35]/20 transition-colors"
+              >
+                Legendas
+              </Link>
               <Button
                 onClick={() => {
                   console.log('[Header] Mobile CTA clicked - scrolling to plans');
