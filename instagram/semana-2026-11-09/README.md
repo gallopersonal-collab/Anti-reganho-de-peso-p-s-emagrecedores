@@ -8,11 +8,11 @@
 | Sáb 10:00 | Reel | Para de vender hora-aula | pergunta nos comentários | pronta | `4-sabado-reel-hora-aula.md` |
 | Dom 19:00 | Reel | A faculdade não me ensinou a emagrecer | seguir | pronta | `5-domingo-reel-mae.md` |
 
-Outros arquivos: `dms.md` (HÁBITO, PESO e enquete), `stories-segunda.md`, `stories-terca-quiz.md`, `stories-quarta-reel-diego.md`, `stories-quinta-carrossel.md`, `stories-sexta-oferta.md`, `stories-sabado-respostas.md`, `plano.md`, `historico.md`.
+Outros arquivos: `dms.md` (HÁBITO, PESO e enquete), `stories-segunda.md`, `stories-terca-quiz.md`, `stories-quarta-reel-diego.md`, `stories-quinta-carrossel.md`, `stories-sexta-oferta.md`, `stories-sabado-respostas.md`, `stories-domingo-mae.md`, `plano.md`, `historico.md`.
 
 ## Pendências
 
-- Respostas das perguntas da caixa de quinta (stories de sábado) e stories de domingo.
+- Respostas das perguntas da caixa de quinta (telas 2 e 3 dos stories de sábado).
 - Lista das 10 contas para o engajamento diário (5 alcance, 3 pares, 2 compradores).
 
 ## Conferir antes de postar
