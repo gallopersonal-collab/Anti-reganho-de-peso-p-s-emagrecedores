@@ -4,7 +4,7 @@
 **Gancho:** #1 Ordem negativa (95 FORTE, pontuado na tradução em inglês)
 **Duração:** 31,3s em 12 falas a 140 palavras/min
 **Pedido:** pergunta nos comentários (sem palavra-chave, sem DM)
-**Legenda:** ainda não escrita
+**Legenda:** pronta (abaixo)
 
 ## Roteiro
 
@@ -34,3 +34,19 @@ Comenta: quanto custa a sua hora-aula hoje?
 - 0:28 QUANTO CUSTA SUA HORA?
 
 Fonte dos números: VSL (4 a 9 mil por programa de 60 dias) e copy (começo, meio e fim).
+
+## Legenda
+
+```
+Me conta nos comentários: quanto custa a sua hora-aula hoje? Eu respondo com a conta de um programa de 4 mil.
+
+Personal trainer que vende hora tem teto. O dia tem 24 horas, e você não vende a vigésima quinta.
+
+Programa de emagrecimento é outra conta. Tem começo, meio e fim, e um resultado que o aluno vê na balança. Quem aplica o Método P.E.S.O. cobra de 4 a 9 mil reais por 60 dias.
+
+Nem todo mundo chega nesse número. Mas ninguém chega vendendo hora.
+
+#personaltrainer #educacaofisica #emagrecimento #quantocobrar
+```
+
+A primeira linha promete resposta: responda cada comentário com a conta (valor da hora × horas por mês contra um programa de 4 mil). Se não for responder um por um, troque por "Eu leio todos."

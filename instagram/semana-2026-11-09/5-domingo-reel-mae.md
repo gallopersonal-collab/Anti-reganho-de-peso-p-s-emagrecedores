@@ -4,7 +4,7 @@
 **Gancho:** #7 Bastidor (76 FORTE, pontuado na tradução em inglês)
 **Duração:** 37,7s em 16 falas a 140 palavras/min, mais 2s de pausa (~40s)
 **Pedido:** seguir o perfil
-**Legenda:** ainda não escrita
+**Legenda:** pronta (abaixo)
 
 ## Roteiro
 
@@ -36,6 +36,22 @@ Segue. O que a faculdade não ensinou, eu ensino.
 - 0:19 VÔLEI. BASQUETE. NATAÇÃO.
 - 0:25 BOLSA EM COLÔNIA, ALEMANHA
 - 0:34 SEGUE @GALLOPERSONALSYSTEMS
+
+## Legenda
+
+```
+Segue o perfil: há 36 anos eu ensino o emagrecimento que a faculdade não me ensinou.
+
+Minha mãe voltou do médico com pressão, colesterol e glicemia altos. O médico mandou emagrecer. Ela respondeu que tinha um filho formado em educação física.
+
+Eu fiquei mudo. A faculdade me ensinou vôlei, basquete e natação. Emagrecimento, não.
+
+Estudei sozinho por dois meses. Depois veio uma bolsa em Colônia, na Alemanha, em fisiologia clínica e do exercício. Foi de lá que saiu o Método P.E.S.O.
+
+Se você é personal trainer e também saiu da faculdade sem saber emagrecer ninguém, a culpa não é sua.
+
+#educacaofisica #personaltrainer #emagrecimento #fisiologiadoexercicio
+```
 
 ## Conferir antes de gravar
 

@@ -5,14 +5,13 @@
 | Seg 12:00 | Reel | Ozempic tira a fome, não o hábito | HÁBITO + DM | pronta | `1-segunda-reel-ozempic.md` |
 | Qua 12:00 | Reel | Diego, aluno do Bruno: -5,2 kg em 8 dias | PESO + DM | pronta | `2-quarta-reel-diego.md` |
 | Qui 12:00 | Carrossel | As 5 fases para o peso não voltar | HÁBITO + DM | pronta | `3-quinta-carrossel-5-fases.md` |
-| Sáb 10:00 | Reel | Para de vender hora-aula | pergunta nos comentários | falta | `4-sabado-reel-hora-aula.md` |
-| Dom 19:00 | Reel | A faculdade não me ensinou a emagrecer | seguir | falta | `5-domingo-reel-mae.md` |
+| Sáb 10:00 | Reel | Para de vender hora-aula | pergunta nos comentários | pronta | `4-sabado-reel-hora-aula.md` |
+| Dom 19:00 | Reel | A faculdade não me ensinou a emagrecer | seguir | pronta | `5-domingo-reel-mae.md` |
 
 Outros arquivos: `dms.md` (HÁBITO, PESO e enquete), `stories-segunda.md`, `plano.md`, `historico.md`.
 
 ## Pendências
 
-- Legendas de sábado e domingo.
 - Stories de oferta da sexta e stories diários dos outros dias.
 - Lista das 10 contas para o engajamento diário (5 alcance, 3 pares, 2 compradores).
 
