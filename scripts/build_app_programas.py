@@ -24,7 +24,7 @@ def main() -> None:
 
     html = html.replace('<link rel="stylesheet" href="styles.css">', f"<style>\n{css}\n</style>")
     worker = safe((vendor / "pdf.worker.min.js").read_text(encoding="utf-8"))
-    for name in ("pdf.min.js", "html2canvas.min.js", "jspdf.umd.min.js"):
+    for name in ("pdf.min.js", "html2canvas.min.js", "jspdf.umd.min.js", "supabase.min.js"):
         tag = f'<script src="vendor/{name}"></script>'
         assert tag in html, tag
         code = safe((vendor / name).read_text(encoding="utf-8"))

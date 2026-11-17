@@ -41,6 +41,7 @@ function readFile(file, as = 'dataURL') {
 function loadImage(src) {
   return new Promise((res, rej) => {
     const i = new Image();
+    if (/^https?:/.test(src)) i.crossOrigin = 'anonymous';
     i.onload = () => res(i);
     i.onerror = rej;
     i.src = src;
@@ -165,12 +166,18 @@ async function saveEntity(store, obj) {
   if (!obj.createdAt) obj.createdAt = obj.updatedAt;
   await DB.put(store, obj);
   upsert(S[store], obj);
+  if (typeof queueSync === 'function') queueSync(store, obj.id);
 }
 async function removeEntity(store, id) {
   await DB.del(store, id);
   S[store] = S[store].filter((x) => x.id !== id);
+  if (typeof queueSync === 'function') queueSync(store, id, true);
 }
-async function saveSettings() { await DB.put('settings', S.settings); }
+async function saveSettings() {
+  S.settings.updatedAt = Date.now();
+  await DB.put('settings', S.settings);
+  if (typeof queueSync === 'function') queueSync('settings', 'app');
+}
 
 /* =========================================================
  * Modelos
@@ -468,6 +475,8 @@ async function route() {
   const navKey = { programa: 'inicio', novo: 'inicio', biblioteca: 'biblioteca', alunos: 'alunos', personais: 'config', pdfs: 'pdfs', pdf: 'pdfs', config: 'config' }[r] || 'inicio';
   $$('[data-nav]').forEach((a) => a.classList.toggle('active', a.dataset.nav === navKey));
   window.scrollTo(0, 0);
+  if (r !== 'aluno') document.body.classList.remove('student-mode');
+  if (r === 'aluno') return viewStudent(id);
   if (!r) return viewHome();
   if (r === 'novo') return viewWizard(id);
   if (r === 'biblioteca') return viewLibrary();
@@ -617,6 +626,9 @@ function viewHome() {
     return `${p.title} ${st ? st.name : ''}`.toLowerCase().includes(q);
   });
   app.innerHTML = `
+    ${sb && !CLOUD.user ? `<div class="card onboard row">
+      <div style="flex:1;min-width:220px"><strong>Entre na sua conta</strong><div class="small muted">Para salvar na nuvem e liberar o acesso dos seus alunos ao app (com código), entre ou crie sua conta.</div></div>
+      <button class="btn primary" data-action="login">Entrar ou criar conta</button></div>` : ''}
     ${!S.trainers.length ? `<div class="card onboard row">
       <div style="flex:1;min-width:220px"><strong>Primeiro passo: cadastre seu perfil de personal</strong><div class="small muted">Seu nome, foto e CREF aparecem nos programas que você enviar.</div></div>
       <button class="btn primary" data-action="new-person" data-kind="trainers">Cadastrar meu perfil</button></div>` : ''}
@@ -641,7 +653,8 @@ function viewHome() {
           <h3>${esc(p.title || 'Sem título')}</h3>
           ${hasTags(progTags(p)) ? `<div class="meta">${tagChips(progTags(p))}</div>` : ''}
           <div class="actions">
-            <button class="btn sm primary" data-action="send-program" data-id="${esc(p.id)}">Enviar</button>
+            <button class="btn sm primary" data-action="student-access" data-id="${esc(p.id)}">Acesso do aluno</button>
+            <button class="btn sm" data-action="send-program" data-id="${esc(p.id)}">PDF</button>
             <button class="btn sm" data-action="open-program" data-id="${esc(p.id)}" data-tab="gerar">Ver / editar</button>
             <span class="spacer"></span>
             <button class="btn sm ghost" data-action="save-template" data-id="${esc(p.id)}" title="Salvar como modelo para usar com outros alunos">Salvar como modelo</button>
@@ -1021,7 +1034,7 @@ function viewEditor(id, tab) {
   p.include = { trainer: true, overview: true, guidelines: true, warmup: true, pse: true, closing: true, ...(p.include || {}) };
   p.tags = p.tags || {};
   E.p = p;
-  const tabs = p.mode === 'slides' ? ['slides', 'dados', 'gerar'] : ['dados', 'treinos', 'gerar'];
+  const tabs = (p.mode === 'slides' ? ['slides', 'dados', 'gerar'] : ['dados', 'treinos', 'gerar']).concat(p.isTemplate ? [] : ['acomp']);
   E.tab = tabs.includes(tab) ? tab : tabs[0];
   leaveHook = () => saveSoon.flush();
   renderEditor();
@@ -1036,16 +1049,19 @@ function renderEditor() {
         <span class="spacer"></span>
         <span id="save-state" class="save-state ok">Salvo ✓</span>
         ${p.isTemplate ? '' : `<button class="btn sm ghost" data-action="save-template" data-id="${esc(p.id)}">Salvar como modelo</button>
-        <button class="btn sm primary" data-action="send-program" data-id="${esc(p.id)}">Enviar pelo WhatsApp</button>`}
+        <button class="btn sm" data-action="send-program" data-id="${esc(p.id)}">Enviar PDF</button>
+        <button class="btn sm primary" data-action="student-access" data-id="${esc(p.id)}">Liberar acesso ao aluno</button>`}
       </div>
       <h1 id="ed-title" style="margin-top:6px">${esc(p.title || 'Sem título')}</h1>
       <div class="tabs">${(p.mode === 'slides'
         ? [['slides', '1. Slides'], ['dados', '2. Aluno e personal'], ['gerar', '3. Gerar PDF']]
         : [['dados', '1. Dados e capa'], ['treinos', '2. Treinos e exercícios'], ['gerar', '3. Visualizar e gerar PDF']])
+        .concat(p.isTemplate ? [] : [['acomp', '4. Acompanhamento']])
         .map(([k, l]) => `<button data-action="tab" data-tab="${k}" class="${E.tab === k ? 'active' : ''}">${l}</button>`).join('')}
       </div>
     </div>
-    <div id="ed-body">${E.tab === 'slides' ? tabSlides() : E.tab === 'dados' ? (p.mode === 'slides' ? tabPessoas() : tabDados()) : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
+    <div id="ed-body">${E.tab === 'acomp' ? '' : E.tab === 'slides' ? tabSlides() : E.tab === 'dados' ? (p.mode === 'slides' ? tabPessoas() : tabDados()) : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
+  if (E.tab === 'acomp') tabAcompanhamento();
   bindInputs(app);
   if (E.tab === 'gerar') renderPreview();
   if (E.tab === 'slides') { scaleFrames(app); new ResizeObserver(() => scaleFrames(app)).observe($('#ed-body')); }
@@ -1427,7 +1443,7 @@ function tabGerar() {
       <select id="theme-quick">${Object.entries(THEMES).map(([k, v]) => `<option value="${k}" ${p.theme === k ? 'selected' : ''}>${esc(v)}</option>`).join('')}</select></label>
     <span class="spacer"></span>
     <button class="btn" data-action="export-pdf">Gerar PDF</button>
-    ${p.isTemplate ? '' : `<button class="btn primary" data-action="send-program" data-id="${esc(p.id)}">Enviar pelo WhatsApp</button>`}
+    ${p.isTemplate ? '' : `<button class="btn" data-action="send-program" data-id="${esc(p.id)}">Enviar PDF pelo WhatsApp</button><button class="btn primary" data-action="student-access" data-id="${esc(p.id)}">Liberar acesso ao aluno</button>`}
   </div>
   ${warn.length ? `<div class="section card small" style="border-color:#5a4a2c">${warn.map((w) => '⚠ ' + esc(w)).join('<br>')}</div>` : ''}
   <div class="section"><div id="preview" class="preview-list"></div></div>`;
@@ -1843,7 +1859,7 @@ function layerHTML(l, p, selId) {
   return `<div class="ly ly-${l.type}${sel ? ' sel' : ''}" data-lid="${esc(l.id)}" style="${st}">${inner}${handles}</div>`;
 }
 function pageSlideHTML(s, p, selId) {
-  const bg = blobURL(s.bg);
+  const bg = blobURL(s.bg) || s.bgUrl || '';
   return `<div class="slide sp" style="width:${s.w}px;height:${s.h}px;background:${esc(s.bgColor || '#000')}">`
     + (bg ? `<div class="bg sp-bg" style="background-image:url('${bg}')"></div>` : '')
     + (s.layers || []).map((l) => layerHTML(l, p, selId)).join('') + '</div>';
@@ -2349,6 +2365,588 @@ function chooseImportTarget(pdfId, pages) {
   };
 }
 
+/* =========================================================
+ * Nuvem (Supabase): conta do personal, sincronização, acesso do aluno
+ * ======================================================= */
+const SB_URL = 'https://dzmgbvyffxtcjsdpedqb.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR6bWdidnlmZnh0Y2pzZHBlZHFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ5NTc1NjMsImV4cCI6MjExMDUzMzU2M30.SwPdVvklPQrSm1dnsLbGvEk8Li0VsgfE3siegg_iXh8';
+const sb = window.supabase ? window.supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: true, storageKey: 'tps-auth', autoRefreshToken: true } }) : null;
+const CLOUD = { user: null, queue: new Map(), timer: null, busy: false, lastSync: 0, error: '' };
+const SYNC_STORES = ['programs', 'students', 'trainers', 'settings'];
+const fmtCode = (c) => String(c || '').replace(/^(.{4})(.{4})$/, '$1-$2');
+
+function cloudJSON(obj) {
+  // Blobs (imagens de slides) não vão no JSON: vão para o Storage (bgUrl)
+  return JSON.parse(JSON.stringify(obj, (k, v) => (v instanceof Blob ? undefined : v)));
+}
+function queueSync(store, id, del = false) {
+  if (!CLOUD.user || !SYNC_STORES.includes(store)) return;
+  CLOUD.queue.set(store + '|' + id, { store, id, del });
+  clearTimeout(CLOUD.timer);
+  CLOUD.timer = setTimeout(flushSync, 1500);
+}
+async function uploadSlideImages(p) {
+  let changed = false;
+  for (const s of p.slides || []) {
+    if (s.bg instanceof Blob && s.bgUploaded !== s.bg.size) {
+      const path = `${CLOUD.user.id}/${p.id}/${s.id}-${Date.now()}.jpg`;
+      const { error } = await sb.storage.from('slides').upload(path, s.bg, { contentType: 'image/jpeg', upsert: true });
+      if (error) throw error;
+      s.bgUrl = sb.storage.from('slides').getPublicUrl(path).data.publicUrl;
+      s.bgUploaded = s.bg.size;
+      changed = true;
+    }
+  }
+  if (changed) await DB.put('programs', p);
+}
+async function flushSync() {
+  if (!CLOUD.user || CLOUD.busy || !CLOUD.queue.size) return;
+  CLOUD.busy = true;
+  const jobs = [...CLOUD.queue.values()];
+  CLOUD.queue.clear();
+  try {
+    const up = [];
+    for (const j of jobs) {
+      if (j.del) {
+        await sb.from('items').delete().eq('store', j.store).eq('id', j.id);
+        continue;
+      }
+      const obj = j.store === 'settings' ? S.settings : byId(S[j.store], j.id);
+      if (!obj) continue;
+      if (j.store === 'programs' && obj.mode === 'slides') await uploadSlideImages(obj);
+      up.push({ owner: CLOUD.user.id, store: j.store, id: j.id, data: cloudJSON(obj), updated_at: new Date(obj.updatedAt || Date.now()).toISOString() });
+    }
+    for (let i = 0; i < up.length; i += 20) {
+      const { error } = await sb.from('items').upsert(up.slice(i, i + 20));
+      if (error) throw error;
+    }
+    CLOUD.lastSync = Date.now();
+    CLOUD.error = '';
+  } catch (e) {
+    console.warn('sync', e);
+    CLOUD.error = e.message || 'falha ao sincronizar';
+    jobs.forEach((j) => CLOUD.queue.set(j.store + '|' + j.id, j));
+    clearTimeout(CLOUD.timer);
+    CLOUD.timer = setTimeout(flushSync, 15000);
+  } finally {
+    CLOUD.busy = false;
+    updateCloudBadge();
+  }
+}
+async function syncNow() {
+  clearTimeout(CLOUD.timer);
+  while (CLOUD.busy) await sleep(200);
+  await flushSync();
+  if (CLOUD.error) throw new Error(CLOUD.error);
+}
+/** Ao entrar: junta o que está no aparelho com o que está na nuvem (o mais recente vence). */
+async function pullAndMerge() {
+  const { data, error } = await sb.from('items').select('store,id,data');
+  if (error) throw error;
+  const remote = new Map(data.map((r) => [r.store + '|' + r.id, r]));
+  for (const r of data) {
+    const d = r.data;
+    if (r.store === 'settings') {
+      if ((d.updatedAt || 0) > (S.settings.updatedAt || 0)) { S.settings = { ...S.settings, ...d }; await DB.put('settings', S.settings); }
+      continue;
+    }
+    const local = byId(S[r.store], r.id);
+    if (!local || (d.updatedAt || 0) > (local.updatedAt || 0)) {
+      if (local && r.store === 'programs') {
+        // preserva as imagens locais de slides que ainda batem
+        (d.slides || []).forEach((sl) => { const ls = (local.slides || []).find((x) => x.id === sl.id); if (ls && ls.bg instanceof Blob && ls.bgUploaded === sl.bgUploaded) sl.bg = ls.bg; });
+      }
+      await DB.put(r.store, d);
+      upsert(S[r.store], d);
+    }
+  }
+  for (const st of ['programs', 'students', 'trainers']) {
+    for (const x of S[st]) {
+      const r = remote.get(st + '|' + x.id);
+      if (!r || (x.updatedAt || 0) > (r.data.updatedAt || 0)) CLOUD.queue.set(st + '|' + x.id, { store: st, id: x.id });
+    }
+  }
+  if (!remote.has('settings|app') || (S.settings.updatedAt || 0) > ((remote.get('settings|app') || {}).data || {}).updatedAt) CLOUD.queue.set('settings|app', { store: 'settings', id: 'app' });
+  await flushSync();
+}
+async function cloudInit() {
+  if (!sb) return;
+  const { data } = await sb.auth.getSession();
+  CLOUD.user = data.session ? data.session.user : null;
+  sb.auth.onAuthStateChange((ev, session) => {
+    const was = CLOUD.user;
+    CLOUD.user = session ? session.user : null;
+    updateCloudBadge();
+    if (!was && CLOUD.user && ev === 'SIGNED_IN') pullAndMerge().then(softRefresh).catch((e) => toast('Erro ao sincronizar: ' + e.message));
+  });
+  updateCloudBadge();
+  if (CLOUD.user) pullAndMerge().then(softRefresh).catch((e) => console.warn(e));
+}
+/** Atualiza a tela depois de sincronizar, sem fechar janelas abertas nem atrapalhar a edição. */
+function softRefresh() {
+  if ($('#modal-root').innerHTML || $('.busy')) return;
+  const h = location.hash || '#/';
+  if (['#/', '#/biblioteca', '#/alunos', '#/config', '#/novo'].includes(h) || h === '#') route();
+}
+function updateCloudBadge() {
+  const b = $('#cloud-badge');
+  if (!b) return;
+  if (!CLOUD.user) { b.textContent = 'Entrar'; b.className = 'cloud-badge off'; b.title = 'Entre para salvar na nuvem e liberar acesso aos alunos'; return; }
+  b.textContent = CLOUD.error ? '⚠ Nuvem' : CLOUD.busy || CLOUD.queue.size ? '⟳ Nuvem' : '✓ Nuvem';
+  b.className = 'cloud-badge ' + (CLOUD.error ? 'err' : 'on');
+  b.title = CLOUD.error ? 'Erro ao sincronizar: ' + CLOUD.error : 'Salvo na nuvem' + (CLOUD.lastSync ? ' às ' + new Date(CLOUD.lastSync).toLocaleTimeString('pt-BR') : '');
+}
+
+/* ---- Conta do personal ---- */
+const AUTH_ERRORS = {
+  'Invalid login credentials': 'E-mail ou senha incorretos.',
+  'Email not confirmed': 'Confirme seu e-mail pelo link que enviamos antes de entrar.',
+  'User already registered': 'Este e-mail já tem conta. Use "Entrar".',
+};
+function authError(e) {
+  const m = (e && e.message) || String(e);
+  if (/password/i.test(m) && /6/.test(m)) return 'A senha precisa ter pelo menos 6 caracteres.';
+  return AUTH_ERRORS[m] || m;
+}
+function openLogin(after) {
+  if (!sb) { toast('Sem conexão com a nuvem.'); return; }
+  const body = openModal('Sua conta Trainer Pro', `
+    <p class="muted" style="margin-top:0">Com a conta, seus programas ficam salvos na nuvem (em qualquer aparelho) e você libera o acesso dos alunos ao app.</p>
+    <div class="stack">
+      <label class="field"><span>E-mail</span><input type="text" id="lg-email" autocomplete="email" inputmode="email"></label>
+      <label class="field"><span>Senha</span><input type="password" id="lg-pass" autocomplete="current-password" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:var(--text)"></label>
+      <p class="small" id="lg-msg" style="margin:0;color:var(--gold-2)"></p>
+      <div class="row"><button class="btn primary" id="lg-in">Entrar</button><button class="btn" id="lg-up">Criar conta</button><span class="spacer"></span><button class="btn ghost sm" id="lg-reset">Esqueci a senha</button></div>
+    </div>`);
+  const msg = (t) => { $('#lg-msg', body).textContent = t; };
+  const creds = () => ({ email: $('#lg-email', body).value.trim(), password: $('#lg-pass', body).value });
+  const done = () => { closeModal(); toast('Conta conectada. Sincronizando…'); if (after) after(); };
+  $('#lg-in', body).onclick = async () => {
+    msg('Entrando…');
+    const { error } = await sb.auth.signInWithPassword(creds());
+    if (error) return msg(authError(error));
+    done();
+  };
+  $('#lg-up', body).onclick = async () => {
+    const c = creds();
+    if (!c.email || c.password.length < 6) return msg('Informe o e-mail e uma senha com pelo menos 6 caracteres.');
+    msg('Criando conta…');
+    const { data, error } = await sb.auth.signUp({ ...c, options: { emailRedirectTo: location.origin + location.pathname } });
+    if (error) return msg(authError(error));
+    if (!data.session) return msg('Conta criada. Abra o e-mail de confirmação que enviamos e depois clique em "Entrar".');
+    done();
+  };
+  $('#lg-reset', body).onclick = async () => {
+    const email = $('#lg-email', body).value.trim();
+    if (!email) return msg('Digite seu e-mail acima.');
+    const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + location.pathname });
+    msg(error ? authError(error) : 'Enviamos um link para redefinir a senha.');
+  };
+  setTimeout(() => $('#lg-email', body).focus(), 50);
+}
+actions.login = () => openLogin(() => route());
+actions.logout = async () => {
+  if (!confirm('Sair da conta? Os dados continuam neste aparelho e na nuvem.')) return;
+  await sb.auth.signOut();
+  route();
+};
+actions['cloud-badge'] = () => { if (CLOUD.user) location.hash = '#/config'; else openLogin(() => route()); };
+actions['sync-now'] = async () => {
+  try { await withBusy('Sincronizando…', async () => { await pullAndMerge(); await syncNow(); return true; }); toast('Tudo sincronizado'); route(); } catch (e) { toast('Erro: ' + e.message); }
+};
+function cloudCardHTML() {
+  if (!sb) return '';
+  if (!CLOUD.user) {
+    return `<div class="card stack"><h2>Conta na nuvem</h2>
+      <p class="muted" style="margin:0">Entre para salvar seus programas na nuvem, usar em qualquer aparelho e liberar o acesso dos alunos ao app.</p>
+      <div class="row"><button class="btn primary" data-action="login">Entrar ou criar conta</button></div></div>`;
+  }
+  return `<div class="card stack"><h2>Conta na nuvem</h2>
+    <p style="margin:0">Conectado como <b>${esc(CLOUD.user.email)}</b></p>
+    <p class="small muted" style="margin:0">${CLOUD.error ? '⚠ ' + esc(CLOUD.error) : CLOUD.lastSync ? 'Sincronizado às ' + new Date(CLOUD.lastSync).toLocaleTimeString('pt-BR') : 'Sincronização automática ativa.'}</p>
+    <div class="row"><button class="btn" data-action="sync-now">Sincronizar agora</button><button class="btn ghost" data-action="logout">Sair da conta</button></div></div>`;
+}
+
+/* ---- Acesso do aluno (código) ---- */
+const studentLink = () => location.origin + location.pathname + '#/aluno';
+function accessStatus(a) {
+  if (!a.active) return ['Desativado', 'off'];
+  if (a.expires_at && new Date(a.expires_at) < new Date()) return ['Expirado', 'off'];
+  return ['Ativo', 'on'];
+}
+function accessMessage(p, a) {
+  const st = byId(S.students, p.studentId), tr = byId(S.trainers, p.trainerId);
+  return `Olá${st ? ' ' + st.name.split(' ')[0] : ''}! Seu programa de treino "${p.title}" já está no app.\n\n1) Acesse: ${studentLink()}\n2) Digite o código: ${fmtCode(a.code)}\n\nLá você vê os treinos com fotos e explicações, marca o treino feito e registra suas cargas.${a.expires_at ? `\nAcesso válido até ${new Date(a.expires_at).toLocaleDateString('pt-BR')}.` : ''}${tr ? '\n\n' + tr.name : ''}`;
+}
+actions['student-access'] = async (el, ev) => {
+  if (ev) ev.stopPropagation();
+  const p = byId(S.programs, el.dataset.id || (E.p && E.p.id));
+  if (!CLOUD.user) {
+    openModal('Liberar acesso ao aluno', `<p>Para o aluno acessar o programa pelo app, entre na sua conta (os programas passam a ficar na nuvem).</p>
+      <div class="row"><button class="btn primary" id="la-login">Entrar ou criar conta</button></div>`);
+    $('#la-login').onclick = () => openLogin(() => actions['student-access'](el));
+    return;
+  }
+  await openAccessModal(p);
+};
+async function openAccessModal(p) {
+  if (E.p && E.p.id === p.id) await saveSoon.flush();
+  queueSync('programs', p.id);
+  if (p.studentId) queueSync('students', p.studentId);
+  if (p.trainerId) queueSync('trainers', p.trainerId);
+  const ok = await withBusy('Enviando o programa para a nuvem…', async () => { await syncNow(); return true; });
+  if (!ok) return;
+  const st = byId(S.students, p.studentId);
+  const body = openModal('Acesso do aluno ao app', `
+    <p class="muted" style="margin-top:0">O aluno abre o link, digita o código e vê "${esc(p.title)}" sempre atualizado: se você editar o programa, ele vê na hora. Ele também marca os treinos feitos e registra as cargas.</p>
+    <div id="acc-list" class="stack"><p class="muted">Carregando…</p></div>
+    <div class="card stack" style="margin-top:14px;background:var(--bg)">
+      <strong>Gerar novo código${st ? ' para ' + esc(st.name.split(' ')[0]) : ''}</strong>
+      <div class="row">
+        <label class="field" style="min-width:200px"><span>Validade</span><select id="acc-valid">
+          <option value="">Até eu desativar</option><option value="30" selected>30 dias (ciclo do programa)</option><option value="60">60 dias</option><option value="90">90 dias</option><option value="date">Data específica…</option></select></label>
+        <label class="field hidden" id="acc-date-w"><span>Válido até</span><input type="date" id="acc-date" style="padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:var(--text)"></label>
+        <button class="btn primary" id="acc-new" style="align-self:flex-end">Gerar código</button>
+      </div>
+    </div>`);
+  $('#acc-valid', body).onchange = (e) => $('#acc-date-w', body).classList.toggle('hidden', e.target.value !== 'date');
+  const expiresFrom = () => {
+    const v = $('#acc-valid', body).value;
+    if (!v) return null;
+    if (v === 'date') { const d = $('#acc-date', body).value; return d ? new Date(d + 'T23:59:59').toISOString() : undefined; }
+    return new Date(Date.now() + (+v) * 86400000).toISOString();
+  };
+  const load = async () => {
+    const { data, error } = await sb.from('student_access').select('*').eq('program_ref', p.id).order('created_at', { ascending: false });
+    const box = $('#acc-list', body);
+    if (!box) return;
+    if (error) { box.innerHTML = `<p>Erro: ${esc(error.message)}</p>`; return; }
+    if (!data.length) { box.innerHTML = '<p class="muted">Nenhum código gerado para este programa ainda.</p>'; return; }
+    box.innerHTML = data.map((a) => {
+      const [label, cls] = accessStatus(a);
+      return `<div class="card acc-item">
+        <div class="row"><span class="acc-code">${esc(fmtCode(a.code))}</span><span class="chip ${cls === 'on' ? 'gold' : ''}">${label}</span><span class="spacer"></span>
+          <span class="small muted">${a.expires_at ? 'Válido até ' + new Date(a.expires_at).toLocaleDateString('pt-BR') : 'Sem validade'} · ${a.last_seen_at ? 'Último acesso ' + new Date(a.last_seen_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : 'Ainda não acessou'}</span></div>
+        <div class="row" style="margin-top:10px;gap:6px">
+          <button class="btn sm primary" data-acc="wa" data-id="${a.id}">Enviar pelo WhatsApp</button>
+          <button class="btn sm" data-acc="copy" data-id="${a.id}">Copiar mensagem</button>
+          <button class="btn sm" data-acc="toggle" data-id="${a.id}">${a.active ? 'Desativar' : 'Reativar'}</button>
+          <button class="btn sm" data-acc="renew" data-id="${a.id}">+30 dias</button>
+          <button class="btn sm danger" data-acc="del" data-id="${a.id}" title="Excluir código e histórico">✕</button>
+        </div></div>`;
+    }).join('');
+    $$('[data-acc]', box).forEach((b) => b.addEventListener('click', async () => {
+      const a = data.find((x) => x.id === b.dataset.id);
+      const kind = b.dataset.acc;
+      if (kind === 'wa' || kind === 'copy') {
+        const text = accessMessage(p, a);
+        if (kind === 'copy') { navigator.clipboard.writeText(text).then(() => toast('Mensagem copiada'), () => toast('Não foi possível copiar')); return; }
+        window.open(`https://wa.me/${waNumber(byId(S.students, p.studentId))}?text=${encodeURIComponent(text)}`, '_blank');
+        return;
+      }
+      let res;
+      if (kind === 'toggle') res = await sb.from('student_access').update({ active: !a.active }).eq('id', a.id);
+      if (kind === 'renew') {
+        const base = a.expires_at && new Date(a.expires_at) > new Date() ? new Date(a.expires_at) : new Date();
+        res = await sb.from('student_access').update({ expires_at: new Date(base.getTime() + 30 * 86400000).toISOString(), active: true }).eq('id', a.id);
+      }
+      if (kind === 'del') {
+        if (!confirm('Excluir este código? O aluno perde o acesso e o histórico de treinos dele é apagado.')) return;
+        res = await sb.from('student_access').delete().eq('id', a.id);
+      }
+      if (res && res.error) toast('Erro: ' + res.error.message); else load();
+    }));
+  };
+  $('#acc-new', body).onclick = async () => {
+    const exp = expiresFrom();
+    if (exp === undefined) { toast('Escolha a data'); return; }
+    const { error } = await sb.from('student_access').insert({ program_ref: p.id, student_ref: p.studentId || null, student_name: st ? st.name : null, expires_at: exp });
+    if (error) { toast('Erro: ' + error.message); return; }
+    toast('Código gerado');
+    load();
+  };
+  load();
+}
+
+/* ---- Acompanhamento (personal vê os treinos do aluno) ---- */
+async function tabAcompanhamento() {
+  const box = $('#ed-body');
+  const p = E.p;
+  if (!CLOUD.user) {
+    box.innerHTML = `<div class="section empty"><h2>Acompanhamento</h2><p>Entre na sua conta e libere o acesso do aluno para ver aqui os treinos feitos e as cargas registradas.</p><button class="btn primary" data-action="login">Entrar ou criar conta</button></div>`;
+    return;
+  }
+  box.innerHTML = '<div class="section muted">Carregando…</div>';
+  const { data: acc, error: e1 } = await sb.from('student_access').select('id,code,active,expires_at,last_seen_at').eq('program_ref', p.id);
+  if (e1) { box.innerHTML = `<div class="section">Erro: ${esc(e1.message)}</div>`; return; }
+  if (!acc.length) {
+    box.innerHTML = `<div class="section empty"><h2>Nenhum acesso liberado</h2><p>Gere o código para o aluno usar o app. Os treinos que ele marcar aparecem aqui.</p><button class="btn primary" data-action="student-access" data-id="${esc(p.id)}">Liberar acesso ao aluno</button></div>`;
+    return;
+  }
+  const { data: logs, error: e2 } = await sb.from('workout_logs').select('*').in('access_id', acc.map((a) => a.id)).order('log_date', { ascending: false }).order('created_at', { ascending: false }).limit(200);
+  if (e2) { box.innerHTML = `<div class="section">Erro: ${esc(e2.message)}</div>`; return; }
+  const last = acc.map((a) => a.last_seen_at).filter(Boolean).sort().pop();
+  const since30 = logs.filter((l) => new Date(l.log_date) > new Date(Date.now() - 30 * 86400000)).length;
+  box.innerHTML = `
+    <div class="section grid three">
+      <div class="card"><div class="small muted">Treinos registrados</div><div class="kpi">${logs.length}</div></div>
+      <div class="card"><div class="small muted">Nos últimos 30 dias</div><div class="kpi">${since30}</div></div>
+      <div class="card"><div class="small muted">Último acesso ao app</div><div class="kpi sm">${last ? new Date(last).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : '—'}</div></div>
+    </div>
+    <div class="section row"><button class="btn sm" data-action="student-access" data-id="${esc(p.id)}">Gerenciar acesso do aluno</button><button class="btn sm ghost" data-action="tab" data-tab="acomp">Atualizar</button></div>
+    <div class="section stack">${logs.length ? logs.map((l) => `
+      <div class="card">
+        <div class="row"><strong>${new Date(l.log_date + 'T12:00:00').toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit' })}</strong><span class="chip gold">${esc(l.workout_name || 'Treino')}</span>
+          <span class="small muted">${(l.exercises || []).filter((x) => (x.sets || []).some((s) => s.done)).length} de ${(l.exercises || []).length} exercícios</span></div>
+        <table class="tpl-table" style="margin-top:8px">${(l.exercises || []).map((x) => `<tr><td>${esc(x.name)}</td><td>${(x.sets || []).filter((s) => s.done || s.reps || s.load).map((s) => `${esc(s.reps || '–')}${s.load ? ' × ' + esc(s.load) + 'kg' : ''}${s.done ? '' : ' (não feita)'}`).join(' · ') || '<span class="muted">—</span>'}</td></tr>`).join('')}</table>
+        ${l.notes ? `<p class="small" style="margin:8px 0 0">💬 ${esc(l.notes)}</p>` : ''}
+      </div>`).join('') : '<div class="empty">O aluno ainda não registrou treinos.</div>'}</div>`;
+}
+
+/* =========================================================
+ * Área do aluno (#/aluno)
+ * ======================================================= */
+const ST = { code: '', data: null, wid: null, timer: null };
+const STUDENT_ERRORS = {
+  INVALID_CODE: 'Código não encontrado. Confira com seu personal.',
+  INACTIVE: 'Este acesso foi desativado pelo seu personal.',
+  EXPIRED: 'Seu acesso expirou. Fale com seu personal para renovar.',
+  TOO_MANY_ATTEMPTS: 'Muitas tentativas. Aguarde 1 hora e tente de novo.',
+  PROGRAM_NOT_FOUND: 'O programa não está disponível. Fale com seu personal.',
+};
+function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+function lsSet(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { /* sem armazenamento */ } }
+async function viewStudent(codeFromUrl) {
+  document.body.classList.add('student-mode');
+  if (codeFromUrl) { lsSet('tps-student-code', codeFromUrl); history.replaceState(null, '', '#/aluno'); }
+  ST.code = lsGet('tps-student-code') || '';
+  if (!ST.code) return studentLoginView();
+  app.innerHTML = '<div class="empty" style="margin-top:40px">Carregando seu programa…</div>';
+  const { data, error } = await sb.rpc('student_open', { _code: ST.code });
+  if (error || !data || data.error) {
+    const msg = error ? 'Sem conexão. Verifique a internet e tente de novo.' : STUDENT_ERRORS[data.error] || data.error;
+    if (data && ['INVALID_CODE', 'INACTIVE', 'EXPIRED', 'PROGRAM_NOT_FOUND'].includes(data.error)) lsSet('tps-student-code', null);
+    return studentLoginView(msg);
+  }
+  ST.data = data;
+  renderStudent();
+}
+function studentLoginView(msg = '') {
+  app.innerHTML = `
+    <div class="st-login card">
+      <div class="brand-mark" style="width:56px;height:56px;font-size:22px;margin:0 auto">TP</div>
+      <h1 style="text-align:center;margin-top:14px">Seu programa de treino</h1>
+      <p class="muted" style="text-align:center">Digite o código que seu personal enviou.</p>
+      <input type="text" id="st-code" placeholder="XXXX-XXXX" maxlength="9" autocomplete="one-time-code" autocapitalize="characters" class="st-code-input">
+      ${msg ? `<p class="small" style="color:var(--gold-2);text-align:center">${esc(msg)}</p>` : ''}
+      <button class="btn primary lg" id="st-go" style="width:100%">Entrar</button>
+      <p class="small muted" style="text-align:center;margin-bottom:0">É personal? <a href="#/" data-action="leave-student">Abrir o Trainer Pro Studio</a></p>
+    </div>`;
+  const go = () => {
+    const c = $('#st-code').value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (c.length < 8) { toast('O código tem 8 caracteres'); return; }
+    lsSet('tps-student-code', c);
+    viewStudent();
+  };
+  $('#st-go').onclick = go;
+  $('#st-code').addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+  $('#st-code').focus();
+}
+actions['leave-student'] = () => { location.hash = '#/'; location.reload(); };
+actions['st-logout'] = () => { if (!confirm('Sair? Para voltar, use o código de novo.')) return; lsSet('tps-student-code', null); ST.data = null; studentLoginView(); };
+function lastLogFor(wref) { return (ST.data.logs || []).find((l) => l.workout_ref === wref); }
+function lastSetsFor(exRef, exName) {
+  for (const l of ST.data.logs || []) {
+    const x = (l.exercises || []).find((e) => e.ref === exRef || e.name === exName);
+    if (x && (x.sets || []).some((s) => s.done && (s.reps || s.load))) return { date: l.log_date, sets: x.sets.filter((s) => s.done) };
+  }
+  return null;
+}
+function nextWorkout(p) {
+  const ws = p.workouts || [];
+  const last = (ST.data.logs || [])[0];
+  if (!last) return ws[0];
+  const i = ws.findIndex((w) => w.id === last.workout_ref);
+  return ws[(i + 1) % ws.length] || ws[0];
+}
+function draftKey(wid) { return `tps-draft-${ST.code}-${wid}`; }
+function loadDraft(wid) { try { return JSON.parse(lsGet(draftKey(wid)) || 'null'); } catch (e) { return null; } }
+function saveDraft(wid, d) { lsSet(draftKey(wid), JSON.stringify(d)); }
+function renderStudent(tab) {
+  const { program: p, trainer: tr, student: st, access } = ST.data;
+  const isSlides = p.mode === 'slides';
+  if (!ST.wid || !(p.workouts || []).some((w) => w.id === ST.wid)) ST.wid = (nextWorkout(p) || {}).id;
+  ST.tab = tab || ST.tab || 'treino';
+  const exp = access.expires_at ? new Date(access.expires_at) : null;
+  const daysLeft = exp ? Math.ceil((exp - new Date()) / 86400000) : null;
+  app.innerHTML = `
+    <div class="st-head card">
+      <div class="row">
+        ${avatarHTML(st && st.photo, st && st.name, 'lg')}
+        <div style="flex:1;min-width:0"><div class="small muted">Olá,</div><h1 style="font-size:24px">${esc(st && st.name ? st.name.split(' ')[0] : 'Aluno')}</h1>
+          <div class="small muted">${esc(p.title)}</div></div>
+        <button class="btn sm ghost" data-action="st-logout">Sair</button>
+      </div>
+      ${tr ? `<div class="row st-trainer">${avatarHTML(tr.photo, tr.name)}<div><div class="small muted">Seu personal</div><strong>${esc(tr.name)}</strong>${tr.cref ? `<div class="small muted">CREF ${esc(tr.cref)}</div>` : ''}</div></div>` : ''}
+      ${daysLeft !== null && daysLeft <= 7 ? `<div class="small" style="color:var(--gold-2);margin-top:10px">Seu acesso vence em ${daysLeft} dia(s). Fale com seu personal para renovar.</div>` : ''}
+    </div>
+    ${isSlides ? '' : `<div class="tabs st-tabs"><button data-action="st-tab" data-tab="treino" class="${ST.tab === 'treino' ? 'active' : ''}">Treino de hoje</button><button data-action="st-tab" data-tab="hist" class="${ST.tab === 'hist' ? 'active' : ''}">Histórico (${(ST.data.logs || []).length})</button><button data-action="st-tab" data-tab="info" class="${ST.tab === 'info' ? 'active' : ''}">Orientações</button></div>`}
+    <div id="st-body"></div>`;
+  if (isSlides) return renderStudentSlides(p);
+  if (ST.tab === 'hist') return renderStudentHistory();
+  if (ST.tab === 'info') return renderStudentInfo(p);
+  renderStudentWorkout(p);
+}
+actions['st-tab'] = (el) => renderStudent(el.dataset.tab);
+function renderStudentSlides(p) {
+  const box = $('#st-body');
+  const { student: st, trainer: tr } = ST.data;
+  const bs = S.students, bt = S.trainers;
+  S.students = st ? [{ ...st, id: p.studentId }] : [];
+  S.trainers = tr ? [{ ...tr, id: p.trainerId }] : [];
+  try {
+    box.innerHTML = `<div class="stack" style="margin-top:14px">${(p.slides || []).map((s) => `<div class="slide-frame" ${frameAttrs(s.w, s.h)}>${pageSlideHTML(s, p)}</div>`).join('')}</div>`;
+  } finally { S.students = bs; S.trainers = bt; }
+  scaleFrames(box);
+  new ResizeObserver(() => scaleFrames(box)).observe(box);
+}
+function renderStudentInfo(p) {
+  const box = $('#st-body');
+  const sec = (h, t) => (t && String(t).trim() ? `<div class="card"><h3>${h}</h3><p style="white-space:pre-line;margin:8px 0 0">${esc(t)}</p></div>` : '');
+  box.innerHTML = `<div class="stack" style="margin-top:14px">
+    ${sec('Sobre o programa', p.overview)}${sec('Aquecimento', p.warmup)}${sec('Progressão', p.objectives)}${sec('Recomendações', p.recommendations)}${sec('Intensidade (PSE)', p.pseNote)}</div>`;
+}
+function renderStudentHistory() {
+  const box = $('#st-body');
+  const logs = ST.data.logs || [];
+  box.innerHTML = logs.length ? `<div class="stack" style="margin-top:14px">${logs.map((l) => `
+    <div class="card"><div class="row"><strong>${new Date(l.log_date + 'T12:00:00').toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit' })}</strong><span class="chip gold">${esc(l.workout_name || 'Treino')}</span><span class="spacer"></span><button class="btn sm ghost" data-action="st-del-log" data-id="${l.id}" title="Apagar registro">✕</button></div>
+      <table class="tpl-table" style="margin-top:8px">${(l.exercises || []).map((x) => `<tr><td>${esc(x.name)}</td><td>${(x.sets || []).filter((s) => s.done).map((s) => `${esc(s.reps || '–')}${s.load ? ' × ' + esc(s.load) + 'kg' : ''}`).join(' · ') || '<span class="muted">—</span>'}</td></tr>`).join('')}</table>
+      ${l.notes ? `<p class="small" style="margin:8px 0 0">💬 ${esc(l.notes)}</p>` : ''}</div>`).join('')}</div>`
+    : '<div class="empty" style="margin-top:14px">Nenhum treino registrado ainda. Marque as séries no "Treino de hoje" e toque em "Concluir treino".</div>';
+}
+actions['st-del-log'] = async (el) => {
+  if (!confirm('Apagar este registro de treino?')) return;
+  const { data, error } = await sb.rpc('student_delete_log', { _code: ST.code, _id: el.dataset.id });
+  if (error || (data && data.error)) { toast('Erro ao apagar'); return; }
+  ST.data.logs = ST.data.logs.filter((l) => l.id !== el.dataset.id);
+  renderStudent('hist');
+};
+function setCount(x) { const n = parseInt(x.sets, 10); return n > 0 && n < 15 ? n : (x.sets ? 1 : 0); }
+function renderStudentWorkout(p) {
+  const box = $('#st-body');
+  const w = (p.workouts || []).find((x) => x.id === ST.wid);
+  if (!w) { box.innerHTML = '<div class="empty">Programa sem treinos.</div>'; return; }
+  const draft = loadDraft(w.id) || {};
+  const last = lastLogFor(w.id);
+  box.innerHTML = `
+    <div class="row st-wsel">${p.workouts.map((x) => `<button class="btn sm ${x.id === w.id ? 'primary' : ''}" data-action="st-w" data-id="${x.id}">${esc(x.name)}</button>`).join('')}</div>
+    <div class="st-wtitle"><h2>${esc(w.name)}</h2>${w.focus ? `<div class="small muted">${esc(w.focus)}</div>` : ''}${last ? `<div class="small muted">Feito pela última vez em ${new Date(last.log_date + 'T12:00:00').toLocaleDateString('pt-BR')}</div>` : ''}</div>
+    <div class="stack">${w.exercises.map((x, i) => {
+      const n = setCount(x);
+      const prev = lastSetsFor(x.id, x.name);
+      const d = (draft.ex || {})[x.id] || {};
+      return `<div class="card st-ex" data-ex="${x.id}">
+        <div class="st-ex-top">
+          ${x.image ? `<img src="${esc(x.image)}" alt="" class="st-ex-img" data-action="st-zoom" data-src="${esc(x.image)}">` : ''}
+          <div style="flex:1;min-width:0"><div class="small muted">${pad2(i + 1)}${x.muscles ? ' · ' + esc(x.muscles) : ''}</div><h3>${esc(x.name)}</h3>
+            <div class="meta" style="margin-top:6px">${x.sets || x.reps ? `<span class="chip gold">${esc(x.sets || '')}${x.sets && x.reps ? ' × ' : ''}${esc(x.reps || '')}</span>` : ''}${x.rest ? `<span class="chip">Descanso ${esc(fmtRest(x.rest))}</span>` : ''}${x.cadence ? `<span class="chip">Cadência ${esc(x.cadence)}</span>` : ''}${x.pse ? `<span class="chip">PSE ${esc(x.pse)}</span>` : ''}</div>
+            ${prev ? `<div class="small" style="margin-top:6px;color:var(--gold-2)">Última vez: ${prev.sets.map((s) => `${esc(s.reps || '–')}${s.load ? '×' + esc(s.load) + 'kg' : ''}`).join(' · ')}</div>` : ''}</div>
+        </div>
+        ${x.execution || x.cautions || x.notes ? `<details class="st-how"><summary>Como fazer</summary>${x.execution ? `<p>${esc(x.execution)}</p>` : ''}${x.cautions ? `<p><b>Cuidados:</b> ${esc(x.cautions)}</p>` : ''}${x.notes ? `<p><b>Obs.:</b> ${esc(x.notes)}</p>` : ''}</details>` : ''}
+        ${n ? `<div class="st-sets">${Array.from({ length: n }, (_, s) => {
+          const ds = (d.sets || [])[s] || {};
+          const ps = prev && prev.sets[s];
+          return `<div class="st-set${ds.done ? ' done' : ''}">
+            <span class="st-set-n">${s + 1}ª</span>
+            <input type="text" inputmode="numeric" data-f="reps" data-s="${s}" value="${esc(ds.reps || '')}" placeholder="${esc(ps && ps.reps ? ps.reps : String(x.reps || 'reps').replace(/\/.*$/, ''))}" ${ps && ps.reps ? 'data-prev="1"' : ''} aria-label="Repetições">
+            <span class="small muted">reps</span>
+            <input type="text" inputmode="decimal" data-f="load" data-s="${s}" value="${esc(ds.load || '')}" placeholder="${esc(ps && ps.load ? ps.load : 'kg')}" ${ps && ps.load ? 'data-prev="1"' : ''} aria-label="Carga em kg">
+            <span class="small muted">kg</span>
+            <button class="st-check" data-action="st-check" data-s="${s}" aria-label="Série feita">${ds.done ? '✓' : ''}</button>
+          </div>`;
+        }).join('')}</div>` : `<div class="row" style="margin-top:10px"><button class="st-check wide${(d.sets || [])[0] && d.sets[0].done ? ' on' : ''}" data-action="st-check" data-s="0">${(d.sets || [])[0] && d.sets[0].done ? '✓ Feito' : 'Marcar como feito'}</button></div>`}
+        ${x.rest ? `<button class="btn sm ghost st-rest" data-action="st-rest" data-rest="${esc(x.rest)}">⏱ Descanso ${esc(fmtRest(x.rest))}</button>` : ''}
+      </div>`;
+    }).join('')}</div>
+    <div class="card stack" style="margin-top:14px">
+      <label class="field"><span>Como foi o treino? (opcional)</span><textarea id="st-notes" rows="2" placeholder="Ex.: senti o joelho no agachamento">${esc(draft.notes || '')}</textarea></label>
+      <button class="btn primary lg" data-action="st-finish">Concluir treino</button>
+    </div>`;
+  box.addEventListener('input', (e) => {
+    const inp = e.target.closest('[data-f]');
+    if (inp) { setDraftValue(w.id, inp.closest('[data-ex]').dataset.ex, +inp.dataset.s, inp.dataset.f, inp.value); return; }
+    if (e.target.id === 'st-notes') { const dr = loadDraft(w.id) || {}; dr.notes = e.target.value; saveDraft(w.id, dr); }
+  });
+}
+function setDraftValue(wid, exId, s, field, value) {
+  const dr = loadDraft(wid) || {};
+  dr.ex = dr.ex || {};
+  dr.ex[exId] = dr.ex[exId] || { sets: [] };
+  dr.ex[exId].sets[s] = { ...(dr.ex[exId].sets[s] || {}), [field]: value };
+  saveDraft(wid, dr);
+  return dr.ex[exId].sets[s];
+}
+actions['st-w'] = (el) => { ST.wid = el.dataset.id; renderStudent('treino'); window.scrollTo(0, 0); };
+actions['st-check'] = (el) => {
+  const card = el.closest('[data-ex]');
+  const s = +el.dataset.s;
+  const row = el.closest('.st-set');
+  const cur = (((loadDraft(ST.wid) || {}).ex || {})[card.dataset.ex] || { sets: [] }).sets[s] || {};
+  // ao marcar sem digitar, usa o que estava sugerido (última vez / prescrito)
+  if (!cur.done && row) {
+    ['reps', 'load'].forEach((f) => {
+      const inp = $(`[data-f="${f}"]`, row);
+      // repete o que foi feito da última vez (não preenche com a faixa prescrita, ex.: 8–12)
+      const exact = inp.dataset.prev || (f === 'reps' && /^\d+$/.test(inp.placeholder));
+      if (!inp.value && exact) { inp.value = inp.placeholder; setDraftValue(ST.wid, card.dataset.ex, s, f, inp.value); }
+    });
+  }
+  const v = setDraftValue(ST.wid, card.dataset.ex, s, 'done', !cur.done);
+  if (row) { row.classList.toggle('done', v.done); el.textContent = v.done ? '✓' : ''; }
+  else { el.classList.toggle('on', v.done); el.textContent = v.done ? '✓ Feito' : 'Marcar como feito'; }
+  if (v.done && row) { const btn = $('.st-rest', card); if (btn) startRest(btn.dataset.rest); }
+};
+function startRest(rest) {
+  const secs = parseInt(String(rest).replace(/\D/g, ''), 10) || 60;
+  clearInterval(ST.timer);
+  let left = /min/i.test(rest) ? secs * 60 : secs;
+  let bar = $('#st-timer');
+  if (!bar) { bar = document.createElement('div'); bar.id = 'st-timer'; bar.className = 'st-timer'; document.body.appendChild(bar); }
+  const draw = () => { bar.innerHTML = `<span>Descanso</span><b>${Math.floor(left / 60)}:${pad2(left % 60)}</b><button class="btn sm" id="st-timer-x">Pular</button>`; $('#st-timer-x').onclick = stop; };
+  const stop = () => { clearInterval(ST.timer); bar.remove(); };
+  draw();
+  ST.timer = setInterval(() => {
+    left--;
+    if (left <= 0) { stop(); if (navigator.vibrate) navigator.vibrate([200, 100, 200]); toast('Descanso terminado. Próxima série!'); return; }
+    draw();
+  }, 1000);
+}
+actions['st-rest'] = (el) => startRest(el.dataset.rest);
+actions['st-zoom'] = (el) => openModal('Exercício', `<img src="${esc(el.dataset.src)}" alt="" style="width:100%;border-radius:10px">`);
+actions['st-finish'] = async () => {
+  const p = ST.data.program;
+  const w = p.workouts.find((x) => x.id === ST.wid);
+  const dr = loadDraft(w.id) || {};
+  const exercises = w.exercises.map((x) => ({ ref: x.id, name: x.name, sets: (((dr.ex || {})[x.id] || {}).sets || []).map((s) => ({ reps: (s && s.reps) || '', load: (s && s.load) || '', done: !!(s && s.done) })) }));
+  const doneCount = exercises.filter((x) => x.sets.some((s) => s.done)).length;
+  if (!doneCount && !confirm('Nenhuma série marcada como feita. Registrar mesmo assim?')) return;
+  const log = { workout_ref: w.id, workout_name: w.name, exercises, notes: dr.notes || '' };
+  const res = await withBusy('Salvando treino…', async () => {
+    const { data, error } = await sb.rpc('student_save_log', { _code: ST.code, _log: log });
+    if (error) throw error;
+    if (data && data.error) throw new Error(STUDENT_ERRORS[data.error] || data.error);
+    return data;
+  });
+  if (!res) return;
+  lsSet(draftKey(w.id), null);
+  ST.data.logs = [{ ...log, id: res.id, log_date: new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' }) }, ...(ST.data.logs || [])];
+  ST.wid = null;
+  toast(`Treino concluído! ${doneCount} exercício(s) registrados. 💪`);
+  renderStudent('hist');
+  window.scrollTo(0, 0);
+};
+
 /* ---- Recorte de imagem ---- */
 const CROP_PRESETS = {
   full: { x: 0, y: 0, w: 1, h: 1 },
@@ -2740,8 +3338,9 @@ async function openPageView(pdfId, n) {
  * ======================================================= */
 function viewConfig() {
   app.innerHTML = `
-    <div class="page-head"><div><h1>Ajustes</h1><p class="muted">Marca, padrões e cópia de segurança</p></div></div>
+    <div class="page-head"><div><h1>Ajustes</h1><p class="muted">Conta, perfil, padrões e cópia de segurança</p></div></div>
     <div class="stack">
+      ${cloudCardHTML()}
       <div class="card stack">
         <h2>Seu perfil de personal</h2>
         <p class="muted" style="margin:0">Nome, foto, CREF e apresentação que aparecem nos programas.</p>
@@ -2836,6 +3435,7 @@ async function seed() {
   await DB.open();
   await loadAll();
   await seed();
+  await cloudInit();
   route();
   tagPendingPdfs();
 })();

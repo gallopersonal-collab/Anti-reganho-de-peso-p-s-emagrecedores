@@ -10,8 +10,19 @@ Como o personal usa
   edite e salve: o modelo fica na Biblioteca para usar com outros alunos.
   Também é possível salvar o programa de um aluno como modelo ("Salvar como modelo").
 
+Acesso do aluno ao app (com conta na nuvem)
+  1. O personal entra na conta (botão "Entrar" no topo) - os dados passam a ficar na nuvem
+  2. No programa do aluno: "Liberar acesso ao aluno" > escolhe a validade
+     (até desativar, 30/60/90 dias ou data) > "Gerar código"
+  3. "Enviar pelo WhatsApp": vai o link + código (ex.: 7F2B-DN5B)
+  4. O aluno abre o link, digita o código e vê os treinos, marca as séries feitas,
+     registra repetições e cargas, usa o cronômetro de descanso e vê o histórico
+  5. O personal acompanha na aba "4. Acompanhamento" e pode desativar ou renovar o código
+  Servidor: Supabase, projeto trainer-pro-studio (detalhes em supabase/README.md)
+
 Onde ficam os dados
-  No navegador do aparelho (IndexedDB). Faça backup em Ajustes > Cópia de segurança.
+  Sem conta: no navegador do aparelho (IndexedDB). Com conta: também na nuvem (Supabase),
+  disponíveis em qualquer aparelho. Backup em Ajustes > Cópia de segurança.
 
 Como publicar
   1. Abra netlify.com/drop
