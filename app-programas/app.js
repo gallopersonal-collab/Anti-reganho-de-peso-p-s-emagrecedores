@@ -258,10 +258,32 @@ function tagChips(t) {
   if (!hasTags(t)) return '';
   return TAG_KEYS.filter((k) => t[k]).map((k) => `<span class="chip ${k === 'obj' ? 'gold' : ''}">${esc(tagLabel(k, t[k]))}</span>`).join('');
 }
-function tagMatch(t, f) { return TAG_KEYS.every((k) => !f[k] || (t && t[k] === f[k])); }
-function tagSelects(f, idp, onlyKeys = TAG_KEYS) {
-  return onlyKeys.map((k) => `<select id="${idp}${k}" data-tagfilter="${k}" style="max-width:190px"><option value="">${TAGS[k].label}: todos</option>${Object.entries(TAGS[k].opts).map(([v, l]) => `<option value="${v}" ${f[k] === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`).join('');
+/* Faixa etária no filtro = idade do aluno. Um programa 20–39 aparece para quem filtra 20–29 ou 30–39. */
+const AGE_FILTER = { '20-29': '20–29 anos', '30-39': '30–39 anos', '40-49': '40–49 anos', '50-60': '50–60 anos' };
+function agesOverlap(a, b) {
+  const [a1, a2] = String(a).split('-').map(Number);
+  const [b1, b2] = String(b).split('-').map(Number);
+  if ([a1, a2, b1, b2].some(isNaN)) return a === b;
+  return a1 <= b2 && b1 <= a2;
 }
+function tagMatchKey(t, k, v) {
+  if (!v) return true;
+  if (!t || !t[k]) return false;
+  return k === 'age' ? agesOverlap(t[k], v) : t[k] === v;
+}
+function tagMatch(t, f, except) { return TAG_KEYS.every((k) => k === except || tagMatchKey(t, k, f[k])); }
+/** Filtros com contagem: cada opção mostra quantos itens existem com os demais filtros aplicados. */
+function tagSelects(f, idp, items) {
+  return TAG_KEYS.map((k) => {
+    const base = items.filter((t) => tagMatch(t, f, k));
+    const opts = k === 'age' ? AGE_FILTER : TAGS[k].opts;
+    return `<select id="${idp}${k}" data-tagfilter="${k}" style="max-width:200px"><option value="">${TAGS[k].label}: todos</option>${Object.entries(opts).map(([v, l]) => {
+      const n = base.filter((t) => tagMatchKey(t, k, v)).length;
+      return `<option value="${v}" ${f[k] === v ? 'selected' : ''} ${n || f[k] === v ? '' : 'disabled'}>${esc(l)} (${n})</option>`;
+    }).join('')}</select>`;
+  }).join('');
+}
+const libraryPdfs = () => S.pdfs.filter((x) => !x.generated);
 
 const DEFAULT_PSE_NOTE = 'Neste programa:\ntrabalhe a maioria das séries entre PSE 7–8.\n\nReserve PSE 9–10 apenas para a última série da semana 4.';
 
@@ -452,19 +474,20 @@ function viewPrograms() {
     <div class="toolbar">
       <input type="search" id="q" placeholder="Buscar por título ou aluno…" value="${esc(S.ui.q)}">
       <select id="fstudent"><option value="">Todos os alunos</option>${studentOpts}</select>
-      ${tagSelects(S.ui.prf, 'prf-')}
+      ${tagSelects(S.ui.prf, 'prf-', [...S.programs.map(progTags), ...libraryPdfs().map((x) => x.tags)])}
+      ${TAG_KEYS.some((k) => S.ui.prf[k]) ? '<button class="btn sm ghost" data-action="prog-clear-filters">Limpar filtros</button>' : ''}
     </div>
     <div id="plist"></div>`;
   $('#q').addEventListener('input', (e) => { S.ui.q = e.target.value; renderProgramList(); });
   $('#fstudent').addEventListener('change', (e) => { S.ui.student = e.target.value; renderProgramList(); });
-  $$('[data-tagfilter]', app).forEach((sel) => sel.addEventListener('change', () => { S.ui.prf[sel.dataset.tagfilter] = sel.value; renderProgramList(); }));
+  $$('[data-tagfilter]', app).forEach((sel) => sel.addEventListener('change', () => { S.ui.prf[sel.dataset.tagfilter] = sel.value; viewPrograms(); }));
   renderProgramList();
 }
 function renderProgramList() {
   const q = S.ui.q.trim().toLowerCase();
   const list = S.programs
     .filter((p) => !S.ui.student || p.studentId === S.ui.student)
-    .filter((p) => tagMatch(p.tags, S.ui.prf))
+    .filter((p) => tagMatch(progTags(p), S.ui.prf))
     .filter((p) => {
       if (!q) return true;
       const st = byId(S.students, p.studentId);
@@ -477,15 +500,34 @@ function renderProgramList() {
       <div class="row" style="justify-content:center"><button class="btn" data-action="import-pdf-new">Importar PDF</button><button class="btn primary" data-action="new-program">+ Novo programa</button></div></div>`;
     return;
   }
-  if (!list.length) { box.innerHTML = `<div class="empty">Nenhum programa encontrado com esse filtro.</div>`; return; }
-  box.innerHTML = `<div class="grid cards">${list.map((p) => {
+  const filtering = TAG_KEYS.some((k) => S.ui.prf[k]);
+  const lib = filtering ? libraryPdfs().filter((x) => tagMatch(x.tags, S.ui.prf)).sort((a, b) => (a.code || a.name).localeCompare(b.code || b.name)) : [];
+  const libHTML = !filtering ? '' : `
+    <div class="section"><h2 style="margin-bottom:4px">Na Biblioteca de Treinos (${lib.length})</h2>
+      <p class="small muted" style="margin:0 0 12px">Modelos em PDF que combinam com os filtros. Use "Criar programa" para personalizar para um aluno.</p>
+      ${lib.length ? `<div class="grid cards">${lib.map((x) => `<div class="card pcard" style="cursor:default">
+        ${x.thumb ? `<img src="${esc(x.thumb)}" alt="" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#fff">` : ''}
+        <h3>${esc(pdfTitle(x))}</h3>
+        <div class="small muted">${esc(x.code || x.name)}</div>
+        <div class="meta">${tagChips(x.tags)}</div>
+        <div class="actions"><button class="btn sm primary" data-action="pdf-to-program" data-id="${esc(x.id)}">Criar programa</button><a class="btn sm" href="#/pdf/${esc(x.id)}">Ver PDF</a></div>
+      </div>`).join('')}</div>` : `<div class="empty" style="padding:24px">Nenhum PDF da biblioteca com essa combinação. ${untaggedNote()}</div>`}
+    </div>`;
+  const ownTitle = filtering ? `<h2 style="margin-bottom:12px">Seus programas (${list.length})</h2>` : '';
+  if (!list.length) {
+    box.innerHTML = (filtering
+      ? `${ownTitle}<div class="empty" style="padding:24px">Nenhum programa seu com esses filtros. Programas criados antes das etiquetas não têm etiqueta: abra o programa e preencha em "1. Dados e capa".</div>`
+      : `<div class="empty">Nenhum programa encontrado com essa busca.</div>`) + libHTML;
+    return;
+  }
+  box.innerHTML = ownTitle + `<div class="grid cards">${list.map((p) => {
     const st = byId(S.students, p.studentId);
     const tr = byId(S.trainers, p.trainerId);
     return `<div class="card pcard" data-action="open-program" data-id="${esc(p.id)}">
       <div class="who">${avatarHTML(st && st.photo, st ? st.name : '?')}
         <div><div class="small muted">${st ? esc(st.name) : 'Sem aluno definido'}</div><div class="small muted">${tr ? 'por ' + esc(tr.name) : ''}</div></div></div>
       <h3>${esc(p.title || 'Sem título')}</h3>
-      ${hasTags(p.tags) ? `<div class="meta">${tagChips(p.tags)}</div>` : ''}
+      ${hasTags(progTags(p)) ? `<div class="meta">${tagChips(progTags(p))}</div>` : ''}
       <div class="meta"><span class="chip gold">${p.workouts.length} treino(s)</span><span class="chip">${totalExercises(p)} exercícios</span><span class="chip">${esc(p.weeks || '?')} semanas</span></div>
       <div class="small muted">Atualizado em ${fmtDate(p.updatedAt)}</div>
       <div class="actions">
@@ -496,8 +538,23 @@ function renderProgramList() {
         <button class="btn sm danger" data-action="del-program" data-id="${esc(p.id)}" title="Excluir">✕</button>
       </div>
     </div>`;
-  }).join('')}</div>`;
+  }).join('')}</div>` + libHTML;
 }
+actions['prog-clear-filters'] = () => { S.ui.prf = {}; viewPrograms(); };
+/** Etiquetas do programa; se não tiver, herda do PDF de origem. */
+function progTags(p) {
+  if (hasTags(p.tags)) return p.tags;
+  const src = p.sourcePdfId && byId(S.pdfs, p.sourcePdfId);
+  return (src && src.tags) || {};
+}
+function untaggedNote() {
+  const n = libraryPdfs().filter((x) => !hasTags(x.tags)).length;
+  return n ? `<br><b>${n} PDF(s) estão sem etiquetas</b> e não entram nos filtros. <a href="#/pdfs" data-action="show-untagged">Ver quais</a>.` : '';
+}
+actions['show-untagged'] = () => {
+  S.ui.pf = {}; S.ui.pq = ''; S.ui.ptype = 'untag';
+  if (location.hash === '#/pdfs') viewPdfs(); else location.hash = '#/pdfs';
+};
 actions['new-program'] = async () => {
   const p = newProgram();
   await saveEntity('programs', p);
@@ -1477,7 +1534,7 @@ function viewPdfs() {
       <button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>
     ${S.pdfs.length ? `<div class="toolbar">
       <input type="search" id="pdf-q" placeholder="Buscar por nome ou código…" value="${esc(S.ui.pq)}" style="max-width:240px">
-      ${tagSelects(f, 'pf-')}
+      ${tagSelects(f, 'pf-', S.pdfs.map((x) => x.tags))}
       <select id="pdf-type" style="max-width:190px">
         <option value="">Todos os PDFs</option>
         <option value="orig" ${S.ui.ptype === 'orig' ? 'selected' : ''}>Originais enviados</option>
@@ -1490,7 +1547,7 @@ function viewPdfs() {
   if (S.pdfs.length) {
     $('#pdf-q').addEventListener('input', (e) => { S.ui.pq = e.target.value; renderPdfList(); });
     $('#pdf-type').addEventListener('change', (e) => { S.ui.ptype = e.target.value; renderPdfList(); });
-    $$('[data-tagfilter]', app).forEach((sel) => sel.addEventListener('change', () => { S.ui.pf[sel.dataset.tagfilter] = sel.value; renderPdfList(); }));
+    $$('[data-tagfilter]', app).forEach((sel) => sel.addEventListener('change', () => { S.ui.pf[sel.dataset.tagfilter] = sel.value; viewPdfs(); }));
   }
   renderPdfList();
 }
@@ -1511,8 +1568,10 @@ function renderPdfList() {
     box.innerHTML = `<div class="empty"><h2>Nenhum PDF ainda</h2><p>Envie os PDFs dos programas que você já tem. O app lê o código de cada programa (ex.: HIP-M-20-29-INI-ACA) e etiqueta sozinho.</p><button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>`;
     return;
   }
-  if (!list.length) { box.innerHTML = '<div class="empty">Nenhum PDF com esses filtros.</div>'; return; }
-  box.innerHTML = `<div class="stack">${list.map((x) => {
+  const nUntag = libraryPdfs().filter((x) => !hasTags(x.tags)).length;
+  const banner = nUntag && S.ui.ptype !== 'untag' ? `<div class="card small" style="margin-bottom:12px;border-color:#5a4a2c">⚠ ${nUntag} PDF(s) sem etiquetas não aparecem nos filtros. <a href="#/pdfs" data-action="show-untagged">Ver e etiquetar</a></div>` : '';
+  if (!list.length) { box.innerHTML = banner + '<div class="empty">Nenhum PDF com essa combinação de filtros. Os números entre parênteses em cada filtro mostram quantos PDFs existem para cada opção.</div>'; return; }
+  box.innerHTML = banner + `<div class="stack">${list.map((x) => {
     const p = prog(x);
     return `<div class="card pdf-item">
       ${x.thumb ? `<img class="pdf-thumb" src="${esc(x.thumb)}" alt="">` : '<span class="pdf-thumb"></span>'}
