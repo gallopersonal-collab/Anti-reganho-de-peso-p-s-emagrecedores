@@ -29,6 +29,10 @@ def main() -> None:
         assert tag in html, tag
         code = safe((vendor / name).read_text(encoding="utf-8"))
         html = html.replace(tag, f"<script>\n{code}\n</script>")
+    tag = '<script src="library-data.js"></script>'
+    assert tag in html, tag
+    lib = safe((APP / "library-data.js").read_text(encoding="utf-8"))
+    html = html.replace(tag, f"<script>\n{lib}\n</script>")
     tag = '<script src="app.js"></script>'
     assert tag in html
     app = safe((APP / "app.js").read_text(encoding="utf-8"))

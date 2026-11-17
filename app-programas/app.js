@@ -320,6 +320,42 @@ function newProgram(over = {}) {
     ...over,
   };
 }
+/* Conteúdo completo dos 60 programas da Biblioteca (library-data.js) */
+const libraryEntry = (code) => (window.LIBRARY_DATA || {})[code];
+function programCode(p) {
+  const src = p.sourcePdfId && byId(S.pdfs, p.sourcePdfId);
+  if (src && src.code) return src.code;
+  if (p.libraryCode) return p.libraryCode;
+  const t = p.tags || {};
+  return TAG_KEYS.every((k) => t[k]) ? `${t.obj}-${t.sex}-${t.age}-${t.level}-${t.env}` : '';
+}
+function fillFromLibrary(p, code) {
+  const d = libraryEntry(code);
+  if (!d) return false;
+  p.title = d.title;
+  p.overview = d.overview;
+  p.warmup = d.warmup.join('\n');
+  p.objectives = d.weeks.join('\n');
+  p.recommendations = d.load.join('\n');
+  p.workouts = d.workouts.map((w) => newWorkout(w.name, {
+    focus: w.focus,
+    exercises: w.exercises.map((x) => newExercise({ ...x, pse: '', load: '', notes: '' })),
+  }));
+  p.libraryCode = code;
+  const t = parseCode(code);
+  if (t && !hasTags(p.tags)) { const { code: _c, ...tags } = t; p.tags = tags; }
+  return true;
+}
+function libBanner(p) {
+  const code = programCode(p);
+  const d = code && libraryEntry(code);
+  if (!d) return '';
+  const empty = !totalExercises(p);
+  return `<div class="section card row" style="border-color:${empty ? 'var(--gold)' : 'var(--line)'}">
+    <div style="flex:1;min-width:220px"><strong>${empty ? 'Conteúdo da Biblioteca disponível' : 'Programa da Biblioteca'}:</strong> ${esc(d.title)} <span class="muted small">(${esc(code)} · ${d.workouts.length} treinos)</span>
+      <div class="small muted">${empty ? 'Preencha treinos, exercícios, séries, repetições, descanso, cadência, execução e cuidados com um clique. Depois edite o que quiser.' : 'Use para restaurar o conteúdo original. Substitui treinos e textos atuais.'}</div></div>
+    <button class="btn ${empty ? 'primary' : 'sm'}" data-action="fill-library">${empty ? 'Preencher com a Biblioteca' : 'Restaurar da Biblioteca'}</button></div>`;
+}
 function totalExercises(p) { return p.workouts.reduce((n, w) => n + w.exercises.length, 0); }
 
 /* =========================================================
@@ -606,9 +642,10 @@ async function createProgramFromPdf(pdfId) {
     over.structure = cat[1] === '3x' ? 'Full body A/B/C' : '';
   }
   const p = newProgram(over);
+  if (meta.code) fillFromLibrary(p, meta.code);
   await saveEntity('programs', p);
   location.hash = `#/programa/${p.id}/treinos`;
-  setTimeout(() => toast('PDF salvo. Agora puxe as páginas dos exercícios.'), 300);
+  setTimeout(() => toast(p.libraryCode ? 'Programa criado com o conteúdo da Biblioteca. Edite o que quiser.' : 'PDF salvo. Agora puxe as páginas dos exercícios.'), 300);
 }
 
 /* =========================================================
@@ -673,6 +710,16 @@ function renderEditor() {
   bindInputs(app);
   if (E.tab === 'gerar') renderPreview();
 }
+actions['fill-library'] = async () => {
+  const p = E.p;
+  if (totalExercises(p) && !confirm('Substituir os treinos e textos atuais pelo conteúdo original da Biblioteca? As fotos dos exercícios serão removidas.')) return;
+  fillFromLibrary(p, programCode(p));
+  E.open.clear();
+  saveSoon();
+  await saveSoon.flush();
+  renderEditor();
+  toast('Programa preenchido com a Biblioteca');
+};
 actions.tab = async (el) => {
   await saveSoon.flush();
   E.tab = el.dataset.tab;
@@ -716,8 +763,8 @@ function tabDados() {
   const p = E.p;
   const st = byId(S.students, p.studentId);
   const tr = byId(S.trainers, p.trainerId);
-  return `
-  <div class="section grid two">
+  return `${libBanner(p)}
+  <div class="section grid two" id="sec-pessoas">
     <div class="card stack">
       <h2>Aluno(a)</h2>
       <div class="photo-pick">${avatarHTML(st && st.photo, st ? st.name : '?', 'lg')}
@@ -740,7 +787,7 @@ function tabDados() {
     </div>
   </div>
 
-  <div class="section card stack">
+  <div class="section card stack" id="sec-capa">
     <h2>Capa do programa</h2>
     <div class="grid two">
       <label class="field"><span>Título do programa</span><input type="text" data-bind="title" placeholder="Ex.: Projeto Fundação Muscular"></label>
@@ -762,7 +809,7 @@ function tabDados() {
     <div class="grid three">${TAG_KEYS.map((k) => `<label class="field"><span>${TAGS[k].label}</span><select data-bind="tags.${k}"><option value="">—</option>${Object.entries(TAGS[k].opts).map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('')}</select></label>`).join('')}</div>
   </div>
 
-  <div class="section card stack">
+  <div class="section card stack" id="sec-conteudo">
     <h2>Conteúdo das páginas iniciais</h2>
     <label class="field"><span>Visão geral do programa</span><textarea data-bind="overview" rows="4" placeholder="Explique o objetivo e a lógica do programa."></textarea></label>
     <div class="grid two">
@@ -801,7 +848,7 @@ function fmtRest(r) { r = String(r || '').trim(); return /^\d+$/.test(r) ? r + '
 function tabTreinos() {
   const p = E.p;
   const src = p.sourcePdfId && byId(S.pdfs, p.sourcePdfId);
-  return `
+  return `${libBanner(p)}
   ${src ? `<div class="section card row"><div style="flex:1;min-width:220px"><strong>PDF original:</strong> ${esc(src.name)} <span class="muted small">(${src.pages} páginas)</span><div class="small muted">Use "Importar páginas do PDF" em cada treino para trazer as fotos dos exercícios de uma vez.</div></div>
     <a class="btn sm" href="#/pdf/${esc(src.id)}">Ver PDF</a></div>` : ''}
   <div class="section stack">
@@ -815,7 +862,7 @@ function tabTreinos() {
 }
 function workoutHTML(w, wi) {
   const n = E.p.workouts.length;
-  return `<div class="card workout">
+  return `<div class="card workout" id="w-${esc(w.id)}">
     <div class="workout-head">
       <input type="text" data-bind="workouts.${wi}.name" placeholder="Nome do treino (ex.: Treino A)" style="max-width:220px">
       <input type="text" data-bind="workouts.${wi}.focus" placeholder="Foco (ex.: Full body · ênfase inferior)">
@@ -1044,7 +1091,8 @@ async function renderPreview() {
   const box = $('#preview');
   if (!box) return;
   const slides = buildSlides(E.p);
-  box.innerHTML = slides.map((s, i) => `<div class="slide-frame">${s.html}</div><div class="slide-label">${i + 1}. ${esc(s.label)}</div>`).join('');
+  box.innerHTML = slides.map((s, i) => `<div class="slide-frame editable" data-action="edit-slide" data-i="${i}" title="Clique para editar este slide">${s.html}<span class="edit-badge">✎ Editar este slide</span></div><div class="slide-label">${i + 1}. ${esc(s.label)}</div>`).join('');
+  E.slideEdits = slides.map((s) => s.edit);
   const scaleAll = () => $$('.slide-frame', box).forEach((f) => f.style.setProperty('--k', f.clientWidth / 1334));
   scaleAll();
   if (previewRO) previewRO.disconnect();
@@ -1053,6 +1101,22 @@ async function renderPreview() {
   await document.fonts.ready;
   $$('.slide', box).forEach(fitSlide);
 }
+actions['edit-slide'] = async (el) => {
+  const t = (E.slideEdits || [])[+el.dataset.i];
+  if (!t) return;
+  await saveSoon.flush();
+  E.tab = t.tab;
+  if (t.ex) E.open.add(t.ex);
+  history.replaceState(null, '', `#/programa/${E.p.id}/${E.tab}`);
+  renderEditor();
+  const target = t.ex ? $(`[data-exrow="${t.ex}"]`) : t.wid ? $(`#w-${t.wid}`) : $(`#${t.sec}`);
+  if (target) {
+    const y = target.getBoundingClientRect().top + window.scrollY - ($('.editor-head') ? $('.editor-head').offsetHeight + 80 : 150);
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    target.style.outline = '2px solid var(--gold)';
+    setTimeout(() => { target.style.outline = ''; }, 1800);
+  }
+};
 actions['export-pdf'] = async () => {
   await saveSoon.flush();
   await exportProgramPdf(E.p);
@@ -1079,7 +1143,8 @@ function buildSlides(p) {
   const brand = S.settings.brand || '';
   const inc = p.include || {};
   const out = [];
-  const add = (cls, label, html) => out.push({ cls, label, html });
+  let edit = { tab: 'dados', sec: 'sec-capa' };
+  const add = (cls, label, html) => out.push({ cls, label, html, edit });
 
   // Capa
   const tfs = titleSize(p.title, 150, 7);
@@ -1101,6 +1166,7 @@ function buildSlides(p) {
   if (inc.trainer && tr) {
     const blocks = [['Formação', tr.formacao], ['Experiência', tr.experiencia], ['Especializações', tr.especializacoes], ['Metodologia', tr.metodologia]]
       .filter(([, v]) => v && v.trim());
+    edit = { tab: 'dados', sec: 'sec-pessoas' };
     add('s-trainer', 'Personal', `
       <div class="photo">${bgImg(tr.photo, initials(tr.name))}</div>
       <div class="content" data-fitbox>
@@ -1113,6 +1179,7 @@ function buildSlides(p) {
 
   // Visão geral
   if (inc.overview && p.overview && p.overview.trim()) {
+    edit = { tab: 'dados', sec: 'sec-conteudo' };
     add('s-text', 'Visão geral', `
       <div class="content" data-fitbox>
         <div class="kicker">Introdução</div><div class="rule"></div>
@@ -1129,6 +1196,7 @@ function buildSlides(p) {
   // Objetivos e recomendações
   const obj = lines(p.objectives), rec = lines(p.recommendations);
   if (inc.guidelines && (obj.length || rec.length)) {
+    edit = { tab: 'dados', sec: 'sec-conteudo' };
     add('s-text', 'Objetivos e recomendações', `
       <div class="content" data-fitbox>
         <div class="kicker">Orientações gerais</div><div class="rule"></div>
@@ -1143,15 +1211,17 @@ function buildSlides(p) {
   // Aquecimento
   const wu = lines(p.warmup);
   if (inc.warmup && wu.length) {
+    edit = { tab: 'dados', sec: 'sec-conteudo' };
     add('s-text', 'Aquecimento', `
       <div class="content" data-fitbox>
         <div class="kicker">Antes de começar</div><div class="rule"></div>
         <div class="heading bebas">Aquecimento padrão</div>
         <div class="steps">${wu.map((l, i) => {
           const k = l.indexOf(':');
-          const h = k > 0 ? l.slice(0, k) : l;
-          const d = k > 0 ? l.slice(k + 1).trim() : '';
-          return `<div class="step"><div class="n">${i + 1}</div><div><h4>${esc(h)}</h4>${d ? `<p data-shrink="15">${esc(d)}</p>` : ''}</div></div>`;
+          const short = k > 0 && k <= 40;
+          const h = short ? l.slice(0, k) : '';
+          const d = short ? l.slice(k + 1).trim() : l;
+          return `<div class="step"><div class="n">${i + 1}</div><div>${h ? `<h4>${esc(h)}</h4>` : ''}${d ? `<p data-shrink="15" style="${h ? '' : 'margin-top:20px'}">${esc(d)}</p>` : ''}</div></div>`;
         }).join('')}</div>
       </div>`);
   }
@@ -1160,6 +1230,7 @@ function buildSlides(p) {
   if (inc.pse) {
     const rows = [['1–2', 'Muito leve (aquecimento)'], ['3–4', 'Leve · esforço confortável'], ['5–6', 'Moderado · 4-5 reps em reserva'], ['7', 'Desafiador · 3 reps em reserva'], ['8', 'Forte · 2 reps em reserva'], ['9', 'Muito forte · 1 rep em reserva'], ['10', 'Máximo · falha total']];
     const note = (p.pseNote || '').split('\n');
+    edit = { tab: 'dados', sec: 'sec-conteudo' };
     add('s-text s-pse', 'Escala PSE', `
       <div class="content">
         <div class="kicker">Controle da intensidade</div><div class="rule"></div>
@@ -1172,6 +1243,7 @@ function buildSlides(p) {
   // Treinos
   p.workouts.forEach((w) => {
     const cover = w.coverImage || (w.exercises.find((x) => x.image) || {}).image;
+    edit = { tab: 'treinos', wid: w.id };
     add('s-wcover', w.name || 'Treino', `
       ${cover ? `<div class="img">${bgImg(cover, '')}</div>` : ''}
       <div class="content">
@@ -1184,6 +1256,7 @@ function buildSlides(p) {
       const stats = [['Séries', x.sets], [x.repsLabel || 'Reps', x.reps], ['PSE', x.pse], ['Descanso', fmtRest(x.rest)], ['Cadência', x.cadence], ['Carga', x.load]]
         .filter(([, v]) => v && String(v).trim());
       const txt = [['Execução', x.execution], ['Cuidados', x.cautions], ['Observações', x.notes]].filter(([, v]) => v && v.trim());
+      edit = { tab: 'treinos', ex: x.id };
       add('s-ex', `${w.name} · ${pad2(i + 1)} ${x.name}`, `
         <div class="img">${bgImg(x.image, 'Sem imagem')}</div>
         <div class="panel" data-fitbox>
@@ -1198,6 +1271,7 @@ function buildSlides(p) {
 
   // Final
   if (inc.closing) {
+    edit = { tab: 'dados', sec: 'sec-conteudo' };
     add('s-close', 'Página final', `
       <div class="content">
         <div class="kicker">${esc(p.title)}</div>
@@ -1213,7 +1287,7 @@ function buildSlides(p) {
   const total = out.length;
   return out.map((s, i) => {
     const foot = /s-cover|s-ex|s-wcover/.test(s.cls) ? '' : `<div class="footer"><span>${esc(brand)}</span><span>${pad2(i + 1)}/${pad2(total)}</span></div>`;
-    return { label: s.label, html: `<div class="slide t-${esc(p.theme || 'navy')} ${s.cls}">${s.html}${foot}</div>` };
+    return { label: s.label, edit: s.edit, html: `<div class="slide t-${esc(p.theme || 'navy')} ${s.cls}">${s.html}${foot}</div>` };
   });
 }
 /** Reduz fontes até o conteúdo caber na página. */
@@ -1648,6 +1722,7 @@ async function viewPdf(id) {
         <button class="btn" data-action="dl-pdf" data-id="${esc(id)}">Baixar</button>
         <button class="btn danger" data-action="del-pdf" data-id="${esc(id)}">Excluir</button>
       </div></div>
+    ${meta.generated ? '' : `<div class="card small" style="margin-bottom:14px">Este é o PDF original, só para consulta. Para editar os slides, use <b>Criar programa a partir deste PDF</b>: o programa abre no editor${meta.code && libraryEntry(meta.code) ? ' já com todos os treinos e exercícios preenchidos' : ''}.</div>`}
     <div class="pages-grid" id="pv-grid">${Array.from({ length: meta.pages }, (_, i) => `<div class="page-tile" data-page="${i + 1}"><img alt=""><span class="pn">${i + 1}</span></div>`).join('')}</div>`;
   const grid = $('#pv-grid');
   grid.addEventListener('click', (e) => {

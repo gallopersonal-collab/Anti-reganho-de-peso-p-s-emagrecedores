@@ -375,3 +375,16 @@ textarea { resize: vertical; min-height: 84px; line-height: 1.45; }
   .pdf-item > div:nth-child(2) { flex: 1 1 calc(100% - 112px); }
   .pdf-item > .row:last-child { width: 100%; justify-content: flex-start !important; }
 }
+
+/* Slides clicáveis na pré-visualização */
+.slide-frame.editable { cursor: pointer; transition: box-shadow .15s, border-color .15s; }
+.slide-frame.editable:hover { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(210, 169, 97, .25); }
+.slide-frame .edit-badge {
+  position: absolute; right: 10px; top: 10px; z-index: 2; padding: 6px 12px; border-radius: 999px;
+  background: var(--gold); color: #141007; font: 600 13px/1 Inter, sans-serif; box-shadow: var(--shadow);
+  opacity: .92; pointer-events: none;
+}
+@media (hover: hover) {
+  .slide-frame .edit-badge { opacity: 0; transition: opacity .15s; }
+  .slide-frame.editable:hover .edit-badge { opacity: 1; }
+}
