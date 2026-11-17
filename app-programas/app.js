@@ -119,7 +119,7 @@ const DB = {
     });
   },
   async all(store) {
-    if (this.mem) return [...this.mem[store].values()].map(clone);
+    if (this.mem) return [...this.mem[store].values()].map((x) => structuredClone(x));
     return this.req(store, 'readonly', (s) => s.getAll());
   },
   async get(store, id) {
@@ -469,6 +469,7 @@ async function route() {
   $$('[data-nav]').forEach((a) => a.classList.toggle('active', a.dataset.nav === navKey));
   window.scrollTo(0, 0);
   if (!r) return viewPrograms();
+  if (r === 'programa' && id && parts[2] === 'slide' && parts[3]) return viewSlideEditor(id, parts[3]);
   if (r === 'programa' && id) return viewEditor(id, parts[2]);
   if (r === 'alunos') return viewPeople('students');
   if (r === 'personais') return viewPeople('trainers');
@@ -564,7 +565,7 @@ function renderProgramList() {
         <div><div class="small muted">${st ? esc(st.name) : 'Sem aluno definido'}</div><div class="small muted">${tr ? 'por ' + esc(tr.name) : ''}</div></div></div>
       <h3>${esc(p.title || 'Sem título')}</h3>
       ${hasTags(progTags(p)) ? `<div class="meta">${tagChips(progTags(p))}</div>` : ''}
-      <div class="meta"><span class="chip gold">${p.workouts.length} treino(s)</span><span class="chip">${totalExercises(p)} exercícios</span><span class="chip">${esc(p.weeks || '?')} semanas</span></div>
+      <div class="meta">${p.mode === 'slides' ? `<span class="chip gold">${(p.slides || []).length} slides</span>` : `<span class="chip gold">${p.workouts.length} treino(s)</span><span class="chip">${totalExercises(p)} exercícios</span><span class="chip">${esc(p.weeks || '?')} semanas</span>`}</div>
       <div class="small muted">Atualizado em ${fmtDate(p.updatedAt)}</div>
       <div class="actions">
         <button class="btn sm" data-action="open-program" data-id="${esc(p.id)}">Editar</button>
@@ -603,12 +604,13 @@ actions['open-program'] = (el, ev) => {
 actions['dup-program'] = async (el, ev) => {
   ev.stopPropagation();
   const src = byId(S.programs, el.dataset.id);
-  const p = clone(src);
+  const p = structuredClone(src);
   p.id = uid();
   p.title = src.title + ' (cópia)';
   p.studentId = '';
   p.createdAt = 0;
   p.workouts.forEach((w) => { w.id = uid(); w.exercises.forEach((x) => { x.id = uid(); }); });
+  (p.slides || []).forEach((sl) => { sl.id = uid(); sl.layers.forEach((l) => { l.id = uid(); }); });
   await saveEntity('programs', p);
   toast('Programa duplicado. Escolha o aluno.');
   location.hash = `#/programa/${p.id}`;
@@ -686,7 +688,8 @@ function viewEditor(id, tab) {
   p.include = { trainer: true, overview: true, guidelines: true, warmup: true, pse: true, closing: true, ...(p.include || {}) };
   p.tags = p.tags || {};
   E.p = p;
-  E.tab = ['dados', 'treinos', 'gerar'].includes(tab) ? tab : 'dados';
+  const tabs = p.mode === 'slides' ? ['slides', 'dados', 'gerar'] : ['dados', 'treinos', 'gerar'];
+  E.tab = tabs.includes(tab) ? tab : tabs[0];
   leaveHook = () => saveSoon.flush();
   renderEditor();
 }
@@ -700,15 +703,16 @@ function renderEditor() {
         <span id="save-state" class="save-state ok">Salvo ✓</span>
       </div>
       <h1 id="ed-title" style="margin-top:6px">${esc(p.title || 'Sem título')}</h1>
-      <div class="tabs">
-        <button data-action="tab" data-tab="dados" class="${E.tab === 'dados' ? 'active' : ''}">1. Dados e capa</button>
-        <button data-action="tab" data-tab="treinos" class="${E.tab === 'treinos' ? 'active' : ''}">2. Treinos e exercícios</button>
-        <button data-action="tab" data-tab="gerar" class="${E.tab === 'gerar' ? 'active' : ''}">3. Visualizar e gerar PDF</button>
+      <div class="tabs">${(p.mode === 'slides'
+        ? [['slides', '1. Slides'], ['dados', '2. Aluno e personal'], ['gerar', '3. Gerar PDF']]
+        : [['dados', '1. Dados e capa'], ['treinos', '2. Treinos e exercícios'], ['gerar', '3. Visualizar e gerar PDF']])
+        .map(([k, l]) => `<button data-action="tab" data-tab="${k}" class="${E.tab === k ? 'active' : ''}">${l}</button>`).join('')}
       </div>
     </div>
-    <div id="ed-body">${E.tab === 'dados' ? tabDados() : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
+    <div id="ed-body">${E.tab === 'slides' ? tabSlides() : E.tab === 'dados' ? (p.mode === 'slides' ? tabPessoas() : tabDados()) : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
   bindInputs(app);
   if (E.tab === 'gerar') renderPreview();
+  if (E.tab === 'slides') { scaleFrames(app); new ResizeObserver(() => scaleFrames(app)).observe($('#ed-body')); }
 }
 actions['fill-library'] = async () => {
   const p = E.p;
@@ -1068,6 +1072,14 @@ actions['import-pages'] = (el) => {
 /* ---- Aba 3: Gerar ---- */
 function tabGerar() {
   const p = E.p;
+  if (p.mode === 'slides') {
+    return `
+  <div class="section card row">
+    <div style="flex:1;min-width:200px"><strong>${(p.slides || []).length} slide(s)</strong><div class="small muted">Confira abaixo. Clique num slide para editar.</div></div>
+    <button class="btn primary" data-action="export-pdf">Gerar PDF</button>
+  </div>
+  <div class="section"><div id="preview" class="preview-list"></div></div>`;
+  }
   const st = byId(S.students, p.studentId);
   const warn = [];
   if (!st) warn.push('Nenhum aluno selecionado (aba 1).');
@@ -1091,9 +1103,9 @@ async function renderPreview() {
   const box = $('#preview');
   if (!box) return;
   const slides = buildSlides(E.p);
-  box.innerHTML = slides.map((s, i) => `<div class="slide-frame editable" data-action="edit-slide" data-i="${i}" title="Clique para editar este slide">${s.html}<span class="edit-badge">✎ Editar este slide</span></div><div class="slide-label">${i + 1}. ${esc(s.label)}</div>`).join('');
+  box.innerHTML = slides.map((s, i) => `<div class="slide-frame editable" data-action="edit-slide" data-i="${i}" title="Clique para editar este slide" ${frameAttrs(s.w || 1334, s.h || 750)}>${s.html}<span class="edit-badge">✎ Editar este slide</span></div><div class="slide-label">${i + 1}. ${esc(s.label)}</div>`).join('');
   E.slideEdits = slides.map((s) => s.edit);
-  const scaleAll = () => $$('.slide-frame', box).forEach((f) => f.style.setProperty('--k', f.clientWidth / 1334));
+  const scaleAll = () => scaleFrames(box);
   scaleAll();
   if (previewRO) previewRO.disconnect();
   previewRO = new ResizeObserver(scaleAll);
@@ -1105,6 +1117,7 @@ actions['edit-slide'] = async (el) => {
   const t = (E.slideEdits || [])[+el.dataset.i];
   if (!t) return;
   await saveSoon.flush();
+  if (t.slide) { location.hash = `#/programa/${E.p.id}/slide/${t.slide}`; return; }
   E.tab = t.tab;
   if (t.ex) E.open.add(t.ex);
   history.replaceState(null, '', `#/programa/${E.p.id}/${E.tab}`);
@@ -1138,6 +1151,9 @@ function titleSize(t, base, widthChars) {
   return fs;
 }
 function buildSlides(p) {
+  if (p.mode === 'slides') {
+    return (p.slides || []).map((sl, i) => ({ label: `Slide ${i + 1}`, edit: { slide: sl.id }, w: sl.w, h: sl.h, html: pageSlideHTML(sl, p) }));
+  }
   const st = byId(S.students, p.studentId) || { name: 'Nome do aluno', photo: '' };
   const tr = byId(S.trainers, p.trainerId);
   const brand = S.settings.brand || '';
@@ -1319,7 +1335,10 @@ async function exportProgramPdf(p) {
   const result = await withBusy('Gerando PDF…', async (prog) => {
     await document.fonts.ready;
     const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: [1334, 750], compress: true });
+    const dim = (sl) => [sl.w || 1334, sl.h || 750];
+    const orient = (w, h) => (w >= h ? 'landscape' : 'portrait');
+    const [w0, h0] = dim(slides[0] || {});
+    const pdf = new jsPDF({ orientation: orient(w0, h0), unit: 'pt', format: [w0, h0], compress: true });
     const stage = $('#render-stage');
     let thumb = '';
     for (let i = 0; i < slides.length; i++) {
@@ -1328,13 +1347,15 @@ async function exportProgramPdf(p) {
       const el = stage.firstElementChild;
       fitSlide(el);
       await sleep(30);
-      const canvas = await html2canvas(el, { scale: 1.5, useCORS: true, backgroundColor: '#000000', logging: false, width: 1334, height: 750, windowWidth: 1334, windowHeight: 750, scrollX: 0, scrollY: 0 });
-      if (i > 0) pdf.addPage([1334, 750], 'landscape');
-      pdf.addImage(canvas.toDataURL('image/jpeg', 0.86), 'JPEG', 0, 0, 1334, 750, undefined, 'FAST');
+      const [W, H] = dim(slides[i]);
+      if (el.tagName !== 'DIV') throw new Error('slide inválido');
+      const canvas = await html2canvas(el, { scale: 1.5, useCORS: true, backgroundColor: '#000000', logging: false, width: W, height: H, windowWidth: W, windowHeight: H, scrollX: 0, scrollY: 0 });
+      if (i > 0) pdf.addPage([W, H], orient(W, H));
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.86), 'JPEG', 0, 0, W, H, undefined, 'FAST');
       if (i === 0) {
         const t = document.createElement('canvas');
-        t.width = 480; t.height = 270;
-        t.getContext('2d').drawImage(canvas, 0, 0, 480, 270);
+        t.width = 480; t.height = Math.round(480 * H / W);
+        t.getContext('2d').drawImage(canvas, 0, 0, t.width, t.height);
         thumb = t.toDataURL('image/jpeg', 0.8);
       }
     }
@@ -1396,6 +1417,607 @@ async function withBusy(msg, fn) {
   }
 }
 
+/* =========================================================
+ * Programas em slides: importar páginas do PDF e editar cada slide
+ * ======================================================= */
+const FONTS = { Inter: 'Inter, sans-serif', Oswald: 'Oswald, sans-serif', Bebas: "'Bebas Neue', Oswald, sans-serif" };
+const FONT_LABELS = { Inter: 'Inter (texto)', Oswald: 'Oswald (subtítulo)', Bebas: 'Bebas Neue (título)' };
+function slideSize(w, h) {
+  return w >= h ? { w: 1334, h: Math.round(1334 * h / w) } : { w: 800, h: Math.round(800 * h / w) };
+}
+const blobUrls = new WeakMap();
+function blobURL(b) {
+  if (!b) return '';
+  if (typeof b === 'string') return b;
+  let u = blobUrls.get(b);
+  if (!u) { u = URL.createObjectURL(b); blobUrls.set(b, u); }
+  return u;
+}
+async function renderPageForSlide(pdfId, n) {
+  const doc = await getPdfDoc(pdfId);
+  const page = await doc.getPage(n);
+  const vp1 = page.getViewport({ scale: 1 });
+  const size = slideSize(vp1.width, vp1.height);
+  const vp = page.getViewport({ scale: (size.w * 1.3) / vp1.width });
+  const cv = document.createElement('canvas');
+  cv.width = Math.round(vp.width);
+  cv.height = Math.round(vp.height);
+  await page.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+  const bg = await new Promise((res) => cv.toBlob(res, 'image/jpeg', 0.85));
+  return { bg, w: size.w, h: size.h };
+}
+function newSlide(over = {}) {
+  return { id: uid(), w: 1334, h: 750, bg: null, bgColor: '#0b1220', layers: [], ...over };
+}
+async function importPagesAsSlides(pdfId, pages, prog) {
+  const out = [];
+  for (let i = 0; i < pages.length; i++) {
+    prog(i / pages.length, `Página ${pages[i]} (${i + 1} de ${pages.length})`);
+    const r = await renderPageForSlide(pdfId, pages[i]);
+    out.push(newSlide({ bg: r.bg, w: r.w, h: r.h, source: { pdfId, page: pages[i] } }));
+  }
+  return out;
+}
+async function createSlideProgram(pdfId, pages) {
+  const meta = byId(S.pdfs, pdfId);
+  if (!pages) pages = Array.from({ length: meta.pages }, (_, i) => i + 1);
+  const slides = await withBusy('Importando slides…', (prog) => importPagesAsSlides(pdfId, pages, prog));
+  if (!slides) return;
+  const p = newProgram({ mode: 'slides', title: pdfTitle(meta), sourcePdfId: pdfId, tags: { ...(meta.tags || {}) }, slides, workouts: [] });
+  await saveEntity('programs', p);
+  location.hash = `#/programa/${p.id}/slides`;
+  setTimeout(() => toast(`${slides.length} slide(s) importados. Clique num slide para editar.`), 300);
+}
+async function addSlidesToProgram(p, pdfId, pages) {
+  const slides = await withBusy('Importando slides…', (prog) => importPagesAsSlides(pdfId, pages, prog));
+  if (!slides) return false;
+  p.slides = [...(p.slides || []), ...slides];
+  await saveEntity('programs', p);
+  toast(`${slides.length} slide(s) adicionados a "${p.title}"`);
+  return true;
+}
+
+/* ---- Variáveis e camadas ---- */
+function fillVars(text, p) {
+  const st = byId(S.students, p.studentId), tr = byId(S.trainers, p.trainerId);
+  const v = {
+    aluno: st ? st.name : 'Nome do aluno', primeiro_nome: st ? st.name.split(' ')[0] : 'Aluno',
+    personal: tr ? tr.name : 'Nome do personal', cref: tr && tr.cref ? 'CREF ' + tr.cref : '', programa: p.title || '',
+  };
+  return String(text || '').replace(/\{(aluno|primeiro_nome|personal|cref|programa)\}/g, (m, k) => v[k]);
+}
+function layerSrc(l, p) {
+  if (l.src === '@aluno') { const st = byId(S.students, p.studentId); return st && st.photo; }
+  if (l.src === '@personal') { const tr = byId(S.trainers, p.trainerId); return tr && tr.photo; }
+  return l.src;
+}
+function layerHTML(l, p, selId) {
+  let st = `left:${l.x}px;top:${l.y}px;width:${l.w}px;height:${l.h}px;`;
+  let inner = '';
+  if (l.type === 'rect') {
+    st += `background:${l.fill};opacity:${l.opacity ?? 1};border-radius:${l.radius || 0}px;`;
+  } else if (l.type === 'image') {
+    const src = layerSrc(l, p);
+    const rad = l.round ? '50%' : (l.radius || 0) + 'px';
+    st += `border-radius:${rad};${l.borderW ? `border:${l.borderW}px solid ${l.borderColor || '#d2a961'};` : ''}`;
+    inner = src ? `<div class="bg" style="background-image:url('${esc(src)}');border-radius:${rad}"></div>`
+      : `<div class="ly-ph" style="border-radius:${rad}">${l.src === '@aluno' ? 'Foto do aluno' : l.src === '@personal' ? 'Foto do personal' : 'Imagem'}</div>`;
+  } else {
+    st += `color:${l.color};font-family:${FONTS[l.font] || FONTS.Inter};font-size:${l.size}px;font-weight:${l.bold ? 700 : 400};text-align:${l.align || 'left'};`
+      + `letter-spacing:${l.spacing || 0}px;${l.upper ? 'text-transform:uppercase;' : ''}${l.bgOn ? `background:${l.fill};` : ''}`;
+    inner = esc(fillVars(l.text, p));
+  }
+  const sel = selId === l.id;
+  const handles = sel ? ['nw', 'ne', 'sw', 'se'].map((h) => `<span class="lh lh-${h}" data-h="${h}"></span>`).join('') : '';
+  return `<div class="ly ly-${l.type}${sel ? ' sel' : ''}" data-lid="${esc(l.id)}" style="${st}">${inner}${handles}</div>`;
+}
+function pageSlideHTML(s, p, selId) {
+  const bg = blobURL(s.bg);
+  return `<div class="slide sp" style="width:${s.w}px;height:${s.h}px;background:${esc(s.bgColor || '#000')}">`
+    + (bg ? `<div class="bg sp-bg" style="background-image:url('${bg}')"></div>` : '')
+    + (s.layers || []).map((l) => layerHTML(l, p, selId)).join('') + '</div>';
+}
+function scaleFrames(root) {
+  $$('.slide-frame', root).forEach((f) => f.style.setProperty('--k', f.clientWidth / (+f.dataset.w || 1334)));
+}
+function frameAttrs(w, h) {
+  return `data-w="${w}" style="aspect-ratio:${w}/${h};${h > w ? 'max-width:420px;' : ''}"`;
+}
+
+/* ---- Aba Slides ---- */
+function tabSlides() {
+  const p = E.p;
+  const n = (p.slides || []).length;
+  return `
+  <div class="section card row">
+    <div style="flex:1;min-width:200px"><strong>${n} slide(s)</strong><div class="small muted">Clique num slide para editar. Use as setas para mudar a ordem.</div></div>
+    <button class="btn" data-action="slides-add-pdf">+ Slides de um PDF</button>
+    <button class="btn" data-action="slides-add-blank">+ Slide em branco</button>
+  </div>
+  ${n ? `<div class="slides-grid">${p.slides.map((s, i) => `
+    <div class="slide-card">
+      <div class="slide-frame editable" data-action="open-slide" data-id="${esc(s.id)}" ${frameAttrs(s.w, s.h)}>${pageSlideHTML(s, p)}<span class="edit-badge">✎ Editar</span></div>
+      <div class="row" style="gap:4px;margin-top:6px">
+        <span class="small muted" style="min-width:28px">${i + 1}</span>
+        <button class="btn icon sm" data-action="slide-mv" data-i="${i}" data-d="-1" ${i === 0 ? 'disabled' : ''} title="Mover para antes">←</button>
+        <button class="btn icon sm" data-action="slide-mv" data-i="${i}" data-d="1" ${i === n - 1 ? 'disabled' : ''} title="Mover para depois">→</button>
+        <span class="spacer"></span>
+        <button class="btn sm" data-action="slide-dup" data-i="${i}">Duplicar</button>
+        <button class="btn sm danger" data-action="slide-del" data-i="${i}" title="Excluir slide">✕</button>
+      </div>
+    </div>`).join('')}</div>`
+    : '<div class="empty">Nenhum slide. Adicione slides de um PDF ou um slide em branco.</div>'}
+  <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="gerar">Próximo: gerar PDF →</button></div>`;
+}
+function rerenderSlidesTab() {
+  const y = window.scrollY;
+  $('#ed-body').innerHTML = tabSlides();
+  scaleFrames($('#ed-body'));
+  window.scrollTo(0, y);
+}
+actions['open-slide'] = (el) => { location.hash = `#/programa/${E.p.id}/slide/${el.dataset.id}`; };
+actions['slide-mv'] = (el) => { move(E.p.slides, +el.dataset.i, +el.dataset.d); saveSoon(); rerenderSlidesTab(); };
+actions['slide-dup'] = (el) => {
+  const s = structuredClone(E.p.slides[+el.dataset.i]);
+  s.id = uid();
+  s.layers.forEach((l) => { l.id = uid(); });
+  E.p.slides.splice(+el.dataset.i + 1, 0, s);
+  saveSoon(); rerenderSlidesTab();
+};
+actions['slide-del'] = (el) => {
+  if (!confirm('Excluir este slide?')) return;
+  E.p.slides.splice(+el.dataset.i, 1);
+  saveSoon(); rerenderSlidesTab();
+};
+actions['slides-add-blank'] = () => {
+  const last = E.p.slides[E.p.slides.length - 1];
+  const s = newSlide({ w: last ? last.w : 1334, h: last ? last.h : 750 });
+  E.p.slides.push(s);
+  saveSoon();
+  location.hash = `#/programa/${E.p.id}/slide/${s.id}`;
+};
+actions['slides-add-pdf'] = () => {
+  openPagePicker({
+    pdfId: E.p.sourcePdfId, multi: true, slides: true, title: `Adicionar slides a "${E.p.title}"`,
+    onPickMany: async (pdfId, pages) => {
+      await saveSoon.flush();
+      if (await addSlidesToProgram(E.p, pdfId, pages)) rerenderSlidesTab();
+    },
+  });
+};
+
+/* ---- Editor de slide ---- */
+const SE = { sid: null, sel: null, undo: [], eyedrop: null, bgCanvas: null, bgFor: null };
+const curSlide = () => (E.p.slides || []).find((s) => s.id === SE.sid);
+const curLayer = () => { const s = curSlide(); return s && s.layers.find((l) => l.id === SE.sel); };
+function viewSlideEditor(pid, sid) {
+  const p = byId(S.programs, pid);
+  if (!p || !(p.slides || []).some((s) => s.id === sid)) { location.hash = pid ? `#/programa/${pid}/slides` : '#/'; return; }
+  E.p = p;
+  E.tab = 'slides';
+  if (SE.sid !== sid) Object.assign(SE, { sid, sel: null, undo: [], eyedrop: null });
+  leaveHook = () => saveSoon.flush();
+  renderSlideEditor();
+}
+function renderSlideEditor() {
+  const p = E.p, s = curSlide();
+  const i = p.slides.indexOf(s), n = p.slides.length;
+  const prev = p.slides[i - 1], next = p.slides[i + 1];
+  app.innerHTML = `
+    <div class="editor-head se-head">
+      <div class="row">
+        <a class="btn ghost sm" href="#/programa/${esc(p.id)}/slides">← Todos os slides</a>
+        <span class="small muted">Slide ${i + 1} de ${n} · ${esc(p.title)}</span>
+        <span class="spacer"></span>
+        ${prev ? `<a class="btn sm" href="#/programa/${esc(p.id)}/slide/${esc(prev.id)}">‹ Anterior</a>` : ''}
+        ${next ? `<a class="btn sm" href="#/programa/${esc(p.id)}/slide/${esc(next.id)}">Próximo ›</a>` : ''}
+        <button class="btn sm" data-action="se-undo" id="se-undo">↶ Desfazer</button>
+        <span id="save-state" class="save-state ok">Salvo ✓</span>
+      </div>
+      <div class="row se-tools">
+        <button class="btn sm" data-action="se-add" data-kind="cover" title="Coloque sobre um texto antigo para escondê-lo">▭ Cobrir texto</button>
+        <button class="btn sm" data-action="se-add" data-kind="text">T Texto</button>
+        <button class="btn sm" data-action="se-add" data-kind="image">▣ Imagem</button>
+        <button class="btn sm" data-action="se-add" data-kind="photo-aluno">◉ Foto do aluno</button>
+        <button class="btn sm" data-action="se-add" data-kind="name-aluno">Nome do aluno</button>
+        <button class="btn sm" data-action="se-add" data-kind="photo-personal">◉ Foto do personal</button>
+        <button class="btn sm" data-action="se-add" data-kind="name-personal">Nome do personal</button>
+      </div>
+    </div>
+    <div class="se-layout">
+      <div class="se-stage-col">
+        <div class="slide-frame se-stage" id="se-stage" ${frameAttrs(s.w, s.h)}></div>
+        <p class="small muted" id="se-hint" style="margin:8px 0 0">Toque num elemento para selecionar. Arraste para mover e use os cantos para redimensionar.</p>
+      </div>
+      <div class="card se-panel" id="se-panel"></div>
+    </div>`;
+  renderStage();
+  renderPanel();
+  scaleFrames(app);
+  new ResizeObserver(() => scaleFrames(app)).observe($('#se-stage'));
+}
+function renderStage() {
+  const st = $('#se-stage');
+  if (!st) return;
+  st.innerHTML = pageSlideHTML(curSlide(), E.p, SE.sel);
+  st.classList.toggle('eyedrop', !!SE.eyedrop);
+  const u = $('#se-undo');
+  if (u) u.disabled = !SE.undo.length;
+}
+function refreshLayer(l) {
+  const el = $(`#se-stage [data-lid="${l.id}"]`);
+  if (el) el.outerHTML = layerHTML(l, E.p, SE.sel);
+}
+function pushUndo() {
+  const s = curSlide();
+  SE.undo.push(structuredClone({ layers: s.layers, bg: s.bg, bgColor: s.bgColor }));
+  if (SE.undo.length > 40) SE.undo.shift();
+  const u = $('#se-undo');
+  if (u) u.disabled = false;
+}
+actions['se-undo'] = () => {
+  const snap = SE.undo.pop();
+  if (!snap) return;
+  Object.assign(curSlide(), snap);
+  if (SE.sel && !curLayer()) SE.sel = null;
+  saveSoon(); renderStage(); renderPanel();
+};
+
+/* conta-gotas: lê a cor do fundo (imagem da página) */
+async function bgCanvas() {
+  const s = curSlide();
+  if (SE.bgFor === s.bg && SE.bgCanvas) return SE.bgCanvas;
+  const cv = document.createElement('canvas');
+  cv.width = s.w; cv.height = s.h;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  ctx.fillStyle = s.bgColor || '#000';
+  ctx.fillRect(0, 0, s.w, s.h);
+  if (s.bg) { const img = await loadImage(blobURL(s.bg)); ctx.drawImage(img, 0, 0, s.w, s.h); }
+  SE.bgCanvas = cv; SE.bgFor = s.bg;
+  return cv;
+}
+const hex = (r, g, b) => '#' + [r, g, b].map((v) => Math.round(v).toString(16).padStart(2, '0')).join('');
+async function sampleColor(x, y) {
+  const cv = await bgCanvas();
+  const s = curSlide();
+  const cx = Math.min(Math.max(1, Math.round(x)), s.w - 2), cy = Math.min(Math.max(1, Math.round(y)), s.h - 2);
+  const d = cv.getContext('2d').getImageData(cx - 1, cy - 1, 3, 3).data;
+  let r = 0, g = 0, b = 0;
+  for (let i = 0; i < d.length; i += 4) { r += d[i]; g += d[i + 1]; b += d[i + 2]; }
+  return hex(r / 9, g / 9, b / 9);
+}
+/** Cor mais provável do fundo ao redor de uma área (para cobrir texto). */
+async function surroundColor(x, y, w, h) {
+  const pts = [[x - 4, y + h / 2], [x + w + 4, y + h / 2], [x + w / 2, y - 4], [x + w / 2, y + h + 4], [x - 4, y - 4], [x + w + 4, y + h + 4]];
+  const cols = await Promise.all(pts.map(([a, b]) => sampleColor(a, b)));
+  const lum = (c) => parseInt(c.slice(1, 3), 16) * 0.3 + parseInt(c.slice(3, 5), 16) * 0.59 + parseInt(c.slice(5, 7), 16) * 0.11;
+  cols.sort((a, b) => lum(a) - lum(b));
+  return cols[Math.floor(cols.length / 2)];
+}
+
+actions['se-add'] = async (el) => {
+  const s = curSlide();
+  const W = s.w, H = s.h, k = el.dataset.kind;
+  pushUndo();
+  let l;
+  if (k === 'cover') {
+    l = { type: 'rect', x: Math.round(W * 0.3), y: Math.round(H * 0.4), w: Math.round(W * 0.35), h: Math.round(H * 0.1), radius: 0, opacity: 1 };
+    l.fill = await surroundColor(l.x, l.y, l.w, l.h);
+  } else if (k === 'text' || k === 'name-aluno' || k === 'name-personal') {
+    const big = k !== 'text';
+    l = {
+      type: 'text', x: Math.round(W * 0.08), y: Math.round(H * (big ? 0.7 : 0.4)), w: Math.round(W * 0.5), h: Math.round(H * 0.12),
+      text: k === 'name-aluno' ? '{aluno}' : k === 'name-personal' ? '{personal}' : 'Novo texto',
+      font: 'Inter', size: Math.round(H * (big ? 0.065 : 0.05)), color: '#ffffff', bold: true, align: 'left', upper: false, spacing: 0, bgOn: false, fill: '#000000',
+    };
+  } else {
+    const side = Math.round(H * 0.4);
+    l = { type: 'image', x: Math.round(W * 0.6), y: Math.round(H * 0.25), w: side, h: side, round: k !== 'image', radius: 0, borderW: k !== 'image' ? 6 : 0, borderColor: '#d2a961',
+      src: k === 'photo-aluno' ? '@aluno' : k === 'photo-personal' ? '@personal' : '' };
+  }
+  l.id = uid();
+  s.layers.push(l);
+  SE.sel = l.id;
+  saveSoon(); renderStage(); renderPanel();
+  if (k === 'image') pickLayerImage(l);
+  if ((k === 'photo-aluno' && !layerSrc(l, E.p)) || (k === 'photo-personal' && !layerSrc(l, E.p))) {
+    toast(`Cadastre a foto do ${k === 'photo-aluno' ? 'aluno' : 'personal'} na aba "Aluno e personal".`);
+  }
+};
+async function pickLayerImage(l) {
+  const [f] = await pickFile('image/*');
+  if (!f) return;
+  const src = await readFile(f);
+  openCrop({ src, preset: 'full', onDone: (url) => { pushUndo(); l.src = url; const img = new Image(); img.onload = () => { if (!l.round) { l.h = Math.round(l.w * img.height / img.width); } saveSoon(); renderStage(); renderPanel(); }; img.src = url; } });
+}
+
+/* arrastar / redimensionar */
+let seDrag = null;
+document.addEventListener('pointerdown', async (e) => {
+  const stage = e.target.closest('#se-stage');
+  if (!stage) return;
+  const k = stage.clientWidth / curSlide().w;
+  const r = stage.getBoundingClientRect();
+  const px = (e.clientX - r.left) / k, py = (e.clientY - r.top) / k;
+  if (SE.eyedrop) {
+    e.preventDefault();
+    const l = curLayer();
+    const c = await sampleColor(px, py);
+    if (l) { pushUndo(); if (SE.eyedrop === 'color') l.color = c; else { l.fill = c; if (l.type === 'text') l.bgOn = true; } saveSoon(); }
+    SE.eyedrop = null;
+    renderStage(); renderPanel();
+    return;
+  }
+  const lyEl = e.target.closest('.ly');
+  if (!lyEl) { if (SE.sel) { SE.sel = null; renderStage(); renderPanel(); } return; }
+  e.preventDefault();
+  const id = lyEl.dataset.lid;
+  if (SE.sel !== id) { SE.sel = id; renderStage(); renderPanel(); }
+  const l = curLayer();
+  seDrag = { h: e.target.dataset.h || 'move', sx: e.clientX, sy: e.clientY, o: { x: l.x, y: l.y, w: l.w, h: l.h }, k, moved: false };
+});
+document.addEventListener('pointermove', (e) => {
+  if (!seDrag) return;
+  const l = curLayer();
+  if (!l) return;
+  const dx = (e.clientX - seDrag.sx) / seDrag.k, dy = (e.clientY - seDrag.sy) / seDrag.k;
+  if (!seDrag.moved) { if (Math.abs(dx) + Math.abs(dy) < 2) return; pushUndo(); seDrag.moved = true; }
+  const o = seDrag.o, MIN = 12, h = seDrag.h;
+  if (h === 'move') { l.x = Math.round(o.x + dx); l.y = Math.round(o.y + dy); } else {
+    let { x, y, w, h: hh } = o;
+    if (h.includes('w')) { x = Math.min(o.x + dx, o.x + o.w - MIN); w = o.x + o.w - x; }
+    if (h.includes('e')) w = Math.max(MIN, o.w + dx);
+    if (h.includes('n')) { y = Math.min(o.y + dy, o.y + o.h - MIN); hh = o.y + o.h - y; }
+    if (h.includes('s')) hh = Math.max(MIN, o.h + dy);
+    if (l.type === 'image' && l.round) { const side = Math.max(w, hh); w = side; hh = side; }
+    Object.assign(l, { x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(hh) });
+  }
+  const el = $(`#se-stage [data-lid="${l.id}"]`);
+  if (el) Object.assign(el.style, { left: l.x + 'px', top: l.y + 'px', width: l.w + 'px', height: l.h + 'px' });
+});
+document.addEventListener('pointerup', () => {
+  if (!seDrag) return;
+  const moved = seDrag.moved;
+  seDrag = null;
+  if (moved) { saveSoon(); renderStage(); }
+});
+document.addEventListener('keydown', (e) => {
+  if (!SE.sel || !$('#se-stage') || e.target.closest('input,textarea,select')) return;
+  const l = curLayer();
+  if (!l) return;
+  const step = e.shiftKey ? 10 : 1;
+  const mv = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
+  if (mv) { e.preventDefault(); pushUndo(); l.x += mv[0]; l.y += mv[1]; refreshLayer(l); saveSoon(); }
+  if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); actions['se-del'](); }
+});
+
+/* painel de propriedades */
+function renderPanel() {
+  const box = $('#se-panel');
+  if (!box) return;
+  const l = curLayer();
+  const s = curSlide();
+  if (!l) {
+    box.innerHTML = `
+      <h3>Como editar este slide</h3>
+      <ol class="small se-help">
+        <li><b>Trocar um texto do slide:</b> clique em <b>▭ Cobrir texto</b> e posicione a caixa sobre o texto antigo (a cor do fundo é copiada sozinha). Depois clique em <b>T Texto</b> e digite o novo.</li>
+        <li><b>Foto e nome do aluno ou do personal:</b> use os botões da barra. Eles puxam a foto e o nome cadastrados e mudam sozinhos se você trocar o aluno.</li>
+        <li><b>Mover e ajustar:</b> arraste o elemento; use os cantos para mudar o tamanho. No computador, as setas do teclado fazem ajuste fino.</li>
+      </ol>
+      <div class="stack" style="gap:10px;margin-top:12px">
+        <div class="row"><button class="btn sm" data-action="se-bg-upload">Trocar imagem de fundo</button>${s.bg ? '<button class="btn sm ghost" data-action="se-bg-clear">Remover fundo</button>' : ''}</div>
+        <label class="row small">Cor de fundo <input type="color" data-sp="bgColor" value="${esc(s.bgColor || '#000000')}"></label>
+      </div>`;
+  } else {
+    const common = `
+      <div class="row" style="gap:6px;margin-top:14px">
+        <button class="btn sm" data-action="se-front" title="Trazer para frente">⬆ Frente</button>
+        <button class="btn sm" data-action="se-back" title="Enviar para trás">⬇ Trás</button>
+        <button class="btn sm" data-action="se-dupl">Duplicar</button>
+        <button class="btn sm danger" data-action="se-del">Excluir</button>
+      </div>`;
+    if (l.type === 'text') {
+      box.innerHTML = `
+        <h3>Texto</h3>
+        <label class="field"><span>Conteúdo</span><textarea data-lp="text" rows="3">${esc(l.text)}</textarea>
+          <span class="hint">Variáveis: {aluno} {primeiro_nome} {personal} {cref} {programa}</span></label>
+        <div class="grid two" style="gap:10px">
+          <label class="field"><span>Fonte</span><select data-lp="font">${Object.entries(FONT_LABELS).map(([k, v]) => `<option value="${k}" ${l.font === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label>
+          <label class="field"><span>Tamanho</span><input type="number" min="8" max="400" data-lp="size" value="${l.size}"></label>
+        </div>
+        <div class="row" style="gap:12px;margin-top:10px">
+          <label class="row small">Cor <input type="color" data-lp="color" value="${esc(l.color)}"></label>
+          <button class="btn sm" data-action="se-eyedrop" data-target="color">Conta-gotas</button>
+          <label class="row small"><input type="checkbox" data-lp="bold" ${l.bold ? 'checked' : ''}> Negrito</label>
+          <label class="row small"><input type="checkbox" data-lp="upper" ${l.upper ? 'checked' : ''}> MAIÚSCULAS</label>
+        </div>
+        <div class="row" style="gap:12px;margin-top:10px">
+          <label class="row small">Alinhar <select data-lp="align" style="width:auto">${[['left', 'Esquerda'], ['center', 'Centro'], ['right', 'Direita']].map(([v, t]) => `<option value="${v}" ${l.align === v ? 'selected' : ''}>${t}</option>`).join('')}</select></label>
+          <label class="row small">Espaçamento <input type="number" data-lp="spacing" value="${l.spacing || 0}" style="width:70px"></label>
+        </div>
+        <div class="row" style="gap:12px;margin-top:10px">
+          <label class="row small"><input type="checkbox" data-lp="bgOn" ${l.bgOn ? 'checked' : ''}> Fundo atrás do texto</label>
+          <input type="color" data-lp="fill" value="${esc(l.fill || '#000000')}">
+          <button class="btn sm" data-action="se-eyedrop" data-target="fill">Conta-gotas</button>
+        </div>${common}`;
+    } else if (l.type === 'rect') {
+      box.innerHTML = `
+        <h3>Caixa (cobrir texto)</h3>
+        <p class="small muted" style="margin-top:0">Posicione sobre o texto antigo. Se a cor não ficar igual ao fundo, use o conta-gotas e clique no fundo do slide.</p>
+        <div class="row" style="gap:12px">
+          <label class="row small">Cor <input type="color" data-lp="fill" value="${esc(l.fill)}"></label>
+          <button class="btn sm" data-action="se-eyedrop" data-target="fill">Conta-gotas</button>
+          <button class="btn sm" data-action="se-autocolor">Cor automática</button>
+        </div>
+        <label class="field" style="margin-top:10px"><span>Opacidade</span><input type="range" min="0.1" max="1" step="0.05" data-lp="opacity" value="${l.opacity ?? 1}"></label>
+        <label class="field"><span>Cantos arredondados</span><input type="range" min="0" max="80" step="1" data-lp="radius" value="${l.radius || 0}"></label>${common}`;
+    } else {
+      box.innerHTML = `
+        <h3>Imagem</h3>
+        <label class="field"><span>Origem</span><select data-lp="srcKind">
+          <option value="@aluno" ${l.src === '@aluno' ? 'selected' : ''}>Foto do aluno (cadastro)</option>
+          <option value="@personal" ${l.src === '@personal' ? 'selected' : ''}>Foto do personal (cadastro)</option>
+          <option value="own" ${l.src !== '@aluno' && l.src !== '@personal' ? 'selected' : ''}>Imagem própria</option></select></label>
+        <div class="row" style="gap:8px;margin-top:10px"><button class="btn sm" data-action="se-img-upload">Enviar imagem</button><button class="btn sm" data-action="se-img-pdf">Recortar de um PDF</button></div>
+        <div class="row" style="gap:12px;margin-top:10px">
+          <label class="row small"><input type="checkbox" data-lp="round" ${l.round ? 'checked' : ''}> Redonda</label>
+          <label class="row small">Borda <input type="number" min="0" max="40" data-lp="borderW" value="${l.borderW || 0}" style="width:64px"></label>
+          <input type="color" data-lp="borderColor" value="${esc(l.borderColor || '#d2a961')}">
+        </div>
+        <label class="field" style="margin-top:10px"><span>Cantos arredondados</span><input type="range" min="0" max="120" data-lp="radius" value="${l.radius || 0}"></label>${common}`;
+    }
+  }
+  let undoArmed = false;
+  $$('[data-lp]', box).forEach((inp) => {
+    const prop = inp.dataset.lp;
+    const ev = inp.type === 'checkbox' || inp.tagName === 'SELECT' || inp.type === 'color' ? 'change' : 'input';
+    inp.addEventListener('focus', () => { undoArmed = false; });
+    const apply = () => {
+      const lay = curLayer();
+      if (!lay) return;
+      if (!undoArmed) { pushUndo(); undoArmed = true; }
+      let v = inp.type === 'checkbox' ? inp.checked : inp.value;
+      if (['size', 'spacing', 'borderW', 'radius'].includes(prop)) v = +v || 0;
+      if (prop === 'opacity') v = +v;
+      if (prop === 'srcKind') { if (v === 'own') { lay.src = ''; pickLayerImage(lay); } else lay.src = v; renderPanel(); }
+      else lay[prop] = v;
+      if (prop === 'round' && v) { const side = Math.max(lay.w, lay.h); lay.w = side; lay.h = side; }
+      refreshLayer(lay);
+      saveSoon();
+    };
+    inp.addEventListener(ev, apply);
+    if (inp.type === 'color') inp.addEventListener('input', apply);
+  });
+  $$('[data-sp]', box).forEach((inp) => inp.addEventListener('input', () => { pushUndo(); curSlide()[inp.dataset.sp] = inp.value; SE.bgFor = null; renderStage(); saveSoon(); }));
+}
+actions['se-del'] = () => {
+  const s = curSlide();
+  if (!SE.sel) return;
+  pushUndo();
+  s.layers = s.layers.filter((l) => l.id !== SE.sel);
+  SE.sel = null;
+  saveSoon(); renderStage(); renderPanel();
+};
+actions['se-dupl'] = () => {
+  const s = curSlide(), l = curLayer();
+  pushUndo();
+  const c = { ...structuredClone(l), id: uid(), x: l.x + 20, y: l.y + 20 };
+  s.layers.push(c);
+  SE.sel = c.id;
+  saveSoon(); renderStage(); renderPanel();
+};
+actions['se-front'] = () => { const s = curSlide(), l = curLayer(); pushUndo(); s.layers = [...s.layers.filter((x) => x !== l), l]; saveSoon(); renderStage(); };
+actions['se-back'] = () => { const s = curSlide(), l = curLayer(); pushUndo(); s.layers = [l, ...s.layers.filter((x) => x !== l)]; saveSoon(); renderStage(); };
+actions['se-eyedrop'] = (el) => {
+  SE.eyedrop = el.dataset.target;
+  renderStage();
+  toast('Clique no fundo do slide para copiar a cor');
+};
+actions['se-autocolor'] = async () => {
+  const l = curLayer();
+  pushUndo();
+  l.fill = await surroundColor(l.x, l.y, l.w, l.h);
+  refreshLayer(l); renderPanel(); saveSoon();
+};
+actions['se-img-upload'] = () => pickLayerImage(curLayer());
+actions['se-img-pdf'] = () => {
+  const l = curLayer();
+  openPagePicker({
+    pdfId: E.p.sourcePdfId, title: 'Escolha a página com a imagem',
+    onPick: async (pdfId, n) => {
+      const src = await withBusy('Preparando página…', () => renderPage(pdfId, n, 1800));
+      if (src) openCrop({ src, preset: 'left', onDone: (url) => { pushUndo(); l.src = url; l.round = false; saveSoon(); renderStage(); renderPanel(); } });
+    },
+  });
+};
+actions['se-bg-upload'] = async () => {
+  const [f] = await pickFile('image/*');
+  if (!f) return;
+  const s = curSlide();
+  const url = await compressImage(f, 1900, 0.86);
+  pushUndo();
+  s.bg = await (await fetch(url)).blob();
+  SE.bgFor = null;
+  saveSoon(); renderStage(); renderPanel();
+};
+actions['se-bg-clear'] = () => { pushUndo(); curSlide().bg = null; SE.bgFor = null; saveSoon(); renderStage(); renderPanel(); };
+
+/* ---- Aluno e personal (programas em slides) ---- */
+function tabPessoas() {
+  const p = E.p;
+  const st = byId(S.students, p.studentId);
+  const tr = byId(S.trainers, p.trainerId);
+  return `
+  <div class="section card stack">
+    <label class="field"><span>Nome do programa</span><input type="text" data-bind="title"></label>
+  </div>
+  <div class="section grid two">
+    <div class="card stack">
+      <h2>Aluno(a)</h2>
+      <div class="photo-pick">${avatarHTML(st && st.photo, st ? st.name : '?', 'lg')}
+        <div class="stack" style="flex:1;gap:8px">
+          <select id="sel-student">${optList(S.students, p.studentId, 'Selecione o aluno…')}</select>
+          <div class="row"><button class="btn sm" data-action="new-person" data-kind="students" data-assign="1">+ Novo aluno</button>
+          ${st ? `<button class="btn sm" data-action="edit-person" data-kind="students" data-id="${esc(st.id)}" data-assign="1">Editar foto/nome</button>` : ''}</div>
+        </div>
+      </div>
+    </div>
+    <div class="card stack">
+      <h2>Personal Trainer</h2>
+      <div class="photo-pick">${avatarHTML(tr && tr.photo, tr ? tr.name : '?', 'lg')}
+        <div class="stack" style="flex:1;gap:8px">
+          <select id="sel-trainer">${optList(S.trainers, p.trainerId, 'Selecione o personal…')}</select>
+          <div class="row"><button class="btn sm" data-action="new-person" data-kind="trainers" data-assign="1">+ Novo personal</button>
+          ${tr ? `<button class="btn sm" data-action="edit-person" data-kind="trainers" data-id="${esc(tr.id)}" data-assign="1">Editar foto/dados</button>` : ''}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="small muted">As fotos e nomes colocados nos slides com os botões "Foto do aluno", "Nome do aluno", "Foto do personal" e "Nome do personal" usam este cadastro. Trocou o aluno aqui, todos os slides mudam.</p>
+  <div class="section card stack">
+    <h2>Etiquetas</h2>
+    <div class="grid three">${TAG_KEYS.map((k) => `<label class="field"><span>${TAGS[k].label}</span><select data-bind="tags.${k}"><option value="">—</option>${Object.entries(TAGS[k].opts).map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('')}</select></label>`).join('')}</div>
+  </div>`;
+}
+
+/* ---- Seleção de páginas no visualizador de PDF ---- */
+const PV = { sel: new Set(), pdfId: null };
+function updatePvBar() {
+  const n = PV.sel.size;
+  const c = $('#pv-count');
+  if (c) c.textContent = n ? `${n} selecionado(s)` : 'Nenhum selecionado';
+  const b = $('#pv-import-sel');
+  if (b) { b.disabled = !n; b.textContent = `Importar ${n || ''} selecionado(s)`; }
+  $$('#pv-grid .page-tile').forEach((t) => t.classList.toggle('picked', PV.sel.has(+t.dataset.page)));
+}
+actions['pv-all'] = () => { const m = byId(S.pdfs, PV.pdfId); for (let i = 1; i <= m.pages; i++) PV.sel.add(i); updatePvBar(); };
+actions['pv-none'] = () => { PV.sel.clear(); updatePvBar(); };
+actions['pv-import-all'] = () => chooseImportTarget(PV.pdfId, null);
+actions['pv-import-sel'] = () => chooseImportTarget(PV.pdfId, [...PV.sel].sort((a, b) => a - b));
+function chooseImportTarget(pdfId, pages) {
+  const meta = byId(S.pdfs, pdfId);
+  const targets = S.programs.filter((p) => p.mode === 'slides').sort((a, b) => b.updatedAt - a.updatedAt);
+  const n = pages ? pages.length : meta.pages;
+  if (!targets.length) { createSlideProgram(pdfId, pages); return; }
+  const body = openModal(`Importar ${n} slide(s)`, `
+    <div class="stack">
+      <label class="row"><input type="radio" name="imp" value="new" checked> Criar um programa novo</label>
+      <label class="row"><input type="radio" name="imp" value="add"> Adicionar a um programa existente</label>
+      <select id="imp-prog">${targets.map((p) => `<option value="${esc(p.id)}">${esc(p.title)} (${(p.slides || []).length} slides)</option>`).join('')}</select>
+      <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="imp-go">Importar</button></div>
+    </div>`);
+  $('#imp-go', body).onclick = async () => {
+    const mode = $('input[name="imp"]:checked', body).value;
+    const pid = $('#imp-prog', body).value;
+    closeModal();
+    if (mode === 'new') return createSlideProgram(pdfId, pages);
+    const p = byId(S.programs, pid);
+    const pg = pages || Array.from({ length: meta.pages }, (_, i) => i + 1);
+    if (await addSlidesToProgram(p, pdfId, pg)) location.hash = `#/programa/${p.id}/slides`;
+  };
+}
+
 /* ---- Recorte de imagem ---- */
 const CROP_PRESETS = {
   full: { x: 0, y: 0, w: 1, h: 1 },
@@ -1451,14 +2073,14 @@ function openCrop({ src, preset = 'full', onDone }) {
 }
 
 /* ---- Seletor de páginas de PDF ---- */
-function openPagePicker({ pdfId, multi = false, title, onPick, onPickMany }) {
+function openPagePicker({ pdfId, multi = false, slides = false, title, onPick, onPickMany }) {
   if (!S.pdfs.length) {
     openModal(title, `<p>Nenhum PDF na biblioteca ainda.</p><div class="row"><button class="btn primary" id="pp-up">Enviar um PDF</button></div>`);
     $('#pp-up').onclick = async () => {
       const [f] = await pickFile('application/pdf');
       if (!f) return;
       const meta = await withBusy('Lendo o PDF…', () => addPdfFile(f));
-      if (meta) openPagePicker({ pdfId: meta.id, multi, title, onPick, onPickMany });
+      if (meta) openPagePicker({ pdfId: meta.id, multi, slides, title, onPick, onPickMany });
     };
     return;
   }
@@ -1471,8 +2093,8 @@ function openPagePicker({ pdfId, multi = false, title, onPick, onPickMany }) {
       <button class="btn sm" id="pp-up">Enviar outro PDF</button>
     </div>
     ${multi ? `<div class="card row small" style="margin-bottom:12px;padding:12px">
-        <span>Selecione as páginas dos exercícios (uma página = um exercício).</span><span class="spacer"></span>
-        <label class="row">Recorte da foto: <select id="pp-preset" style="width:auto">${['left', 'right', 'full'].map((k) => `<option value="${k}">${PRESET_LABELS[k]}</option>`).join('')}</select></label>
+        <span>${slides ? 'Selecione os slides para adicionar.' : 'Selecione as páginas dos exercícios (uma página = um exercício).'}</span><span class="spacer"></span>
+        <label class="row" style="${slides ? 'display:none' : ''}">Recorte da foto: <select id="pp-preset" style="width:auto">${['left', 'right', 'full'].map((k) => `<option value="${k}">${PRESET_LABELS[k]}</option>`).join('')}</select></label>
         <button class="btn primary sm" id="pp-go" disabled>Importar 0 páginas</button></div>` : '<p class="small muted" style="margin-top:0">Toque na página para escolher e depois ajuste o recorte.</p>'}
     <div class="pages-grid" id="pp-grid"></div>`, { wide: true });
   const token = ++modalToken;
@@ -1511,7 +2133,7 @@ function openPagePicker({ pdfId, multi = false, title, onPick, onPickMany }) {
     const [f] = await pickFile('application/pdf');
     if (!f) return;
     const meta = await withBusy('Lendo o PDF…', () => addPdfFile(f));
-    if (meta) openPagePicker({ pdfId: meta.id, multi, title, onPick, onPickMany });
+    if (meta) openPagePicker({ pdfId: meta.id, multi, slides, title, onPick, onPickMany });
   });
   if (multi) {
     $('#pp-go', body).addEventListener('click', () => {
@@ -1651,7 +2273,7 @@ function renderPdfList() {
       ${x.thumb ? `<img class="pdf-thumb" src="${esc(x.thumb)}" alt="">` : '<span class="pdf-thumb"></span>'}
       <div style="flex:1;min-width:0">
         <h3 style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(pdfTitle(x))}</h3>
-        <div class="small muted">${x.code ? esc(x.code) + ' · ' : ''}${x.pages} páginas · ${fmtSize(x.size)}</div>
+        <div class="small muted">${x.title && x.title !== x.name ? 'Arquivo: ' + esc(x.name) + ' · ' : ''}${x.code ? esc(x.code) + ' · ' : ''}${x.pages} páginas · ${fmtSize(x.size)}</div>
         <div class="row" style="margin-top:6px;gap:6px">${tagChips(x.tags) || '<span class="chip">Sem etiquetas</span>'}
           ${x.generated ? '<span class="chip gold">Gerado pelo app</span>' : ''}
           ${p ? `<a class="chip" href="#/programa/${esc(p.id)}">Programa: ${esc(p.title)}</a>` : ''}</div>
@@ -1718,16 +2340,32 @@ async function viewPdf(id) {
   app.innerHTML = `
     <div class="page-head"><div><a class="btn ghost sm" href="#/pdfs">← PDFs</a><h1 style="margin-top:6px">${esc(pdfTitle(meta))}</h1><p class="muted">${meta.code ? esc(meta.code) + ' · ' : ''}${meta.pages} páginas · ${fmtSize(meta.size)}</p><div class="row" style="gap:6px">${tagChips(meta.tags)}<button class="btn sm ghost" data-action="edit-tags" data-id="${esc(id)}">Editar etiquetas</button></div></div>
       <div class="row">
-        ${meta.generated ? '' : `<button class="btn primary" data-action="pdf-to-program" data-id="${esc(id)}">Criar programa a partir deste PDF</button>`}
         <button class="btn" data-action="dl-pdf" data-id="${esc(id)}">Baixar</button>
         <button class="btn danger" data-action="del-pdf" data-id="${esc(id)}">Excluir</button>
       </div></div>
-    ${meta.generated ? '' : `<div class="card small" style="margin-bottom:14px">Este é o PDF original, só para consulta. Para editar os slides, use <b>Criar programa a partir deste PDF</b>: o programa abre no editor${meta.code && libraryEntry(meta.code) ? ' já com todos os treinos e exercícios preenchidos' : ''}.</div>`}
-    <div class="pages-grid" id="pv-grid">${Array.from({ length: meta.pages }, (_, i) => `<div class="page-tile" data-page="${i + 1}"><img alt=""><span class="pn">${i + 1}</span></div>`).join('')}</div>`;
+    <div class="card pv-bar">
+      <div class="row">
+        <button class="btn primary" data-action="pv-import-all">Importar programa inteiro (${meta.pages} slides)</button>
+        <button class="btn" id="pv-import-sel" data-action="pv-import-sel" disabled>Importar selecionados</button>
+        <span class="spacer"></span>
+        <span class="small muted" id="pv-count"></span>
+        <button class="btn sm ghost" data-action="pv-all">Selecionar todos</button>
+        <button class="btn sm ghost" data-action="pv-none">Limpar</button>
+      </div>
+      <div class="small muted" style="margin-top:8px">Toque nos slides para selecionar. Depois de importar, cada slide pode ser editado: cobrir e reescrever textos, trocar fotos, colocar nome e foto do aluno e do personal.
+        ${meta.code && libraryEntry(meta.code) ? ` Alternativa: <a href="#" data-action="pdf-to-template" data-id="${esc(id)}">montar no modelo do app</a> (treinos e exercícios em formulário).` : ''}</div>
+    </div>
+    <div class="pages-grid" id="pv-grid">${Array.from({ length: meta.pages }, (_, i) => `<div class="page-tile" data-page="${i + 1}"><img alt=""><span class="pn">${i + 1}</span><span class="pick">✓</span><button class="zoom" title="Ampliar">🔍</button></div>`).join('')}</div>`;
+  if (PV.pdfId !== id) { PV.pdfId = id; PV.sel = new Set(); }
+  updatePvBar();
   const grid = $('#pv-grid');
   grid.addEventListener('click', (e) => {
     const t = e.target.closest('.page-tile');
-    if (t) openPageView(id, +t.dataset.page);
+    if (!t) return;
+    const n = +t.dataset.page;
+    if (e.target.closest('.zoom')) { openPageView(id, n); return; }
+    if (PV.sel.has(n)) PV.sel.delete(n); else PV.sel.add(n);
+    updatePvBar();
   });
   const h = location.hash;
   for (let n = 1; n <= meta.pages; n++) {
@@ -1735,7 +2373,8 @@ async function viewPdf(id) {
     try { const url = await renderPage(id, n, 360); const img = $(`[data-page="${n}"] img`, grid); if (img) img.src = url; } catch (e) { console.warn(e); }
   }
 }
-actions['pdf-to-program'] = (el) => createProgramFromPdf(el.dataset.id);
+actions['pdf-to-program'] = (el) => createSlideProgram(el.dataset.id);
+actions['pdf-to-template'] = (el) => createProgramFromPdf(el.dataset.id);
 async function openPageView(pdfId, n) {
   const meta = byId(S.pdfs, pdfId);
   const body = openModal(`Página ${n} de ${meta.pages}`, `<div class="page-view"><img id="pv-img" alt=""><div class="row">
@@ -1791,7 +2430,13 @@ const blobToDataURL = (b) => new Promise((res) => { const r = new FileReader(); 
 actions.backup = async () => {
   const withPdfs = $('#bk-pdfs').checked;
   const data = await withBusy('Preparando cópia…', async () => {
-    const out = { app: 'gallo-programas', version: 1, exportedAt: new Date().toISOString(), settings: S.settings, programs: S.programs, students: S.students, trainers: S.trainers, pdfs: [] };
+    const programs = [];
+    for (const pr of S.programs) {
+      const c = structuredClone(pr);
+      for (const sl of c.slides || []) if (sl.bg instanceof Blob) sl.bg = await blobToDataURL(sl.bg);
+      programs.push(c);
+    }
+    const out = { app: 'gallo-programas', version: 1, exportedAt: new Date().toISOString(), settings: S.settings, programs, students: S.students, trainers: S.trainers, pdfs: [] };
     if (withPdfs) {
       for (const m of S.pdfs) {
         const rec = await DB.get('pdfblobs', m.id);
@@ -1809,6 +2454,7 @@ actions.restore = async () => {
   const ok = await withBusy('Restaurando…', async () => {
     const data = JSON.parse(await f.text());
     if (data.app !== 'gallo-programas') throw new Error('Arquivo não é uma cópia deste app');
+    for (const pr of data.programs || []) for (const sl of pr.slides || []) if (typeof sl.bg === 'string' && sl.bg.startsWith('data:')) sl.bg = await (await fetch(sl.bg)).blob();
     for (const k of ['programs', 'students', 'trainers']) for (const x of data[k] || []) { await DB.put(k, x); upsert(S[k], x); }
     for (const m of data.pdfs || []) {
       if (!m.data) continue;
