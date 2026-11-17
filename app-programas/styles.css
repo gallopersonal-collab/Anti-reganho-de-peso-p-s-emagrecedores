@@ -48,8 +48,9 @@ h3 { font-size: 16px; }
 .brand-mark {
   display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px;
   background: linear-gradient(135deg, var(--gold), #9c7434); color: #0b1220;
-  font: 700 20px/1 Oswald, sans-serif;
+  font: 700 16px/1 Oswald, sans-serif; letter-spacing: .5px;
 }
+.brand-text b { color: var(--gold-2); font-weight: 600; }
 .brand-text { font: 600 18px/1 Oswald, sans-serif; letter-spacing: .5px; }
 .nav { display: flex; gap: 4px; }
 .nav a {

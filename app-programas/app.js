@@ -1,4 +1,4 @@
-/* Programas de Treino — Instituto Gallo Personal
+/* Trainer Pro Studio — Instituto Gallo Personal
  * App 100% no navegador: os dados ficam no IndexedDB do aparelho.
  * Bibliotecas locais em vendor/: pdf.js (ler PDFs), html2canvas + jsPDF (gerar PDFs).
  */
@@ -144,7 +144,7 @@ const S = {
   students: [],
   trainers: [],
   pdfs: [],
-  settings: { id: 'app', brand: 'Instituto Gallo Personal', theme: 'navy', seeded: false },
+  settings: { id: 'app', brand: 'Trainer Pro Studio · Instituto Gallo Personal', theme: 'navy', seeded: false },
   ui: { q: '', student: '' },
 };
 const byId = (list, id) => list.find((x) => x.id === id);

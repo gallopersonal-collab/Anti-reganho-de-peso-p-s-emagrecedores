@@ -1,4 +1,4 @@
-APP PROGRAMAS DE TREINO — FASE 1
+TRAINER PRO STUDIO — FASE 1
 
 O que faz
   - Guarda vários programas de treino, alunos e personais
