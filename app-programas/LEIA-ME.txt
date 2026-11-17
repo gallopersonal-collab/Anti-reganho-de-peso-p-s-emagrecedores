@@ -1,26 +1,23 @@
-TRAINER PRO STUDIO — FASE 1
+TRAINER PRO STUDIO
 
-O que faz
-  - Guarda vários programas de treino, alunos e personais
-  - Envia PDFs já existentes e puxa as fotos dos exercícios das páginas (com recorte)
-  - Edita exercícios: nome, grupo muscular, foto, séries, reps/tempo, PSE,
-    descanso, cadência, carga, execução, cuidados e observações
-  - Foto e nome do personal e do aluno na capa, na apresentação e na página final
-  - Gera um PDF novo no padrão visual (3 temas) e salva na biblioteca de PDFs
-  - Cópia de segurança (backup) em Ajustes
+Como o personal usa
+  1. Início > "+ Novo programa para um aluno"
+  2. Cadastra o aluno: nome, foto, WhatsApp, sexo, idade, objetivo, nível e onde treina
+  3. O App recomenda os programas da Biblioteca que combinam (60 programas embutidos)
+  4. "Usar para o aluno": o programa sai pronto, com foto e nome do aluno na capa
+  5. Ajusta o que quiser (clique em qualquer slide para editar) e "Enviar pelo WhatsApp"
+  Não achou um programa adequado? Biblioteca > "Criar modelo a partir deste",
+  edite e salve: o modelo fica na Biblioteca para usar com outros alunos.
+  Também é possível salvar o programa de um aluno como modelo ("Salvar como modelo").
 
 Onde ficam os dados
-  No navegador do aparelho que está usando (IndexedDB). Não vai para servidor.
-  Faça backup em Ajustes > Cópia de segurança. Para levar a outro aparelho,
-  restaure o arquivo de backup lá.
+  No navegador do aparelho (IndexedDB). Faça backup em Ajustes > Cópia de segurança.
 
-Arquivos (manter sempre juntos, na mesma pasta)
-  index.html, app.js, styles.css e a pasta vendor/ (leitor e gerador de PDF)
-
-Como publicar (arquivo único)
+Como publicar
   1. Abra netlify.com/drop
-  2. Arraste a pasta "app-programas/netlify" (contém só o index.html, já com tudo embutido)
-  3. Abra o link gerado no celular ou computador
+  2. Arraste a pasta "app-programas/netlify" inteira (index.html + pasta fotos)
+  A pasta "fotos" tem as imagens dos exercícios: sem ela os programas saem sem foto.
 
-Para regerar o arquivo único depois de mudar o código:
-  python3 scripts/build_app_programas.py
+Para regerar depois de mudar o código ou os roteiros:
+  python3 scripts/build_library_data.py   (roteiros -> library-data.js + fotos)
+  python3 scripts/build_app_programas.py  (gera a pasta netlify)

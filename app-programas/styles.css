@@ -426,3 +426,28 @@ textarea { resize: vertical; min-height: 84px; line-height: 1.45; }
 .page-tile.picked { border-color: var(--gold); }
 .page-tile.picked .pick { background: var(--gold); border-color: var(--gold); color: #000; }
 .page-tile .zoom { position: absolute; right: 8px; bottom: 8px; border: 0; border-radius: 8px; background: rgba(0,0,0,.65); color: #fff; padding: 4px 8px; cursor: pointer; }
+
+/* ============ Início / Biblioteca / Passo a passo ============ */
+.btn.lg { min-height: 50px; padding: 12px 22px; font-size: 16px; border-radius: 12px; }
+.hero { display: flex; flex-direction: column; gap: 18px; padding: 28px; background: linear-gradient(135deg, #1b2a48 0%, #121c31 60%); border-color: #34497a; }
+.hero h1 { font-size: 30px; }
+.hero p { margin: 8px 0 0; max-width: 640px; }
+.hero-actions { gap: 12px; }
+.onboard { margin-bottom: 16px; border-color: var(--gold); }
+.tpl-card { cursor: default; }
+.tpl-card:hover { transform: none; }
+.tpl-cover { height: 150px; border-radius: 10px; background: #fff center 20% / cover no-repeat; }
+.tpl-cover-empty { display: grid; place-items: center; background: linear-gradient(135deg, #22345a, #0f1a2e); color: var(--gold); font: 600 22px/1 Oswald, sans-serif; letter-spacing: 1px; }
+.tpl-tagline { margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.tpl-card .actions { flex-wrap: wrap; }
+.wiz-step h2 { display: flex; align-items: center; gap: 10px; }
+.step-n { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--gold); color: #141007; font: 700 16px/1 Inter, sans-serif; }
+.wz-student { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); }
+.tpl-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tpl-table td { padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.tpl-table td:nth-child(2), .tpl-table td:nth-child(3) { white-space: nowrap; color: var(--muted); width: 1%; }
+@media (max-width: 760px) {
+  .hero { padding: 20px; }
+  .hero h1 { font-size: 24px; }
+  .hero-actions .btn { width: 100%; }
+}

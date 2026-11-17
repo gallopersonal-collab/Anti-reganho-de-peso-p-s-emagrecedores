@@ -465,10 +465,12 @@ async function route() {
   closeModal();
   const parts = (location.hash.slice(1) || '/').split('/').filter(Boolean);
   const [r, id] = parts;
-  const navKey = { programa: 'programas', alunos: 'alunos', personais: 'personais', pdfs: 'pdfs', pdf: 'pdfs', config: 'config' }[r] || 'programas';
+  const navKey = { programa: 'inicio', novo: 'inicio', biblioteca: 'biblioteca', alunos: 'alunos', personais: 'config', pdfs: 'pdfs', pdf: 'pdfs', config: 'config' }[r] || 'inicio';
   $$('[data-nav]').forEach((a) => a.classList.toggle('active', a.dataset.nav === navKey));
   window.scrollTo(0, 0);
-  if (!r) return viewPrograms();
+  if (!r) return viewHome();
+  if (r === 'novo') return viewWizard(id);
+  if (r === 'biblioteca') return viewLibrary();
   if (r === 'programa' && id && parts[2] === 'slide' && parts[3]) return viewSlideEditor(id, parts[3]);
   if (r === 'programa' && id) return viewEditor(id, parts[2]);
   if (r === 'alunos') return viewPeople('students');
@@ -488,6 +490,337 @@ document.addEventListener('click', (ev) => {
   const fn = actions[el.dataset.action];
   if (fn) { ev.preventDefault(); fn(el, ev); }
 });
+
+/* =========================================================
+ * Modelos: 60 programas do App + modelos criados pelo personal
+ * ======================================================= */
+function libTemplates() {
+  return Object.entries(window.LIBRARY_DATA || {}).map(([code, d]) => {
+    const t = parseCode(code) || {};
+    const { code: _c, ...tags } = t;
+    const exs = d.workouts.flatMap((w) => w.exercises);
+    return {
+      id: 'lib:' + code, builtin: true, code, title: d.title, tagline: d.tagline, tags,
+      freq: (CATALOG[code] || [])[1] || '', info: `${d.workouts.length} treinos · ${exs.length} exercícios`,
+      cover: (exs.find((x) => x.image) || {}).image || '', data: d,
+    };
+  });
+}
+function myTemplates() {
+  return S.programs.filter((p) => p.isTemplate).map((p) => {
+    const exs = (p.workouts || []).flatMap((w) => w.exercises);
+    return {
+      id: p.id, builtin: false, title: p.title, tagline: p.subtitle, tags: progTags(p), freq: p.frequency || '',
+      info: p.mode === 'slides' ? `${(p.slides || []).length} slides` : `${p.workouts.length} treinos · ${exs.length} exercícios`,
+      cover: p.mode === 'slides' ? '' : (exs.find((x) => x.image) || {}).image || '', program: p,
+    };
+  });
+}
+const allTemplates = () => [...myTemplates().sort((a, b) => a.title.localeCompare(b.title)), ...libTemplates()];
+const templateById = (id) => allTemplates().find((t) => t.id === id);
+const studentPrograms = () => S.programs.filter((p) => !p.isTemplate);
+
+/** Filtro a partir dos dados do aluno. */
+function studentFilter(st) {
+  const f = {};
+  if (st.sex) f.sex = st.sex;
+  if (st.obj) f.obj = st.obj;
+  if (st.level) f.level = st.level;
+  if (st.env) f.env = st.env;
+  const age = parseInt(st.age, 10);
+  if (age) f.age = `${age}-${age}`;
+  return f;
+}
+const DROP_ORDER = [['env', 'ambiente'], ['level', 'nível'], ['age', 'faixa etária'], ['obj', 'objetivo']];
+/** Programas que combinam com o aluno; se nenhum, relaxa o filtro aos poucos. */
+function recommend(st) {
+  const f = studentFilter(st);
+  const list = allTemplates();
+  let found = list.filter((t) => tagMatch(t.tags, f));
+  if (found.length) return { exact: true, list: found, dropped: [] };
+  const g = { ...f };
+  const dropped = [];
+  for (const [k, label] of DROP_ORDER) {
+    if (!g[k]) continue;
+    delete g[k];
+    dropped.push(label);
+    found = list.filter((t) => tagMatch(t.tags, g));
+    if (found.length) return { exact: false, list: found, dropped };
+  }
+  return { exact: false, list, dropped };
+}
+
+/** Cria o programa do aluno a partir de um modelo. */
+async function createFromTemplate(tplId, studentId) {
+  const tpl = templateById(tplId);
+  if (!tpl) return null;
+  let p;
+  if (tpl.builtin) {
+    const t = tpl.tags;
+    p = newProgram({
+      tags: { ...t },
+      subtitle: [tagLabel('sex', t.sex), tagLabel('age', t.age), tagLabel('level', t.level), tagLabel('env', t.env)].filter(Boolean).join(' · '),
+      level: tagLabel('level', t.level),
+      frequency: tpl.freq ? tpl.freq + '/semana' : '',
+      structure: tpl.freq === '3x' ? 'Full body A/B/C' : '',
+    });
+    fillFromLibrary(p, tpl.code);
+  } else {
+    p = structuredClone(tpl.program);
+    p.id = uid();
+    p.createdAt = 0;
+    p.isTemplate = false;
+    (p.workouts || []).forEach((w) => { w.id = uid(); w.exercises.forEach((x) => { x.id = uid(); }); });
+    (p.slides || []).forEach((sl) => { sl.id = uid(); sl.layers.forEach((l) => { l.id = uid(); }); });
+  }
+  p.templateId = tplId;
+  p.studentId = studentId || '';
+  p.trainerId = S.settings.defaultTrainerId || (S.trainers[0] && S.trainers[0].id) || '';
+  await saveEntity('programs', p);
+  return p;
+}
+
+/** Copia um modelo (do App ou próprio) como novo modelo editável. */
+async function copyAsTemplate(tplId) {
+  const p = await createFromTemplate(tplId, '');
+  if (!p) return;
+  p.isTemplate = true;
+  p.title = p.title + ' (meu modelo)';
+  delete p.templateId;
+  await saveEntity('programs', p);
+  location.hash = `#/programa/${p.id}`;
+  setTimeout(() => toast('Modelo criado. Edite e ele fica salvo na Biblioteca.'), 300);
+}
+
+/* ---- Cartão de modelo ---- */
+function templateCard(t, actionsHTML) {
+  return `<div class="card pcard tpl-card">
+    ${t.cover ? `<div class="tpl-cover" style="background-image:url('${esc(t.cover)}')"></div>` : '<div class="tpl-cover tpl-cover-empty">Trainer Pro</div>'}
+    <div class="row" style="gap:6px">${t.builtin ? '<span class="chip">Programa do App</span>' : '<span class="chip gold">Meu modelo</span>'}${t.freq ? `<span class="chip">${esc(t.freq)}/semana</span>` : ''}</div>
+    <h3>${esc(t.title)}</h3>
+    ${t.tagline ? `<p class="small muted tpl-tagline">${esc(t.tagline)}</p>` : ''}
+    <div class="meta">${tagChips(t.tags)}</div>
+    <div class="small muted">${esc(t.info)}${t.code ? ' · ' + esc(t.code) : ''}</div>
+    <div class="actions">${actionsHTML}</div>
+  </div>`;
+}
+
+/* =========================================================
+ * Tela: Início
+ * ======================================================= */
+function viewHome() {
+  const progs = studentPrograms().sort((a, b) => b.updatedAt - a.updatedAt);
+  const q = S.ui.q.trim().toLowerCase();
+  const list = progs.filter((p) => {
+    if (!q) return true;
+    const st = byId(S.students, p.studentId);
+    return `${p.title} ${st ? st.name : ''}`.toLowerCase().includes(q);
+  });
+  app.innerHTML = `
+    ${!S.trainers.length ? `<div class="card onboard row">
+      <div style="flex:1;min-width:220px"><strong>Primeiro passo: cadastre seu perfil de personal</strong><div class="small muted">Seu nome, foto e CREF aparecem nos programas que você enviar.</div></div>
+      <button class="btn primary" data-action="new-person" data-kind="trainers">Cadastrar meu perfil</button></div>` : ''}
+    <div class="hero card">
+      <div>
+        <h1>Programa pronto para o seu aluno em 1 minuto</h1>
+        <p class="muted">Informe os dados do aluno, escolha um dos ${libTemplates().length} programas recomendados, coloque foto e nome e envie pelo WhatsApp.</p>
+      </div>
+      <div class="row hero-actions">
+        <a class="btn primary lg" href="#/novo">+ Novo programa para um aluno</a>
+        <a class="btn lg" href="#/biblioteca">Ver Biblioteca (${allTemplates().length})</a>
+      </div>
+    </div>
+    <div class="page-head" style="margin-top:28px"><div><h2>Programas dos seus alunos</h2><p class="muted small">${progs.length} programa(s) neste aparelho</p></div>
+      ${progs.length ? `<input type="search" id="q" placeholder="Buscar por aluno ou programa…" value="${esc(S.ui.q)}" style="max-width:280px">` : ''}</div>
+    ${!progs.length ? '<div class="empty">Nenhum programa enviado ainda. Comece em <b>+ Novo programa para um aluno</b>.</div>'
+      : !list.length ? '<div class="empty">Nada encontrado.</div>'
+      : `<div class="grid cards">${list.map((p) => {
+        const st = byId(S.students, p.studentId);
+        return `<div class="card pcard" data-action="open-program" data-id="${esc(p.id)}">
+          <div class="who">${avatarHTML(st && st.photo, st ? st.name : '?')}<div><strong>${st ? esc(st.name) : 'Sem aluno'}</strong><div class="small muted">Atualizado em ${fmtDate(p.updatedAt)}</div></div></div>
+          <h3>${esc(p.title || 'Sem título')}</h3>
+          ${hasTags(progTags(p)) ? `<div class="meta">${tagChips(progTags(p))}</div>` : ''}
+          <div class="actions">
+            <button class="btn sm primary" data-action="send-program" data-id="${esc(p.id)}">Enviar</button>
+            <button class="btn sm" data-action="open-program" data-id="${esc(p.id)}" data-tab="gerar">Ver / editar</button>
+            <span class="spacer"></span>
+            <button class="btn sm ghost" data-action="save-template" data-id="${esc(p.id)}" title="Salvar como modelo para usar com outros alunos">Salvar como modelo</button>
+            <button class="btn sm danger" data-action="del-program" data-id="${esc(p.id)}" title="Excluir">✕</button>
+          </div></div>`;
+      }).join('')}</div>`}`;
+  const qi = $('#q');
+  if (qi) qi.addEventListener('input', (e) => { S.ui.q = e.target.value; const pos = e.target.selectionStart; viewHome(); const n = $('#q'); n.focus(); n.setSelectionRange(pos, pos); });
+}
+
+/* =========================================================
+ * Tela: Novo programa (passo a passo)
+ * ======================================================= */
+const W2 = { studentId: '', tplId: '' };
+function viewWizard(tplId) {
+  if (tplId) W2.tplId = decodeURIComponent(tplId);
+  const st = byId(S.students, W2.studentId);
+  const tpl = W2.tplId && templateById(W2.tplId);
+  const studentOpts = S.students.slice().sort((a, b) => a.name.localeCompare(b.name))
+    .map((s) => `<option value="${esc(s.id)}" ${s.id === W2.studentId ? 'selected' : ''}>${esc(s.name)}</option>`).join('');
+  const missing = st ? ['sex', 'age', 'obj'].filter((k) => !st[k]) : [];
+  app.innerHTML = `
+    <div class="page-head"><div><a class="btn ghost sm" href="#/">← Início</a><h1 style="margin-top:6px">Novo programa para um aluno</h1></div></div>
+    <div class="card stack wiz-step">
+      <h2><span class="step-n">1</span> Aluno</h2>
+      <div class="row">
+        <select id="wz-student" style="max-width:360px"><option value="">Selecione um aluno já cadastrado…</option>${studentOpts}</select>
+        <span class="muted small">ou</span>
+        <button class="btn primary" data-action="wz-new-student">+ Cadastrar novo aluno</button>
+      </div>
+      ${st ? `<div class="row wz-student">${avatarHTML(st.photo, st.name, 'lg')}
+        <div style="flex:1;min-width:200px"><strong>${esc(st.name)}</strong>
+          <div class="meta" style="margin-top:6px">${[st.sex && tagLabel('sex', st.sex), st.age && st.age + ' anos', st.obj && tagLabel('obj', st.obj), st.level && tagLabel('level', st.level), st.env && tagLabel('env', st.env)].filter(Boolean).map((x) => `<span class="chip">${esc(x)}</span>`).join('')}</div>
+          ${!st.photo ? '<div class="small" style="color:var(--gold-2);margin-top:6px">Sem foto: adicione para aparecer na capa.</div>' : ''}
+          ${missing.length ? '<div class="small" style="color:var(--gold-2);margin-top:6px">Complete sexo, idade e objetivo para receber as recomendações certas.</div>' : ''}</div>
+        <button class="btn sm" data-action="edit-person" data-kind="students" data-id="${esc(st.id)}" data-wizard="1">Editar dados / foto</button></div>` : ''}
+    </div>
+    ${st ? `<div class="card stack wiz-step" style="margin-top:16px">
+      <h2><span class="step-n">2</span> ${tpl ? 'Programa escolhido' : 'Programas recomendados'}</h2>
+      <div id="wz-recs"></div>
+    </div>` : ''}`;
+  $('#wz-student').addEventListener('change', (e) => { W2.studentId = e.target.value; viewWizard(); });
+  if (st) renderRecs(st, tpl);
+}
+function renderRecs(st, tpl) {
+  const box = $('#wz-recs');
+  const useBtn = (t) => `<button class="btn sm primary" data-action="wz-use" data-tpl="${esc(t.id)}">Usar para ${esc(st.name.split(' ')[0])}</button>
+    <button class="btn sm" data-action="tpl-view" data-tpl="${esc(t.id)}">Ver treinos</button>`;
+  if (tpl) {
+    box.innerHTML = `<div class="grid cards">${templateCard(tpl, useBtn(tpl))}</div>
+      <div class="row" style="margin-top:12px"><button class="btn sm ghost" data-action="wz-clear-tpl">Ver recomendações para este aluno</button></div>`;
+    return;
+  }
+  const r = recommend(st);
+  box.innerHTML = `
+    <p class="small ${r.exact ? 'muted' : ''}" style="margin:0 0 12px;${r.exact ? '' : 'color:var(--gold-2)'}">${r.exact
+      ? `${r.list.length} programa(s) combinam com os dados de ${esc(st.name.split(' ')[0])}.`
+      : `Nenhum programa combina 100%. Estes são os mais próximos (ignorando: ${r.dropped.join(', ')}). Você pode usar um deles e ajustar, ou ver toda a Biblioteca.`}</p>
+    <div class="grid cards">${r.list.map((t) => templateCard(t, useBtn(t))).join('')}</div>
+    <div class="row" style="margin-top:14px"><a class="btn sm" href="#/biblioteca">Ver toda a Biblioteca</a></div>`;
+}
+actions['wz-new-student'] = () => personForm('students', null, false, (x) => { W2.studentId = x.id; viewWizard(); });
+actions['wz-clear-tpl'] = () => { W2.tplId = ''; viewWizard(); };
+actions['wz-use'] = async (el) => {
+  const p = await withBusy('Montando o programa…', async () => createFromTemplate(el.dataset.tpl, W2.studentId));
+  if (!p) return;
+  W2.tplId = '';
+  location.hash = `#/programa/${p.id}/gerar`;
+  setTimeout(() => toast('Programa pronto. Confira, ajuste se quiser e envie.'), 300);
+};
+actions['tpl-view'] = (el) => {
+  const t = templateById(el.dataset.tpl);
+  const workouts = t.builtin ? t.data.workouts : (t.program.workouts || []);
+  openModal(t.title, `
+    ${t.tagline ? `<p class="muted">${esc(t.tagline)}</p>` : ''}
+    <div class="meta" style="margin-bottom:12px">${tagChips(t.tags)}</div>
+    ${t.program && t.program.mode === 'slides' ? `<p>Programa em slides (${t.info}).</p>` : workouts.map((w) => `
+      <h3 style="margin:14px 0 6px">${esc(w.name)}${w.focus ? ` <span class="muted small">· ${esc(w.focus)}</span>` : ''}</h3>
+      <table class="tpl-table">${w.exercises.map((x) => `<tr><td>${esc(x.name)}</td><td>${esc(x.sets || '')}${x.sets ? ' × ' : ''}${esc(x.reps || '')}</td><td>${esc(fmtRest(x.rest))}</td></tr>`).join('')}</table>`).join('')}`);
+};
+
+/* =========================================================
+ * Tela: Biblioteca de programas (App + meus modelos)
+ * ======================================================= */
+function viewLibrary() {
+  const f = S.ui.lf || (S.ui.lf = {});
+  const all = allTemplates();
+  app.innerHTML = `
+    <div class="page-head"><div><h1>Biblioteca de programas</h1><p class="muted" id="lib-count"></p></div>
+      <a class="btn" href="#/pdfs">Importar meus PDFs</a></div>
+    <div class="toolbar">
+      <input type="search" id="lib-q" placeholder="Buscar programa…" value="${esc(S.ui.lq || '')}" style="max-width:240px">
+      ${tagSelects(f, 'lf-', all.map((t) => t.tags))}
+      <select id="lib-src" style="max-width:200px"><option value="">Todos</option><option value="app" ${S.ui.lsrc === 'app' ? 'selected' : ''}>Programas do App</option><option value="mine" ${S.ui.lsrc === 'mine' ? 'selected' : ''}>Meus modelos</option></select>
+      ${TAG_KEYS.some((k) => f[k]) ? '<button class="btn sm ghost" data-action="lib-clear">Limpar filtros</button>' : ''}
+    </div>
+    <div id="lib-list"></div>`;
+  $('#lib-q').addEventListener('input', (e) => { S.ui.lq = e.target.value; renderLibList(); });
+  $('#lib-src').addEventListener('change', (e) => { S.ui.lsrc = e.target.value; renderLibList(); });
+  $$('[data-tagfilter]', app).forEach((sel) => sel.addEventListener('change', () => { f[sel.dataset.tagfilter] = sel.value; viewLibrary(); }));
+  renderLibList();
+}
+actions['lib-clear'] = () => { S.ui.lf = {}; viewLibrary(); };
+function renderLibList() {
+  const f = S.ui.lf || {}, q = (S.ui.lq || '').trim().toLowerCase();
+  const all = allTemplates();
+  const list = all.filter((t) => tagMatch(t.tags, f))
+    .filter((t) => !S.ui.lsrc || (S.ui.lsrc === 'mine' ? !t.builtin : t.builtin))
+    .filter((t) => !q || `${t.title} ${t.code || ''} ${t.tagline || ''}`.toLowerCase().includes(q));
+  $('#lib-count').textContent = `${list.length} de ${all.length} programas · ${myTemplates().length} modelo(s) seus`;
+  $('#lib-list').innerHTML = list.length ? `<div class="grid cards">${list.map((t) => templateCard(t, `
+      <button class="btn sm primary" data-action="tpl-use" data-tpl="${esc(t.id)}">Usar para um aluno</button>
+      <button class="btn sm" data-action="tpl-view" data-tpl="${esc(t.id)}">Ver</button>
+      ${t.builtin ? `<button class="btn sm ghost" data-action="tpl-copy" data-tpl="${esc(t.id)}" title="Cria uma cópia sua para editar">Criar modelo a partir deste</button>`
+        : `<button class="btn sm ghost" data-action="open-program" data-id="${esc(t.id)}">Editar</button><button class="btn sm ghost" data-action="tpl-copy" data-tpl="${esc(t.id)}">Duplicar</button><button class="btn sm danger" data-action="del-program" data-id="${esc(t.id)}">✕</button>`}`)).join('')}</div>`
+    : '<div class="empty">Nenhum programa com esses filtros. Os números entre parênteses mostram quantos existem em cada opção.</div>';
+}
+actions['tpl-use'] = (el) => { W2.tplId = el.dataset.tpl; location.hash = '#/novo'; };
+actions['tpl-copy'] = (el) => copyAsTemplate(el.dataset.tpl);
+actions['save-template'] = async (el, ev) => {
+  if (ev) ev.stopPropagation();
+  const src = byId(S.programs, el.dataset.id || (E.p && E.p.id));
+  await saveSoon.flush();
+  const name = prompt('Nome do novo modelo:', src.title);
+  if (!name) return;
+  const p = structuredClone(src);
+  Object.assign(p, { id: uid(), createdAt: 0, isTemplate: true, studentId: '', title: name.trim() });
+  delete p.templateId;
+  (p.workouts || []).forEach((w) => { w.id = uid(); w.exercises.forEach((x) => { x.id = uid(); }); });
+  (p.slides || []).forEach((sl) => { sl.id = uid(); sl.layers.forEach((l) => { l.id = uid(); }); });
+  await saveEntity('programs', p);
+  toast('Modelo salvo na Biblioteca. Use com outros alunos.');
+};
+
+/* =========================================================
+ * Envio: PDF + WhatsApp
+ * ======================================================= */
+function waText(p) {
+  const st = byId(S.students, p.studentId), tr = byId(S.trainers, p.trainerId);
+  return `Olá${st ? ' ' + st.name.split(' ')[0] : ''}! Segue seu programa de treino "${p.title}". Qualquer dúvida, é só me chamar.${tr ? '\n' + tr.name : ''}`;
+}
+function waNumber(st) {
+  let d = String((st && st.phone) || '').replace(/\D/g, '');
+  if (!d) return '';
+  if (d.length <= 11) d = '55' + d;
+  return d;
+}
+actions['send-program'] = async (el, ev) => {
+  if (ev) ev.stopPropagation();
+  const p = byId(S.programs, el.dataset.id || (E.p && E.p.id));
+  if (E.p && E.p.id === p.id) await saveSoon.flush();
+  const out = await buildProgramPdf(p);
+  if (out) showSendModal(p, out);
+};
+function showSendModal(p, { blob, fileName, pages }) {
+  const st = byId(S.students, p.studentId);
+  const file = new File([blob], fileName, { type: 'application/pdf' });
+  const canShare = navigator.canShare && navigator.canShare({ files: [file] });
+  const num = waNumber(st);
+  const text = waText(p);
+  const body = openModal('Enviar programa', `
+    <p>PDF <b>${esc(fileName)}</b> pronto (${pages} páginas, ${fmtSize(blob.size)}). Uma cópia ficou salva em Meus PDFs.</p>
+    <label class="field"><span>Mensagem</span><textarea id="wa-text" rows="3">${esc(text)}</textarea></label>
+    <div class="stack" style="margin-top:14px;gap:10px">
+      ${canShare ? '<button class="btn primary lg" id="wa-share">Enviar pelo WhatsApp (PDF anexado)</button>' : ''}
+      <button class="btn ${canShare ? '' : 'primary lg'}" id="wa-open">${canShare ? 'Abrir conversa no WhatsApp' : 'Baixar PDF e abrir o WhatsApp'}</button>
+      <button class="btn ghost" id="dl-pdf">Só baixar o PDF</button>
+    </div>
+    <p class="small muted" style="margin-bottom:0">${canShare ? 'Em "Enviar pelo WhatsApp" escolha o WhatsApp e o contato: o PDF vai anexado.' : `O PDF é baixado e a conversa ${num ? 'com ' + esc(st.name.split(' ')[0]) + ' ' : ''}abre no WhatsApp com a mensagem. Arraste o PDF baixado para a conversa.`}
+      ${!num ? '<br>Dica: cadastre o WhatsApp do aluno para abrir a conversa direto com ele.' : ''}</p>`);
+  const msg = () => $('#wa-text', body).value;
+  if (canShare) $('#wa-share', body).onclick = () => navigator.share({ files: [file], title: p.title, text: msg() }).catch(() => {});
+  $('#wa-open', body).onclick = () => {
+    if (!canShare) downloadBlob(blob, fileName);
+    window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg())}`, '_blank');
+  };
+  $('#dl-pdf', body).onclick = () => downloadBlob(blob, fileName);
+}
+
 
 /* =========================================================
  * Tela: Programas
@@ -618,10 +951,10 @@ actions['dup-program'] = async (el, ev) => {
 actions['del-program'] = async (el, ev) => {
   ev.stopPropagation();
   const p = byId(S.programs, el.dataset.id);
-  if (!confirm(`Excluir o programa "${p.title}"? Isso não pode ser desfeito.`)) return;
+  if (!confirm(`Excluir ${p.isTemplate ? 'o modelo' : 'o programa'} "${p.title}"? Isso não pode ser desfeito.`)) return;
   await removeEntity('programs', p.id);
-  toast('Programa excluído');
-  renderProgramList();
+  toast(p.isTemplate ? 'Modelo excluído' : 'Programa excluído');
+  route();
 };
 actions['import-pdf-new'] = async () => {
   const files = await pickFile('application/pdf', false);
@@ -698,9 +1031,12 @@ function renderEditor() {
   app.innerHTML = `
     <div class="editor-head">
       <div class="row">
-        <a class="btn ghost sm" href="#/">← Programas</a>
+        <a class="btn ghost sm" href="${p.isTemplate ? '#/biblioteca' : '#/'}">← ${p.isTemplate ? 'Biblioteca' : 'Início'}</a>
+        ${p.isTemplate ? '<span class="chip gold">Meu modelo: alterações valem para os próximos alunos</span>' : ''}
         <span class="spacer"></span>
         <span id="save-state" class="save-state ok">Salvo ✓</span>
+        ${p.isTemplate ? '' : `<button class="btn sm ghost" data-action="save-template" data-id="${esc(p.id)}">Salvar como modelo</button>
+        <button class="btn sm primary" data-action="send-program" data-id="${esc(p.id)}">Enviar pelo WhatsApp</button>`}
       </div>
       <h1 id="ed-title" style="margin-top:6px">${esc(p.title || 'Sem título')}</h1>
       <div class="tabs">${(p.mode === 'slides'
@@ -1082,7 +1418,7 @@ function tabGerar() {
   }
   const st = byId(S.students, p.studentId);
   const warn = [];
-  if (!st) warn.push('Nenhum aluno selecionado (aba 1).');
+  if (!st && !p.isTemplate) warn.push('Nenhum aluno selecionado (aba 1).');
   if (!byId(S.trainers, p.trainerId)) warn.push('Nenhum personal selecionado (aba 1).');
   if (!totalExercises(p)) warn.push('Nenhum exercício cadastrado (aba 2).');
   return `
@@ -1090,7 +1426,8 @@ function tabGerar() {
     <label class="field" style="min-width:220px"><span>Visual do PDF</span>
       <select id="theme-quick">${Object.entries(THEMES).map(([k, v]) => `<option value="${k}" ${p.theme === k ? 'selected' : ''}>${esc(v)}</option>`).join('')}</select></label>
     <span class="spacer"></span>
-    <button class="btn primary" data-action="export-pdf">Gerar PDF</button>
+    <button class="btn" data-action="export-pdf">Gerar PDF</button>
+    ${p.isTemplate ? '' : `<button class="btn primary" data-action="send-program" data-id="${esc(p.id)}">Enviar pelo WhatsApp</button>`}
   </div>
   ${warn.length ? `<div class="section card small" style="border-color:#5a4a2c">${warn.map((w) => '⚠ ' + esc(w)).join('<br>')}</div>` : ''}
   <div class="section"><div id="preview" class="preview-list"></div></div>`;
@@ -1329,6 +1666,10 @@ function fitSlide(root) {
 }
 
 async function exportProgramPdf(p) {
+  const out = await buildProgramPdf(p);
+  if (out) showSendModal(p, out);
+}
+async function buildProgramPdf(p) {
   const slides = buildSlides(p);
   const st = byId(S.students, p.studentId);
   const fileName = `${slug(p.title)}${st ? '-' + slug(st.name) : ''}.pdf`;
@@ -1370,18 +1711,8 @@ async function exportProgramPdf(p) {
     await saveEntity('pdfs', { id, name: fileName.replace(/\.pdf$/, ''), size: blob.size, pages: slides.length, thumb, generated: true, programId: p.id, createdAt: Date.now(), tags: { ...(p.tags || {}) }, tagsChecked: true });
     return blob;
   });
-  if (!result) return;
-  const file = new File([result], fileName, { type: 'application/pdf' });
-  const canShare = navigator.canShare && navigator.canShare({ files: [file] });
-  openModal(`PDF pronto`, `
-    <p>O PDF <b>${esc(fileName)}</b> (${slides.length} páginas, ${fmtSize(result.size)}) foi gerado e salvo na biblioteca de PDFs.</p>
-    <div class="row" style="margin-top:16px">
-      <button class="btn primary" id="dl-pdf">Baixar PDF</button>
-      ${canShare ? '<button class="btn" id="share-pdf">Enviar (WhatsApp, e-mail…)</button>' : ''}
-      <a class="btn ghost" href="#/pdfs">Ver biblioteca</a>
-    </div>`);
-  $('#dl-pdf').onclick = () => downloadBlob(result, fileName);
-  if (canShare) $('#share-pdf').onclick = () => navigator.share({ files: [file], title: p.title }).catch(() => {});
+  if (!result) return null;
+  return { blob: result, fileName, pages: slides.length };
 }
 
 /* =========================================================
@@ -2150,7 +2481,12 @@ function openPagePicker({ pdfId, multi = false, slides = false, title, onPick, o
  * Telas: Alunos / Personais
  * ======================================================= */
 const KIND = {
-  students: { title: 'Alunos', one: 'aluno', fields: [['notes', 'Observações (lesões, objetivos…)', 'area']] },
+  students: {
+    title: 'Alunos', one: 'aluno',
+    fields: [['phone', 'WhatsApp (com DDD)', 'tel'], ['sex', 'Sexo', 'select', TAGS.sex.opts], ['age', 'Idade', 'number'],
+      ['obj', 'Objetivo', 'select', TAGS.obj.opts], ['level', 'Nível', 'select', TAGS.level.opts], ['env', 'Onde treina', 'select', TAGS.env.opts],
+      ['notes', 'Observações (lesões, restrições…)', 'area']],
+  },
   trainers: {
     title: 'Personais', one: 'personal',
     fields: [['cref', 'CREF', 'text'], ['formacao', 'Formação', 'area'], ['experiencia', 'Experiência', 'area'], ['especializacoes', 'Especializações', 'area'], ['metodologia', 'Metodologia', 'area']],
@@ -2168,12 +2504,13 @@ function viewPeople(kind) {
         <div class="info"><h3>${esc(x.name)}</h3><div class="small muted">${kind === 'trainers' && x.cref ? 'CREF ' + esc(x.cref) + ' · ' : ''}${count(x.id)} programa(s)</div>
           <div class="row" style="margin-top:8px">
             <button class="btn sm" data-action="edit-person" data-kind="${kind}" data-id="${esc(x.id)}">Editar</button>
-            ${kind === 'students' ? `<button class="btn sm" data-action="filter-student" data-id="${esc(x.id)}">Programas</button>` : ''}
+            ${kind === 'students' ? `<button class="btn sm primary" data-action="student-new-program" data-id="${esc(x.id)}">Novo programa</button><button class="btn sm" data-action="filter-student" data-id="${esc(x.id)}">Programas</button>` : ''}
             <button class="btn sm danger" data-action="del-person" data-kind="${kind}" data-id="${esc(x.id)}">✕</button>
           </div></div></div>`).join('')}</div>`
     : `<div class="empty"><h2>Nenhum ${K.one} cadastrado</h2><p>Cadastre nome e foto para aparecerem na capa do PDF.</p><button class="btn primary" data-action="new-person" data-kind="${kind}">+ Novo ${K.one}</button></div>`}`;
 }
-actions['filter-student'] = (el) => { S.ui.student = el.dataset.id; location.hash = '#/'; };
+actions['filter-student'] = (el) => { const st = byId(S.students, el.dataset.id); S.ui.q = st ? st.name : ''; location.hash = '#/'; };
+actions['student-new-program'] = (el) => { W2.studentId = el.dataset.id; W2.tplId = ''; location.hash = '#/novo'; };
 actions['new-person'] = (el) => personForm(el.dataset.kind, null, !!el.dataset.assign);
 actions['edit-person'] = (el) => personForm(el.dataset.kind, byId(S[el.dataset.kind], el.dataset.id), !!el.dataset.assign);
 actions['del-person'] = async (el) => {
@@ -2183,7 +2520,7 @@ actions['del-person'] = async (el) => {
   await removeEntity(kind, x.id);
   viewPeople(kind);
 };
-function personForm(kind, rec, assign) {
+function personForm(kind, rec, assign, onSaved) {
   const K = KIND[kind];
   const x = rec ? clone(rec) : { id: uid(), name: '', photo: '' };
   const body = openModal(rec ? `Editar ${K.one}` : `Novo ${K.one}`, `
@@ -2191,7 +2528,10 @@ function personForm(kind, rec, assign) {
       <div class="photo-pick"><span id="pf-av">${avatarHTML(x.photo, x.name, 'xl')}</span>
         <div class="stack" style="gap:8px"><button class="btn sm" id="pf-photo">Escolher foto</button><button class="btn sm ghost" id="pf-nophoto">Remover foto</button></div></div>
       <label class="field"><span>Nome completo</span><input type="text" id="pf-name" value="${esc(x.name)}" placeholder="Nome"></label>
-      ${K.fields.map(([k, l, t]) => `<label class="field"><span>${l}</span>${t === 'area' ? `<textarea id="pf-${k}" rows="2">${esc(x[k] || '')}</textarea>` : `<input type="text" id="pf-${k}" value="${esc(x[k] || '')}">`}</label>`).join('')}
+      <div class="grid two" style="gap:12px">${K.fields.filter(([, , t]) => t !== 'area').map(([k, l, t, opts]) => `<label class="field"><span>${l}</span>${t === 'select'
+        ? `<select id="pf-${k}"><option value="">—</option>${Object.entries(opts).map(([v, lb]) => `<option value="${v}" ${x[k] === v ? 'selected' : ''}>${esc(lb)}</option>`).join('')}</select>`
+        : `<input type="${t === 'number' ? 'number' : t === 'tel' ? 'tel' : 'text'}" id="pf-${k}" value="${esc(x[k] || '')}" ${t === 'number' ? 'min="10" max="99"' : ''}>`}</label>`).join('')}</div>
+      ${K.fields.filter(([, , t]) => t === 'area').map(([k, l]) => `<label class="field"><span>${l}</span><textarea id="pf-${k}" rows="2">${esc(x[k] || '')}</textarea></label>`).join('')}
       <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="pf-save">Salvar</button></div>
     </div>`);
   const refreshAv = () => { $('#pf-av', body).innerHTML = avatarHTML(x.photo, $('#pf-name', body).value, 'xl'); };
@@ -2208,8 +2548,12 @@ function personForm(kind, rec, assign) {
     if (!x.name) { toast('Informe o nome'); return; }
     K.fields.forEach(([k]) => { x[k] = $(`#pf-${k}`, body).value.trim(); });
     await saveEntity(kind, x);
+    if (kind === 'trainers' && !S.settings.defaultTrainerId) { S.settings.defaultTrainerId = x.id; await saveSettings(); }
     closeModal();
     toast('Salvo');
+    if (onSaved) { onSaved(x); return; }
+    if (location.hash.startsWith('#/novo')) { viewWizard(); return; }
+    if (!location.hash || location.hash === '#/') { viewHome(); return; }
     if (assign && E.p && location.hash.startsWith('#/programa/')) {
       if (kind === 'students') E.p.studentId = x.id; else E.p.trainerId = x.id;
       saveSoon();
@@ -2226,7 +2570,7 @@ function personForm(kind, rec, assign) {
 function viewPdfs() {
   const f = S.ui.pf;
   app.innerHTML = `
-    <div class="page-head"><div><h1>Biblioteca de PDFs</h1><p class="muted" id="pdf-count"></p></div>
+    <div class="page-head"><div><h1>Meus PDFs</h1><p class="muted" id="pdf-count"></p><p class="small muted" style="margin:4px 0 0;max-width:640px">Opcional: envie PDFs próprios para guardar, importar slides e editar. Os 60 programas do App já estão na Biblioteca.</p></div>
       <button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>
     ${S.pdfs.length ? `<div class="toolbar">
       <input type="search" id="pdf-q" placeholder="Buscar por nome ou código…" value="${esc(S.ui.pq)}" style="max-width:240px">
@@ -2399,6 +2743,12 @@ function viewConfig() {
     <div class="page-head"><div><h1>Ajustes</h1><p class="muted">Marca, padrões e cópia de segurança</p></div></div>
     <div class="stack">
       <div class="card stack">
+        <h2>Seu perfil de personal</h2>
+        <p class="muted" style="margin:0">Nome, foto, CREF e apresentação que aparecem nos programas.</p>
+        <div class="row">${S.trainers.map((t) => `<span class="row" style="gap:8px">${avatarHTML(t.photo, t.name)}<b>${esc(t.name)}</b></span>`).join('')}
+          <a class="btn sm" href="#/personais">${S.trainers.length ? 'Editar perfil' : 'Cadastrar perfil'}</a></div>
+      </div>
+      <div class="card stack">
         <h2>Padrões</h2>
         <label class="field"><span>Marca no rodapé do PDF</span><input type="text" id="cf-brand" value="${esc(S.settings.brand)}"></label>
         <div class="grid two">
@@ -2473,44 +2823,9 @@ actions.restore = async () => {
  * Exemplo inicial
  * ======================================================= */
 async function seed() {
+  // Os 60 programas vêm embutidos no App (library-data.js); não há mais dados de exemplo.
   if (S.settings.seeded) return;
-  const tr = {
-    id: uid(), name: 'Prof. José Carlos Gallo', photo: '', cref: '',
-    formacao: 'Graduado em Educação Física, Fisioterapia e Nutrição, com pós em Fisiologia do Exercício e Treinamento Resistido.',
-    experiencia: 'Mais de 36 anos prescrevendo treinos para iniciantes e atletas em academia.',
-    especializacoes: 'Hipertrofia, emagrecimento, reabilitação funcional e periodização. Fisiologia Clínica e do Exercício.',
-    metodologia: 'Técnica impecável, progressão de cargas registrada e resultados sustentáveis sem atalhos.',
-  };
-  const st = { id: uid(), name: 'Aluno Exemplo', photo: '', notes: '' };
-  const X = (name, muscles, sets, reps, pse, rest, cadence, execution, cautions, notes, extra = {}) =>
-    newExercise({ name, muscles, sets, reps, pse, rest, cadence, execution, cautions, notes, ...extra });
-  const p = newProgram({
-    title: 'Projeto Fundação Muscular',
-    subtitle: 'Homens 30-39 anos · Iniciante · Academia',
-    studentId: st.id, trainerId: tr.id, theme: 'navy',
-    tags: { obj: 'HIP', sex: 'M', age: '30-39', level: 'INI', env: 'ACA' },
-    overview: 'Mesociclo introdutório em full body (A/B/C) 3x por semana, centrado nos padrões fundamentais: agachar, empurrar horizontal e vertical, puxar e estender o quadril. Para o iniciante de 30-39 anos, treinar cada grupo 3x na semana é o estímulo mais eficiente, e a janela de ganhos de novato responde fortemente à progressão de cargas bem registrada.',
-    objectives: 'Construir massa muscular desde a primeira semana com técnica correta.\nDominar os padrões fundamentais de movimento.\nAproveitar ao máximo a janela de ganhos de novato.',
-    recommendations: 'Treine em dias alternados (ex.: seg/qua/sex).\nRegistre cargas, repetições e sensações em todas as sessões.\nCarga só sobe com técnica estável e amplitude completa.\nSono de 7-9h e alimentação suficiente fazem parte do programa.',
-    warmup: 'Cárdio leve: 5-8 minutos de esteira ou bicicleta para elevar a temperatura corporal.\nMobilidade: 2 minutos de mobilidade de ombros, quadril e tornozelos.\nSéries de aproximação: no 1º exercício da sessão, 1×12 com cerca de 50% da carga de trabalho.',
-    workouts: [newWorkout('Treino A', {
-      focus: 'Full body — base de empurrar',
-      exercises: [
-        X('Agachamento no Smith ou livre', 'Quadríceps / Glúteos', '3', '8-12', '6-7', '120s', '3-0-1', 'Barra sobre o trapézio, pés na largura dos ombros. Desça em 3s até próximo do paralelo e suba empurrando pelos calcanhares. Inspire na descida, expire na subida.', 'Joelhos alinhados aos pés; ajuste os apoios de segurança do rack.', 'No Smith, pés levemente à frente da linha da barra. Iniciantes podem começar no Smith.'),
-        X('Supino reto com barra', 'Peitoral', '3', '8-12', '6-7', '90s', '2-0-1', 'Deitado, pés firmes, pegada um pouco mais larga que os ombros, escápulas retraídas. Desça a barra até a linha do peitoral e empurre sem travar os cotovelos. Inspire na descida, expire na subida.', 'Presilhas sempre; spotter nas séries pesadas; sem rebote no peito.', 'Composto principal de peito — priorize técnica e progressão registrada.'),
-        X('Puxada frontal na polia', 'Dorsal', '3', '8-12', '6-7', '90s', '2-0-1', 'Coxas travadas, pegada mais larga que os ombros. Puxe a barra até a parte alta do peito aproximando as escápulas e retorne controlando. Expire ao puxar.', 'Sem inclinar o tronco para trás para ajudar.', 'Base do desenvolvimento das costas. Foque em puxar com os cotovelos.'),
-        X('Desenvolvimento na máquina', 'Ombros', '3', '10-12', '6-7', '75s', '2-0-1', 'Costas apoiadas, manoplas na altura dos ombros. Empurre até quase estender e desça até a linha das orelhas. Expire ao empurrar.', 'Sem arquear a lombar; mantenha o core firme.', 'A máquina guia o movimento — ideal para o iniciante aprender o padrão.'),
-        X('Cadeira flexora', 'Posteriores', '3', '10-15', '6', '60s', '2-0-2', 'Joelho alinhado ao eixo, rolete acima dos calcanhares. Flexione e retorne controlando em 2s. Expire ao flexionar.', 'Quadril colado no banco; sem impulso.', 'Isolador de posteriores; controle a fase excêntrica.'),
-        X('Tríceps na polia (corda)', 'Tríceps', '3', '10-15', '6-7', '60s', '2-0-1', 'Cotovelos colados ao tronco. Estenda separando as pontas da corda no final e retorne controlando. Expire ao estender.', 'Cotovelos imóveis durante todo o movimento.', 'Finalize o treino com boa conexão no tríceps.'),
-        X('Prancha abdominal', 'Abdômen / Core', '3', '30-45s', '6', '45s', 'Isometria', 'Antebraços e pontas dos pés no chão, corpo alinhado, abdômen e glúteos contraídos. Respire normalmente.', 'Quadril nem cai nem sobe — mantenha a linha reta.', 'Aumente o tempo conforme evoluir. Base de estabilidade do core.', { repsLabel: 'Tempo' }),
-      ],
-    })],
-  });
-  await saveEntity('trainers', tr);
-  await saveEntity('students', st);
-  await saveEntity('programs', p);
   S.settings.seeded = true;
-  S.settings.defaultTrainerId = tr.id;
   await saveSettings();
 }
 

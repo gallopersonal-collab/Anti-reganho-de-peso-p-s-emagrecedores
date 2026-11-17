@@ -42,7 +42,14 @@ def main() -> None:
     )
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(html, encoding="utf-8")
-    print(f"{OUT} ({OUT.stat().st_size / 1048576:.1f} MB)")
+    # fotos dos exercícios: carregadas sob demanda, ficam ao lado do index.html
+    import shutil
+    fotos_out = OUT.parent / "fotos"
+    if fotos_out.exists():
+        shutil.rmtree(fotos_out)
+    shutil.copytree(APP / "fotos", fotos_out)
+    n = len(list(fotos_out.glob("*.jpg")))
+    print(f"{OUT} ({OUT.stat().st_size / 1048576:.1f} MB) + {n} fotos em {fotos_out}")
 
 
 if __name__ == "__main__":

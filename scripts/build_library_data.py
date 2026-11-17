@@ -165,11 +165,63 @@ def parse(md: str) -> dict:
     }
 
 
+FOTOS_SRC = BASE / "biblioteca-de-treinos" / "fotos-exercicios"
+FOTOS_OUT = BASE / "app-programas" / "fotos"
+
+
+def load_rules() -> list:
+    """Reaproveita as regras nome->foto de scripts/gerar_pdfs_com_fotos.py."""
+    import ast
+    src = (BASE / "scripts" / "gerar_pdfs_com_fotos.py").read_text(encoding="utf-8")
+    m = re.search(r"RULES = (\[.*?\n\])", src, re.S)
+    return ast.literal_eval(m.group(1))
+
+
+def photo_for(name: str, rules: list):
+    n = name.lower()
+    for pat, ex_id in rules:
+        if re.search(pat, n):
+            return ex_id if (FOTOS_SRC / ex_id / "0.jpg").exists() else None
+    return None
+
+
+def build_photo(ex_id: str) -> None:
+    """Junta as fotos de posição inicial e final numa imagem vertical (cabe no slide)."""
+    from PIL import Image
+    dest = FOTOS_OUT / f"{ex_id}.jpg"
+    if dest.exists():
+        return
+    imgs = [Image.open(p).convert("RGB") for p in sorted((FOTOS_SRC / ex_id).glob("*.jpg"))[:2]]
+    W = 520
+    imgs = [im.resize((W, round(im.height * W / im.width))) for im in imgs]
+    out = Image.new("RGB", (W, sum(im.height for im in imgs) + 6 * (len(imgs) - 1)), (255, 255, 255))
+    y = 0
+    for im in imgs:
+        out.paste(im, (0, y))
+        y += im.height + 6
+    FOTOS_OUT.mkdir(exist_ok=True)
+    out.save(dest, "JPEG", quality=74, optimize=True)
+
+
 def main() -> None:
     data = {}
     for f in sorted(SRC.glob("*.md")):
         if CODE_RE.match(f.stem):
             data[f.stem] = parse(f.read_text(encoding="utf-8"))
+    rules = load_rules()
+    used = set()
+    for d in data.values():
+        for w in d["workouts"]:
+            for e in w["exercises"]:
+                pid = photo_for(e["name"], rules)
+                if pid:
+                    e["image"] = f"fotos/{pid}.jpg"
+                    used.add(pid)
+    for pid in sorted(used):
+        build_photo(pid)
+    total = sum(len(w["exercises"]) for d in data.values() for w in d["workouts"])
+    with_photo = sum(1 for d in data.values() for w in d["workouts"] for e in w["exercises"] if e.get("image"))
+    print(f"fotos: {with_photo}/{total} exercícios com foto, {len(used)} imagens em {FOTOS_OUT}")
     missing = [(c, w["name"], e["name"]) for c, d in data.items() for w in d["workouts"] for e in w["exercises"]
                if not e["execution"]]
     OUT.write_text("window.LIBRARY_DATA = " + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n",
