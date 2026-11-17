@@ -17,10 +17,10 @@ Onde ficam os dados
 Arquivos (manter sempre juntos, na mesma pasta)
   index.html, app.js, styles.css e a pasta vendor/ (leitor e gerador de PDF)
 
-Como publicar
+Como publicar (arquivo único)
   1. Abra netlify.com/drop
-  2. Arraste a pasta inteira "app-programas"
+  2. Arraste a pasta "app-programas/netlify" (contém só o index.html, já com tudo embutido)
   3. Abra o link gerado no celular ou computador
 
-Abrir o index.html direto do computador (duplo clique) não funciona para ler PDFs:
-o navegador bloqueia. Use o link publicado.
+Para regerar o arquivo único depois de mudar o código:
+  python3 scripts/build_app_programas.py

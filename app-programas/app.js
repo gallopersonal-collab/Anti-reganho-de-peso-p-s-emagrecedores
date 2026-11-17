@@ -216,7 +216,13 @@ function totalExercises(p) { return p.workouts.reduce((n, w) => n + w.exercises.
 /* =========================================================
  * PDF.js — leitura de PDFs
  * ======================================================= */
-if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'vendor/pdf.worker.min.js';
+if (window.pdfjsLib) {
+  // Versão de arquivo único: o worker vem embutido no próprio HTML.
+  const inlineWorker = document.getElementById('pdf-worker-src');
+  pdfjsLib.GlobalWorkerOptions.workerSrc = inlineWorker
+    ? URL.createObjectURL(new Blob([inlineWorker.textContent], { type: 'text/javascript' }))
+    : 'vendor/pdf.worker.min.js';
+}
 const docCache = new Map();
 const pageCache = new Map();
 async function getPdfDoc(pdfId) {
