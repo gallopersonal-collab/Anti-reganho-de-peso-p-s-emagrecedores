@@ -1,0 +1,26 @@
+APP PROGRAMAS DE TREINO — FASE 1
+
+O que faz
+  - Guarda vários programas de treino, alunos e personais
+  - Envia PDFs já existentes e puxa as fotos dos exercícios das páginas (com recorte)
+  - Edita exercícios: nome, grupo muscular, foto, séries, reps/tempo, PSE,
+    descanso, cadência, carga, execução, cuidados e observações
+  - Foto e nome do personal e do aluno na capa, na apresentação e na página final
+  - Gera um PDF novo no padrão visual (3 temas) e salva na biblioteca de PDFs
+  - Cópia de segurança (backup) em Ajustes
+
+Onde ficam os dados
+  No navegador do aparelho que está usando (IndexedDB). Não vai para servidor.
+  Faça backup em Ajustes > Cópia de segurança. Para levar a outro aparelho,
+  restaure o arquivo de backup lá.
+
+Arquivos (manter sempre juntos, na mesma pasta)
+  index.html, app.js, styles.css e a pasta vendor/ (leitor e gerador de PDF)
+
+Como publicar
+  1. Abra netlify.com/drop
+  2. Arraste a pasta inteira "app-programas"
+  3. Abra o link gerado no celular ou computador
+
+Abrir o index.html direto do computador (duplo clique) não funciona para ler PDFs:
+o navegador bloqueia. Use o link publicado.
