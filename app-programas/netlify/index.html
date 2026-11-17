@@ -380,6 +380,17 @@ textarea { resize: vertical; min-height: 84px; line-height: 1.45; }
 .s-close .people small { font: 600 13px/1 Oswald, sans-serif; letter-spacing: 3px; color: var(--s-gold); text-transform: uppercase; }
 .s-close .people strong { font-size: 22px; color: var(--s-cream); }
 
+@media (max-width: 760px) {
+  .toolbar input, .toolbar select { max-width: none !important; flex: 1 1 45%; }
+}
+.chip { white-space: nowrap; }
+@media (max-width: 760px) {
+  .pdf-item { flex-wrap: wrap; align-items: flex-start; }
+  .pdf-item .pdf-thumb { width: 96px; }
+  .pdf-item > div:nth-child(2) { flex: 1 1 calc(100% - 112px); }
+  .pdf-item > .row:last-child { width: 100%; justify-content: flex-start !important; }
+}
+
 </style>
 </head>
 <body>
@@ -1030,7 +1041,7 @@ const S = {
   trainers: [],
   pdfs: [],
   settings: { id: 'app', brand: 'Trainer Pro Studio · Instituto Gallo Personal', theme: 'navy', seeded: false },
-  ui: { q: '', student: '' },
+  ui: { q: '', student: '', pf: {}, pq: '', ptype: '', prf: {} },
 };
 const byId = (list, id) => list.find((x) => x.id === id);
 
@@ -1061,6 +1072,93 @@ async function saveSettings() { await DB.put('settings', S.settings); }
  * Modelos
  * ======================================================= */
 const THEMES = { navy: 'Azul-marinho e dourado', black: 'Preto e dourado', light: 'Claro (impressão)' };
+/* Etiquetas da Biblioteca de Treinos (código OBJ-SEXO-IDADE-IDADE-NÍVEL-AMBIENTE) */
+const TAGS = {
+  obj: { label: 'Objetivo', opts: { EMA: 'Emagrecimento', DEF: 'Definição muscular', HIP: 'Hipertrofia', PER: 'Performance', SAU: 'Saúde' } },
+  sex: { label: 'Público', opts: { F: 'Feminino', M: 'Masculino' } },
+  age: { label: 'Faixa etária', opts: { '20-29': '20–29 anos', '30-39': '30–39 anos', '40-49': '40–49 anos', '50-60': '50–60 anos', '20-39': '20–39 anos', '40-60': '40–60 anos', '20-60': '20–60 anos' } },
+  level: { label: 'Nível', opts: { INI: 'Iniciante', INT: 'Intermediário', AVA: 'Avançado', HIT: 'HIIT' } },
+  env: { label: 'Ambiente', opts: { ACA: 'Academia', CAS: 'Casa', ELA: 'Elásticos' } },
+};
+const TAG_KEYS = Object.keys(TAGS);
+const tagLabel = (k, v) => (TAGS[k].opts[v] || v || '');
+const CATALOG = {
+  'EMA-F-20-29-INI-ACA': ["Projeto Primeira Versão", '3x'],
+  'EMA-F-20-29-INT-ACA': ["Modo Turbina", '4x'],
+  'EMA-F-30-39-INI-CAS': ["Queima em Casa — Sem Desculpas", '3x'],
+  'EMA-F-30-39-INT-ACA': ["Década de Ouro", '4x'],
+  'EMA-F-40-49-INI-ACA': ["Recomeço Poderoso", '3x'],
+  'EMA-F-40-49-INT-ACA': ["Força Madura", '4x'],
+  'EMA-F-50-60-INI-ELA': ["Elástica & Forte", '3x'],
+  'EMA-F-50-60-INT-ACA': ["Madura & Imparável", '4x'],
+  'EMA-M-20-29-INI-ACA': ["Projeto Primeira Marra", '3x'],
+  'EMA-M-20-29-AVA-ACA': ["Modo Fera", '5x'],
+  'EMA-M-30-39-INI-ACA': ["Projeto Virada de Jogo", '3x'],
+  'EMA-M-30-39-INT-ACA': ["Projeto Máquina 30+", '4x'],
+  'EMA-M-40-49-INI-ACA': ["Projeto Recomeço de Ferro", '3x'],
+  'EMA-M-40-49-INT-ACA': ["Máquina 40+", '4x'],
+  'EMA-M-50-60-INI-ELA': ["Forte em Casa 50+", '3x'],
+  'EMA-M-50-60-INT-ACA': ["Veterano de Elite", '4x'],
+  'HIP-F-20-29-INI-ACA': ["Projeto Construção de Curvas", '3x'],
+  'HIP-F-20-29-AVA-ACA': ["Projeto Escultura", '5x'],
+  'HIP-F-30-39-INT-ACA': ["Projeto Glúteo Blindado", '4x'],
+  'HIP-F-30-39-AVA-ACA': ["Projeto Corpo Total 30+", '5x'],
+  'HIP-F-40-49-INI-ACA': ["Projeto Músculo é Juventude", '3x'],
+  'HIP-F-40-49-INT-ACA': ["Projeto Força Madura", '4x'],
+  'HIP-F-50-60-INI-ACA': ["Projeto Musculatura da Longevidade", '3x'],
+  'HIP-F-50-60-INT-ACA': ["Força de Rainha", '4x'],
+  'HIP-M-20-29-INI-ACA': ["Projeto Fundação Muscular", '3x'],
+  'HIP-M-20-29-AVA-ACA': ["Projeto Dominância", '5x'],
+  'HIP-M-30-39-INT-ACA': ["Projeto Monstro Clássico", '4x'],
+  'HIP-M-30-39-AVA-ACA': ["Projeto Apex 30+", '5x'],
+  'HIP-M-40-49-INT-ACA': ["Projeto Titã 40+", '4x'],
+  'HIP-M-40-49-AVA-ACA': ["Projeto Força de Aço 40+", '5x'],
+  'HIP-M-50-60-INI-ACA': ["Projeto Construção Blindada", '3x'],
+  'HIP-M-50-60-INT-ACA': ["Projeto Patrimônio Muscular", '4x'],
+  'DEF-F-20-39-INI-ACA': ["Projeto Primeiro Contorno", '3x'],
+  'DEF-F-20-39-INT-ACA': ["Projeto Corpo em Alta Definição", '4x'],
+  'DEF-F-20-39-AVA-ACA': ["Projeto Lapidação Total", '5x'],
+  'DEF-F-40-60-INI-ACA': ["Projeto Renovação 40+", '3x'],
+  'DEF-F-40-60-INT-ACA': ["Projeto Shape Atemporal", '4x'],
+  'DEF-F-40-60-INT-ELA': ["Projeto Definição Sem Fronteiras", '4x'],
+  'DEF-M-20-39-INI-ACA': ["Projeto Primeiro Trinco", '3x'],
+  'DEF-M-20-39-INT-ACA': ["Projeto Shape Trincado", '4x'],
+  'DEF-M-20-39-AVA-ACA': ["Protocolo Lâmina", '5x'],
+  'DEF-M-40-60-INI-ACA': ["Projeto Versão Definida 40+", '3x'],
+  'DEF-M-40-60-INT-ACA': ["Projeto Tanquinho 40+", '4x'],
+  'DEF-M-40-60-INT-CAS': ["Projeto Definição Sem Academia", '4x'],
+  'SAU-F-20-39-INI-ACA': ["Projeto Energia em Dia", '3x'],
+  'SAU-F-40-49-INI-ACA': ["Projeto Equilíbrio 40+", '3x'],
+  'SAU-F-50-60-INI-ACA': ["Projeto Viver Bem 50+", '3x'],
+  'SAU-F-20-60-INT-ACA': ["Projeto Corpo Livre", '4x'],
+  'SAU-M-20-39-INI-ACA': ["Projeto De Volta ao Jogo", '3x'],
+  'SAU-M-40-49-INI-ACA': ["Projeto Motor Novo 40+", '3x'],
+  'SAU-M-50-60-INI-ACA': ["Projeto Saúde Blindada 50+", '3x'],
+  'SAU-M-20-60-INT-ACA': ["Projeto Corpo Funcional", '4x'],
+  'PER-F-20-39-INI-ACA': ["Projeto Atleta Interior", '3x'],
+  'PER-F-20-39-INT-ACA': ["Projeto Evolução Atlética", '4x'],
+  'PER-F-20-39-AVA-ACA': ["Protocolo Potência Máxima", '5x'],
+  'PER-F-20-39-HIT-ACA': ["Turbo HIIT — Fôlego de Atleta", '4x'],
+  'PER-M-20-39-INI-ACA': ["Projeto Modo Atleta", '3x'],
+  'PER-M-20-39-INT-ACA': ["Projeto Máquina de Rendimento", '4x'],
+  'PER-M-20-39-AVA-ACA': ["Protocolo Limite Zero", '5x'],
+  'PER-M-30-39-AVA-ACA': ["Projeto Força Explosiva 30+", '5x'],
+};
+function parseCode(str) {
+  const m = String(str || '').toUpperCase().match(/(EMA|DEF|HIP|PER|SAU)[-_ ]+([FM])[-_ ]+(\d{2})[-_ ]+(\d{2})[-_ ]+(INI|INT|AVA|HIT)[-_ ]+(ACA|CAS|ELA)/);
+  if (!m) return null;
+  return { code: `${m[1]}-${m[2]}-${m[3]}-${m[4]}-${m[5]}-${m[6]}`, obj: m[1], sex: m[2], age: `${m[3]}-${m[4]}`, level: m[5], env: m[6] };
+}
+const hasTags = (t) => !!t && TAG_KEYS.some((k) => t[k]);
+function tagChips(t) {
+  if (!hasTags(t)) return '';
+  return TAG_KEYS.filter((k) => t[k]).map((k) => `<span class="chip ${k === 'obj' ? 'gold' : ''}">${esc(tagLabel(k, t[k]))}</span>`).join('');
+}
+function tagMatch(t, f) { return TAG_KEYS.every((k) => !f[k] || (t && t[k] === f[k])); }
+function tagSelects(f, idp, onlyKeys = TAG_KEYS) {
+  return onlyKeys.map((k) => `<select id="${idp}${k}" data-tagfilter="${k}" style="max-width:190px"><option value="">${TAGS[k].label}: todos</option>${Object.entries(TAGS[k].opts).map(([v, l]) => `<option value="${v}" ${f[k] === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`).join('');
+}
+
 const DEFAULT_PSE_NOTE = 'Neste programa:\ntrabalhe a maioria das séries entre PSE 7–8.\n\nReserve PSE 9–10 apenas para a última série da semana 4.';
 
 function newExercise(over = {}) {
@@ -1151,9 +1249,44 @@ async function addPdfFile(file) {
   docCache.set(id, Promise.resolve(doc));
   const thumb = await renderPage(id, 1, 480);
   const meta = { id, name: file.name.replace(/\.pdf(\.pdf)?$/i, ''), size: file.size, pages: doc.numPages, thumb, generated: false };
+  await applyDetectedTags(meta);
   await saveEntity('pdfs', meta);
   return meta;
 }
+/** Procura o código do programa no nome do arquivo e, se não achar, nas primeiras páginas. */
+async function detectTags(meta) {
+  let t = parseCode(meta.name);
+  if (!t) {
+    const last = Math.min(meta.pages || 1, 5);
+    for (let n = 1; n <= last && !t; n++) {
+      try { t = parseCode(await pageText(meta.id, n)); } catch (e) { /* página sem texto */ }
+    }
+  }
+  return t;
+}
+async function applyDetectedTags(meta) {
+  const t = await detectTags(meta);
+  if (t) {
+    const { code, ...tags } = t;
+    meta.code = code;
+    meta.tags = tags;
+    if (CATALOG[code]) meta.title = CATALOG[code][0];
+  }
+  meta.tagsChecked = true;
+  return !!t;
+}
+/** Etiqueta em segundo plano os PDFs enviados antes desta versão. */
+async function tagPendingPdfs() {
+  const pending = S.pdfs.filter((m) => !m.generated && !m.tagsChecked);
+  if (!pending.length) return;
+  let found = 0;
+  for (const m of pending) {
+    try { if (await applyDetectedTags(m)) found++; await saveEntity('pdfs', m); } catch (e) { console.warn(e); }
+  }
+  if (found) toast(`Etiquetas identificadas em ${found} PDF(s)`);
+  if (location.hash.startsWith('#/pdfs')) renderPdfList();
+}
+const pdfTitle = (m) => m.title || m.name;
 async function deletePdf(id) {
   await removeEntity('pdfs', id);
   await DB.del('pdfblobs', id);
@@ -1215,16 +1348,19 @@ function viewPrograms() {
     <div class="toolbar">
       <input type="search" id="q" placeholder="Buscar por título ou aluno…" value="${esc(S.ui.q)}">
       <select id="fstudent"><option value="">Todos os alunos</option>${studentOpts}</select>
+      ${tagSelects(S.ui.prf, 'prf-')}
     </div>
     <div id="plist"></div>`;
   $('#q').addEventListener('input', (e) => { S.ui.q = e.target.value; renderProgramList(); });
   $('#fstudent').addEventListener('change', (e) => { S.ui.student = e.target.value; renderProgramList(); });
+  $$('[data-tagfilter]', app).forEach((sel) => sel.addEventListener('change', () => { S.ui.prf[sel.dataset.tagfilter] = sel.value; renderProgramList(); }));
   renderProgramList();
 }
 function renderProgramList() {
   const q = S.ui.q.trim().toLowerCase();
   const list = S.programs
     .filter((p) => !S.ui.student || p.studentId === S.ui.student)
+    .filter((p) => tagMatch(p.tags, S.ui.prf))
     .filter((p) => {
       if (!q) return true;
       const st = byId(S.students, p.studentId);
@@ -1245,6 +1381,7 @@ function renderProgramList() {
       <div class="who">${avatarHTML(st && st.photo, st ? st.name : '?')}
         <div><div class="small muted">${st ? esc(st.name) : 'Sem aluno definido'}</div><div class="small muted">${tr ? 'por ' + esc(tr.name) : ''}</div></div></div>
       <h3>${esc(p.title || 'Sem título')}</h3>
+      ${hasTags(p.tags) ? `<div class="meta">${tagChips(p.tags)}</div>` : ''}
       <div class="meta"><span class="chip gold">${p.workouts.length} treino(s)</span><span class="chip">${totalExercises(p)} exercícios</span><span class="chip">${esc(p.weeks || '?')} semanas</span></div>
       <div class="small muted">Atualizado em ${fmtDate(p.updatedAt)}</div>
       <div class="actions">
@@ -1296,7 +1433,18 @@ actions['import-pdf-new'] = async () => {
 };
 async function createProgramFromPdf(pdfId) {
   const meta = byId(S.pdfs, pdfId);
-  const p = newProgram({ title: meta.name.replace(/[_-]+/g, ' ').trim(), sourcePdfId: pdfId });
+  const t = meta.tags || {};
+  const over = { title: pdfTitle(meta).replace(/[_]+/g, ' ').trim(), sourcePdfId: pdfId, tags: { ...t } };
+  if (hasTags(t)) {
+    over.subtitle = [t.sex && tagLabel('sex', t.sex), t.age && tagLabel('age', t.age), t.level && tagLabel('level', t.level), t.env && tagLabel('env', t.env)].filter(Boolean).join(' · ');
+    if (t.level) over.level = tagLabel('level', t.level);
+  }
+  const cat = meta.code && CATALOG[meta.code];
+  if (cat) {
+    over.frequency = cat[1] + '/semana';
+    over.structure = cat[1] === '3x' ? 'Full body A/B/C' : '';
+  }
+  const p = newProgram(over);
   await saveEntity('programs', p);
   location.hash = `#/programa/${p.id}/treinos`;
   setTimeout(() => toast('PDF salvo. Agora puxe as páginas dos exercícios.'), 300);
@@ -1338,6 +1486,7 @@ function viewEditor(id, tab) {
   const p = byId(S.programs, id);
   if (!p) { location.hash = '#/'; return; }
   p.include = { trainer: true, overview: true, guidelines: true, warmup: true, pse: true, closing: true, ...(p.include || {}) };
+  p.tags = p.tags || {};
   E.p = p;
   E.tab = ['dados', 'treinos', 'gerar'].includes(tab) ? tab : 'dados';
   leaveHook = () => saveSoon.flush();
@@ -1445,6 +1594,11 @@ function tabDados() {
       <label class="field"><span>Nível</span><input type="text" data-bind="level" placeholder="Iniciante"></label>
       <label class="field"><span>Visual do PDF</span><select data-bind="theme">${Object.entries(THEMES).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('')}</select></label>
     </div>
+  </div>
+
+  <div class="section card stack">
+    <h2>Etiquetas</h2>
+    <div class="grid three">${TAG_KEYS.map((k) => `<label class="field"><span>${TAGS[k].label}</span><select data-bind="tags.${k}"><option value="">—</option>${Object.entries(TAGS[k].opts).map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('')}</select></label>`).join('')}</div>
   </div>
 
   <div class="section card stack">
@@ -1957,7 +2111,7 @@ async function exportProgramPdf(p) {
     await DB.put('pdfblobs', { id, blob });
     docCache.delete(id);
     [...pageCache.keys()].filter((k) => k.startsWith(id + ':')).forEach((k) => pageCache.delete(k));
-    await saveEntity('pdfs', { id, name: fileName.replace(/\.pdf$/, ''), size: blob.size, pages: slides.length, thumb, generated: true, programId: p.id, createdAt: Date.now() });
+    await saveEntity('pdfs', { id, name: fileName.replace(/\.pdf$/, ''), size: blob.size, pages: slides.length, thumb, generated: true, programId: p.id, createdAt: Date.now(), tags: { ...(p.tags || {}) }, tagsChecked: true });
     return blob;
   });
   if (!result) return;
@@ -2213,29 +2367,93 @@ function personForm(kind, rec, assign) {
  * Telas: PDFs
  * ======================================================= */
 function viewPdfs() {
-  const list = S.pdfs.slice().sort((a, b) => b.updatedAt - a.updatedAt);
-  const prog = (x) => byId(S.programs, x.programId) || S.programs.find((p) => p.sourcePdfId === x.id);
+  const f = S.ui.pf;
   app.innerHTML = `
-    <div class="page-head"><div><h1>Biblioteca de PDFs</h1><p class="muted">PDFs enviados e PDFs gerados pelo app</p></div>
+    <div class="page-head"><div><h1>Biblioteca de PDFs</h1><p class="muted" id="pdf-count"></p></div>
       <button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>
-    ${list.length ? `<div class="stack">${list.map((x) => {
-      const p = prog(x);
-      return `<div class="card pdf-item">
-        ${x.thumb ? `<img class="pdf-thumb" src="${esc(x.thumb)}" alt="">` : '<span class="pdf-thumb"></span>'}
-        <div style="flex:1;min-width:0">
-          <h3 style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(x.name)}</h3>
-          <div class="small muted">${x.pages} páginas · ${fmtSize(x.size)} · ${fmtDate(x.updatedAt)}</div>
-          <div class="row" style="margin-top:6px">${x.generated ? '<span class="chip gold">Gerado pelo app</span>' : '<span class="chip">Original enviado</span>'}
-            ${p ? `<a class="chip" href="#/programa/${esc(p.id)}">Programa: ${esc(p.title)}</a>` : ''}</div>
-        </div>
-        <div class="row" style="gap:6px;justify-content:flex-end">
-          <a class="btn sm" href="#/pdf/${esc(x.id)}">Abrir</a>
-          <button class="btn sm" data-action="dl-pdf" data-id="${esc(x.id)}">Baixar</button>
-          <button class="btn sm danger" data-action="del-pdf" data-id="${esc(x.id)}">✕</button>
-        </div></div>`;
-    }).join('')}</div>`
-    : `<div class="empty"><h2>Nenhum PDF ainda</h2><p>Envie os PDFs dos programas que você já tem. Eles ficam guardados aqui e servem de fonte para as fotos dos exercícios.</p><button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>`}`;
+    ${S.pdfs.length ? `<div class="toolbar">
+      <input type="search" id="pdf-q" placeholder="Buscar por nome ou código…" value="${esc(S.ui.pq)}" style="max-width:240px">
+      ${tagSelects(f, 'pf-')}
+      <select id="pdf-type" style="max-width:190px">
+        <option value="">Todos os PDFs</option>
+        <option value="orig" ${S.ui.ptype === 'orig' ? 'selected' : ''}>Originais enviados</option>
+        <option value="gen" ${S.ui.ptype === 'gen' ? 'selected' : ''}>Gerados pelo app</option>
+        <option value="untag" ${S.ui.ptype === 'untag' ? 'selected' : ''}>Sem etiquetas</option>
+      </select>
+      <button class="btn sm ghost" data-action="pdf-clear-filters">Limpar filtros</button>
+    </div>` : ''}
+    <div id="pdflist"></div>`;
+  if (S.pdfs.length) {
+    $('#pdf-q').addEventListener('input', (e) => { S.ui.pq = e.target.value; renderPdfList(); });
+    $('#pdf-type').addEventListener('change', (e) => { S.ui.ptype = e.target.value; renderPdfList(); });
+    $$('[data-tagfilter]', app).forEach((sel) => sel.addEventListener('change', () => { S.ui.pf[sel.dataset.tagfilter] = sel.value; renderPdfList(); }));
+  }
+  renderPdfList();
 }
+actions['pdf-clear-filters'] = () => { S.ui.pf = {}; S.ui.pq = ''; S.ui.ptype = ''; viewPdfs(); };
+function renderPdfList() {
+  const box = $('#pdflist');
+  if (!box) return;
+  const f = S.ui.pf, q = S.ui.pq.trim().toLowerCase();
+  const prog = (x) => byId(S.programs, x.programId) || S.programs.find((p) => p.sourcePdfId === x.id);
+  const list = S.pdfs
+    .filter((x) => tagMatch(x.tags, f))
+    .filter((x) => !S.ui.ptype || (S.ui.ptype === 'gen' ? x.generated : S.ui.ptype === 'orig' ? !x.generated : !hasTags(x.tags)))
+    .filter((x) => !q || `${x.name} ${x.title || ''} ${x.code || ''}`.toLowerCase().includes(q))
+    .sort((a, b) => (a.code || '~' + a.name).localeCompare(b.code || '~' + b.name));
+  const cnt = $('#pdf-count');
+  if (cnt) cnt.textContent = S.pdfs.length ? `${list.length} de ${S.pdfs.length} PDF(s)` : 'PDFs enviados e PDFs gerados pelo app';
+  if (!S.pdfs.length) {
+    box.innerHTML = `<div class="empty"><h2>Nenhum PDF ainda</h2><p>Envie os PDFs dos programas que você já tem. O app lê o código de cada programa (ex.: HIP-M-20-29-INI-ACA) e etiqueta sozinho.</p><button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>`;
+    return;
+  }
+  if (!list.length) { box.innerHTML = '<div class="empty">Nenhum PDF com esses filtros.</div>'; return; }
+  box.innerHTML = `<div class="stack">${list.map((x) => {
+    const p = prog(x);
+    return `<div class="card pdf-item">
+      ${x.thumb ? `<img class="pdf-thumb" src="${esc(x.thumb)}" alt="">` : '<span class="pdf-thumb"></span>'}
+      <div style="flex:1;min-width:0">
+        <h3 style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(pdfTitle(x))}</h3>
+        <div class="small muted">${x.code ? esc(x.code) + ' · ' : ''}${x.pages} páginas · ${fmtSize(x.size)}</div>
+        <div class="row" style="margin-top:6px;gap:6px">${tagChips(x.tags) || '<span class="chip">Sem etiquetas</span>'}
+          ${x.generated ? '<span class="chip gold">Gerado pelo app</span>' : ''}
+          ${p ? `<a class="chip" href="#/programa/${esc(p.id)}">Programa: ${esc(p.title)}</a>` : ''}</div>
+      </div>
+      <div class="row" style="gap:6px;justify-content:flex-end">
+        <a class="btn sm" href="#/pdf/${esc(x.id)}">Abrir</a>
+        ${x.generated ? '' : `<button class="btn sm" data-action="pdf-to-program" data-id="${esc(x.id)}">Criar programa</button>`}
+        <button class="btn sm" data-action="edit-tags" data-id="${esc(x.id)}">Etiquetas</button>
+        <button class="btn sm" data-action="dl-pdf" data-id="${esc(x.id)}">Baixar</button>
+        <button class="btn sm danger" data-action="del-pdf" data-id="${esc(x.id)}">✕</button>
+      </div></div>`;
+  }).join('')}</div>`;
+}
+actions['edit-tags'] = (el) => {
+  const meta = byId(S.pdfs, el.dataset.id);
+  const t = { ...(meta.tags || {}) };
+  const body = openModal('Etiquetas do PDF', `
+    <div class="stack">
+      <p class="small muted" style="margin:0">${esc(pdfTitle(meta))}</p>
+      <label class="field"><span>Código do programa</span><input type="text" id="tg-code" value="${esc(meta.code || '')}" placeholder="Ex.: HIP-F-30-39-INT-ACA"><span class="hint">Digite o código para preencher tudo automaticamente.</span></label>
+      <div class="grid two">${TAG_KEYS.map((k) => `<label class="field"><span>${TAGS[k].label}</span><select id="tg-${k}"><option value="">—</option>${Object.entries(TAGS[k].opts).map(([v, l]) => `<option value="${v}" ${t[k] === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`).join('')}</div>
+      <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="tg-save">Salvar</button></div>
+    </div>`);
+  $('#tg-code', body).addEventListener('input', (e) => {
+    const c = parseCode(e.target.value);
+    if (c) TAG_KEYS.forEach((k) => { $(`#tg-${k}`, body).value = c[k]; });
+  });
+  $('#tg-save', body).onclick = async () => {
+    const c = parseCode($('#tg-code', body).value);
+    meta.tags = Object.fromEntries(TAG_KEYS.map((k) => [k, $(`#tg-${k}`, body).value]).filter(([, v]) => v));
+    meta.code = c ? c.code : '';
+    meta.title = c && CATALOG[c.code] ? CATALOG[c.code][0] : meta.title;
+    meta.tagsChecked = true;
+    await saveEntity('pdfs', meta);
+    closeModal();
+    toast('Etiquetas salvas');
+    if (location.hash.startsWith('#/pdf/')) viewPdf(meta.id); else renderPdfList();
+  };
+};
 actions['upload-pdfs'] = async () => {
   const files = await pickFile('application/pdf', true);
   if (!files.length) return;
@@ -2261,7 +2479,7 @@ async function viewPdf(id) {
   const meta = byId(S.pdfs, id);
   if (!meta) { location.hash = '#/pdfs'; return; }
   app.innerHTML = `
-    <div class="page-head"><div><a class="btn ghost sm" href="#/pdfs">← PDFs</a><h1 style="margin-top:6px">${esc(meta.name)}</h1><p class="muted">${meta.pages} páginas · ${fmtSize(meta.size)}</p></div>
+    <div class="page-head"><div><a class="btn ghost sm" href="#/pdfs">← PDFs</a><h1 style="margin-top:6px">${esc(pdfTitle(meta))}</h1><p class="muted">${meta.code ? esc(meta.code) + ' · ' : ''}${meta.pages} páginas · ${fmtSize(meta.size)}</p><div class="row" style="gap:6px">${tagChips(meta.tags)}<button class="btn sm ghost" data-action="edit-tags" data-id="${esc(id)}">Editar etiquetas</button></div></div>
       <div class="row">
         ${meta.generated ? '' : `<button class="btn primary" data-action="pdf-to-program" data-id="${esc(id)}">Criar programa a partir deste PDF</button>`}
         <button class="btn" data-action="dl-pdf" data-id="${esc(id)}">Baixar</button>
@@ -2386,6 +2604,7 @@ async function seed() {
     title: 'Projeto Fundação Muscular',
     subtitle: 'Homens 30-39 anos · Iniciante · Academia',
     studentId: st.id, trainerId: tr.id, theme: 'navy',
+    tags: { obj: 'HIP', sex: 'M', age: '30-39', level: 'INI', env: 'ACA' },
     overview: 'Mesociclo introdutório em full body (A/B/C) 3x por semana, centrado nos padrões fundamentais: agachar, empurrar horizontal e vertical, puxar e estender o quadril. Para o iniciante de 30-39 anos, treinar cada grupo 3x na semana é o estímulo mais eficiente, e a janela de ganhos de novato responde fortemente à progressão de cargas bem registrada.',
     objectives: 'Construir massa muscular desde a primeira semana com técnica correta.\nDominar os padrões fundamentais de movimento.\nAproveitar ao máximo a janela de ganhos de novato.',
     recommendations: 'Treine em dias alternados (ex.: seg/qua/sex).\nRegistre cargas, repetições e sensações em todas as sessões.\nCarga só sobe com técnica estável e amplitude completa.\nSono de 7-9h e alimentação suficiente fazem parte do programa.',
@@ -2419,6 +2638,7 @@ async function seed() {
   await loadAll();
   await seed();
   route();
+  tagPendingPdfs();
 })();
 
 // Exposto para testes automatizados
