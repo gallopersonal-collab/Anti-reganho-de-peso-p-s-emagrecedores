@@ -2507,8 +2507,18 @@ function updateCloudBadge() {
 }
 
 /* ---- Licença (assinatura Kiwify) ---- */
-// Link de compra exibido para quem não tem licença ativa (deixe '' para esconder o botão)
-const KIWIFY_CHECKOUT_URL = '';
+// Links de compra exibidos para quem não tem licença ativa (lista vazia esconde os botões)
+const KIWIFY_PLANS_NOTE = 'Oferta especial para quem já tem a Biblioteca de Treinos Lucrativos Pro';
+const KIWIFY_PLANS = [
+  { label: 'Assinatura anual', hint: 'melhor custo-benefício', url: 'https://pay.kiwify.com.br/9tg3a34', primary: true },
+  { label: 'Assinatura mensal', hint: '', url: 'https://pay.kiwify.com.br/4HeJX92' },
+];
+const plansHTML = () => !KIWIFY_PLANS.length ? '' : `
+  <div class="gate-plans">
+    <p class="small" style="color:var(--gold-2)"><b>${esc(KIWIFY_PLANS_NOTE)}</b></p>
+    ${KIWIFY_PLANS.map((pl) => `<a class="btn lg ${pl.primary ? 'primary' : ''}" href="${esc(pl.url)}" target="_blank" rel="noopener"><span>${esc(pl.label)}${pl.hint ? `<span class="plan-hint">${esc(pl.hint)}</span>` : ''}</span></a>`).join('')}
+    <p class="small muted">Depois do pagamento, crie a conta (ou entre) com o mesmo e-mail da compra.</p>
+  </div>`;
 const LIC = { checked: false, active: false, admin: false, expires_at: null, offline: false };
 const LIC_CACHE_DAYS = 7; // sem internet, vale a última verificação por até 7 dias
 async function checkLicense() {
@@ -2545,8 +2555,8 @@ function viewGate() {
       ${!logged ? `
         <p class="muted">Entre com a sua conta de personal para usar o app.</p>
         <p class="small muted">Primeiro acesso? Clique em <b>Entrar</b> e depois em <b>Criar conta</b>, usando o <b>mesmo e-mail da compra</b> na Kiwify.</p>
-        <div class="stack"><button class="btn primary lg" data-action="gate-login">Entrar</button>
-        ${KIWIFY_CHECKOUT_URL ? `<a class="btn lg" href="${esc(KIWIFY_CHECKOUT_URL)}" target="_blank" rel="noopener">Ainda não tenho acesso: assinar</a>` : ''}</div>`
+        <div class="stack"><button class="btn primary lg" data-action="gate-login">Entrar</button></div>
+        ${KIWIFY_PLANS.length ? '<p class="muted" style="margin-top:6px">Ainda não tem acesso?</p>' + plansHTML() : ''}`
       : `
         <p><b>Sua assinatura não está ativa.</b></p>
         <p class="muted">Conta: <b>${esc(CLOUD.user.email || '')}</b></p>
@@ -2554,9 +2564,9 @@ function viewGate() {
           : 'O acesso é liberado automaticamente após a confirmação do pagamento na Kiwify. Use o mesmo e-mail da compra. Se pagou com outro e-mail, saia e crie a conta com ele.'}</p>
         <div class="stack">
           <button class="btn primary lg" data-action="gate-recheck">Verificar novamente</button>
-          ${KIWIFY_CHECKOUT_URL ? `<a class="btn lg" href="${esc(KIWIFY_CHECKOUT_URL)}" target="_blank" rel="noopener">Assinar o Trainer Pro Studio</a>` : ''}
           <button class="btn ghost" data-action="gate-logout">Sair e entrar com outro e-mail</button>
-        </div>`}
+        </div>
+        ${plansHTML()}`}
     </div>`;
 }
 actions['gate-login'] = () => openLogin(afterLogin);

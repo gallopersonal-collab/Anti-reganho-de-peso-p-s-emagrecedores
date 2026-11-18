@@ -510,3 +510,5 @@ body.gated .nav, body.gated .tabbar, body.gated .cloud-badge { display: none !im
 /* Painel de licenças */
 .lic-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2); flex-wrap: wrap; }
 .lic-main { flex: 1; min-width: 180px; overflow-wrap: anywhere; }
+.gate-plans { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; padding-top: 16px; border-top: 1px solid var(--line); }
+.plan-hint { display: block; font-size: 12px; font-weight: 500; opacity: .8; margin-top: 2px; }
