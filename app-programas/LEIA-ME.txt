@@ -50,6 +50,7 @@ Assinatura (Kiwify)
 
 Links de assinatura (Kiwify) exibidos na tela de acesso
   Normal:   anual https://pay.kiwify.com.br/AhHl1Ll   mensal https://pay.kiwify.com.br/ECHlfVR
-  Especial (quem tem a Biblioteca de Treinos Lucrativos Pro):
+  Especial (quem tem a Biblioteca de Treinos Lucrativos Pro) - NÃO aparece no app;
+  enviar só para a base de alunos da Biblioteca (e-mail / área de membros):
             anual https://pay.kiwify.com.br/9tg3a34   mensal https://pay.kiwify.com.br/4HeJX92
   Para trocar: constante KIWIFY_OFFERS em app.js e rodar scripts/build_app_programas.py
