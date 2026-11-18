@@ -165,7 +165,7 @@ textarea { resize: vertical; min-height: 84px; line-height: 1.45; }
 .pcard .who { display: flex; align-items: center; gap: 10px; }
 .pcard h3 { font-size: 18px; line-height: 1.2; }
 .pcard .meta { display: flex; gap: 6px; flex-wrap: wrap; }
-.pcard .actions { display: flex; gap: 6px; margin-top: auto; }
+.pcard .actions { display: flex; gap: 6px; margin-top: auto; flex-wrap: wrap; }
 
 .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
 .toolbar input, .toolbar select { max-width: 280px; }
@@ -507,6 +507,13 @@ body.student-mode .main { max-width: 720px; padding-bottom: 90px; }
 .st-rest { margin-top: 10px; }
 .st-timer { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 70; display: flex; align-items: center; gap: 14px; background: #f4efe4; color: #141007; padding: 10px 12px 10px 20px; border-radius: 999px; box-shadow: var(--shadow); font-weight: 600; }
 .st-timer b { font: 700 26px/1 Oswald, sans-serif; min-width: 64px; text-align: center; }
+
+/* Celulares estreitos: texto do botão quebra linha em vez de vazar */
+@media (max-width: 480px) {
+  .btn { white-space: normal; text-align: center; line-height: 1.2; max-width: 100%; }
+  .toast { max-width: calc(100vw - 24px); border-radius: 14px; }
+  .grid.cards { grid-template-columns: minmax(0, 1fr); }
+}
 
 </style>
 </head>
