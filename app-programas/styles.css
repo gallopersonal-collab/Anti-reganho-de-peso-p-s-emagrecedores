@@ -512,3 +512,5 @@ body.gated .nav, body.gated .tabbar, body.gated .cloud-badge { display: none !im
 .lic-main { flex: 1; min-width: 180px; overflow-wrap: anywhere; }
 .gate-plans { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; padding-top: 16px; border-top: 1px solid var(--line); }
 .plan-hint { display: block; font-size: 12px; font-weight: 500; opacity: .8; margin-top: 2px; }
+.gate-offer { display: flex; flex-direction: column; gap: 10px; }
+.gate-offer.special { margin-top: 6px; padding: 14px; border: 1px dashed rgba(210,169,97,.55); border-radius: 14px; background: rgba(210,169,97,.06); }

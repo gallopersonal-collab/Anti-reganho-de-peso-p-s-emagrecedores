@@ -47,3 +47,9 @@ Assinatura (Kiwify)
   (CHAVE fica na tabela app_config, linha kiwify_url_key, no Supabase)
   Liberar/bloquear na mão: Ajustes > Licenças (aparece só para a conta do dono).
   Escolha e-mail, validade (sem vencimento, 30/90/180/365 dias ou data) e observação.
+
+Links de assinatura (Kiwify) exibidos na tela de acesso
+  Normal:   anual https://pay.kiwify.com.br/AhHl1Ll   mensal https://pay.kiwify.com.br/ECHlfVR
+  Especial (quem tem a Biblioteca de Treinos Lucrativos Pro):
+            anual https://pay.kiwify.com.br/9tg3a34   mensal https://pay.kiwify.com.br/4HeJX92
+  Para trocar: constante KIWIFY_OFFERS em app.js e rodar scripts/build_app_programas.py

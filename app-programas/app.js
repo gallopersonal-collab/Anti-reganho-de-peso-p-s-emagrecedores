@@ -2508,15 +2508,23 @@ function updateCloudBadge() {
 
 /* ---- Licença (assinatura Kiwify) ---- */
 // Links de compra exibidos para quem não tem licença ativa (lista vazia esconde os botões)
-const KIWIFY_PLANS_NOTE = 'Oferta especial para quem já tem a Biblioteca de Treinos Lucrativos Pro';
-const KIWIFY_PLANS = [
-  { label: 'Assinatura anual', hint: 'melhor custo-benefício', url: 'https://pay.kiwify.com.br/9tg3a34', primary: true },
-  { label: 'Assinatura mensal', hint: '', url: 'https://pay.kiwify.com.br/4HeJX92' },
+const KIWIFY_OFFERS = [
+  { title: 'Assine o Trainer Pro Studio', plans: [
+    { label: 'Assinatura anual', hint: 'melhor custo-benefício', url: 'https://pay.kiwify.com.br/AhHl1Ll', primary: true },
+    { label: 'Assinatura mensal', url: 'https://pay.kiwify.com.br/ECHlfVR' },
+  ] },
+  { title: 'Já tem a Biblioteca de Treinos Lucrativos Pro? Oferta especial', special: true, plans: [
+    { label: 'Anual especial', hint: 'para alunos da Biblioteca', url: 'https://pay.kiwify.com.br/9tg3a34' },
+    { label: 'Mensal especial', hint: 'para alunos da Biblioteca', url: 'https://pay.kiwify.com.br/4HeJX92' },
+  ] },
 ];
-const plansHTML = () => !KIWIFY_PLANS.length ? '' : `
+const plansHTML = () => !KIWIFY_OFFERS.length ? '' : `
   <div class="gate-plans">
-    <p class="small" style="color:var(--gold-2)"><b>${esc(KIWIFY_PLANS_NOTE)}</b></p>
-    ${KIWIFY_PLANS.map((pl) => `<a class="btn lg ${pl.primary ? 'primary' : ''}" href="${esc(pl.url)}" target="_blank" rel="noopener"><span>${esc(pl.label)}${pl.hint ? `<span class="plan-hint">${esc(pl.hint)}</span>` : ''}</span></a>`).join('')}
+    ${KIWIFY_OFFERS.map((o) => `
+      <div class="gate-offer${o.special ? ' special' : ''}">
+        <p class="small" style="${o.special ? 'color:var(--gold-2)' : ''}"><b>${esc(o.title)}</b></p>
+        ${o.plans.map((pl) => `<a class="btn lg ${pl.primary ? 'primary' : ''}" href="${esc(pl.url)}" target="_blank" rel="noopener"><span>${esc(pl.label)}${pl.hint ? `<span class="plan-hint">${esc(pl.hint)}</span>` : ''}</span></a>`).join('')}
+      </div>`).join('')}
     <p class="small muted">Depois do pagamento, crie a conta (ou entre) com o mesmo e-mail da compra.</p>
   </div>`;
 const LIC = { checked: false, active: false, admin: false, expires_at: null, offline: false };
@@ -2556,7 +2564,7 @@ function viewGate() {
         <p class="muted">Entre com a sua conta de personal para usar o app.</p>
         <p class="small muted">Primeiro acesso? Clique em <b>Entrar</b> e depois em <b>Criar conta</b>, usando o <b>mesmo e-mail da compra</b> na Kiwify.</p>
         <div class="stack"><button class="btn primary lg" data-action="gate-login">Entrar</button></div>
-        ${KIWIFY_PLANS.length ? '<p class="muted" style="margin-top:6px">Ainda não tem acesso?</p>' + plansHTML() : ''}`
+        ${KIWIFY_OFFERS.length ? '<p class="muted" style="margin-top:6px">Ainda não tem acesso?</p>' + plansHTML() : ''}`
       : `
         <p><b>Sua assinatura não está ativa.</b></p>
         <p class="muted">Conta: <b>${esc(CLOUD.user.email || '')}</b></p>
