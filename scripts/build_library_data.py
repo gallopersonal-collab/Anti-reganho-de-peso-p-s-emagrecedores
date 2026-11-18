@@ -10,6 +10,7 @@ Uso: python3 scripts/build_library_data.py
 """
 import json
 import re
+import shutil
 import unicodedata
 from pathlib import Path
 
@@ -183,6 +184,12 @@ EXEC_OVERRIDE = {
                        "Respire fundo pelo nariz, solte os ombros e aproveite para se hidratar antes do próximo bloco.",
 }
 
+# Fotos enviadas ao Supabase (fotos/v2) com outro nome de arquivo: caminho no app -> nome publicado
+PHOTO_ALIAS = {
+    "fotos/F/Active_Recovery_Walk.jpg": "fotos/F/image-1795023366491.jpg",
+    "fotos/M/Active_Recovery_Walk.jpg": "fotos/M/image-1795023348126.jpg",
+}
+
 # Exercícios que as regras do gerador de PDF não cobrem (fotos só para o app)
 EXTRA_RULES = [
     (r"transi[cç][aã]o ativa", "Active_Recovery_Walk"),
@@ -264,6 +271,12 @@ def main() -> None:
                 if pid:
                     sexed = FOTOS_OUT / sex / f"{pid}.jpg"
                     e["image"] = f"fotos/{sex}/{pid}.jpg" if sexed.exists() else f"fotos/{pid}.jpg"
+                    if e["image"] in PHOTO_ALIAS:
+                        alias = PHOTO_ALIAS[e["image"]]
+                        target = BASE / "app-programas" / alias
+                        if not target.exists():
+                            shutil.copyfile(BASE / "app-programas" / e["image"], target)
+                        e["image"] = alias
                     used.add(pid)
     for pid in sorted(used):
         if (FOTOS_SRC / pid).exists():
