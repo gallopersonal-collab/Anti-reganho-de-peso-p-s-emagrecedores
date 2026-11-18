@@ -177,11 +177,47 @@ def load_rules() -> list:
     return ast.literal_eval(m.group(1))
 
 
+# Exercícios que as regras do gerador de PDF não cobrem (fotos só para o app)
+EXTRA_RULES = [
+    (r"^cardio|finalizador|caminhada/bike intervalada", "Cardio_Finalizador"),
+    (r"circuito metab|wall ball", "Wall_Ball"),
+    (r"avan[cç]o.*halter", "Dumbbell_Lunges"),
+    (r"rosca direta na m[aá]quina", "Dumbbell_Bicep_Curl"),
+    (r"flex[aã]o de joelho em p[eé] com el[aá]stico", "Standing_Leg_Curl"),
+    (r"supino em p[eé] com el[aá]stico", "Band_Chest_Press"),
+    (r"remada sentada com el[aá]stico", "Band_Seated_Row"),
+    (r"abdu[cç][aã]o de quadril na polia", "Cable_Hip_Abduction"),
+    (r"abdu[cç][aã]o sentada", "Seated_Band_Abduction"),
+    (r"abdu[cç][aã]o de quadril em p[eé]", "Band_Standing_Hip_Abduction"),
+    (r"caminhada lateral", "Band_Lateral_Walk"),
+    (r"tr[ií]ceps no el[aá]stico", "Band_Triceps_Pushdown"),
+    (r"remada invertida", "Inverted_Row_Table"),
+    (r"mochila", "Backpack_Bent_Over_Row"),
+    (r"pike push", "Pike_Push_Up"),
+    (r"burpee", "Burpee_Step_Back"),
+    (r"afundo lateral", "Lateral_Lunge"),
+    (r"puxada com el[aá]stico", "Band_Lat_Pulldown"),
+    (r"equil[ií]brio unipodal", "Single_Leg_Balance"),
+    (r"calcanhar-ponta|linha reta", "Tandem_Walk"),
+    (r"skipping", "High_Knees"),
+    (r"maior alongamento do mundo|sequ[eê]ncia de mobilidade", "Worlds_Greatest_Stretch"),
+    (r"90/90", "Hip_90_90"),
+    (r"wall slide|deslizamento de bra[cç]os", "Wall_Slide"),
+    (r"tornozelo", "Ankle_Mobility"),
+    (r"alongamento global", "Posterior_Chain_Stretch"),
+]
+
+
 def photo_for(name: str, rules: list):
     n = name.lower()
     for pat, ex_id in rules:
         if re.search(pat, n):
-            return ex_id if (FOTOS_SRC / ex_id / "0.jpg").exists() or (FOTOS_OUT / "F" / f"{ex_id}.jpg").exists() else None
+            if (FOTOS_SRC / ex_id / "0.jpg").exists() or (FOTOS_OUT / "F" / f"{ex_id}.jpg").exists():
+                return ex_id
+            break
+    for pat, ex_id in EXTRA_RULES:
+        if re.search(pat, n) and (FOTOS_OUT / "F" / f"{ex_id}.jpg").exists():
+            return ex_id
     return None
 
 
@@ -221,7 +257,8 @@ def main() -> None:
                     e["image"] = f"fotos/{sex}/{pid}.jpg" if sexed.exists() else f"fotos/{pid}.jpg"
                     used.add(pid)
     for pid in sorted(used):
-        build_photo(pid)
+        if (FOTOS_SRC / pid).exists():
+            build_photo(pid)
     total = sum(len(w["exercises"]) for d in data.values() for w in d["workouts"])
     with_photo = sum(1 for d in data.values() for w in d["workouts"] for e in w["exercises"] if e.get("image"))
     print(f"fotos: {with_photo}/{total} exercícios com foto, {len(used)} imagens em {FOTOS_OUT}")
