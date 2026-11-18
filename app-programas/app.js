@@ -480,6 +480,8 @@ async function route() {
   window.scrollTo(0, 0);
   if (r !== 'aluno') document.body.classList.remove('student-mode');
   if (r === 'aluno') return viewStudent(id);
+  if (!hasAccess()) return viewGate();
+  document.body.classList.remove('gated');
   if (!r) return viewHome();
   if (r === 'novo') return viewWizard(id);
   if (r === 'biblioteca') return viewLibrary();
@@ -2480,10 +2482,14 @@ async function cloudInit() {
     const was = CLOUD.user;
     CLOUD.user = session ? session.user : null;
     updateCloudBadge();
-    if (!was && CLOUD.user && ev === 'SIGNED_IN') pullAndMerge().then(softRefresh).catch((e) => toast('Erro ao sincronizar: ' + e.message));
+    if (!was && CLOUD.user && ev === 'SIGNED_IN') checkLicense().then(() => { if (LIC.active) return pullAndMerge().then(softRefresh); }).catch((e) => toast('Erro ao sincronizar: ' + e.message));
+    if (was && !CLOUD.user) { LIC.active = false; route(); }
   });
   updateCloudBadge();
-  if (CLOUD.user) pullAndMerge().then(softRefresh).catch((e) => console.warn(e));
+  if (CLOUD.user) {
+    await checkLicense();
+    if (LIC.active) pullAndMerge().then(softRefresh).catch((e) => console.warn(e));
+  }
 }
 /** Atualiza a tela depois de sincronizar, sem fechar janelas abertas nem atrapalhar a edição. */
 function softRefresh() {
@@ -2500,6 +2506,65 @@ function updateCloudBadge() {
   b.title = CLOUD.error ? 'Erro ao sincronizar: ' + CLOUD.error : 'Salvo na nuvem' + (CLOUD.lastSync ? ' às ' + new Date(CLOUD.lastSync).toLocaleTimeString('pt-BR') : '');
 }
 
+/* ---- Licença (assinatura Kiwify) ---- */
+// Link de compra exibido para quem não tem licença ativa (deixe '' para esconder o botão)
+const KIWIFY_CHECKOUT_URL = '';
+const LIC = { checked: false, active: false, expires_at: null, offline: false };
+const LIC_CACHE_DAYS = 7; // sem internet, vale a última verificação por até 7 dias
+async function checkLicense() {
+  LIC.checked = true; LIC.offline = false;
+  if (!sb || !CLOUD.user) { LIC.active = false; return LIC; }
+  const email = (CLOUD.user.email || '').toLowerCase();
+  try {
+    const { data, error } = await sb.rpc('my_license');
+    if (error) throw error;
+    LIC.active = !!(data && data.active);
+    LIC.expires_at = data && data.expires_at;
+    lsSet('tps-lic', JSON.stringify({ email, active: LIC.active, expires_at: LIC.expires_at, at: Date.now() }));
+  } catch (e) {
+    let c = null;
+    try { c = JSON.parse(lsGet('tps-lic') || 'null'); } catch (x) { /* cache inválido */ }
+    const fresh = c && c.email === email && Date.now() - c.at < LIC_CACHE_DAYS * 86400000;
+    LIC.active = !!(fresh && c.active && (!c.expires_at || new Date(c.expires_at) > new Date()));
+    LIC.expires_at = fresh ? c.expires_at : null;
+    LIC.offline = true;
+  }
+  return LIC;
+}
+const hasAccess = () => !!(CLOUD.user && LIC.active);
+const afterLogin = () => checkLicense().then(() => route());
+function viewGate() {
+  document.body.classList.add('gated');
+  const logged = !!CLOUD.user;
+  app.innerHTML = `
+    <div class="gate card">
+      <div class="gate-logo">TP</div>
+      <h1>Trainer Pro Studio</h1>
+      ${!logged ? `
+        <p class="muted">Entre com a sua conta de personal para usar o app.</p>
+        <p class="small muted">Primeiro acesso? Clique em <b>Entrar</b> e depois em <b>Criar conta</b>, usando o <b>mesmo e-mail da compra</b> na Kiwify.</p>
+        <div class="stack"><button class="btn primary lg" data-action="gate-login">Entrar</button>
+        ${KIWIFY_CHECKOUT_URL ? `<a class="btn lg" href="${esc(KIWIFY_CHECKOUT_URL)}" target="_blank" rel="noopener">Ainda não tenho acesso: assinar</a>` : ''}</div>`
+      : `
+        <p><b>Sua assinatura não está ativa.</b></p>
+        <p class="muted">Conta: <b>${esc(CLOUD.user.email || '')}</b></p>
+        <p class="small muted">${LIC.offline ? 'Sem conexão para verificar a assinatura. Conecte-se à internet e tente de novo.'
+          : 'O acesso é liberado automaticamente após a confirmação do pagamento na Kiwify. Use o mesmo e-mail da compra. Se pagou com outro e-mail, saia e crie a conta com ele.'}</p>
+        <div class="stack">
+          <button class="btn primary lg" data-action="gate-recheck">Verificar novamente</button>
+          ${KIWIFY_CHECKOUT_URL ? `<a class="btn lg" href="${esc(KIWIFY_CHECKOUT_URL)}" target="_blank" rel="noopener">Assinar o Trainer Pro Studio</a>` : ''}
+          <button class="btn ghost" data-action="gate-logout">Sair e entrar com outro e-mail</button>
+        </div>`}
+    </div>`;
+}
+actions['gate-login'] = () => openLogin(afterLogin);
+actions['gate-recheck'] = async () => {
+  await withBusy('Verificando assinatura…', () => checkLicense());
+  if (LIC.active) toast('Assinatura ativa. Bem-vindo!');
+  route();
+};
+actions['gate-logout'] = async () => { await sb.auth.signOut(); LIC.active = false; route(); };
+
 /* ---- Conta do personal ---- */
 const AUTH_ERRORS = {
   'Invalid login credentials': 'E-mail ou senha incorretos.',
@@ -2515,6 +2580,7 @@ function openLogin(after) {
   if (!sb) { toast('Sem conexão com a nuvem.'); return; }
   const body = openModal('Sua conta Trainer Pro', `
     <p class="muted" style="margin-top:0">Com a conta, seus programas ficam salvos na nuvem (em qualquer aparelho) e você libera o acesso dos alunos ao app.</p>
+    <p class="small muted" style="margin-top:0">Use o <b>mesmo e-mail da compra</b> na Kiwify.</p>
     <div class="stack">
       <label class="field"><span>E-mail</span><input type="text" id="lg-email" autocomplete="email" inputmode="email"></label>
       <label class="field"><span>Senha</span><input type="password" id="lg-pass" autocomplete="current-password" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:var(--text)"></label>
@@ -2547,13 +2613,14 @@ function openLogin(after) {
   };
   setTimeout(() => $('#lg-email', body).focus(), 50);
 }
-actions.login = () => openLogin(() => route());
+actions.login = () => openLogin(afterLogin);
 actions.logout = async () => {
   if (!confirm('Sair da conta? Os dados continuam neste aparelho e na nuvem.')) return;
   await sb.auth.signOut();
+  LIC.active = false;
   route();
 };
-actions['cloud-badge'] = () => { if (CLOUD.user) location.hash = '#/config'; else openLogin(() => route()); };
+actions['cloud-badge'] = () => { if (CLOUD.user) location.hash = '#/config'; else openLogin(afterLogin); };
 actions['sync-now'] = async () => {
   try { await withBusy('Sincronizando…', async () => { await pullAndMerge(); await syncNow(); return true; }); toast('Tudo sincronizado'); route(); } catch (e) { toast('Erro: ' + e.message); }
 };

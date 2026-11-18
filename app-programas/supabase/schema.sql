@@ -191,3 +191,59 @@ create policy slides_owner_update on storage.objects for update to authenticated
   using (bucket_id = 'slides' and (storage.foldername(name))[1] = (select auth.uid())::text);
 create policy slides_owner_delete on storage.objects for delete to authenticated
   using (bucket_id = 'slides' and (storage.foldername(name))[1] = (select auth.uid())::text);
+
+-- =========================================================
+-- Licenças (assinatura Kiwify)
+-- O webhook (supabase/functions/kiwify-webhook) grava uma licença por e-mail do comprador.
+-- O app só abre para o personal cuja conta (mesmo e-mail) tem licença ativa.
+-- =========================================================
+create table public.licenses (
+  email text primary key check (email = lower(email)),
+  status text not null default 'active' check (status in ('active', 'inactive')),
+  expires_at timestamptz,              -- null = sem vencimento
+  source text not null default 'kiwify',
+  order_id text, product text, last_event text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+alter table public.licenses enable row level security;   -- sem políticas: só funções e webhook
+
+create table public.kiwify_events (                      -- registro de cada aviso recebido
+  id bigint generated always as identity primary key,
+  received_at timestamptz not null default now(),
+  event text, email text, order_id text, result text, payload jsonb
+);
+alter table public.kiwify_events enable row level security;
+
+create table public.app_config (key text primary key, value text not null, updated_at timestamptz not null default now());
+alter table public.app_config enable row level security;
+-- chaves usadas: kiwify_url_key (segredo da URL do webhook), kiwify_token (opcional, assinatura da Kiwify)
+
+create or replace function public.has_license()
+returns boolean language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.licenses l
+    where l.email = lower(coalesce(auth.jwt() ->> 'email', ''))
+      and l.status = 'active' and (l.expires_at is null or l.expires_at > now()));
+$$;
+create or replace function public.my_license()
+returns jsonb language sql stable security definer set search_path = public as $$
+  select jsonb_build_object('active', public.has_license(),
+    'status', (select status from public.licenses where email = lower(coalesce(auth.jwt() ->> 'email', ''))),
+    'expires_at', (select expires_at from public.licenses where email = lower(coalesce(auth.jwt() ->> 'email', ''))));
+$$;
+revoke execute on function public.has_license() from public, anon;
+grant execute on function public.has_license() to authenticated;
+revoke execute on function public.my_license() from public, anon;
+grant execute on function public.my_license() to authenticated;
+
+-- Sem licença ativa, a conta não grava na nuvem nem cria códigos de aluno
+create policy items_license_insert on public.items as restrictive for insert to authenticated with check (public.has_license());
+create policy items_license_update on public.items as restrictive for update to authenticated using (public.has_license());
+create policy access_license_insert on public.student_access as restrictive for insert to authenticated with check (public.has_license());
+create policy access_license_update on public.student_access as restrictive for update to authenticated using (public.has_license());
+create policy slides_license_insert on storage.objects as restrictive for insert to authenticated with check (bucket_id <> 'slides' or public.has_license());
+
+-- Liberar manualmente (cortesia, parceiro):
+--   insert into public.licenses (email, source) values ('email@exemplo.com', 'manual');
+-- Bloquear manualmente:
+--   update public.licenses set status = 'inactive' where email = 'email@exemplo.com';

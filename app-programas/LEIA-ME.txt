@@ -34,3 +34,15 @@ Como publicar
 Para regerar depois de mudar o código ou os roteiros:
   python3 scripts/build_library_data.py   (roteiros -> library-data.js + fotos)
   python3 scripts/build_app_programas.py  (gera a pasta netlify)
+
+Assinatura (Kiwify)
+  O app só abre para o personal com assinatura ativa. Ele cria a conta com o MESMO e-mail da compra.
+  A Kiwify avisa o Supabase (webhook kiwify-webhook) a cada compra, renovação, cancelamento,
+  reembolso e chargeback; a licença é ativada ou desativada sozinha.
+  - Compra/renovação: libera até a próxima cobrança + 3 dias de tolerância
+  - Cancelamento: mantém até o fim do período pago
+  - Reembolso/chargeback: bloqueia na hora
+  A área do aluno (link + código) continua aberta.
+  URL do webhook: https://dzmgbvyffxtcjsdpedqb.supabase.co/functions/v1/kiwify-webhook?k=CHAVE
+  (CHAVE fica na tabela app_config, linha kiwify_url_key, no Supabase)
+  Liberar/bloquear na mão: ver o fim de supabase/schema.sql
