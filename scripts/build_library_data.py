@@ -177,8 +177,15 @@ def load_rules() -> list:
     return ast.literal_eval(m.group(1))
 
 
+# Itens sem texto de execução no roteiro (evita herdar o texto de outro exercício)
+EXEC_OVERRIDE = {
+    "transicao ativa": "Caminhada leve por 3 minutos para baixar a frequência cardíaca entre os blocos. "
+                       "Respire fundo pelo nariz, solte os ombros e aproveite para se hidratar antes do próximo bloco.",
+}
+
 # Exercícios que as regras do gerador de PDF não cobrem (fotos só para o app)
 EXTRA_RULES = [
+    (r"transi[cç][aã]o ativa", "Active_Recovery_Walk"),
     (r"^cardio|finalizador|caminhada/bike intervalada", "Cardio_Finalizador"),
     (r"circuito metab|wall ball", "Wall_Ball"),
     (r"avan[cç]o.*halter", "Dumbbell_Lunges"),
@@ -251,6 +258,8 @@ def main() -> None:
         sex = code.split("-")[1]  # F ou M: foto com aluna ou aluno
         for w in d["workouts"]:
             for e in w["exercises"]:
+                if norm(e["name"]) in EXEC_OVERRIDE:
+                    e["execution"] = EXEC_OVERRIDE[norm(e["name"])]
                 pid = photo_for(e["name"], rules)
                 if pid:
                     sexed = FOTOS_OUT / sex / f"{pid}.jpg"
