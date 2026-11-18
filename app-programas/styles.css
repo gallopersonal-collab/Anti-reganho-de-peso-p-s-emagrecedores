@@ -506,3 +506,7 @@ body.gated .nav, body.gated .tabbar, body.gated .cloud-badge { display: none !im
 .gate p { margin: 0; }
 .gate .stack { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
 .gate-logo { width: 64px; height: 64px; margin: 0 auto; border-radius: 16px; display: grid; place-items: center; font-family: 'Bebas Neue', 'Oswald', sans-serif; font-size: 30px; color: #141007; background: linear-gradient(135deg, var(--gold), #9c7a3c); }
+
+/* Painel de licenças */
+.lic-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2); flex-wrap: wrap; }
+.lic-main { flex: 1; min-width: 180px; overflow-wrap: anywhere; }

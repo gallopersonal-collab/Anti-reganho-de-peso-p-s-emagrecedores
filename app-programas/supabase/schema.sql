@@ -243,7 +243,19 @@ create policy access_license_insert on public.student_access as restrictive for 
 create policy access_license_update on public.student_access as restrictive for update to authenticated using (public.has_license());
 create policy slides_license_insert on storage.objects as restrictive for insert to authenticated with check (bucket_id <> 'slides' or public.has_license());
 
--- Liberar manualmente (cortesia, parceiro):
+-- Painel de licenças no app (Ajustes), visível só para quem está em public.admins
+alter table public.licenses add column if not exists note text;
+create table public.admins (email text primary key check (email = lower(email)), created_at timestamptz not null default now());
+alter table public.admins enable row level security;
+-- insert into public.admins (email) values ('<e-mail do dono>');
+create or replace function public.is_admin() returns boolean language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.admins where email = lower(coalesce(auth.jwt() ->> 'email', '')));
+$$;
+-- has_license() passa a aceitar o admin: select public.is_admin() or exists (...licença ativa...)
+-- my_license() devolve também 'admin'; admin_list_licenses() e admin_set_license(email, ativo, vence_em, obs)
+-- só funcionam para admin (ver migração painel_licencas_admin no projeto).
+
+-- Liberar manualmente (cortesia, parceiro) pelo SQL, se preferir:
 --   insert into public.licenses (email, source) values ('email@exemplo.com', 'manual');
 -- Bloquear manualmente:
 --   update public.licenses set status = 'inactive' where email = 'email@exemplo.com';

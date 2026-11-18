@@ -2509,7 +2509,7 @@ function updateCloudBadge() {
 /* ---- Licença (assinatura Kiwify) ---- */
 // Link de compra exibido para quem não tem licença ativa (deixe '' para esconder o botão)
 const KIWIFY_CHECKOUT_URL = '';
-const LIC = { checked: false, active: false, expires_at: null, offline: false };
+const LIC = { checked: false, active: false, admin: false, expires_at: null, offline: false };
 const LIC_CACHE_DAYS = 7; // sem internet, vale a última verificação por até 7 dias
 async function checkLicense() {
   LIC.checked = true; LIC.offline = false;
@@ -2519,14 +2519,16 @@ async function checkLicense() {
     const { data, error } = await sb.rpc('my_license');
     if (error) throw error;
     LIC.active = !!(data && data.active);
+    LIC.admin = !!(data && data.admin);
     LIC.expires_at = data && data.expires_at;
-    lsSet('tps-lic', JSON.stringify({ email, active: LIC.active, expires_at: LIC.expires_at, at: Date.now() }));
+    lsSet('tps-lic', JSON.stringify({ email, active: LIC.active, admin: LIC.admin, expires_at: LIC.expires_at, at: Date.now() }));
   } catch (e) {
     let c = null;
     try { c = JSON.parse(lsGet('tps-lic') || 'null'); } catch (x) { /* cache inválido */ }
     const fresh = c && c.email === email && Date.now() - c.at < LIC_CACHE_DAYS * 86400000;
     LIC.active = !!(fresh && c.active && (!c.expires_at || new Date(c.expires_at) > new Date()));
     LIC.expires_at = fresh ? c.expires_at : null;
+    LIC.admin = !!(fresh && c.admin);
     LIC.offline = true;
   }
   return LIC;
@@ -2636,6 +2638,94 @@ function cloudCardHTML() {
     <p class="small muted" style="margin:0">${CLOUD.error ? '⚠ ' + esc(CLOUD.error) : CLOUD.lastSync ? 'Sincronizado às ' + new Date(CLOUD.lastSync).toLocaleTimeString('pt-BR') : 'Sincronização automática ativa.'}</p>
     <div class="row"><button class="btn" data-action="sync-now">Sincronizar agora</button><button class="btn ghost" data-action="logout">Sair da conta</button></div></div>`;
 }
+
+/* ---- Painel de licenças (só o dono do app) ---- */
+function licAdminHTML() {
+  if (!LIC.admin || !CLOUD.user) return '';
+  return `<div class="card stack" id="lic-admin">
+    <h2>Licenças <span class="small muted" style="font-weight:400">· só você vê esta área</span></h2>
+    <p class="muted" style="margin:0">Libere cortesias e parceiros, bloqueie ou reative qualquer personal. Quem comprou pela Kiwify entra aqui sozinho.</p>
+    <div class="grid two">
+      <label class="field"><span>E-mail do personal</span><input type="text" id="la-email" inputmode="email" placeholder="email@exemplo.com"></label>
+      <label class="field"><span>Validade</span><select id="la-exp">
+        <option value="">Sem vencimento</option><option value="30">30 dias</option><option value="90">90 dias</option>
+        <option value="180">6 meses</option><option value="365">1 ano</option><option value="date">Até uma data…</option></select></label>
+    </div>
+    <label class="field" id="la-date-wrap" style="display:none"><span>Data final</span><input type="date" id="la-date"></label>
+    <label class="field"><span>Observação (opcional)</span><input type="text" id="la-note" placeholder="Ex.: cortesia aluno do curso, parceiro Fulano"></label>
+    <div class="row"><button class="btn primary" data-action="lic-grant">Liberar acesso</button><span class="small muted" id="la-msg"></span></div>
+    <div class="row"><input type="text" id="la-q" placeholder="Buscar e-mail ou observação…" style="flex:1;min-width:180px"><span class="small muted" id="la-count"></span></div>
+    <div id="la-list" class="stack"><p class="muted small">Carregando…</p></div>
+  </div>`;
+}
+let LIC_ROWS = [];
+async function loadLicAdmin() {
+  const box = $('#la-list');
+  if (!box) return;
+  const { data, error } = await sb.rpc('admin_list_licenses');
+  if (error) { box.innerHTML = `<p class="small" style="color:#ffb4a9">Erro: ${esc(error.message)}</p>`; return; }
+  LIC_ROWS = data || [];
+  renderLicAdmin();
+}
+function renderLicAdmin() {
+  const box = $('#la-list');
+  if (!box) return;
+  const q = ($('#la-q') || {}).value ? $('#la-q').value.trim().toLowerCase() : '';
+  const rows = LIC_ROWS.filter((r) => !q || (r.email + ' ' + (r.note || '')).toLowerCase().includes(q));
+  const act = LIC_ROWS.filter((r) => r.active).length;
+  $('#la-count').textContent = `${act} ativa(s) de ${LIC_ROWS.length}`;
+  if (!rows.length) { box.innerHTML = '<p class="muted small">Nenhuma licença encontrada.</p>'; return; }
+  box.innerHTML = rows.map((r) => {
+    const exp = r.expires_at ? new Date(r.expires_at) : null;
+    const st = r.active ? ['Ativa', 'on'] : r.status === 'inactive' ? ['Bloqueada', 'off'] : ['Vencida', 'off'];
+    return `<div class="lic-row">
+      <div class="lic-main"><b>${esc(r.email)}</b>
+        <div class="small muted">${r.source === 'kiwify' ? 'Kiwify' : 'Manual'}${exp ? ' · ' + (r.active ? 'até ' : 'desde ') + exp.toLocaleDateString('pt-BR') : r.active ? ' · sem vencimento' : ''}${r.has_account ? '' : ' · ainda não criou conta'}${r.note ? ' · ' + esc(r.note) : ''}</div></div>
+      <span class="chip ${st[1] === 'on' ? 'gold' : ''}">${st[0]}</span>
+      ${r.active
+        ? `<button class="btn sm danger" data-action="lic-block" data-email="${esc(r.email)}">Bloquear</button>`
+        : `<button class="btn sm" data-action="lic-edit" data-email="${esc(r.email)}">Reativar</button>`}
+    </div>`;
+  }).join('');
+}
+function bindLicAdmin() {
+  if (!$('#lic-admin')) return;
+  $('#la-exp').onchange = () => { $('#la-date-wrap').style.display = $('#la-exp').value === 'date' ? '' : 'none'; };
+  $('#la-q').oninput = renderLicAdmin;
+  loadLicAdmin();
+}
+async function setLicense(email, active, expiresAt, note) {
+  const { data, error } = await sb.rpc('admin_set_license', { _email: email, _active: active, _expires_at: expiresAt, _note: note || null });
+  if (error) throw error;
+  if (data && data.error) throw new Error(data.error);
+}
+actions['lic-grant'] = async () => {
+  const email = $('#la-email').value.trim().toLowerCase();
+  const v = $('#la-exp').value;
+  let exp = null;
+  if (v === 'date') {
+    if (!$('#la-date').value) { $('#la-msg').textContent = 'Escolha a data final.'; return; }
+    exp = new Date($('#la-date').value + 'T23:59:59').toISOString();
+  } else if (v) exp = new Date(Date.now() + Number(v) * 86400000).toISOString();
+  try {
+    await setLicense(email, true, exp, $('#la-note').value.trim());
+    toast('Acesso liberado para ' + email);
+    $('#la-email').value = ''; $('#la-note').value = ''; $('#la-msg').textContent = '';
+    loadLicAdmin();
+  } catch (e) { $('#la-msg').textContent = e.message; }
+};
+actions['lic-block'] = async (el) => {
+  const email = el.dataset.email;
+  if (!confirm(`Bloquear o acesso de ${email}? O personal deixa de usar o app (pode reativar depois).`)) return;
+  try { await setLicense(email, false, null, null); toast('Acesso bloqueado'); loadLicAdmin(); } catch (e) { toast('Erro: ' + e.message); }
+};
+actions['lic-edit'] = (el) => {
+  const r = LIC_ROWS.find((x) => x.email === el.dataset.email) || {};
+  $('#la-email').value = r.email || '';
+  $('#la-note').value = r.note || '';
+  $('#la-email').scrollIntoView({ block: 'center' });
+  $('#la-msg').textContent = 'Escolha a validade e clique em "Liberar acesso".';
+};
 
 /* ---- Acesso do aluno (código) ---- */
 const studentLink = () => location.origin + location.pathname + '#/aluno';
@@ -3411,6 +3501,7 @@ function viewConfig() {
     <div class="page-head"><div><h1>Ajustes</h1><p class="muted">Conta, perfil, padrões e cópia de segurança</p></div></div>
     <div class="stack">
       ${cloudCardHTML()}
+      ${licAdminHTML()}
       <div class="card stack">
         <h2>Seu perfil de personal</h2>
         <p class="muted" style="margin:0">Nome, foto, CREF e apresentação que aparecem nos programas.</p>
@@ -3434,6 +3525,7 @@ function viewConfig() {
       </div>
       <div class="card small muted">Espaço usado: <span id="cf-usage">calculando…</span></div>
     </div>`;
+  bindLicAdmin();
   if (navigator.storage && navigator.storage.estimate) {
     navigator.storage.estimate().then((e) => { $('#cf-usage').textContent = `${fmtSize(e.usage || 0)} de ${fmtSize(e.quota || 0)} disponíveis`; });
   } else $('#cf-usage').textContent = 'indisponível';

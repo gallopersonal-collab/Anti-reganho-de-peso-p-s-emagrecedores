@@ -45,4 +45,5 @@ Assinatura (Kiwify)
   A área do aluno (link + código) continua aberta.
   URL do webhook: https://dzmgbvyffxtcjsdpedqb.supabase.co/functions/v1/kiwify-webhook?k=CHAVE
   (CHAVE fica na tabela app_config, linha kiwify_url_key, no Supabase)
-  Liberar/bloquear na mão: ver o fim de supabase/schema.sql
+  Liberar/bloquear na mão: Ajustes > Licenças (aparece só para a conta do dono).
+  Escolha e-mail, validade (sem vencimento, 30/90/180/365 dias ou data) e observação.
