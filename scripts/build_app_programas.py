@@ -51,6 +51,13 @@ def main() -> None:
     n = len(list(fotos_out.glob("*.jpg")))
     print(f"{OUT} ({OUT.stat().st_size / 1048576:.1f} MB) + {n} fotos em {fotos_out}")
 
+    # Versão de arquivo único: as fotos vêm do Supabase (bucket público "fotos")
+    single = APP / "netlify-arquivo-unico" / "index.html"
+    single.parent.mkdir(exist_ok=True)
+    base = "https://dzmgbvyffxtcjsdpedqb.supabase.co/storage/v1/object/public/fotos/"
+    single.write_text(html.replace("<head>", f"<head>\n<script>window.PHOTO_BASE = '{base}';</script>", 1), encoding="utf-8")
+    print(f"{single} ({single.stat().st_size / 1048576:.1f} MB, fotos pelo Supabase)")
+
 
 if __name__ == "__main__":
     main()

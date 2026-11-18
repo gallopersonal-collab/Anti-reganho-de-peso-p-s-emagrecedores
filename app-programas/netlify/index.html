@@ -1350,6 +1350,9 @@ function newProgram(over = {}) {
 }
 /* Conteúdo completo dos 60 programas da Biblioteca (library-data.js) */
 const libraryEntry = (code) => (window.LIBRARY_DATA || {})[code];
+/* Fotos dos exercícios: na pasta fotos/ ao lado do app ou, na versão de arquivo único, no Supabase */
+const PHOTO_BASE = window.PHOTO_BASE || '';
+const photo = (src) => (PHOTO_BASE && typeof src === 'string' && src.startsWith('fotos/') ? PHOTO_BASE + src.slice(6) : src);
 function programCode(p) {
   const src = p.sourcePdfId && byId(S.pdfs, p.sourcePdfId);
   if (src && src.code) return src.code;
@@ -1540,7 +1543,7 @@ function myTemplates() {
   return S.programs.filter((p) => p.isTemplate).map((p) => {
     const exs = (p.workouts || []).flatMap((w) => w.exercises);
     return {
-      id: p.id, builtin: false, title: p.title, tagline: p.subtitle, tags: progTags(p), freq: p.frequency || '',
+      id: p.id, builtin: false, title: p.title, tagline: p.subtitle, tags: progTags(p), freq: String(p.frequency || '').replace(/\/semana$/i, ''),
       info: p.mode === 'slides' ? `${(p.slides || []).length} slides` : `${p.workouts.length} treinos · ${exs.length} exercícios`,
       cover: p.mode === 'slides' ? '' : (exs.find((x) => x.image) || {}).image || '', program: p,
     };
@@ -1625,7 +1628,7 @@ async function copyAsTemplate(tplId) {
 /* ---- Cartão de modelo ---- */
 function templateCard(t, actionsHTML) {
   return `<div class="card pcard tpl-card">
-    ${t.cover ? `<div class="tpl-cover" style="background-image:url('${esc(t.cover)}')"></div>` : '<div class="tpl-cover tpl-cover-empty">Trainer Pro</div>'}
+    ${t.cover ? `<div class="tpl-cover" style="background-image:url('${esc(photo(t.cover))}')"></div>` : '<div class="tpl-cover tpl-cover-empty">Trainer Pro</div>'}
     <div class="row" style="gap:6px">${t.builtin ? '<span class="chip">Programa do App</span>' : '<span class="chip gold">Meu modelo</span>'}${t.freq ? `<span class="chip">${esc(t.freq)}/semana</span>` : ''}</div>
     <h3>${esc(t.title)}</h3>
     ${t.tagline ? `<p class="small muted tpl-tagline">${esc(t.tagline)}</p>` : ''}
@@ -2273,7 +2276,7 @@ function exerciseHTML(x, wi, ei, n) {
   return `<div class="ex" data-exrow="${esc(x.id)}">
     <div class="ex-row" data-action="toggle-ex" data-id="${esc(x.id)}">
       <span class="ex-num">${pad2(ei + 1)}</span>
-      ${x.image ? `<img class="ex-thumb" src="${esc(x.image)}" alt="">` : '<span class="ex-thumb">sem foto</span>'}
+      ${x.image ? `<img class="ex-thumb" src="${esc(photo(x.image))}" alt="">` : '<span class="ex-thumb">sem foto</span>'}
       <span class="ex-title"><strong>${esc(x.name || 'Novo exercício')}</strong><span>${esc(exSummary(x))}</span></span>
       <span class="ex-tools">
         <button class="btn icon sm hide-sm" data-action="mv-ex" data-wi="${wi}" data-ei="${ei}" data-d="-1" ${ei === 0 ? 'disabled' : ''} title="Subir">↑</button>
@@ -2287,7 +2290,7 @@ function exerciseHTML(x, wi, ei, n) {
         <label class="field"><span>Grupo muscular</span><input type="text" data-bind="${b}.muscles" placeholder="Ex.: Quadríceps / Glúteos"></label>
       </div>
       <div class="ex-img-edit">
-        ${x.image ? `<img class="preview" src="${esc(x.image)}" alt="">` : '<div class="preview">Sem imagem.<br>Envie uma foto ou puxe do PDF.</div>'}
+        ${x.image ? `<img class="preview" src="${esc(photo(x.image))}" alt="">` : '<div class="preview">Sem imagem.<br>Envie uma foto ou puxe do PDF.</div>'}
         <div class="stack" style="gap:8px">
           <button class="btn sm" data-action="img-upload" data-target="ex" data-wi="${wi}" data-ei="${ei}">Enviar foto</button>
           <button class="btn sm" data-action="img-pdf" data-target="ex" data-wi="${wi}" data-ei="${ei}">Puxar do PDF</button>
@@ -2513,7 +2516,7 @@ actions['export-pdf'] = async () => {
  * Slides do PDF (1334 x 750, mesmo formato dos PDFs atuais)
  * ======================================================= */
 function bgImg(src, ph) {
-  return src ? `<div class="bg" style="background-image:url('${esc(src)}')"></div>` : `<div class="ph">${esc(ph)}</div>`;
+  return src ? `<div class="bg" style="background-image:url('${esc(photo(src))}')"></div>` : `<div class="ph">${esc(ph)}</div>`;
 }
 function titleSize(t, base, widthChars) {
   const words = String(t || '').split(/\s+/);
@@ -3869,7 +3872,7 @@ function renderStudentWorkout(p) {
       const d = (draft.ex || {})[x.id] || {};
       return `<div class="card st-ex" data-ex="${x.id}">
         <div class="st-ex-top">
-          ${x.image ? `<img src="${esc(x.image)}" alt="" class="st-ex-img" data-action="st-zoom" data-src="${esc(x.image)}">` : ''}
+          ${x.image ? `<img src="${esc(photo(x.image))}" alt="" class="st-ex-img" data-action="st-zoom" data-src="${esc(photo(x.image))}">` : ''}
           <div style="flex:1;min-width:0"><div class="small muted">${pad2(i + 1)}${x.muscles ? ' · ' + esc(x.muscles) : ''}</div><h3>${esc(x.name)}</h3>
             <div class="meta" style="margin-top:6px">${x.sets || x.reps ? `<span class="chip gold">${esc(x.sets || '')}${x.sets && x.reps ? ' × ' : ''}${esc(x.reps || '')}</span>` : ''}${x.rest ? `<span class="chip">Descanso ${esc(fmtRest(x.rest))}</span>` : ''}${x.cadence ? `<span class="chip">Cadência ${esc(x.cadence)}</span>` : ''}${x.pse ? `<span class="chip">PSE ${esc(x.pse)}</span>` : ''}</div>
             ${prev ? `<div class="small" style="margin-top:6px;color:var(--gold-2)">Última vez: ${prev.sets.map((s) => `${esc(s.reps || '–')}${s.load ? '×' + esc(s.load) + 'kg' : ''}`).join(' · ')}</div>` : ''}</div>
