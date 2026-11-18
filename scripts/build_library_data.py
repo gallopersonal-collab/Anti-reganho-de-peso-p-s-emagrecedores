@@ -181,12 +181,13 @@ def photo_for(name: str, rules: list):
     n = name.lower()
     for pat, ex_id in rules:
         if re.search(pat, n):
-            return ex_id if (FOTOS_SRC / ex_id / "0.jpg").exists() else None
+            return ex_id if (FOTOS_SRC / ex_id / "0.jpg").exists() or (FOTOS_OUT / "F" / f"{ex_id}.jpg").exists() else None
     return None
 
 
 def build_photo(ex_id: str) -> None:
-    """Junta as fotos de posição inicial e final numa imagem vertical (cabe no slide)."""
+    """Fallback: junta as fotos de posição inicial e final numa imagem vertical.
+    As fotos oficiais (geradas por IA, 600x800) ficam em fotos/F e fotos/M."""
     from PIL import Image
     dest = FOTOS_OUT / f"{ex_id}.jpg"
     if dest.exists():
@@ -210,12 +211,14 @@ def main() -> None:
             data[f.stem] = parse(f.read_text(encoding="utf-8"))
     rules = load_rules()
     used = set()
-    for d in data.values():
+    for code, d in data.items():
+        sex = code.split("-")[1]  # F ou M: foto com aluna ou aluno
         for w in d["workouts"]:
             for e in w["exercises"]:
                 pid = photo_for(e["name"], rules)
                 if pid:
-                    e["image"] = f"fotos/{pid}.jpg"
+                    sexed = FOTOS_OUT / sex / f"{pid}.jpg"
+                    e["image"] = f"fotos/{sex}/{pid}.jpg" if sexed.exists() else f"fotos/{pid}.jpg"
                     used.add(pid)
     for pid in sorted(used):
         build_photo(pid)

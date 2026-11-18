@@ -27,7 +27,9 @@ Onde ficam os dados
 Como publicar
   1. Abra netlify.com/drop
   2. Arraste a pasta "app-programas/netlify" inteira (index.html + pasta fotos)
-  A pasta "fotos" tem as imagens dos exercícios: sem ela os programas saem sem foto.
+  A pasta "fotos" tem as imagens dos exercícios (fotos/F = aluna, fotos/M = aluno;
+  o App escolhe pela etiqueta de sexo do programa). Sem ela os programas saem sem foto.
+  Versão de arquivo único (netlify-arquivo-unico/index.html): fotos vêm do Supabase, bucket "fotos", pasta v2/.
 
 Para regerar depois de mudar o código ou os roteiros:
   python3 scripts/build_library_data.py   (roteiros -> library-data.js + fotos)
