@@ -65,7 +65,10 @@ Deno.serve(async (req) => {
   const orderId = String(p.order_id || p.order_ref || "");
 
   let result = "ignorado";
-  if (email) {
+  const { data: adminRow } = email ? await sb.from("admins").select("email").eq("email", email).maybeSingle() : { data: null };
+  if (adminRow) {
+    result = "ignorado (conta de administrador: licença permanente)";
+  } else if (email) {
     let row: Record<string, unknown> | null = null;
     if (REVOKE_EVENTS.includes(ev) || REVOKE_STATUS.includes(st)) {
       row = { status: "inactive", expires_at: new Date().toISOString() };
