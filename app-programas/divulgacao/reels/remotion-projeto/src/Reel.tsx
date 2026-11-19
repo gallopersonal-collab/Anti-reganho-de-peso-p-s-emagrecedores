@@ -13,6 +13,7 @@ export type Scene = {
   sub?: string;              // linha de apoio (cena stat)
   strike?: boolean;          // risca o número (cena stat)
   items?: string[];          // etapas (cena flow)
+  photo?: string;            // foto redonda acima do número (cena stat)
   zoom?: [number, number];   // escala inicial/final
   focusY?: number;           // 0 = topo da tela, 1 = base (para o zoom)
 };
@@ -53,14 +54,15 @@ const Slide: React.FC<{ src: string; dur: number }> = ({ src, dur }) => {
 };
 
 
-const Stat: React.FC<{ big: string; sub?: string; strike?: boolean; dur: number }> = ({ big, sub, strike, dur }) => {
+const Stat: React.FC<{ big: string; sub?: string; strike?: boolean; dur: number; photo?: string }> = ({ big, sub, strike, dur, photo }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   const k = spring({ frame: f, fps, config: { damping: 11, mass: 0.7 } });
   const line = interpolate(f, [dur * 0.45, dur * 0.7], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   return (
-    <div style={{ position: 'absolute', left: 60, right: 60, top: 720, textAlign: 'center' }}>
-      <div style={{ position: 'relative', display: 'inline-block', fontFamily: 'Bebas', fontSize: 300, lineHeight: 0.9, color: GOLD2, transform: `scale(${0.5 + 0.5 * k})`, opacity: k, textShadow: '0 20px 60px rgba(0,0,0,.6)' }}>
+    <div style={{ position: 'absolute', left: 60, right: 60, top: photo ? 600 : 720, textAlign: 'center' }}>
+      {photo ? <div style={{ width: 300, height: 300, margin: '0 auto 30px', borderRadius: '50%', overflow: 'hidden', border: `6px solid ${GOLD}`, opacity: k, transform: `scale(${0.7 + 0.3 * k})` }}><Img src={staticFile(photo)} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 18%', transform: 'scale(1.9) translateY(14%)' }} /></div> : null}
+      <div style={{ position: 'relative', display: 'inline-block', fontFamily: 'Bebas', fontSize: Math.min(photo ? 220 : 300, Math.floor(2050 / Math.max(1, big.length))), whiteSpace: 'nowrap', lineHeight: 0.9, color: GOLD2, transform: `scale(${0.5 + 0.5 * k})`, opacity: k, textShadow: '0 20px 60px rgba(0,0,0,.6)' }}>
         {big}
         {strike ? <div style={{ position: 'absolute', left: -10, top: '46%', height: 18, width: `${line * 105}%`, background: '#e2574c', borderRadius: 9, transform: 'rotate(-6deg)' }} /> : null}
       </div>
@@ -113,7 +115,7 @@ const Title: React.FC<{ text: string }> = ({ text }) => {
   const k = spring({ frame: f, fps, config: { damping: 14, mass: 0.6 } });
   return (
     <div style={{ position: 'absolute', top: 236, left: 60, right: 230, transform: `scale(${0.8 + 0.2 * k})`, transformOrigin: 'left center', opacity: k }}>
-      <div style={{ display: 'inline-block', fontFamily: 'Bebas', fontSize: 86, lineHeight: 0.95, color: NAVY, background: `linear-gradient(135deg, ${GOLD2}, ${GOLD})`, padding: '10px 22px 4px', borderRadius: 14, letterSpacing: 1 }}>{text}</div>
+      <div style={{ display: 'inline-block', whiteSpace: 'nowrap', fontFamily: 'Bebas', fontSize: Math.min(86, Math.floor(1700 / Math.max(1, text.length))), lineHeight: 0.95, color: NAVY, background: `linear-gradient(135deg, ${GOLD2}, ${GOLD})`, padding: '10px 22px 4px', borderRadius: 14, letterSpacing: 1 }}>{text}</div>
     </div>
   );
 };
@@ -166,7 +168,7 @@ export const Reel: React.FC<ReelProps> = ({ audio, scenes }) => {
         return (
           <Sequence key={i} from={from} durationInFrames={dur} layout="none">
             <AbsoluteFill>
-              {s.kind === 'cta' ? <Cta /> : s.kind === 'stat' ? <Stat big={s.big || ''} sub={s.sub} strike={s.strike} dur={dur} /> : s.kind === 'flow' ? <Flow items={s.items || []} dur={dur} /> : s.kind === 'pdf' ? <Pdf dur={dur} /> : s.kind === 'slide' && s.img ? <Slide src={s.img} dur={dur} /> : s.img ? <Phone src={s.img} zoom={s.zoom || [1, 1.06]} focusY={s.focusY ?? 0.3} dur={dur} /> : null}
+              {s.kind === 'cta' ? <Cta /> : s.kind === 'stat' ? <Stat big={s.big || ''} sub={s.sub} strike={s.strike} dur={dur} photo={s.photo} /> : s.kind === 'flow' ? <Flow items={s.items || []} dur={dur} /> : s.kind === 'pdf' ? <Pdf dur={dur} /> : s.kind === 'slide' && s.img ? <Slide src={s.img} dur={dur} /> : s.img ? <Phone src={s.img} zoom={s.zoom || [1, 1.06]} focusY={s.focusY ?? 0.3} dur={dur} /> : null}
               {s.title ? <Title text={s.title} /> : null}
               {s.kind !== 'cta' ? <Caption text={s.caption} dur={dur} /> : null}
             </AbsoluteFill>
