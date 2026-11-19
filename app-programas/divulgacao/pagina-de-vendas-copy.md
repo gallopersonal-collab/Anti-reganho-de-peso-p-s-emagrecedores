@@ -31,7 +31,7 @@ Você informa o perfil do aluno, o Trainer Pro Studio indica o programa certo en
 
 ## D. Corpo da página
 
-**Quem fala com você.** Eu sou o Prof. José Carlos Gallo, CEO do Instituto Gallo Personal. Já formei mais de 2.500 personal trainers e mais de 160 deles usam hoje a Biblioteca de Treinos Lucrativos, que é a base deste app.
+**Quem fala com você.** Eu sou o Prof. José Carlos Gallo. Sou personal trainer há mais de 36 anos, tenho especialização como Fisiologista Clínico do Exercício em Colônia, na Alemanha, e sou CEO do Instituto Gallo Personal. Já formei mais de 2.500 personal trainers e mais de 160 deles usam hoje a Biblioteca de Treinos Lucrativos, que é a base deste app.
 
 **Talvez você...**
 Talvez você termine o dia de atendimentos e ainda tenha três programas para montar. Abre a planilha, copia o treino de outro aluno, troca um exercício, ajusta as séries. Procura uma imagem do exercício na internet. Exporta o PDF. Manda no WhatsApp. Uma hora e meia depois, você está cansado e o aluno nem abriu o arquivo direito.
@@ -53,7 +53,7 @@ Se nenhum programa servir, você copia o mais próximo, edita e salva como seu m
 
 **Quanto custa resolver do jeito antigo.** Montar quatro programas por mês leva umas seis horas. Se a sua hora vale R$ 80, são R$ 480 por mês de trabalho que você não cobra de ninguém. Contratar um designer para criar um modelo de programa com a sua marca custa algumas centenas de reais, e ainda assim você continua montando o conteúdo sozinho. E um app próprio para o aluno registrar treino, feito sob medida, custa milhares.
 
-**A prova, do jeito que ela é.** O Trainer Pro Studio é novo. Ele ainda não tem centenas de depoimentos. O que ele tem é a base: os 60 programas Premium da Biblioteca de Treinos Lucrativos, testados e validados por mais de 160 personais com alunos reais, e a metodologia que formou mais de 2.500 personal trainers no Instituto Gallo Personal. O app pega esse conteúdo testado e coloca no celular do seu aluno.
+**A prova, do jeito que ela é.** O Trainer Pro Studio é novo. Ele ainda não tem centenas de depoimentos. O que ele tem é a base: os 60 programas Premium da Biblioteca de Treinos Lucrativos, testados e validados por mais de 160 personais com alunos reais, e a metodologia de mais de 36 anos de prática que já formou mais de 2.500 personal trainers no Instituto Gallo Personal. O app pega esse conteúdo testado e coloca no celular do seu aluno.
 
 ## E. Oferta / Value Stack
 
@@ -65,7 +65,7 @@ Se nenhum programa servir, você copia o mais próximo, edita e salva como seu m
 | Aulas de uso | Passo a passo para montar e entregar o primeiro programa no mesmo dia | R$ 97 |
 | Bônus 1: Kit de Mensagens para WhatsApp | Textos prontos para apresentar o programa, vender a renovação e reativar aluno parado | R$ 97 |
 | Bônus 2: Calculadora de Precificação de Horas de Trabalho | Descubra quanto vale a sua hora e quanto cobrar por aula, programa e acompanhamento, sem chute | R$ 97 |
-| Bônus 3: Tabela de Preço do Programa | Quanto cobrar por programa e por mês de acompanhamento, com exemplos | R$ 67 |
+| Bônus 3: Guia de Renovação | Como reter o aluno no fim de cada ciclo de 4 semanas e vender o próximo programa | R$ 67 |
 | **Total** | | **R$ 1.549** |
 
 **Você leva tudo por:**
