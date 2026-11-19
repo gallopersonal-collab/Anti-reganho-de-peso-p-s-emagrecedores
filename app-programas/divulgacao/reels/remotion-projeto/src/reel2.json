@@ -1,0 +1,158 @@
+{
+ "audio": "reel2-voz.wav",
+ "duration": 27.6,
+ "scenes": [
+  {
+   "start": 0,
+   "end": 2.48,
+   "caption": "Programa de treino pronto em 10 minutos. Olha.",
+   "kind": "phone",
+   "img": "a-home.png",
+   "title": "PRONTO EM 10 MIN",
+   "zoom": [
+    0,
+    0.15
+   ],
+   "focusY": 0.2
+  },
+  {
+   "start": 2.48,
+   "end": 4.7,
+   "caption": "Aluna de 32 anos, hipertrofia.",
+   "kind": "phone",
+   "img": "b-cadastro.png",
+   "title": "32 ANOS · HIPERTROFIA",
+   "zoom": [
+    0.25,
+    0.55
+   ],
+   "focusY": 0.55
+  },
+  {
+   "start": 4.7,
+   "end": 7.02,
+   "caption": "Intermediária, treina na academia.",
+   "kind": "phone",
+   "img": "b-cadastro.png",
+   "title": "INTERMEDIÁRIA · ACADEMIA",
+   "zoom": [
+    0.55,
+    0.85
+   ],
+   "focusY": 0.85
+  },
+  {
+   "start": 7.02,
+   "end": 8.81,
+   "caption": "Cadastro com foto. Dez segundos.",
+   "kind": "phone",
+   "img": "b-cadastro.png",
+   "title": "10 SEGUNDOS",
+   "zoom": [
+    0.0,
+    0.05
+   ],
+   "focusY": 0.12
+  },
+  {
+   "start": 8.81,
+   "end": 10.29,
+   "caption": "O aplicativo separa os programas pra ela.",
+   "kind": "phone",
+   "img": "c-recomendados.png",
+   "title": "PROGRAMAS PARA ELA",
+   "zoom": [
+    0.15,
+    0.35
+   ],
+   "focusY": 0.3
+  },
+  {
+   "start": 10.29,
+   "end": 11.52,
+   "caption": "Escolho este. Pronto.",
+   "kind": "phone",
+   "img": "c-recomendados.png",
+   "title": "PRONTO",
+   "zoom": [
+    0.4,
+    0.6
+   ],
+   "focusY": 0.75
+  },
+  {
+   "start": 11.52,
+   "end": 14.08,
+   "caption": "Capa com nome, foto e o meu CREF.",
+   "kind": "slide",
+   "img": "h-capa.png",
+   "title": "SUA MARCA NA CAPA"
+  },
+  {
+   "start": 14.08,
+   "end": 16.6,
+   "caption": "Exercício com foto. 4 séries, 120 segundos de descanso.",
+   "kind": "slide",
+   "img": "i-exercicio.png",
+   "title": "EXERCÍCIO COM FOTO"
+  },
+  {
+   "start": 16.6,
+   "end": 18.86,
+   "caption": "Libero o acesso com um código de 8 letras.",
+   "kind": "phone",
+   "img": "e-codigo.png",
+   "title": "CÓDIGO DE ACESSO",
+   "zoom": [
+    0.1,
+    0.3
+   ],
+   "focusY": 0.35
+  },
+  {
+   "start": 18.86,
+   "end": 20.65,
+   "caption": "No celular dela, o treino de hoje.",
+   "kind": "phone",
+   "img": "f-aluno.png",
+   "title": "NO CELULAR DA ALUNA",
+   "zoom": [
+    0.0,
+    0.25
+   ],
+   "focusY": 0.2
+  },
+  {
+   "start": 20.65,
+   "end": 23.69,
+   "caption": "Ela registra 60 quilos na primeira série.",
+   "kind": "phone",
+   "img": "g-carga.png",
+   "title": "60 KG REGISTRADOS",
+   "zoom": [
+    0.55,
+    0.7
+   ],
+   "focusY": 0.45
+  },
+  {
+   "start": 23.69,
+   "end": 25.12,
+   "caption": "Comenta Aplicativo que eu te mando o link.",
+   "kind": "cta"
+  },
+  {
+   "start": 25.12,
+   "end": 27.6,
+   "caption": "10 minutos. Programa pronto.",
+   "kind": "phone",
+   "img": "a-home.png",
+   "title": "10 MIN. PROGRAMA PRONTO.",
+   "zoom": [
+    0.15,
+    0.0
+   ],
+   "focusY": 0.2
+  }
+ ]
+}
