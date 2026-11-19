@@ -40,6 +40,7 @@ Assinatura (Kiwify)
   A Kiwify avisa o Supabase (webhook kiwify-webhook) a cada compra, renovação, cancelamento,
   reembolso e chargeback; a licença é ativada ou desativada sozinha.
   - Compra/renovação: libera até a próxima cobrança + 3 dias de tolerância
+    (se a Kiwify não mandar a data: 35 dias no mensal, 370 no anual; o produto anual precisa ter "Anual" no nome)
   - Cancelamento: mantém até o fim do período pago
   - Reembolso/chargeback: bloqueia na hora
   A área do aluno (link + código) continua aberta.

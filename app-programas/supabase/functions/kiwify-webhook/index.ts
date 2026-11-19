@@ -75,9 +75,14 @@ Deno.serve(async (req) => {
       row = { status: "active", expires_at: (next || new Date()).toISOString() };
       result = "assinatura cancelada (acesso até o fim do período)";
     } else if (GRANT_EVENTS.includes(ev) || st === "paid" || st === "approved") {
-      const exp = next ? new Date(next.getTime() + GRACE_DAYS * 86400000).toISOString() : null;
+      // Sem a data da próxima cobrança: libera um ciclo (anual = 370 dias, demais = 35 dias), nunca "para sempre"
+      const freq = String(sub.plan?.frequency || sub.frequency || p.plan_frequency || "").toLowerCase();
+      const yearly = /year|annual|anual/.test(freq) || /anual/i.test(product) || /anual/i.test(String(sub.plan?.name || ""));
+      const exp = next
+        ? new Date(next.getTime() + GRACE_DAYS * 86400000).toISOString()
+        : new Date(Date.now() + (yearly ? 370 : 35) * 86400000).toISOString();
       row = { status: "active", expires_at: exp };
-      result = "licença ativada" + (exp ? " até " + exp.slice(0, 10) : " (sem vencimento)");
+      result = "licença ativada até " + exp.slice(0, 10) + (next ? "" : yearly ? " (ciclo anual)" : " (ciclo mensal)");
     }
     if (row) {
       const { error } = await sb.from("licenses").upsert({
