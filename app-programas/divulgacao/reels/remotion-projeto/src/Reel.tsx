@@ -8,7 +8,11 @@ export type Scene = {
   caption: string;           // legenda (fala)
   title?: string;            // texto de destaque no topo (até 6 palavras)
   img?: string;              // tela em public/
-  kind?: 'phone' | 'slide' | 'cta' | 'end';
+  kind?: 'phone' | 'slide' | 'cta' | 'end' | 'stat' | 'flow' | 'pdf';
+  big?: string;              // número grande (cena stat)
+  sub?: string;              // linha de apoio (cena stat)
+  strike?: boolean;          // risca o número (cena stat)
+  items?: string[];          // etapas (cena flow)
   zoom?: [number, number];   // escala inicial/final
   focusY?: number;           // 0 = topo da tela, 1 = base (para o zoom)
 };
@@ -44,6 +48,61 @@ const Slide: React.FC<{ src: string; dur: number }> = ({ src, dur }) => {
       <div style={{ borderRadius: 26, overflow: 'hidden', border: `3px solid ${GOLD}`, boxShadow: '0 40px 90px rgba(0,0,0,.6)' }}>
         <Img src={staticFile(src)} style={{ width: '100%', display: 'block' }} />
       </div>
+    </div>
+  );
+};
+
+
+const Stat: React.FC<{ big: string; sub?: string; strike?: boolean; dur: number }> = ({ big, sub, strike, dur }) => {
+  const f = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const k = spring({ frame: f, fps, config: { damping: 11, mass: 0.7 } });
+  const line = interpolate(f, [dur * 0.45, dur * 0.7], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  return (
+    <div style={{ position: 'absolute', left: 60, right: 60, top: 720, textAlign: 'center' }}>
+      <div style={{ position: 'relative', display: 'inline-block', fontFamily: 'Bebas', fontSize: 300, lineHeight: 0.9, color: GOLD2, transform: `scale(${0.5 + 0.5 * k})`, opacity: k, textShadow: '0 20px 60px rgba(0,0,0,.6)' }}>
+        {big}
+        {strike ? <div style={{ position: 'absolute', left: -10, top: '46%', height: 18, width: `${line * 105}%`, background: '#e2574c', borderRadius: 9, transform: 'rotate(-6deg)' }} /> : null}
+      </div>
+      {sub ? <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: 52, color: CREAM, marginTop: 24, opacity: k }}>{sub}</div> : null}
+    </div>
+  );
+};
+
+const Flow: React.FC<{ items: string[]; dur: number }> = ({ items, dur }) => {
+  const f = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const step = (dur * 0.8) / items.length;
+  return (
+    <div style={{ position: 'absolute', left: 90, right: 90, top: 650, display: 'flex', flexDirection: 'column', gap: 26, alignItems: 'stretch' }}>
+      {items.map((it, i) => {
+        const k = spring({ frame: f - i * step, fps, config: { damping: 14 } });
+        return (
+          <div key={i} style={{ opacity: k, transform: `translateX(${(1 - k) * -120}px)`, display: 'flex', alignItems: 'center', gap: 22, background: 'rgba(21,32,58,.95)', border: '2px solid #2b3a58', borderRadius: 22, padding: '26px 32px' }}>
+            <div style={{ width: 64, height: 64, borderRadius: 32, display: 'grid', placeItems: 'center', fontFamily: 'Bebas', fontSize: 40, color: NAVY, background: GOLD }}>{i + 1}</div>
+            <div style={{ fontFamily: 'Inter', fontWeight: 800, fontSize: 56, color: CREAM }}>{it}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const Pdf: React.FC<{ dur: number }> = ({ dur }) => {
+  const f = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const k = spring({ frame: f, fps, config: { damping: 14 } });
+  const q = spring({ frame: f - dur * 0.45, fps, config: { damping: 9 } });
+  return (
+    <div style={{ position: 'absolute', left: 120, right: 120, top: 700, opacity: k, transform: `translateY(${(1 - k) * 60}px)` }}>
+      <div style={{ marginLeft: 'auto', width: 640, background: '#1f3b2c', borderRadius: '28px 28px 6px 28px', padding: 26, boxShadow: '0 30px 70px rgba(0,0,0,.5)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 22, background: 'rgba(0,0,0,.25)', borderRadius: 18, padding: 22 }}>
+          <div style={{ width: 92, height: 112, borderRadius: 10, background: '#e2574c', display: 'grid', placeItems: 'center', fontFamily: 'Inter', fontWeight: 800, fontSize: 30, color: '#fff' }}>PDF</div>
+          <div><div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: 40, color: '#fff' }}>Treino_Ana_v3.pdf</div><div style={{ fontFamily: 'Inter', fontSize: 30, color: '#b9c9bf' }}>2 páginas · 1,4 MB</div></div>
+        </div>
+        <div style={{ textAlign: 'right', fontFamily: 'Inter', fontSize: 28, color: '#b9c9bf', marginTop: 12 }}>23:41 ✓✓</div>
+      </div>
+      <div style={{ marginTop: 60, textAlign: 'center', transform: `scale(${q})`, opacity: q, fontFamily: 'Bebas', fontSize: 120, color: '#e2574c' }}>NÃO ABERTO</div>
     </div>
   );
 };
@@ -107,7 +166,7 @@ export const Reel: React.FC<ReelProps> = ({ audio, scenes }) => {
         return (
           <Sequence key={i} from={from} durationInFrames={dur} layout="none">
             <AbsoluteFill>
-              {s.kind === 'cta' ? <Cta /> : s.kind === 'slide' && s.img ? <Slide src={s.img} dur={dur} /> : s.img ? <Phone src={s.img} zoom={s.zoom || [1, 1.06]} focusY={s.focusY ?? 0.3} dur={dur} /> : null}
+              {s.kind === 'cta' ? <Cta /> : s.kind === 'stat' ? <Stat big={s.big || ''} sub={s.sub} strike={s.strike} dur={dur} /> : s.kind === 'flow' ? <Flow items={s.items || []} dur={dur} /> : s.kind === 'pdf' ? <Pdf dur={dur} /> : s.kind === 'slide' && s.img ? <Slide src={s.img} dur={dur} /> : s.img ? <Phone src={s.img} zoom={s.zoom || [1, 1.06]} focusY={s.focusY ?? 0.3} dur={dur} /> : null}
               {s.title ? <Title text={s.title} /> : null}
               {s.kind !== 'cta' ? <Caption text={s.caption} dur={dur} /> : null}
             </AbsoluteFill>

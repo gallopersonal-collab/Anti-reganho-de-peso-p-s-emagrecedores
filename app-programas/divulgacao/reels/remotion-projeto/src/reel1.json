@@ -1,0 +1,143 @@
+{
+ "audio": "reel1-voz.wav",
+ "duration": 29.2,
+ "scenes": [
+  {
+   "kind": "stat",
+   "big": "90 MIN",
+   "sub": "por programa de treino",
+   "title": "TODO PROGRAMA",
+   "caption": "90 minutos por programa de treino.",
+   "start": 0,
+   "end": 2.45
+  },
+  {
+   "kind": "stat",
+   "big": "10 MIN",
+   "sub": "com o app certo",
+   "title": "DÁ PRA FAZER EM",
+   "caption": "Dá pra fazer em dez minutos.",
+   "start": 2.45,
+   "end": 4.59
+  },
+  {
+   "kind": "stat",
+   "big": "6 HORAS",
+   "sub": "4 programas por mês",
+   "title": "FAZ A CONTA",
+   "caption": "Quatro programas por mês. Seis horas.",
+   "start": 4.59,
+   "end": 6.4
+  },
+  {
+   "kind": "stat",
+   "big": "R$ 80",
+   "sub": "por hora de trabalho",
+   "title": "SUA HORA VALE",
+   "caption": "Sua hora vale 80 reais?",
+   "start": 6.4,
+   "end": 7.9
+  },
+  {
+   "kind": "stat",
+   "big": "R$ 480",
+   "sub": "de graça, todo mês",
+   "title": "TRABALHO NÃO PAGO",
+   "strike": false,
+   "caption": "São 480 reais de graça por mês.",
+   "start": 7.9,
+   "end": 9.88
+  },
+  {
+   "kind": "flow",
+   "items": [
+    "Planilha",
+    "Foto do Google",
+    "PDF",
+    "WhatsApp"
+   ],
+   "title": "O JEITO ANTIGO",
+   "caption": "Planilha, foto do Google, PDF, WhatsApp.",
+   "start": 9.88,
+   "end": 12.36
+  },
+  {
+   "kind": "pdf",
+   "title": "E O ALUNO...",
+   "caption": "E o aluno nem abre o arquivo.",
+   "start": 12.36,
+   "end": 14.94
+  },
+  {
+   "kind": "phone",
+   "img": "j-biblioteca.png",
+   "zoom": [
+    0.1,
+    0.35
+   ],
+   "title": "60 PROGRAMAS PREMIUM",
+   "caption": "O Trainer Pro Studio tem 60 programas Premium.",
+   "start": 14.94,
+   "end": 16.92
+  },
+  {
+   "kind": "phone",
+   "img": "b-cadastro.png",
+   "zoom": [
+    0.0,
+    0.3
+   ],
+   "title": "4 DADOS DO ALUNO",
+   "caption": "Você coloca 4 dados do aluno.",
+   "start": 16.92,
+   "end": 18.89
+  },
+  {
+   "kind": "phone",
+   "img": "b-cadastro.png",
+   "zoom": [
+    0.45,
+    0.85
+   ],
+   "title": "IDADE · OBJETIVO · NÍVEL · LOCAL",
+   "caption": "Idade, objetivo, nível e onde treina.",
+   "start": 18.89,
+   "end": 21.04
+  },
+  {
+   "kind": "phone",
+   "img": "c-recomendados.png",
+   "zoom": [
+    0.1,
+    0.3
+   ],
+   "title": "O PROGRAMA CERTO",
+   "caption": "O aplicativo mostra o programa certo.",
+   "start": 21.04,
+   "end": 22.76
+  },
+  {
+   "kind": "slide",
+   "img": "h-capa.png",
+   "title": "SUA MARCA NA CAPA",
+   "caption": "Sua marca na capa. Treino no celular dele.",
+   "start": 22.76,
+   "end": 24.9
+  },
+  {
+   "kind": "cta",
+   "caption": "Comenta Aplicativo que eu te mando o link.",
+   "start": 24.9,
+   "end": 26.97
+  },
+  {
+   "kind": "stat",
+   "big": "10 MIN",
+   "sub": "não 90",
+   "title": "PROGRAMA PRONTO",
+   "caption": "Dez minutos. Não noventa.",
+   "start": 26.97,
+   "end": 29.2
+  }
+ ]
+}
