@@ -1,0 +1,102 @@
+{
+ "audio": "aula2.wav",
+ "duration": 44.38,
+ "scenes": [
+  {
+   "img": "aulas/a2-novo.png",
+   "title": "NOVO PROGRAMA",
+   "caption": "Agora você monta o primeiro programa. Na tela inicial, toque em Novo programa para um aluno.",
+   "start": 0,
+   "end": 6.06,
+   "kind": "phone",
+   "zoom": [
+    0.33204433497536945,
+    0.4120443349753694
+   ]
+  },
+  {
+   "img": "aulas/a2-cadastrar.png",
+   "title": "CADASTRAR NOVO ALUNO",
+   "caption": "Toque em Cadastrar novo aluno.",
+   "start": 6.06,
+   "end": 8.34,
+   "kind": "phone",
+   "zoom": [
+    0.388344827586207,
+    0.46834482758620694
+   ]
+  },
+  {
+   "img": "aulas/a2-aluno.png",
+   "title": "NOME, FOTO E WHATSAPP",
+   "caption": "Coloque o nome, a foto e o WhatsApp do aluno.",
+   "start": 8.34,
+   "end": 12.67,
+   "kind": "phone",
+   "zoom": [
+    0.32180788177339903,
+    0.401807881773399
+   ]
+  },
+  {
+   "img": "aulas/a2-dados.png",
+   "title": "DADOS DO ALUNO",
+   "caption": "Depois, os dados que fazem a recomendação: sexo, idade, objetivo, nível e onde ele treina.",
+   "start": 12.67,
+   "end": 19.15,
+   "kind": "phone",
+   "zoom": [
+    0.4582939244663383,
+    0.5382939244663383
+   ]
+  },
+  {
+   "img": "aulas/a2-recomendados.png",
+   "title": "PROGRAMAS RECOMENDADOS",
+   "caption": "Toque em Salvar. O aplicativo filtra os 60 programas e mostra os que combinam com esse aluno.",
+   "start": 19.15,
+   "end": 25.93,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a2-usar.png",
+   "title": "USAR PARA O ALUNO",
+   "caption": "Abra um para ver os treinos. Gostou? Toque em Usar para, e o nome do aluno.",
+   "start": 25.93,
+   "end": 30.21,
+   "kind": "phone",
+   "zoom": [
+    0.7739178981937603,
+    0.8539178981937604
+   ]
+  },
+  {
+   "img": "aulas/a2-capa.png",
+   "title": "CAPA PERSONALIZADA",
+   "caption": "Pronto. O programa sai com a capa personalizada: nome e foto do aluno, seu nome e seu CREF.",
+   "start": 30.21,
+   "end": 36.86,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a2-aba.png",
+   "title": "ABA VISUALIZAR",
+   "caption": "Confira tudo na aba Visualizar. Na próxima aula, você aprende a ajustar o que quiser.",
+   "start": 36.86,
+   "end": 44.38,
+   "kind": "phone",
+   "zoom": [
+    0.14266995073891622,
+    0.22266995073891624
+   ]
+  }
+ ]
+}

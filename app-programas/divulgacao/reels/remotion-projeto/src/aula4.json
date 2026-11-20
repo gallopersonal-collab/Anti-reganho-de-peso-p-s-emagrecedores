@@ -1,0 +1,90 @@
+{
+ "audio": "aula4.wav",
+ "duration": 29.8,
+ "scenes": [
+  {
+   "img": "aulas/a4-liberar.png",
+   "title": "LIBERAR ACESSO AO ALUNO",
+   "caption": "Agora o aluno recebe o treino no celular. Dentro do programa, toque em Liberar acesso ao aluno.",
+   "start": 0,
+   "end": 6.22,
+   "kind": "phone",
+   "zoom": [
+    0,
+    0.04353201970443347
+   ]
+  },
+  {
+   "img": "aulas/a4-validade.png",
+   "title": "VALIDADE",
+   "caption": "Escolha a validade: trinta dias, que é o ciclo do programa, ou até você desativar.",
+   "start": 6.22,
+   "end": 9.68,
+   "kind": "phone",
+   "zoom": [
+    0.8319244663382593,
+    0.9119244663382594
+   ]
+  },
+  {
+   "img": "aulas/a4-gerar.png",
+   "title": "GERAR CÓDIGO",
+   "caption": "Toque em Gerar código.",
+   "start": 9.68,
+   "end": 11.12,
+   "kind": "phone",
+   "zoom": [
+    0.96,
+    1
+   ]
+  },
+  {
+   "img": "aulas/a4-codigo.png",
+   "title": "CÓDIGO DO ALUNO",
+   "caption": "O aplicativo cria um código de oito letras só para esse aluno.",
+   "start": 11.12,
+   "end": 15.61,
+   "kind": "phone",
+   "zoom": [
+    0.26891954022988507,
+    0.34891954022988503
+   ]
+  },
+  {
+   "img": "aulas/a4-whatsapp.png",
+   "title": "ENVIAR PELO WHATSAPP",
+   "caption": "Toque em Enviar pelo WhatsApp. A mensagem já vai com o link e o código.",
+   "start": 15.61,
+   "end": 19.42,
+   "kind": "phone",
+   "zoom": [
+    0.44464532019704434,
+    0.5246453201970444
+   ]
+  },
+  {
+   "img": "aulas/a4-renovar.png",
+   "title": "+30 DIAS OU DESATIVAR",
+   "caption": "Se o aluno renovar, toque em mais trinta dias. Se ele parar, toque em Desativar e o acesso é bloqueado na hora.",
+   "start": 19.42,
+   "end": 24.37,
+   "kind": "phone",
+   "zoom": [
+    0.603310344827586,
+    0.6833103448275861
+   ]
+  },
+  {
+   "img": "aulas/a2-capa.png",
+   "title": "ATUALIZA NA HORA",
+   "caption": "Se você editar o programa depois, o aluno vê a mudança na hora, com o mesmo código.",
+   "start": 24.37,
+   "end": 29.8,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  }
+ ]
+}
