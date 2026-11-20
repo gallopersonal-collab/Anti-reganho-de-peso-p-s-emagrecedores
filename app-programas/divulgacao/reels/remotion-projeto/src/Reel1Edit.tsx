@@ -4,7 +4,8 @@ import {
 } from 'remotion';
 
 type Scene = {
-  t: 'text' | 'flow' | 'app' | 'slide' | 'cta';
+  t: 'text' | 'flow' | 'app' | 'slide' | 'cta' | 'card';
+  photo?: string;
   start: number; end: number; words: [string, number][];
   big?: string; pre?: string; post?: string; items?: string[]; img?: string; title?: string; pan?: [number, number];
 };
@@ -59,6 +60,23 @@ const Cta: React.FC = () => {
       <div style={{ display: 'inline-block', fontFamily: 'Bebas', fontSize: 170, lineHeight: 0.9, color: NAVY, background: goldBg, padding: '24px 44px 6px', borderRadius: 26, boxShadow: '0 20px 60px rgba(0,0,0,.5)' }}>APLICATIVO</div>
       <div style={{ fontFamily: 'Inter', fontWeight: 700, fontSize: 46, color: CREAM, textShadow: '0 4px 20px rgba(0,0,0,.8)', marginTop: 16 }}>que eu te mando o link</div>
     </div>
+  );
+};
+
+const Card: React.FC<{ s: Scene }> = ({ s }) => {
+  const k = useK(0, 13);
+  const k2 = useK(6, 13);
+  return (
+    <AbsoluteFill style={{ background: `radial-gradient(110% 70% at 80% 10%, #1d2c4d 0%, ${NAVY} 60%, #070b14 100%)`, alignItems: 'center', textAlign: 'center' }}>
+      {s.photo ? <div style={{ marginTop: 300, width: 460, height: 460, borderRadius: '50%', overflow: 'hidden', border: `8px solid ${GOLD}`, boxShadow: '0 30px 80px rgba(0,0,0,.6)', opacity: k, transform: `scale(${0.7 + 0.3 * k})` }}>
+        <Img src={staticFile(s.photo)} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 18%', transform: 'scale(1.6) translateY(12%)' }} />
+      </div> : <div style={{ height: 520 }} />}
+      <div style={{ marginTop: 50, opacity: k2, transform: `translateY(${(1 - k2) * 40}px)` }}>
+        {s.pre ? <div style={{ fontFamily: 'Inter', fontWeight: 800, fontSize: 58, color: CREAM, marginBottom: 10 }}>{s.pre}</div> : null}
+        <div style={{ display: 'inline-block', fontFamily: 'Bebas', fontSize: Math.min(230, Math.floor(1700 / Math.max(1, (s.big || '').length))), lineHeight: 0.9, color: NAVY, background: goldBg, padding: '18px 40px 4px', borderRadius: 24 }}>{s.big}</div>
+        {s.post ? <div style={{ fontFamily: 'Inter', fontWeight: 800, fontSize: 58, color: CREAM, marginTop: 14 }}>{s.post}</div> : null}
+      </div>
+    </AbsoluteFill>
   );
 };
 
@@ -125,7 +143,7 @@ export const Reel1Edit: React.FC<R1Props> = ({ video, scenes }) => {
         return (
           <Sequence key={i} from={from} durationInFrames={dur} layout="none">
             <AbsoluteFill>
-              {s.t === 'text' ? <BigText s={s} /> : s.t === 'flow' ? <Flow s={s} dur={dur} /> : s.t === 'cta' ? <Cta /> : <AppScene s={s} dur={dur} video={video} from={from} />}
+              {s.t === 'text' ? <BigText s={s} /> : s.t === 'flow' ? <Flow s={s} dur={dur} /> : s.t === 'cta' ? <Cta /> : s.t === 'card' ? <Card s={s} /> : <AppScene s={s} dur={dur} video={video} from={from} />}
               <Captions s={s} />
             </AbsoluteFill>
           </Sequence>
