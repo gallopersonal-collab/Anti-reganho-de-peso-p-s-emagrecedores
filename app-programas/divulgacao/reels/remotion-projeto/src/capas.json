@@ -1,0 +1,10 @@
+[
+{"id":"aula0-boas-vindas","tag":"AULA 0","title":"Boas-vindas","sub":"Comece por aqui","img":"gallo.jpg","kind":"photo"},
+{"id":"aula1-primeiro-acesso","tag":"AULA 1","title":"Primeiro acesso e seu perfil","sub":"Entre no app e cadastre seus dados","img":"aulas/a1-inicio.png","kind":"phone"},
+{"id":"aula2-primeiro-programa","tag":"AULA 2","title":"Seu primeiro programa em 10 minutos","sub":"Cadastre o aluno e receba os programas recomendados","img":"aulas/a2-recomendados.png","kind":"phone"},
+{"id":"aula3-personalizar","tag":"AULA 3","title":"Personalize e salve seus modelos","sub":"Ajuste treinos, exercícios e crie sua biblioteca","img":"aulas/a3-exercicio.png","kind":"phone"},
+{"id":"aula4-liberar-acesso","tag":"AULA 4","title":"Libere o acesso do aluno","sub":"Gere o código e envie pelo WhatsApp","img":"aulas/a4-codigo.png","kind":"phone"},
+{"id":"aula5-o-que-o-aluno-ve","tag":"AULA 5","title":"O que o seu aluno vê","sub":"Treino no celular, registro de cargas e histórico","img":"aulas/a5-serie.png","kind":"phone"},
+{"id":"aula6-acompanhar-renovar","tag":"AULA 6","title":"Acompanhe e renove","sub":"Evolução do aluno e o próximo ciclo","img":"aulas/a6-numeros.png","kind":"phone"},
+{"id":"material-guia-rapido","tag":"MATERIAL DE APOIO","title":"Guia Rápido Trainer Pro Studio","sub":"Os 6 passos para consulta rápida (PDF)","img":"guia-1.png","kind":"pdf"}
+]
