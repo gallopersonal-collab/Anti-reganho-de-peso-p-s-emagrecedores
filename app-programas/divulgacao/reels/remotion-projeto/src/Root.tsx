@@ -14,6 +14,7 @@ import bv from './bv.json';
 import capas from './capas.json';
 import r1e from './reel1edit.json';
 import r3e from './reel3edit.json';
+import r2e from './reel2edit.json';
 import { Reel1Edit, R1Props } from './Reel1Edit';
 import { Capa, CapaProps } from './Capa';
 import { BoasVindas, BVProps } from './BoasVindas';
@@ -36,6 +37,7 @@ export const Root: React.FC = () => {
     {(capas as any[]).map((c) => <Composition key={c.id} id={'Capa-' + c.id} component={Capa} durationInFrames={1} fps={25} width={1280} height={720} defaultProps={c as CapaProps} />)}
     <Composition id="Reel1Edit" component={Reel1Edit} durationInFrames={Math.round(r1e.duration * 24)} fps={24} width={1080} height={1920} defaultProps={r1e as unknown as R1Props} />
     <Composition id="Reel3Edit" component={Reel1Edit} durationInFrames={Math.round(r3e.duration * 24)} fps={24} width={1080} height={1920} defaultProps={r3e as unknown as R1Props} />
+    <Composition id="Reel2Edit" component={Reel1Edit} durationInFrames={Math.round(r2e.duration * 25)} fps={25} width={1080} height={1920} defaultProps={r2e as unknown as R1Props} />
     <Composition id="BVVertical" component={BoasVindas} durationInFrames={Math.round((bv.videoDur + bv.endCard) * 25)} fps={25} width={1080} height={1920} defaultProps={{ ...(bv as any), vertical: true } as BVProps} />
     <Composition id="BVHorizontal" component={BoasVindas} durationInFrames={Math.round((bv.videoDur + bv.endCard) * 25)} fps={25} width={1920} height={1080} defaultProps={{ ...(bv as any), vertical: false } as BVProps} />
     <Composition id="Reel3" component={Reel} durationInFrames={Math.ceil(p3.duration * FPS)} fps={FPS} width={1080} height={1920} defaultProps={p3} />
