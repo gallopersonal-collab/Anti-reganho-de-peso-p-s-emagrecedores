@@ -1,0 +1,102 @@
+{
+ "audio": "aula5.wav",
+ "duration": 42.3,
+ "scenes": [
+  {
+   "img": "aulas/a5-codigo.png",
+   "title": "O ALUNO DIGITA O CÓDIGO",
+   "caption": "Assim fica para o seu aluno. Ele abre o link e digita o código. Não precisa de senha nem de instalar nada.",
+   "start": 0,
+   "end": 8.27,
+   "kind": "phone",
+   "zoom": [
+    0.5862495894909687,
+    0.6662495894909688
+   ]
+  },
+  {
+   "img": "aulas/a5-topo.png",
+   "title": "SUA MARCA",
+   "caption": "Logo no início, ele vê o nome dele, a sua foto e o seu CREF.",
+   "start": 8.27,
+   "end": 12.44,
+   "kind": "phone",
+   "zoom": [
+    0.07272085385878496,
+    0.15272085385878498
+   ]
+  },
+  {
+   "img": "aulas/a5-treinos.png",
+   "title": "TREINO DE HOJE",
+   "caption": "Em Treino de hoje, ele escolhe o treino: A, B ou C.",
+   "start": 12.44,
+   "end": 16.73,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a5-comofazer.png",
+   "title": "COMO FAZER",
+   "caption": "Cada exercício tem foto, séries, repetições e descanso. Em Como fazer, ele lê a execução e os cuidados.",
+   "start": 16.73,
+   "end": 24.36,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a5-serie.png",
+   "title": "REGISTRA A CARGA",
+   "caption": "A cada série, ele digita as repetições e a carga e toca no check. O cronômetro de descanso começa sozinho.",
+   "start": 24.36,
+   "end": 31.94,
+   "kind": "phone",
+   "zoom": [
+    0.4582939244663383,
+    0.5382939244663383
+   ]
+  },
+  {
+   "img": "aulas/a5-concluir.png",
+   "title": "CONCLUIR TREINO",
+   "caption": "No fim, toca em Concluir treino.",
+   "start": 31.94,
+   "end": 34.06,
+   "kind": "phone",
+   "zoom": [
+    0.96,
+    1
+   ]
+  },
+  {
+   "img": "aulas/a5-historico.png",
+   "title": "HISTÓRICO",
+   "caption": "Tudo fica no Histórico e aparece para você.",
+   "start": 34.06,
+   "end": 37.08,
+   "kind": "phone",
+   "zoom": [
+    0.4497635467980295,
+    0.5297635467980295
+   ]
+  },
+  {
+   "img": "aulas/a5-ultimavez.png",
+   "title": "CARGA DA ÚLTIMA VEZ",
+   "caption": "No próximo treino, o aplicativo mostra a carga da última vez.",
+   "start": 37.08,
+   "end": 42.3,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  }
+ ]
+}

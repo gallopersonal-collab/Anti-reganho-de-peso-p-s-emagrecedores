@@ -125,7 +125,7 @@ const Caption: React.FC<{ text: string; dur: number }> = ({ text, dur }) => {
   const words = text.split(' ');
   const per = Math.max(1, (dur * 0.85) / words.length);
   return (
-    <div style={{ position: 'absolute', left: 60, width: 830, top: 380, display: 'flex', flexWrap: 'wrap', columnGap: 14, rowGap: 4, fontFamily: 'Inter', fontWeight: 800, fontSize: 54, lineHeight: 1.15 }}>
+    <div style={{ position: 'absolute', left: 60, width: 830, top: 380, display: 'flex', flexWrap: 'wrap', columnGap: 14, rowGap: 4, fontFamily: 'Inter', fontWeight: 800, fontSize: text.length > 100 ? 40 : text.length > 70 ? 46 : 54, lineHeight: 1.15 }}>
       {words.map((w, i) => (
         <span key={i} style={{ color: f >= i * per ? CREAM : 'rgba(243,236,221,.32)' }}>{w}</span>
       ))}

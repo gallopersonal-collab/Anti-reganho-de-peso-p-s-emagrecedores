@@ -1,0 +1,111 @@
+{
+ "audio": "aula3.wav",
+ "duration": 45.58,
+ "scenes": [
+  {
+   "kind": "stat",
+   "big": "AULA 3",
+   "sub": "Personalizar e salvar seus modelos",
+   "caption": "O programa veio pronto, mas você pode mudar tudo.",
+   "start": 0,
+   "end": 3.08,
+   "title": "AULA 3 · PERSONALIZAR"
+  },
+  {
+   "img": "aulas/a3-dados.png",
+   "title": "DADOS E CAPA",
+   "caption": "Na aba Dados e capa, você troca o título, a duração do ciclo e a frequência.",
+   "start": 3.08,
+   "end": 8.22,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a3-exercicio.png",
+   "title": "TREINOS E EXERCÍCIOS",
+   "caption": "Na aba Treinos e exercícios, toque em um exercício para editar séries, repetições, descanso, cadência e carga.",
+   "start": 8.22,
+   "end": 16.25,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a3-botoes.png",
+   "title": "ORDEM, DUPLICAR, EXCLUIR",
+   "caption": "Use as setas para mudar a ordem, Duplicar para repetir e Excluir para tirar.",
+   "start": 16.25,
+   "end": 21.72,
+   "kind": "phone",
+   "zoom": [
+    0,
+    0.04
+   ]
+  },
+  {
+   "img": "aulas/a3-novo-ex.png",
+   "title": "+ EXERCÍCIO",
+   "caption": "Para incluir um exercício novo, toque em Exercício, com o sinal de mais.",
+   "start": 21.72,
+   "end": 26.39,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a2-capa.png",
+   "title": "EDITAR ESTE SLIDE",
+   "caption": "Quer mudar um slide? Na aba Visualizar, toque em Editar este slide e troque textos e imagens.",
+   "start": 26.39,
+   "end": 33.25,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a3-modelo.png",
+   "title": "SALVAR COMO MODELO",
+   "caption": "Montou um programa que vai usar com outros alunos? Toque em Salvar como modelo.",
+   "start": 33.25,
+   "end": 38.88,
+   "kind": "phone",
+   "zoom": [
+    0,
+    0.04
+   ]
+  },
+  {
+   "img": "aulas/a3-biblioteca.png",
+   "title": "MEU MODELO",
+   "caption": "Ele fica na sua Biblioteca, marcado como Meu modelo.",
+   "start": 38.88,
+   "end": 42.62,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a3-salvo.png",
+   "title": "SALVO AUTOMATICAMENTE",
+   "caption": "Tudo é salvo automaticamente.",
+   "start": 42.62,
+   "end": 45.58,
+   "kind": "phone",
+   "zoom": [
+    0,
+    0.04
+   ]
+  }
+ ]
+}

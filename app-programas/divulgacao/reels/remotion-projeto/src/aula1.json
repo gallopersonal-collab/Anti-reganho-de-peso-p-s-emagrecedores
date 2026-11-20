@@ -1,0 +1,107 @@
+{
+ "audio": "aula1.wav",
+ "duration": 39.38,
+ "scenes": [
+  {
+   "kind": "stat",
+   "big": "AULA 1",
+   "sub": "Primeiro acesso e seu perfil",
+   "caption": "Bem-vindo ao Trainer Pro Studio. Nesta aula você faz o primeiro acesso e cadastra o seu perfil. Leva dois minutos.",
+   "start": 0,
+   "end": 7.5,
+   "title": "AULA 1 · PRIMEIRO ACESSO"
+  },
+  {
+   "img": "aulas/a1-entrar.png",
+   "title": "TOQUE EM ENTRAR",
+   "caption": "Abra o link do aplicativo e toque em Entrar.",
+   "start": 7.5,
+   "end": 10.4,
+   "kind": "phone",
+   "zoom": [
+    0.4582939244663383,
+    0.5382939244663383
+   ]
+  },
+  {
+   "img": "aulas/a1-criar.png",
+   "title": "CRIAR CONTA",
+   "caption": "Na primeira vez, toque em Criar conta. Use o mesmo e-mail da compra na Kiwify e crie uma senha.",
+   "start": 10.4,
+   "end": 15.27,
+   "kind": "phone",
+   "zoom": [
+    0.8643399014778324,
+    0.9443399014778324
+   ]
+  },
+  {
+   "img": "aulas/a1-inicio.png",
+   "title": "TELA INICIAL",
+   "caption": "Pronto. O aplicativo abre na tela inicial.",
+   "start": 15.27,
+   "end": 19.26,
+   "kind": "phone",
+   "zoom": [
+    0.13072742200328408,
+    0.2107274220032841
+   ]
+  },
+  {
+   "img": "aulas/a1-inicio.png",
+   "title": "CADASTRAR MEU PERFIL",
+   "caption": "Agora toque em Cadastrar meu perfil.",
+   "start": 19.26,
+   "end": 21.48,
+   "kind": "phone",
+   "zoom": [
+    0.13072742200328408,
+    0.2107274220032841
+   ]
+  },
+  {
+   "img": "aulas/a1-perfil.png",
+   "title": "NOME, CREF E FOTO",
+   "caption": "Coloque seu nome, seu CREF e uma foto sua. Eles aparecem na capa de todos os programas.",
+   "start": 21.48,
+   "end": 27.09,
+   "kind": "phone",
+   "zoom": [
+    0.32180788177339903,
+    0.401807881773399
+   ]
+  },
+  {
+   "img": "aulas/a1-salvar.png",
+   "title": "SALVAR",
+   "caption": "Toque em Salvar.",
+   "start": 27.09,
+   "end": 28.35,
+   "kind": "phone",
+   "zoom": [
+    0.96,
+    1
+   ]
+  },
+  {
+   "kind": "flow",
+   "items": [
+    "Compartilhar",
+    "Adicionar à Tela de Início"
+   ],
+   "title": "DICA",
+   "caption": "Dica: salve o aplicativo na tela inicial do celular. No navegador, toque em compartilhar e depois em Adicionar à Tela de Início.",
+   "start": 28.35,
+   "end": 35.62
+  },
+  {
+   "kind": "stat",
+   "big": "AULA 2",
+   "sub": "Primeiro programa em 10 minutos",
+   "title": "PRÓXIMA AULA",
+   "caption": "Na próxima aula, você monta o seu primeiro programa.",
+   "start": 35.62,
+   "end": 39.38
+  }
+ ]
+}

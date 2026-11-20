@@ -1,0 +1,91 @@
+{
+ "audio": "aula6.wav",
+ "duration": 30.5,
+ "scenes": [
+  {
+   "img": "aulas/a6-aba.png",
+   "title": "ACOMPANHAMENTO",
+   "caption": "Agora você acompanha. Abra o programa do aluno e toque na aba Acompanhamento.",
+   "start": 0,
+   "end": 4.04,
+   "kind": "phone",
+   "zoom": [
+    0.18361576354679804,
+    0.26361576354679805
+   ]
+  },
+  {
+   "img": "aulas/a6-numeros.png",
+   "title": "NÚMEROS DO ALUNO",
+   "caption": "Você vê quantos treinos ele registrou, quantos nos últimos trinta dias e o último acesso.",
+   "start": 4.04,
+   "end": 8.07,
+   "kind": "phone",
+   "zoom": [
+    0.46,
+    0.54
+   ]
+  },
+  {
+   "img": "aulas/a6-treinos.png",
+   "title": "CADA TREINO",
+   "caption": "Logo abaixo, cada treino com séries, repetições e cargas.",
+   "start": 8.07,
+   "end": 11.26,
+   "kind": "phone",
+   "zoom": [
+    0.11878489326765188,
+    0.1987848932676519
+   ]
+  },
+  {
+   "img": "aulas/a6-treinos.png",
+   "title": "AJUSTE E EVOLUÇÃO",
+   "caption": "Use isso para ajustar a carga e para mostrar a evolução ao aluno.",
+   "start": 11.26,
+   "end": 14.46,
+   "kind": "phone",
+   "zoom": [
+    0.11878489326765188,
+    0.1987848932676519
+   ]
+  },
+  {
+   "img": "aulas/a6-proximo.png",
+   "title": "PRÓXIMO PROGRAMA",
+   "caption": "No fim das quatro semanas, monte o próximo programa: Novo programa para um aluno, escolha o mesmo aluno e use o próximo nível.",
+   "start": 14.46,
+   "end": 20.8,
+   "kind": "phone",
+   "zoom": [
+    0.25527093596059114,
+    0.3352709359605911
+   ]
+  },
+  {
+   "img": "aulas/a6-renovar.png",
+   "title": "RENOVAR O ACESSO",
+   "caption": "E renove o acesso com mais trinta dias, ou gere um código para o novo programa.",
+   "start": 20.8,
+   "end": 25.77,
+   "kind": "phone",
+   "zoom": [
+    0.6050164203612478,
+    0.6850164203612479
+   ]
+  },
+  {
+   "kind": "flow",
+   "items": [
+    "Montar",
+    "Liberar",
+    "Acompanhar",
+    "Renovar"
+   ],
+   "title": "O CICLO COMPLETO",
+   "caption": "Pronto. Esse é o ciclo completo: montar, liberar, acompanhar e renovar.",
+   "start": 25.77,
+   "end": 30.5
+  }
+ ]
+}
