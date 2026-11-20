@@ -1,0 +1,147 @@
+{
+ "audio": "reel3-voz.wav",
+ "duration": 29.4,
+ "scenes": [
+  {
+   "kind": "stat",
+   "big": "60",
+   "sub": "programas testados por 160 personais",
+   "title": "PROGRAMAS PREMIUM",
+   "caption": "60 programas testados por 160 personais.",
+   "start": 0,
+   "end": 2.71
+  },
+  {
+   "kind": "phone",
+   "img": "f-aluno.png",
+   "zoom": [
+    0.0,
+    0.2
+   ],
+   "title": "NO CELULAR DO ALUNO",
+   "caption": "Agora no celular do seu aluno.",
+   "start": 2.71,
+   "end": 3.95
+  },
+  {
+   "kind": "stat",
+   "big": "36 ANOS",
+   "sub": "Prof. José Carlos Gallo",
+   "photo": "gallo.jpg",
+   "title": "DE PERSONAL TRAINER",
+   "caption": "Eu sou o Prof. José Carlos Gallo. 36 anos de personal.",
+   "start": 3.95,
+   "end": 6.83
+  },
+  {
+   "kind": "stat",
+   "big": "FISIOLOGISTA",
+   "sub": "Clínico do Exercício",
+   "photo": "gallo.jpg",
+   "title": "ESPECIALIZAÇÃO",
+   "caption": "Fisiologista Clínico do Exercício.",
+   "start": 6.83,
+   "end": 8.55
+  },
+  {
+   "kind": "stat",
+   "big": "COLÔNIA",
+   "sub": "Alemanha",
+   "photo": "gallo.jpg",
+   "title": "FORMAÇÃO",
+   "caption": "Especialização em Colônia, na Alemanha.",
+   "start": 8.55,
+   "end": 10.3
+  },
+  {
+   "kind": "stat",
+   "big": "2.500+",
+   "sub": "personais formados",
+   "photo": "gallo.jpg",
+   "title": "INSTITUTO GALLO PERSONAL",
+   "caption": "Mais de 2.500 personais formados.",
+   "start": 10.3,
+   "end": 12.07
+  },
+  {
+   "kind": "stat",
+   "big": "?",
+   "sub": "o mesmo problema em quase todos",
+   "title": "O PROBLEMA",
+   "caption": "O problema de quase todos é o mesmo.",
+   "start": 12.07,
+   "end": 13.95
+  },
+  {
+   "kind": "flow",
+   "items": [
+    "Planilha à noite",
+    "Copiar treino",
+    "Montar PDF"
+   ],
+   "title": "NOITES NA PLANILHA",
+   "caption": "Noites montando treino na planilha.",
+   "start": 13.95,
+   "end": 16.03
+  },
+  {
+   "kind": "phone",
+   "img": "j-biblioteca.png",
+   "zoom": [
+    0.1,
+    0.35
+   ],
+   "title": "A BIBLIOTECA NO APP",
+   "caption": "Peguei os 60 programas da minha Biblioteca.",
+   "start": 16.03,
+   "end": 18.03
+  },
+  {
+   "kind": "phone",
+   "img": "c-recomendados.png",
+   "zoom": [
+    0.0,
+    0.25
+   ],
+   "title": "OBJETIVO · IDADE · NÍVEL · LOCAL",
+   "caption": "Por objetivo, idade, nível e local.",
+   "start": 18.03,
+   "end": 20.05
+  },
+  {
+   "kind": "slide",
+   "img": "i-exercicio.png",
+   "title": "1.500 EXERCÍCIOS COM FOTO",
+   "caption": "Num aplicativo com 1.500 exercícios com foto.",
+   "start": 20.05,
+   "end": 22.51
+  },
+  {
+   "kind": "phone",
+   "img": "g-carga.png",
+   "zoom": [
+    0.3,
+    0.6
+   ],
+   "title": "SUA MARCA. SEU ALUNO.",
+   "caption": "Sua marca. Seu aluno treinando pelo celular.",
+   "start": 22.51,
+   "end": 24.55
+  },
+  {
+   "kind": "cta",
+   "caption": "Comenta Aplicativo que eu te mando o link.",
+   "start": 24.55,
+   "end": 26.33
+  },
+  {
+   "kind": "stat",
+   "big": "60",
+   "sub": "programas testados no seu celular",
+   "title": "TRAINER PRO STUDIO",
+   "caption": "60 programas testados. No seu celular.",
+   "start": 26.33,
+   "end": 29.4
+  }
+ ]
+}

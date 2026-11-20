@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trainer Pro Studio</title>
+<meta name="description" content="Trainer Pro Studio: biblioteca e editor de programas de treino em PDF para Personal Trainers — Instituto Gallo Personal.">
+<meta name="application-name" content="Trainer Pro Studio">
+<meta name="apple-mobile-web-app-title" content="Trainer Pro Studio">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23d2a961%27/%3E%3Ctext x=%2732%27 y=%2743%27 font-family=%27Arial,sans-serif%27 font-weight=%27700%27 font-size=%2728%27 text-anchor=%27middle%27 fill=%27%230b1220%27%3ETP%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#0b1426">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#/">
+    <span class="brand-mark">TP</span>
+    <span class="brand-text">Trainer Pro <b>Studio</b></span>
+  </a>
+  <nav class="nav" id="nav">
+    <a href="#/" data-nav="inicio">Início</a>
+    <a href="#/biblioteca" data-nav="biblioteca">Biblioteca</a>
+    <a href="#/alunos" data-nav="alunos">Alunos</a>
+    <a href="#/pdfs" data-nav="pdfs">Meus PDFs</a>
+    <a href="#/config" data-nav="config">Ajustes</a>
+  </nav>
+  <button id="cloud-badge" class="cloud-badge off" data-action="cloud-badge">Entrar</button>
+</header>
+
+<main id="app" class="main"></main>
+
+<nav class="tabbar" id="tabbar">
+  <a href="#/" data-nav="inicio"><span class="ti">⌂</span>Início</a>
+  <a href="#/biblioteca" data-nav="biblioteca"><span class="ti">▤</span>Biblioteca</a>
+  <a href="#/alunos" data-nav="alunos"><span class="ti">◉</span>Alunos</a>
+  <a href="#/pdfs" data-nav="pdfs"><span class="ti">⎙</span>PDFs</a>
+  <a href="#/config" data-nav="config"><span class="ti">⚙</span>Ajustes</a>
+</nav>
+
+<div id="modal-root"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="render-stage" aria-hidden="true"></div>
+
+<script src="vendor/pdf.min.js"></script>
+<script src="vendor/html2canvas.min.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="vendor/supabase.min.js"></script>
+<script src="library-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>document.documentElement.className='js'</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trainer Pro Studio | Programa completo do seu aluno em 10 minutos</title>
+<meta name="description" content="App para personal trainer: 60 programas Premium testados e validados, mais de 1.500 exercícios com foto, app do aluno com registro de cargas e programas com a sua marca.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1220;--bg2:#111a2e;--card:#15203a;--line:#26344f;--text:#eef1f7;--muted:#a3adc2;--gold:#d2a961;--gold2:#e9c886;--ink:#141007;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:17px;padding-bottom:84px}
+img{max-width:100%;height:auto;display:block}
+.wrap{width:min(1080px,100% - 32px);margin:0 auto}
+.narrow{width:min(720px,100% - 32px);margin:0 auto}
+section{padding:clamp(56px,9vw,104px) 0}
+h1,h2,h3{font-family:'Bebas Neue',Oswald,sans-serif;font-weight:400;letter-spacing:.5px;line-height:1}
+h1{font-size:clamp(44px,8vw,84px)}
+h2{font-size:clamp(36px,6vw,58px);margin-bottom:22px}
+h3{font-size:clamp(24px,3.4vw,30px)}
+h1 em,h2 em{font-style:normal;color:var(--gold)}
+p+p{margin-top:14px}
+.kicker{font-weight:700;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.muted{color:var(--muted)}
+.cta{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:58px;padding:14px 30px;border-radius:999px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--ink);font-weight:800;font-size:18px;text-decoration:none;text-align:center;box-shadow:0 10px 30px rgba(210,169,97,.25);transition:transform .15s,box-shadow .15s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(210,169,97,.35)}
+.cta small{font-weight:600;font-size:13px;opacity:.8}
+.alt{display:inline-block;margin-top:14px;color:var(--muted);font-size:15px;text-decoration:underline;text-underline-offset:3px}
+.note{font-size:14px;color:var(--muted);margin-top:12px}
+/* hero */
+.hero{padding-top:28px;background:radial-gradient(90% 70% at 85% 10%,#1d2c4d 0%,var(--bg) 60%)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px;margin-bottom:clamp(28px,6vw,56px)}
+.brand i{font-style:normal;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-family:'Bebas Neue';font-size:22px;color:var(--ink);background:linear-gradient(135deg,var(--gold2),#9c7a3c)}
+.brand span{color:var(--gold)}
+.hero-grid{display:grid;gap:40px;align-items:center}
+.hero .sub{font-size:clamp(17px,2.2vw,20px);color:#cfd6e4;margin:22px 0 30px;max-width:620px}
+.phones{position:relative;display:flex;justify-content:center;gap:18px}
+.phone{width:min(46%,250px);border-radius:34px;padding:8px;background:#05070c;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 2px #2a3550}
+.phone img{border-radius:27px}
+.phone.b{margin-top:48px}
+@media(min-width:880px){.hero-grid{grid-template-columns:1.15fr .85fr}}
+/* proof strip */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);padding:26px 0}
+.strip ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;text-align:center}
+.strip b{display:block;font-family:'Bebas Neue';font-size:clamp(34px,5vw,46px);color:var(--gold);line-height:1;font-weight:400}
+.strip span{font-size:14px;color:var(--muted)}
+@media(min-width:760px){.strip ul{grid-template-columns:repeat(4,1fr)}}
+/* text blocks */
+.pain p{font-size:clamp(17px,2vw,19px)}
+.pain .q{border-left:3px solid var(--gold);padding:4px 0 4px 18px;color:#d9dfeb}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,4vw,34px)}
+.turn{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+.ends{display:grid;gap:10px;margin-top:22px}
+.ends div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;font-weight:600}
+.ends div::before{content:"✕";color:var(--gold);margin-right:10px}
+/* bullets */
+.bullets{list-style:none;display:grid;gap:12px;margin-top:8px}
+.bullets li{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.bullets li::before{content:"";flex:0 0 22px;height:22px;margin-top:2px;border-radius:50%;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%23141007' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+@media(min-width:880px){.bullets{grid-template-columns:1fr 1fr}}
+/* steps */
+.steps{display:grid;gap:16px;margin:26px 0}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.step .n{font-family:'Bebas Neue';font-size:44px;color:var(--gold);line-height:1}
+@media(min-width:880px){.steps{grid-template-columns:repeat(3,1fr)}}
+.shots{display:grid;gap:16px;margin-top:30px}
+.shots figure{border-radius:14px;overflow:hidden;border:1px solid rgba(210,169,97,.4);background:var(--bg2)}
+.shots figcaption{font-size:14px;color:var(--muted);padding:10px 14px}
+@media(min-width:880px){.shots{grid-template-columns:1fr 1fr}}
+/* author */
+.author{display:grid;gap:18px}
+.author .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.author .tags span{border:1px solid rgba(210,169,97,.5);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600}
+/* cost */
+.cost{display:grid;gap:14px;margin-top:20px}
+.cost div{display:flex;flex-direction:column;gap:4px;border-bottom:1px dashed var(--line);padding:12px 0}
+@media(min-width:760px){.cost div{flex-direction:row;justify-content:space-between;gap:16px}}
+.cost b{color:var(--gold2);white-space:nowrap}
+/* stack */
+.stack{border:1px solid rgba(210,169,97,.45);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+.stack .row{display:flex;justify-content:space-between;gap:16px;padding:16px clamp(16px,3vw,26px);border-bottom:1px solid var(--line)}
+.stack .row h4{font-size:17px;margin-bottom:2px}
+.stack .row p{font-size:15px;color:var(--muted);margin:0}
+.stack .row .v{font-weight:700;color:var(--gold2);white-space:nowrap}
+.stack .bonus h4::before{content:"BÔNUS · ";color:var(--gold);font-size:13px;letter-spacing:1px}
+.stack .total{background:var(--bg2);font-weight:700}
+.stack .total .v s{color:var(--muted)}
+/* offer */
+.offer{text-align:center}
+.plans{display:grid;gap:18px;margin:30px auto 0;max-width:760px}
+.plan{border-radius:20px;padding:28px 22px;border:1px solid var(--line);background:var(--card)}
+.plan.main{border:2px solid var(--gold);background:linear-gradient(180deg,#1b2744,var(--card));position:relative}
+.plan.main .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--ink);font-weight:800;font-size:12px;letter-spacing:1px;padding:5px 14px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.plan .price{font-family:'Bebas Neue';font-size:clamp(54px,9vw,72px);line-height:1;color:var(--text);margin:8px 0 2px}
+.plan .price small{font-size:.4em;color:var(--muted)}
+.plan .alt{display:block}
+@media(min-width:760px){.plans{grid-template-columns:1.2fr .8fr;align-items:center}}
+/* guarantee */
+.guarantee{display:grid;gap:20px;align-items:center;border:2px dashed rgba(210,169,97,.6);border-radius:22px;padding:clamp(24px,4vw,40px);background:rgba(210,169,97,.05)}
+.seal{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,var(--gold2),var(--gold));color:var(--ink);font-family:'Bebas Neue';font-size:20px;line-height:.95;margin:0 auto;box-shadow:0 0 0 6px rgba(210,169,97,.2)}
+.seal b{display:block;font-size:52px;font-weight:400}
+@media(min-width:760px){.guarantee{grid-template-columns:140px 1fr}}
+/* faq */
+.faq details{border:1px solid var(--line);border-radius:12px;background:var(--card);margin-bottom:10px}
+.faq summary{cursor:pointer;list-style:none;padding:16px 46px 16px 18px;font-weight:600;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:18px;top:12px;font-size:24px;color:var(--gold);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 18px 16px;color:var(--muted)}
+/* final */
+.final{text-align:center;background:radial-gradient(80% 80% at 50% 0%,#1d2c4d 0%,var(--bg) 70%)}
+footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-size:13px;color:var(--muted)}
+/* sticky bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(9,14,26,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:center;transform:translateY(110%);transition:transform .25s}
+.bar.show{transform:none}
+.bar .cta{min-height:48px;padding:10px 22px;font-size:16px;width:100%;max-width:420px}
+.bar .info{display:none;font-size:14px;color:var(--muted)}
+@media(min-width:760px){.bar .info{display:block}.bar .cta{width:auto}}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- 1. HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="brand"><i>TP</i>Trainer Pro <span>Studio</span></div>
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">App para personal trainer</p>
+        <h1>Personal trainer: monte hoje o programa completo do seu aluno <em>em 10 minutos</em>, com a sua marca e o treino no celular dele.</h1>
+        <p class="sub">Você informa o perfil do aluno, o Trainer Pro Studio indica o programa certo entre 60 programas Premium, já testados e validados, você ajusta o que quiser, coloca sua marca e libera o acesso dele pelo app.</p>
+        <a class="cta" href="{{CHECKOUT}}">Quero o plano anual por R$ 497</a>
+        <p class="note">Acesso imediato. Garantia de 7 dias.</p>
+      </div>
+      <div class="phones">
+        <div class="phone"><img src="{{IMG_biblioteca}}" alt="Tela da biblioteca de programas do Trainer Pro Studio no celular" width="520" height="885"></div>
+        <div class="phone b"><img src="{{IMG_aluno}}" alt="Tela do aluno registrando repetições e cargas no Trainer Pro Studio" width="520" height="885"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 2. FAIXA DE PROVA -->
+<div class="strip">
+  <ul class="wrap">
+    <li><b>36+ anos</b><span>como personal trainer</span></li>
+    <li><b>2.500+</b><span>personais formados</span></li>
+    <li><b>160+</b><span>personais usam a Biblioteca</span></li>
+    <li><b>60</b><span>programas Premium validados</span></li>
+  </ul>
+</div>
+
+<!-- 3. DOR -->
+<section class="pain">
+  <div class="narrow rv">
+    <p class="kicker">Talvez você...</p>
+    <h2>Termine o dia de atendimentos <em>com três programas para montar</em></h2>
+    <p>Talvez você termine o dia de atendimentos e ainda tenha três programas para montar. Abre a planilha, copia o treino de outro aluno, troca um exercício, ajusta as séries. Procura uma imagem do exercício na internet. Exporta o PDF. Manda no WhatsApp. Uma hora e meia depois, você está cansado e o aluno nem abriu o arquivo direito.</p>
+    <p>Talvez você sinta que o seu serviço parece amador perto das assessorias grandes, mesmo sabendo que você entende mais de treino do que muitas delas.</p>
+    <p class="q">Talvez o aluno pergunte "quanto de carga eu coloquei semana passada?" e nenhum dos dois saiba responder.</p>
+    <div class="box" style="margin-top:28px">
+      <h3 style="margin-bottom:10px">O diagnóstico</h3>
+      <p>Tudo isso vem de uma causa só: você monta cada programa do zero, à mão, em ferramentas que não foram feitas para personal trainer. A planilha não sabe o que é um programa de hipertrofia para uma mulher de 35 anos que treina em casa. Ela não guarda as cargas do aluno. Ela não coloca sua marca. Por isso cada programa custa tanto tempo e entrega tão pouco valor percebido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. VIRADA -->
+<section class="turn">
+  <div class="narrow rv">
+    <p class="kicker">O que muda quando você resolve</p>
+    <h2>E se o treino do seu aluno <em>já estivesse pronto?</em></h2>
+    <p>E se você tivesse 60 programas Premium, já testados e validados, escritos por quem forma personal trainers há anos, separados exatamente pelo perfil de cada aluno?</p>
+    <p>E se o seu aluno abrisse o celular e visse o treino do dia, com foto de cada exercício, e marcasse as cargas ali mesmo?</p>
+    <div class="ends">
+      <div>Fim das noites montando planilha.</div>
+      <div>Fim do PDF esquecido na conversa do WhatsApp.</div>
+      <div>Fim do "não lembro quanto peguei".</div>
+    </div>
+  </div>
+  <div class="wrap rv" style="margin-top:44px">
+    <ul class="bullets">
+      <li>Você monta o programa do aluno em minutos e recupera as noites que gastava com planilha.</li>
+      <li>Você escolhe entre 60 programas Premium, já testados e validados, separados por objetivo, sexo, faixa etária, nível e local de treino.</li>
+      <li>Seu aluno vê cada exercício com foto, séries, repetições, descanso e cadência, direto no celular.</li>
+      <li>Seu aluno marca as séries feitas e registra as cargas. Você acompanha a evolução sem pedir print no WhatsApp.</li>
+      <li>Você entrega um programa com seu nome, sua foto e seu CREF na capa. O aluno enxerga um profissional de verdade.</li>
+      <li>Você cria, edita e salva seus próprios programas e reaproveita com outros alunos.</li>
+      <li>Você libera o acesso do aluno por código e desativa quando o ciclo termina.</li>
+      <li>Você usa no celular ou no computador, com tudo salvo na nuvem.</li>
+      <li>Você aprende a usar com aulas curtas, passo a passo.</li>
+    </ul>
+    <p style="text-align:center;margin-top:30px"><a class="cta" href="{{CHECKOUT}}">Quero o plano anual por R$ 497</a></p>
+  </div>
+</section>
+
+<!-- 5. COMO FUNCIONA -->
+<section>
+  <div class="wrap rv">
+    <p class="kicker">O mecanismo</p>
+    <h2>O Filtro do Aluno: <em>três passos</em></h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><p>Você cadastra o aluno: nome, foto, sexo, idade, objetivo, nível e onde ele treina.</p></div>
+      <div class="step"><div class="n">02</div><p>O app filtra os 60 programas Premium e mostra os que servem para aquele perfil.</p></div>
+      <div class="step"><div class="n">03</div><p>Você ajusta o que quiser e libera o acesso. O aluno entra pelo celular com um código.</p></div>
+    </div>
+    <p class="muted">Se nenhum programa servir, você copia o mais próximo, edita e salva como seu modelo. Ele fica guardado para os próximos alunos.</p>
+    <div class="shots">
+      <figure><img src="{{IMG_capa}}" alt="Capa de programa com foto e nome da aluna e do personal trainer" width="900" height="506"><figcaption>A capa do programa leva o nome e a foto do aluno, e o seu nome, foto e CREF.</figcaption></figure>
+      <figure><img src="{{IMG_ex}}" alt="Página de exercício com foto, séries, repetições, descanso e cadência" width="900" height="507"><figcaption>Cada exercício com foto, séries, repetições, descanso, cadência e cuidados.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 6. AUTOR + PROVA -->
+<section style="background:var(--bg2)">
+  <div class="narrow rv author">
+    <p class="kicker">Quem fala com você</p>
+    <h2>Prof. José Carlos Gallo</h2>
+    <p>Eu sou o Prof. José Carlos Gallo. Sou personal trainer há mais de 36 anos, tenho especialização como Fisiologista Clínico do Exercício em Colônia, na Alemanha, e sou CEO do Instituto Gallo Personal. Já formei mais de 2.500 personal trainers e mais de 160 deles usam hoje a Biblioteca de Treinos Lucrativos, que é a base deste app.</p>
+    <div class="tags"><span>36+ anos de personal</span><span>Fisiologista Clínico do Exercício · Colônia, Alemanha</span><span>CEO do Instituto Gallo Personal</span></div>
+    <div class="box" style="margin-top:22px">
+      <h3 style="margin-bottom:10px">A prova, do jeito que ela é</h3>
+      <p>O Trainer Pro Studio é novo. Ele ainda não tem centenas de depoimentos. O que ele tem é a base: os 60 programas Premium da Biblioteca de Treinos Lucrativos, testados e validados por mais de 160 personais com alunos reais, e a metodologia de mais de 36 anos de prática que já formou mais de 2.500 personal trainers no Instituto Gallo Personal. O app pega esse conteúdo testado e coloca no celular do seu aluno.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRASTE -->
+<section>
+  <div class="narrow rv">
+    <p class="kicker">Quanto custa resolver do jeito antigo</p>
+    <h2>O jeito antigo <em>sai caro</em></h2>
+    <div class="cost">
+      <div><span>Montar quatro programas por mês leva umas seis horas. Se a sua hora vale R$ 80:</span><b>R$ 480 por mês</b></div>
+      <div><span>Contratar um designer para criar um modelo de programa com a sua marca, e ainda assim montar o conteúdo sozinho:</span><b>algumas centenas de reais</b></div>
+      <div><span>Um app próprio para o aluno registrar treino, feito sob medida:</span><b>milhares</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. O QUE VOCÊ RECEBE -->
+<section style="background:var(--bg2)">
+  <div class="narrow rv">
+    <p class="kicker">O que você recebe</p>
+    <h2>Tudo o que vem <em>no Trainer Pro Studio</em></h2>
+    <div class="stack">
+      <div class="row"><div><h4>App Trainer Pro Studio</h4><p>60 programas Premium, já testados e validados, com mais de 1.500 exercícios com foto, filtrados pelo perfil do aluno</p></div><div class="v">R$ 697</div></div>
+      <div class="row"><div><h4>App do aluno</h4><p>Treino no celular, séries marcadas, cargas registradas e histórico</p></div><div class="v">R$ 297</div></div>
+      <div class="row"><div><h4>Editor de programas</h4><p>Crie, edite e salve seus programas com seu nome, foto e CREF</p></div><div class="v">R$ 197</div></div>
+      <div class="row"><div><h4>Aulas de uso</h4><p>Passo a passo para montar e entregar o primeiro programa no mesmo dia</p></div><div class="v">R$ 97</div></div>
+      <div class="row bonus"><div><h4>Kit de Mensagens para WhatsApp</h4><p>Textos prontos para apresentar o programa, vender a renovação e reativar aluno parado</p></div><div class="v">R$ 97</div></div>
+      <div class="row bonus"><div><h4>Calculadora de Precificação de Horas de Trabalho</h4><p>Descubra quanto vale a sua hora e quanto cobrar por aula, programa e acompanhamento, sem chute</p></div><div class="v">R$ 97</div></div>
+      <div class="row bonus"><div><h4>Guia de Renovação</h4><p>Como reter o aluno no fim de cada ciclo de 4 semanas e vender o próximo programa</p></div><div class="v">R$ 67</div></div>
+      <div class="row total"><div>Total</div><div class="v"><s>R$ 1.549</s></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. OFERTA -->
+<section class="offer" id="oferta">
+  <div class="wrap rv">
+    <p class="kicker">Você leva tudo por</p>
+    <h2>Escolha o seu plano</h2>
+    <div class="plans">
+      <div class="plan main">
+        <span class="tag">Economize R$ 197,80</span>
+        <h3>Anual</h3>
+        <div class="price">R$ 497 <small>à vista</small></div>
+        <p class="muted">R$ 41,42 por mês · ou 12x de R$ 51,40</p>
+        <p class="muted" style="margin:6px 0 20px">Você economiza R$ 197,80 em relação ao mensal.</p>
+        <a class="cta" href="{{CHECKOUT}}" style="width:100%">Quero o plano anual por R$ 497</a>
+      </div>
+      <div class="plan">
+        <h3>Mensal</h3>
+        <div class="price">R$ 57,90 <small>/mês</small></div>
+        <p class="muted">Cancele quando quiser.</p>
+        <a class="alt" href="{{CHECKOUT_MENSAL}}">Prefiro o mensal por R$ 57,90</a>
+      </div>
+    </div>
+    <p class="note">Acesso imediato. Garantia de 7 dias.</p>
+  </div>
+</section>
+
+<!-- 9. GARANTIA -->
+<section style="padding-top:0">
+  <div class="narrow rv">
+    <div class="guarantee">
+      <div class="seal"><div><b>7</b>dias de<br>garantia</div></div>
+      <div>
+        <h3 style="margin-bottom:10px">O risco fica comigo</h3>
+        <p>Use o Trainer Pro Studio por 7 dias. Monte o programa de um aluno, libere o acesso, veja ele registrar as cargas. Se achar que não vale o que pagou, peça o reembolso dentro de 7 dias e você recebe 100% do valor de volta. Sem pergunta e sem burocracia. O risco fica comigo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FAQ -->
+<section class="faq" style="background:var(--bg2)">
+  <div class="narrow rv">
+    <p class="kicker">Perguntas frequentes</p>
+    <h2>Dúvidas comuns</h2>
+    <details><summary>Como eu recebo o acesso depois da compra?</summary><p>Depois do pagamento, acesse o app, clique em Entrar e depois em Criar conta, usando o mesmo e-mail da compra. O acesso é liberado na hora.</p></details>
+    <details><summary>Funciona no celular?</summary><p>Sim. Você usa no celular ou no computador, com tudo salvo na nuvem.</p></details>
+    <details><summary>Como o meu aluno acessa o treino?</summary><p>Você libera o acesso do aluno por código. Ele entra pelo celular, vê o treino do dia com foto de cada exercício, marca as séries e registra as cargas.</p></details>
+    <details><summary>Posso criar os meus próprios programas?</summary><p>Sim. Você cria, edita e salva seus próprios programas e reaproveita com outros alunos. Se nenhum programa servir, você copia o mais próximo, edita e salva como seu modelo.</p></details>
+    <details><summary>O programa sai com a minha marca?</summary><p>Sim. A capa leva o seu nome, a sua foto e o seu CREF, além do nome e da foto do aluno.</p></details>
+    <details><summary>Posso cancelar?</summary><p>No plano mensal, você cancela quando quiser. Em qualquer plano, se pedir o reembolso dentro de 7 dias, você recebe 100% do valor de volta.</p></details>
+  </div>
+</section>
+
+<!-- 11. CTA FINAL -->
+<section class="final">
+  <div class="narrow rv">
+    <h2>Você pode continuar montando programa na planilha, <em>uma noite de cada vez</em></h2>
+    <p style="font-size:19px">Ou pode montar o próximo em dez minutos e entregar no celular do aluno ainda hoje.</p>
+    <p style="margin-top:28px"><a class="cta" href="{{CHECKOUT}}">Quero o plano anual por R$ 497</a></p>
+    <a class="alt" href="{{CHECKOUT_MENSAL}}">Prefiro o mensal por R$ 57,90</a>
+    <p class="note">Acesso imediato. Garantia de 7 dias.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Trainer Pro Studio · Instituto Gallo Personal · Pagamento processado pela Kiwify</div>
+</footer>
+
+<div class="bar" id="bar" aria-hidden="true">
+  <span class="info">Anual R$ 497 à vista · garantia de 7 dias</span>
+  <a class="cta" href="{{CHECKOUT}}" tabindex="-1">Quero o plano anual por R$ 497</a>
+</div>
+
+<script>
+(function(){
+  // Barra fixa de CTA: aparece depois do hero
+  var bar=document.getElementById('bar'), hero=document.querySelector('.hero');
+  function onScroll(){var show=hero.getBoundingClientRect().bottom<0;bar.classList.toggle('show',show);bar.setAttribute('aria-hidden',show?'false':'true');}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  // Revelar seções no scroll
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -10% 0px'});
+  els.forEach(function(e){io.observe(e)});
+  // FAQ: um aberto por vez
+  document.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('.faq details').forEach(function(o){if(o!==d)o.open=false})})});
+})();
+</script>
+</body>
+</html>
