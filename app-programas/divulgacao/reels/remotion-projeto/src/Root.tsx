@@ -11,6 +11,8 @@ import aula4 from './aula4.json';
 import aula5 from './aula5.json';
 import aula6 from './aula6.json';
 import bv from './bv.json';
+import capas from './capas.json';
+import { Capa, CapaProps } from './Capa';
 import { BoasVindas, BVProps } from './BoasVindas';
 
 
@@ -28,6 +30,7 @@ export const Root: React.FC = () => {
     <Composition id="Aula4" component={Reel} durationInFrames={Math.ceil((aula4 as any).duration * FPS)} fps={FPS} width={1080} height={1920} defaultProps={aula4 as unknown as ReelProps} />
     <Composition id="Aula5" component={Reel} durationInFrames={Math.ceil((aula5 as any).duration * FPS)} fps={FPS} width={1080} height={1920} defaultProps={aula5 as unknown as ReelProps} />
     <Composition id="Aula6" component={Reel} durationInFrames={Math.ceil((aula6 as any).duration * FPS)} fps={FPS} width={1080} height={1920} defaultProps={aula6 as unknown as ReelProps} />
+    {(capas as any[]).map((c) => <Composition key={c.id} id={'Capa-' + c.id} component={Capa} durationInFrames={1} fps={25} width={1280} height={720} defaultProps={c as CapaProps} />)}
     <Composition id="BVVertical" component={BoasVindas} durationInFrames={Math.round((bv.videoDur + bv.endCard) * 25)} fps={25} width={1080} height={1920} defaultProps={{ ...(bv as any), vertical: true } as BVProps} />
     <Composition id="BVHorizontal" component={BoasVindas} durationInFrames={Math.round((bv.videoDur + bv.endCard) * 25)} fps={25} width={1920} height={1080} defaultProps={{ ...(bv as any), vertical: false } as BVProps} />
     <Composition id="Reel3" component={Reel} durationInFrames={Math.ceil(p3.duration * FPS)} fps={FPS} width={1080} height={1920} defaultProps={p3} />
