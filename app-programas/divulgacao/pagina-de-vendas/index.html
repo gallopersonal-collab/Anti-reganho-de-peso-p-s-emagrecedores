@@ -124,6 +124,12 @@ footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-si
 .js .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
+<!-- Meta Pixel (Pixel Gallo Personal) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','359597814629044');fbq('track','PageView');fbq('track','ViewContent',{content_name:'Trainer Pro Studio'});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=359597814629044&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
 
@@ -350,6 +356,15 @@ footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-si
   // FAQ: um aberto por vez
   document.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)document.querySelectorAll('.faq details').forEach(function(o){if(o!==d)o.open=false})})});
 })();
+</script>
+<script>
+/* Checkout: envia InitiateCheckout ao pixel e repassa UTMs/fbclid para a Kiwify */
+(function(){var q=location.search.replace(/^\?/,'');
+document.querySelectorAll('a[href*="pay.kiwify.com.br"]').forEach(function(a){
+ if(q){a.href+=(a.href.indexOf('?')<0?'?':'&')+q;}
+ a.addEventListener('click',function(){var anual=a.href.indexOf('vpzl9M0')>-1;
+  if(window.fbq)fbq('track','InitiateCheckout',{content_name:anual?'Plano anual':'Plano mensal',value:anual?497:57.9,currency:'BRL'});});
+});})();
 </script>
 </body>
 </html>
