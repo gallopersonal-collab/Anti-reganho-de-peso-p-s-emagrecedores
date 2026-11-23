@@ -546,3 +546,7 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .xb-img img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
 .xb-item.sel { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(210,169,97,.35); }
 .xb-item.sel span::before { content: '✓ '; color: var(--gold-2); font-weight: 700; }
+
+/* Biblioteca de PDFs na nuvem */
+.cl-list { display: flex; flex-direction: column; gap: 8px; max-height: 520px; overflow: auto; }
+.cl-item { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--card-2); }

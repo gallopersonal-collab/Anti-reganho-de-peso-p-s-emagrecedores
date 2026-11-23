@@ -3419,6 +3419,7 @@ function viewPdfs() {
   app.innerHTML = `
     <div class="page-head"><div><h1>Meus PDFs</h1><p class="muted" id="pdf-count"></p><p class="small muted" style="margin:4px 0 0;max-width:640px">Opcional: envie PDFs próprios para guardar, importar slides e editar. Os 60 programas do App já estão na Biblioteca.</p></div>
       <button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>
+    <div id="cloudlib"></div>
     ${S.pdfs.length ? `<div class="toolbar">
       <input type="search" id="pdf-q" placeholder="Buscar por nome ou código…" value="${esc(S.ui.pq)}" style="max-width:240px">
       ${tagSelects(f, 'pf-', S.pdfs.map((x) => x.tags))}
@@ -3437,6 +3438,7 @@ function viewPdfs() {
     $$('[data-tagfilter]', app).forEach((sel) => sel.addEventListener('change', () => { S.ui.pf[sel.dataset.tagfilter] = sel.value; viewPdfs(); }));
   }
   renderPdfList();
+  renderCloudLib();
 }
 actions['pdf-clear-filters'] = () => { S.ui.pf = {}; S.ui.pq = ''; S.ui.ptype = ''; viewPdfs(); };
 function renderPdfList() {
@@ -3452,7 +3454,7 @@ function renderPdfList() {
   const cnt = $('#pdf-count');
   if (cnt) cnt.textContent = S.pdfs.length ? `${list.length} de ${S.pdfs.length} PDF(s)` : 'PDFs enviados e PDFs gerados pelo app';
   if (!S.pdfs.length) {
-    box.innerHTML = `<div class="empty"><h2>Nenhum PDF ainda</h2><p>Envie os PDFs dos programas que você já tem. O app lê o código de cada programa (ex.: HIP-M-20-29-INI-ACA) e etiqueta sozinho.</p><button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>`;
+    box.innerHTML = `<div class="empty"><h2>Nenhum PDF seu neste aparelho</h2><p>Os PDFs da Biblioteca ficam na nuvem, logo acima. Aqui você pode enviar PDFs próprios. O app lê o código de cada programa (ex.: HIP-M-20-29-INI-ACA) e etiqueta sozinho.</p><button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>`;
     return;
   }
   const nUntag = libraryPdfs().filter((x) => !hasTags(x.tags)).length;
@@ -3591,6 +3593,7 @@ function viewConfig() {
     <div class="stack">
       ${cloudCardHTML()}
       ${licAdminHTML()}
+      ${cloudPublishHTML()}
       <div class="card stack">
         <h2>Seu perfil de personal</h2>
         <p class="muted" style="margin:0">Nome, foto, CREF e apresentação que aparecem nos programas.</p>
@@ -4006,6 +4009,112 @@ actions['st-aero-done'] = async (el) => {
   toast('Treino concluído! 💪');
   renderStudent('aero');
   window.scrollTo(0, 0);
+};
+
+/* =========================================================
+ * Biblioteca de PDFs na nuvem (compartilhada com todos os assinantes)
+ * ======================================================= */
+const CLOUD_LIB = { rows: null, loading: false, error: '' };
+async function loadCloudLib(force = false) {
+  if (!sb || !CLOUD.user) return [];
+  if (CLOUD_LIB.rows && !force) return CLOUD_LIB.rows;
+  CLOUD_LIB.loading = true;
+  const { data, error } = await sb.from('library_pdfs').select('*').order('title');
+  CLOUD_LIB.loading = false;
+  CLOUD_LIB.error = error ? error.message : '';
+  CLOUD_LIB.rows = error ? [] : data || [];
+  return CLOUD_LIB.rows;
+}
+function cloudItemsHTML(rows) {
+  const q = normTxt(S.ui.cq || '');
+  const list = rows.filter((r) => !q || normTxt(`${r.title} ${r.code || ''}`).includes(q));
+  return list.map((r) => `<div class="cl-item">
+      <div style="flex:1;min-width:0"><strong>${esc(r.title)}</strong><div class="small muted">${r.code ? esc(r.code) + ' · ' : ''}${r.pages ? r.pages + ' páginas · ' : ''}${r.size ? fmtSize(r.size) : ''}</div>
+        ${hasTags(r.tags) ? `<div class="meta" style="margin-top:4px">${tagChips(r.tags)}</div>` : ''}</div>
+      <div class="row" style="gap:6px"><button class="btn sm" data-action="cl-open" data-path="${esc(r.file_path)}">Abrir</button>
+        <button class="btn sm" data-action="cl-dl" data-path="${esc(r.file_path)}" data-name="${esc(r.title)}">Baixar</button>
+        <button class="btn sm ghost" data-action="cl-import" data-path="${esc(r.file_path)}" data-name="${esc(r.title)}" title="Trazer para Meus PDFs deste aparelho (para importar slides e editar)">Usar no app</button></div>
+    </div>`).join('') || '<div class="empty">Nada encontrado.</div>';
+}
+function cloudLibHTML(rows) {
+  if (!rows.length) return '';
+  return `<div class="card stack" style="margin-bottom:22px">
+    <div class="row"><div style="flex:1;min-width:220px"><h2 style="margin:0">Biblioteca de Treinos Lucrativos</h2>
+      <div class="small muted">${rows.length} PDFs originais na nuvem · disponíveis em qualquer aparelho</div></div>
+      <input type="search" id="cl-q" placeholder="Buscar programa ou código…" value="${esc(S.ui.cq || '')}" style="max-width:260px"></div>
+    <div class="cl-list" id="cl-items">${cloudItemsHTML(rows)}</div></div>`;
+}
+async function renderCloudLib() {
+  const box = $('#cloudlib');
+  if (!box) return;
+  if (!sb || !CLOUD.user || !LIC.active) { box.innerHTML = ''; return; }
+  if (!CLOUD_LIB.rows) box.innerHTML = '<div class="small muted" style="margin-bottom:14px">Carregando a Biblioteca da nuvem…</div>';
+  const rows = await loadCloudLib();
+  const b2 = $('#cloudlib');
+  if (!b2) return;
+  b2.innerHTML = cloudLibHTML(rows);
+  const qi = $('#cl-q');
+  if (qi) qi.addEventListener('input', (e) => { S.ui.cq = e.target.value; $('#cl-items').innerHTML = cloudItemsHTML(rows); });
+}
+async function cloudSignedUrl(path, download) {
+  const { data, error } = await sb.storage.from('biblioteca').createSignedUrl(path, 3600, download ? { download } : undefined);
+  if (error) throw error;
+  return data.signedUrl;
+}
+actions['cl-open'] = async (el) => {
+  const w = window.open('', '_blank');
+  try { const url = await cloudSignedUrl(el.dataset.path); if (w) w.location = url; else location.href = url; } catch (e) { if (w) w.close(); toast('Não foi possível abrir o PDF'); }
+};
+actions['cl-dl'] = async (el) => {
+  try { const url = await cloudSignedUrl(el.dataset.path, slug(el.dataset.name) + '.pdf'); const a = document.createElement('a'); a.href = url; a.click(); } catch (e) { toast('Não foi possível baixar o PDF'); }
+};
+actions['cl-import'] = async (el) => {
+  const meta = await withBusy('Trazendo o PDF para este aparelho…', async () => {
+    const { data, error } = await sb.storage.from('biblioteca').download(el.dataset.path);
+    if (error) throw error;
+    return addPdfFile(new File([data], el.dataset.name + '.pdf', { type: 'application/pdf' }));
+  });
+  if (meta) { toast('PDF disponível em Meus PDFs deste aparelho'); renderPdfList(); }
+};
+
+/* ---- Admin: publicar os PDFs deste aparelho na nuvem ---- */
+function cloudPublishHTML() {
+  if (!LIC.admin || !CLOUD.user) return '';
+  const n = libraryPdfs().length;
+  return `<div class="card stack" id="cl-admin">
+    <h2>PDFs da Biblioteca na nuvem <span class="small muted" style="font-weight:400">· só você vê esta área</span></h2>
+    <p class="muted" style="margin:0">Envia os PDFs originais que estão em "Meus PDFs" deste aparelho para a nuvem. Todos os assinantes passam a ver e baixar em "Meus PDFs". PDFs gerados pelo app não são enviados. Quem já está na nuvem é pulado.</p>
+    <div class="row"><button class="btn primary" data-action="cl-publish" ${n ? '' : 'disabled'}>Publicar ${n} PDF(s) para os assinantes</button><span class="small muted" id="cl-msg"></span></div>
+  </div>`;
+}
+actions['cl-publish'] = async () => {
+  const list = libraryPdfs();
+  if (!list.length) return;
+  if (!confirm(`Enviar ${list.length} PDF(s) para a nuvem? Pode levar alguns minutos. Deixe esta aba aberta até terminar.`)) return;
+  const msg = (t) => { const m = $('#cl-msg'); if (m) m.textContent = t; };
+  const existing = new Set((await loadCloudLib(true)).map((r) => r.file_path));
+  let ok = 0, skip = 0, fail = 0;
+  const used = new Set();
+  for (let i = 0; i < list.length; i++) {
+    const m = list[i];
+    let path = slug(m.code || m.title || m.name) + '.pdf';
+    if (used.has(path)) path = slug((m.code || m.name) + '-' + m.id.slice(-4)) + '.pdf';
+    used.add(path);
+    msg(`Enviando ${i + 1} de ${list.length}: ${pdfTitle(m)}…`);
+    if (existing.has(path)) { skip++; continue; }
+    try {
+      const rec = await DB.get('pdfblobs', m.id);
+      if (!rec || !rec.blob) throw new Error('arquivo não encontrado neste aparelho');
+      const up = await sb.storage.from('biblioteca').upload(path, rec.blob, { upsert: true, contentType: 'application/pdf' });
+      if (up.error) throw up.error;
+      const ins = await sb.from('library_pdfs').upsert({ code: m.code || null, title: pdfTitle(m), file_path: path, pages: m.pages || null, size: rec.blob.size, tags: m.tags || {} }, { onConflict: 'file_path' });
+      if (ins.error) throw ins.error;
+      ok++;
+    } catch (e) { console.warn(e); fail++; }
+  }
+  msg(`Pronto: ${ok} enviado(s), ${skip} já estavam na nuvem${fail ? `, ${fail} com erro (tente de novo)` : ''}.`);
+  toast('Publicação concluída');
+  await loadCloudLib(true);
 };
 
 /* =========================================================
