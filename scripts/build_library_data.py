@@ -17,7 +17,7 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent.parent
 SRC = BASE / "biblioteca-de-treinos" / "roteiros"
 OUT = BASE / "app-programas" / "library-data.js"
-CODE_RE = re.compile(r"^(EMA|DEF|HIP|PER|SAU)-[FM]-\d{2}-\d{2}-(INI|INT|AVA|HIT)-(ACA|CAS|ELA)$")
+CODE_RE = re.compile(r"^(EMA|DEF|HIP|PER|SAU)-[FM]-\d{2}-\d{2}-(INI|INT|AVA|HIT)-(ACA|CAS|ELA)(-\d)?$")
 
 
 def clean(t: str) -> str:
@@ -163,6 +163,7 @@ def parse(md: str) -> dict:
         "load": bullets(find(secs, "Diretrizes de Progressão")),
         "safety": safety,
         "next": clean(" ".join(find(secs, "Próximo Passo"))),
+        "duration": (re.search(r"\*\*Duração:\*\*\s*(\d+)\s*semanas", md) or [None, ""])[1],
     }
 
 
@@ -219,6 +220,14 @@ EXTRA_RULES = [
     (r"wall slide|deslizamento de bra[cç]os", "Wall_Slide"),
     (r"tornozelo", "Ankle_Mobility"),
     (r"alongamento global", "Posterior_Chain_Stretch"),
+    (r"marcha estacion", "High_Knees"),
+    (r"thruster", "Push_Press"),
+    (r"afundo parado|passada no smith", "Split_Squats"),
+    (r"agachamento para banco", "Chair_Squat"),
+    (r"agachamento unilateral assistido", "Bodyweight_Squat"),
+    (r"avan[cç]o \(lunge\)", "Dumbbell_Lunges"),
+    (r"extens[aã]o lombar", "Hyperextensions_Back_Extensions"),
+    (r"remada curvada com el[aá]stico", "Backpack_Bent_Over_Row"),
 ]
 
 

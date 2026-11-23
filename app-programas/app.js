@@ -187,7 +187,7 @@ const THEMES = { navy: 'Azul-marinho e dourado', black: 'Preto e dourado', light
 const TAGS = {
   obj: { label: 'Objetivo', opts: { EMA: 'Emagrecimento', DEF: 'Definição muscular', HIP: 'Hipertrofia', PER: 'Performance', SAU: 'Saúde' } },
   sex: { label: 'Público', opts: { F: 'Feminino', M: 'Masculino' } },
-  age: { label: 'Faixa etária', opts: { '20-29': '20–29 anos', '30-39': '30–39 anos', '40-49': '40–49 anos', '50-60': '50–60 anos', '20-39': '20–39 anos', '40-60': '40–60 anos', '20-60': '20–60 anos' } },
+  age: { label: 'Faixa etária', opts: { '20-29': '20–29 anos', '30-39': '30–39 anos', '40-49': '40–49 anos', '50-60': '50–60 anos', '20-39': '20–39 anos', '30-49': '30–49 anos', '20-49': '20–49 anos', '40-60': '40–60 anos', '20-60': '20–60 anos' } },
   level: { label: 'Nível', opts: { INI: 'Iniciante', INT: 'Intermediário', AVA: 'Avançado', HIT: 'HIIT' } },
   env: { label: 'Ambiente', opts: { ACA: 'Academia', CAS: 'Casa', ELA: 'Elásticos' } },
 };
@@ -254,11 +254,22 @@ const CATALOG = {
   'PER-M-20-39-INT-ACA': ["Projeto Máquina de Rendimento", '4x'],
   'PER-M-20-39-AVA-ACA': ["Protocolo Limite Zero", '5x'],
   'PER-M-30-39-AVA-ACA': ["Projeto Força Explosiva 30+", '5x'],
+  'EMA-M-50-60-INI-ACA': ["Projeto Motor Ativo 50+", '3x'],
+  'EMA-M-40-49-INT-ACA-2': ["Projeto Queima Inteligente 40+", '4x'],
+  'EMA-F-50-60-INI-CAS': ["Leve & Forte em Casa 50+", '3x'],
+  'HIP-M-50-60-INI-ACA-2': ["Projeto Músculo Sem Idade", '3x'],
+  'HIP-F-30-49-INT-ACA': ["O Despertar da Força Feminina", '5x'],
+  'HIP-F-50-60-INI-CAS': ["Músculo em Casa 50+", '3x'],
+  'SAU-M-30-39-INT-CAS': ["Projeto Base Sólida 30+", '4x'],
+  'SAU-F-20-49-INI-CAS': ["Mulher Rejuvenescida — 21 Dias", '6x'],
+  'HIP-F-20-49-INT-ACA': ["O Despertar da Sua Força", '4x'],
 };
 function parseCode(str) {
-  const m = String(str || '').toUpperCase().match(/(EMA|DEF|HIP|PER|SAU)[-_ ]+([FM])[-_ ]+(\d{2})[-_ ]+(\d{2})[-_ ]+(INI|INT|AVA|HIT)[-_ ]+(ACA|CAS|ELA)/);
+  const m = String(str || '').toUpperCase().match(/(EMA|DEF|HIP|PER|SAU)[-_ ]+([FM])[-_ ]+(\d{2})[-_ ]+(\d{2})[-_ ]+(INI|INT|AVA|HIT)[-_ ]+(ACA|CAS|ELA)(?:[-_ ]+(\d)(?!\d))?/);
   if (!m) return null;
-  return { code: `${m[1]}-${m[2]}-${m[3]}-${m[4]}-${m[5]}-${m[6]}`, obj: m[1], sex: m[2], age: `${m[3]}-${m[4]}`, level: m[5], env: m[6] };
+  const base = `${m[1]}-${m[2]}-${m[3]}-${m[4]}-${m[5]}-${m[6]}`;
+  const variant = m[7] && (window.LIBRARY_DATA || {})[`${base}-${m[7]}`] ? `-${m[7]}` : '';
+  return { code: base + variant, obj: m[1], sex: m[2], age: `${m[3]}-${m[4]}`, level: m[5], env: m[6] };
 }
 const hasTags = (t) => !!t && TAG_KEYS.some((k) => t[k]);
 function tagChips(t) {
@@ -347,6 +358,7 @@ function fillFromLibrary(p, code) {
   p.warmup = d.warmup.join('\n');
   p.objectives = d.weeks.join('\n');
   p.recommendations = d.load.join('\n');
+  if (d.duration) p.weeks = String(d.duration);
   p.workouts = d.workouts.map((w) => newWorkout(w.name, {
     focus: w.focus,
     exercises: w.exercises.map((x) => newExercise({ ...x, pse: '', load: '', notes: '' })),
@@ -3417,7 +3429,7 @@ function personForm(kind, rec, assign, onSaved) {
 function viewPdfs() {
   const f = S.ui.pf;
   app.innerHTML = `
-    <div class="page-head"><div><h1>Meus PDFs</h1><p class="muted" id="pdf-count"></p><p class="small muted" style="margin:4px 0 0;max-width:640px">Opcional: envie PDFs próprios para guardar, importar slides e editar. Os 60 programas do App já estão na Biblioteca.</p></div>
+    <div class="page-head"><div><h1>Meus PDFs</h1><p class="muted" id="pdf-count"></p><p class="small muted" style="margin:4px 0 0;max-width:640px">Opcional: envie PDFs próprios para guardar, importar slides e editar. Todos os programas do App já estão na Biblioteca.</p></div>
       <button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>
     <div id="cloudlib"></div>
     ${S.pdfs.length ? `<div class="toolbar">
