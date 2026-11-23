@@ -187,7 +187,7 @@ const THEMES = { navy: 'Azul-marinho e dourado', black: 'Preto e dourado', light
 const TAGS = {
   obj: { label: 'Objetivo', opts: { EMA: 'Emagrecimento', DEF: 'Definição muscular', HIP: 'Hipertrofia', PER: 'Performance', SAU: 'Saúde' } },
   sex: { label: 'Público', opts: { F: 'Feminino', M: 'Masculino' } },
-  age: { label: 'Faixa etária', opts: { '20-29': '20–29 anos', '30-39': '30–39 anos', '40-49': '40–49 anos', '50-60': '50–60 anos', '20-39': '20–39 anos', '40-60': '40–60 anos', '20-60': '20–60 anos' } },
+  age: { label: 'Faixa etária', opts: { '20-29': '20–29 anos', '30-39': '30–39 anos', '40-49': '40–49 anos', '50-60': '50–60 anos', '20-39': '20–39 anos', '30-49': '30–49 anos', '20-49': '20–49 anos', '40-60': '40–60 anos', '20-60': '20–60 anos' } },
   level: { label: 'Nível', opts: { INI: 'Iniciante', INT: 'Intermediário', AVA: 'Avançado', HIT: 'HIIT' } },
   env: { label: 'Ambiente', opts: { ACA: 'Academia', CAS: 'Casa', ELA: 'Elásticos' } },
 };
@@ -254,11 +254,22 @@ const CATALOG = {
   'PER-M-20-39-INT-ACA': ["Projeto Máquina de Rendimento", '4x'],
   'PER-M-20-39-AVA-ACA': ["Protocolo Limite Zero", '5x'],
   'PER-M-30-39-AVA-ACA': ["Projeto Força Explosiva 30+", '5x'],
+  'EMA-M-50-60-INI-ACA': ["Projeto Motor Ativo 50+", '3x'],
+  'EMA-M-40-49-INT-ACA-2': ["Projeto Queima Inteligente 40+", '4x'],
+  'EMA-F-50-60-INI-CAS': ["Leve & Forte em Casa 50+", '3x'],
+  'HIP-M-50-60-INI-ACA-2': ["Projeto Músculo Sem Idade", '3x'],
+  'HIP-F-30-49-INT-ACA': ["O Despertar da Força Feminina", '5x'],
+  'HIP-F-50-60-INI-CAS': ["Músculo em Casa 50+", '3x'],
+  'SAU-M-30-39-INT-CAS': ["Projeto Base Sólida 30+", '4x'],
+  'SAU-F-20-49-INI-CAS': ["Mulher Rejuvenescida — 21 Dias", '6x'],
+  'HIP-F-20-49-INT-ACA': ["O Despertar da Sua Força", '4x'],
 };
 function parseCode(str) {
-  const m = String(str || '').toUpperCase().match(/(EMA|DEF|HIP|PER|SAU)[-_ ]+([FM])[-_ ]+(\d{2})[-_ ]+(\d{2})[-_ ]+(INI|INT|AVA|HIT)[-_ ]+(ACA|CAS|ELA)/);
+  const m = String(str || '').toUpperCase().match(/(EMA|DEF|HIP|PER|SAU)[-_ ]+([FM])[-_ ]+(\d{2})[-_ ]+(\d{2})[-_ ]+(INI|INT|AVA|HIT)[-_ ]+(ACA|CAS|ELA)(?:[-_ ]+(\d)(?!\d))?/);
   if (!m) return null;
-  return { code: `${m[1]}-${m[2]}-${m[3]}-${m[4]}-${m[5]}-${m[6]}`, obj: m[1], sex: m[2], age: `${m[3]}-${m[4]}`, level: m[5], env: m[6] };
+  const base = `${m[1]}-${m[2]}-${m[3]}-${m[4]}-${m[5]}-${m[6]}`;
+  const variant = m[7] && (window.LIBRARY_DATA || {})[`${base}-${m[7]}`] ? `-${m[7]}` : '';
+  return { code: base + variant, obj: m[1], sex: m[2], age: `${m[3]}-${m[4]}`, level: m[5], env: m[6] };
 }
 const hasTags = (t) => !!t && TAG_KEYS.some((k) => t[k]);
 function tagChips(t) {
@@ -347,6 +358,7 @@ function fillFromLibrary(p, code) {
   p.warmup = d.warmup.join('\n');
   p.objectives = d.weeks.join('\n');
   p.recommendations = d.load.join('\n');
+  if (d.duration) p.weeks = String(d.duration);
   p.workouts = d.workouts.map((w) => newWorkout(w.name, {
     focus: w.focus,
     exercises: w.exercises.map((x) => newExercise({ ...x, pse: '', load: '', notes: '' })),
@@ -645,6 +657,7 @@ function viewHome() {
       <div class="row hero-actions">
         <a class="btn primary lg" href="#/novo">+ Novo programa para um aluno</a>
         <a class="btn lg" href="#/biblioteca">Ver Biblioteca (${allTemplates().length})</a>
+        <button class="btn lg" data-action="new-aero">+ Programa aeróbico</button>
       </div>
     </div>
     <div class="page-head" style="margin-top:28px"><div><h2>Programas dos seus alunos</h2><p class="muted small">${progs.length} programa(s) neste aparelho</p></div>
@@ -659,10 +672,10 @@ function viewHome() {
           ${hasTags(progTags(p)) ? `<div class="meta">${tagChips(progTags(p))}</div>` : ''}
           <div class="actions">
             <button class="btn sm primary" data-action="student-access" data-id="${esc(p.id)}">Acesso do aluno</button>
-            <button class="btn sm" data-action="send-program" data-id="${esc(p.id)}">PDF</button>
+            ${p.mode === 'aero' ? `<button class="btn sm" data-action="open-program" data-id="${esc(p.id)}">Ver / editar</button><span class="spacer"></span>` : `<button class="btn sm" data-action="send-program" data-id="${esc(p.id)}">PDF</button>
             <button class="btn sm" data-action="open-program" data-id="${esc(p.id)}" data-tab="gerar">Ver / editar</button>
             <span class="spacer"></span>
-            <button class="btn sm ghost" data-action="save-template" data-id="${esc(p.id)}" title="Salvar como modelo para usar com outros alunos">Salvar como modelo</button>
+            <button class="btn sm ghost" data-action="save-template" data-id="${esc(p.id)}" title="Salvar como modelo para usar com outros alunos">Salvar como modelo</button>`}
             <button class="btn sm danger" data-action="del-program" data-id="${esc(p.id)}" title="Excluir">✕</button>
           </div></div>`;
       }).join('')}</div>`}`;
@@ -1039,7 +1052,7 @@ function viewEditor(id, tab) {
   p.include = { trainer: true, overview: true, guidelines: true, warmup: true, pse: true, closing: true, ...(p.include || {}) };
   p.tags = p.tags || {};
   E.p = p;
-  const tabs = (p.mode === 'slides' ? ['slides', 'dados', 'gerar'] : ['dados', 'treinos', 'gerar']).concat(p.isTemplate ? [] : ['acomp']);
+  const tabs = (p.mode === 'slides' ? ['slides', 'dados', 'gerar'] : p.mode === 'aero' ? AERO_TABS.map((t) => t[0]) : ['dados', 'treinos', 'gerar']).concat(p.isTemplate ? [] : ['acomp']);
   E.tab = tabs.includes(tab) ? tab : tabs[0];
   leaveHook = () => saveSoon.flush();
   renderEditor();
@@ -1053,21 +1066,23 @@ function renderEditor() {
         ${p.isTemplate ? '<span class="chip gold">Meu modelo: alterações valem para os próximos alunos</span>' : ''}
         <span class="spacer"></span>
         <span id="save-state" class="save-state ok">Salvo ✓</span>
-        ${p.isTemplate ? '' : `<button class="btn sm ghost" data-action="save-template" data-id="${esc(p.id)}">Salvar como modelo</button>
-        <button class="btn sm" data-action="send-program" data-id="${esc(p.id)}">Enviar PDF</button>
+        ${p.isTemplate ? '' : `${p.mode === 'aero' ? '' : `<button class="btn sm ghost" data-action="save-template" data-id="${esc(p.id)}">Salvar como modelo</button>
+        <button class="btn sm" data-action="send-program" data-id="${esc(p.id)}">Enviar PDF</button>`}
         <button class="btn sm primary" data-action="student-access" data-id="${esc(p.id)}">Liberar acesso ao aluno</button>`}
       </div>
       <h1 id="ed-title" style="margin-top:6px">${esc(p.title || 'Sem título')}</h1>
       <div class="tabs">${(p.mode === 'slides'
         ? [['slides', '1. Slides'], ['dados', '2. Aluno e personal'], ['gerar', '3. Gerar PDF']]
+        : p.mode === 'aero' ? AERO_TABS
         : [['dados', '1. Dados e capa'], ['treinos', '2. Treinos e exercícios'], ['gerar', '3. Visualizar e gerar PDF']])
-        .concat(p.isTemplate ? [] : [['acomp', '4. Acompanhamento']])
+        .concat(p.isTemplate ? [] : [['acomp', p.mode === 'aero' ? '7. Acompanhamento' : '4. Acompanhamento']])
         .map(([k, l]) => `<button data-action="tab" data-tab="${k}" class="${E.tab === k ? 'active' : ''}">${l}</button>`).join('')}
       </div>
     </div>
-    <div id="ed-body">${E.tab === 'acomp' ? '' : E.tab === 'slides' ? tabSlides() : E.tab === 'dados' ? (p.mode === 'slides' ? tabPessoas() : tabDados()) : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
+    <div id="ed-body">${E.tab === 'acomp' ? '' : p.mode === 'aero' ? aeroBody(p) : E.tab === 'slides' ? tabSlides() : E.tab === 'dados' ? (p.mode === 'slides' ? tabPessoas() : tabDados()) : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
   if (E.tab === 'acomp') tabAcompanhamento();
   bindInputs(app);
+  if (p.mode === 'aero') aeroRefresh();
   if (E.tab === 'gerar') renderPreview();
   if (E.tab === 'slides') { scaleFrames(app); new ResizeObserver(() => scaleFrames(app)).observe($('#ed-body')); }
 }
@@ -1084,6 +1099,7 @@ actions['fill-library'] = async () => {
 actions.tab = async (el) => {
   await saveSoon.flush();
   E.tab = el.dataset.tab;
+  if (E.p.mode === 'aero' && !AERO_TABS.some((t) => t[0] === E.tab) && E.tab !== 'acomp') E.tab = 'aerob';
   history.replaceState(null, '', `#/programa/${E.p.id}/${E.tab}`);
   renderEditor();
   window.scrollTo(0, 0);
@@ -1104,6 +1120,7 @@ function bindInputs(root) {
 }
 function onBound(path) {
   if (path === 'title') $('#ed-title').textContent = E.p.title || 'Sem título';
+  if (path.startsWith('aero.')) aeroRefresh();
   const m = path.match(/^workouts\.(\d+)\.exercises\.(\d+)\./);
   if (m) {
     const ex = E.p.workouts[+m[1]].exercises[+m[2]];
@@ -1245,7 +1262,8 @@ function workoutHTML(w, wi) {
       ${w.exercises.length ? '' : '<div class="empty" style="padding:20px">Nenhum exercício neste treino ainda.</div>'}
       ${w.exercises.map((x, ei) => exerciseHTML(x, wi, ei, w.exercises.length)).join('')}
       <div class="row">
-        <button class="btn sm" data-action="add-ex" data-wi="${wi}">+ Exercício</button>
+        <button class="btn sm primary" data-action="ex-bank" data-wi="${wi}">+ Do banco de exercícios (com foto)</button>
+        <button class="btn sm" data-action="add-ex" data-wi="${wi}">+ Exercício em branco</button>
         <button class="btn sm" data-action="import-pages" data-wi="${wi}">Importar páginas do PDF</button>
       </div>
     </div>
@@ -1304,7 +1322,7 @@ function exerciseHTML(x, wi, ei, n) {
 }
 function rerenderTreinos() {
   const y = window.scrollY;
-  $('#ed-body').innerHTML = tabTreinos();
+  $('#ed-body').innerHTML = E.p.mode === 'aero' ? aeroBody(E.p) : tabTreinos();
   bindInputs($('#ed-body'));
   window.scrollTo(0, y);
 }
@@ -1340,6 +1358,70 @@ actions['del-workout'] = (el) => {
   saveSoon(); rerenderTreinos();
 };
 actions['mv-workout'] = (el) => { move(E.p.workouts, +el.dataset.wi, +el.dataset.d); saveSoon(); rerenderTreinos(); };
+
+/* ---- Banco de exercícios (todos os exercícios da Biblioteca, com foto) ---- */
+let EX_BANK = null;
+const normTxt = (t) => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+function exerciseBank() {
+  if (EX_BANK) return EX_BANK;
+  const m = new Map();
+  Object.values(window.LIBRARY_DATA || {}).forEach((pr) => (pr.workouts || []).forEach((w) => (w.exercises || []).forEach((e) => {
+    const k = String(e.name || '').trim();
+    if (!k) return;
+    const sx = /fotos\/M\//.test(e.image || '') ? 'M' : 'F';
+    const o = m.get(k) || { name: k, img: {}, execution: e.execution || '', cautions: e.cautions || '', repsLabel: e.repsLabel || 'Reps' };
+    if (e.image && !o.img[sx]) o.img[sx] = e.image;
+    m.set(k, o);
+  })));
+  EX_BANK = [...m.values()].sort((a, b) => a.name.localeCompare(b.name, 'pt'));
+  return EX_BANK;
+}
+actions['ex-bank'] = (el) => {
+  const wi = +el.dataset.wi;
+  const st = byId(S.students, E.p.studentId);
+  const sx = st && st.sex === 'M' ? 'M' : 'F';
+  const sel = new Set();
+  const bank = exerciseBank();
+  const body = openModal('Banco de exercícios', `
+    <div class="stack">
+      <input type="search" id="xb-q" placeholder="Buscar exercício (ex.: supino, agachamento, remada)…">
+      <div class="row small muted"><span id="xb-n"></span><span class="spacer"></span><span>Fotos ${sx === 'M' ? 'masculinas' : 'femininas'} (conforme o sexo do aluno)</span></div>
+      <div class="xb-grid" id="xb-list"></div>
+      <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="xb-add" disabled>Adicionar</button></div>
+    </div>`, { wide: true });
+  const imgOf = (x) => x.img[sx] || x.img.F || x.img.M || '';
+  let limit = 30;
+  const draw = () => {
+    const q = normTxt($('#xb-q', body).value.trim());
+    const list = bank.filter((x) => !q || normTxt(x.name).includes(q));
+    $('#xb-n', body).textContent = `${list.length} exercício(s)${list.length > limit ? ` · mostrando ${limit}` : ''}`;
+    $('#xb-list', body).innerHTML = list.slice(0, limit).map((x) => `<button class="xb-item ${sel.has(x.name) ? 'sel' : ''}" data-xb="${esc(x.name)}">
+      ${imgOf(x) ? `<span class="xb-img"><img src="${esc(photo(imgOf(x)))}" alt="" decoding="async" onerror="this.parentNode.classList.add('err')"></span>` : '<span class="xb-noimg">sem foto</span>'}<span>${esc(x.name)}</span></button>`).join('')
+      + (list.length > limit ? '<button class="btn" id="xb-more" style="grid-column:1/-1">Mostrar mais exercícios</button>' : '');
+    const more = $('#xb-more', body);
+    if (more) more.onclick = () => { limit += 30; draw(); };
+    const b = $('#xb-add', body); b.disabled = !sel.size; b.textContent = sel.size ? `Adicionar ${sel.size} exercício(s)` : 'Adicionar';
+  };
+  $('#xb-list', body).addEventListener('click', (e) => {
+    const it = e.target.closest('[data-xb]'); if (!it) return;
+    const n = it.dataset.xb; if (sel.has(n)) sel.delete(n); else sel.add(n);
+    it.classList.toggle('sel');
+    const b = $('#xb-add', body); b.disabled = !sel.size; b.textContent = sel.size ? `Adicionar ${sel.size} exercício(s)` : 'Adicionar';
+  });
+  $('#xb-q', body).addEventListener('input', () => { limit = 30; draw(); });
+  $('#xb-add', body).onclick = () => {
+    const w = E.p.workouts[wi];
+    bank.filter((x) => sel.has(x.name)).forEach((x) => w.exercises.push(newExercise({
+      name: x.name, image: imgOf(x), execution: x.execution, cautions: x.cautions, repsLabel: x.repsLabel,
+      sets: '3', reps: x.repsLabel === 'Tempo' ? '30s' : '10-12', rest: '60s',
+    })));
+    closeModal();
+    saveSoon(); rerenderTreinos();
+    toast(`${sel.size} exercício(s) adicionado(s)`);
+  };
+  draw();
+  $('#xb-q', body).focus();
+};
 actions['add-ex'] = (el) => {
   const x = newExercise();
   W(el).exercises.push(x);
@@ -2949,8 +3031,11 @@ function saveDraft(wid, d) { lsSet(draftKey(wid), JSON.stringify(d)); }
 function renderStudent(tab) {
   const { program: p, trainer: tr, student: st, access } = ST.data;
   const isSlides = p.mode === 'slides';
+  const isAero = p.mode === 'aero' && p.aero;
+  const hasForca = (p.workouts || []).some((w) => (w.exercises || []).length);
   if (!ST.wid || !(p.workouts || []).some((w) => w.id === ST.wid)) ST.wid = (nextWorkout(p) || {}).id;
-  ST.tab = tab || ST.tab || 'treino';
+  ST.tab = tab || ST.tab || (isAero ? 'aero' : 'treino');
+  if (isAero && !['aero', 'plano', 'treino', 'hist'].includes(ST.tab)) ST.tab = 'aero';
   const exp = access.expires_at ? new Date(access.expires_at) : null;
   const daysLeft = exp ? Math.ceil((exp - new Date()) / 86400000) : null;
   app.innerHTML = `
@@ -2964,11 +3049,13 @@ function renderStudent(tab) {
       ${tr ? `<div class="row st-trainer">${avatarHTML(tr.photo, tr.name)}<div><div class="small muted">Seu personal</div><strong>${esc(tr.name)}</strong>${tr.cref ? `<div class="small muted">CREF ${esc(tr.cref)}</div>` : ''}</div></div>` : ''}
       ${daysLeft !== null && daysLeft <= 7 ? `<div class="small" style="color:var(--gold-2);margin-top:10px">Seu acesso vence em ${daysLeft} dia(s). Fale com seu personal para renovar.</div>` : ''}
     </div>
-    ${isSlides ? '' : `<div class="tabs st-tabs"><button data-action="st-tab" data-tab="treino" class="${ST.tab === 'treino' ? 'active' : ''}">Treino de hoje</button><button data-action="st-tab" data-tab="hist" class="${ST.tab === 'hist' ? 'active' : ''}">Histórico (${(ST.data.logs || []).length})</button><button data-action="st-tab" data-tab="info" class="${ST.tab === 'info' ? 'active' : ''}">Orientações</button></div>`}
+    ${isAero ? `<div class="tabs st-tabs"><button data-action="st-tab" data-tab="aero" class="${ST.tab === 'aero' ? 'active' : ''}">Treino de hoje</button><button data-action="st-tab" data-tab="plano" class="${ST.tab === 'plano' ? 'active' : ''}">Plano</button>${hasForca ? `<button data-action="st-tab" data-tab="treino" class="${ST.tab === 'treino' ? 'active' : ''}">Força</button>` : ''}<button data-action="st-tab" data-tab="hist" class="${ST.tab === 'hist' ? 'active' : ''}">Histórico (${(ST.data.logs || []).length})</button></div>` : isSlides ? '' : `<div class="tabs st-tabs"><button data-action="st-tab" data-tab="treino" class="${ST.tab === 'treino' ? 'active' : ''}">Treino de hoje</button><button data-action="st-tab" data-tab="hist" class="${ST.tab === 'hist' ? 'active' : ''}">Histórico (${(ST.data.logs || []).length})</button><button data-action="st-tab" data-tab="info" class="${ST.tab === 'info' ? 'active' : ''}">Orientações</button></div>`}
     <div id="st-body"></div>`;
   if (isSlides) return renderStudentSlides(p);
   if (ST.tab === 'hist') return renderStudentHistory();
   if (ST.tab === 'info') return renderStudentInfo(p);
+  if (isAero && ST.tab === 'aero') return renderStudentAero(p);
+  if (isAero && ST.tab === 'plano') return renderStudentAeroPlan(p);
   renderStudentWorkout(p);
 }
 actions['st-tab'] = (el) => renderStudent(el.dataset.tab);
@@ -3342,8 +3429,9 @@ function personForm(kind, rec, assign, onSaved) {
 function viewPdfs() {
   const f = S.ui.pf;
   app.innerHTML = `
-    <div class="page-head"><div><h1>Meus PDFs</h1><p class="muted" id="pdf-count"></p><p class="small muted" style="margin:4px 0 0;max-width:640px">Opcional: envie PDFs próprios para guardar, importar slides e editar. Os 60 programas do App já estão na Biblioteca.</p></div>
+    <div class="page-head"><div><h1>Meus PDFs</h1><p class="muted" id="pdf-count"></p><p class="small muted" style="margin:4px 0 0;max-width:640px">Opcional: envie PDFs próprios para guardar, importar slides e editar. Todos os programas do App já estão na Biblioteca.</p></div>
       <button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>
+    <div id="cloudlib"></div>
     ${S.pdfs.length ? `<div class="toolbar">
       <input type="search" id="pdf-q" placeholder="Buscar por nome ou código…" value="${esc(S.ui.pq)}" style="max-width:240px">
       ${tagSelects(f, 'pf-', S.pdfs.map((x) => x.tags))}
@@ -3362,6 +3450,7 @@ function viewPdfs() {
     $$('[data-tagfilter]', app).forEach((sel) => sel.addEventListener('change', () => { S.ui.pf[sel.dataset.tagfilter] = sel.value; viewPdfs(); }));
   }
   renderPdfList();
+  renderCloudLib();
 }
 actions['pdf-clear-filters'] = () => { S.ui.pf = {}; S.ui.pq = ''; S.ui.ptype = ''; viewPdfs(); };
 function renderPdfList() {
@@ -3377,7 +3466,7 @@ function renderPdfList() {
   const cnt = $('#pdf-count');
   if (cnt) cnt.textContent = S.pdfs.length ? `${list.length} de ${S.pdfs.length} PDF(s)` : 'PDFs enviados e PDFs gerados pelo app';
   if (!S.pdfs.length) {
-    box.innerHTML = `<div class="empty"><h2>Nenhum PDF ainda</h2><p>Envie os PDFs dos programas que você já tem. O app lê o código de cada programa (ex.: HIP-M-20-29-INI-ACA) e etiqueta sozinho.</p><button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>`;
+    box.innerHTML = `<div class="empty"><h2>Nenhum PDF seu neste aparelho</h2><p>Os PDFs da Biblioteca ficam na nuvem, logo acima. Aqui você pode enviar PDFs próprios. O app lê o código de cada programa (ex.: HIP-M-20-29-INI-ACA) e etiqueta sozinho.</p><button class="btn primary" data-action="upload-pdfs">+ Enviar PDFs</button></div>`;
     return;
   }
   const nUntag = libraryPdfs().filter((x) => !hasTags(x.tags)).length;
@@ -3516,6 +3605,7 @@ function viewConfig() {
     <div class="stack">
       ${cloudCardHTML()}
       ${licAdminHTML()}
+      ${cloudPublishHTML()}
       <div class="card stack">
         <h2>Seu perfil de personal</h2>
         <p class="muted" style="margin:0">Nome, foto, CREF e apresentação que aparecem nos programas.</p>
@@ -3592,6 +3682,451 @@ actions.restore = async () => {
     return true;
   });
   if (ok) { toast('Cópia restaurada'); viewConfig(); }
+};
+
+/* =========================================================
+ * Programa Aeróbico (prescrição individualizada por zonas)
+ * ======================================================= */
+const AERO_OBJ = { EMA: 'Emagrecimento', EST: 'Redução do estresse', PER: 'Performance' };
+const AERO_ZONES = {
+  reg: { label: 'Regenerativa', lo: 0.28, hi: 0.42, cls: 'z-reg' },
+  lip: { label: 'Lipolítica', lo: 0.43, hi: 0.58, cls: 'z-lip' },
+  gli: { label: 'Glicolítica', lo: 0.60, hi: 0.70, cls: 'z-gli' },
+};
+const AERO_MUSC = {
+  RML: 'Musculação RML (40% a 60% de 1RM)',
+  FD: 'Musculação Força Dinâmica (60% a 70% de 1RM)',
+};
+const AERO_TEMPLATE = [
+  { fase: 1, micro: 'Microciclo introdutório', dias: [40, 42, 44, 40, 46, 48, 'R'] },
+  { fase: 1, micro: 'Microciclo condicionante', dias: [47, 47, 47, 43, 39, 35, 'R'] },
+  { fase: 2, micro: 'Microciclo condicionante 1', dias: [49, 49, 49, 45, 41, 38, 'R'] },
+  { fase: 2, micro: 'Microciclo condicionante 2', dias: [51, 51, 51, 47, 43, 39, 'R'] },
+  { fase: 3, micro: 'Microciclo condicionante 1', dias: [49, 'RML', 49, 'RML', 49, 45, 'R'] },
+  { fase: 3, micro: 'Microciclo condicionante 2', dias: [49, 'RML', 49, 'RML', 49, 45, 'R'] },
+  { fase: 4, micro: 'Microciclo condicionante 1', dias: [45, 'FD', 45, 'FD', 45, 41, 'R'] },
+  { fase: 4, micro: 'Microciclo condicionante 2', dias: [45, 'FD', 45, 'FD', 45, 41, 'R'] },
+  { fase: 5, micro: 'Microciclo de recuperação', dias: [49, 45, 41, 37, 45, 41, 'R'] },
+];
+const AERO_MODAL = ['Esteira', 'Bicicleta ergométrica', 'Elíptico', 'Remo ergômetro', 'Caminhada ao ar livre', 'Corrida ao ar livre', 'Natação', 'Outra'];
+const AERO_EXAMS = [
+  ['ct', 'Colesterol total', 'mg/dL'], ['ldl', 'LDL colesterol', 'mg/dL'], ['vldl', 'VLDL colesterol', 'mg/dL'], ['hdl', 'HDL colesterol', 'mg/dL'],
+  ['tg', 'Triglicerídeos', 'mg/dL'], ['glic', 'Glicemia', 'mg/dL'], ['hem', 'Hemácias', 'milhões/mm³'], ['hb', 'Hemoglobina', 'g/dL'],
+  ['hba1c', 'Hemoglobina glicada', '%'], ['ins', 'Insulina', 'µUI/mL'], ['au', 'Ácido úrico', 'mg/dL'], ['so2', 'SO2 (saturação de O2)', '%'],
+];
+const aeroNum = (v) => { const n = parseFloat(String(v ?? '').replace(',', '.')); return Number.isFinite(n) ? n : null; };
+const aeroFmt = (n, d = 1) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d }));
+function aeroDefaultZone(obj, fase, min) {
+  if (fase === 5) return 'reg';
+  if (obj === 'EST') return 'reg';
+  if (obj === 'PER') return min <= 45 ? 'gli' : 'lip';
+  return 'lip';
+}
+function aeroPlan(obj) {
+  return AERO_TEMPLATE.map((w) => ({
+    fase: w.fase, micro: w.micro,
+    dias: w.dias.map((d) => (typeof d === 'number' ? { t: 'aero', min: String(d), zona: aeroDefaultZone(obj, w.fase, d) } : { t: d })),
+  }));
+}
+function newAeroProgram(obj, studentId) {
+  return newProgram({
+    mode: 'aero',
+    title: `Programa Aeróbico · ${AERO_OBJ[obj] || ''}`,
+    studentId: studentId || '',
+    weeks: String(AERO_TEMPLATE.length),
+    frequency: '6x/semana',
+    structure: '5 fases · aeróbico por zonas + musculação',
+    workouts: [newWorkout('Série A'), newWorkout('Série B')],
+    aero: { obj, inicio: '', av: {}, hemo: {}, ex: {}, exerc: { modalidade: '' }, plano: aeroPlan(obj) },
+  });
+}
+/* Cálculos a partir da avaliação (p = programa, st = aluno) */
+function aeroCalc(p, st) {
+  const a = p.aero || {};
+  const av = a.av || {}, he = a.hemo || {};
+  const peso = aeroNum(av.peso), alt = aeroNum(av.altura), g = aeroNum(av.gordura);
+  const sex = (st && st.sex) || av.sexo || '';
+  const idade = aeroNum(av.idade) ?? aeroNum(st && st.age);
+  const altM = alt ? (alt > 3 ? alt / 100 : alt) : null;
+  const r = { peso, idade, sex };
+  r.imc = peso && altM ? peso / (altM * altM) : null;
+  r.mcmPct = g != null ? 100 - g : null;
+  r.mg = peso && g != null ? peso * g / 100 : null;
+  r.mm = peso && g != null ? peso - r.mg : null;
+  r.gIdeal = sex === 'M' ? 15 : sex === 'F' ? 23 : null;
+  r.mgIdeal = peso && r.gIdeal != null ? peso * r.gIdeal / 100 : null;
+  r.mmIdeal = peso && r.gIdeal != null ? peso - r.mgIdeal : null;
+  // Gordura excedente = (% gordura medido − % gordura sugerido) × peso atual / 100
+  r.excedente = peso && g != null && r.gIdeal != null ? Math.max(0, (g - r.gIdeal) * peso / 100) : null;
+  // Carência muscular = [(% MCM de referência − % MCM) / 100] × MCM (kg); referência 81% (masc.) e 77% (fem.)
+  r.mcmRef = sex === 'M' ? 81 : sex === 'F' ? 77 : null;
+  r.carencia = r.mm != null && r.mcmRef != null ? Math.max(0, (r.mcmRef - r.mcmPct) / 100 * r.mm) : null;
+  r.rcq = aeroNum(av.cintura) && aeroNum(av.quadril) ? aeroNum(av.cintura) / aeroNum(av.quadril) : null;
+  r.fcmaxCalc = idade != null ? 220 - idade : null;
+  r.fcmax = aeroNum(he.fcmax) ?? r.fcmaxCalc;
+  r.fcrep = aeroNum(he.fcrep);
+  r.fcr = r.fcmax != null && r.fcrep != null ? r.fcmax - r.fcrep : null;
+  r.vo2max = aeroNum(he.vo2max);
+  r.vo2r = r.vo2max != null ? r.vo2max - 3.5 : null;
+  r.zones = {};
+  Object.entries(AERO_ZONES).forEach(([k, z]) => {
+    const o = {};
+    if (r.fcr != null) { o.bpmLo = Math.round(r.fcrep + z.lo * r.fcr); o.bpmHi = Math.round(r.fcrep + z.hi * r.fcr); }
+    if (r.vo2r != null) {
+      o.vo2Lo = 3.5 + z.lo * r.vo2r; o.vo2Hi = 3.5 + z.hi * r.vo2r;
+      if (peso) o.kcalMin = ((o.vo2Lo + o.vo2Hi) / 2) * peso * 5 / 1000;
+    }
+    r.zones[k] = o;
+  });
+  return r;
+}
+function aeroBpm(c, zk) { const z = c.zones[zk] || {}; return z.bpmLo != null ? `${z.bpmLo}–${z.bpmHi} bpm` : 'FC: preencha FC de repouso e idade'; }
+function aeroKcal(c, zk, min) { const z = c.zones[zk] || {}; const m = aeroNum(min); return z.kcalMin != null && m ? Math.round(z.kcalMin * m) : null; }
+function aeroTotals(p, c) {
+  const days = (p.aero.plano || []).flatMap((w) => w.dias).filter((d) => d.t === 'aero');
+  const mins = days.map((d) => aeroNum(d.min) || 0);
+  const kcal = days.map((d) => aeroKcal(c, d.zona, d.min)).filter((x) => x != null);
+  const weeks = (p.aero.plano || []).length || 1;
+  return {
+    sessoes: days.length, minTotal: mins.reduce((a, b) => a + b, 0),
+    minMedio: mins.length ? Math.round(mins.reduce((a, b) => a + b, 0) / mins.length) : 0,
+    freq: Math.round(days.length / weeks * 10) / 10,
+    kcalTotal: kcal.length === days.length ? kcal.reduce((a, b) => a + b, 0) : null,
+  };
+}
+
+/* ---- Editor (personal) ---- */
+const AERO_TABS = [['aval', '1. Avaliação física'], ['hemo', '2. Hemodinâmica'], ['exames', '3. Exames'], ['exerc', '4. Exercício físico'], ['treinos', '5. Treino de força'], ['aerob', '6. Treinos aeróbicos']];
+const aeroField = (path, label, unit = '', ph = '') => `<label class="field"><span>${label}${unit ? ` <em class="unit">(${unit})</em>` : ''}</span><input type="text" inputmode="decimal" data-bind="${path}" placeholder="${esc(ph)}"></label>`;
+const aeroOut = (id, label, unit = '') => `<div class="aero-out"><span>${label}</span><b id="${id}">—</b>${unit ? `<em>${unit}</em>` : ''}</div>`;
+function aeroStudent(p) { return byId(S.students, p.studentId); }
+function aeroHead(p) {
+  const st = aeroStudent(p);
+  return `<div class="section card row">
+    <div style="flex:1;min-width:220px"><div class="small muted">Aluno</div><select id="aero-student">${optList(S.students, p.studentId, 'Escolha o aluno')}</select>
+      ${st ? `<div class="small muted" style="margin-top:6px">${st.sex ? esc(TAGS.sex.opts[st.sex]) : 'Sexo não informado'} · ${st.age ? esc(st.age) + ' anos' : 'idade não informada'} <a href="#" data-action="edit-person" data-assign="1" data-kind="students" data-id="${esc(st.id)}">editar</a></div>` : ''}</div>
+    <label class="field" style="min-width:200px"><span>Objetivo</span><select data-bind="aero.obj">${Object.entries(AERO_OBJ).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
+    <label class="field" style="min-width:160px"><span>Início do programa</span><input type="date" data-bind="aero.inicio"></label>
+  </div>`;
+}
+function tabAeroAval(p) {
+  return `${aeroHead(p)}
+  <div class="section card"><h3>Avaliação física</h3>
+    <div class="grid three">
+      ${aeroField('aero.av.data', 'Data da avaliação', '', 'dd/mm/aaaa')}${aeroField('aero.av.idade', 'Idade', 'anos', 'usa a do cadastro')}${aeroField('aero.av.peso', 'Peso', 'kg')}
+      ${aeroField('aero.av.altura', 'Altura', 'cm')}${aeroField('aero.av.cintura', 'Circ. de cintura', 'cm')}${aeroField('aero.av.abdome', 'Circ. de abdome', 'cm')}
+      ${aeroField('aero.av.quadril', 'Circ. de quadril', 'cm')}${aeroField('aero.av.punho', 'Circ. de punho', 'cm')}${aeroField('aero.av.gordura', '% de gordura', '%')}
+    </div></div>
+  <div class="section card"><h3>Resultados (calculados)</h3>
+    <div class="aero-outs">
+      ${aeroOut('o-imc', 'IMC', 'kg/m²')}${aeroOut('o-mcm', '% MCM (massa corporal magra)', '%')}${aeroOut('o-mg', 'Massa gorda', 'kg')}${aeroOut('o-mm', 'Massa magra', 'kg')}
+      ${aeroOut('o-exc', 'Gordura excedente', 'kg')}${aeroOut('o-car', 'Carência muscular', 'kg')}${aeroOut('o-rcq', 'Relação cintura/quadril', '')}
+    </div>
+    <p class="small muted" style="margin:10px 0 0">Gordura excedente = (% de gordura medido − % de gordura sugerido) × peso atual ÷ 100, com % sugerido de 15% (masculino) e 23% (feminino). Carência muscular = [(81% − %MCM) ÷ 100] × MCM no masculino e [(77% − %MCM) ÷ 100] × MCM no feminino. O sexo vem do cadastro do aluno.</p>
+  </div>
+  <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="hemo">Próximo: hemodinâmica →</button></div>`;
+}
+function tabAeroHemo(p) {
+  const sel = (path, label, opts) => `<label class="field"><span>${label}</span><select data-bind="${path}"><option value="">—</option>${opts.map((o) => `<option>${esc(o)}</option>`).join('')}</select></label>`;
+  return `<div class="section card"><h3>Medidas hemodinâmicas</h3>
+    <div class="grid three">
+      ${aeroField('aero.hemo.pas', 'Pressão arterial sistólica', 'mmHg')}${aeroField('aero.hemo.pad', 'Pressão arterial diastólica', 'mmHg')}${aeroField('aero.hemo.fcrep', 'FC de repouso', 'bpm')}
+      ${aeroField('aero.hemo.fcmax', 'FC máxima', 'bpm', 'automático: 220 − idade')}${aeroField('aero.hemo.vo2max', 'VO2 máximo', 'ml/kg/min')}
+      ${sel('aero.hemo.sono', 'Qualidade do sono', ['Boa', 'Regular', 'Ruim'])}
+      ${sel('aero.hemo.intestino', 'Funcionamento do intestino', ['Regular', 'Preso', 'Solto', 'Irregular'])}
+      ${sel('aero.hemo.estresse', 'Nível de estresse', ['Baixo', 'Moderado', 'Alto', 'Muito alto'])}
+    </div>
+    <label class="field" style="margin-top:12px"><span>Objetivos do aluno</span><textarea rows="3" data-bind="aero.hemo.objetivos" placeholder="Ex.: reduzir 6 kg de gordura em 9 semanas, dormir melhor…"></textarea></label>
+  </div>
+  <div class="section card"><h3>Valores calculados</h3>
+    <div class="aero-outs">
+      ${aeroOut('o-fcmax', 'FC máxima usada', 'bpm')}${aeroOut('o-fcr', 'FC de reserva (FCmáx − FCrep)', 'bpm')}${aeroOut('o-vo2r', 'VO2 de reserva (VO2máx − 3,5)', 'ml/kg/min')}
+    </div></div>
+  <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="exames">Próximo: exames →</button></div>`;
+}
+function tabAeroExames() {
+  return `<div class="section card"><h3>Exames laboratoriais</h3>
+    <div class="grid three">${aeroField('aero.ex.data', 'Data dos exames', '', 'dd/mm/aaaa')}${AERO_EXAMS.map(([k, l, u]) => aeroField(`aero.ex.${k}`, l, u)).join('')}</div>
+    <label class="field" style="margin-top:12px"><span>Observações</span><textarea rows="2" data-bind="aero.ex.obs"></textarea></label>
+  </div>
+  <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="exerc">Próximo: exercício físico →</button></div>`;
+}
+function tabAeroExerc(p) {
+  return `<div class="section card"><h3>Exercício físico</h3>
+    <div class="grid three">
+      <label class="field"><span>Modalidade aeróbica</span><select data-bind="aero.exerc.modalidade"><option value="">—</option>${AERO_MODAL.map((m) => `<option>${m}</option>`).join('')}</select></label>
+      <label class="field"><span>Observações da modalidade</span><input type="text" data-bind="aero.exerc.obs" placeholder="Ex.: esteira com 1% de inclinação"></label>
+    </div></div>
+  <div class="section card"><h3>Resumo do programa (calculado)</h3>
+    <div class="aero-outs">
+      ${aeroOut('o-int', 'Intensidade predominante')}${aeroOut('o-freq', 'Frequência semanal', 'sessões aeróbicas')}${aeroOut('o-dur', 'Duração média', 'min')}
+      ${aeroOut('o-min', 'Volume total', 'min')}${aeroOut('o-kcal', 'Gasto calórico total estimado', 'kcal')}${aeroOut('o-kcalw', 'Gasto médio por semana', 'kcal')}
+    </div>
+    <p class="small muted" style="margin:10px 0 0">Gasto calórico = VO2 alvo da zona × peso × minutos × 5 kcal/L. Precisa do peso e do VO2máx.</p></div>
+  <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="treinos">Próximo: treino de força →</button></div>`;
+}
+function tabAeroAerob(p) {
+  const c = aeroCalc(p, aeroStudent(p));
+  const zoneRows = Object.entries(AERO_ZONES).map(([k, z]) => {
+    const o = c.zones[k];
+    return `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td>${Math.round(z.lo * 100)}% a ${Math.round(z.hi * 100)}%</td>
+      <td><b>${o.bpmLo != null ? `${o.bpmLo} a ${o.bpmHi} bpm` : '—'}</b></td><td>${o.vo2Lo != null ? `${aeroFmt(o.vo2Lo)} a ${aeroFmt(o.vo2Hi)}` : '—'}</td><td>${o.kcalMin != null ? aeroFmt(o.kcalMin) : '—'}</td></tr>`;
+  }).join('');
+  let n = 0;
+  const weeks = (p.aero.plano || []).map((w, wi) => {
+    const prevFase = wi > 0 ? p.aero.plano[wi - 1].fase : 0;
+    return `${w.fase !== prevFase ? `<h3 class="aero-fase">Fase ${w.fase}</h3>` : ''}
+    <div class="card aero-week"><div class="row"><strong>Semana ${wi + 1}</strong><span class="small muted">${esc(w.micro)}</span></div>
+      <div class="aero-days">${w.dias.map((d, di) => {
+        const lab = `Dia ${di + 1}`;
+        if (d.t === 'R') return `<div class="aero-day rest"><span class="small muted">${lab}</span><b>Descanso</b></div>`;
+        if (d.t !== 'aero') return `<div class="aero-day musc"><span class="small muted">${lab}</span><b>${esc(AERO_MUSC[d.t] || d.t)}</b><span class="small muted">Treino de força (aba 5)</span></div>`;
+        n++;
+        const kc = aeroKcal(c, d.zona, d.min);
+        return `<div class="aero-day"><span class="small muted">${lab} · sessão ${n}</span>
+          <div class="row" style="gap:6px"><input type="text" inputmode="numeric" data-bind="aero.plano.${wi}.dias.${di}.min" class="min-in"><span class="small">min</span></div>
+          <select data-bind="aero.plano.${wi}.dias.${di}.zona" class="${AERO_ZONES[d.zona] ? AERO_ZONES[d.zona].cls : ''}">${Object.entries(AERO_ZONES).map(([k, z]) => `<option value="${k}">${z.label}</option>`).join('')}</select>
+          <span class="small" data-zbpm="${wi}-${di}">${esc(aeroBpm(c, d.zona))}</span>${kc != null ? `<span class="small muted" data-zkcal="${wi}-${di}">≈ ${kc} kcal</span>` : `<span class="small muted" data-zkcal="${wi}-${di}"></span>`}</div>`;
+      }).join('')}</div></div>`;
+  }).join('');
+  return `<div class="section card"><h3>Zonas de treinamento do aluno</h3>
+    <table class="tpl-table aero-ztable"><tr><th>Zona</th><th>% da reserva</th><th>FC alvo (Karvonen)</th><th>VO2 alvo (ml/kg/min)</th><th>kcal/min</th></tr>${zoneRows}</table>
+    <p class="small muted" style="margin:10px 0 0">FC alvo = FC repouso + % × (FCmáx − FC repouso). VO2 alvo = 3,5 + % × (VO2máx − 3,5). Atualize a avaliação e a hemodinâmica que as zonas se recalculam.</p></div>
+  <div class="section stack">${weeks}</div>
+  <div class="section row"><button class="btn" data-action="aero-reset-plan">Restaurar periodização padrão</button><span class="spacer"></span><button class="btn primary" data-action="student-access" data-id="${esc(p.id)}">Liberar acesso ao aluno</button></div>`;
+}
+function aeroBody(p) {
+  if (E.tab === 'aval') return tabAeroAval(p);
+  if (E.tab === 'hemo') return tabAeroHemo(p);
+  if (E.tab === 'exames') return tabAeroExames(p);
+  if (E.tab === 'exerc') return tabAeroExerc(p);
+  if (E.tab === 'treinos') return `<div class="section card small muted">Monte as séries de musculação (A, B, C…). Use o campo "Foco" para os grupos musculares e "Obs." para a técnica utilizada. Elas aparecem para o aluno nos dias de musculação RML e Força Dinâmica.</div>${tabTreinos().replace(/<button class="btn primary" data-action="tab" data-tab="gerar">[^<]*<\/button>/, '<button class="btn primary" data-action="tab" data-tab="aerob">Próximo: treinos aeróbicos →</button>')}`;
+  if (E.tab === 'aerob') return tabAeroAerob(p);
+  return '';
+}
+function aeroRefresh() {
+  const p = E.p;
+  if (!p || p.mode !== 'aero') return;
+  const c = aeroCalc(p, aeroStudent(p));
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('o-imc', aeroFmt(c.imc)); set('o-mcm', aeroFmt(c.mcmPct)); set('o-mg', aeroFmt(c.mg)); set('o-mm', aeroFmt(c.mm));
+  set('o-exc', aeroFmt(c.excedente)); set('o-car', aeroFmt(c.carencia)); set('o-rcq', aeroFmt(c.rcq, 2));
+  set('o-fcmax', c.fcmax != null ? String(Math.round(c.fcmax)) : '—'); set('o-fcr', c.fcr != null ? String(Math.round(c.fcr)) : '—'); set('o-vo2r', aeroFmt(c.vo2r));
+  const t = aeroTotals(p, c);
+  const zc = {};
+  p.aero.plano.flatMap((w) => w.dias).filter((d) => d.t === 'aero').forEach((d) => { zc[d.zona] = (zc[d.zona] || 0) + 1; });
+  const top = Object.entries(zc).sort((a, b) => b[1] - a[1])[0];
+  set('o-int', top ? AERO_ZONES[top[0]].label : '—'); set('o-freq', aeroFmt(t.freq)); set('o-dur', String(t.minMedio)); set('o-min', String(t.minTotal));
+  set('o-kcal', t.kcalTotal != null ? Math.round(t.kcalTotal).toLocaleString('pt-BR') : '—');
+  set('o-kcalw', t.kcalTotal != null ? Math.round(t.kcalTotal / p.aero.plano.length).toLocaleString('pt-BR') : '—');
+  $$('[data-zbpm]').forEach((el) => {
+    const [wi, di] = el.dataset.zbpm.split('-').map(Number);
+    const d = p.aero.plano[wi].dias[di];
+    el.textContent = aeroBpm(c, d.zona);
+    const kc = aeroKcal(c, d.zona, d.min);
+    const k = $(`[data-zkcal="${wi}-${di}"]`);
+    if (k) k.textContent = kc != null ? `≈ ${kc} kcal` : '';
+    const s = el.parentElement.querySelector('select');
+    if (s) s.className = AERO_ZONES[d.zona] ? AERO_ZONES[d.zona].cls : '';
+  });
+}
+actions['new-aero'] = () => {
+  const body = openModal('Novo programa aeróbico', `
+    <div class="stack">
+      <p class="muted small" style="margin:0">Prescrição individualizada: você preenche a avaliação e o app calcula as zonas (FC de reserva e VO2 de reserva) e monta a periodização de 5 fases.</p>
+      <label class="field"><span>Objetivo</span><select id="na-obj">${Object.entries(AERO_OBJ).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
+      <label class="field"><span>Aluno</span><select id="na-st">${optList(S.students, '', 'Escolha depois')}</select></label>
+      <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="na-go">Criar programa</button></div>
+    </div>`);
+  $('#na-go', body).onclick = async () => {
+    const p = newAeroProgram($('#na-obj', body).value, $('#na-st', body).value);
+    await saveEntity('programs', p);
+    closeModal();
+    location.hash = `#/programa/${p.id}/aval`;
+  };
+};
+actions['aero-reset-plan'] = async () => {
+  if (!confirm('Restaurar as durações e zonas padrão das 5 fases? Suas alterações na periodização serão perdidas.')) return;
+  E.p.aero.plano = aeroPlan(E.p.aero.obj);
+  saveSoon();
+  await saveSoon.flush();
+  renderEditor();
+};
+document.addEventListener('change', (e) => {
+  if (e.target && e.target.id === 'aero-student' && E.p) { E.p.studentId = e.target.value; saveSoon(); renderEditor(); }
+});
+
+/* ---- Área do aluno ---- */
+function aeroSessions(p) {
+  const out = [];
+  (p.aero.plano || []).forEach((w, wi) => w.dias.forEach((d, di) => { if (d.t !== 'R') out.push({ ...d, wi, di, fase: w.fase, micro: w.micro, ref: `aero-${wi + 1}-${di + 1}` }); }));
+  return out;
+}
+function aeroDone(ref) { return (ST.data.logs || []).find((l) => l.workout_ref === ref); }
+function aeroSessionName(s) {
+  return s.t === 'aero' ? `Aeróbico ${s.min} min · ${(AERO_ZONES[s.zona] || {}).label || ''}` : (AERO_MUSC[s.t] || 'Musculação');
+}
+function renderStudentAero(p) {
+  const box = $('#st-body');
+  const c = aeroCalc(p, ST.data.student);
+  const ss = aeroSessions(p);
+  const next = ss.find((s) => !aeroDone(s.ref));
+  const doneN = ss.filter((s) => aeroDone(s.ref)).length;
+  const modal = (p.aero.exerc || {}).modalidade;
+  const card = (s) => {
+    if (!s) return '<div class="card"><h3>Programa concluído! 🎉</h3><p class="muted">Você completou todas as sessões. Fale com seu personal para a próxima etapa.</p></div>';
+    const z = AERO_ZONES[s.zona];
+    return `<div class="card aero-today">
+      <div class="small muted">Fase ${s.fase} · Semana ${s.wi + 1} · Dia ${s.di + 1} · ${esc(s.micro)}</div>
+      ${s.t === 'aero' ? `<h2 style="margin:6px 0">${esc(s.min)} minutos</h2>
+        <div class="row" style="gap:8px"><span class="zchip ${z.cls}">Zona ${z.label}</span>${modal ? `<span class="chip">${esc(modal)}</span>` : ''}</div>
+        <div class="aero-bpm">${c.zones[s.zona].bpmLo != null ? `${c.zones[s.zona].bpmLo}–${c.zones[s.zona].bpmHi}` : '—'}<small> bpm</small></div>
+        <p class="small muted" style="margin:0">Mantenha a frequência cardíaca nessa faixa durante o treino.${aeroKcal(c, s.zona, s.min) != null ? ` Gasto estimado: ≈ ${aeroKcal(c, s.zona, s.min)} kcal.` : ''}</p>`
+      : `<h2 style="margin:6px 0">${esc(AERO_MUSC[s.t] || 'Musculação')}</h2><p class="muted" style="margin:0">Hoje é dia de musculação. Faça a série indicada pelo seu personal na aba <b>Força</b>.</p>`}
+      <label class="field" style="margin-top:12px"><span>Como foi? (opcional)</span><input type="text" id="aero-note" placeholder="Ex.: FC média 128, me senti bem"></label>
+      <button class="btn primary lg" style="width:100%;margin-top:12px" data-action="st-aero-done" data-ref="${s.ref}">Concluir este treino ✓</button>
+    </div>`;
+  };
+  box.innerHTML = `<div class="stack" style="margin-top:14px">
+    <div class="small muted">${doneN} de ${ss.length} sessões concluídas</div>
+    ${card(next)}
+    <div class="card"><h3>Suas zonas de treino</h3><table class="tpl-table">${Object.entries(AERO_ZONES).map(([k, z]) => `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td><b>${c.zones[k].bpmLo != null ? `${c.zones[k].bpmLo}–${c.zones[k].bpmHi} bpm` : '—'}</b></td></tr>`).join('')}</table></div>
+  </div>`;
+}
+function renderStudentAeroPlan(p) {
+  const box = $('#st-body');
+  const c = aeroCalc(p, ST.data.student);
+  box.innerHTML = `<div class="stack" style="margin-top:14px">${(p.aero.plano || []).map((w, wi) => `
+    <div class="card"><div class="row"><strong>Semana ${wi + 1}</strong><span class="small muted">Fase ${w.fase} · ${esc(w.micro)}</span></div>
+      <table class="tpl-table" style="margin-top:8px">${w.dias.map((d, di) => {
+        const ref = `aero-${wi + 1}-${di + 1}`;
+        const ok = d.t !== 'R' && aeroDone(ref);
+        return `<tr><td>${ok ? '✅' : d.t === 'R' ? '😴' : '⬜'} Dia ${di + 1}</td><td>${d.t === 'R' ? 'Descanso' : d.t === 'aero' ? `${esc(d.min)} min · <span class="zchip ${AERO_ZONES[d.zona].cls}">${AERO_ZONES[d.zona].label}</span> ${esc(aeroBpm(c, d.zona))}` : esc(AERO_MUSC[d.t] || d.t)}</td></tr>`;
+      }).join('')}</table></div>`).join('')}</div>`;
+}
+actions['st-aero-done'] = async (el) => {
+  const p = ST.data.program;
+  const s = aeroSessions(p).find((x) => x.ref === el.dataset.ref);
+  if (!s) return;
+  const note = ($('#aero-note') || {}).value || '';
+  const log = { workout_ref: s.ref, workout_name: `Sem. ${s.wi + 1} · Dia ${s.di + 1} · ${aeroSessionName(s)}`, exercises: [], notes: note };
+  const res = await withBusy('Salvando…', async () => {
+    const { data, error } = await sb.rpc('student_save_log', { _code: ST.code, _log: log });
+    if (error) throw error;
+    if (data && data.error) throw new Error(STUDENT_ERRORS[data.error] || data.error);
+    return data;
+  });
+  if (!res) return;
+  ST.data.logs = [{ ...log, id: res.id, log_date: new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' }) }, ...(ST.data.logs || [])];
+  toast('Treino concluído! 💪');
+  renderStudent('aero');
+  window.scrollTo(0, 0);
+};
+
+/* =========================================================
+ * Biblioteca de PDFs na nuvem (compartilhada com todos os assinantes)
+ * ======================================================= */
+const CLOUD_LIB = { rows: null, loading: false, error: '' };
+async function loadCloudLib(force = false) {
+  if (!sb || !CLOUD.user) return [];
+  if (CLOUD_LIB.rows && !force) return CLOUD_LIB.rows;
+  CLOUD_LIB.loading = true;
+  const { data, error } = await sb.from('library_pdfs').select('*').order('title');
+  CLOUD_LIB.loading = false;
+  CLOUD_LIB.error = error ? error.message : '';
+  CLOUD_LIB.rows = error ? [] : data || [];
+  return CLOUD_LIB.rows;
+}
+function cloudItemsHTML(rows) {
+  const q = normTxt(S.ui.cq || '');
+  const list = rows.filter((r) => !q || normTxt(`${r.title} ${r.code || ''}`).includes(q));
+  return list.map((r) => `<div class="cl-item">
+      <div style="flex:1;min-width:0"><strong>${esc(r.title)}</strong><div class="small muted">${r.code ? esc(r.code) + ' · ' : ''}${r.pages ? r.pages + ' páginas · ' : ''}${r.size ? fmtSize(r.size) : ''}</div>
+        ${hasTags(r.tags) ? `<div class="meta" style="margin-top:4px">${tagChips(r.tags)}</div>` : ''}</div>
+      <div class="row" style="gap:6px"><button class="btn sm" data-action="cl-open" data-path="${esc(r.file_path)}">Abrir</button>
+        <button class="btn sm" data-action="cl-dl" data-path="${esc(r.file_path)}" data-name="${esc(r.title)}">Baixar</button>
+        <button class="btn sm ghost" data-action="cl-import" data-path="${esc(r.file_path)}" data-name="${esc(r.title)}" title="Trazer para Meus PDFs deste aparelho (para importar slides e editar)">Usar no app</button></div>
+    </div>`).join('') || '<div class="empty">Nada encontrado.</div>';
+}
+function cloudLibHTML(rows) {
+  if (!rows.length) return '';
+  return `<div class="card stack" style="margin-bottom:22px">
+    <div class="row"><div style="flex:1;min-width:220px"><h2 style="margin:0">Biblioteca de Treinos Lucrativos</h2>
+      <div class="small muted">${rows.length} PDFs originais na nuvem · disponíveis em qualquer aparelho</div></div>
+      <input type="search" id="cl-q" placeholder="Buscar programa ou código…" value="${esc(S.ui.cq || '')}" style="max-width:260px"></div>
+    <div class="cl-list" id="cl-items">${cloudItemsHTML(rows)}</div></div>`;
+}
+async function renderCloudLib() {
+  const box = $('#cloudlib');
+  if (!box) return;
+  if (!sb || !CLOUD.user || !LIC.active) { box.innerHTML = ''; return; }
+  if (!CLOUD_LIB.rows) box.innerHTML = '<div class="small muted" style="margin-bottom:14px">Carregando a Biblioteca da nuvem…</div>';
+  const rows = await loadCloudLib();
+  const b2 = $('#cloudlib');
+  if (!b2) return;
+  b2.innerHTML = cloudLibHTML(rows);
+  const qi = $('#cl-q');
+  if (qi) qi.addEventListener('input', (e) => { S.ui.cq = e.target.value; $('#cl-items').innerHTML = cloudItemsHTML(rows); });
+}
+async function cloudSignedUrl(path, download) {
+  const { data, error } = await sb.storage.from('biblioteca').createSignedUrl(path, 3600, download ? { download } : undefined);
+  if (error) throw error;
+  return data.signedUrl;
+}
+actions['cl-open'] = async (el) => {
+  const w = window.open('', '_blank');
+  try { const url = await cloudSignedUrl(el.dataset.path); if (w) w.location = url; else location.href = url; } catch (e) { if (w) w.close(); toast('Não foi possível abrir o PDF'); }
+};
+actions['cl-dl'] = async (el) => {
+  try { const url = await cloudSignedUrl(el.dataset.path, slug(el.dataset.name) + '.pdf'); const a = document.createElement('a'); a.href = url; a.click(); } catch (e) { toast('Não foi possível baixar o PDF'); }
+};
+actions['cl-import'] = async (el) => {
+  const meta = await withBusy('Trazendo o PDF para este aparelho…', async () => {
+    const { data, error } = await sb.storage.from('biblioteca').download(el.dataset.path);
+    if (error) throw error;
+    return addPdfFile(new File([data], el.dataset.name + '.pdf', { type: 'application/pdf' }));
+  });
+  if (meta) { toast('PDF disponível em Meus PDFs deste aparelho'); renderPdfList(); }
+};
+
+/* ---- Admin: publicar os PDFs deste aparelho na nuvem ---- */
+function cloudPublishHTML() {
+  if (!LIC.admin || !CLOUD.user) return '';
+  const n = libraryPdfs().length;
+  return `<div class="card stack" id="cl-admin">
+    <h2>PDFs da Biblioteca na nuvem <span class="small muted" style="font-weight:400">· só você vê esta área</span></h2>
+    <p class="muted" style="margin:0">Envia os PDFs originais que estão em "Meus PDFs" deste aparelho para a nuvem. Todos os assinantes passam a ver e baixar em "Meus PDFs". PDFs gerados pelo app não são enviados. Quem já está na nuvem é pulado.</p>
+    <div class="row"><button class="btn primary" data-action="cl-publish" ${n ? '' : 'disabled'}>Publicar ${n} PDF(s) para os assinantes</button><span class="small muted" id="cl-msg"></span></div>
+  </div>`;
+}
+actions['cl-publish'] = async () => {
+  const list = libraryPdfs();
+  if (!list.length) return;
+  if (!confirm(`Enviar ${list.length} PDF(s) para a nuvem? Pode levar alguns minutos. Deixe esta aba aberta até terminar.`)) return;
+  const msg = (t) => { const m = $('#cl-msg'); if (m) m.textContent = t; };
+  const existing = new Set((await loadCloudLib(true)).map((r) => r.file_path));
+  let ok = 0, skip = 0, fail = 0;
+  const used = new Set();
+  for (let i = 0; i < list.length; i++) {
+    const m = list[i];
+    let path = slug(m.code || m.title || m.name) + '.pdf';
+    if (used.has(path)) path = slug((m.code || m.name) + '-' + m.id.slice(-4)) + '.pdf';
+    used.add(path);
+    msg(`Enviando ${i + 1} de ${list.length}: ${pdfTitle(m)}…`);
+    if (existing.has(path)) { skip++; continue; }
+    try {
+      const rec = await DB.get('pdfblobs', m.id);
+      if (!rec || !rec.blob) throw new Error('arquivo não encontrado neste aparelho');
+      const up = await sb.storage.from('biblioteca').upload(path, rec.blob, { upsert: true, contentType: 'application/pdf' });
+      if (up.error) throw up.error;
+      const ins = await sb.from('library_pdfs').upsert({ code: m.code || null, title: pdfTitle(m), file_path: path, pages: m.pages || null, size: rec.blob.size, tags: m.tags || {} }, { onConflict: 'file_path' });
+      if (ins.error) throw ins.error;
+      ok++;
+    } catch (e) { console.warn(e); fail++; }
+  }
+  msg(`Pronto: ${ok} enviado(s), ${skip} já estavam na nuvem${fail ? `, ${fail} com erro (tente de novo)` : ''}.`);
+  toast('Publicação concluída');
+  await loadCloudLib(true);
 };
 
 /* =========================================================
