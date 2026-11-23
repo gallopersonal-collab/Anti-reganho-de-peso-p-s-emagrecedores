@@ -1378,12 +1378,16 @@ actions['ex-bank'] = (el) => {
       <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="xb-add" disabled>Adicionar</button></div>
     </div>`, { wide: true });
   const imgOf = (x) => x.img[sx] || x.img.F || x.img.M || '';
+  let limit = 30;
   const draw = () => {
     const q = normTxt($('#xb-q', body).value.trim());
     const list = bank.filter((x) => !q || normTxt(x.name).includes(q));
-    $('#xb-n', body).textContent = `${list.length} exercício(s)${list.length > 150 ? ' · mostrando 150, use a busca' : ''}`;
-    $('#xb-list', body).innerHTML = list.slice(0, 150).map((x) => `<button class="xb-item ${sel.has(x.name) ? 'sel' : ''}" data-xb="${esc(x.name)}">
-      ${imgOf(x) ? `<img src="${esc(photo(imgOf(x)))}" alt="" loading="lazy">` : '<span class="xb-noimg">sem foto</span>'}<span>${esc(x.name)}</span></button>`).join('');
+    $('#xb-n', body).textContent = `${list.length} exercício(s)${list.length > limit ? ` · mostrando ${limit}` : ''}`;
+    $('#xb-list', body).innerHTML = list.slice(0, limit).map((x) => `<button class="xb-item ${sel.has(x.name) ? 'sel' : ''}" data-xb="${esc(x.name)}">
+      ${imgOf(x) ? `<span class="xb-img"><img src="${esc(photo(imgOf(x)))}" alt="" decoding="async" onerror="this.parentNode.classList.add('err')"></span>` : '<span class="xb-noimg">sem foto</span>'}<span>${esc(x.name)}</span></button>`).join('')
+      + (list.length > limit ? '<button class="btn" id="xb-more" style="grid-column:1/-1">Mostrar mais exercícios</button>' : '');
+    const more = $('#xb-more', body);
+    if (more) more.onclick = () => { limit += 30; draw(); };
     const b = $('#xb-add', body); b.disabled = !sel.size; b.textContent = sel.size ? `Adicionar ${sel.size} exercício(s)` : 'Adicionar';
   };
   $('#xb-list', body).addEventListener('click', (e) => {
@@ -1392,7 +1396,7 @@ actions['ex-bank'] = (el) => {
     it.classList.toggle('sel');
     const b = $('#xb-add', body); b.disabled = !sel.size; b.textContent = sel.size ? `Adicionar ${sel.size} exercício(s)` : 'Adicionar';
   });
-  $('#xb-q', body).addEventListener('input', draw);
+  $('#xb-q', body).addEventListener('input', () => { limit = 30; draw(); });
   $('#xb-add', body).onclick = () => {
     const w = E.p.workouts[wi];
     bank.filter((x) => sel.has(x.name)).forEach((x) => w.exercises.push(newExercise({
