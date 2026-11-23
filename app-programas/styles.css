@@ -514,3 +514,25 @@ body.gated .nav, body.gated .tabbar, body.gated .cloud-badge { display: none !im
 .plan-hint { display: block; font-size: 12px; font-weight: 500; opacity: .8; margin-top: 2px; }
 .gate-offer { display: flex; flex-direction: column; gap: 10px; }
 .gate-offer.special { margin-top: 6px; padding: 14px; border: 1px dashed rgba(210,169,97,.55); border-radius: 14px; background: rgba(210,169,97,.06); }
+
+/* Programa aeróbico */
+.unit { font-style: normal; text-transform: none; letter-spacing: 0; opacity: .8; }
+.aero-outs { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.aero-out { background: var(--card-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.aero-out span { font-size: 12px; color: var(--muted); }
+.aero-out b { font: 600 24px/1.1 Oswald, sans-serif; color: var(--gold-2); }
+.aero-out em { font-style: normal; font-size: 12px; color: var(--muted); }
+.zchip { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; border: 1px solid transparent; }
+.z-reg { background: #12324a; color: #8fd0ff; border-color: #24577a; }
+.z-lip { background: #3a2e12; color: #ffd77a; border-color: #6b5420; }
+.z-gli { background: #4a1a1a; color: #ff9a8a; border-color: #7a2c2c; }
+select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
+.aero-fase { margin: 18px 0 4px; color: var(--gold-2); }
+.aero-days { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin-top: 10px; }
+.aero-day { border: 1px solid var(--line); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 6px; background: var(--card-2); }
+.aero-day.rest { opacity: .6; }
+.aero-day.musc { border-style: dashed; }
+.aero-day .min-in { width: 64px; }
+.aero-ztable th { text-align: left; font-size: 12px; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.aero-today .aero-bpm { font: 700 46px/1 Oswald, sans-serif; color: var(--gold-2); margin: 12px 0 6px; }
+.aero-today .aero-bpm small { font-size: 18px; color: var(--muted); }
