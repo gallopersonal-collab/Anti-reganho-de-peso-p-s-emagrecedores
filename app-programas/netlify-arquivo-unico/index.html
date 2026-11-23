@@ -553,6 +553,13 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .aero-today .aero-bpm { font: 700 46px/1 Oswald, sans-serif; color: var(--gold-2); margin: 12px 0 6px; }
 .aero-today .aero-bpm small { font-size: 18px; color: var(--muted); }
 
+/* Banco de exercícios */
+.xb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; max-height: 58vh; overflow: auto; padding: 2px; }
+.xb-item { display: flex; flex-direction: column; gap: 6px; text-align: left; background: var(--card-2); border: 2px solid var(--line); border-radius: 12px; padding: 8px; color: var(--text); cursor: pointer; font: inherit; font-size: 13px; line-height: 1.25; }
+.xb-item img, .xb-noimg { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; background: #0d1424; display: grid; place-items: center; color: var(--muted); font-size: 12px; }
+.xb-item.sel { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(210,169,97,.35); }
+.xb-item.sel span::before { content: '✓ '; color: var(--gold-2); font-weight: 700; }
+
 </style>
 </head>
 <body>
@@ -2317,7 +2324,8 @@ function workoutHTML(w, wi) {
       ${w.exercises.length ? '' : '<div class="empty" style="padding:20px">Nenhum exercício neste treino ainda.</div>'}
       ${w.exercises.map((x, ei) => exerciseHTML(x, wi, ei, w.exercises.length)).join('')}
       <div class="row">
-        <button class="btn sm" data-action="add-ex" data-wi="${wi}">+ Exercício</button>
+        <button class="btn sm primary" data-action="ex-bank" data-wi="${wi}">+ Do banco de exercícios (com foto)</button>
+        <button class="btn sm" data-action="add-ex" data-wi="${wi}">+ Exercício em branco</button>
         <button class="btn sm" data-action="import-pages" data-wi="${wi}">Importar páginas do PDF</button>
       </div>
     </div>
@@ -2376,7 +2384,7 @@ function exerciseHTML(x, wi, ei, n) {
 }
 function rerenderTreinos() {
   const y = window.scrollY;
-  $('#ed-body').innerHTML = tabTreinos();
+  $('#ed-body').innerHTML = E.p.mode === 'aero' ? aeroBody(E.p) : tabTreinos();
   bindInputs($('#ed-body'));
   window.scrollTo(0, y);
 }
@@ -2412,6 +2420,66 @@ actions['del-workout'] = (el) => {
   saveSoon(); rerenderTreinos();
 };
 actions['mv-workout'] = (el) => { move(E.p.workouts, +el.dataset.wi, +el.dataset.d); saveSoon(); rerenderTreinos(); };
+
+/* ---- Banco de exercícios (todos os exercícios da Biblioteca, com foto) ---- */
+let EX_BANK = null;
+const normTxt = (t) => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+function exerciseBank() {
+  if (EX_BANK) return EX_BANK;
+  const m = new Map();
+  Object.values(window.LIBRARY_DATA || {}).forEach((pr) => (pr.workouts || []).forEach((w) => (w.exercises || []).forEach((e) => {
+    const k = String(e.name || '').trim();
+    if (!k) return;
+    const sx = /fotos\/M\//.test(e.image || '') ? 'M' : 'F';
+    const o = m.get(k) || { name: k, img: {}, execution: e.execution || '', cautions: e.cautions || '', repsLabel: e.repsLabel || 'Reps' };
+    if (e.image && !o.img[sx]) o.img[sx] = e.image;
+    m.set(k, o);
+  })));
+  EX_BANK = [...m.values()].sort((a, b) => a.name.localeCompare(b.name, 'pt'));
+  return EX_BANK;
+}
+actions['ex-bank'] = (el) => {
+  const wi = +el.dataset.wi;
+  const st = byId(S.students, E.p.studentId);
+  const sx = st && st.sex === 'M' ? 'M' : 'F';
+  const sel = new Set();
+  const bank = exerciseBank();
+  const body = openModal('Banco de exercícios', `
+    <div class="stack">
+      <input type="search" id="xb-q" placeholder="Buscar exercício (ex.: supino, agachamento, remada)…">
+      <div class="row small muted"><span id="xb-n"></span><span class="spacer"></span><span>Fotos ${sx === 'M' ? 'masculinas' : 'femininas'} (conforme o sexo do aluno)</span></div>
+      <div class="xb-grid" id="xb-list"></div>
+      <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="xb-add" disabled>Adicionar</button></div>
+    </div>`, { wide: true });
+  const imgOf = (x) => x.img[sx] || x.img.F || x.img.M || '';
+  const draw = () => {
+    const q = normTxt($('#xb-q', body).value.trim());
+    const list = bank.filter((x) => !q || normTxt(x.name).includes(q));
+    $('#xb-n', body).textContent = `${list.length} exercício(s)${list.length > 150 ? ' · mostrando 150, use a busca' : ''}`;
+    $('#xb-list', body).innerHTML = list.slice(0, 150).map((x) => `<button class="xb-item ${sel.has(x.name) ? 'sel' : ''}" data-xb="${esc(x.name)}">
+      ${imgOf(x) ? `<img src="${esc(photo(imgOf(x)))}" alt="" loading="lazy">` : '<span class="xb-noimg">sem foto</span>'}<span>${esc(x.name)}</span></button>`).join('');
+    const b = $('#xb-add', body); b.disabled = !sel.size; b.textContent = sel.size ? `Adicionar ${sel.size} exercício(s)` : 'Adicionar';
+  };
+  $('#xb-list', body).addEventListener('click', (e) => {
+    const it = e.target.closest('[data-xb]'); if (!it) return;
+    const n = it.dataset.xb; if (sel.has(n)) sel.delete(n); else sel.add(n);
+    it.classList.toggle('sel');
+    const b = $('#xb-add', body); b.disabled = !sel.size; b.textContent = sel.size ? `Adicionar ${sel.size} exercício(s)` : 'Adicionar';
+  });
+  $('#xb-q', body).addEventListener('input', draw);
+  $('#xb-add', body).onclick = () => {
+    const w = E.p.workouts[wi];
+    bank.filter((x) => sel.has(x.name)).forEach((x) => w.exercises.push(newExercise({
+      name: x.name, image: imgOf(x), execution: x.execution, cautions: x.cautions, repsLabel: x.repsLabel,
+      sets: '3', reps: x.repsLabel === 'Tempo' ? '30s' : '10-12', rest: '60s',
+    })));
+    closeModal();
+    saveSoon(); rerenderTreinos();
+    toast(`${sel.size} exercício(s) adicionado(s)`);
+  };
+  draw();
+  $('#xb-q', body).focus();
+};
 actions['add-ex'] = (el) => {
   const x = newExercise();
   W(el).exercises.push(x);
