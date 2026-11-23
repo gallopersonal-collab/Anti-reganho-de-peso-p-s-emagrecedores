@@ -4743,8 +4743,11 @@ function aeroCalc(p, st) {
   r.gIdeal = sex === 'M' ? 15 : sex === 'F' ? 23 : null;
   r.mgIdeal = peso && r.gIdeal != null ? peso * r.gIdeal / 100 : null;
   r.mmIdeal = peso && r.gIdeal != null ? peso - r.mgIdeal : null;
-  r.excedente = r.mg != null && r.mgIdeal != null ? Math.max(0, r.mg - r.mgIdeal) : null;
-  r.carencia = r.mm != null && r.mmIdeal != null ? Math.max(0, r.mmIdeal - r.mm) : null;
+  // Gordura excedente = (% gordura medido − % gordura sugerido) × peso atual / 100
+  r.excedente = peso && g != null && r.gIdeal != null ? Math.max(0, (g - r.gIdeal) * peso / 100) : null;
+  // Carência muscular = [(% MCM de referência − % MCM) / 100] × MCM (kg); referência 81% (masc.) e 77% (fem.)
+  r.mcmRef = sex === 'M' ? 81 : sex === 'F' ? 77 : null;
+  r.carencia = r.mm != null && r.mcmRef != null ? Math.max(0, (r.mcmRef - r.mcmPct) / 100 * r.mm) : null;
   r.rcq = aeroNum(av.cintura) && aeroNum(av.quadril) ? aeroNum(av.cintura) / aeroNum(av.quadril) : null;
   r.fcmaxCalc = idade != null ? 220 - idade : null;
   r.fcmax = aeroNum(he.fcmax) ?? r.fcmaxCalc;
@@ -4806,7 +4809,7 @@ function tabAeroAval(p) {
       ${aeroOut('o-imc', 'IMC', 'kg/m²')}${aeroOut('o-mcm', '% MCM (massa corporal magra)', '%')}${aeroOut('o-mg', 'Massa gorda', 'kg')}${aeroOut('o-mm', 'Massa magra', 'kg')}
       ${aeroOut('o-exc', 'Gordura excedente', 'kg')}${aeroOut('o-car', 'Carência muscular', 'kg')}${aeroOut('o-rcq', 'Relação cintura/quadril', '')}
     </div>
-    <p class="small muted" style="margin:10px 0 0">Referência de % de gordura ideal: 15% (homens) e 23% (mulheres). Gordura excedente = massa gorda atual − massa gorda ideal. Carência muscular = massa magra ideal − massa magra atual. O sexo vem do cadastro do aluno.</p>
+    <p class="small muted" style="margin:10px 0 0">Gordura excedente = (% de gordura medido − % de gordura sugerido) × peso atual ÷ 100, com % sugerido de 15% (masculino) e 23% (feminino). Carência muscular = [(81% − %MCM) ÷ 100] × MCM no masculino e [(77% − %MCM) ÷ 100] × MCM no feminino. O sexo vem do cadastro do aluno.</p>
   </div>
   <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="hemo">Próximo: hemodinâmica →</button></div>`;
 }
