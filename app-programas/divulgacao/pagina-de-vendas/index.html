@@ -97,6 +97,7 @@ p+p{margin-top:14px}
 .plan .price{font-family:'Bebas Neue';font-size:clamp(54px,9vw,72px);line-height:1;color:var(--text);margin:8px 0 2px}
 .plan .price small{font-size:.4em;color:var(--muted)}
 .plan .alt{display:block}
+.plans-one{max-width:460px!important;grid-template-columns:1fr!important}
 .cta-sec{background:transparent!important;color:var(--gold)!important;border:2px solid var(--gold);box-shadow:none!important}
 @media(min-width:760px){.plans{grid-template-columns:1.2fr .8fr;align-items:center}}
 /* guarantee */
@@ -164,29 +165,23 @@ fbq('init','359597814629044');fbq('track','PageView');fbq('track','ViewContent',
   </ul>
 </div>
 
-<!-- 8. OFERTA -->
+<!-- 8. OFERTA (topo: só o mensal) -->
 <section class="offer" id="oferta">
   <div class="wrap rv">
-    <p class="kicker">Você leva tudo por</p>
-    <h2>Escolha o seu plano</h2>
-    <div class="plans">
+    <p class="kicker">Comece hoje</p>
+    <h2>Plano mensal</h2>
+    <div class="plans plans-one">
       <div class="plan main">
-        <span class="tag">Economize R$ 197,80</span>
-        <h3>Anual</h3>
-        <div class="price">R$ 497 <small>à vista</small></div>
-        <p class="muted">R$ 41,42 por mês · ou 12x de R$ 51,40</p>
-        <p class="muted" style="margin:6px 0 20px">Você economiza R$ 197,80 em relação ao mensal.</p>
-        <a class="cta" href="https://pay.kiwify.com.br/vpzl9M0" style="width:100%">Quero o plano anual por R$ 497</a>
-      </div>
-      <div class="plan">
+        <span class="tag">Recomendado para começar</span>
         <h3>Mensal</h3>
         <div class="price">R$ 57,90 <small>/mês</small></div>
-        <p class="muted">Cancele quando quiser.</p>
-        <p class="muted" style="margin:6px 0 20px">Ideal para começar e testar com seus alunos.</p>
-        <a class="cta cta-sec" href="https://pay.kiwify.com.br/yP2MzG4" style="width:100%">Começar no mensal por R$ 57,90</a>
+        <p class="muted">60 programas Premium, app do aluno, sua marca na capa e aulas de uso.</p>
+        <p class="muted" style="margin:6px 0 20px">Cancele quando quiser.</p>
+        <a class="cta" href="https://pay.kiwify.com.br/yP2MzG4" style="width:100%">Começar por R$ 57,90/mês</a>
       </div>
     </div>
     <p class="note">Acesso imediato. Garantia de 7 dias. Cancele quando quiser.</p>
+    <p style="text-align:center"><a class="alt" href="#planos">Prefere economizar no ano? Veja o plano anual</a></p>
   </div>
 </section>
 
@@ -329,8 +324,24 @@ fbq('init','359597814629044');fbq('track','PageView');fbq('track','ViewContent',
   <div class="narrow rv">
     <h2>Você pode continuar montando programa na planilha, <em>uma noite de cada vez</em></h2>
     <p style="font-size:19px">Ou pode montar o próximo em dez minutos e entregar no celular do aluno ainda hoje.</p>
-    <p style="margin-top:28px"><a class="cta" href="https://pay.kiwify.com.br/vpzl9M0">Quero o plano anual por R$ 497</a></p>
-    <a class="alt" href="https://pay.kiwify.com.br/yP2MzG4">Prefiro o mensal por R$ 57,90</a>
+  </div>
+  <div class="wrap rv" id="planos">
+    <div class="plans">
+      <div class="plan main">
+        <span class="tag">Recomendado para começar</span>
+        <h3>Mensal</h3>
+        <div class="price">R$ 57,90 <small>/mês</small></div>
+        <p class="muted" style="margin:6px 0 20px">Cancele quando quiser.</p>
+        <a class="cta" href="https://pay.kiwify.com.br/yP2MzG4" style="width:100%">Começar por R$ 57,90/mês</a>
+      </div>
+      <div class="plan">
+        <h3>Anual</h3>
+        <div class="price">12x <span style="white-space:nowrap">R$ 51,40</span></div>
+        <p class="muted">ou R$ 497 à vista · economize R$ 197,80 no ano</p>
+        <p class="muted" style="margin:6px 0 20px">Um ano inteiro de acesso.</p>
+        <a class="cta cta-sec" href="https://pay.kiwify.com.br/vpzl9M0" style="width:100%">Quero o anual em 12x de R$ 51,40</a>
+      </div>
+    </div>
     <p class="note">Acesso imediato. Garantia de 7 dias. Cancele quando quiser.</p>
   </div>
 </section>
@@ -340,8 +351,8 @@ fbq('init','359597814629044');fbq('track','PageView');fbq('track','ViewContent',
 </footer>
 
 <div class="bar" id="bar" aria-hidden="true">
-  <span class="info">A partir de R$ 41,42/mês · garantia de 7 dias</span>
-  <a class="cta" href="#oferta" tabindex="-1">Ver planos · a partir de R$ 57,90/mês</a>
+  <span class="info">Plano mensal R$ 57,90 · cancele quando quiser · garantia de 7 dias</span>
+  <a class="cta" href="#oferta" tabindex="-1">Começar por R$ 57,90/mês</a>
 </div>
 
 <script>
