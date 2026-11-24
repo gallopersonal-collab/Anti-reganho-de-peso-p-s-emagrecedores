@@ -567,6 +567,59 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .cl-list { display: flex; flex-direction: column; gap: 8px; max-height: 520px; overflow: auto; }
 .cl-item { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--card-2); }
 
+/* Evolução do aluno */
+.evo-table-wrap { overflow-x: auto; }
+.evo-table th, .evo-table td { text-align: right; white-space: nowrap; }
+.evo-table th:first-child, .evo-table td:first-child { text-align: left; }
+.evo-up { color: #46c37b; }
+.evo-down { color: #ef6b6b; }
+.evo-chart { width: 100%; max-width: 900px; border-radius: 12px; background: rgba(255,255,255,.02); }
+.evo-items { display: flex; flex-direction: column; gap: 6px; }
+.evo-item { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; flex-wrap: wrap; }
+.evo-slide .evo-statboxes { flex-wrap: wrap; }
+.evo-slide .evo-stat { min-width: 250px; }
+.evo-slide .evo-stat b { font-size: 64px; }
+.evo-slide .evo-stat span { display: block; font-size: 20px; }
+.evo-slide .evo-stat em { display: block; font-style: normal; font-size: 18px; color: var(--s-muted); margin-top: 8px; }
+.evo-slide .evo-stat.evo-up b { color: #46c37b; }
+.evo-slide .evo-stat.evo-down b { color: #ef6b6b; }
+.evo-slide-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 18px; }
+.evo-slide-table th { text-align: right; font: 600 16px/1.2 Inter, sans-serif; letter-spacing: 1px; text-transform: uppercase; color: var(--s-gold); padding: 6px 14px; border-bottom: 2px solid var(--s-line); }
+.evo-slide-table th small { display: block; text-transform: none; letter-spacing: 0; color: var(--s-muted); font-weight: 500; }
+.evo-slide-table td { text-align: right; padding: 4px 14px; border-bottom: 1px solid rgba(201,163,91,.18); color: var(--s-text); }
+.evo-slide-table td:first-child, .evo-slide-table th:first-child { text-align: left; }
+.evo-slide-table td small { color: var(--s-muted); font-size: 15px; }
+.evo-slide-table td.evo-up { color: #46c37b; font-weight: 700; }
+.evo-slide-table td.evo-down { color: #ef6b6b; font-weight: 700; }
+.evo-slide-table.compact { font-size: 19px; }
+.evo-slide-table.compact td { padding: 7px 14px; }
+.evo-slide .evo-h3 { font: 400 40px/1 "Bebas Neue", sans-serif; color: var(--s-cream); letter-spacing: 1px; margin: 26px 0 0; }
+.evo-how { margin-left: 6px; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--gold); background: transparent; color: var(--gold-2); font: 600 10px/1.6 Inter, sans-serif; letter-spacing: .3px; text-transform: none; cursor: pointer; }
+.evo-how:hover { background: rgba(210,169,97,.15); }
+.evo-guide { z-index: 1200; }
+.evo-guide-item { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 16px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.evo-guide-item:last-child { border-bottom: 0; }
+.evo-guide-item img { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #ddd; }
+.evo-guide-item h3 { margin: 0 0 6px; }
+.evo-guide-item ol { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; }
+@media (max-width: 640px) { .evo-guide-item { grid-template-columns: 1fr; } }
+.zone-in { width: 64px !important; padding: 6px 8px !important; text-align: center; }
+.aero-modal-photo { display: flex; gap: 16px; align-items: center; margin-top: 12px; }
+.aero-modal-photo img { width: 180px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
+.aero-today-img { width: 100%; max-height: 260px; object-fit: cover; object-position: 50% 30%; border-radius: 14px; margin: 10px 0 4px; }
+.aero-cls { font-size: 12px; margin-top: 4px; font-weight: 600; }
+.aero-cls:empty { display: none; }
+.aero-cls.lv-ok { color: #46c37b; }
+.aero-cls.lv-warn { color: var(--gold-2); }
+.aero-cls.lv-bad { color: #ef6b6b; }
+.vo2-how { display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: 14px; align-items: start; }
+.vo2-how img { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #ddd; }
+.vo2-dasi { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+.vo2-item { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); font-size: 14px; cursor: pointer; }
+.vo2-item em { font-style: normal; font-size: 12px; color: var(--muted); }
+.vo2-item:has(input:checked) { border-color: var(--gold); background: rgba(210,169,97,.08); }
+@media (max-width: 640px) { .vo2-how { grid-template-columns: 1fr; } }
+
 </style>
 </head>
 <body>
@@ -1716,6 +1769,7 @@ function templateCard(t, actionsHTML) {
  * Tela: Início
  * ======================================================= */
 function viewHome() {
+  W2.renew = false;
   const progs = studentPrograms().sort((a, b) => b.updatedAt - a.updatedAt);
   const q = S.ui.q.trim().toLowerCase();
   const list = progs.filter((p) => {
@@ -1767,7 +1821,7 @@ function viewHome() {
 /* =========================================================
  * Tela: Novo programa (passo a passo)
  * ======================================================= */
-const W2 = { studentId: '', tplId: '' };
+const W2 = { studentId: '', tplId: '', renew: false };
 function viewWizard(tplId) {
   if (tplId) W2.tplId = decodeURIComponent(tplId);
   const st = byId(S.students, W2.studentId);
@@ -1776,7 +1830,8 @@ function viewWizard(tplId) {
     .map((s) => `<option value="${esc(s.id)}" ${s.id === W2.studentId ? 'selected' : ''}>${esc(s.name)}</option>`).join('');
   const missing = st ? ['sex', 'age', 'obj'].filter((k) => !st[k]) : [];
   app.innerHTML = `
-    <div class="page-head"><div><a class="btn ghost sm" href="#/">← Início</a><h1 style="margin-top:6px">Novo programa para um aluno</h1></div></div>
+    <div class="page-head"><div><a class="btn ghost sm" href="#/">← Início</a><h1 style="margin-top:6px">${W2.renew && st ? `Próximo ciclo de ${esc(st.name.split(' ')[0])}` : 'Novo programa para um aluno'}</h1>
+      ${W2.renew && st ? '<p class="muted" style="margin:4px 0 0">Reavalie, mostre a evolução com o relatório e escolha o próximo programa.</p>' : ''}</div></div>
     <div class="card stack wiz-step">
       <h2><span class="step-n">1</span> Aluno</h2>
       <div class="row">
@@ -1792,7 +1847,11 @@ function viewWizard(tplId) {
         <button class="btn sm" data-action="edit-person" data-kind="students" data-id="${esc(st.id)}" data-wizard="1">Editar dados / foto</button></div>` : ''}
     </div>
     ${st ? `<div class="card stack wiz-step" style="margin-top:16px">
-      <h2><span class="step-n">2</span> ${tpl ? 'Programa escolhido' : 'Programas recomendados'}</h2>
+      <h2><span class="step-n">2</span> ${W2.renew ? 'Reavaliação e evolução' : 'Avaliação <span class="muted small" style="font-weight:400">(opcional)</span>'}</h2>
+      ${evoPanelHTML(st, evoLastProgram(st), { wizard: true })}
+    </div>
+    <div class="card stack wiz-step" style="margin-top:16px">
+      <h2><span class="step-n">3</span> ${tpl ? 'Programa escolhido' : W2.renew ? 'Próximo programa' : 'Programas recomendados'}</h2>
       <div id="wz-recs"></div>
     </div>` : ''}`;
   $('#wz-student').addEventListener('change', (e) => { W2.studentId = e.target.value; viewWizard(); });
@@ -1820,7 +1879,7 @@ actions['wz-clear-tpl'] = () => { W2.tplId = ''; viewWizard(); };
 actions['wz-use'] = async (el) => {
   const p = await withBusy('Montando o programa…', async () => createFromTemplate(el.dataset.tpl, W2.studentId));
   if (!p) return;
-  W2.tplId = '';
+  W2.tplId = ''; W2.renew = false;
   location.hash = `#/programa/${p.id}/gerar`;
   setTimeout(() => toast('Programa pronto. Confira, ajuste se quiser e envie.'), 300);
 };
@@ -1908,14 +1967,14 @@ actions['send-program'] = async (el, ev) => {
   const out = await buildProgramPdf(p);
   if (out) showSendModal(p, out);
 };
-function showSendModal(p, { blob, fileName, pages }) {
+function showSendModal(p, { blob, fileName, pages }, o = {}) {
   const st = byId(S.students, p.studentId);
   const file = new File([blob], fileName, { type: 'application/pdf' });
   const canShare = navigator.canShare && navigator.canShare({ files: [file] });
   const num = waNumber(st);
-  const text = waText(p);
-  const body = openModal('Enviar programa', `
-    <p>PDF <b>${esc(fileName)}</b> pronto (${pages} páginas, ${fmtSize(blob.size)}). Uma cópia ficou salva em Meus PDFs.</p>
+  const text = o.text || waText(p);
+  const body = openModal(o.title || 'Enviar programa', `
+    <p>PDF <b>${esc(fileName)}</b> pronto (${pages} páginas, ${fmtSize(blob.size)}).${o.text ? '' : ' Uma cópia ficou salva em Meus PDFs.'}</p>
     <label class="field"><span>Mensagem</span><textarea id="wa-text" rows="3">${esc(text)}</textarea></label>
     <div class="stack" style="margin-top:14px;gap:10px">
       ${canShare ? '<button class="btn primary lg" id="wa-share">Enviar pelo WhatsApp (PDF anexado)</button>' : ''}
@@ -1998,7 +2057,7 @@ function renderProgramList() {
   const ownTitle = filtering ? `<h2 style="margin-bottom:12px">Seus programas (${list.length})</h2>` : '';
   if (!list.length) {
     box.innerHTML = (filtering
-      ? `${ownTitle}<div class="empty" style="padding:24px">Nenhum programa seu com esses filtros. Programas criados antes das etiquetas não têm etiqueta: abra o programa e preencha em "1. Dados e capa".</div>`
+      ? `${ownTitle}<div class="empty" style="padding:24px">Nenhum programa seu com esses filtros. Programas criados antes das etiquetas não têm etiqueta: abra o programa e preencha em "Dados e capa".</div>`
       : `<div class="empty">Nenhum programa encontrado com essa busca.</div>`) + libHTML;
     return;
   }
@@ -2133,8 +2192,9 @@ function viewEditor(id, tab) {
   p.include = { trainer: true, overview: true, guidelines: true, warmup: true, pse: true, closing: true, ...(p.include || {}) };
   p.tags = p.tags || {};
   E.p = p;
-  const tabs = (p.mode === 'slides' ? ['slides', 'dados', 'gerar'] : p.mode === 'aero' ? AERO_TABS.map((t) => t[0]) : ['dados', 'treinos', 'gerar']).concat(p.isTemplate ? [] : ['acomp']);
-  E.tab = tabs.includes(tab) ? tab : tabs[0];
+  const normal = p.mode !== 'slides' && p.mode !== 'aero';
+  const tabs = (p.mode === 'slides' ? ['slides', 'dados', 'gerar'] : p.mode === 'aero' ? AERO_TABS.map((t) => t[0]) : (p.isTemplate ? [] : ['aval']).concat(['dados', 'treinos', 'gerar'])).concat(p.isTemplate ? [] : ['acomp']);
+  E.tab = tabs.includes(tab) ? tab : normal ? 'dados' : tabs[0];
   leaveHook = () => saveSoon.flush();
   renderEditor();
 }
@@ -2155,12 +2215,13 @@ function renderEditor() {
       <div class="tabs">${(p.mode === 'slides'
         ? [['slides', '1. Slides'], ['dados', '2. Aluno e personal'], ['gerar', '3. Gerar PDF']]
         : p.mode === 'aero' ? AERO_TABS
-        : [['dados', '1. Dados e capa'], ['treinos', '2. Treinos e exercícios'], ['gerar', '3. Visualizar e gerar PDF']])
-        .concat(p.isTemplate ? [] : [['acomp', p.mode === 'aero' ? '7. Acompanhamento' : '4. Acompanhamento']])
+        : p.isTemplate ? [['dados', '1. Dados e capa'], ['treinos', '2. Treinos e exercícios'], ['gerar', '3. Visualizar e gerar PDF']]
+        : [['aval', '1. Avaliação'], ['dados', '2. Dados e capa'], ['treinos', '3. Treinos e exercícios'], ['gerar', '4. Visualizar e gerar PDF']])
+        .concat(p.isTemplate ? [] : [['acomp', p.mode === 'aero' ? '7. Acompanhamento' : '5. Acompanhamento']])
         .map(([k, l]) => `<button data-action="tab" data-tab="${k}" class="${E.tab === k ? 'active' : ''}">${l}</button>`).join('')}
       </div>
     </div>
-    <div id="ed-body">${E.tab === 'acomp' ? '' : p.mode === 'aero' ? aeroBody(p) : E.tab === 'slides' ? tabSlides() : E.tab === 'dados' ? (p.mode === 'slides' ? tabPessoas() : tabDados()) : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
+    <div id="ed-body">${E.tab === 'acomp' ? '' : p.mode === 'aero' ? aeroBody(p) : E.tab === 'aval' ? tabAvaliacao(p) : E.tab === 'slides' ? tabSlides() : E.tab === 'dados' ? (p.mode === 'slides' ? tabPessoas() : tabDados()) : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
   if (E.tab === 'acomp') tabAcompanhamento();
   bindInputs(app);
   if (p.mode === 'aero') aeroRefresh();
@@ -2190,7 +2251,7 @@ function bindInputs(root) {
   $$('[data-bind]', root).forEach((inp) => {
     const path = inp.dataset.bind;
     const v = getPath(E.p, path);
-    if (inp.type === 'checkbox') inp.checked = !!v; else inp.value = v ?? '';
+    if (inp.type === 'checkbox') inp.checked = !!v; else inp.value = inp.dataset.mask === 'date' ? maskDate(v ?? '') : v ?? '';
     const evName = inp.tagName === 'SELECT' || inp.type === 'checkbox' ? 'change' : 'input';
     inp.addEventListener(evName, () => {
       setPath(E.p, path, inp.type === 'checkbox' ? inp.checked : inp.value);
@@ -4007,10 +4068,13 @@ async function openAccessModal(p) {
 
 /* ---- Acompanhamento (personal vê os treinos do aluno) ---- */
 async function tabAcompanhamento() {
-  const box = $('#ed-body');
+  const host = $('#ed-body');
   const p = E.p;
+  host.innerHTML = `<div class="section card row"><div style="flex:1;min-width:220px"><strong>Avaliações e relatório de evolução</strong><div class="small muted">Reavaliações, comparativo e o PDF para renovar o plano ficam na aba ${p.mode === 'aero' ? '1. Avaliação física' : '1. Avaliação'}.</div></div>
+    <button class="btn" data-action="tab" data-tab="aval">Abrir avaliações →</button></div><div id="acomp-box"></div>`;
+  const box = $('#acomp-box');
   if (!CLOUD.user) {
-    box.innerHTML = `<div class="section empty"><h2>Acompanhamento</h2><p>Entre na sua conta e libere o acesso do aluno para ver aqui os treinos feitos e as cargas registradas.</p><button class="btn primary" data-action="login">Entrar ou criar conta</button></div>`;
+    box.innerHTML = `<div class="section empty"><h2>Treinos do aluno</h2><p>Entre na sua conta e libere o acesso do aluno para ver aqui os treinos feitos e as cargas registradas.</p><button class="btn primary" data-action="login">Entrar ou criar conta</button></div>`;
     return;
   }
   box.innerHTML = '<div class="section muted">Carregando…</div>';
@@ -4444,13 +4508,13 @@ function viewPeople(kind) {
         <div class="info"><h3>${esc(x.name)}</h3><div class="small muted">${kind === 'trainers' && x.cref ? 'CREF ' + esc(x.cref) + ' · ' : ''}${count(x.id)} programa(s)</div>
           <div class="row" style="margin-top:8px">
             <button class="btn sm" data-action="edit-person" data-kind="${kind}" data-id="${esc(x.id)}">Editar</button>
-            ${kind === 'students' ? `<button class="btn sm primary" data-action="student-new-program" data-id="${esc(x.id)}">Novo programa</button><button class="btn sm" data-action="filter-student" data-id="${esc(x.id)}">Programas</button>` : ''}
+            ${kind === 'students' ? `<button class="btn sm primary" data-action="student-new-program" data-id="${esc(x.id)}">Novo programa</button>${count(x.id) || (x.evals || []).length ? `<button class="btn sm" data-action="evo-renew" data-sid="${esc(x.id)}">Reavaliar e novo ciclo</button>` : ''}<button class="btn sm" data-action="filter-student" data-id="${esc(x.id)}">Programas</button>` : ''}
             <button class="btn sm danger" data-action="del-person" data-kind="${kind}" data-id="${esc(x.id)}">✕</button>
           </div></div></div>`).join('')}</div>`
     : `<div class="empty"><h2>Nenhum ${K.one} cadastrado</h2><p>Cadastre nome e foto para aparecerem na capa do PDF.</p><button class="btn primary" data-action="new-person" data-kind="${kind}">+ Novo ${K.one}</button></div>`}`;
 }
 actions['filter-student'] = (el) => { const st = byId(S.students, el.dataset.id); S.ui.q = st ? st.name : ''; location.hash = '#/'; };
-actions['student-new-program'] = (el) => { W2.studentId = el.dataset.id; W2.tplId = ''; location.hash = '#/novo'; };
+actions['student-new-program'] = (el) => { W2.studentId = el.dataset.id; W2.tplId = ''; W2.renew = false; location.hash = '#/novo'; };
 actions['new-person'] = (el) => personForm(el.dataset.kind, null, !!el.dataset.assign);
 actions['edit-person'] = (el) => personForm(el.dataset.kind, byId(S[el.dataset.kind], el.dataset.id), !!el.dataset.assign);
 actions['del-person'] = async (el) => {
@@ -4771,9 +4835,17 @@ actions.restore = async () => {
 const AERO_OBJ = { EMA: 'Emagrecimento', EST: 'Redução do estresse', PER: 'Performance' };
 const AERO_ZONES = {
   reg: { label: 'Regenerativa', lo: 0.28, hi: 0.42, cls: 'z-reg' },
-  lip: { label: 'Lipolítica', lo: 0.43, hi: 0.58, cls: 'z-lip' },
-  gli: { label: 'Glicolítica', lo: 0.60, hi: 0.70, cls: 'z-gli' },
+  lip: { label: 'Lipolítica', lo: 0.43, hi: 0.56, cls: 'z-lip' },
+  gli: { label: 'Glicolítica', lo: 0.57, hi: 0.70, cls: 'z-gli' },
 };
+/** Zona com as intensidades escolhidas pelo personal neste programa (em % da reserva) ou as padrão. */
+function aeroZone(p, k) {
+  const z = AERO_ZONES[k];
+  const o = (p && p.aero && p.aero.zonas && p.aero.zonas[k]) || {};
+  const it = aeroNum(o.int);
+  // intensidade única escolhida pelo personal (% da reserva da FC); sem escolha, vale a faixa padrão da zona
+  return { ...z, int: it != null ? it / 100 : null, custom: it != null };
+}
 const AERO_MUSC = {
   RML: 'Musculação RML (40% a 60% de 1RM)',
   FD: 'Musculação Força Dinâmica (60% a 70% de 1RM)',
@@ -4790,11 +4862,205 @@ const AERO_TEMPLATE = [
   { fase: 5, micro: 'Microciclo de recuperação', dias: [49, 45, 41, 37, 45, 41, 'R'] },
 ];
 const AERO_MODAL = ['Esteira', 'Bicicleta ergométrica', 'Elíptico', 'Remo ergômetro', 'Caminhada ao ar livre', 'Corrida ao ar livre', 'Natação', 'Outra'];
+/* Foto de cada modalidade (versão feminina e masculina, conforme o sexo do aluno) */
+const AERO_MODAL_IMG = { 'Esteira': 'Running_Treadmill', 'Bicicleta ergométrica': 'Bicycling_Stationary', 'Elíptico': 'Elliptical_Trainer', 'Remo ergômetro': 'Rowing_Stationary',
+  'Caminhada ao ar livre': 'Outdoor_Walk', 'Corrida ao ar livre': 'Outdoor_Run', 'Natação': 'Swimming' };
+function aeroModalImg(modal, sex) {
+  const id = AERO_MODAL_IMG[modal];
+  return id ? photo(`fotos/${sex === 'M' ? 'M' : 'F'}/${id}.jpg`) : '';
+}
 const AERO_EXAMS = [
   ['ct', 'Colesterol total', 'mg/dL'], ['ldl', 'LDL colesterol', 'mg/dL'], ['vldl', 'VLDL colesterol', 'mg/dL'], ['hdl', 'HDL colesterol', 'mg/dL'],
   ['tg', 'Triglicerídeos', 'mg/dL'], ['glic', 'Glicemia', 'mg/dL'], ['hem', 'Hemácias', 'milhões/mm³'], ['hb', 'Hemoglobina', 'g/dL'],
   ['hba1c', 'Hemoglobina glicada', '%'], ['ins', 'Insulina', 'µUI/mL'], ['au', 'Ácido úrico', 'mg/dL'], ['so2', 'SO2 (saturação de O2)', '%'],
 ];
+
+/* ---- Classificações (hemodinâmica e exames). Retornam [texto, nível: ok | warn | bad] ---- */
+const aeroBand = (v, bands) => { for (const [max, t, lv] of bands) if (v < max) return [t, lv]; return null; };
+/** Pressão arterial (Diretriz Brasileira de Hipertensão 2020): vale a pior categoria entre sistólica e diastólica. */
+function aeroClassPA(pas, pad) {
+  if (pas == null && pad == null) return null;
+  const cat = (v, lim) => (v == null ? -1 : lim.findIndex((x) => v < x) === -1 ? lim.length : lim.findIndex((x) => v < x));
+  const i = Math.max(cat(pas, [120, 130, 140, 160, 180]), cat(pad, [80, 85, 90, 100, 110]));
+  return [['PA ótima', 'ok'], ['PA normal', 'ok'], ['Pré-hipertensão', 'warn'], ['Hipertensão estágio 1', 'bad'], ['Hipertensão estágio 2', 'bad'], ['Hipertensão estágio 3', 'bad']][i];
+}
+/** VO2máx (American Heart Association), por sexo e faixa etária. */
+function aeroClassVO2(v, sex, idade) {
+  if (v == null || !sex || idade == null) return v == null ? null : ['Informe sexo e idade para classificar', 'warn'];
+  const T = sex === 'M'
+    ? [[29, [25, 34, 43, 53]], [39, [23, 31, 39, 49]], [49, [20, 27, 36, 45]], [59, [18, 25, 34, 43]], [200, [16, 23, 31, 41]]]
+    : [[29, [24, 31, 38, 49]], [39, [20, 28, 34, 45]], [49, [17, 24, 31, 42]], [59, [15, 21, 28, 38]], [200, [13, 18, 24, 35]]];
+  const lim = (T.find(([a]) => idade <= a) || T[T.length - 1])[1];
+  const n = ['Muito fraca', 'Fraca', 'Regular', 'Boa', 'Excelente'], lv = ['bad', 'bad', 'warn', 'ok', 'ok'];
+  const i = lim.findIndex((x) => v < x); const k = i === -1 ? 4 : i;
+  return [`Aptidão ${n[k].toLowerCase()} (AHA)`, lv[k]];
+}
+function aeroClassFCrep(v) { return v == null ? null : aeroBand(v, [[60, 'Abaixo de 60: bradicardia (comum em treinados)', 'warn'], [101, 'Normal (60 a 100)', 'ok'], [1e9, 'Taquicardia (acima de 100)', 'bad']]); }
+/** Exames (adultos). Lipídios: Atualização da Diretriz Brasileira de Dislipidemias 2017; glicemia e HbA1c: SBD. */
+function aeroClassExame(k, v, sex) {
+  if (v == null) return null;
+  const M = sex === 'M';
+  switch (k) {
+    case 'ct': return aeroBand(v, [[190, 'Desejável', 'ok'], [240, 'Limítrofe', 'warn'], [1e9, 'Alto', 'bad']]);
+    case 'ldl': return aeroBand(v, [[100, 'Ótimo', 'ok'], [130, 'Desejável', 'ok'], [160, 'Limítrofe', 'warn'], [190, 'Alto', 'bad'], [1e9, 'Muito alto', 'bad']]);
+    case 'hdl': return aeroBand(v, [[40, 'Baixo', 'bad'], [60, 'Desejável', 'ok'], [1e9, 'Ótimo (protetor)', 'ok']]);
+    case 'vldl': return aeroBand(v, [[31, 'Desejável', 'ok'], [1e9, 'Elevado', 'bad']]);
+    case 'tg': return aeroBand(v, [[150, 'Desejável', 'ok'], [200, 'Limítrofe', 'warn'], [500, 'Alto', 'bad'], [1e9, 'Muito alto', 'bad']]);
+    case 'glic': return aeroBand(v, [[70, 'Baixa (hipoglicemia)', 'warn'], [100, 'Normal', 'ok'], [126, 'Glicemia alterada (pré-diabetes)', 'warn'], [1e9, 'Compatível com diabetes', 'bad']]);
+    case 'hba1c': return aeroBand(v, [[5.7, 'Normal', 'ok'], [6.5, 'Pré-diabetes', 'warn'], [1e9, 'Compatível com diabetes', 'bad']]);
+    case 'ins': return aeroBand(v, [[2.6, 'Baixa', 'warn'], [25, 'Normal', 'ok'], [1e9, 'Elevada (sugere resistência à insulina)', 'bad']]);
+    case 'au': return aeroBand(v, M ? [[3.4, 'Baixo', 'warn'], [7.01, 'Normal', 'ok'], [1e9, 'Elevado', 'bad']] : [[2.4, 'Baixo', 'warn'], [6.01, 'Normal', 'ok'], [1e9, 'Elevado', 'bad']]);
+    case 'hem': return aeroBand(v, M ? [[4.5, 'Baixa', 'warn'], [5.91, 'Normal', 'ok'], [1e9, 'Elevada', 'warn']] : [[4.0, 'Baixa', 'warn'], [5.21, 'Normal', 'ok'], [1e9, 'Elevada', 'warn']]);
+    case 'hb': return aeroBand(v, M ? [[13.5, 'Baixa (possível anemia)', 'bad'], [17.6, 'Normal', 'ok'], [1e9, 'Elevada', 'warn']] : [[12, 'Baixa (possível anemia)', 'bad'], [15.6, 'Normal', 'ok'], [1e9, 'Elevada', 'warn']]);
+    case 'so2': return aeroBand(v, [[90, 'Baixa', 'bad'], [95, 'Levemente baixa', 'warn'], [101, 'Normal', 'ok']]);
+    default: return null;
+  }
+}
+/** Coloca (ou atualiza) a etiqueta de classificação embaixo do campo. */
+function aeroSetClass(path, res) {
+  const inp = document.querySelector(`[data-bind="${path}"]`);
+  if (!inp) return;
+  const lab = inp.closest('.field');
+  let el = lab.querySelector('.aero-cls');
+  if (!el) { el = document.createElement('div'); el.className = 'aero-cls'; lab.appendChild(el); }
+  el.className = 'aero-cls' + (res ? ' lv-' + res[1] : '');
+  el.textContent = res ? res[0] : '';
+}
+function aeroClassRefresh(p, c) {
+  const he = p.aero.hemo || {}, ex = p.aero.ex || {};
+  const pa = aeroClassPA(aeroNum(he.pas), aeroNum(he.pad));
+  aeroSetClass('aero.hemo.pas', pa); aeroSetClass('aero.hemo.pad', pa);
+  aeroSetClass('aero.hemo.fcrep', aeroClassFCrep(aeroNum(he.fcrep)));
+  aeroSetClass('aero.hemo.vo2max', aeroClassVO2(aeroNum(he.vo2max), c.sex, c.idade));
+  const vi = document.getElementById('vo2-test-info');
+  if (vi) vi.textContent = he.vo2teste && he.vo2max ? `Último cálculo: ${he.vo2teste}` : 'Estimativa sem teste, banco, caminhada, corrida ou questionário de Duke.';
+  const fm = document.querySelector('[data-bind="aero.hemo.fcmax"]');
+  if (fm) {
+    fm.placeholder = c.fcmaxCalc != null ? `${c.fcmaxCalc} (${c.fcmaxBase} − ${c.idade}) ± 6` : 'informe a idade do aluno';
+    aeroSetClass('aero.hemo.fcmax', c.fcmaxCalc == null ? ['Estimada: informe a idade na avaliação física', 'warn']
+      : c.fcmaxMedida ? [`Medida em teste. Estimada pela idade: ${c.fcmaxCalc} ± 6 (${c.fcmaxBase} − ${c.idade})`, 'ok']
+      : [`Estimada: ${c.fcmaxCalc} bpm (${c.fcmaxBase} − ${c.idade}, ${c.sex === 'F' ? 'mulheres' : c.sex === 'M' ? 'homens' : 'sexo não informado'}) ± 6. Preencha só se tiver a FC máxima medida em teste.`, 'ok']);
+  }
+  AERO_EXAMS.forEach(([k]) => aeroSetClass(`aero.ex.${k}`, aeroClassExame(k, aeroNum(ex[k]), c.sex)));
+}
+
+/* ---- Testes práticos de VO2máx (ml/kg/min) ---- */
+const VO2_TESTS = {
+  uth: {
+    img: 'vo2-uth.jpg',
+    nome: 'Estimativa rápida, sem teste (Uth)', quando: 'Qualquer aluno, inclusive sedentário. Não exige esforço.',
+    como: ['Meça a FC de repouso pela manhã ou após 5 minutos deitado ou sentado em silêncio.', 'A FC máxima é a estimada pela idade (220 − idade nos homens; 226 − idade nas mulheres) ou a medida em teste.', 'É uma estimativa: use quando não for possível aplicar um teste.'],
+    campos: [['fcmax', 'FC máxima', 'bpm'], ['fcrep', 'FC de repouso', 'bpm']],
+    calc: (v) => (v.fcmax && v.fcrep ? 15.3 * v.fcmax / v.fcrep : null),
+    formula: 'VO2máx = 15,3 × FCmáx ÷ FC repouso',
+  },
+  banco: {
+    img: 'vo2-banco.jpg',
+    nome: 'Teste do banco (Queens College, 3 minutos)', quando: 'Academia ou casa. Simples e rápido; evite em quem tem dor no joelho ou problema de equilíbrio.',
+    como: ['Banco ou degrau de 41,3 cm de altura e metrônomo (pode ser um aplicativo de celular).', 'Ritmo: homens 24 subidas por minuto (metrônomo em 96 bpm); mulheres 22 subidas por minuto (88 bpm). Cada subida = sobe direita, sobe esquerda, desce direita, desce esquerda.', 'O aluno sobe e desce por 3 minutos. Ao terminar, ele para em pé.', 'Entre 5 e 20 segundos após o fim, conte os batimentos por 15 segundos e multiplique por 4 (ou use o frequencímetro).'],
+    campos: [['fcfinal', 'FC de recuperação (15 s × 4)', 'bpm']],
+    calc: (v, sex) => (v.fcfinal ? (sex === 'M' ? 111.33 - 0.42 * v.fcfinal : 65.81 - 0.1847 * v.fcfinal) : null),
+    formula: 'Homens: 111,33 − 0,42 × FC · Mulheres: 65,81 − 0,1847 × FC',
+  },
+  rockport: {
+    img: 'vo2-rockport.jpg',
+    nome: 'Caminhada de 1,6 km (Rockport)', quando: 'Iniciantes, idosos e pessoas com excesso de peso. Pode ser feito na esteira ou em pista.',
+    como: ['Marque 1,6 km (1 milha) em pista ou na esteira, sem inclinação.', 'O aluno caminha o mais rápido possível, sem correr.', 'Anote o tempo total em minutos e segundos.', 'Logo ao terminar, meça a FC (frequencímetro ou 15 segundos × 4).'],
+    campos: [['peso', 'Peso', 'kg'], ['idade', 'Idade', 'anos'], ['min', 'Tempo: minutos', 'min'], ['seg', 'Tempo: segundos', 's'], ['fcfinal', 'FC ao final', 'bpm']],
+    calc: (v, sex) => (v.peso && v.idade != null && v.min != null && v.fcfinal ? 132.853 - 0.0769 * (v.peso * 2.2046) - 0.3877 * v.idade + 6.315 * (sex === 'M' ? 1 : 0) - 3.2649 * (v.min + (v.seg || 0) / 60) - 0.1565 * v.fcfinal : null),
+    formula: 'VO2máx = 132,853 − 0,0769 × peso (lb) − 0,3877 × idade + 6,315 × sexo (H = 1, M = 0) − 3,2649 × tempo (min) − 0,1565 × FC',
+  },
+  cooper: {
+    img: 'vo2-cooper.jpg',
+    nome: 'Corrida de 12 minutos (Cooper)', quando: 'Alunos ativos e condicionados. Exige esforço máximo; evite em sedentários e pessoas com risco cardiovascular.',
+    como: ['Use uma pista ou a esteira, com aquecimento de 5 a 10 minutos.', 'O aluno corre (ou alterna corrida e caminhada) a maior distância possível em 12 minutos.', 'Anote a distância total percorrida em metros.'],
+    campos: [['dist', 'Distância percorrida', 'm']],
+    calc: (v) => (v.dist ? (v.dist - 504.9) / 44.73 : null),
+    formula: 'VO2máx = (distância em metros − 504,9) ÷ 44,73',
+  },
+  duke: {
+    img: 'vo2-duke.jpg',
+    nome: 'Questionário de Duke (DASI), sem esforço físico', quando: 'Quem não pode fazer nenhum dos testes: idosos, pessoas com limitação ortopédica, cardiopatas liberados ou alunos muito sedentários.',
+    como: ['Pergunte ao aluno, uma a uma, se ele CONSEGUE fazer cada atividade abaixo, sem precisar parar e sem sentir falta de ar ou dor.', 'Marque apenas as respostas "sim". Na dúvida, considere "não".', 'O app soma os pontos de cada atividade (pontuação de 0 a 58,2) e estima o VO2.'],
+    itens: [
+      ['Cuidar de si mesmo: comer, vestir-se, tomar banho ou usar o banheiro', 2.75],
+      ['Caminhar dentro de casa', 1.75],
+      ['Caminhar um ou dois quarteirões no plano', 2.75],
+      ['Subir um lance de escadas ou subir uma ladeira', 5.5],
+      ['Correr uma curta distância', 8],
+      ['Fazer trabalhos domésticos leves: tirar o pó, lavar a louça', 2.7],
+      ['Fazer trabalhos domésticos moderados: aspirar, varrer, carregar compras', 3.5],
+      ['Fazer trabalhos domésticos pesados: esfregar o chão, levantar ou empurrar móveis pesados', 8],
+      ['Fazer trabalhos no jardim: juntar folhas, capinar, empurrar o cortador de grama', 4.5],
+      ['Ter relações sexuais', 5.25],
+      ['Atividades recreativas moderadas: dança, boliche, tênis em dupla, golfe, arremessar bola', 6],
+      ['Esportes intensos: natação, tênis individual, futebol, basquete, ciclismo forte', 7.5],
+    ],
+    campos: [],
+    calc: (v) => 0.43 * (v.dasi || 0) + 9.6,
+    formula: 'VO2máx = 0,43 × pontuação DASI + 9,6 (Hlatky et al., 1989)',
+  },
+};
+actions['vo2-test'] = () => {
+  const p = E.p; if (!p || !p.aero) return;
+  const c = aeroCalc(p, aeroStudent(p));
+  const pre = { fcmax: c.fcmax, fcrep: c.fcrep, peso: c.peso, idade: c.idade };
+  const old = $('#evo-guide'); if (old) old.remove();
+  const el = document.createElement('div');
+  el.id = 'evo-guide'; el.className = 'modal-backdrop evo-guide';
+  let cur = 'banco';
+  const draw = () => {
+    const T = VO2_TESTS[cur];
+    el.innerHTML = `<div class="modal" style="width:min(720px,100%)">
+      <div class="modal-head"><h2>Calcular VO2 máximo</h2><button class="btn icon sm" data-close-guide aria-label="Fechar">✕</button></div>
+      <div class="modal-body stack">
+        <label class="field"><span>Teste</span><select id="vo2-sel">${Object.entries(VO2_TESTS).map(([k, t]) => `<option value="${k}" ${k === cur ? 'selected' : ''}>${esc(t.nome)}</option>`).join('')}</select></label>
+        <div class="vo2-how">${T.img ? `<img src="${EVO_IMG + T.img}" alt="${esc(T.nome)}">` : ''}
+          <div><div class="small" style="margin-bottom:6px"><b>Indicado para:</b> ${esc(T.quando)}</div>
+          <b class="small">Como fazer</b>
+          <ol style="margin:4px 0 0;padding-left:20px;font-size:14px;line-height:1.5">${T.como.map((t) => `<li>${esc(t)}</li>`).join('')}</ol></div></div>
+        ${T.itens ? `<div class="card"><b>O aluno consegue…</b> <span class="small muted">(marque os "sim")</span>
+          <div class="vo2-dasi">${T.itens.map(([t, w], i) => `<label class="vo2-item"><input type="checkbox" data-dasi="${w}"><span>${i + 1}. ${esc(t)}</span><em>${String(w).replace('.', ',')}</em></label>`).join('')}</div>
+          <div class="small" style="margin-top:8px">Pontuação DASI: <b id="vo2-dasi-sum">0</b> de 58,2</div></div>` : ''}
+        <div class="small muted">Aluno: ${c.sex === 'M' ? 'masculino' : c.sex === 'F' ? 'feminino' : '<b style="color:var(--gold-2)">sexo não informado</b>'}${c.idade != null ? ` · ${c.idade} anos` : ''}</div>
+        <div class="grid three">${T.campos.map(([k, l, u]) => `<label class="field"><span>${l} <em class="unit">(${u})</em></span><input type="text" inputmode="decimal" data-vo2="${k}" value="${pre[k] != null ? esc(String(Math.round(pre[k] * 10) / 10).replace('.', ',')) : ''}"></label>`).join('')}</div>
+        <div class="aero-outs"><div class="aero-out"><span>VO2 máximo estimado</span><b id="vo2-res">—</b><em>ml/kg/min</em></div><div class="aero-out"><span>Classificação</span><b id="vo2-cls" style="font-size:16px">—</b></div></div>
+        <div class="small muted">${esc(T.formula)}</div>
+        <div class="row"><span class="spacer"></span><button class="btn" data-close-guide>Cancelar</button><button class="btn primary" id="vo2-use" disabled>Usar este valor</button></div>
+      </div></div>`;
+    const calc = () => {
+      const v = Object.fromEntries($$('[data-vo2]', el).map((i) => [i.dataset.vo2, aeroNum(i.value)]));
+      if (T.itens) {
+        v.dasi = $$('[data-dasi]', el).filter((i) => i.checked).reduce((a, i) => a + parseFloat(i.dataset.dasi), 0);
+        $('#vo2-dasi-sum', el).textContent = aeroFmt(v.dasi, 2);
+      }
+      const r = T.calc(v, c.sex);
+      const ok = r != null && Number.isFinite(r) && r > 5 && r < 95 && (!T.itens || v.dasi > 0) && (cur !== 'banco' && cur !== 'rockport' || c.sex);
+      $('#vo2-res', el).textContent = ok ? aeroFmt(r, 1) : '—';
+      const cl = ok ? aeroClassVO2(r, c.sex, c.idade) : null;
+      $('#vo2-cls', el).textContent = cl ? cl[0] : (cur === 'banco' || cur === 'rockport') && !c.sex ? 'Informe o sexo do aluno' : '—';
+      $('#vo2-use', el).disabled = !ok;
+      $('#vo2-use', el).dataset.v = ok ? String(Math.round(r * 10) / 10) : '';
+    };
+    $$('[data-vo2]', el).forEach((i) => i.addEventListener('input', calc));
+    $$('[data-dasi]', el).forEach((i) => i.addEventListener('change', calc));
+    $('#vo2-sel', el).addEventListener('change', (e) => { cur = e.target.value; draw(); });
+    $('#vo2-use', el).onclick = async () => {
+      const v = $('#vo2-use', el).dataset.v; if (!v) return;
+      p.aero.hemo = p.aero.hemo || {};
+      p.aero.hemo.vo2max = v.replace('.', ',');
+      p.aero.hemo.vo2teste = VO2_TESTS[cur].nome;
+      el.remove();
+      saveSoon(); await saveSoon.flush(); renderEditor();
+      toast(`VO2 máximo: ${v.replace('.', ',')} ml/kg/min`);
+    };
+    calc();
+  };
+  el.addEventListener('click', (e) => { if (e.target === el || e.target.closest('[data-close-guide]')) el.remove(); });
+  draw();
+  document.body.appendChild(el);
+};
+
 const aeroNum = (v) => { const n = parseFloat(String(v ?? '').replace(',', '.')); return Number.isFinite(n) ? n : null; };
 const aeroFmt = (n, d = 1) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d }));
 function aeroDefaultZone(obj, fase, min) {
@@ -4843,25 +5109,38 @@ function aeroCalc(p, st) {
   r.mcmRef = sex === 'M' ? 81 : sex === 'F' ? 77 : null;
   r.carencia = r.mm != null && r.mcmRef != null ? Math.max(0, (r.mcmRef - r.mcmPct) / 100 * r.mm) : null;
   r.rcq = aeroNum(av.cintura) && aeroNum(av.quadril) ? aeroNum(av.cintura) / aeroNum(av.quadril) : null;
-  r.fcmaxCalc = idade != null ? 220 - idade : null;
+  // FC máxima estimada: homens 220 − idade; mulheres 226 − idade (desvio padrão ± 6 bpm)
+  r.fcmaxBase = sex === 'F' ? 226 : 220;
+  r.fcmaxCalc = idade != null ? r.fcmaxBase - idade : null;
+  r.fcmaxMedida = aeroNum(he.fcmax) != null;
   r.fcmax = aeroNum(he.fcmax) ?? r.fcmaxCalc;
   r.fcrep = aeroNum(he.fcrep);
   r.fcr = r.fcmax != null && r.fcrep != null ? r.fcmax - r.fcrep : null;
   r.vo2max = aeroNum(he.vo2max);
   r.vo2r = r.vo2max != null ? r.vo2max - 3.5 : null;
   r.zones = {};
-  Object.entries(AERO_ZONES).forEach(([k, z]) => {
-    const o = {};
-    if (r.fcr != null) { o.bpmLo = Math.round(r.fcrep + z.lo * r.fcr); o.bpmHi = Math.round(r.fcrep + z.hi * r.fcr); }
+  Object.keys(AERO_ZONES).forEach((k) => {
+    const z = aeroZone(p, k);
+    // FC alvo = [(FCmáx − FC repouso) × intensidade ÷ 100] + FC repouso; a FCmáx estimada tem ± 6 bpm, que passa para o alvo × intensidade
+    const lo = z.int != null ? z.int : z.lo, hi = z.int != null ? z.int : z.hi;
+    const o = { lo, hi, int: z.int };
+    if (r.fcr != null) {
+      // FC alvo central; com FCmáx estimada (± 6 bpm) a faixa final já soma e subtrai a variação (ex.: 128 → 125 a 131)
+      o.bpm = Math.round(r.fcrep + ((lo + hi) / 2) * r.fcr);
+      const vLo = r.fcmaxMedida ? 0 : Math.round(6 * lo), vHi = r.fcmaxMedida ? 0 : Math.round(6 * hi);
+      o.bpmLo = Math.round(r.fcrep + lo * r.fcr) - vLo; o.bpmHi = Math.round(r.fcrep + hi * r.fcr) + vHi;
+    }
     if (r.vo2r != null) {
-      o.vo2Lo = 3.5 + z.lo * r.vo2r; o.vo2Hi = 3.5 + z.hi * r.vo2r;
+      o.vo2Lo = 3.5 + lo * r.vo2r; o.vo2Hi = 3.5 + hi * r.vo2r;
       if (peso) o.kcalMin = ((o.vo2Lo + o.vo2Hi) / 2) * peso * 5 / 1000;
     }
     r.zones[k] = o;
   });
   return r;
 }
-function aeroBpm(c, zk) { const z = c.zones[zk] || {}; return z.bpmLo != null ? `${z.bpmLo}–${z.bpmHi} bpm` : 'FC: preencha FC de repouso e idade'; }
+/** Faixa ou valor único da FC alvo (sem "bpm"). */
+function aeroZoneTxt(o) { return !o || o.bpmLo == null ? '—' : o.bpmLo === o.bpmHi ? `${o.bpmLo}` : `${o.bpmLo} a ${o.bpmHi}`; }
+function aeroBpm(c, zk) { const z = c.zones[zk] || {}; return z.bpmLo == null ? 'FC: preencha FC de repouso e idade' : `${aeroZoneTxt(z)} bpm`; }
 function aeroKcal(c, zk, min) { const z = c.zones[zk] || {}; const m = aeroNum(min); return z.kcalMin != null && m ? Math.round(z.kcalMin * m) : null; }
 function aeroTotals(p, c) {
   const days = (p.aero.plano || []).flatMap((w) => w.dias).filter((d) => d.t === 'aero');
@@ -4878,7 +5157,16 @@ function aeroTotals(p, c) {
 
 /* ---- Editor (personal) ---- */
 const AERO_TABS = [['aval', '1. Avaliação física'], ['hemo', '2. Hemodinâmica'], ['exames', '3. Exames'], ['exerc', '4. Exercício físico'], ['treinos', '5. Treino de força'], ['aerob', '6. Treinos aeróbicos']];
-const aeroField = (path, label, unit = '', ph = '') => `<label class="field"><span>${label}${unit ? ` <em class="unit">(${unit})</em>` : ''}</span><input type="text" inputmode="decimal" data-bind="${path}" placeholder="${esc(ph)}"></label>`;
+const aeroField = (path, label, unit = '', ph = '') => `<label class="field"><span>${label}${unit ? ` <em class="unit">(${unit})</em>` : ''}</span><input type="text" ${ph === 'dd/mm/aaaa' ? 'inputmode="numeric" maxlength="10" data-mask="date"' : 'inputmode="decimal"'} data-bind="${path}" placeholder="${esc(ph)}"></label>`;
+/** Máscara de data dd/mm/aaaa: roda antes do salvamento (fase de captura), então o valor já é gravado com barras. */
+const maskDate = (v) => { const d = String(v || '').replace(/\D/g, '').slice(0, 8); return d.length > 4 ? `${d.slice(0, 2)}/${d.slice(2, 4)}/${d.slice(4)}` : d.length > 2 ? `${d.slice(0, 2)}/${d.slice(2)}` : d; };
+document.addEventListener('input', (e) => {
+  const i = e.target;
+  if (!i || !i.matches || !i.matches('[data-mask="date"]')) return;
+  if (e.inputType && e.inputType.startsWith('delete')) return;
+  const m = maskDate(i.value);
+  if (m !== i.value) i.value = m;
+}, true);
 const aeroOut = (id, label, unit = '') => `<div class="aero-out"><span>${label}</span><b id="${id}">—</b>${unit ? `<em>${unit}</em>` : ''}</div>`;
 function aeroStudent(p) { return byId(S.students, p.studentId); }
 function aeroHead(p) {
@@ -4912,11 +5200,13 @@ function tabAeroHemo(p) {
   return `<div class="section card"><h3>Medidas hemodinâmicas</h3>
     <div class="grid three">
       ${aeroField('aero.hemo.pas', 'Pressão arterial sistólica', 'mmHg')}${aeroField('aero.hemo.pad', 'Pressão arterial diastólica', 'mmHg')}${aeroField('aero.hemo.fcrep', 'FC de repouso', 'bpm')}
-      ${aeroField('aero.hemo.fcmax', 'FC máxima', 'bpm', 'automático: 220 − idade')}${aeroField('aero.hemo.vo2max', 'VO2 máximo', 'ml/kg/min')}
+      ${aeroField('aero.hemo.fcmax', 'FC máxima medida (opcional)', 'bpm', 'vazio = estimada pela idade')}${aeroField('aero.hemo.vo2max', 'VO2 máximo', 'ml/kg/min')}
+      <div class="field"><span>VO2 máximo por teste</span><button type="button" class="btn" data-action="vo2-test">🏃 Calcular VO2máx por teste</button><div class="small muted" style="margin-top:4px" id="vo2-test-info"></div></div>
       ${sel('aero.hemo.sono', 'Qualidade do sono', ['Boa', 'Regular', 'Ruim'])}
       ${sel('aero.hemo.intestino', 'Funcionamento do intestino', ['Regular', 'Preso', 'Solto', 'Irregular'])}
       ${sel('aero.hemo.estresse', 'Nível de estresse', ['Baixo', 'Moderado', 'Alto', 'Muito alto'])}
     </div>
+    <p class="small muted" style="margin:8px 0 0">Classificações: pressão arterial pela Diretriz Brasileira de Hipertensão (2020); VO2máx pela tabela da American Heart Association por sexo e idade.</p>
     <label class="field" style="margin-top:12px"><span>Objetivos do aluno</span><textarea rows="3" data-bind="aero.hemo.objetivos" placeholder="Ex.: reduzir 6 kg de gordura em 9 semanas, dormir melhor…"></textarea></label>
   </div>
   <div class="section card"><h3>Valores calculados</h3>
@@ -4929,6 +5219,7 @@ function tabAeroExames() {
   return `<div class="section card"><h3>Exames laboratoriais</h3>
     <div class="grid three">${aeroField('aero.ex.data', 'Data dos exames', '', 'dd/mm/aaaa')}${AERO_EXAMS.map(([k, l, u]) => aeroField(`aero.ex.${k}`, l, u)).join('')}</div>
     <label class="field" style="margin-top:12px"><span>Observações</span><textarea rows="2" data-bind="aero.ex.obs"></textarea></label>
+    <p class="small muted" style="margin:10px 0 0">Classificações para adultos: lipídios pela Atualização da Diretriz Brasileira de Dislipidemias (2017); glicemia e hemoglobina glicada pela Sociedade Brasileira de Diabetes; demais por valores de referência usuais. Ácido úrico, hemácias e hemoglobina variam por sexo. Servem de orientação e não substituem a avaliação médica.</p>
   </div>
   <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="exerc">Próximo: exercício físico →</button></div>`;
 }
@@ -4937,7 +5228,8 @@ function tabAeroExerc(p) {
     <div class="grid three">
       <label class="field"><span>Modalidade aeróbica</span><select data-bind="aero.exerc.modalidade"><option value="">—</option>${AERO_MODAL.map((m) => `<option>${m}</option>`).join('')}</select></label>
       <label class="field"><span>Observações da modalidade</span><input type="text" data-bind="aero.exerc.obs" placeholder="Ex.: esteira com 1% de inclinação"></label>
-    </div></div>
+    </div>
+    <div id="aero-modal-photo" class="aero-modal-photo"></div></div>
   <div class="section card"><h3>Resumo do programa (calculado)</h3>
     <div class="aero-outs">
       ${aeroOut('o-int', 'Intensidade predominante')}${aeroOut('o-freq', 'Frequência semanal', 'sessões aeróbicas')}${aeroOut('o-dur', 'Duração média', 'min')}
@@ -4948,10 +5240,18 @@ function tabAeroExerc(p) {
 }
 function tabAeroAerob(p) {
   const c = aeroCalc(p, aeroStudent(p));
-  const zoneRows = Object.entries(AERO_ZONES).map(([k, z]) => {
+  const editing = !!E.zoneEdit;
+  const pct = (v) => Math.round(v * 100);
+  const zoneRows = Object.keys(AERO_ZONES).map((k) => {
+    const z = aeroZone(p, k);
     const o = c.zones[k];
-    return `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td>${Math.round(z.lo * 100)}% a ${Math.round(z.hi * 100)}%</td>
-      <td><b>${o.bpmLo != null ? `${o.bpmLo} a ${o.bpmHi} bpm` : '—'}</b></td><td>${o.vo2Lo != null ? `${aeroFmt(o.vo2Lo)} a ${aeroFmt(o.vo2Hi)}` : '—'}</td><td>${o.kcalMin != null ? aeroFmt(o.kcalMin) : '—'}</td></tr>`;
+    const faixa = `faixa ${pct(z.lo)}% a ${pct(z.hi)}%`;
+    const pctCell = editing
+      ? `<span class="row" style="gap:6px;flex-wrap:nowrap"><input type="text" inputmode="numeric" class="zone-in" data-zone="${k}" value="${z.int != null ? pct(z.int) : ''}" placeholder="${pct((z.lo + z.hi) / 2)}"> %</span><div class="small muted">${faixa}</div>`
+      : z.int != null ? `<b>${pct(z.int)}%</b> <span class="chip" style="font-size:10px;padding:1px 6px">escolhida</span><div class="small muted">${faixa}</div>` : `${pct(z.lo)}% a ${pct(z.hi)}%<div class="small muted">sem intensidade escolhida</div>`;
+    const bpm = o.bpmLo == null ? '—' : `${aeroZoneTxt(o)} bpm`;
+    return `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td>${pctCell}</td>
+      <td><b>${bpm}</b></td><td>${o.vo2Lo != null ? (o.vo2Lo === o.vo2Hi ? aeroFmt(o.vo2Lo) : `${aeroFmt(o.vo2Lo)} a ${aeroFmt(o.vo2Hi)}`) : '—'}</td><td>${o.kcalMin != null ? aeroFmt(o.kcalMin) : '—'}</td></tr>`;
   }).join('');
   let n = 0;
   const weeks = (p.aero.plano || []).map((w, wi) => {
@@ -4970,14 +5270,31 @@ function tabAeroAerob(p) {
           <span class="small" data-zbpm="${wi}-${di}">${esc(aeroBpm(c, d.zona))}</span>${kc != null ? `<span class="small muted" data-zkcal="${wi}-${di}">≈ ${kc} kcal</span>` : `<span class="small muted" data-zkcal="${wi}-${di}"></span>`}</div>`;
       }).join('')}</div></div>`;
   }).join('');
-  return `<div class="section card"><h3>Zonas de treinamento do aluno</h3>
-    <table class="tpl-table aero-ztable"><tr><th>Zona</th><th>% da reserva</th><th>FC alvo (Karvonen)</th><th>VO2 alvo (ml/kg/min)</th><th>kcal/min</th></tr>${zoneRows}</table>
-    <p class="small muted" style="margin:10px 0 0">FC alvo = FC repouso + % × (FCmáx − FC repouso). VO2 alvo = 3,5 + % × (VO2máx − 3,5). Atualize a avaliação e a hemodinâmica que as zonas se recalculam.</p></div>
+  return `<div class="section card"><div class="row"><h3 style="margin:0;flex:1">Zonas de treinamento do aluno</h3>
+      ${editing ? '<button class="btn sm ghost" data-action="aero-zones-reset">Restaurar padrão</button><button class="btn sm primary" data-action="aero-zones-edit">Concluir</button>' : '<button class="btn sm" data-action="aero-zones-edit">⚙ Escolher intensidades</button>'}</div>
+    <table class="tpl-table aero-ztable"><tr><th>Zona</th><th>Intensidade (% da reserva da FC)</th><th>FC alvo (Karvonen)</th><th>VO2 alvo (ml/kg/min)</th><th>kcal/min</th></tr>${zoneRows}</table>
+    <p class="small muted" style="margin:10px 0 0">FC alvo = [(FCmáx − FC repouso) × intensidade ÷ 100] + FC repouso, com FCmáx = 220 − idade (homens) ou 226 − idade (mulheres). A faixa mostrada já inclui o desvio padrão de ± 6 bpm da FCmáx (ex.: 128 → 125 a 131). VO2 alvo = 3,5 + intensidade × (VO2máx − 3,5). ${editing ? 'Digite a intensidade de cada zona em % da reserva da FC (um valor). Deixe vazio para usar a faixa inteira.' : 'Faixas: regenerativa 28–42%, lipolítica 43–56%, glicolítica 57–70%. Clique em Escolher intensidades para definir um % em cada zona.'}</p></div>
   <div class="section stack">${weeks}</div>
   <div class="section row"><button class="btn" data-action="aero-reset-plan">Restaurar periodização padrão</button><span class="spacer"></span><button class="btn primary" data-action="student-access" data-id="${esc(p.id)}">Liberar acesso ao aluno</button></div>`;
 }
+actions['aero-zones-edit'] = async () => { E.zoneEdit = !E.zoneEdit; await saveSoon.flush(); renderEditor(); };
+actions['aero-zones-reset'] = async () => { delete E.p.aero.zonas; saveSoon(); await saveSoon.flush(); renderEditor(); toast('Intensidades padrão restauradas'); };
+document.addEventListener('change', (e) => {
+  const i = e.target.closest && e.target.closest('.zone-in');
+  if (!i || !E.p || !E.p.aero) return;
+  const zs = (E.p.aero.zonas = E.p.aero.zonas || {});
+  const k = i.dataset.zone;
+  if (!i.value.trim()) { delete zs[k]; saveSoon(); renderEditor(); return; }
+  const v = aeroNum(i.value);
+  if (v == null || v < 1 || v > 100) { toast('Use um valor entre 1 e 100'); renderEditor(); return; }
+  zs[k] = { int: Math.round(v) };
+  const z = AERO_ZONES[k];
+  if (v < z.lo * 100 || v > z.hi * 100) toast(`Atenção: ${Math.round(v)}% está fora da faixa da zona ${z.label.toLowerCase()} (${Math.round(z.lo * 100)}–${Math.round(z.hi * 100)}%)`);
+  saveSoon();
+  renderEditor();
+});
 function aeroBody(p) {
-  if (E.tab === 'aval') return tabAeroAval(p);
+  if (E.tab === 'aval') return tabAeroAval(p) + `<div id="evo-box">${evoSectionHTML(p)}</div>`;
   if (E.tab === 'hemo') return tabAeroHemo(p);
   if (E.tab === 'exames') return tabAeroExames(p);
   if (E.tab === 'exerc') return tabAeroExerc(p);
@@ -4988,11 +5305,22 @@ function aeroBody(p) {
 function aeroRefresh() {
   const p = E.p;
   if (!p || p.mode !== 'aero') return;
+  if (E.tab === 'aval' && $('#evo-box')) clearTimeout(aeroRefresh.t), (aeroRefresh.t = setTimeout(evoRefresh, 400));
   const c = aeroCalc(p, aeroStudent(p));
+  aeroClassRefresh(p, c);
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const mp = document.getElementById('aero-modal-photo');
+  const mKey = mp && `${(p.aero.exerc || {}).modalidade}|${(aeroStudent(p) || {}).sex}`;
+  if (mp && mp.dataset.key !== mKey) {
+    mp.dataset.key = mKey;
+    const modal = (p.aero.exerc || {}).modalidade, st = aeroStudent(p), src = aeroModalImg(modal, st && st.sex);
+    mp.innerHTML = src ? `<img src="${esc(src)}" alt="${esc(modal)}"><div><b>${esc(modal)}</b><div class="small muted">Foto ${st && st.sex === 'M' ? 'masculina' : 'feminina'}, conforme o sexo do aluno. Aparece também no app do aluno.</div></div>`
+      : modal ? `<div class="small muted">${esc(modal)}: sem foto para esta modalidade.</div>` : '<div class="small muted">Escolha a modalidade para ver a foto.</div>';
+  }
   set('o-imc', aeroFmt(c.imc)); set('o-mcm', aeroFmt(c.mcmPct)); set('o-mg', aeroFmt(c.mg)); set('o-mm', aeroFmt(c.mm));
   set('o-exc', aeroFmt(c.excedente)); set('o-car', aeroFmt(c.carencia)); set('o-rcq', aeroFmt(c.rcq, 2));
-  set('o-fcmax', c.fcmax != null ? String(Math.round(c.fcmax)) : '—'); set('o-fcr', c.fcr != null ? String(Math.round(c.fcr)) : '—'); set('o-vo2r', aeroFmt(c.vo2r));
+  set('o-fcmax', c.fcmax != null ? (c.fcmaxMedida ? String(Math.round(c.fcmax)) : `${Math.round(c.fcmax)} ± 6`) : '—');
+  { const em = $('#o-fcmax') && $('#o-fcmax').parentElement.querySelector('em'); if (em) em.textContent = c.fcmaxMedida ? 'bpm · medida em teste' : `bpm · estimada: ${c.fcmaxBase} − idade (${c.sex === 'F' ? 'mulheres' : c.sex === 'M' ? 'homens' : 'informe o sexo do aluno'}), desvio padrão ± 6`; } set('o-fcr', c.fcr != null ? String(Math.round(c.fcr)) : '—'); set('o-vo2r', aeroFmt(c.vo2r));
   const t = aeroTotals(p, c);
   const zc = {};
   p.aero.plano.flatMap((w) => w.dias).filter((d) => d.t === 'aero').forEach((d) => { zc[d.zona] = (zc[d.zona] || 0) + 1; });
@@ -5059,9 +5387,10 @@ function renderStudentAero(p) {
     const z = AERO_ZONES[s.zona];
     return `<div class="card aero-today">
       <div class="small muted">Fase ${s.fase} · Semana ${s.wi + 1} · Dia ${s.di + 1} · ${esc(s.micro)}</div>
+      ${s.t === 'aero' && aeroModalImg(modal, ST.data.student && ST.data.student.sex) ? `<img class="aero-today-img" src="${esc(aeroModalImg(modal, ST.data.student && ST.data.student.sex))}" alt="${esc(modal)}">` : ''}
       ${s.t === 'aero' ? `<h2 style="margin:6px 0">${esc(s.min)} minutos</h2>
         <div class="row" style="gap:8px"><span class="zchip ${z.cls}">Zona ${z.label}</span>${modal ? `<span class="chip">${esc(modal)}</span>` : ''}</div>
-        <div class="aero-bpm">${c.zones[s.zona].bpmLo != null ? `${c.zones[s.zona].bpmLo}–${c.zones[s.zona].bpmHi}` : '—'}<small> bpm</small></div>
+        <div class="aero-bpm">${aeroZoneTxt(c.zones[s.zona])}<small> bpm</small></div>
         <p class="small muted" style="margin:0">Mantenha a frequência cardíaca nessa faixa durante o treino.${aeroKcal(c, s.zona, s.min) != null ? ` Gasto estimado: ≈ ${aeroKcal(c, s.zona, s.min)} kcal.` : ''}</p>`
       : `<h2 style="margin:6px 0">${esc(AERO_MUSC[s.t] || 'Musculação')}</h2><p class="muted" style="margin:0">Hoje é dia de musculação. Faça a série indicada pelo seu personal na aba <b>Força</b>.</p>`}
       <label class="field" style="margin-top:12px"><span>Como foi? (opcional)</span><input type="text" id="aero-note" placeholder="Ex.: FC média 128, me senti bem"></label>
@@ -5071,7 +5400,7 @@ function renderStudentAero(p) {
   box.innerHTML = `<div class="stack" style="margin-top:14px">
     <div class="small muted">${doneN} de ${ss.length} sessões concluídas</div>
     ${card(next)}
-    <div class="card"><h3>Suas zonas de treino</h3><table class="tpl-table">${Object.entries(AERO_ZONES).map(([k, z]) => `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td><b>${c.zones[k].bpmLo != null ? `${c.zones[k].bpmLo}–${c.zones[k].bpmHi} bpm` : '—'}</b></td></tr>`).join('')}</table></div>
+    <div class="card"><h3>Suas zonas de treino</h3><table class="tpl-table">${Object.entries(AERO_ZONES).map(([k, z]) => `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td><b>${c.zones[k].bpmLo != null ? aeroZoneTxt(c.zones[k]) + ' bpm' : '—'}</b></td></tr>`).join('')}</table></div>
   </div>`;
 }
 function renderStudentAeroPlan(p) {
@@ -5209,6 +5538,619 @@ actions['cl-publish'] = async () => {
   toast('Publicação concluída');
   await loadCloudLib(true);
 };
+
+/* =========================================================
+ * Evolução do aluno: reavaliações, comparativo e relatório de renovação
+ * ======================================================= */
+const EVO_FIELDS = [
+  ['peso', 'Peso', 'kg'], ['altura', 'Altura', 'cm'],
+  ['cintura', 'Cintura', 'cm'], ['abd1', 'Abdome 1 · ponto médio xifoide–umbigo', 'cm'], ['abdome', 'Abdome 2 · cicatriz umbilical', 'cm'],
+  ['quadril', 'Quadril', 'cm'], ['crista', 'Crista ilíaca', 'cm'], ['braco', 'Braço', 'cm'], ['coxa', 'Coxa', 'cm'],
+  ['gordura', '% de gordura', '%'],
+  ['fcrep', 'FC de repouso', 'bpm'], ['pas', 'PA sistólica', 'mmHg'], ['pad', 'PA diastólica', 'mmHg'],
+];
+/* Métricas mostradas no comparativo. dir: -1 = menor é melhor, 1 = maior é melhor, 0 = neutro */
+const EVO_METRICS = [
+  ['peso', 'Peso', 'kg', 0, 1], ['gordura', '% de gordura', '%', -1, 1], ['mg', 'Massa gorda', 'kg', -1, 1],
+  ['mm', 'Massa magra', 'kg', 1, 1], ['excedente', 'Gordura excedente', 'kg', -1, 1], ['carencia', 'Carência muscular', 'kg', -1, 1],
+  ['imc', 'IMC', '', 0, 1], ['cintura', 'Cintura', 'cm', -1, 1], ['abdome', 'Abdome', 'cm', -1, 1], ['quadril', 'Quadril', 'cm', 0, 1],
+  ['braco', 'Braço', 'cm', 1, 1], ['coxa', 'Coxa', 'cm', 1, 1], ['rcq', 'Relação cintura/quadril', '', -1, 2],
+  ['fcrep', 'FC de repouso', 'bpm', -1, 0], ['pas', 'PA sistólica', 'mmHg', -1, 0], ['pad', 'PA diastólica', 'mmHg', -1, 0],
+];
+const evoToday = () => new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' });
+const evoDate = (d) => (d ? new Date(d + 'T12:00:00').toLocaleDateString('pt-BR') : '—');
+/** Converte dd/mm/aaaa ou aaaa-mm-dd em aaaa-mm-dd */
+function evoISO(d) {
+  const s = String(d || '').trim();
+  const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/) || s.match(/^(\d{2})(\d{2})(\d{4})$/);
+  if (m) return `${m[3]}-${pad2(m[2])}-${pad2(m[1])}`;
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : '';
+}
+/** Mesmas fórmulas do programa aeróbico (gordura excedente e carência muscular). */
+function evoCalc(ev, st) {
+  const n = (k) => aeroNum(ev[k]);
+  const peso = n('peso'), alt = n('altura'), g = n('gordura');
+  const sex = (st && st.sex) || ev.sexo || '';
+  const altM = alt ? (alt > 3 ? alt / 100 : alt) : null;
+  const r = {};
+  EVO_FIELDS.forEach(([k]) => { r[k] = n(k); });
+  r.imc = peso && altM ? peso / (altM * altM) : null;
+  r.mg = peso && g != null ? peso * g / 100 : null;
+  r.mm = peso && g != null ? peso - r.mg : null;
+  const gIdeal = sex === 'M' ? 15 : sex === 'F' ? 23 : null;
+  r.excedente = peso && g != null && gIdeal != null ? Math.max(0, (g - gIdeal) * peso / 100) : null;
+  const mcmRef = sex === 'M' ? 81 : sex === 'F' ? 77 : null;
+  r.carencia = r.mm != null && mcmRef != null ? Math.max(0, (mcmRef - (100 - g)) / 100 * r.mm) : null;
+  r.rcq = r.cintura && r.quadril ? r.cintura / r.quadril : null;
+  return r;
+}
+/** Avaliações do aluno em ordem de data. Inclui a avaliação do programa aeróbico como ponto de partida. */
+/**
+ * Avaliações do aluno em ordem de data. Junta as avaliações salvas no cadastro do aluno com a
+ * avaliação física de TODOS os programas aeróbicos dele (importadas automaticamente, sem digitar de novo).
+ */
+function evoList(st, p) {
+  const list = ((st && st.evals) || []).slice();
+  const aeros = S.programs.filter((x) => x.mode === 'aero' && !x.isTemplate && st && x.studentId === st.id);
+  if (p && p.mode === 'aero' && !aeros.includes(p)) aeros.push(p);
+  aeros.forEach((ap) => {
+    const av = ap.aero && ap.aero.av;
+    if (!av || !aeroNum(av.peso)) return;
+    const he = ap.aero.hemo || {};
+    const created = ap.createdAt ? new Date(ap.createdAt).toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' }) : '';
+    list.push({ id: 'aero-' + ap.id, virtual: true, aeroId: ap.id, date: evoISO(av.data) || evoISO(ap.aero.inicio) || created,
+      idade: av.idade, peso: av.peso, altura: av.altura, gordura: av.gordura, cintura: av.cintura, abdome: av.abdome, quadril: av.quadril,
+      fcrep: he.fcrep, pas: he.pas, pad: he.pad, obs: `Avaliação física do programa aeróbico${ap.title ? ' · ' + ap.title : ''}` });
+  });
+  return list.sort((a, b) => String(a.date || '0').localeCompare(String(b.date || '0')));
+}
+function evoDelta(a, b, m) {
+  const [k, , , dir] = m;
+  if (a[k] == null || b[k] == null) return { txt: '—', cls: '' };
+  const d = b[k] - a[k];
+  const dd = m[4];
+  if (Math.abs(d) < Math.pow(10, -dd) / 2) return { txt: '=', cls: '', d: 0 };
+  const cls = dir === 0 ? '' : (d * dir > 0 ? 'evo-up' : 'evo-down');
+  return { txt: (d > 0 ? '+' : '−') + aeroFmt(Math.abs(d), dd), cls, d };
+}
+
+/** Gráfico de linhas em canvas (vira imagem para funcionar na tela e no PDF). */
+function evoChartImg(series, labels, { w = 900, h = 360, light = false } = {}) {
+  const c = document.createElement('canvas');
+  const k = 2; c.width = w * k; c.height = h * k;
+  const g = c.getContext('2d'); g.scale(k, k);
+  const txt = light ? '#5d6779' : '#a9b4c6', grid = light ? 'rgba(0,0,0,.08)' : 'rgba(255,255,255,.08)';
+  const L = 56, R = 56, T = 30, B = 46;
+  g.font = '600 13px Inter, sans-serif';
+  const n = labels.length;
+  const xAt = (i) => (n <= 1 ? (L + w - R) / 2 : L + i * (w - L - R) / (n - 1));
+  for (let i = 0; i <= 4; i++) { const y = T + i * (h - T - B) / 4; g.strokeStyle = grid; g.beginPath(); g.moveTo(L, y); g.lineTo(w - R, y); g.stroke(); }
+  g.fillStyle = txt; g.textAlign = 'center';
+  labels.forEach((lb, i) => g.fillText(lb, xAt(i), h - 18));
+  series.forEach((s, si) => {
+    const vals = s.values.map((v) => (v == null ? null : v));
+    const ok = vals.filter((v) => v != null);
+    if (!ok.length) return;
+    let lo = Math.min(...ok), hi = Math.max(...ok);
+    const pad = Math.max((hi - lo) * 0.25, Math.abs(hi) * 0.03, 0.5); lo -= pad; hi += pad;
+    const yAt = (v) => T + (1 - (v - lo) / (hi - lo)) * (h - T - B);
+    g.strokeStyle = s.color; g.lineWidth = 4; g.lineJoin = 'round'; g.beginPath();
+    let started = false;
+    vals.forEach((v, i) => { if (v == null) return; const x = xAt(i), y = yAt(v); if (!started) { g.moveTo(x, y); started = true; } else g.lineTo(x, y); });
+    g.stroke();
+    vals.forEach((v, i) => {
+      if (v == null) return;
+      const x = xAt(i), y = yAt(v);
+      g.fillStyle = s.color; g.beginPath(); g.arc(x, y, 6, 0, Math.PI * 2); g.fill();
+      g.fillStyle = light ? '#1b2433' : '#efe6d2'; g.font = '700 14px Inter, sans-serif'; g.textAlign = 'center';
+      g.fillText(aeroFmt(v, 1) + (s.unit || ''), x, y + (si % 2 ? 24 : -14));
+    });
+  });
+  g.textAlign = 'left'; g.font = '700 14px Inter, sans-serif';
+  let lx = L;
+  series.forEach((s) => { g.fillStyle = s.color; g.fillRect(lx, 6, 14, 14); g.fillStyle = txt; g.fillText(s.label, lx + 20, 18); lx += g.measureText(s.label).width + 50; });
+  return c.toDataURL('image/png');
+}
+
+/* ---- Registros de treino do aluno (nuvem) ---- */
+async function evoFetchLogs(p, st) {
+  if (!sb || !CLOUD.user) return null;
+  // com o aluno: treinos de todos os programas dele (vários ciclos); sem: só deste programa
+  const refs = st ? [...new Set([p.id].concat(S.programs.filter((x) => x.studentId === st.id).map((x) => x.id)))] : [p.id];
+  const { data: acc, error: e1 } = await sb.from('student_access').select('id,code,active,expires_at,last_seen_at').in('program_ref', refs);
+  if (e1) throw e1;
+  if (!acc.length) return { acc, logs: [] };
+  const { data: logs, error: e2 } = await sb.from('workout_logs').select('*').in('access_id', acc.map((a) => a.id)).order('log_date', { ascending: false }).order('created_at', { ascending: false }).limit(500);
+  if (e2) throw e2;
+  return { acc, logs };
+}
+/** Resumo dos treinos: total, semanas, frequência e progressão de carga por exercício. */
+function evoTrainStats(logs) {
+  const out = { total: logs.length, perWeek: null, first: null, last: null, loads: [] };
+  if (!logs.length) return out;
+  const dates = logs.map((l) => l.log_date).filter(Boolean).sort();
+  out.first = dates[0]; out.last = dates[dates.length - 1];
+  const days = Math.max(7, (new Date(out.last) - new Date(out.first)) / 86400000 + 1);
+  out.perWeek = logs.length / (days / 7);
+  const by = {};
+  logs.slice().sort((a, b) => String(a.log_date).localeCompare(String(b.log_date))).forEach((l) => {
+    (l.exercises || []).forEach((x) => {
+      const best = Math.max(0, ...(x.sets || []).map((s) => aeroNum(s.load) || 0));
+      if (!best || !x.name) return;
+      const e = by[x.name] || (by[x.name] = { name: x.name, first: best, max: best, n: 0 });
+      e.max = Math.max(e.max, best); e.n++;
+    });
+  });
+  out.loads = Object.values(by).filter((e) => e.n >= 2 && e.max > e.first)
+    .map((e) => ({ ...e, pct: (e.max - e.first) / e.first * 100 }))
+    .sort((a, b) => b.pct - a.pct).slice(0, 6);
+  return out;
+}
+
+/* ---- Tela: seção "Avaliações e evolução" no Acompanhamento ---- */
+/** Programa mais recente do aluno (referência para o relatório fora do editor). */
+function evoLastProgram(st) {
+  return S.programs.filter((x) => !x.isTemplate && x.studentId === st.id).sort((a, b) => (b.updatedAt || b.createdAt || 0) - (a.updatedAt || a.createdAt || 0))[0] || null;
+}
+function evoSectionHTML(p) {
+  const st = byId(S.students, p.studentId);
+  if (!st) {
+    return `<div class="section card"><h2 style="margin-top:0">Avaliações e evolução</h2>
+      <p class="muted" style="margin:0">Escolha o aluno deste programa${p.mode === 'aero' ? ' no topo da aba Avaliação física' : ' acima'} para registrar avaliações e gerar o relatório de evolução.</p></div>`;
+  }
+  return evoPanelHTML(st, p, {});
+}
+/** Avaliações, comparativo e gráfico de um aluno. p = programa de referência (pode ser null). */
+function evoPanelHTML(st, p, { wizard = false } = {}) {
+  const ids = `data-sid="${esc(st.id)}" data-pid="${esc(p ? p.id : '')}"`;
+  const list = evoList(st, p);
+  const calc = list.map((ev) => evoCalc(ev, st));
+  const first = calc[0], last = calc[calc.length - 1];
+  const show = list.length > 4 ? [0, list.length - 2, list.length - 1] : list.map((_, i) => i);
+  const rows = EVO_METRICS.filter((m) => calc.some((c) => c[m[0]] != null)).map((m) => {
+    const dl = list.length >= 2 ? evoDelta(first, last, m) : null;
+    return `<tr><td>${esc(m[1])}${m[2] ? ` <span class="muted small">(${m[2]})</span>` : ''}</td>${show.map((i) => `<td>${aeroFmt(calc[i][m[0]], m[4])}</td>`).join('')}${dl ? `<td class="${dl.cls}"><b>${dl.txt}</b></td>` : ''}</tr>`;
+  }).join('');
+  let chart = '';
+  if (list.length >= 2) {
+    const labels = list.map((ev) => evoDate(ev.date).slice(0, 5));
+    chart = `<img class="evo-chart" alt="Gráfico de evolução" src="${evoChartImg([
+      { label: '% de gordura', color: '#d2a961', unit: '%', values: calc.map((c) => c.gordura) },
+      { label: 'Massa magra (kg)', color: '#5fb3ff', unit: '', values: calc.map((c) => c.mm) },
+    ], labels)}">`;
+  }
+  const canReport = list.length && p;
+  return `<div class="${wizard ? '' : 'section card '}stack" id="evo">
+    <div class="row"><div style="flex:1;min-width:220px">${wizard ? '' : '<h2 style="margin:0">Avaliações e evolução</h2>'}
+      <div class="small muted">${esc(st.name)} · ${list.length} avaliação(ões).${wizard ? (list.length ? ' Registre a nova avaliação e compare com as anteriores antes de escolher o programa.' : ' Opcional: registre a avaliação inicial antes de escolher o programa, ou pule esta etapa.') : ' Reavalie a cada 4 a 8 semanas e gere o relatório para renovar o plano.'}</div></div>
+      <button class="btn ${list.length ? 'primary' : ''}" data-action="evo-new" ${ids}>+ ${list.length ? 'Nova avaliação' : 'Avaliação inicial'}</button>
+      ${canReport ? `<button class="btn ${list.length >= 2 ? 'primary' : ''}" data-action="evo-report" ${ids}>Gerar relatório de evolução</button>` : ''}
+      ${!wizard && p && !p.isTemplate ? `<button class="btn ghost" data-action="evo-renew" data-sid="${esc(st.id)}" title="Nova avaliação, comparativo e escolha do próximo programa">Reavaliar e montar o próximo ciclo →</button>` : ''}</div>
+    ${list.length ? `
+      <div class="evo-table-wrap"><table class="tpl-table evo-table">
+        <thead><tr><th></th>${show.map((i) => `<th>${evoDate(list[i].date)}${i === 0 ? '<br><span class="small muted">inicial</span>' : i === list.length - 1 ? '<br><span class="small muted">atual</span>' : ''}</th>`).join('')}${list.length >= 2 ? '<th>Evolução</th>' : ''}</tr></thead>
+        <tbody>${rows}</tbody></table></div>
+      ${chart}
+      <div class="evo-items">${list.slice().reverse().map((ev) => `<div class="evo-item"><span><b>${evoDate(ev.date)}</b>${ev.obs ? ` · <span class="muted">${esc(ev.obs)}</span>` : ''}</span>
+        ${ev.virtual ? (p && p.id === ev.aeroId && E.tab === 'aval' && location.hash.startsWith('#/programa') ? '<span class="small muted">importada desta aba</span>' : `<a class="btn sm ghost" href="#/programa/${esc(ev.aeroId)}/aval">Abrir no programa aeróbico</a>`) : `<span class="row" style="gap:6px"><button class="btn sm" data-action="evo-edit" data-id="${esc(ev.id)}" ${ids}>Editar</button><button class="btn sm danger" data-action="evo-del" data-id="${esc(ev.id)}" ${ids}>✕</button></span>`}</div>`).join('')}</div>`
+    : `<div class="empty" style="margin:0">${wizard ? 'Nenhuma avaliação deste aluno ainda.' : 'Nenhuma avaliação ainda. Registre a avaliação inicial agora e a reavaliação no fim do ciclo.'}</div>`}
+  </div>`;
+}
+/** Aba "1. Avaliação" dos programas de musculação (opcional). */
+function tabAvaliacao(p) {
+  const st = byId(S.students, p.studentId);
+  return `<div class="section card stack">
+      <div class="small muted">Opcional: registre a avaliação inicial do aluno e as reavaliações ao longo do programa. Com duas ou mais avaliações você gera o relatório de evolução para renovar o plano.</div>
+      <div class="photo-pick">${avatarHTML(st && st.photo, st ? st.name : '?', 'lg')}
+        <div class="stack" style="flex:1;gap:8px">
+          <select id="sel-student">${optList(S.students, p.studentId, 'Selecione o aluno…')}</select>
+          <div class="row"><button class="btn sm" data-action="new-person" data-kind="students" data-assign="1">+ Novo aluno</button></div>
+        </div>
+      </div>
+    </div>
+    <div id="evo-box">${evoSectionHTML(p)}</div>
+    <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="dados">Próximo: dados e capa →</button></div>`;
+}
+function evoRefresh() {
+  const box = $('#evo-box');
+  if (box && E.p) box.innerHTML = evoSectionHTML(E.p);
+}
+const evoCtx = (el) => {
+  const st = byId(S.students, el.dataset.sid || (E.p && E.p.studentId));
+  const p = byId(S.programs, el.dataset.pid) || (st && location.hash.startsWith('#/programa') && E.p) || (st && evoLastProgram(st)) || null;
+  return { st, p };
+};
+/** Depois de salvar/excluir: atualiza a tela em que o personal está. */
+function evoAfterChange() {
+  if (location.hash.startsWith('#/novo')) viewWizard(); else evoRefresh();
+}
+/* Dobras cutâneas (mm) e protocolos de Jackson & Pollock com a equação de Siri */
+const EVO_DOBRAS = [['pt', 'Peitoral'], ['ax', 'Axilar média'], ['tr', 'Tricipital'], ['se', 'Subescapular'], ['ab', 'Abdominal'], ['si', 'Supra-ilíaca'], ['cx', 'Coxa']];
+const EVO_PERIM = ['perim', 'weltman', 'tranw'];
+const EVO_PROTOCOLOS = {
+  perim: { label: 'Perimetria automática pelo IMC: Weltman (acima de 29,9) ou Tran & Weltman (até 29,9)' },
+  weltman: { label: 'Perimetria: Weltman (qualquer IMC)' },
+  tranw: { label: 'Perimetria: Tran & Weltman (qualquer IMC)' },
+  manual: { label: 'Informar o % de gordura (bioimpedância ou outro método)' },
+  jp3: { label: 'Pollock 3 dobras (Jackson & Pollock)', M: ['pt', 'ab', 'cx'], F: ['tr', 'si', 'cx'] },
+  jp7: { label: 'Pollock 7 dobras (Jackson & Pollock)', M: ['pt', 'ax', 'tr', 'se', 'ab', 'si', 'cx'], F: ['pt', 'ax', 'tr', 'se', 'ab', 'si', 'cx'] },
+};
+/** Densidade corporal (Jackson & Pollock) e % de gordura (Siri). Retorna null se faltar dado. */
+function evoBodyFat(proto, sex, idade, dobras) {
+  const P = EVO_PROTOCOLOS[proto];
+  if (!P || !P[sex] || idade == null) return null;
+  const v = P[sex].map((k) => aeroNum(dobras[k]));
+  if (v.some((x) => x == null)) return null;
+  const S7 = v.reduce((a, b) => a + b, 0);
+  let dc;
+  if (proto === 'jp7') dc = sex === 'M' ? 1.112 - 0.00043499 * S7 + 0.00000055 * S7 * S7 - 0.00028826 * idade : 1.097 - 0.00046971 * S7 + 0.00000056 * S7 * S7 - 0.00012828 * idade;
+  else dc = sex === 'M' ? 1.10938 - 0.0008267 * S7 + 0.0000016 * S7 * S7 - 0.0002574 * idade : 1.0994921 - 0.0009929 * S7 + 0.0000023 * S7 * S7 - 0.0001392 * idade;
+  const g = (4.95 / dc - 4.5) * 100;
+  return { soma: S7, dc, g: Math.round(g * 10) / 10 };
+}
+/**
+ * % de gordura por perimetria, escolhendo a equação pelo IMC.
+ * Abdome médio = média do abdome 1 (ponto médio entre o processo xifoide e a cicatriz umbilical) e do abdome 2 (na cicatriz umbilical).
+ * IMC > 29,9 → Weltman (1987/1988), % de gordura direto.
+ *   Homens:   %G = 0,31457·abdome médio − 0,10969·peso + 10,8336
+ *   Mulheres: %G = 0,11077·abdome médio − 0,17666·estatura + 0,14354·peso + 51,03301
+ * IMC ≤ 29,9 → Tran & Weltman (1988 homens; 1989 mulheres), densidade → Siri.
+ *   Homens:   DC = 1,21142 + 0,00085·peso − 0,00050·crista ilíaca − 0,00061·quadril − 0,00138·abdome médio
+ *   Mulheres: DC = 1,168297 − 0,002824·abdome médio + 0,0000122098·abdome médio² − 0,000733128·quadril + 0,000510477·estatura − 0,000216161·idade
+ */
+function evoBodyFatPerim(sex, m, force = '') {
+  const n = (k) => aeroNum(m[k]);
+  const peso = n('peso'), alt = n('altura'), a1 = n('abd1'), a2 = n('abdome'), quad = n('quadril'), crista = n('crista'), idade = n('idade');
+  if (!sex) return { err: 'Informe o sexo para calcular.' };
+  if (!peso || !alt) return { err: 'Preencha peso e altura (para o IMC).' };
+  const altCm = alt > 3 ? alt : alt * 100;
+  const imc = peso / Math.pow(altCm / 100, 2);
+  if (a1 == null || a2 == null) return { err: 'Preencha abdome 1 e abdome 2.', imc };
+  const abd = (a1 + a2) / 2;
+  let g, eq, dc = null;
+  const useW = force === 'weltman' || (force !== 'tranw' && imc > 29.9);
+  if (useW) {
+    eq = force ? 'Weltman (escolhida)' : 'Weltman (IMC acima de 29,9)';
+    g = sex === 'M' ? 0.31457 * abd - 0.10969 * peso + 10.8336 : 0.11077 * abd - 0.17666 * altCm + 0.14354 * peso + 51.03301;
+  } else {
+    eq = force ? 'Tran & Weltman (escolhida)' : 'Tran & Weltman (IMC até 29,9)';
+    if (sex === 'M') {
+      if (quad == null || crista == null) return { err: 'Preencha quadril e crista ilíaca.', imc };
+      dc = 1.21142 + 0.00085 * peso - 0.0005 * crista - 0.00061 * quad - 0.00138 * abd;
+    } else {
+      if (quad == null || idade == null) return { err: 'Preencha quadril e idade.', imc };
+      dc = 1.168297 - 0.002824 * abd + 0.0000122098 * abd * abd - 0.000733128 * quad + 0.000510477 * altCm - 0.000216161 * idade;
+    }
+    g = (4.95 / dc - 4.5) * 100;
+  }
+  return { g: Math.round(g * 10) / 10, eq, imc, abd, dc };
+}
+/* ---- Guia de medidas: foto + como medir (abre por cima do formulário) ---- */
+const EVO_IMG = 'https://dzmgbvyffxtcjsdpedqb.supabase.co/storage/v1/object/public/fotos/v2/medidas/';
+const EVO_GUIDE = {
+  peso: ['Peso', '', ['Balança calibrada, sobre piso firme e plano.', 'Aluno descalço, com roupa leve, parado no centro da balança.', 'De preferência pela manhã, em jejum e após urinar. Repita sempre nas mesmas condições.']],
+  altura: ['Altura (estatura)', '', ['Estadiômetro ou fita fixada na parede.', 'Descalço, calcanhares juntos, glúteos, costas e cabeça encostados na parede.', 'Olhar para a frente (plano de Frankfurt). Peça uma inspiração e meça no ponto mais alto da cabeça.']],
+  cintura: ['Cintura', 'cintura.jpg', ['Aluno em pé, abdome relaxado, braços levemente afastados do tronco.', 'Fita na MENOR circunferência do tronco, entre a última costela e a crista ilíaca.', 'Fita na horizontal, justa sem comprimir a pele. Leia ao final de uma expiração normal.']],
+  abd1: ['Abdome 1 · ponto médio xifoide–umbigo', 'abd1.jpg', ['Localize o processo xifoide (ponta inferior do esterno) e a cicatriz umbilical.', 'Fita no PONTO MÉDIO entre os dois, na frente; nas laterais, entre a última costela e a crista ilíaca.', 'Fita na horizontal, abdome relaxado, leitura ao final da expiração. Usada nas equações de Weltman e Tran & Weltman.']],
+  abdome: ['Abdome 2 · cicatriz umbilical', 'abdome.jpg', ['Aluno em pé, abdome relaxado (não encolher a barriga).', 'Fita passando exatamente sobre a cicatriz umbilical.', 'Fita na horizontal, leitura ao final da expiração. Usada nas equações de Weltman e Tran & Weltman.']],
+  quadril: ['Quadril', 'quadril.jpg', ['Aluno em pé, pés juntos, glúteos relaxados.', 'Observe de lado e posicione a fita na MAIOR protuberância dos glúteos.', 'Fita na horizontal em toda a volta, sem comprimir.']],
+  crista: ['Crista ilíaca', 'crista.jpg', ['Palpe o ponto mais alto do osso do quadril (crista ilíaca) dos dois lados.', 'Fita imediatamente ACIMA das cristas ilíacas, na horizontal.', 'Usada na equação de Tran & Weltman para homens.']],
+  braco: ['Braço (relaxado)', 'braco.jpg', ['Braço relaxado ao lado do corpo, palma voltada para a coxa.', 'Marque o ponto médio entre o acrômio (ponta do ombro) e o olécrano (cotovelo).', 'Fita na horizontal nesse ponto, sem contrair o bíceps. Use sempre o mesmo lado (padrão: direito).']],
+  coxa: ['Coxa', 'coxa.jpg', ['Aluno em pé, pés levemente afastados, peso distribuído nas duas pernas.', 'Marque o ponto médio entre a prega inguinal e a borda superior da patela.', 'Fita na horizontal nesse ponto, sem comprimir. Use sempre o mesmo lado (padrão: direito).']],
+  pt: ['Dobra peitoral', 'd-pt.jpg', ['Dobra DIAGONAL, no lado direito.', 'Homens: na metade da distância entre a linha axilar anterior e o mamilo. Mulheres: a 1/3 dessa distância, a partir da axila.', 'Pince com polegar e indicador, aplique o adipômetro 1 cm abaixo dos dedos e leia em cerca de 2 segundos.']],
+  ax: ['Dobra axilar média', 'd-ax.jpg', ['Dobra VERTICAL, no lado direito, com o braço do aluno levemente para a frente.', 'Na linha axilar média (abaixo do centro da axila), na altura do processo xifoide.', 'Adipômetro 1 cm abaixo dos dedos; faça 2 a 3 medidas e use a média.']],
+  tr: ['Dobra tricipital', 'd-tr.jpg', ['Dobra VERTICAL na face posterior do braço direito, braço relaxado ao lado do corpo.', 'No ponto médio entre o acrômio e o olécrano.', 'Adipômetro 1 cm abaixo dos dedos; faça 2 a 3 medidas e use a média.']],
+  se: ['Dobra subescapular', 'd-se.jpg', ['Dobra OBLÍQUA (cerca de 45°, para baixo e para o lado).', 'Cerca de 2 cm abaixo do ângulo inferior da escápula direita.', 'Adipômetro 1 cm abaixo dos dedos; faça 2 a 3 medidas e use a média.']],
+  ab: ['Dobra abdominal', 'd-ab.jpg', ['Dobra VERTICAL, no lado direito.', 'Cerca de 2 cm à direita da cicatriz umbilical.', 'Aluno com o abdome relaxado; adipômetro 1 cm abaixo dos dedos; 2 a 3 medidas e média.']],
+  si: ['Dobra supra-ilíaca', 'd-si.jpg', ['Dobra OBLÍQUA, acompanhando a linha natural do quadril.', 'Imediatamente acima da crista ilíaca, na linha axilar anterior, lado direito.', 'Adipômetro 1 cm abaixo dos dedos; 2 a 3 medidas e média.']],
+  cx: ['Dobra da coxa', 'd-cx.jpg', ['Dobra VERTICAL na face anterior da coxa direita, com o peso do aluno na perna esquerda.', 'No ponto médio entre a prega inguinal e a borda superior da patela.', 'Adipômetro 1 cm abaixo dos dedos; 2 a 3 medidas e média.']],
+};
+const EVO_GUIDE_TIPS = ['Fita métrica flexível e inextensível; adipômetro científico calibrado.', 'Meça sempre do mesmo lado (padrão: direito), na mesma hora do dia e com o mesmo avaliador.', 'Faça 2 a 3 medidas em cada ponto e use a média; refaça se a diferença passar de 5%.', 'Não meça logo após o treino: o inchaço muscular altera as circunferências e as dobras.'];
+function evoGuideItem(k) {
+  const g = EVO_GUIDE[k];
+  if (!g) return '';
+  return `<div class="evo-guide-item" id="eg-${k}">
+    ${g[1] ? `<img src="${EVO_IMG + g[1]}" alt="${esc(g[0])}" loading="lazy">` : ''}
+    <div><h3>${esc(g[0])}</h3><ol>${g[2].map((t) => `<li>${esc(t)}</li>`).join('')}</ol></div></div>`;
+}
+/** Abre por cima do formulário (sem fechar a avaliação). k = uma medida; vazio = guia completo. */
+function evoHow(k) {
+  const old = $('#evo-guide'); if (old) old.remove();
+  const el = document.createElement('div');
+  el.id = 'evo-guide';
+  el.className = 'modal-backdrop evo-guide';
+  const keys = k ? [k] : Object.keys(EVO_GUIDE);
+  el.innerHTML = `<div class="modal" style="width:min(760px,100%)">
+    <div class="modal-head"><h2>${k ? 'Como medir' : 'Guia de medidas'}</h2><button class="btn icon sm" data-close-guide aria-label="Fechar">✕</button></div>
+    <div class="modal-body">
+      ${k ? '' : `<div class="card" style="margin-bottom:14px"><h3 style="margin-top:0">Antes de começar</h3><ul class="small">${EVO_GUIDE_TIPS.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div>`}
+      ${keys.map(evoGuideItem).join('')}
+      ${k ? `<div class="row" style="margin-top:12px"><button class="btn sm ghost" data-guide-all>Ver o guia completo</button><span class="spacer"></span><button class="btn primary" data-close-guide>Voltar à avaliação</button></div>` : ''}
+    </div></div>`;
+  el.addEventListener('click', (e) => {
+    if (e.target === el || e.target.closest('[data-close-guide]')) { e.stopPropagation(); el.remove(); }
+    else if (e.target.closest('[data-guide-all]')) { e.stopPropagation(); evoHow(''); }
+  });
+  document.body.appendChild(el);
+}
+actions['evo-how'] = (el, ev) => { if (ev) ev.stopPropagation(); evoHow(el.dataset.k || ''); };
+const evoHowBtn = (k) => (EVO_GUIDE[k] ? ` <button type="button" class="evo-how" data-action="evo-how" data-k="${k}" title="Como medir">? como medir</button>` : '');
+
+function evoForm(st, p, ev) {
+  if (!st) return;
+  const prev = evoList(st, p).filter((x) => !ev || x.id !== ev.id).pop() || {};
+  const x = ev || { id: uid(), date: evoToday(), protocolo: prev.protocolo || 'perim' };
+  if (x.perim) { x.abd1 = x.abd1 ?? x.perim.abd1; x.crista = x.crista ?? x.perim.crista; }
+  const dob = x.dobras || {};
+  const pdob = prev.dobras || {};
+  const ph = (v) => (v != null && v !== '' ? 'antes: ' + esc(v) : '');
+  const inp = ([k, l, u]) => `<label class="field"><span>${l} <em class="unit">(${u})</em>${evoHowBtn(k)}</span><input type="text" inputmode="decimal" data-ev="${k}" value="${esc(x[k] ?? '')}" placeholder="${ph(prev[k])}"></label>`;
+  const F = (keys) => EVO_FIELDS.filter(([k]) => keys.includes(k)).map(inp).join('');
+  const body = openModal(ev ? 'Editar avaliação' : 'Nova avaliação', `
+    <p class="small muted" style="margin-top:0">${esc(st.name)}. Preencha o que você mediu; os campos vazios ficam de fora do relatório.${prev.date ? ` Última avaliação: ${evoDate(prev.date)}.` : ''}</p>
+    <div class="grid three">
+      <label class="field"><span>Data</span><input type="date" id="ev-date" value="${esc(x.date || evoToday())}"></label>
+      <label class="field"><span>Idade <em class="unit">(anos)</em></span><input type="text" inputmode="numeric" id="ev-idade" value="${esc(x.idade ?? st.age ?? '')}"></label>
+      <label class="field"><span>Sexo</span><select id="ev-sex"><option value="">—</option><option value="F" ${(st.sex || x.sexo) === 'F' ? 'selected' : ''}>Feminino</option><option value="M" ${(st.sex || x.sexo) === 'M' ? 'selected' : ''}>Masculino</option></select></label>
+    </div>
+    <div class="row" style="margin:14px 0 6px"><h3 style="margin:0">1. Peso, altura e circunferências</h3><span class="spacer"></span><button type="button" class="btn sm" data-action="evo-how" data-k="">📏 Guia de medidas com fotos</button></div>
+    <div class="grid three">${F(['peso', 'altura', 'cintura', 'abd1', 'abdome', 'quadril', 'crista', 'braco', 'coxa'])}</div>
+    <h3 style="margin:14px 0 6px">2. % de gordura</h3>
+    <label class="field"><span>Método</span><select id="ev-proto">${Object.entries(EVO_PROTOCOLOS).map(([k, v]) => `<option value="${k}" ${(x.protocolo || 'manual') === k ? 'selected' : ''}>${v.label}</option>`).join('')}</select></label>
+    <div id="ev-dobras" class="grid three"></div>
+    <div class="grid three" style="margin-top:6px">
+      <label class="field"><span>% de gordura <em class="unit">(%)</em></span><input type="text" inputmode="decimal" data-ev="gordura" id="ev-g" value="${esc(x.gordura ?? '')}" placeholder="${ph(prev.gordura)}"></label>
+      <div class="field" style="grid-column:span 2"><span>Como foi calculado</span><div id="ev-res" class="small muted" style="padding-top:8px">—</div></div>
+    </div>
+    <h3 style="margin:14px 0 6px">3. Resultados <span class="muted small" style="font-weight:400">(calculados)</span></h3>
+    <div class="aero-outs" id="ev-out"></div>
+    <h3 style="margin:14px 0 6px">Outras medidas <span class="muted small" style="font-weight:400">(opcional)</span></h3>
+    <div class="grid three">${F(['fcrep', 'pas', 'pad'])}</div>
+    <label class="field"><span>Observações</span><input type="text" id="ev-obs" value="${esc(x.obs || '')}" placeholder="Ex.: reavaliação do fim do ciclo 1"></label>
+    <div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="ev-save">Salvar avaliação</button></div>`);
+  const proto = () => $('#ev-proto', body).value;
+  const sex = () => $('#ev-sex', body).value;
+  const val = (k) => { const i = $(`[data-ev="${k}"]`, body); return i ? i.value.trim().replace(',', '.') : ''; };
+  const readDobras = () => Object.fromEntries($$('[data-dob]', body).map((i) => [i.dataset.dob, i.value.trim().replace(',', '.')]).filter(([, v]) => v));
+  let cur = { ...dob };
+  const results = () => {
+    const ev2 = Object.fromEntries(EVO_FIELDS.map(([k]) => [k, val(k)]));
+    const c = evoCalc(ev2, { sex: sex() });
+    const out = [['IMC', c.imc, 1, 'kg/m²'], ['% de gordura', c.gordura, 1, '%'], ['Massa gorda', c.mg, 1, 'kg'], ['Massa magra', c.mm, 1, 'kg'],
+      ['Gordura excedente', c.excedente, 1, 'kg'], ['Carência muscular', c.carencia, 1, 'kg'], ['Relação cintura/quadril', c.rcq, 2, '']];
+    const miss = !c.peso ? 'Preencha o peso.' : !sex() ? 'Informe o sexo (no topo) para calcular % de gordura, gordura excedente e carência muscular.' : c.gordura == null ? 'Falta o % de gordura (item 2).' : '';
+    $('#ev-out', body).innerHTML = out.map(([l, v, d, u]) => `<div class="aero-out"><span>${l}</span><b>${aeroFmt(v, d)}</b>${u ? `<em>${u}</em>` : ''}</div>`).join('')
+      + (miss ? `<div class="small" style="color:var(--gold-2);grid-column:1/-1">${miss}</div>` : '');
+  };
+  const calc = () => {
+    const P = EVO_PROTOCOLOS[proto()];
+    const g = $('#ev-g', body), res = $('#ev-res', body);
+    if (proto() === 'manual') { g.readOnly = false; res.textContent = 'Digite o valor medido (bioimpedância ou outro método).'; results(); return; }
+    g.readOnly = true;
+    if (EVO_PERIM.includes(proto())) {
+      const m = { idade: $('#ev-idade', body).value };
+      ['peso', 'altura', 'abd1', 'abdome', 'quadril', 'crista'].forEach((k) => { m[k] = val(k); });
+      const r = evoBodyFatPerim(sex(), m, proto() === 'perim' ? '' : proto());
+      if (r.err) { res.textContent = (r.imc ? `IMC ${aeroFmt(r.imc, 1)}. ` : '') + r.err; g.value = ''; }
+      else {
+        g.value = String(r.g).replace('.', ',');
+        res.innerHTML = `IMC <b>${aeroFmt(r.imc, 1)}</b> · <b>${esc(r.eq)}</b> · abdome médio ${aeroFmt(r.abd, 1)} cm${r.dc ? ` · densidade ${r.dc.toFixed(4).replace('.', ',')} g/ml (Siri)` : ''}`;
+      }
+      results(); return;
+    }
+    if (!sex()) { res.textContent = 'Informe o sexo para calcular.'; g.value = ''; results(); return; }
+    const r = evoBodyFat(proto(), sex(), aeroNum($('#ev-idade', body).value), readDobras());
+    if (!r) { res.textContent = `Preencha as ${P[sex()].length} dobras e a idade.`; g.value = ''; }
+    else {
+      g.value = String(r.g).replace('.', ',');
+      res.innerHTML = `Soma das dobras: <b>${aeroFmt(r.soma, 1)} mm</b> · Densidade: <b>${r.dc.toFixed(4).replace('.', ',')} g/ml</b> · Siri`;
+    }
+    results();
+  };
+  const drawMethod = () => {
+    cur = { ...cur, ...readDobras() };
+    const box = $('#ev-dobras', body);
+    const P = EVO_PROTOCOLOS[proto()];
+    if (EVO_PERIM.includes(proto())) {
+      const need = proto() === 'weltman' ? (sex() === 'M' ? 'peso, abdome 1 e abdome 2' : 'peso, altura, abdome 1 e abdome 2')
+        : `peso, altura, abdome 1 e abdome 2${sex() === 'M' ? ', quadril e crista ilíaca' : sex() === 'F' ? ', quadril e idade' : ', quadril e (homens) crista ilíaca'}`;
+      box.innerHTML = `<div class="small muted" style="grid-column:1/-1">Usa ${need} do item 1.${proto() === 'perim' ? ' IMC acima de 29,9 → Weltman; até 29,9 → Tran & Weltman.' : ''}</div>`;
+    } else if (proto() === 'manual') {
+      box.innerHTML = '';
+    } else {
+      box.innerHTML = P[sex() || 'F'].map((k) => `<label class="field"><span>Dobra ${EVO_DOBRAS.find((d) => d[0] === k)[1].toLowerCase()} <em class="unit">(mm)</em>${evoHowBtn(k)}</span><input type="text" inputmode="decimal" data-dob="${k}" value="${esc(cur[k] ?? '')}" placeholder="${ph(pdob[k])}"></label>`).join('');
+      $$('[data-dob]', box).forEach((i) => i.addEventListener('input', calc));
+    }
+    calc();
+  };
+  $('#ev-proto', body).addEventListener('change', drawMethod);
+  $('#ev-sex', body).addEventListener('change', drawMethod);
+  $('#ev-idade', body).addEventListener('input', calc);
+  $$('[data-ev]', body).forEach((i) => { if (i.id !== 'ev-g') i.addEventListener('input', calc); });
+  $('#ev-g', body).addEventListener('input', results);
+  drawMethod();
+  $('#ev-save', body).onclick = async () => {
+    const rec = { id: x.id, date: $('#ev-date', body).value || evoToday(), obs: $('#ev-obs', body).value.trim(), protocolo: proto() };
+    const idade = $('#ev-idade', body).value.trim();
+    if (idade) rec.idade = idade;
+    if (sex()) rec.sexo = sex();
+    $$('[data-ev]', body).forEach((i) => { const v = i.value.trim().replace(',', '.'); if (v) rec[i.dataset.ev] = v; });
+    if (proto() === 'jp3' || proto() === 'jp7') { const d = readDobras(); if (Object.keys(d).length) rec.dobras = d; }
+    if (!EVO_FIELDS.some(([k]) => rec[k])) { toast('Preencha ao menos uma medida'); return; }
+    if (sex() && sex() !== st.sex) st.sex = sex();
+    st.evals = (st.evals || []).filter((e) => e.id !== rec.id).concat(rec);
+    await saveEntity('students', st);
+    closeModal();
+    toast('Avaliação salva');
+    evoAfterChange();
+  };
+}
+actions['evo-new'] = (el) => { const { st, p } = evoCtx(el); evoForm(st, p, null); };
+actions['evo-edit'] = (el) => {
+  const { st, p } = evoCtx(el);
+  evoForm(st, p, ((st && st.evals) || []).find((e) => e.id === el.dataset.id));
+};
+actions['evo-del'] = async (el) => {
+  const { st } = evoCtx(el);
+  if (!st || !confirm('Excluir esta avaliação?')) return;
+  st.evals = (st.evals || []).filter((e) => e.id !== el.dataset.id);
+  await saveEntity('students', st);
+  evoAfterChange();
+};
+/** Renovação: nova avaliação, comparativo e escolha do próximo programa, numa tela só. */
+actions['evo-renew'] = (el) => { W2.studentId = el.dataset.sid; W2.tplId = ''; W2.renew = true; location.hash = '#/novo'; };
+
+/* ---- Relatório de evolução (PDF para renovar o plano) ---- */
+function evoReportSlides(p, st, opts) {
+  const tr = byId(S.trainers, p.trainerId);
+  const brand = S.settings.brand || '';
+  const light = p.theme === 'light';
+  const list = evoList(st, p);
+  const calc = list.map((ev) => evoCalc(ev, st));
+  const a = calc[0], b = calc[calc.length - 1];
+  const two = list.length >= 2;
+  const period = two ? `${evoDate(list[0].date)} a ${evoDate(list[list.length - 1].date)}` : evoDate(list[0].date);
+  const ts = opts.train;
+  const out = [];
+  const add = (cls, html) => out.push({ cls, html });
+  const first = st.name.split(' ')[0];
+
+  add('s-cover', `
+    <div class="left">
+      <div class="kicker">Relatório de evolução</div>
+      <div class="title bebas" style="font-size:${titleSize('Sua evolução', 150, 7)}px;margin-top:18px">Sua evolução</div>
+      <div class="subtitle">${esc(p.title)}</div>
+      <div class="facts"><span>${esc(period)}</span><span>${list.length} avaliação(ões)${ts && ts.total ? ` · ${ts.total} treinos registrados` : ''}</span></div>
+      ${tr ? `<div class="by">${bgImg(tr.photo, initials(tr.name))}<div><small>Personal Trainer</small><strong>${esc(tr.name)}</strong>${tr.cref ? `<em>CREF ${esc(tr.cref)}</em>` : ''}</div></div>` : ''}
+    </div>
+    <div class="right">
+      <div class="ring">${bgImg(st.photo, initials(st.name))}</div>
+      <div class="student-label">Resultados de</div>
+      <div class="student-name">${esc(st.name)}</div>
+    </div>`);
+
+  if (two) {
+    const pick = ['mg', 'mm', 'gordura', 'cintura', 'excedente', 'peso'];
+    const cards = pick.map((k) => EVO_METRICS.find((m) => m[0] === k)).filter((m) => a[m[0]] != null && b[m[0]] != null).slice(0, 4);
+    const card = (m) => {
+      const dl = evoDelta(a, b, m);
+      const label = { mg: dl.d < 0 ? 'de gordura a menos' : 'de massa gorda', mm: dl.d > 0 ? 'de massa magra a mais' : 'de massa magra', gordura: 'pontos no % de gordura', cintura: 'cm de cintura', excedente: 'de gordura excedente', peso: 'de peso' }[m[0]];
+      return `<div class="statbox evo-stat ${dl.cls}"><b>${dl.txt}${m[2] === 'kg' ? ' kg' : ''}</b><span>${esc(label)}</span>
+        <em>${aeroFmt(a[m[0]], m[4])} → ${aeroFmt(b[m[0]], m[4])} ${m[2]}</em></div>`;
+    };
+    add('s-text', `
+      <div class="content" data-fitbox>
+        <div class="kicker">Resultados</div><div class="rule"></div>
+        <div class="heading bebas">O que você conquistou</div>
+        <div class="body" data-shrink="16">${esc(first)}, comparando a avaliação de ${evoDate(list[0].date)} com a de ${evoDate(list[list.length - 1].date)}:</div>
+        <div class="statboxes evo-statboxes">${cards.map(card).join('')}</div>
+      </div>`);
+  }
+
+  const mrows = EVO_METRICS.filter((m) => a[m[0]] != null || b[m[0]] != null);
+  add('s-text', `
+    <div class="content">
+      <div class="kicker">Avaliação física</div><div class="rule"></div>
+      <div class="heading bebas" style="font-size:60px">${two ? 'Antes e agora' : 'Avaliação inicial'}</div>
+      <table class="evo-slide-table">
+        <thead><tr><th></th><th>${two ? 'Antes' : 'Medida'}<small>${evoDate(list[0].date)}</small></th>${two ? `<th>Agora<small>${evoDate(list[list.length - 1].date)}</small></th><th>Evolução</th>` : ''}</tr></thead>
+        <tbody>${mrows.slice(0, 12).map((m) => {
+          const dl = two ? evoDelta(a, b, m) : null;
+          return `<tr><td>${esc(m[1])}${m[2] ? ` <small>(${m[2]})</small>` : ''}</td><td>${aeroFmt(a[m[0]], m[4])}</td>${two ? `<td>${aeroFmt(b[m[0]], m[4])}</td><td class="${dl.cls}">${dl.txt}</td>` : ''}</tr>`;
+        }).join('')}</tbody>
+      </table>
+    </div>`);
+
+  if (list.length >= 2) {
+    const img = evoChartImg([
+      { label: '% de gordura', color: light ? '#a67a2c' : '#d2a961', unit: '%', values: calc.map((c) => c.gordura) },
+      { label: 'Massa magra (kg)', color: '#3d8fe0', unit: '', values: calc.map((c) => c.mm) },
+    ], list.map((ev) => evoDate(ev.date).slice(0, 5)), { w: 1200, h: 470, light });
+    add('s-text', `
+      <div class="content">
+        <div class="kicker">Linha do tempo</div><div class="rule"></div>
+        <div class="heading bebas" style="font-size:72px">Sua curva de resultados</div>
+        <img src="${img}" alt="" style="width:1180px;margin-top:18px">
+      </div>`);
+  }
+
+  if (ts && ts.total) {
+    add('s-text', `
+      <div class="content" data-fitbox>
+        <div class="kicker">Treinos</div><div class="rule"></div>
+        <div class="heading bebas" style="font-size:72px">Sua dedicação em números</div>
+        <div class="statboxes" style="margin-top:22px">
+          <div class="statbox"><b>${ts.total}</b><span>treinos registrados</span></div>
+          <div class="statbox"><b>${aeroFmt(ts.perWeek, 1)}x</b><span>por semana, em média</span></div>
+          <div class="statbox"><b>${evoDate(ts.first).slice(0, 5)} a ${evoDate(ts.last).slice(0, 5)}</b><span>período de treino</span></div>
+        </div>
+        ${ts.loads.length ? `<h3 class="evo-h3">Progressão de carga</h3>
+          <table class="evo-slide-table compact"><thead><tr><th>Exercício</th><th>Início</th><th>Melhor carga</th><th>Evolução</th></tr></thead>
+          <tbody>${ts.loads.map((e) => `<tr><td>${esc(e.name)}</td><td>${aeroFmt(e.first, 0)} kg</td><td>${aeroFmt(e.max, 0)} kg</td><td class="evo-up">+${aeroFmt(e.pct, 0)}%</td></tr>`).join('')}</tbody></table>` : ''}
+      </div>`);
+  }
+
+  add('s-text', `
+    <div class="content" data-fitbox>
+      <div class="kicker">Próximo passo</div><div class="rule"></div>
+      <div class="heading bebas">${esc(opts.nextTitle || 'Vamos para a próxima fase')}</div>
+      <div class="body" data-shrink="16">${esc(opts.message || '')}</div>
+      ${tr ? `<div class="statboxes"><div class="statbox"><b>${esc(tr.name)}</b><span>${tr.cref ? 'CREF ' + esc(tr.cref) : 'Seu personal trainer'}</span></div></div>` : ''}
+    </div>`);
+
+  const total = out.length;
+  return out.map((s, i) => {
+    const foot = s.cls === 's-cover' ? '' : `<div class="footer"><span>${esc(brand)}</span><span>${pad2(i + 1)}/${pad2(total)}</span></div>`;
+    return { html: `<div class="slide t-${esc(p.theme || 'navy')} ${s.cls} evo-slide">${s.html}${foot}</div>` };
+  });
+}
+async function evoBuildPdf(p, st, opts) {
+  const slides = evoReportSlides(p, st, opts);
+  const fileName = `evolucao-${slug(st.name)}-${evoToday()}.pdf`;
+  const blob = await withBusy('Gerando relatório…', async (prog) => {
+    await document.fonts.ready;
+    const { jsPDF } = window.jspdf;
+    const W = 1334, H = 750;
+    const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: [W, H], compress: true });
+    const stage = $('#render-stage');
+    for (let i = 0; i < slides.length; i++) {
+      prog(i / slides.length, `Página ${i + 1} de ${slides.length}`);
+      stage.innerHTML = slides[i].html;
+      const el = stage.firstElementChild;
+      fitSlide(el);
+      await Promise.all($$('img', el).map((im) => (im.complete ? 0 : new Promise((r) => { im.onload = im.onerror = r; }))));
+      await sleep(30);
+      const canvas = await html2canvas(el, { scale: 1.5, useCORS: true, backgroundColor: '#000000', logging: false, width: W, height: H, windowWidth: W, windowHeight: H, scrollX: 0, scrollY: 0 });
+      if (i > 0) pdf.addPage([W, H], 'landscape');
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.88), 'JPEG', 0, 0, W, H, undefined, 'FAST');
+    }
+    stage.innerHTML = '';
+    return pdf.output('blob');
+  });
+  if (!blob) return null;
+  return { blob, fileName, pages: slides.length };
+}
+actions['evo-report'] = async (el) => {
+  const { st, p } = evoCtx(el);
+  if (!st) return;
+  if (!p) { toast('Crie um programa para o aluno para gerar o relatório'); return; }
+  const tr = byId(S.trainers, p.trainerId);
+  const first = st.name.split(' ')[0];
+  const def = `${first}, esses números são fruto da sua dedicação. O próximo ciclo vai consolidar o que você conquistou e levar seus resultados a outro nível. Vamos juntos para a próxima fase?`;
+  const body = openModal('Relatório de evolução', `
+    <p class="small muted" style="margin-top:0">O relatório usa as avaliações${CLOUD.user ? ' e os treinos que o aluno registrou no app' : ''}. Termine com o convite para o próximo ciclo.</p>
+    <label class="field"><span>Título da última página</span><input type="text" id="evo-nt" value="Vamos para a próxima fase"></label>
+    <label class="field"><span>Mensagem para o aluno</span><textarea id="evo-msg" rows="4">${esc(def)}</textarea></label>
+    <div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="evo-go">Gerar PDF</button></div>`);
+  $('#evo-go', body).onclick = async () => {
+    const opts = { nextTitle: $('#evo-nt', body).value.trim(), message: $('#evo-msg', body).value.trim(), train: null };
+    closeModal();
+    try { const r = await evoFetchLogs(p, st); if (r) opts.train = evoTrainStats(r.logs); } catch (e) { console.warn(e); }
+    const out = await evoBuildPdf(p, st, opts);
+    if (out) showSendModal(p, out, { title: 'Enviar relatório de evolução', text: `Olá ${first}! Preparei o seu relatório de evolução. Dá uma olhada no quanto você avançou!${tr ? '\n' + tr.name : ''}` });
+  };
+};
+
 
 /* =========================================================
  * Exemplo inicial
