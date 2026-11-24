@@ -5468,8 +5468,11 @@ function evoAfterChange() {
 }
 /* Dobras cutâneas (mm) e protocolos de Jackson & Pollock com a equação de Siri */
 const EVO_DOBRAS = [['pt', 'Peitoral'], ['ax', 'Axilar média'], ['tr', 'Tricipital'], ['se', 'Subescapular'], ['ab', 'Abdominal'], ['si', 'Supra-ilíaca'], ['cx', 'Coxa']];
+const EVO_PERIM = ['perim', 'weltman', 'tranw'];
 const EVO_PROTOCOLOS = {
-  perim: { label: 'Perimetria: Weltman (IMC acima de 29,9) ou Tran & Weltman (IMC até 29,9)' },
+  perim: { label: 'Perimetria automática pelo IMC: Weltman (acima de 29,9) ou Tran & Weltman (até 29,9)' },
+  weltman: { label: 'Perimetria: Weltman (qualquer IMC)' },
+  tranw: { label: 'Perimetria: Tran & Weltman (qualquer IMC)' },
   manual: { label: 'Informar o % de gordura (bioimpedância ou outro método)' },
   jp3: { label: 'Pollock 3 dobras (Jackson & Pollock)', M: ['pt', 'ab', 'cx'], F: ['tr', 'si', 'cx'] },
   jp7: { label: 'Pollock 7 dobras (Jackson & Pollock)', M: ['pt', 'ax', 'tr', 'se', 'ab', 'si', 'cx'], F: ['pt', 'ax', 'tr', 'se', 'ab', 'si', 'cx'] },
@@ -5497,7 +5500,7 @@ function evoBodyFat(proto, sex, idade, dobras) {
  *   Homens:   DC = 1,21142 + 0,00085·peso − 0,00050·crista ilíaca − 0,00061·quadril − 0,00138·abdome médio
  *   Mulheres: DC = 1,168297 − 0,002824·abdome médio + 0,0000122098·abdome médio² − 0,000733128·quadril + 0,000510477·estatura − 0,000216161·idade
  */
-function evoBodyFatPerim(sex, m) {
+function evoBodyFatPerim(sex, m, force = '') {
   const n = (k) => aeroNum(m[k]);
   const peso = n('peso'), alt = n('altura'), a1 = n('abd1'), a2 = n('abdome'), quad = n('quadril'), crista = n('crista'), idade = n('idade');
   if (!sex) return { err: 'Informe o sexo para calcular.' };
@@ -5507,11 +5510,12 @@ function evoBodyFatPerim(sex, m) {
   if (a1 == null || a2 == null) return { err: 'Preencha abdome 1 e abdome 2.', imc };
   const abd = (a1 + a2) / 2;
   let g, eq, dc = null;
-  if (imc > 29.9) {
-    eq = 'Weltman (IMC acima de 29,9)';
+  const useW = force === 'weltman' || (force !== 'tranw' && imc > 29.9);
+  if (useW) {
+    eq = force ? 'Weltman (escolhida)' : 'Weltman (IMC acima de 29,9)';
     g = sex === 'M' ? 0.31457 * abd - 0.10969 * peso + 10.8336 : 0.11077 * abd - 0.17666 * altCm + 0.14354 * peso + 51.03301;
   } else {
-    eq = 'Tran & Weltman (IMC até 29,9)';
+    eq = force ? 'Tran & Weltman (escolhida)' : 'Tran & Weltman (IMC até 29,9)';
     if (sex === 'M') {
       if (quad == null || crista == null) return { err: 'Preencha quadril e crista ilíaca.', imc };
       dc = 1.21142 + 0.00085 * peso - 0.0005 * crista - 0.00061 * quad - 0.00138 * abd;
@@ -5574,10 +5578,10 @@ function evoForm(st, p, ev) {
     const g = $('#ev-g', body), res = $('#ev-res', body);
     if (proto() === 'manual') { g.readOnly = false; res.textContent = 'Digite o valor medido (bioimpedância ou outro método).'; results(); return; }
     g.readOnly = true;
-    if (proto() === 'perim') {
+    if (EVO_PERIM.includes(proto())) {
       const m = { idade: $('#ev-idade', body).value };
       ['peso', 'altura', 'abd1', 'abdome', 'quadril', 'crista'].forEach((k) => { m[k] = val(k); });
-      const r = evoBodyFatPerim(sex(), m);
+      const r = evoBodyFatPerim(sex(), m, proto() === 'perim' ? '' : proto());
       if (r.err) { res.textContent = (r.imc ? `IMC ${aeroFmt(r.imc, 1)}. ` : '') + r.err; g.value = ''; }
       else {
         g.value = String(r.g).replace('.', ',');
@@ -5598,8 +5602,10 @@ function evoForm(st, p, ev) {
     cur = { ...cur, ...readDobras() };
     const box = $('#ev-dobras', body);
     const P = EVO_PROTOCOLOS[proto()];
-    if (proto() === 'perim') {
-      box.innerHTML = `<div class="small muted" style="grid-column:1/-1">Usa peso, altura, abdome 1 e abdome 2${sex() === 'M' ? ', quadril e crista ilíaca' : sex() === 'F' ? ', quadril e idade' : ', quadril e (homens) crista ilíaca'} do item 1. IMC acima de 29,9 → Weltman; até 29,9 → Tran & Weltman.</div>`;
+    if (EVO_PERIM.includes(proto())) {
+      const need = proto() === 'weltman' ? (sex() === 'M' ? 'peso, abdome 1 e abdome 2' : 'peso, altura, abdome 1 e abdome 2')
+        : `peso, altura, abdome 1 e abdome 2${sex() === 'M' ? ', quadril e crista ilíaca' : sex() === 'F' ? ', quadril e idade' : ', quadril e (homens) crista ilíaca'}`;
+      box.innerHTML = `<div class="small muted" style="grid-column:1/-1">Usa ${need} do item 1.${proto() === 'perim' ? ' IMC acima de 29,9 → Weltman; até 29,9 → Tran & Weltman.' : ''}</div>`;
     } else if (proto() === 'manual') {
       box.innerHTML = '';
     } else {
