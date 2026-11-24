@@ -4187,14 +4187,23 @@ function evoCalc(ev, st) {
   return r;
 }
 /** Avaliações do aluno em ordem de data. Inclui a avaliação do programa aeróbico como ponto de partida. */
+/**
+ * Avaliações do aluno em ordem de data. Junta as avaliações salvas no cadastro do aluno com a
+ * avaliação física de TODOS os programas aeróbicos dele (importadas automaticamente, sem digitar de novo).
+ */
 function evoList(st, p) {
   const list = ((st && st.evals) || []).slice();
-  const av = p && p.mode === 'aero' && p.aero && p.aero.av;
-  if (av && aeroNum(av.peso)) {
-    const he = p.aero.hemo || {};
-    list.push({ id: 'aero-' + p.id, virtual: true, date: evoISO(av.data) || evoISO(p.aero.inicio) || '', peso: av.peso, altura: av.altura, gordura: av.gordura,
-      cintura: av.cintura, abdome: av.abdome, quadril: av.quadril, fcrep: he.fcrep, pas: he.pas, pad: he.pad, obs: 'Avaliação do programa aeróbico' });
-  }
+  const aeros = S.programs.filter((x) => x.mode === 'aero' && !x.isTemplate && st && x.studentId === st.id);
+  if (p && p.mode === 'aero' && !aeros.includes(p)) aeros.push(p);
+  aeros.forEach((ap) => {
+    const av = ap.aero && ap.aero.av;
+    if (!av || !aeroNum(av.peso)) return;
+    const he = ap.aero.hemo || {};
+    const created = ap.createdAt ? new Date(ap.createdAt).toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' }) : '';
+    list.push({ id: 'aero-' + ap.id, virtual: true, aeroId: ap.id, date: evoISO(av.data) || evoISO(ap.aero.inicio) || created,
+      idade: av.idade, peso: av.peso, altura: av.altura, gordura: av.gordura, cintura: av.cintura, abdome: av.abdome, quadril: av.quadril,
+      fcrep: he.fcrep, pas: he.pas, pad: he.pad, obs: `Avaliação física do programa aeróbico${ap.title ? ' · ' + ap.title : ''}` });
+  });
   return list.sort((a, b) => String(a.date || '0').localeCompare(String(b.date || '0')));
 }
 function evoDelta(a, b, m) {
@@ -4325,7 +4334,7 @@ function evoPanelHTML(st, p, { wizard = false } = {}) {
         <tbody>${rows}</tbody></table></div>
       ${chart}
       <div class="evo-items">${list.slice().reverse().map((ev) => `<div class="evo-item"><span><b>${evoDate(ev.date)}</b>${ev.obs ? ` · <span class="muted">${esc(ev.obs)}</span>` : ''}</span>
-        ${ev.virtual ? '<span class="small muted">edite na aba Avaliação física</span>' : `<span class="row" style="gap:6px"><button class="btn sm" data-action="evo-edit" data-id="${esc(ev.id)}" ${ids}>Editar</button><button class="btn sm danger" data-action="evo-del" data-id="${esc(ev.id)}" ${ids}>✕</button></span>`}</div>`).join('')}</div>`
+        ${ev.virtual ? (p && p.id === ev.aeroId && E.tab === 'aval' && location.hash.startsWith('#/programa') ? '<span class="small muted">importada desta aba</span>' : `<a class="btn sm ghost" href="#/programa/${esc(ev.aeroId)}/aval">Abrir no programa aeróbico</a>`) : `<span class="row" style="gap:6px"><button class="btn sm" data-action="evo-edit" data-id="${esc(ev.id)}" ${ids}>Editar</button><button class="btn sm danger" data-action="evo-del" data-id="${esc(ev.id)}" ${ids}>✕</button></span>`}</div>`).join('')}</div>`
     : `<div class="empty" style="margin:0">${wizard ? 'Nenhuma avaliação deste aluno ainda.' : 'Nenhuma avaliação ainda. Registre a avaliação inicial agora e a reavaliação no fim do ciclo.'}</div>`}
   </div>`;
 }
