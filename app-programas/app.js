@@ -3708,8 +3708,9 @@ const AERO_ZONES = {
 function aeroZone(p, k) {
   const z = AERO_ZONES[k];
   const o = (p && p.aero && p.aero.zonas && p.aero.zonas[k]) || {};
-  const lo = aeroNum(o.lo), hi = aeroNum(o.hi);
-  return { ...z, lo: lo != null ? lo / 100 : z.lo, hi: hi != null ? hi / 100 : z.hi, custom: lo != null || hi != null };
+  const it = aeroNum(o.int);
+  // intensidade única escolhida pelo personal (% da reserva da FC); sem escolha, vale a faixa padrão da zona
+  return { ...z, int: it != null ? it / 100 : null, custom: it != null };
 }
 const AERO_MUSC = {
   RML: 'Musculação RML (40% a 60% de 1RM)',
@@ -3793,20 +3794,23 @@ function aeroCalc(p, st) {
   Object.keys(AERO_ZONES).forEach((k) => {
     const z = aeroZone(p, k);
     // FC alvo = [(FCmáx − FC repouso) × intensidade ÷ 100] + FC repouso; a FCmáx estimada tem ± 6 bpm, que passa para o alvo × intensidade
-    const o = { lo: z.lo, hi: z.hi };
+    const lo = z.int != null ? z.int : z.lo, hi = z.int != null ? z.int : z.hi;
+    const o = { lo, hi, int: z.int };
     if (r.fcr != null) {
-      o.bpmLo = Math.round(r.fcrep + z.lo * r.fcr); o.bpmHi = Math.round(r.fcrep + z.hi * r.fcr);
-      if (!r.fcmaxMedida) { o.varLo = Math.round(6 * z.lo); o.varHi = Math.round(6 * z.hi); }
+      o.bpmLo = Math.round(r.fcrep + lo * r.fcr); o.bpmHi = Math.round(r.fcrep + hi * r.fcr);
+      if (!r.fcmaxMedida) { o.varLo = Math.round(6 * lo); o.varHi = Math.round(6 * hi); }
     }
     if (r.vo2r != null) {
-      o.vo2Lo = 3.5 + z.lo * r.vo2r; o.vo2Hi = 3.5 + z.hi * r.vo2r;
+      o.vo2Lo = 3.5 + lo * r.vo2r; o.vo2Hi = 3.5 + hi * r.vo2r;
       if (peso) o.kcalMin = ((o.vo2Lo + o.vo2Hi) / 2) * peso * 5 / 1000;
     }
     r.zones[k] = o;
   });
   return r;
 }
-function aeroBpm(c, zk) { const z = c.zones[zk] || {}; return z.bpmLo != null ? `${z.bpmLo}–${z.bpmHi} bpm` : 'FC: preencha FC de repouso e idade'; }
+/** Faixa ou valor único da FC alvo (sem "bpm"). */
+function aeroZoneTxt(o) { return !o || o.bpmLo == null ? '—' : o.bpmLo === o.bpmHi ? `${o.bpmLo}${o.varLo != null ? ` ± ${o.varLo}` : ''}` : `${o.bpmLo}–${o.bpmHi}`; }
+function aeroBpm(c, zk) { const z = c.zones[zk] || {}; return z.bpmLo == null ? 'FC: preencha FC de repouso e idade' : z.bpmLo === z.bpmHi ? `${z.bpmLo} bpm${z.varLo != null ? ` (± ${z.varLo})` : ''}` : `${z.bpmLo}–${z.bpmHi} bpm`; }
 function aeroKcal(c, zk, min) { const z = c.zones[zk] || {}; const m = aeroNum(min); return z.kcalMin != null && m ? Math.round(z.kcalMin * m) : null; }
 function aeroTotals(p, c) {
   const days = (p.aero.plano || []).flatMap((w) => w.dias).filter((d) => d.t === 'aero');
@@ -3898,11 +3902,13 @@ function tabAeroAerob(p) {
   const zoneRows = Object.keys(AERO_ZONES).map((k) => {
     const z = aeroZone(p, k);
     const o = c.zones[k];
+    const faixa = `faixa ${pct(z.lo)}% a ${pct(z.hi)}%`;
     const pctCell = editing
-      ? `<span class="row" style="gap:6px;flex-wrap:nowrap"><input type="text" inputmode="numeric" class="zone-in" data-zone="${k}" data-end="lo" value="${pct(z.lo)}"> a <input type="text" inputmode="numeric" class="zone-in" data-zone="${k}" data-end="hi" value="${pct(z.hi)}"> %</span>`
-      : `${pct(z.lo)}% a ${pct(z.hi)}%${z.custom ? ' <span class="chip" style="font-size:10px;padding:1px 6px">ajustada</span>' : ''}`;
+      ? `<span class="row" style="gap:6px;flex-wrap:nowrap"><input type="text" inputmode="numeric" class="zone-in" data-zone="${k}" value="${z.int != null ? pct(z.int) : ''}" placeholder="${pct((z.lo + z.hi) / 2)}"> %</span><div class="small muted">${faixa}</div>`
+      : z.int != null ? `<b>${pct(z.int)}%</b> <span class="chip" style="font-size:10px;padding:1px 6px">escolhida</span><div class="small muted">${faixa}</div>` : `${pct(z.lo)}% a ${pct(z.hi)}%<div class="small muted">sem intensidade escolhida</div>`;
+    const bpm = o.bpmLo == null ? '—' : o.bpmLo === o.bpmHi ? `${o.bpmLo} bpm` : `${o.bpmLo} a ${o.bpmHi} bpm`;
     return `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td>${pctCell}</td>
-      <td><b>${o.bpmLo != null ? `${o.bpmLo} a ${o.bpmHi} bpm` : '—'}</b>${o.varLo != null ? `<div class="small muted">± ${o.varLo === o.varHi ? o.varLo : `${o.varLo} a ${o.varHi}`} bpm (FCmáx ± 6)</div>` : ''}</td><td>${o.vo2Lo != null ? `${aeroFmt(o.vo2Lo)} a ${aeroFmt(o.vo2Hi)}` : '—'}</td><td>${o.kcalMin != null ? aeroFmt(o.kcalMin) : '—'}</td></tr>`;
+      <td><b>${bpm}</b>${o.varLo != null ? `<div class="small muted">± ${o.varLo === o.varHi ? o.varLo : `${o.varLo} a ${o.varHi}`} bpm (FCmáx ± 6)</div>` : ''}</td><td>${o.vo2Lo != null ? (o.vo2Lo === o.vo2Hi ? aeroFmt(o.vo2Lo) : `${aeroFmt(o.vo2Lo)} a ${aeroFmt(o.vo2Hi)}`) : '—'}</td><td>${o.kcalMin != null ? aeroFmt(o.kcalMin) : '—'}</td></tr>`;
   }).join('');
   let n = 0;
   const weeks = (p.aero.plano || []).map((w, wi) => {
@@ -3922,9 +3928,9 @@ function tabAeroAerob(p) {
       }).join('')}</div></div>`;
   }).join('');
   return `<div class="section card"><div class="row"><h3 style="margin:0;flex:1">Zonas de treinamento do aluno</h3>
-      ${editing ? '<button class="btn sm ghost" data-action="aero-zones-reset">Restaurar padrão</button><button class="btn sm primary" data-action="aero-zones-edit">Concluir</button>' : '<button class="btn sm" data-action="aero-zones-edit">⚙ Ajustar intensidades</button>'}</div>
-    <table class="tpl-table aero-ztable"><tr><th>Zona</th><th>% da reserva da FC</th><th>FC alvo (Karvonen)</th><th>VO2 alvo (ml/kg/min)</th><th>kcal/min</th></tr>${zoneRows}</table>
-    <p class="small muted" style="margin:10px 0 0">FC alvo = [(FCmáx − FC repouso) × intensidade ÷ 100] + FC repouso, com FCmáx = 220 − idade (homens) ou 226 − idade (mulheres), ± 6 bpm. VO2 alvo = 3,5 + intensidade × (VO2máx − 3,5). ${editing ? 'Digite o início e o fim de cada zona em % da reserva; as FC alvo se recalculam.' : 'Padrão: regenerativa 28–42%, lipolítica 43–56%, glicolítica 57–70%.'}</p></div>
+      ${editing ? '<button class="btn sm ghost" data-action="aero-zones-reset">Restaurar padrão</button><button class="btn sm primary" data-action="aero-zones-edit">Concluir</button>' : '<button class="btn sm" data-action="aero-zones-edit">⚙ Escolher intensidades</button>'}</div>
+    <table class="tpl-table aero-ztable"><tr><th>Zona</th><th>Intensidade (% da reserva da FC)</th><th>FC alvo (Karvonen)</th><th>VO2 alvo (ml/kg/min)</th><th>kcal/min</th></tr>${zoneRows}</table>
+    <p class="small muted" style="margin:10px 0 0">FC alvo = [(FCmáx − FC repouso) × intensidade ÷ 100] + FC repouso, com FCmáx = 220 − idade (homens) ou 226 − idade (mulheres), ± 6 bpm. VO2 alvo = 3,5 + intensidade × (VO2máx − 3,5). ${editing ? 'Digite a intensidade de cada zona em % da reserva da FC (um valor). Deixe vazio para usar a faixa inteira.' : 'Faixas: regenerativa 28–42%, lipolítica 43–56%, glicolítica 57–70%. Clique em Escolher intensidades para definir um % em cada zona.'}</p></div>
   <div class="section stack">${weeks}</div>
   <div class="section row"><button class="btn" data-action="aero-reset-plan">Restaurar periodização padrão</button><span class="spacer"></span><button class="btn primary" data-action="student-access" data-id="${esc(p.id)}">Liberar acesso ao aluno</button></div>`;
 }
@@ -3933,13 +3939,14 @@ actions['aero-zones-reset'] = async () => { delete E.p.aero.zonas; saveSoon(); a
 document.addEventListener('change', (e) => {
   const i = e.target.closest && e.target.closest('.zone-in');
   if (!i || !E.p || !E.p.aero) return;
+  const zs = (E.p.aero.zonas = E.p.aero.zonas || {});
+  const k = i.dataset.zone;
+  if (!i.value.trim()) { delete zs[k]; saveSoon(); renderEditor(); return; }
   const v = aeroNum(i.value);
   if (v == null || v < 1 || v > 100) { toast('Use um valor entre 1 e 100'); renderEditor(); return; }
-  const zs = (E.p.aero.zonas = E.p.aero.zonas || {});
-  const cur = aeroZone(E.p, i.dataset.zone);
-  const z = (zs[i.dataset.zone] = { lo: Math.round(cur.lo * 100), hi: Math.round(cur.hi * 100) });
-  z[i.dataset.end] = Math.round(v);
-  if (z.lo >= z.hi) { toast('O início da zona precisa ser menor que o fim'); delete zs[i.dataset.zone]; }
+  zs[k] = { int: Math.round(v) };
+  const z = AERO_ZONES[k];
+  if (v < z.lo * 100 || v > z.hi * 100) toast(`Atenção: ${Math.round(v)}% está fora da faixa da zona ${z.label.toLowerCase()} (${Math.round(z.lo * 100)}–${Math.round(z.hi * 100)}%)`);
   saveSoon();
   renderEditor();
 });
@@ -4030,7 +4037,7 @@ function renderStudentAero(p) {
       <div class="small muted">Fase ${s.fase} · Semana ${s.wi + 1} · Dia ${s.di + 1} · ${esc(s.micro)}</div>
       ${s.t === 'aero' ? `<h2 style="margin:6px 0">${esc(s.min)} minutos</h2>
         <div class="row" style="gap:8px"><span class="zchip ${z.cls}">Zona ${z.label}</span>${modal ? `<span class="chip">${esc(modal)}</span>` : ''}</div>
-        <div class="aero-bpm">${c.zones[s.zona].bpmLo != null ? `${c.zones[s.zona].bpmLo}–${c.zones[s.zona].bpmHi}` : '—'}<small> bpm</small></div>
+        <div class="aero-bpm">${aeroZoneTxt(c.zones[s.zona])}<small> bpm</small></div>
         <p class="small muted" style="margin:0">Mantenha a frequência cardíaca nessa faixa durante o treino.${aeroKcal(c, s.zona, s.min) != null ? ` Gasto estimado: ≈ ${aeroKcal(c, s.zona, s.min)} kcal.` : ''}</p>`
       : `<h2 style="margin:6px 0">${esc(AERO_MUSC[s.t] || 'Musculação')}</h2><p class="muted" style="margin:0">Hoje é dia de musculação. Faça a série indicada pelo seu personal na aba <b>Força</b>.</p>`}
       <label class="field" style="margin-top:12px"><span>Como foi? (opcional)</span><input type="text" id="aero-note" placeholder="Ex.: FC média 128, me senti bem"></label>
@@ -4040,7 +4047,7 @@ function renderStudentAero(p) {
   box.innerHTML = `<div class="stack" style="margin-top:14px">
     <div class="small muted">${doneN} de ${ss.length} sessões concluídas</div>
     ${card(next)}
-    <div class="card"><h3>Suas zonas de treino</h3><table class="tpl-table">${Object.entries(AERO_ZONES).map(([k, z]) => `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td><b>${c.zones[k].bpmLo != null ? `${c.zones[k].bpmLo}–${c.zones[k].bpmHi} bpm` : '—'}</b></td></tr>`).join('')}</table></div>
+    <div class="card"><h3>Suas zonas de treino</h3><table class="tpl-table">${Object.entries(AERO_ZONES).map(([k, z]) => `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td><b>${c.zones[k].bpmLo != null ? aeroZoneTxt(c.zones[k]) + ' bpm' : '—'}</b></td></tr>`).join('')}</table></div>
   </div>`;
 }
 function renderStudentAeroPlan(p) {
