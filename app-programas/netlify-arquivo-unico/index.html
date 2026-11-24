@@ -4925,6 +4925,8 @@ function aeroClassRefresh(p, c) {
   aeroSetClass('aero.hemo.pas', pa); aeroSetClass('aero.hemo.pad', pa);
   aeroSetClass('aero.hemo.fcrep', aeroClassFCrep(aeroNum(he.fcrep)));
   aeroSetClass('aero.hemo.vo2max', aeroClassVO2(aeroNum(he.vo2max), c.sex, c.idade));
+  const vi = document.getElementById('vo2-test-info');
+  if (vi) vi.textContent = he.vo2teste && he.vo2max ? `Último cálculo: ${he.vo2teste}` : 'Estimativa sem teste, banco, caminhada ou corrida.';
   const fm = document.querySelector('[data-bind="aero.hemo.fcmax"]');
   if (fm) {
     fm.placeholder = c.fcmaxCalc != null ? `${c.fcmaxCalc} (${c.fcmaxBase} − ${c.idade}) ± 6` : 'informe a idade do aluno';
@@ -4934,6 +4936,87 @@ function aeroClassRefresh(p, c) {
   }
   AERO_EXAMS.forEach(([k]) => aeroSetClass(`aero.ex.${k}`, aeroClassExame(k, aeroNum(ex[k]), c.sex)));
 }
+
+/* ---- Testes práticos de VO2máx (ml/kg/min) ---- */
+const VO2_TESTS = {
+  uth: {
+    nome: 'Estimativa rápida, sem teste (Uth)', quando: 'Qualquer aluno, inclusive sedentário. Não exige esforço.',
+    como: ['Meça a FC de repouso pela manhã ou após 5 minutos deitado ou sentado em silêncio.', 'A FC máxima é a estimada pela idade (220 − idade nos homens; 226 − idade nas mulheres) ou a medida em teste.', 'É uma estimativa: use quando não for possível aplicar um teste.'],
+    campos: [['fcmax', 'FC máxima', 'bpm'], ['fcrep', 'FC de repouso', 'bpm']],
+    calc: (v) => (v.fcmax && v.fcrep ? 15.3 * v.fcmax / v.fcrep : null),
+    formula: 'VO2máx = 15,3 × FCmáx ÷ FC repouso',
+  },
+  banco: {
+    nome: 'Teste do banco (Queens College, 3 minutos)', quando: 'Academia ou casa. Simples e rápido; evite em quem tem dor no joelho ou problema de equilíbrio.',
+    como: ['Banco ou degrau de 41,3 cm de altura e metrônomo (pode ser um aplicativo de celular).', 'Ritmo: homens 24 subidas por minuto (metrônomo em 96 bpm); mulheres 22 subidas por minuto (88 bpm). Cada subida = sobe direita, sobe esquerda, desce direita, desce esquerda.', 'O aluno sobe e desce por 3 minutos. Ao terminar, ele para em pé.', 'Entre 5 e 20 segundos após o fim, conte os batimentos por 15 segundos e multiplique por 4 (ou use o frequencímetro).'],
+    campos: [['fcfinal', 'FC de recuperação (15 s × 4)', 'bpm']],
+    calc: (v, sex) => (v.fcfinal ? (sex === 'M' ? 111.33 - 0.42 * v.fcfinal : 65.81 - 0.1847 * v.fcfinal) : null),
+    formula: 'Homens: 111,33 − 0,42 × FC · Mulheres: 65,81 − 0,1847 × FC',
+  },
+  rockport: {
+    nome: 'Caminhada de 1,6 km (Rockport)', quando: 'Iniciantes, idosos e pessoas com excesso de peso. Pode ser feito na esteira ou em pista.',
+    como: ['Marque 1,6 km (1 milha) em pista ou na esteira, sem inclinação.', 'O aluno caminha o mais rápido possível, sem correr.', 'Anote o tempo total em minutos e segundos.', 'Logo ao terminar, meça a FC (frequencímetro ou 15 segundos × 4).'],
+    campos: [['peso', 'Peso', 'kg'], ['idade', 'Idade', 'anos'], ['min', 'Tempo: minutos', 'min'], ['seg', 'Tempo: segundos', 's'], ['fcfinal', 'FC ao final', 'bpm']],
+    calc: (v, sex) => (v.peso && v.idade != null && v.min != null && v.fcfinal ? 132.853 - 0.0769 * (v.peso * 2.2046) - 0.3877 * v.idade + 6.315 * (sex === 'M' ? 1 : 0) - 3.2649 * (v.min + (v.seg || 0) / 60) - 0.1565 * v.fcfinal : null),
+    formula: 'VO2máx = 132,853 − 0,0769 × peso (lb) − 0,3877 × idade + 6,315 × sexo (H = 1, M = 0) − 3,2649 × tempo (min) − 0,1565 × FC',
+  },
+  cooper: {
+    nome: 'Corrida de 12 minutos (Cooper)', quando: 'Alunos ativos e condicionados. Exige esforço máximo; evite em sedentários e pessoas com risco cardiovascular.',
+    como: ['Use uma pista ou a esteira, com aquecimento de 5 a 10 minutos.', 'O aluno corre (ou alterna corrida e caminhada) a maior distância possível em 12 minutos.', 'Anote a distância total percorrida em metros.'],
+    campos: [['dist', 'Distância percorrida', 'm']],
+    calc: (v) => (v.dist ? (v.dist - 504.9) / 44.73 : null),
+    formula: 'VO2máx = (distância em metros − 504,9) ÷ 44,73',
+  },
+};
+actions['vo2-test'] = () => {
+  const p = E.p; if (!p || !p.aero) return;
+  const c = aeroCalc(p, aeroStudent(p));
+  const pre = { fcmax: c.fcmax, fcrep: c.fcrep, peso: c.peso, idade: c.idade };
+  const old = $('#evo-guide'); if (old) old.remove();
+  const el = document.createElement('div');
+  el.id = 'evo-guide'; el.className = 'modal-backdrop evo-guide';
+  let cur = 'banco';
+  const draw = () => {
+    const T = VO2_TESTS[cur];
+    el.innerHTML = `<div class="modal" style="width:min(720px,100%)">
+      <div class="modal-head"><h2>Calcular VO2 máximo</h2><button class="btn icon sm" data-close-guide aria-label="Fechar">✕</button></div>
+      <div class="modal-body stack">
+        <label class="field"><span>Teste</span><select id="vo2-sel">${Object.entries(VO2_TESTS).map(([k, t]) => `<option value="${k}" ${k === cur ? 'selected' : ''}>${esc(t.nome)}</option>`).join('')}</select></label>
+        <div class="card"><div class="small" style="margin-bottom:6px"><b>Indicado para:</b> ${esc(T.quando)}</div>
+          <ol style="margin:0;padding-left:20px;font-size:14px;line-height:1.5">${T.como.map((t) => `<li>${esc(t)}</li>`).join('')}</ol></div>
+        <div class="small muted">Aluno: ${c.sex === 'M' ? 'masculino' : c.sex === 'F' ? 'feminino' : '<b style="color:var(--gold-2)">sexo não informado</b>'}${c.idade != null ? ` · ${c.idade} anos` : ''}</div>
+        <div class="grid three">${T.campos.map(([k, l, u]) => `<label class="field"><span>${l} <em class="unit">(${u})</em></span><input type="text" inputmode="decimal" data-vo2="${k}" value="${pre[k] != null ? esc(String(Math.round(pre[k] * 10) / 10).replace('.', ',')) : ''}"></label>`).join('')}</div>
+        <div class="aero-outs"><div class="aero-out"><span>VO2 máximo estimado</span><b id="vo2-res">—</b><em>ml/kg/min</em></div><div class="aero-out"><span>Classificação</span><b id="vo2-cls" style="font-size:16px">—</b></div></div>
+        <div class="small muted">${esc(T.formula)}</div>
+        <div class="row"><span class="spacer"></span><button class="btn" data-close-guide>Cancelar</button><button class="btn primary" id="vo2-use" disabled>Usar este valor</button></div>
+      </div></div>`;
+    const calc = () => {
+      const v = Object.fromEntries($$('[data-vo2]', el).map((i) => [i.dataset.vo2, aeroNum(i.value)]));
+      const r = T.calc(v, c.sex);
+      const ok = r != null && Number.isFinite(r) && r > 5 && r < 95 && (cur !== 'banco' && cur !== 'rockport' || c.sex);
+      $('#vo2-res', el).textContent = ok ? aeroFmt(r, 1) : '—';
+      const cl = ok ? aeroClassVO2(r, c.sex, c.idade) : null;
+      $('#vo2-cls', el).textContent = cl ? cl[0] : (cur === 'banco' || cur === 'rockport') && !c.sex ? 'Informe o sexo do aluno' : '—';
+      $('#vo2-use', el).disabled = !ok;
+      $('#vo2-use', el).dataset.v = ok ? String(Math.round(r * 10) / 10) : '';
+    };
+    $$('[data-vo2]', el).forEach((i) => i.addEventListener('input', calc));
+    $('#vo2-sel', el).addEventListener('change', (e) => { cur = e.target.value; draw(); });
+    $('#vo2-use', el).onclick = async () => {
+      const v = $('#vo2-use', el).dataset.v; if (!v) return;
+      p.aero.hemo = p.aero.hemo || {};
+      p.aero.hemo.vo2max = v.replace('.', ',');
+      p.aero.hemo.vo2teste = VO2_TESTS[cur].nome;
+      el.remove();
+      saveSoon(); await saveSoon.flush(); renderEditor();
+      toast(`VO2 máximo: ${v.replace('.', ',')} ml/kg/min`);
+    };
+    calc();
+  };
+  el.addEventListener('click', (e) => { if (e.target === el || e.target.closest('[data-close-guide]')) el.remove(); });
+  draw();
+  document.body.appendChild(el);
+};
 
 const aeroNum = (v) => { const n = parseFloat(String(v ?? '').replace(',', '.')); return Number.isFinite(n) ? n : null; };
 const aeroFmt = (n, d = 1) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d }));
@@ -5075,6 +5158,7 @@ function tabAeroHemo(p) {
     <div class="grid three">
       ${aeroField('aero.hemo.pas', 'Pressão arterial sistólica', 'mmHg')}${aeroField('aero.hemo.pad', 'Pressão arterial diastólica', 'mmHg')}${aeroField('aero.hemo.fcrep', 'FC de repouso', 'bpm')}
       ${aeroField('aero.hemo.fcmax', 'FC máxima medida (opcional)', 'bpm', 'vazio = estimada pela idade')}${aeroField('aero.hemo.vo2max', 'VO2 máximo', 'ml/kg/min')}
+      <div class="field"><span>VO2 máximo por teste</span><button type="button" class="btn" data-action="vo2-test">🏃 Calcular VO2máx por teste</button><div class="small muted" style="margin-top:4px" id="vo2-test-info"></div></div>
       ${sel('aero.hemo.sono', 'Qualidade do sono', ['Boa', 'Regular', 'Ruim'])}
       ${sel('aero.hemo.intestino', 'Funcionamento do intestino', ['Regular', 'Preso', 'Solto', 'Irregular'])}
       ${sel('aero.hemo.estresse', 'Nível de estresse', ['Baixo', 'Moderado', 'Alto', 'Muito alto'])}
