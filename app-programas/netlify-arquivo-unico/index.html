@@ -612,6 +612,13 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .aero-cls.lv-ok { color: #46c37b; }
 .aero-cls.lv-warn { color: var(--gold-2); }
 .aero-cls.lv-bad { color: #ef6b6b; }
+.vo2-how { display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: 14px; align-items: start; }
+.vo2-how img { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #ddd; }
+.vo2-dasi { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+.vo2-item { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); font-size: 14px; cursor: pointer; }
+.vo2-item em { font-style: normal; font-size: 12px; color: var(--muted); }
+.vo2-item:has(input:checked) { border-color: var(--gold); background: rgba(210,169,97,.08); }
+@media (max-width: 640px) { .vo2-how { grid-template-columns: 1fr; } }
 
 </style>
 </head>
@@ -4926,7 +4933,7 @@ function aeroClassRefresh(p, c) {
   aeroSetClass('aero.hemo.fcrep', aeroClassFCrep(aeroNum(he.fcrep)));
   aeroSetClass('aero.hemo.vo2max', aeroClassVO2(aeroNum(he.vo2max), c.sex, c.idade));
   const vi = document.getElementById('vo2-test-info');
-  if (vi) vi.textContent = he.vo2teste && he.vo2max ? `Último cálculo: ${he.vo2teste}` : 'Estimativa sem teste, banco, caminhada ou corrida.';
+  if (vi) vi.textContent = he.vo2teste && he.vo2max ? `Último cálculo: ${he.vo2teste}` : 'Estimativa sem teste, banco, caminhada, corrida ou questionário de Duke.';
   const fm = document.querySelector('[data-bind="aero.hemo.fcmax"]');
   if (fm) {
     fm.placeholder = c.fcmaxCalc != null ? `${c.fcmaxCalc} (${c.fcmaxBase} − ${c.idade}) ± 6` : 'informe a idade do aluno';
@@ -4940,6 +4947,7 @@ function aeroClassRefresh(p, c) {
 /* ---- Testes práticos de VO2máx (ml/kg/min) ---- */
 const VO2_TESTS = {
   uth: {
+    img: 'vo2-uth.jpg',
     nome: 'Estimativa rápida, sem teste (Uth)', quando: 'Qualquer aluno, inclusive sedentário. Não exige esforço.',
     como: ['Meça a FC de repouso pela manhã ou após 5 minutos deitado ou sentado em silêncio.', 'A FC máxima é a estimada pela idade (220 − idade nos homens; 226 − idade nas mulheres) ou a medida em teste.', 'É uma estimativa: use quando não for possível aplicar um teste.'],
     campos: [['fcmax', 'FC máxima', 'bpm'], ['fcrep', 'FC de repouso', 'bpm']],
@@ -4947,6 +4955,7 @@ const VO2_TESTS = {
     formula: 'VO2máx = 15,3 × FCmáx ÷ FC repouso',
   },
   banco: {
+    img: 'vo2-banco.jpg',
     nome: 'Teste do banco (Queens College, 3 minutos)', quando: 'Academia ou casa. Simples e rápido; evite em quem tem dor no joelho ou problema de equilíbrio.',
     como: ['Banco ou degrau de 41,3 cm de altura e metrônomo (pode ser um aplicativo de celular).', 'Ritmo: homens 24 subidas por minuto (metrônomo em 96 bpm); mulheres 22 subidas por minuto (88 bpm). Cada subida = sobe direita, sobe esquerda, desce direita, desce esquerda.', 'O aluno sobe e desce por 3 minutos. Ao terminar, ele para em pé.', 'Entre 5 e 20 segundos após o fim, conte os batimentos por 15 segundos e multiplique por 4 (ou use o frequencímetro).'],
     campos: [['fcfinal', 'FC de recuperação (15 s × 4)', 'bpm']],
@@ -4954,6 +4963,7 @@ const VO2_TESTS = {
     formula: 'Homens: 111,33 − 0,42 × FC · Mulheres: 65,81 − 0,1847 × FC',
   },
   rockport: {
+    img: 'vo2-rockport.jpg',
     nome: 'Caminhada de 1,6 km (Rockport)', quando: 'Iniciantes, idosos e pessoas com excesso de peso. Pode ser feito na esteira ou em pista.',
     como: ['Marque 1,6 km (1 milha) em pista ou na esteira, sem inclinação.', 'O aluno caminha o mais rápido possível, sem correr.', 'Anote o tempo total em minutos e segundos.', 'Logo ao terminar, meça a FC (frequencímetro ou 15 segundos × 4).'],
     campos: [['peso', 'Peso', 'kg'], ['idade', 'Idade', 'anos'], ['min', 'Tempo: minutos', 'min'], ['seg', 'Tempo: segundos', 's'], ['fcfinal', 'FC ao final', 'bpm']],
@@ -4961,11 +4971,34 @@ const VO2_TESTS = {
     formula: 'VO2máx = 132,853 − 0,0769 × peso (lb) − 0,3877 × idade + 6,315 × sexo (H = 1, M = 0) − 3,2649 × tempo (min) − 0,1565 × FC',
   },
   cooper: {
+    img: 'vo2-cooper.jpg',
     nome: 'Corrida de 12 minutos (Cooper)', quando: 'Alunos ativos e condicionados. Exige esforço máximo; evite em sedentários e pessoas com risco cardiovascular.',
     como: ['Use uma pista ou a esteira, com aquecimento de 5 a 10 minutos.', 'O aluno corre (ou alterna corrida e caminhada) a maior distância possível em 12 minutos.', 'Anote a distância total percorrida em metros.'],
     campos: [['dist', 'Distância percorrida', 'm']],
     calc: (v) => (v.dist ? (v.dist - 504.9) / 44.73 : null),
     formula: 'VO2máx = (distância em metros − 504,9) ÷ 44,73',
+  },
+  duke: {
+    img: 'vo2-duke.jpg',
+    nome: 'Questionário de Duke (DASI), sem esforço físico', quando: 'Quem não pode fazer nenhum dos testes: idosos, pessoas com limitação ortopédica, cardiopatas liberados ou alunos muito sedentários.',
+    como: ['Pergunte ao aluno, uma a uma, se ele CONSEGUE fazer cada atividade abaixo, sem precisar parar e sem sentir falta de ar ou dor.', 'Marque apenas as respostas "sim". Na dúvida, considere "não".', 'O app soma os pontos de cada atividade (pontuação de 0 a 58,2) e estima o VO2.'],
+    itens: [
+      ['Cuidar de si mesmo: comer, vestir-se, tomar banho ou usar o banheiro', 2.75],
+      ['Caminhar dentro de casa', 1.75],
+      ['Caminhar um ou dois quarteirões no plano', 2.75],
+      ['Subir um lance de escadas ou subir uma ladeira', 5.5],
+      ['Correr uma curta distância', 8],
+      ['Fazer trabalhos domésticos leves: tirar o pó, lavar a louça', 2.7],
+      ['Fazer trabalhos domésticos moderados: aspirar, varrer, carregar compras', 3.5],
+      ['Fazer trabalhos domésticos pesados: esfregar o chão, levantar ou empurrar móveis pesados', 8],
+      ['Fazer trabalhos no jardim: juntar folhas, capinar, empurrar o cortador de grama', 4.5],
+      ['Ter relações sexuais', 5.25],
+      ['Atividades recreativas moderadas: dança, boliche, tênis em dupla, golfe, arremessar bola', 6],
+      ['Esportes intensos: natação, tênis individual, futebol, basquete, ciclismo forte', 7.5],
+    ],
+    campos: [],
+    calc: (v) => 0.43 * (v.dasi || 0) + 9.6,
+    formula: 'VO2máx = 0,43 × pontuação DASI + 9,6 (Hlatky et al., 1989)',
   },
 };
 actions['vo2-test'] = () => {
@@ -4982,8 +5015,13 @@ actions['vo2-test'] = () => {
       <div class="modal-head"><h2>Calcular VO2 máximo</h2><button class="btn icon sm" data-close-guide aria-label="Fechar">✕</button></div>
       <div class="modal-body stack">
         <label class="field"><span>Teste</span><select id="vo2-sel">${Object.entries(VO2_TESTS).map(([k, t]) => `<option value="${k}" ${k === cur ? 'selected' : ''}>${esc(t.nome)}</option>`).join('')}</select></label>
-        <div class="card"><div class="small" style="margin-bottom:6px"><b>Indicado para:</b> ${esc(T.quando)}</div>
-          <ol style="margin:0;padding-left:20px;font-size:14px;line-height:1.5">${T.como.map((t) => `<li>${esc(t)}</li>`).join('')}</ol></div>
+        <div class="vo2-how">${T.img ? `<img src="${EVO_IMG + T.img}" alt="${esc(T.nome)}">` : ''}
+          <div><div class="small" style="margin-bottom:6px"><b>Indicado para:</b> ${esc(T.quando)}</div>
+          <b class="small">Como fazer</b>
+          <ol style="margin:4px 0 0;padding-left:20px;font-size:14px;line-height:1.5">${T.como.map((t) => `<li>${esc(t)}</li>`).join('')}</ol></div></div>
+        ${T.itens ? `<div class="card"><b>O aluno consegue…</b> <span class="small muted">(marque os "sim")</span>
+          <div class="vo2-dasi">${T.itens.map(([t, w], i) => `<label class="vo2-item"><input type="checkbox" data-dasi="${w}"><span>${i + 1}. ${esc(t)}</span><em>${String(w).replace('.', ',')}</em></label>`).join('')}</div>
+          <div class="small" style="margin-top:8px">Pontuação DASI: <b id="vo2-dasi-sum">0</b> de 58,2</div></div>` : ''}
         <div class="small muted">Aluno: ${c.sex === 'M' ? 'masculino' : c.sex === 'F' ? 'feminino' : '<b style="color:var(--gold-2)">sexo não informado</b>'}${c.idade != null ? ` · ${c.idade} anos` : ''}</div>
         <div class="grid three">${T.campos.map(([k, l, u]) => `<label class="field"><span>${l} <em class="unit">(${u})</em></span><input type="text" inputmode="decimal" data-vo2="${k}" value="${pre[k] != null ? esc(String(Math.round(pre[k] * 10) / 10).replace('.', ',')) : ''}"></label>`).join('')}</div>
         <div class="aero-outs"><div class="aero-out"><span>VO2 máximo estimado</span><b id="vo2-res">—</b><em>ml/kg/min</em></div><div class="aero-out"><span>Classificação</span><b id="vo2-cls" style="font-size:16px">—</b></div></div>
@@ -4992,8 +5030,12 @@ actions['vo2-test'] = () => {
       </div></div>`;
     const calc = () => {
       const v = Object.fromEntries($$('[data-vo2]', el).map((i) => [i.dataset.vo2, aeroNum(i.value)]));
+      if (T.itens) {
+        v.dasi = $$('[data-dasi]', el).filter((i) => i.checked).reduce((a, i) => a + parseFloat(i.dataset.dasi), 0);
+        $('#vo2-dasi-sum', el).textContent = aeroFmt(v.dasi, 2);
+      }
       const r = T.calc(v, c.sex);
-      const ok = r != null && Number.isFinite(r) && r > 5 && r < 95 && (cur !== 'banco' && cur !== 'rockport' || c.sex);
+      const ok = r != null && Number.isFinite(r) && r > 5 && r < 95 && (!T.itens || v.dasi > 0) && (cur !== 'banco' && cur !== 'rockport' || c.sex);
       $('#vo2-res', el).textContent = ok ? aeroFmt(r, 1) : '—';
       const cl = ok ? aeroClassVO2(r, c.sex, c.idade) : null;
       $('#vo2-cls', el).textContent = cl ? cl[0] : (cur === 'banco' || cur === 'rockport') && !c.sex ? 'Informe o sexo do aluno' : '—';
@@ -5001,6 +5043,7 @@ actions['vo2-test'] = () => {
       $('#vo2-use', el).dataset.v = ok ? String(Math.round(r * 10) / 10) : '';
     };
     $$('[data-vo2]', el).forEach((i) => i.addEventListener('input', calc));
+    $$('[data-dasi]', el).forEach((i) => i.addEventListener('change', calc));
     $('#vo2-sel', el).addEventListener('change', (e) => { cur = e.target.value; draw(); });
     $('#vo2-use', el).onclick = async () => {
       const v = $('#vo2-use', el).dataset.v; if (!v) return;

@@ -596,3 +596,10 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .aero-cls.lv-ok { color: #46c37b; }
 .aero-cls.lv-warn { color: var(--gold-2); }
 .aero-cls.lv-bad { color: #ef6b6b; }
+.vo2-how { display: grid; grid-template-columns: minmax(0, 260px) 1fr; gap: 14px; align-items: start; }
+.vo2-how img { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #ddd; }
+.vo2-dasi { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+.vo2-item { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); font-size: 14px; cursor: pointer; }
+.vo2-item em { font-style: normal; font-size: 12px; color: var(--muted); }
+.vo2-item:has(input:checked) { border-color: var(--gold); background: rgba(210,169,97,.08); }
+@media (max-width: 640px) { .vo2-how { grid-template-columns: 1fr; } }
