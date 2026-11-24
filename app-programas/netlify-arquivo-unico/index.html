@@ -607,6 +607,11 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .aero-modal-photo { display: flex; gap: 16px; align-items: center; margin-top: 12px; }
 .aero-modal-photo img { width: 180px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
 .aero-today-img { width: 100%; max-height: 260px; object-fit: cover; object-position: 50% 30%; border-radius: 14px; margin: 10px 0 4px; }
+.aero-cls { font-size: 12px; margin-top: 4px; font-weight: 600; }
+.aero-cls:empty { display: none; }
+.aero-cls.lv-ok { color: #46c37b; }
+.aero-cls.lv-warn { color: var(--gold-2); }
+.aero-cls.lv-bad { color: #ef6b6b; }
 
 </style>
 </head>
@@ -4862,6 +4867,74 @@ const AERO_EXAMS = [
   ['tg', 'Triglicerídeos', 'mg/dL'], ['glic', 'Glicemia', 'mg/dL'], ['hem', 'Hemácias', 'milhões/mm³'], ['hb', 'Hemoglobina', 'g/dL'],
   ['hba1c', 'Hemoglobina glicada', '%'], ['ins', 'Insulina', 'µUI/mL'], ['au', 'Ácido úrico', 'mg/dL'], ['so2', 'SO2 (saturação de O2)', '%'],
 ];
+
+/* ---- Classificações (hemodinâmica e exames). Retornam [texto, nível: ok | warn | bad] ---- */
+const aeroBand = (v, bands) => { for (const [max, t, lv] of bands) if (v < max) return [t, lv]; return null; };
+/** Pressão arterial (Diretriz Brasileira de Hipertensão 2020): vale a pior categoria entre sistólica e diastólica. */
+function aeroClassPA(pas, pad) {
+  if (pas == null && pad == null) return null;
+  const cat = (v, lim) => (v == null ? -1 : lim.findIndex((x) => v < x) === -1 ? lim.length : lim.findIndex((x) => v < x));
+  const i = Math.max(cat(pas, [120, 130, 140, 160, 180]), cat(pad, [80, 85, 90, 100, 110]));
+  return [['PA ótima', 'ok'], ['PA normal', 'ok'], ['Pré-hipertensão', 'warn'], ['Hipertensão estágio 1', 'bad'], ['Hipertensão estágio 2', 'bad'], ['Hipertensão estágio 3', 'bad']][i];
+}
+/** VO2máx (American Heart Association), por sexo e faixa etária. */
+function aeroClassVO2(v, sex, idade) {
+  if (v == null || !sex || idade == null) return v == null ? null : ['Informe sexo e idade para classificar', 'warn'];
+  const T = sex === 'M'
+    ? [[29, [25, 34, 43, 53]], [39, [23, 31, 39, 49]], [49, [20, 27, 36, 45]], [59, [18, 25, 34, 43]], [200, [16, 23, 31, 41]]]
+    : [[29, [24, 31, 38, 49]], [39, [20, 28, 34, 45]], [49, [17, 24, 31, 42]], [59, [15, 21, 28, 38]], [200, [13, 18, 24, 35]]];
+  const lim = (T.find(([a]) => idade <= a) || T[T.length - 1])[1];
+  const n = ['Muito fraca', 'Fraca', 'Regular', 'Boa', 'Excelente'], lv = ['bad', 'bad', 'warn', 'ok', 'ok'];
+  const i = lim.findIndex((x) => v < x); const k = i === -1 ? 4 : i;
+  return [`Aptidão ${n[k].toLowerCase()} (AHA)`, lv[k]];
+}
+function aeroClassFCrep(v) { return v == null ? null : aeroBand(v, [[60, 'Abaixo de 60: bradicardia (comum em treinados)', 'warn'], [101, 'Normal (60 a 100)', 'ok'], [1e9, 'Taquicardia (acima de 100)', 'bad']]); }
+/** Exames (adultos). Lipídios: Atualização da Diretriz Brasileira de Dislipidemias 2017; glicemia e HbA1c: SBD. */
+function aeroClassExame(k, v, sex) {
+  if (v == null) return null;
+  const M = sex === 'M';
+  switch (k) {
+    case 'ct': return aeroBand(v, [[190, 'Desejável', 'ok'], [240, 'Limítrofe', 'warn'], [1e9, 'Alto', 'bad']]);
+    case 'ldl': return aeroBand(v, [[100, 'Ótimo', 'ok'], [130, 'Desejável', 'ok'], [160, 'Limítrofe', 'warn'], [190, 'Alto', 'bad'], [1e9, 'Muito alto', 'bad']]);
+    case 'hdl': return aeroBand(v, [[40, 'Baixo', 'bad'], [60, 'Desejável', 'ok'], [1e9, 'Ótimo (protetor)', 'ok']]);
+    case 'vldl': return aeroBand(v, [[31, 'Desejável', 'ok'], [1e9, 'Elevado', 'bad']]);
+    case 'tg': return aeroBand(v, [[150, 'Desejável', 'ok'], [200, 'Limítrofe', 'warn'], [500, 'Alto', 'bad'], [1e9, 'Muito alto', 'bad']]);
+    case 'glic': return aeroBand(v, [[70, 'Baixa (hipoglicemia)', 'warn'], [100, 'Normal', 'ok'], [126, 'Glicemia alterada (pré-diabetes)', 'warn'], [1e9, 'Compatível com diabetes', 'bad']]);
+    case 'hba1c': return aeroBand(v, [[5.7, 'Normal', 'ok'], [6.5, 'Pré-diabetes', 'warn'], [1e9, 'Compatível com diabetes', 'bad']]);
+    case 'ins': return aeroBand(v, [[2.6, 'Baixa', 'warn'], [25, 'Normal', 'ok'], [1e9, 'Elevada (sugere resistência à insulina)', 'bad']]);
+    case 'au': return aeroBand(v, M ? [[3.4, 'Baixo', 'warn'], [7.01, 'Normal', 'ok'], [1e9, 'Elevado', 'bad']] : [[2.4, 'Baixo', 'warn'], [6.01, 'Normal', 'ok'], [1e9, 'Elevado', 'bad']]);
+    case 'hem': return aeroBand(v, M ? [[4.5, 'Baixa', 'warn'], [5.91, 'Normal', 'ok'], [1e9, 'Elevada', 'warn']] : [[4.0, 'Baixa', 'warn'], [5.21, 'Normal', 'ok'], [1e9, 'Elevada', 'warn']]);
+    case 'hb': return aeroBand(v, M ? [[13.5, 'Baixa (possível anemia)', 'bad'], [17.6, 'Normal', 'ok'], [1e9, 'Elevada', 'warn']] : [[12, 'Baixa (possível anemia)', 'bad'], [15.6, 'Normal', 'ok'], [1e9, 'Elevada', 'warn']]);
+    case 'so2': return aeroBand(v, [[90, 'Baixa', 'bad'], [95, 'Levemente baixa', 'warn'], [101, 'Normal', 'ok']]);
+    default: return null;
+  }
+}
+/** Coloca (ou atualiza) a etiqueta de classificação embaixo do campo. */
+function aeroSetClass(path, res) {
+  const inp = document.querySelector(`[data-bind="${path}"]`);
+  if (!inp) return;
+  const lab = inp.closest('.field');
+  let el = lab.querySelector('.aero-cls');
+  if (!el) { el = document.createElement('div'); el.className = 'aero-cls'; lab.appendChild(el); }
+  el.className = 'aero-cls' + (res ? ' lv-' + res[1] : '');
+  el.textContent = res ? res[0] : '';
+}
+function aeroClassRefresh(p, c) {
+  const he = p.aero.hemo || {}, ex = p.aero.ex || {};
+  const pa = aeroClassPA(aeroNum(he.pas), aeroNum(he.pad));
+  aeroSetClass('aero.hemo.pas', pa); aeroSetClass('aero.hemo.pad', pa);
+  aeroSetClass('aero.hemo.fcrep', aeroClassFCrep(aeroNum(he.fcrep)));
+  aeroSetClass('aero.hemo.vo2max', aeroClassVO2(aeroNum(he.vo2max), c.sex, c.idade));
+  const fm = document.querySelector('[data-bind="aero.hemo.fcmax"]');
+  if (fm) {
+    fm.placeholder = c.fcmaxCalc != null ? `${c.fcmaxCalc} (${c.fcmaxBase} − ${c.idade}) ± 6` : 'informe a idade do aluno';
+    aeroSetClass('aero.hemo.fcmax', c.fcmaxCalc == null ? ['Estimada: informe a idade na avaliação física', 'warn']
+      : c.fcmaxMedida ? [`Medida em teste. Estimada pela idade: ${c.fcmaxCalc} ± 6 (${c.fcmaxBase} − ${c.idade})`, 'ok']
+      : [`Estimada: ${c.fcmaxCalc} bpm (${c.fcmaxBase} − ${c.idade}, ${c.sex === 'F' ? 'mulheres' : c.sex === 'M' ? 'homens' : 'sexo não informado'}) ± 6. Preencha só se tiver a FC máxima medida em teste.`, 'ok']);
+  }
+  AERO_EXAMS.forEach(([k]) => aeroSetClass(`aero.ex.${k}`, aeroClassExame(k, aeroNum(ex[k]), c.sex)));
+}
+
 const aeroNum = (v) => { const n = parseFloat(String(v ?? '').replace(',', '.')); return Number.isFinite(n) ? n : null; };
 const aeroFmt = (n, d = 1) => (n == null || !Number.isFinite(n) ? '—' : n.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d }));
 function aeroDefaultZone(obj, fase, min) {
@@ -4997,6 +5070,7 @@ function tabAeroHemo(p) {
       ${sel('aero.hemo.intestino', 'Funcionamento do intestino', ['Regular', 'Preso', 'Solto', 'Irregular'])}
       ${sel('aero.hemo.estresse', 'Nível de estresse', ['Baixo', 'Moderado', 'Alto', 'Muito alto'])}
     </div>
+    <p class="small muted" style="margin:8px 0 0">Classificações: pressão arterial pela Diretriz Brasileira de Hipertensão (2020); VO2máx pela tabela da American Heart Association por sexo e idade.</p>
     <label class="field" style="margin-top:12px"><span>Objetivos do aluno</span><textarea rows="3" data-bind="aero.hemo.objetivos" placeholder="Ex.: reduzir 6 kg de gordura em 9 semanas, dormir melhor…"></textarea></label>
   </div>
   <div class="section card"><h3>Valores calculados</h3>
@@ -5009,6 +5083,7 @@ function tabAeroExames() {
   return `<div class="section card"><h3>Exames laboratoriais</h3>
     <div class="grid three">${aeroField('aero.ex.data', 'Data dos exames', '', 'dd/mm/aaaa')}${AERO_EXAMS.map(([k, l, u]) => aeroField(`aero.ex.${k}`, l, u)).join('')}</div>
     <label class="field" style="margin-top:12px"><span>Observações</span><textarea rows="2" data-bind="aero.ex.obs"></textarea></label>
+    <p class="small muted" style="margin:10px 0 0">Classificações para adultos: lipídios pela Atualização da Diretriz Brasileira de Dislipidemias (2017); glicemia e hemoglobina glicada pela Sociedade Brasileira de Diabetes; demais por valores de referência usuais. Ácido úrico, hemácias e hemoglobina variam por sexo. Servem de orientação e não substituem a avaliação médica.</p>
   </div>
   <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="exerc">Próximo: exercício físico →</button></div>`;
 }
@@ -5096,6 +5171,7 @@ function aeroRefresh() {
   if (!p || p.mode !== 'aero') return;
   if (E.tab === 'aval' && $('#evo-box')) clearTimeout(aeroRefresh.t), (aeroRefresh.t = setTimeout(evoRefresh, 400));
   const c = aeroCalc(p, aeroStudent(p));
+  aeroClassRefresh(p, c);
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   const mp = document.getElementById('aero-modal-photo');
   const mKey = mp && `${(p.aero.exerc || {}).modalidade}|${(aeroStudent(p) || {}).sex}`;
