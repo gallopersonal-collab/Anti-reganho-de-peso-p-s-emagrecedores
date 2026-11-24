@@ -594,6 +594,15 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .evo-slide-table.compact { font-size: 19px; }
 .evo-slide-table.compact td { padding: 7px 14px; }
 .evo-slide .evo-h3 { font: 400 40px/1 "Bebas Neue", sans-serif; color: var(--s-cream); letter-spacing: 1px; margin: 26px 0 0; }
+.evo-how { margin-left: 6px; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--gold); background: transparent; color: var(--gold-2); font: 600 10px/1.6 Inter, sans-serif; letter-spacing: .3px; text-transform: none; cursor: pointer; }
+.evo-how:hover { background: rgba(210,169,97,.15); }
+.evo-guide { z-index: 1200; }
+.evo-guide-item { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 16px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.evo-guide-item:last-child { border-bottom: 0; }
+.evo-guide-item img { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #ddd; }
+.evo-guide-item h3 { margin: 0 0 6px; }
+.evo-guide-item ol { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; }
+@media (max-width: 640px) { .evo-guide-item { grid-template-columns: 1fr; } }
 
 </style>
 </head>
@@ -5527,6 +5536,57 @@ function evoBodyFatPerim(sex, m, force = '') {
   }
   return { g: Math.round(g * 10) / 10, eq, imc, abd, dc };
 }
+/* ---- Guia de medidas: foto + como medir (abre por cima do formulário) ---- */
+const EVO_IMG = 'https://dzmgbvyffxtcjsdpedqb.supabase.co/storage/v1/object/public/fotos/v2/medidas/';
+const EVO_GUIDE = {
+  peso: ['Peso', '', ['Balança calibrada, sobre piso firme e plano.', 'Aluno descalço, com roupa leve, parado no centro da balança.', 'De preferência pela manhã, em jejum e após urinar. Repita sempre nas mesmas condições.']],
+  altura: ['Altura (estatura)', '', ['Estadiômetro ou fita fixada na parede.', 'Descalço, calcanhares juntos, glúteos, costas e cabeça encostados na parede.', 'Olhar para a frente (plano de Frankfurt). Peça uma inspiração e meça no ponto mais alto da cabeça.']],
+  cintura: ['Cintura', 'cintura.jpg', ['Aluno em pé, abdome relaxado, braços levemente afastados do tronco.', 'Fita na MENOR circunferência do tronco, entre a última costela e a crista ilíaca.', 'Fita na horizontal, justa sem comprimir a pele. Leia ao final de uma expiração normal.']],
+  abd1: ['Abdome 1 · ponto médio xifoide–umbigo', 'abd1.jpg', ['Localize o processo xifoide (ponta inferior do esterno) e a cicatriz umbilical.', 'Fita no PONTO MÉDIO entre os dois, na frente; nas laterais, entre a última costela e a crista ilíaca.', 'Fita na horizontal, abdome relaxado, leitura ao final da expiração. Usada nas equações de Weltman e Tran & Weltman.']],
+  abdome: ['Abdome 2 · cicatriz umbilical', 'abdome.jpg', ['Aluno em pé, abdome relaxado (não encolher a barriga).', 'Fita passando exatamente sobre a cicatriz umbilical.', 'Fita na horizontal, leitura ao final da expiração. Usada nas equações de Weltman e Tran & Weltman.']],
+  quadril: ['Quadril', 'quadril.jpg', ['Aluno em pé, pés juntos, glúteos relaxados.', 'Observe de lado e posicione a fita na MAIOR protuberância dos glúteos.', 'Fita na horizontal em toda a volta, sem comprimir.']],
+  crista: ['Crista ilíaca', 'crista.jpg', ['Palpe o ponto mais alto do osso do quadril (crista ilíaca) dos dois lados.', 'Fita imediatamente ACIMA das cristas ilíacas, na horizontal.', 'Usada na equação de Tran & Weltman para homens.']],
+  braco: ['Braço (relaxado)', 'braco.jpg', ['Braço relaxado ao lado do corpo, palma voltada para a coxa.', 'Marque o ponto médio entre o acrômio (ponta do ombro) e o olécrano (cotovelo).', 'Fita na horizontal nesse ponto, sem contrair o bíceps. Use sempre o mesmo lado (padrão: direito).']],
+  coxa: ['Coxa', 'coxa.jpg', ['Aluno em pé, pés levemente afastados, peso distribuído nas duas pernas.', 'Marque o ponto médio entre a prega inguinal e a borda superior da patela.', 'Fita na horizontal nesse ponto, sem comprimir. Use sempre o mesmo lado (padrão: direito).']],
+  pt: ['Dobra peitoral', 'd-pt.jpg', ['Dobra DIAGONAL, no lado direito.', 'Homens: na metade da distância entre a linha axilar anterior e o mamilo. Mulheres: a 1/3 dessa distância, a partir da axila.', 'Pince com polegar e indicador, aplique o adipômetro 1 cm abaixo dos dedos e leia em cerca de 2 segundos.']],
+  ax: ['Dobra axilar média', 'd-ax.jpg', ['Dobra VERTICAL, no lado direito, com o braço do aluno levemente para a frente.', 'Na linha axilar média (abaixo do centro da axila), na altura do processo xifoide.', 'Adipômetro 1 cm abaixo dos dedos; faça 2 a 3 medidas e use a média.']],
+  tr: ['Dobra tricipital', 'd-tr.jpg', ['Dobra VERTICAL na face posterior do braço direito, braço relaxado ao lado do corpo.', 'No ponto médio entre o acrômio e o olécrano.', 'Adipômetro 1 cm abaixo dos dedos; faça 2 a 3 medidas e use a média.']],
+  se: ['Dobra subescapular', 'd-se.jpg', ['Dobra OBLÍQUA (cerca de 45°, para baixo e para o lado).', 'Cerca de 2 cm abaixo do ângulo inferior da escápula direita.', 'Adipômetro 1 cm abaixo dos dedos; faça 2 a 3 medidas e use a média.']],
+  ab: ['Dobra abdominal', 'd-ab.jpg', ['Dobra VERTICAL, no lado direito.', 'Cerca de 2 cm à direita da cicatriz umbilical.', 'Aluno com o abdome relaxado; adipômetro 1 cm abaixo dos dedos; 2 a 3 medidas e média.']],
+  si: ['Dobra supra-ilíaca', 'd-si.jpg', ['Dobra OBLÍQUA, acompanhando a linha natural do quadril.', 'Imediatamente acima da crista ilíaca, na linha axilar anterior, lado direito.', 'Adipômetro 1 cm abaixo dos dedos; 2 a 3 medidas e média.']],
+  cx: ['Dobra da coxa', 'd-cx.jpg', ['Dobra VERTICAL na face anterior da coxa direita, com o peso do aluno na perna esquerda.', 'No ponto médio entre a prega inguinal e a borda superior da patela.', 'Adipômetro 1 cm abaixo dos dedos; 2 a 3 medidas e média.']],
+};
+const EVO_GUIDE_TIPS = ['Fita métrica flexível e inextensível; adipômetro científico calibrado.', 'Meça sempre do mesmo lado (padrão: direito), na mesma hora do dia e com o mesmo avaliador.', 'Faça 2 a 3 medidas em cada ponto e use a média; refaça se a diferença passar de 5%.', 'Não meça logo após o treino: o inchaço muscular altera as circunferências e as dobras.'];
+function evoGuideItem(k) {
+  const g = EVO_GUIDE[k];
+  if (!g) return '';
+  return `<div class="evo-guide-item" id="eg-${k}">
+    ${g[1] ? `<img src="${EVO_IMG + g[1]}" alt="${esc(g[0])}" loading="lazy">` : ''}
+    <div><h3>${esc(g[0])}</h3><ol>${g[2].map((t) => `<li>${esc(t)}</li>`).join('')}</ol></div></div>`;
+}
+/** Abre por cima do formulário (sem fechar a avaliação). k = uma medida; vazio = guia completo. */
+function evoHow(k) {
+  const old = $('#evo-guide'); if (old) old.remove();
+  const el = document.createElement('div');
+  el.id = 'evo-guide';
+  el.className = 'modal-backdrop evo-guide';
+  const keys = k ? [k] : Object.keys(EVO_GUIDE);
+  el.innerHTML = `<div class="modal" style="width:min(760px,100%)">
+    <div class="modal-head"><h2>${k ? 'Como medir' : 'Guia de medidas'}</h2><button class="btn icon sm" data-close-guide aria-label="Fechar">✕</button></div>
+    <div class="modal-body">
+      ${k ? '' : `<div class="card" style="margin-bottom:14px"><h3 style="margin-top:0">Antes de começar</h3><ul class="small">${EVO_GUIDE_TIPS.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div>`}
+      ${keys.map(evoGuideItem).join('')}
+      ${k ? `<div class="row" style="margin-top:12px"><button class="btn sm ghost" data-guide-all>Ver o guia completo</button><span class="spacer"></span><button class="btn primary" data-close-guide>Voltar à avaliação</button></div>` : ''}
+    </div></div>`;
+  el.addEventListener('click', (e) => {
+    if (e.target === el || e.target.closest('[data-close-guide]')) { e.stopPropagation(); el.remove(); }
+    else if (e.target.closest('[data-guide-all]')) { e.stopPropagation(); evoHow(''); }
+  });
+  document.body.appendChild(el);
+}
+actions['evo-how'] = (el, ev) => { if (ev) ev.stopPropagation(); evoHow(el.dataset.k || ''); };
+const evoHowBtn = (k) => (EVO_GUIDE[k] ? ` <button type="button" class="evo-how" data-action="evo-how" data-k="${k}" title="Como medir">? como medir</button>` : '');
+
 function evoForm(st, p, ev) {
   if (!st) return;
   const prev = evoList(st, p).filter((x) => !ev || x.id !== ev.id).pop() || {};
@@ -5535,7 +5595,7 @@ function evoForm(st, p, ev) {
   const dob = x.dobras || {};
   const pdob = prev.dobras || {};
   const ph = (v) => (v != null && v !== '' ? 'antes: ' + esc(v) : '');
-  const inp = ([k, l, u]) => `<label class="field"><span>${l} <em class="unit">(${u})</em></span><input type="text" inputmode="decimal" data-ev="${k}" value="${esc(x[k] ?? '')}" placeholder="${ph(prev[k])}"></label>`;
+  const inp = ([k, l, u]) => `<label class="field"><span>${l} <em class="unit">(${u})</em>${evoHowBtn(k)}</span><input type="text" inputmode="decimal" data-ev="${k}" value="${esc(x[k] ?? '')}" placeholder="${ph(prev[k])}"></label>`;
   const F = (keys) => EVO_FIELDS.filter(([k]) => keys.includes(k)).map(inp).join('');
   const body = openModal(ev ? 'Editar avaliação' : 'Nova avaliação', `
     <p class="small muted" style="margin-top:0">${esc(st.name)}. Preencha o que você mediu; os campos vazios ficam de fora do relatório.${prev.date ? ` Última avaliação: ${evoDate(prev.date)}.` : ''}</p>
@@ -5544,7 +5604,7 @@ function evoForm(st, p, ev) {
       <label class="field"><span>Idade <em class="unit">(anos)</em></span><input type="text" inputmode="numeric" id="ev-idade" value="${esc(x.idade ?? st.age ?? '')}"></label>
       <label class="field"><span>Sexo</span><select id="ev-sex"><option value="">—</option><option value="F" ${(st.sex || x.sexo) === 'F' ? 'selected' : ''}>Feminino</option><option value="M" ${(st.sex || x.sexo) === 'M' ? 'selected' : ''}>Masculino</option></select></label>
     </div>
-    <h3 style="margin:14px 0 6px">1. Peso, altura e circunferências</h3>
+    <div class="row" style="margin:14px 0 6px"><h3 style="margin:0">1. Peso, altura e circunferências</h3><span class="spacer"></span><button type="button" class="btn sm" data-action="evo-how" data-k="">📏 Guia de medidas com fotos</button></div>
     <div class="grid three">${F(['peso', 'altura', 'cintura', 'abd1', 'abdome', 'quadril', 'crista', 'braco', 'coxa'])}</div>
     <h3 style="margin:14px 0 6px">2. % de gordura</h3>
     <label class="field"><span>Método</span><select id="ev-proto">${Object.entries(EVO_PROTOCOLOS).map(([k, v]) => `<option value="${k}" ${(x.protocolo || 'manual') === k ? 'selected' : ''}>${v.label}</option>`).join('')}</select></label>
@@ -5609,7 +5669,7 @@ function evoForm(st, p, ev) {
     } else if (proto() === 'manual') {
       box.innerHTML = '';
     } else {
-      box.innerHTML = P[sex() || 'F'].map((k) => `<label class="field"><span>Dobra ${EVO_DOBRAS.find((d) => d[0] === k)[1].toLowerCase()} <em class="unit">(mm)</em></span><input type="text" inputmode="decimal" data-dob="${k}" value="${esc(cur[k] ?? '')}" placeholder="${ph(pdob[k])}"></label>`).join('');
+      box.innerHTML = P[sex() || 'F'].map((k) => `<label class="field"><span>Dobra ${EVO_DOBRAS.find((d) => d[0] === k)[1].toLowerCase()} <em class="unit">(mm)</em>${evoHowBtn(k)}</span><input type="text" inputmode="decimal" data-dob="${k}" value="${esc(cur[k] ?? '')}" placeholder="${ph(pdob[k])}"></label>`).join('');
       $$('[data-dob]', box).forEach((i) => i.addEventListener('input', calc));
     }
     calc();

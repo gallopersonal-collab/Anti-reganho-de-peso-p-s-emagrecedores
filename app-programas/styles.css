@@ -578,3 +578,12 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .evo-slide-table.compact { font-size: 19px; }
 .evo-slide-table.compact td { padding: 7px 14px; }
 .evo-slide .evo-h3 { font: 400 40px/1 "Bebas Neue", sans-serif; color: var(--s-cream); letter-spacing: 1px; margin: 26px 0 0; }
+.evo-how { margin-left: 6px; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--gold); background: transparent; color: var(--gold-2); font: 600 10px/1.6 Inter, sans-serif; letter-spacing: .3px; text-transform: none; cursor: pointer; }
+.evo-how:hover { background: rgba(210,169,97,.15); }
+.evo-guide { z-index: 1200; }
+.evo-guide-item { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 16px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.evo-guide-item:last-child { border-bottom: 0; }
+.evo-guide-item img { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #ddd; }
+.evo-guide-item h3 { margin: 0 0 6px; }
+.evo-guide-item ol { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; }
+@media (max-width: 640px) { .evo-guide-item { grid-template-columns: 1fr; } }
