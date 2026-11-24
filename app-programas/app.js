@@ -3701,9 +3701,16 @@ actions.restore = async () => {
 const AERO_OBJ = { EMA: 'Emagrecimento', EST: 'Redução do estresse', PER: 'Performance' };
 const AERO_ZONES = {
   reg: { label: 'Regenerativa', lo: 0.28, hi: 0.42, cls: 'z-reg' },
-  lip: { label: 'Lipolítica', lo: 0.43, hi: 0.58, cls: 'z-lip' },
-  gli: { label: 'Glicolítica', lo: 0.60, hi: 0.70, cls: 'z-gli' },
+  lip: { label: 'Lipolítica', lo: 0.43, hi: 0.56, cls: 'z-lip' },
+  gli: { label: 'Glicolítica', lo: 0.57, hi: 0.70, cls: 'z-gli' },
 };
+/** Zona com as intensidades escolhidas pelo personal neste programa (em % da reserva) ou as padrão. */
+function aeroZone(p, k) {
+  const z = AERO_ZONES[k];
+  const o = (p && p.aero && p.aero.zonas && p.aero.zonas[k]) || {};
+  const lo = aeroNum(o.lo), hi = aeroNum(o.hi);
+  return { ...z, lo: lo != null ? lo / 100 : z.lo, hi: hi != null ? hi / 100 : z.hi, custom: lo != null || hi != null };
+}
 const AERO_MUSC = {
   RML: 'Musculação RML (40% a 60% de 1RM)',
   FD: 'Musculação Força Dinâmica (60% a 70% de 1RM)',
@@ -3783,9 +3790,14 @@ function aeroCalc(p, st) {
   r.vo2max = aeroNum(he.vo2max);
   r.vo2r = r.vo2max != null ? r.vo2max - 3.5 : null;
   r.zones = {};
-  Object.entries(AERO_ZONES).forEach(([k, z]) => {
-    const o = {};
-    if (r.fcr != null) { o.bpmLo = Math.round(r.fcrep + z.lo * r.fcr); o.bpmHi = Math.round(r.fcrep + z.hi * r.fcr); }
+  Object.keys(AERO_ZONES).forEach((k) => {
+    const z = aeroZone(p, k);
+    // FC alvo = [(FCmáx − FC repouso) × intensidade ÷ 100] + FC repouso; a FCmáx estimada tem ± 6 bpm, que passa para o alvo × intensidade
+    const o = { lo: z.lo, hi: z.hi };
+    if (r.fcr != null) {
+      o.bpmLo = Math.round(r.fcrep + z.lo * r.fcr); o.bpmHi = Math.round(r.fcrep + z.hi * r.fcr);
+      if (!r.fcmaxMedida) { o.varLo = Math.round(6 * z.lo); o.varHi = Math.round(6 * z.hi); }
+    }
     if (r.vo2r != null) {
       o.vo2Lo = 3.5 + z.lo * r.vo2r; o.vo2Hi = 3.5 + z.hi * r.vo2r;
       if (peso) o.kcalMin = ((o.vo2Lo + o.vo2Hi) / 2) * peso * 5 / 1000;
@@ -3881,10 +3893,16 @@ function tabAeroExerc(p) {
 }
 function tabAeroAerob(p) {
   const c = aeroCalc(p, aeroStudent(p));
-  const zoneRows = Object.entries(AERO_ZONES).map(([k, z]) => {
+  const editing = !!E.zoneEdit;
+  const pct = (v) => Math.round(v * 100);
+  const zoneRows = Object.keys(AERO_ZONES).map((k) => {
+    const z = aeroZone(p, k);
     const o = c.zones[k];
-    return `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td>${Math.round(z.lo * 100)}% a ${Math.round(z.hi * 100)}%</td>
-      <td><b>${o.bpmLo != null ? `${o.bpmLo} a ${o.bpmHi} bpm` : '—'}</b></td><td>${o.vo2Lo != null ? `${aeroFmt(o.vo2Lo)} a ${aeroFmt(o.vo2Hi)}` : '—'}</td><td>${o.kcalMin != null ? aeroFmt(o.kcalMin) : '—'}</td></tr>`;
+    const pctCell = editing
+      ? `<span class="row" style="gap:6px;flex-wrap:nowrap"><input type="text" inputmode="numeric" class="zone-in" data-zone="${k}" data-end="lo" value="${pct(z.lo)}"> a <input type="text" inputmode="numeric" class="zone-in" data-zone="${k}" data-end="hi" value="${pct(z.hi)}"> %</span>`
+      : `${pct(z.lo)}% a ${pct(z.hi)}%${z.custom ? ' <span class="chip" style="font-size:10px;padding:1px 6px">ajustada</span>' : ''}`;
+    return `<tr><td><span class="zchip ${z.cls}">${z.label}</span></td><td>${pctCell}</td>
+      <td><b>${o.bpmLo != null ? `${o.bpmLo} a ${o.bpmHi} bpm` : '—'}</b>${o.varLo != null ? `<div class="small muted">± ${o.varLo === o.varHi ? o.varLo : `${o.varLo} a ${o.varHi}`} bpm (FCmáx ± 6)</div>` : ''}</td><td>${o.vo2Lo != null ? `${aeroFmt(o.vo2Lo)} a ${aeroFmt(o.vo2Hi)}` : '—'}</td><td>${o.kcalMin != null ? aeroFmt(o.kcalMin) : '—'}</td></tr>`;
   }).join('');
   let n = 0;
   const weeks = (p.aero.plano || []).map((w, wi) => {
@@ -3903,12 +3921,28 @@ function tabAeroAerob(p) {
           <span class="small" data-zbpm="${wi}-${di}">${esc(aeroBpm(c, d.zona))}</span>${kc != null ? `<span class="small muted" data-zkcal="${wi}-${di}">≈ ${kc} kcal</span>` : `<span class="small muted" data-zkcal="${wi}-${di}"></span>`}</div>`;
       }).join('')}</div></div>`;
   }).join('');
-  return `<div class="section card"><h3>Zonas de treinamento do aluno</h3>
-    <table class="tpl-table aero-ztable"><tr><th>Zona</th><th>% da reserva</th><th>FC alvo (Karvonen)</th><th>VO2 alvo (ml/kg/min)</th><th>kcal/min</th></tr>${zoneRows}</table>
-    <p class="small muted" style="margin:10px 0 0">FC alvo = FC repouso + % × (FCmáx − FC repouso). VO2 alvo = 3,5 + % × (VO2máx − 3,5). Atualize a avaliação e a hemodinâmica que as zonas se recalculam.</p></div>
+  return `<div class="section card"><div class="row"><h3 style="margin:0;flex:1">Zonas de treinamento do aluno</h3>
+      ${editing ? '<button class="btn sm ghost" data-action="aero-zones-reset">Restaurar padrão</button><button class="btn sm primary" data-action="aero-zones-edit">Concluir</button>' : '<button class="btn sm" data-action="aero-zones-edit">⚙ Ajustar intensidades</button>'}</div>
+    <table class="tpl-table aero-ztable"><tr><th>Zona</th><th>% da reserva da FC</th><th>FC alvo (Karvonen)</th><th>VO2 alvo (ml/kg/min)</th><th>kcal/min</th></tr>${zoneRows}</table>
+    <p class="small muted" style="margin:10px 0 0">FC alvo = [(FCmáx − FC repouso) × intensidade ÷ 100] + FC repouso, com FCmáx = 220 − idade (homens) ou 226 − idade (mulheres), ± 6 bpm. VO2 alvo = 3,5 + intensidade × (VO2máx − 3,5). ${editing ? 'Digite o início e o fim de cada zona em % da reserva; as FC alvo se recalculam.' : 'Padrão: regenerativa 28–42%, lipolítica 43–56%, glicolítica 57–70%.'}</p></div>
   <div class="section stack">${weeks}</div>
   <div class="section row"><button class="btn" data-action="aero-reset-plan">Restaurar periodização padrão</button><span class="spacer"></span><button class="btn primary" data-action="student-access" data-id="${esc(p.id)}">Liberar acesso ao aluno</button></div>`;
 }
+actions['aero-zones-edit'] = async () => { E.zoneEdit = !E.zoneEdit; await saveSoon.flush(); renderEditor(); };
+actions['aero-zones-reset'] = async () => { delete E.p.aero.zonas; saveSoon(); await saveSoon.flush(); renderEditor(); toast('Intensidades padrão restauradas'); };
+document.addEventListener('change', (e) => {
+  const i = e.target.closest && e.target.closest('.zone-in');
+  if (!i || !E.p || !E.p.aero) return;
+  const v = aeroNum(i.value);
+  if (v == null || v < 1 || v > 100) { toast('Use um valor entre 1 e 100'); renderEditor(); return; }
+  const zs = (E.p.aero.zonas = E.p.aero.zonas || {});
+  const cur = aeroZone(E.p, i.dataset.zone);
+  const z = (zs[i.dataset.zone] = { lo: Math.round(cur.lo * 100), hi: Math.round(cur.hi * 100) });
+  z[i.dataset.end] = Math.round(v);
+  if (z.lo >= z.hi) { toast('O início da zona precisa ser menor que o fim'); delete zs[i.dataset.zone]; }
+  saveSoon();
+  renderEditor();
+});
 function aeroBody(p) {
   if (E.tab === 'aval') return tabAeroAval(p) + `<div id="evo-box">${evoSectionHTML(p)}</div>`;
   if (E.tab === 'hemo') return tabAeroHemo(p);

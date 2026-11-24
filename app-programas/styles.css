@@ -587,3 +587,4 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .evo-guide-item h3 { margin: 0 0 6px; }
 .evo-guide-item ol { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; }
 @media (max-width: 640px) { .evo-guide-item { grid-template-columns: 1fr; } }
+.zone-in { width: 64px !important; padding: 6px 8px !important; text-align: center; }
