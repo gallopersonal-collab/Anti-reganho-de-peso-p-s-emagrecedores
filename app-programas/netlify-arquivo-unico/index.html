@@ -567,6 +567,34 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .cl-list { display: flex; flex-direction: column; gap: 8px; max-height: 520px; overflow: auto; }
 .cl-item { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--card-2); }
 
+/* Evolução do aluno */
+.evo-table-wrap { overflow-x: auto; }
+.evo-table th, .evo-table td { text-align: right; white-space: nowrap; }
+.evo-table th:first-child, .evo-table td:first-child { text-align: left; }
+.evo-up { color: #46c37b; }
+.evo-down { color: #ef6b6b; }
+.evo-chart { width: 100%; max-width: 900px; border-radius: 12px; background: rgba(255,255,255,.02); }
+.evo-items { display: flex; flex-direction: column; gap: 6px; }
+.evo-item { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; flex-wrap: wrap; }
+.evo-slide .evo-statboxes { flex-wrap: wrap; }
+.evo-slide .evo-stat { min-width: 250px; }
+.evo-slide .evo-stat b { font-size: 64px; }
+.evo-slide .evo-stat span { display: block; font-size: 20px; }
+.evo-slide .evo-stat em { display: block; font-style: normal; font-size: 18px; color: var(--s-muted); margin-top: 8px; }
+.evo-slide .evo-stat.evo-up b { color: #46c37b; }
+.evo-slide .evo-stat.evo-down b { color: #ef6b6b; }
+.evo-slide-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 18px; }
+.evo-slide-table th { text-align: right; font: 600 16px/1.2 Inter, sans-serif; letter-spacing: 1px; text-transform: uppercase; color: var(--s-gold); padding: 6px 14px; border-bottom: 2px solid var(--s-line); }
+.evo-slide-table th small { display: block; text-transform: none; letter-spacing: 0; color: var(--s-muted); font-weight: 500; }
+.evo-slide-table td { text-align: right; padding: 4px 14px; border-bottom: 1px solid rgba(201,163,91,.18); color: var(--s-text); }
+.evo-slide-table td:first-child, .evo-slide-table th:first-child { text-align: left; }
+.evo-slide-table td small { color: var(--s-muted); font-size: 15px; }
+.evo-slide-table td.evo-up { color: #46c37b; font-weight: 700; }
+.evo-slide-table td.evo-down { color: #ef6b6b; font-weight: 700; }
+.evo-slide-table.compact { font-size: 19px; }
+.evo-slide-table.compact td { padding: 7px 14px; }
+.evo-slide .evo-h3 { font: 400 40px/1 "Bebas Neue", sans-serif; color: var(--s-cream); letter-spacing: 1px; margin: 26px 0 0; }
+
 </style>
 </head>
 <body>
@@ -1908,14 +1936,14 @@ actions['send-program'] = async (el, ev) => {
   const out = await buildProgramPdf(p);
   if (out) showSendModal(p, out);
 };
-function showSendModal(p, { blob, fileName, pages }) {
+function showSendModal(p, { blob, fileName, pages }, o = {}) {
   const st = byId(S.students, p.studentId);
   const file = new File([blob], fileName, { type: 'application/pdf' });
   const canShare = navigator.canShare && navigator.canShare({ files: [file] });
   const num = waNumber(st);
-  const text = waText(p);
-  const body = openModal('Enviar programa', `
-    <p>PDF <b>${esc(fileName)}</b> pronto (${pages} páginas, ${fmtSize(blob.size)}). Uma cópia ficou salva em Meus PDFs.</p>
+  const text = o.text || waText(p);
+  const body = openModal(o.title || 'Enviar programa', `
+    <p>PDF <b>${esc(fileName)}</b> pronto (${pages} páginas, ${fmtSize(blob.size)}).${o.text ? '' : ' Uma cópia ficou salva em Meus PDFs.'}</p>
     <label class="field"><span>Mensagem</span><textarea id="wa-text" rows="3">${esc(text)}</textarea></label>
     <div class="stack" style="margin-top:14px;gap:10px">
       ${canShare ? '<button class="btn primary lg" id="wa-share">Enviar pelo WhatsApp (PDF anexado)</button>' : ''}
@@ -4007,10 +4035,12 @@ async function openAccessModal(p) {
 
 /* ---- Acompanhamento (personal vê os treinos do aluno) ---- */
 async function tabAcompanhamento() {
-  const box = $('#ed-body');
+  const host = $('#ed-body');
   const p = E.p;
+  host.innerHTML = `<div id="evo-box">${evoSectionHTML(p)}</div><div id="acomp-box"></div>`;
+  const box = $('#acomp-box');
   if (!CLOUD.user) {
-    box.innerHTML = `<div class="section empty"><h2>Acompanhamento</h2><p>Entre na sua conta e libere o acesso do aluno para ver aqui os treinos feitos e as cargas registradas.</p><button class="btn primary" data-action="login">Entrar ou criar conta</button></div>`;
+    box.innerHTML = `<div class="section empty"><h2>Treinos do aluno</h2><p>Entre na sua conta e libere o acesso do aluno para ver aqui os treinos feitos e as cargas registradas.</p><button class="btn primary" data-action="login">Entrar ou criar conta</button></div>`;
     return;
   }
   box.innerHTML = '<div class="section muted">Carregando…</div>';
@@ -5209,6 +5239,374 @@ actions['cl-publish'] = async () => {
   toast('Publicação concluída');
   await loadCloudLib(true);
 };
+
+/* =========================================================
+ * Evolução do aluno: reavaliações, comparativo e relatório de renovação
+ * ======================================================= */
+const EVO_FIELDS = [
+  ['peso', 'Peso', 'kg'], ['altura', 'Altura', 'cm'], ['gordura', '% de gordura', '%'],
+  ['cintura', 'Cintura', 'cm'], ['abdome', 'Abdome', 'cm'], ['quadril', 'Quadril', 'cm'],
+  ['braco', 'Braço', 'cm'], ['coxa', 'Coxa', 'cm'],
+  ['fcrep', 'FC de repouso', 'bpm'], ['pas', 'PA sistólica', 'mmHg'], ['pad', 'PA diastólica', 'mmHg'],
+];
+/* Métricas mostradas no comparativo. dir: -1 = menor é melhor, 1 = maior é melhor, 0 = neutro */
+const EVO_METRICS = [
+  ['peso', 'Peso', 'kg', 0, 1], ['gordura', '% de gordura', '%', -1, 1], ['mg', 'Massa gorda', 'kg', -1, 1],
+  ['mm', 'Massa magra', 'kg', 1, 1], ['excedente', 'Gordura excedente', 'kg', -1, 1], ['carencia', 'Carência muscular', 'kg', -1, 1],
+  ['imc', 'IMC', '', 0, 1], ['cintura', 'Cintura', 'cm', -1, 1], ['abdome', 'Abdome', 'cm', -1, 1], ['quadril', 'Quadril', 'cm', 0, 1],
+  ['braco', 'Braço', 'cm', 1, 1], ['coxa', 'Coxa', 'cm', 1, 1], ['rcq', 'Relação cintura/quadril', '', -1, 2],
+  ['fcrep', 'FC de repouso', 'bpm', -1, 0], ['pas', 'PA sistólica', 'mmHg', -1, 0], ['pad', 'PA diastólica', 'mmHg', -1, 0],
+];
+const evoToday = () => new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' });
+const evoDate = (d) => (d ? new Date(d + 'T12:00:00').toLocaleDateString('pt-BR') : '—');
+/** Converte dd/mm/aaaa ou aaaa-mm-dd em aaaa-mm-dd */
+function evoISO(d) {
+  const s = String(d || '').trim();
+  const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (m) return `${m[3]}-${pad2(m[2])}-${pad2(m[1])}`;
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : '';
+}
+/** Mesmas fórmulas do programa aeróbico (gordura excedente e carência muscular). */
+function evoCalc(ev, st) {
+  const n = (k) => aeroNum(ev[k]);
+  const peso = n('peso'), alt = n('altura'), g = n('gordura');
+  const sex = (st && st.sex) || '';
+  const altM = alt ? (alt > 3 ? alt / 100 : alt) : null;
+  const r = {};
+  EVO_FIELDS.forEach(([k]) => { r[k] = n(k); });
+  r.imc = peso && altM ? peso / (altM * altM) : null;
+  r.mg = peso && g != null ? peso * g / 100 : null;
+  r.mm = peso && g != null ? peso - r.mg : null;
+  const gIdeal = sex === 'M' ? 15 : sex === 'F' ? 23 : null;
+  r.excedente = peso && g != null && gIdeal != null ? Math.max(0, (g - gIdeal) * peso / 100) : null;
+  const mcmRef = sex === 'M' ? 81 : sex === 'F' ? 77 : null;
+  r.carencia = r.mm != null && mcmRef != null ? Math.max(0, (mcmRef - (100 - g)) / 100 * r.mm) : null;
+  r.rcq = r.cintura && r.quadril ? r.cintura / r.quadril : null;
+  return r;
+}
+/** Avaliações do aluno em ordem de data. Inclui a avaliação do programa aeróbico como ponto de partida. */
+function evoList(st, p) {
+  const list = ((st && st.evals) || []).slice();
+  const av = p && p.mode === 'aero' && p.aero && p.aero.av;
+  if (av && aeroNum(av.peso)) {
+    const he = p.aero.hemo || {};
+    list.push({ id: 'aero-' + p.id, virtual: true, date: evoISO(av.data) || evoISO(p.aero.inicio) || '', peso: av.peso, altura: av.altura, gordura: av.gordura,
+      cintura: av.cintura, abdome: av.abdome, quadril: av.quadril, fcrep: he.fcrep, pas: he.pas, pad: he.pad, obs: 'Avaliação do programa aeróbico' });
+  }
+  return list.sort((a, b) => String(a.date || '0').localeCompare(String(b.date || '0')));
+}
+function evoDelta(a, b, m) {
+  const [k, , , dir] = m;
+  if (a[k] == null || b[k] == null) return { txt: '—', cls: '' };
+  const d = b[k] - a[k];
+  const dd = m[4];
+  if (Math.abs(d) < Math.pow(10, -dd) / 2) return { txt: '=', cls: '', d: 0 };
+  const cls = dir === 0 ? '' : (d * dir > 0 ? 'evo-up' : 'evo-down');
+  return { txt: (d > 0 ? '+' : '−') + aeroFmt(Math.abs(d), dd), cls, d };
+}
+
+/** Gráfico de linhas em canvas (vira imagem para funcionar na tela e no PDF). */
+function evoChartImg(series, labels, { w = 900, h = 360, light = false } = {}) {
+  const c = document.createElement('canvas');
+  const k = 2; c.width = w * k; c.height = h * k;
+  const g = c.getContext('2d'); g.scale(k, k);
+  const txt = light ? '#5d6779' : '#a9b4c6', grid = light ? 'rgba(0,0,0,.08)' : 'rgba(255,255,255,.08)';
+  const L = 56, R = 56, T = 30, B = 46;
+  g.font = '600 13px Inter, sans-serif';
+  const n = labels.length;
+  const xAt = (i) => (n <= 1 ? (L + w - R) / 2 : L + i * (w - L - R) / (n - 1));
+  for (let i = 0; i <= 4; i++) { const y = T + i * (h - T - B) / 4; g.strokeStyle = grid; g.beginPath(); g.moveTo(L, y); g.lineTo(w - R, y); g.stroke(); }
+  g.fillStyle = txt; g.textAlign = 'center';
+  labels.forEach((lb, i) => g.fillText(lb, xAt(i), h - 18));
+  series.forEach((s, si) => {
+    const vals = s.values.map((v) => (v == null ? null : v));
+    const ok = vals.filter((v) => v != null);
+    if (!ok.length) return;
+    let lo = Math.min(...ok), hi = Math.max(...ok);
+    const pad = Math.max((hi - lo) * 0.25, Math.abs(hi) * 0.03, 0.5); lo -= pad; hi += pad;
+    const yAt = (v) => T + (1 - (v - lo) / (hi - lo)) * (h - T - B);
+    g.strokeStyle = s.color; g.lineWidth = 4; g.lineJoin = 'round'; g.beginPath();
+    let started = false;
+    vals.forEach((v, i) => { if (v == null) return; const x = xAt(i), y = yAt(v); if (!started) { g.moveTo(x, y); started = true; } else g.lineTo(x, y); });
+    g.stroke();
+    vals.forEach((v, i) => {
+      if (v == null) return;
+      const x = xAt(i), y = yAt(v);
+      g.fillStyle = s.color; g.beginPath(); g.arc(x, y, 6, 0, Math.PI * 2); g.fill();
+      g.fillStyle = light ? '#1b2433' : '#efe6d2'; g.font = '700 14px Inter, sans-serif'; g.textAlign = 'center';
+      g.fillText(aeroFmt(v, 1) + (s.unit || ''), x, y + (si % 2 ? 24 : -14));
+    });
+  });
+  g.textAlign = 'left'; g.font = '700 14px Inter, sans-serif';
+  let lx = L;
+  series.forEach((s) => { g.fillStyle = s.color; g.fillRect(lx, 6, 14, 14); g.fillStyle = txt; g.fillText(s.label, lx + 20, 18); lx += g.measureText(s.label).width + 50; });
+  return c.toDataURL('image/png');
+}
+
+/* ---- Registros de treino do aluno (nuvem) ---- */
+async function evoFetchLogs(p) {
+  if (!sb || !CLOUD.user) return null;
+  const { data: acc, error: e1 } = await sb.from('student_access').select('id,code,active,expires_at,last_seen_at').eq('program_ref', p.id);
+  if (e1) throw e1;
+  if (!acc.length) return { acc, logs: [] };
+  const { data: logs, error: e2 } = await sb.from('workout_logs').select('*').in('access_id', acc.map((a) => a.id)).order('log_date', { ascending: false }).order('created_at', { ascending: false }).limit(500);
+  if (e2) throw e2;
+  return { acc, logs };
+}
+/** Resumo dos treinos: total, semanas, frequência e progressão de carga por exercício. */
+function evoTrainStats(logs) {
+  const out = { total: logs.length, perWeek: null, first: null, last: null, loads: [] };
+  if (!logs.length) return out;
+  const dates = logs.map((l) => l.log_date).filter(Boolean).sort();
+  out.first = dates[0]; out.last = dates[dates.length - 1];
+  const days = Math.max(7, (new Date(out.last) - new Date(out.first)) / 86400000 + 1);
+  out.perWeek = logs.length / (days / 7);
+  const by = {};
+  logs.slice().sort((a, b) => String(a.log_date).localeCompare(String(b.log_date))).forEach((l) => {
+    (l.exercises || []).forEach((x) => {
+      const best = Math.max(0, ...(x.sets || []).map((s) => aeroNum(s.load) || 0));
+      if (!best || !x.name) return;
+      const e = by[x.name] || (by[x.name] = { name: x.name, first: best, max: best, n: 0 });
+      e.max = Math.max(e.max, best); e.n++;
+    });
+  });
+  out.loads = Object.values(by).filter((e) => e.n >= 2 && e.max > e.first)
+    .map((e) => ({ ...e, pct: (e.max - e.first) / e.first * 100 }))
+    .sort((a, b) => b.pct - a.pct).slice(0, 6);
+  return out;
+}
+
+/* ---- Tela: seção "Avaliações e evolução" no Acompanhamento ---- */
+function evoSectionHTML(p) {
+  const st = byId(S.students, p.studentId);
+  if (!st) {
+    return `<div class="section card"><h2 style="margin-top:0">Avaliações e evolução</h2>
+      <p class="muted" style="margin:0">Escolha o aluno deste programa (aba de dados${p.mode === 'aero' ? ' ou Avaliação física' : ''}) para registrar reavaliações e gerar o relatório de evolução.</p></div>`;
+  }
+  const list = evoList(st, p);
+  const calc = list.map((ev) => evoCalc(ev, st));
+  const first = calc[0], last = calc[calc.length - 1];
+  const show = list.length > 4 ? [0, list.length - 2, list.length - 1] : list.map((_, i) => i);
+  const rows = EVO_METRICS.filter((m) => calc.some((c) => c[m[0]] != null)).map((m) => {
+    const dl = list.length >= 2 ? evoDelta(first, last, m) : null;
+    return `<tr><td>${esc(m[1])}${m[2] ? ` <span class="muted small">(${m[2]})</span>` : ''}</td>${show.map((i) => `<td>${aeroFmt(calc[i][m[0]], m[4])}</td>`).join('')}${dl ? `<td class="${dl.cls}"><b>${dl.txt}</b></td>` : ''}</tr>`;
+  }).join('');
+  let chart = '';
+  if (list.length >= 2) {
+    const labels = list.map((ev) => evoDate(ev.date).slice(0, 5));
+    chart = `<img class="evo-chart" alt="Gráfico de evolução" src="${evoChartImg([
+      { label: '% de gordura', color: '#d2a961', unit: '%', values: calc.map((c) => c.gordura) },
+      { label: 'Massa magra (kg)', color: '#5fb3ff', unit: '', values: calc.map((c) => c.mm) },
+    ], labels)}">`;
+  }
+  return `<div class="section card stack" id="evo">
+    <div class="row"><div style="flex:1;min-width:220px"><h2 style="margin:0">Avaliações e evolução</h2>
+      <div class="small muted">${esc(st.name)} · ${list.length} avaliação(ões). Reavalie a cada 4 a 8 semanas e gere o relatório para renovar o plano.</div></div>
+      <button class="btn" data-action="evo-new">+ Nova avaliação</button>
+      <button class="btn primary" data-action="evo-report" ${list.length ? '' : 'disabled'}>Gerar relatório de evolução</button></div>
+    ${list.length ? `
+      <div class="evo-table-wrap"><table class="tpl-table evo-table">
+        <thead><tr><th></th>${show.map((i) => `<th>${evoDate(list[i].date)}${i === 0 ? '<br><span class="small muted">inicial</span>' : i === list.length - 1 ? '<br><span class="small muted">atual</span>' : ''}</th>`).join('')}${list.length >= 2 ? '<th>Evolução</th>' : ''}</tr></thead>
+        <tbody>${rows}</tbody></table></div>
+      ${chart}
+      <div class="evo-items">${list.slice().reverse().map((ev) => `<div class="evo-item"><span><b>${evoDate(ev.date)}</b>${ev.obs ? ` · <span class="muted">${esc(ev.obs)}</span>` : ''}</span>
+        ${ev.virtual ? '<span class="small muted">edite na aba Avaliação física</span>' : `<span class="row" style="gap:6px"><button class="btn sm" data-action="evo-edit" data-id="${esc(ev.id)}">Editar</button><button class="btn sm danger" data-action="evo-del" data-id="${esc(ev.id)}">✕</button></span>`}</div>`).join('')}</div>`
+    : '<div class="empty" style="margin:0">Nenhuma avaliação ainda. Registre a avaliação inicial agora e a reavaliação no fim do ciclo.</div>'}
+  </div>`;
+}
+function evoRefresh() {
+  const box = $('#evo-box');
+  if (box && E.p) box.innerHTML = evoSectionHTML(E.p);
+}
+function evoForm(ev) {
+  const p = E.p;
+  const st = byId(S.students, p.studentId);
+  if (!st) return;
+  const prev = evoList(st, p).filter((x) => !ev || x.id !== ev.id).pop() || {};
+  const x = ev || { id: uid(), date: evoToday() };
+  const body = openModal(ev ? 'Editar avaliação' : 'Nova avaliação', `
+    <p class="small muted" style="margin-top:0">${esc(st.name)}. Preencha o que você mediu; os campos vazios ficam de fora do relatório.${prev.date ? ` Última avaliação: ${evoDate(prev.date)}.` : ''}</p>
+    <div class="grid three">
+      <label class="field"><span>Data</span><input type="date" id="ev-date" value="${esc(x.date || evoToday())}"></label>
+      ${EVO_FIELDS.map(([k, l, u]) => `<label class="field"><span>${l} <em class="unit">(${u})</em></span><input type="text" inputmode="decimal" data-ev="${k}" value="${esc(x[k] ?? '')}" placeholder="${prev[k] != null && prev[k] !== '' ? 'antes: ' + esc(prev[k]) : ''}"></label>`).join('')}
+    </div>
+    <label class="field"><span>Observações</span><input type="text" id="ev-obs" value="${esc(x.obs || '')}" placeholder="Ex.: reavaliação do fim do ciclo 1"></label>
+    <div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="ev-save">Salvar avaliação</button></div>`);
+  $('#ev-save', body).onclick = async () => {
+    const rec = { id: x.id, date: $('#ev-date', body).value || evoToday(), obs: $('#ev-obs', body).value.trim() };
+    $$('[data-ev]', body).forEach((i) => { const v = i.value.trim().replace(',', '.'); if (v) rec[i.dataset.ev] = v; });
+    if (!EVO_FIELDS.some(([k]) => rec[k])) { toast('Preencha ao menos uma medida'); return; }
+    st.evals = (st.evals || []).filter((e) => e.id !== rec.id).concat(rec);
+    await saveEntity('students', st);
+    closeModal();
+    toast('Avaliação salva');
+    evoRefresh();
+  };
+}
+actions['evo-new'] = () => evoForm(null);
+actions['evo-edit'] = (el) => {
+  const st = byId(S.students, E.p.studentId);
+  evoForm(((st && st.evals) || []).find((e) => e.id === el.dataset.id));
+};
+actions['evo-del'] = async (el) => {
+  const st = byId(S.students, E.p.studentId);
+  if (!st || !confirm('Excluir esta avaliação?')) return;
+  st.evals = (st.evals || []).filter((e) => e.id !== el.dataset.id);
+  await saveEntity('students', st);
+  evoRefresh();
+};
+
+/* ---- Relatório de evolução (PDF para renovar o plano) ---- */
+function evoReportSlides(p, st, opts) {
+  const tr = byId(S.trainers, p.trainerId);
+  const brand = S.settings.brand || '';
+  const light = p.theme === 'light';
+  const list = evoList(st, p);
+  const calc = list.map((ev) => evoCalc(ev, st));
+  const a = calc[0], b = calc[calc.length - 1];
+  const two = list.length >= 2;
+  const period = two ? `${evoDate(list[0].date)} a ${evoDate(list[list.length - 1].date)}` : evoDate(list[0].date);
+  const ts = opts.train;
+  const out = [];
+  const add = (cls, html) => out.push({ cls, html });
+  const first = st.name.split(' ')[0];
+
+  add('s-cover', `
+    <div class="left">
+      <div class="kicker">Relatório de evolução</div>
+      <div class="title bebas" style="font-size:${titleSize('Sua evolução', 150, 7)}px;margin-top:18px">Sua evolução</div>
+      <div class="subtitle">${esc(p.title)}</div>
+      <div class="facts"><span>${esc(period)}</span><span>${list.length} avaliação(ões)${ts && ts.total ? ` · ${ts.total} treinos registrados` : ''}</span></div>
+      ${tr ? `<div class="by">${bgImg(tr.photo, initials(tr.name))}<div><small>Personal Trainer</small><strong>${esc(tr.name)}</strong>${tr.cref ? `<em>CREF ${esc(tr.cref)}</em>` : ''}</div></div>` : ''}
+    </div>
+    <div class="right">
+      <div class="ring">${bgImg(st.photo, initials(st.name))}</div>
+      <div class="student-label">Resultados de</div>
+      <div class="student-name">${esc(st.name)}</div>
+    </div>`);
+
+  if (two) {
+    const pick = ['mg', 'mm', 'gordura', 'cintura', 'excedente', 'peso'];
+    const cards = pick.map((k) => EVO_METRICS.find((m) => m[0] === k)).filter((m) => a[m[0]] != null && b[m[0]] != null).slice(0, 4);
+    const card = (m) => {
+      const dl = evoDelta(a, b, m);
+      const label = { mg: dl.d < 0 ? 'de gordura a menos' : 'de massa gorda', mm: dl.d > 0 ? 'de massa magra a mais' : 'de massa magra', gordura: 'pontos no % de gordura', cintura: 'cm de cintura', excedente: 'de gordura excedente', peso: 'de peso' }[m[0]];
+      return `<div class="statbox evo-stat ${dl.cls}"><b>${dl.txt}${m[2] === 'kg' ? ' kg' : ''}</b><span>${esc(label)}</span>
+        <em>${aeroFmt(a[m[0]], m[4])} → ${aeroFmt(b[m[0]], m[4])} ${m[2]}</em></div>`;
+    };
+    add('s-text', `
+      <div class="content" data-fitbox>
+        <div class="kicker">Resultados</div><div class="rule"></div>
+        <div class="heading bebas">O que você conquistou</div>
+        <div class="body" data-shrink="16">${esc(first)}, comparando a avaliação de ${evoDate(list[0].date)} com a de ${evoDate(list[list.length - 1].date)}:</div>
+        <div class="statboxes evo-statboxes">${cards.map(card).join('')}</div>
+      </div>`);
+  }
+
+  const mrows = EVO_METRICS.filter((m) => a[m[0]] != null || b[m[0]] != null);
+  add('s-text', `
+    <div class="content">
+      <div class="kicker">Avaliação física</div><div class="rule"></div>
+      <div class="heading bebas" style="font-size:60px">${two ? 'Antes e agora' : 'Avaliação inicial'}</div>
+      <table class="evo-slide-table">
+        <thead><tr><th></th><th>${two ? 'Antes' : 'Medida'}<small>${evoDate(list[0].date)}</small></th>${two ? `<th>Agora<small>${evoDate(list[list.length - 1].date)}</small></th><th>Evolução</th>` : ''}</tr></thead>
+        <tbody>${mrows.slice(0, 12).map((m) => {
+          const dl = two ? evoDelta(a, b, m) : null;
+          return `<tr><td>${esc(m[1])}${m[2] ? ` <small>(${m[2]})</small>` : ''}</td><td>${aeroFmt(a[m[0]], m[4])}</td>${two ? `<td>${aeroFmt(b[m[0]], m[4])}</td><td class="${dl.cls}">${dl.txt}</td>` : ''}</tr>`;
+        }).join('')}</tbody>
+      </table>
+    </div>`);
+
+  if (list.length >= 2) {
+    const img = evoChartImg([
+      { label: '% de gordura', color: light ? '#a67a2c' : '#d2a961', unit: '%', values: calc.map((c) => c.gordura) },
+      { label: 'Massa magra (kg)', color: '#3d8fe0', unit: '', values: calc.map((c) => c.mm) },
+    ], list.map((ev) => evoDate(ev.date).slice(0, 5)), { w: 1200, h: 470, light });
+    add('s-text', `
+      <div class="content">
+        <div class="kicker">Linha do tempo</div><div class="rule"></div>
+        <div class="heading bebas" style="font-size:72px">Sua curva de resultados</div>
+        <img src="${img}" alt="" style="width:1180px;margin-top:18px">
+      </div>`);
+  }
+
+  if (ts && ts.total) {
+    add('s-text', `
+      <div class="content" data-fitbox>
+        <div class="kicker">Treinos</div><div class="rule"></div>
+        <div class="heading bebas" style="font-size:72px">Sua dedicação em números</div>
+        <div class="statboxes" style="margin-top:22px">
+          <div class="statbox"><b>${ts.total}</b><span>treinos registrados</span></div>
+          <div class="statbox"><b>${aeroFmt(ts.perWeek, 1)}x</b><span>por semana, em média</span></div>
+          <div class="statbox"><b>${evoDate(ts.first).slice(0, 5)} a ${evoDate(ts.last).slice(0, 5)}</b><span>período de treino</span></div>
+        </div>
+        ${ts.loads.length ? `<h3 class="evo-h3">Progressão de carga</h3>
+          <table class="evo-slide-table compact"><thead><tr><th>Exercício</th><th>Início</th><th>Melhor carga</th><th>Evolução</th></tr></thead>
+          <tbody>${ts.loads.map((e) => `<tr><td>${esc(e.name)}</td><td>${aeroFmt(e.first, 0)} kg</td><td>${aeroFmt(e.max, 0)} kg</td><td class="evo-up">+${aeroFmt(e.pct, 0)}%</td></tr>`).join('')}</tbody></table>` : ''}
+      </div>`);
+  }
+
+  add('s-text', `
+    <div class="content" data-fitbox>
+      <div class="kicker">Próximo passo</div><div class="rule"></div>
+      <div class="heading bebas">${esc(opts.nextTitle || 'Vamos para a próxima fase')}</div>
+      <div class="body" data-shrink="16">${esc(opts.message || '')}</div>
+      ${tr ? `<div class="statboxes"><div class="statbox"><b>${esc(tr.name)}</b><span>${tr.cref ? 'CREF ' + esc(tr.cref) : 'Seu personal trainer'}</span></div></div>` : ''}
+    </div>`);
+
+  const total = out.length;
+  return out.map((s, i) => {
+    const foot = s.cls === 's-cover' ? '' : `<div class="footer"><span>${esc(brand)}</span><span>${pad2(i + 1)}/${pad2(total)}</span></div>`;
+    return { html: `<div class="slide t-${esc(p.theme || 'navy')} ${s.cls} evo-slide">${s.html}${foot}</div>` };
+  });
+}
+async function evoBuildPdf(p, st, opts) {
+  const slides = evoReportSlides(p, st, opts);
+  const fileName = `evolucao-${slug(st.name)}-${evoToday()}.pdf`;
+  const blob = await withBusy('Gerando relatório…', async (prog) => {
+    await document.fonts.ready;
+    const { jsPDF } = window.jspdf;
+    const W = 1334, H = 750;
+    const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: [W, H], compress: true });
+    const stage = $('#render-stage');
+    for (let i = 0; i < slides.length; i++) {
+      prog(i / slides.length, `Página ${i + 1} de ${slides.length}`);
+      stage.innerHTML = slides[i].html;
+      const el = stage.firstElementChild;
+      fitSlide(el);
+      await Promise.all($$('img', el).map((im) => (im.complete ? 0 : new Promise((r) => { im.onload = im.onerror = r; }))));
+      await sleep(30);
+      const canvas = await html2canvas(el, { scale: 1.5, useCORS: true, backgroundColor: '#000000', logging: false, width: W, height: H, windowWidth: W, windowHeight: H, scrollX: 0, scrollY: 0 });
+      if (i > 0) pdf.addPage([W, H], 'landscape');
+      pdf.addImage(canvas.toDataURL('image/jpeg', 0.88), 'JPEG', 0, 0, W, H, undefined, 'FAST');
+    }
+    stage.innerHTML = '';
+    return pdf.output('blob');
+  });
+  if (!blob) return null;
+  return { blob, fileName, pages: slides.length };
+}
+actions['evo-report'] = async () => {
+  const p = E.p;
+  const st = byId(S.students, p.studentId);
+  if (!st) return;
+  const tr = byId(S.trainers, p.trainerId);
+  const first = st.name.split(' ')[0];
+  const def = `${first}, esses números são fruto da sua dedicação. O próximo ciclo vai consolidar o que você conquistou e levar seus resultados a outro nível. Vamos juntos para a próxima fase?`;
+  const body = openModal('Relatório de evolução', `
+    <p class="small muted" style="margin-top:0">O relatório usa as avaliações${CLOUD.user ? ' e os treinos que o aluno registrou no app' : ''}. Termine com o convite para o próximo ciclo.</p>
+    <label class="field"><span>Título da última página</span><input type="text" id="evo-nt" value="Vamos para a próxima fase"></label>
+    <label class="field"><span>Mensagem para o aluno</span><textarea id="evo-msg" rows="4">${esc(def)}</textarea></label>
+    <div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="evo-go">Gerar PDF</button></div>`);
+  $('#evo-go', body).onclick = async () => {
+    const opts = { nextTitle: $('#evo-nt', body).value.trim(), message: $('#evo-msg', body).value.trim(), train: null };
+    closeModal();
+    try { const r = await evoFetchLogs(p); if (r) opts.train = evoTrainStats(r.logs); } catch (e) { console.warn(e); }
+    const out = await evoBuildPdf(p, st, opts);
+    if (out) showSendModal(p, out, { title: 'Enviar relatório de evolução', text: `Olá ${first}! Preparei o seu relatório de evolução. Dá uma olhada no quanto você avançou!${tr ? '\n' + tr.name : ''}` });
+  };
+};
+
 
 /* =========================================================
  * Exemplo inicial

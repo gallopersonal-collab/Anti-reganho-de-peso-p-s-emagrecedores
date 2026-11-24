@@ -550,3 +550,31 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 /* Biblioteca de PDFs na nuvem */
 .cl-list { display: flex; flex-direction: column; gap: 8px; max-height: 520px; overflow: auto; }
 .cl-item { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--card-2); }
+
+/* Evolução do aluno */
+.evo-table-wrap { overflow-x: auto; }
+.evo-table th, .evo-table td { text-align: right; white-space: nowrap; }
+.evo-table th:first-child, .evo-table td:first-child { text-align: left; }
+.evo-up { color: #46c37b; }
+.evo-down { color: #ef6b6b; }
+.evo-chart { width: 100%; max-width: 900px; border-radius: 12px; background: rgba(255,255,255,.02); }
+.evo-items { display: flex; flex-direction: column; gap: 6px; }
+.evo-item { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; flex-wrap: wrap; }
+.evo-slide .evo-statboxes { flex-wrap: wrap; }
+.evo-slide .evo-stat { min-width: 250px; }
+.evo-slide .evo-stat b { font-size: 64px; }
+.evo-slide .evo-stat span { display: block; font-size: 20px; }
+.evo-slide .evo-stat em { display: block; font-style: normal; font-size: 18px; color: var(--s-muted); margin-top: 8px; }
+.evo-slide .evo-stat.evo-up b { color: #46c37b; }
+.evo-slide .evo-stat.evo-down b { color: #ef6b6b; }
+.evo-slide-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 18px; }
+.evo-slide-table th { text-align: right; font: 600 16px/1.2 Inter, sans-serif; letter-spacing: 1px; text-transform: uppercase; color: var(--s-gold); padding: 6px 14px; border-bottom: 2px solid var(--s-line); }
+.evo-slide-table th small { display: block; text-transform: none; letter-spacing: 0; color: var(--s-muted); font-weight: 500; }
+.evo-slide-table td { text-align: right; padding: 4px 14px; border-bottom: 1px solid rgba(201,163,91,.18); color: var(--s-text); }
+.evo-slide-table td:first-child, .evo-slide-table th:first-child { text-align: left; }
+.evo-slide-table td small { color: var(--s-muted); font-size: 15px; }
+.evo-slide-table td.evo-up { color: #46c37b; font-weight: 700; }
+.evo-slide-table td.evo-down { color: #ef6b6b; font-weight: 700; }
+.evo-slide-table.compact { font-size: 19px; }
+.evo-slide-table.compact td { padding: 7px 14px; }
+.evo-slide .evo-h3 { font: 400 40px/1 "Bebas Neue", sans-serif; color: var(--s-cream); letter-spacing: 1px; margin: 26px 0 0; }
