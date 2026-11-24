@@ -604,6 +604,9 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .evo-guide-item ol { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; }
 @media (max-width: 640px) { .evo-guide-item { grid-template-columns: 1fr; } }
 .zone-in { width: 64px !important; padding: 6px 8px !important; text-align: center; }
+.aero-modal-photo { display: flex; gap: 16px; align-items: center; margin-top: 12px; }
+.aero-modal-photo img { width: 180px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
+.aero-today-img { width: 100%; max-height: 260px; object-fit: cover; object-position: 50% 30%; border-radius: 14px; margin: 10px 0 4px; }
 
 </style>
 </head>
@@ -4847,6 +4850,13 @@ const AERO_TEMPLATE = [
   { fase: 5, micro: 'Microciclo de recuperação', dias: [49, 45, 41, 37, 45, 41, 'R'] },
 ];
 const AERO_MODAL = ['Esteira', 'Bicicleta ergométrica', 'Elíptico', 'Remo ergômetro', 'Caminhada ao ar livre', 'Corrida ao ar livre', 'Natação', 'Outra'];
+/* Foto de cada modalidade (versão feminina e masculina, conforme o sexo do aluno) */
+const AERO_MODAL_IMG = { 'Esteira': 'Running_Treadmill', 'Bicicleta ergométrica': 'Bicycling_Stationary', 'Elíptico': 'Elliptical_Trainer', 'Remo ergômetro': 'Rowing_Stationary',
+  'Caminhada ao ar livre': 'Outdoor_Walk', 'Corrida ao ar livre': 'Outdoor_Run', 'Natação': 'Swimming' };
+function aeroModalImg(modal, sex) {
+  const id = AERO_MODAL_IMG[modal];
+  return id ? photo(`fotos/${sex === 'M' ? 'M' : 'F'}/${id}.jpg`) : '';
+}
 const AERO_EXAMS = [
   ['ct', 'Colesterol total', 'mg/dL'], ['ldl', 'LDL colesterol', 'mg/dL'], ['vldl', 'VLDL colesterol', 'mg/dL'], ['hdl', 'HDL colesterol', 'mg/dL'],
   ['tg', 'Triglicerídeos', 'mg/dL'], ['glic', 'Glicemia', 'mg/dL'], ['hem', 'Hemácias', 'milhões/mm³'], ['hb', 'Hemoglobina', 'g/dL'],
@@ -5007,7 +5017,8 @@ function tabAeroExerc(p) {
     <div class="grid three">
       <label class="field"><span>Modalidade aeróbica</span><select data-bind="aero.exerc.modalidade"><option value="">—</option>${AERO_MODAL.map((m) => `<option>${m}</option>`).join('')}</select></label>
       <label class="field"><span>Observações da modalidade</span><input type="text" data-bind="aero.exerc.obs" placeholder="Ex.: esteira com 1% de inclinação"></label>
-    </div></div>
+    </div>
+    <div id="aero-modal-photo" class="aero-modal-photo"></div></div>
   <div class="section card"><h3>Resumo do programa (calculado)</h3>
     <div class="aero-outs">
       ${aeroOut('o-int', 'Intensidade predominante')}${aeroOut('o-freq', 'Frequência semanal', 'sessões aeróbicas')}${aeroOut('o-dur', 'Duração média', 'min')}
@@ -5086,6 +5097,14 @@ function aeroRefresh() {
   if (E.tab === 'aval' && $('#evo-box')) clearTimeout(aeroRefresh.t), (aeroRefresh.t = setTimeout(evoRefresh, 400));
   const c = aeroCalc(p, aeroStudent(p));
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const mp = document.getElementById('aero-modal-photo');
+  const mKey = mp && `${(p.aero.exerc || {}).modalidade}|${(aeroStudent(p) || {}).sex}`;
+  if (mp && mp.dataset.key !== mKey) {
+    mp.dataset.key = mKey;
+    const modal = (p.aero.exerc || {}).modalidade, st = aeroStudent(p), src = aeroModalImg(modal, st && st.sex);
+    mp.innerHTML = src ? `<img src="${esc(src)}" alt="${esc(modal)}"><div><b>${esc(modal)}</b><div class="small muted">Foto ${st && st.sex === 'M' ? 'masculina' : 'feminina'}, conforme o sexo do aluno. Aparece também no app do aluno.</div></div>`
+      : modal ? `<div class="small muted">${esc(modal)}: sem foto para esta modalidade.</div>` : '<div class="small muted">Escolha a modalidade para ver a foto.</div>';
+  }
   set('o-imc', aeroFmt(c.imc)); set('o-mcm', aeroFmt(c.mcmPct)); set('o-mg', aeroFmt(c.mg)); set('o-mm', aeroFmt(c.mm));
   set('o-exc', aeroFmt(c.excedente)); set('o-car', aeroFmt(c.carencia)); set('o-rcq', aeroFmt(c.rcq, 2));
   set('o-fcmax', c.fcmax != null ? (c.fcmaxMedida ? String(Math.round(c.fcmax)) : `${Math.round(c.fcmax)} ± 6`) : '—');
@@ -5156,6 +5175,7 @@ function renderStudentAero(p) {
     const z = AERO_ZONES[s.zona];
     return `<div class="card aero-today">
       <div class="small muted">Fase ${s.fase} · Semana ${s.wi + 1} · Dia ${s.di + 1} · ${esc(s.micro)}</div>
+      ${s.t === 'aero' && aeroModalImg(modal, ST.data.student && ST.data.student.sex) ? `<img class="aero-today-img" src="${esc(aeroModalImg(modal, ST.data.student && ST.data.student.sex))}" alt="${esc(modal)}">` : ''}
       ${s.t === 'aero' ? `<h2 style="margin:6px 0">${esc(s.min)} minutos</h2>
         <div class="row" style="gap:8px"><span class="zchip ${z.cls}">Zona ${z.label}</span>${modal ? `<span class="chip">${esc(modal)}</span>` : ''}</div>
         <div class="aero-bpm">${aeroZoneTxt(c.zones[s.zona])}<small> bpm</small></div>
