@@ -917,7 +917,7 @@ function renderProgramList() {
   const ownTitle = filtering ? `<h2 style="margin-bottom:12px">Seus programas (${list.length})</h2>` : '';
   if (!list.length) {
     box.innerHTML = (filtering
-      ? `${ownTitle}<div class="empty" style="padding:24px">Nenhum programa seu com esses filtros. Programas criados antes das etiquetas não têm etiqueta: abra o programa e preencha em "1. Dados e capa".</div>`
+      ? `${ownTitle}<div class="empty" style="padding:24px">Nenhum programa seu com esses filtros. Programas criados antes das etiquetas não têm etiqueta: abra o programa e preencha em "Dados e capa".</div>`
       : `<div class="empty">Nenhum programa encontrado com essa busca.</div>`) + libHTML;
     return;
   }
@@ -1052,8 +1052,9 @@ function viewEditor(id, tab) {
   p.include = { trainer: true, overview: true, guidelines: true, warmup: true, pse: true, closing: true, ...(p.include || {}) };
   p.tags = p.tags || {};
   E.p = p;
-  const tabs = (p.mode === 'slides' ? ['slides', 'dados', 'gerar'] : p.mode === 'aero' ? AERO_TABS.map((t) => t[0]) : ['dados', 'treinos', 'gerar']).concat(p.isTemplate ? [] : ['acomp']);
-  E.tab = tabs.includes(tab) ? tab : tabs[0];
+  const normal = p.mode !== 'slides' && p.mode !== 'aero';
+  const tabs = (p.mode === 'slides' ? ['slides', 'dados', 'gerar'] : p.mode === 'aero' ? AERO_TABS.map((t) => t[0]) : (p.isTemplate ? [] : ['aval']).concat(['dados', 'treinos', 'gerar'])).concat(p.isTemplate ? [] : ['acomp']);
+  E.tab = tabs.includes(tab) ? tab : normal ? 'dados' : tabs[0];
   leaveHook = () => saveSoon.flush();
   renderEditor();
 }
@@ -1074,12 +1075,13 @@ function renderEditor() {
       <div class="tabs">${(p.mode === 'slides'
         ? [['slides', '1. Slides'], ['dados', '2. Aluno e personal'], ['gerar', '3. Gerar PDF']]
         : p.mode === 'aero' ? AERO_TABS
-        : [['dados', '1. Dados e capa'], ['treinos', '2. Treinos e exercícios'], ['gerar', '3. Visualizar e gerar PDF']])
-        .concat(p.isTemplate ? [] : [['acomp', p.mode === 'aero' ? '7. Acompanhamento' : '4. Acompanhamento']])
+        : p.isTemplate ? [['dados', '1. Dados e capa'], ['treinos', '2. Treinos e exercícios'], ['gerar', '3. Visualizar e gerar PDF']]
+        : [['aval', '1. Avaliação'], ['dados', '2. Dados e capa'], ['treinos', '3. Treinos e exercícios'], ['gerar', '4. Visualizar e gerar PDF']])
+        .concat(p.isTemplate ? [] : [['acomp', p.mode === 'aero' ? '7. Acompanhamento' : '5. Acompanhamento']])
         .map(([k, l]) => `<button data-action="tab" data-tab="${k}" class="${E.tab === k ? 'active' : ''}">${l}</button>`).join('')}
       </div>
     </div>
-    <div id="ed-body">${E.tab === 'acomp' ? '' : p.mode === 'aero' ? aeroBody(p) : E.tab === 'slides' ? tabSlides() : E.tab === 'dados' ? (p.mode === 'slides' ? tabPessoas() : tabDados()) : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
+    <div id="ed-body">${E.tab === 'acomp' ? '' : p.mode === 'aero' ? aeroBody(p) : E.tab === 'aval' ? tabAvaliacao(p) : E.tab === 'slides' ? tabSlides() : E.tab === 'dados' ? (p.mode === 'slides' ? tabPessoas() : tabDados()) : E.tab === 'treinos' ? tabTreinos() : tabGerar()}</div>`;
   if (E.tab === 'acomp') tabAcompanhamento();
   bindInputs(app);
   if (p.mode === 'aero') aeroRefresh();
@@ -2928,7 +2930,8 @@ async function openAccessModal(p) {
 async function tabAcompanhamento() {
   const host = $('#ed-body');
   const p = E.p;
-  host.innerHTML = `<div id="evo-box">${evoSectionHTML(p)}</div><div id="acomp-box"></div>`;
+  host.innerHTML = `<div class="section card row"><div style="flex:1;min-width:220px"><strong>Avaliações e relatório de evolução</strong><div class="small muted">Reavaliações, comparativo e o PDF para renovar o plano ficam na aba ${p.mode === 'aero' ? '1. Avaliação física' : '1. Avaliação'}.</div></div>
+    <button class="btn" data-action="tab" data-tab="aval">Abrir avaliações →</button></div><div id="acomp-box"></div>`;
   const box = $('#acomp-box');
   if (!CLOUD.user) {
     box.innerHTML = `<div class="section empty"><h2>Treinos do aluno</h2><p>Entre na sua conta e libere o acesso do aluno para ver aqui os treinos feitos e as cargas registradas.</p><button class="btn primary" data-action="login">Entrar ou criar conta</button></div>`;
@@ -3898,7 +3901,7 @@ function tabAeroAerob(p) {
   <div class="section row"><button class="btn" data-action="aero-reset-plan">Restaurar periodização padrão</button><span class="spacer"></span><button class="btn primary" data-action="student-access" data-id="${esc(p.id)}">Liberar acesso ao aluno</button></div>`;
 }
 function aeroBody(p) {
-  if (E.tab === 'aval') return tabAeroAval(p);
+  if (E.tab === 'aval') return tabAeroAval(p) + `<div id="evo-box">${evoSectionHTML(p)}</div>`;
   if (E.tab === 'hemo') return tabAeroHemo(p);
   if (E.tab === 'exames') return tabAeroExames(p);
   if (E.tab === 'exerc') return tabAeroExerc(p);
@@ -3909,6 +3912,7 @@ function aeroBody(p) {
 function aeroRefresh() {
   const p = E.p;
   if (!p || p.mode !== 'aero') return;
+  if (E.tab === 'aval' && $('#evo-box')) clearTimeout(aeroRefresh.t), (aeroRefresh.t = setTimeout(evoRefresh, 400));
   const c = aeroCalc(p, aeroStudent(p));
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   set('o-imc', aeroFmt(c.imc)); set('o-mcm', aeroFmt(c.mcmPct)); set('o-mg', aeroFmt(c.mg)); set('o-mm', aeroFmt(c.mm));
@@ -4272,7 +4276,7 @@ function evoSectionHTML(p) {
   const st = byId(S.students, p.studentId);
   if (!st) {
     return `<div class="section card"><h2 style="margin-top:0">Avaliações e evolução</h2>
-      <p class="muted" style="margin:0">Escolha o aluno deste programa (aba de dados${p.mode === 'aero' ? ' ou Avaliação física' : ''}) para registrar reavaliações e gerar o relatório de evolução.</p></div>`;
+      <p class="muted" style="margin:0">Escolha o aluno deste programa${p.mode === 'aero' ? ' no topo da aba Avaliação física' : ' acima'} para registrar avaliações e gerar o relatório de evolução.</p></div>`;
   }
   const list = evoList(st, p);
   const calc = list.map((ev) => evoCalc(ev, st));
@@ -4304,6 +4308,21 @@ function evoSectionHTML(p) {
         ${ev.virtual ? '<span class="small muted">edite na aba Avaliação física</span>' : `<span class="row" style="gap:6px"><button class="btn sm" data-action="evo-edit" data-id="${esc(ev.id)}">Editar</button><button class="btn sm danger" data-action="evo-del" data-id="${esc(ev.id)}">✕</button></span>`}</div>`).join('')}</div>`
     : '<div class="empty" style="margin:0">Nenhuma avaliação ainda. Registre a avaliação inicial agora e a reavaliação no fim do ciclo.</div>'}
   </div>`;
+}
+/** Aba "1. Avaliação" dos programas de musculação (opcional). */
+function tabAvaliacao(p) {
+  const st = byId(S.students, p.studentId);
+  return `<div class="section card stack">
+      <div class="small muted">Opcional: registre a avaliação inicial do aluno e as reavaliações ao longo do programa. Com duas ou mais avaliações você gera o relatório de evolução para renovar o plano.</div>
+      <div class="photo-pick">${avatarHTML(st && st.photo, st ? st.name : '?', 'lg')}
+        <div class="stack" style="flex:1;gap:8px">
+          <select id="sel-student">${optList(S.students, p.studentId, 'Selecione o aluno…')}</select>
+          <div class="row"><button class="btn sm" data-action="new-person" data-kind="students" data-assign="1">+ Novo aluno</button></div>
+        </div>
+      </div>
+    </div>
+    <div id="evo-box">${evoSectionHTML(p)}</div>
+    <div class="section row"><span class="spacer"></span><button class="btn primary" data-action="tab" data-tab="dados">Próximo: dados e capa →</button></div>`;
 }
 function evoRefresh() {
   const box = $('#evo-box');
