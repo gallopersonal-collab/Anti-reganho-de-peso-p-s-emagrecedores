@@ -5254,9 +5254,10 @@ actions['cl-publish'] = async () => {
  * Evolução do aluno: reavaliações, comparativo e relatório de renovação
  * ======================================================= */
 const EVO_FIELDS = [
-  ['peso', 'Peso', 'kg'], ['altura', 'Altura', 'cm'], ['gordura', '% de gordura', '%'],
-  ['cintura', 'Cintura', 'cm'], ['abdome', 'Abdome (umbigo)', 'cm'], ['quadril', 'Quadril', 'cm'],
-  ['braco', 'Braço', 'cm'], ['coxa', 'Coxa', 'cm'],
+  ['peso', 'Peso', 'kg'], ['altura', 'Altura', 'cm'],
+  ['cintura', 'Cintura', 'cm'], ['abd1', 'Abdome 1 · ponto médio xifoide–umbigo', 'cm'], ['abdome', 'Abdome 2 · cicatriz umbilical', 'cm'],
+  ['quadril', 'Quadril', 'cm'], ['crista', 'Crista ilíaca', 'cm'], ['braco', 'Braço', 'cm'], ['coxa', 'Coxa', 'cm'],
+  ['gordura', '% de gordura', '%'],
   ['fcrep', 'FC de repouso', 'bpm'], ['pas', 'PA sistólica', 'mmHg'], ['pad', 'PA diastólica', 'mmHg'],
 ];
 /* Métricas mostradas no comparativo. dir: -1 = menor é melhor, 1 = maior é melhor, 0 = neutro */
@@ -5280,7 +5281,7 @@ function evoISO(d) {
 function evoCalc(ev, st) {
   const n = (k) => aeroNum(ev[k]);
   const peso = n('peso'), alt = n('altura'), g = n('gordura');
-  const sex = (st && st.sex) || '';
+  const sex = (st && st.sex) || ev.sexo || '';
   const altM = alt ? (alt > 3 ? alt / 100 : alt) : null;
   const r = {};
   EVO_FIELDS.forEach(([k]) => { r[k] = n(k); });
@@ -5526,95 +5527,100 @@ function evoForm(st, p, ev) {
   if (!st) return;
   const prev = evoList(st, p).filter((x) => !ev || x.id !== ev.id).pop() || {};
   const x = ev || { id: uid(), date: evoToday(), protocolo: prev.protocolo || 'perim' };
-  const per = x.perim || {};
-  const pper = prev.perim || {};
+  if (x.perim) { x.abd1 = x.abd1 ?? x.perim.abd1; x.crista = x.crista ?? x.perim.crista; }
   const dob = x.dobras || {};
   const pdob = prev.dobras || {};
-  const ph = (k, v) => (v != null && v !== '' ? 'antes: ' + esc(v) : '');
-  const fields = EVO_FIELDS.filter(([k]) => k !== 'gordura');
+  const ph = (v) => (v != null && v !== '' ? 'antes: ' + esc(v) : '');
+  const inp = ([k, l, u]) => `<label class="field"><span>${l} <em class="unit">(${u})</em></span><input type="text" inputmode="decimal" data-ev="${k}" value="${esc(x[k] ?? '')}" placeholder="${ph(prev[k])}"></label>`;
+  const F = (keys) => EVO_FIELDS.filter(([k]) => keys.includes(k)).map(inp).join('');
   const body = openModal(ev ? 'Editar avaliação' : 'Nova avaliação', `
     <p class="small muted" style="margin-top:0">${esc(st.name)}. Preencha o que você mediu; os campos vazios ficam de fora do relatório.${prev.date ? ` Última avaliação: ${evoDate(prev.date)}.` : ''}</p>
     <div class="grid three">
       <label class="field"><span>Data</span><input type="date" id="ev-date" value="${esc(x.date || evoToday())}"></label>
       <label class="field"><span>Idade <em class="unit">(anos)</em></span><input type="text" inputmode="numeric" id="ev-idade" value="${esc(x.idade ?? st.age ?? '')}"></label>
-      <label class="field"><span>Sexo</span><select id="ev-sex"><option value="">—</option><option value="F" ${st.sex === 'F' ? 'selected' : ''}>Feminino</option><option value="M" ${st.sex === 'M' ? 'selected' : ''}>Masculino</option></select></label>
+      <label class="field"><span>Sexo</span><select id="ev-sex"><option value="">—</option><option value="F" ${(st.sex || x.sexo) === 'F' ? 'selected' : ''}>Feminino</option><option value="M" ${(st.sex || x.sexo) === 'M' ? 'selected' : ''}>Masculino</option></select></label>
     </div>
-    <h3 style="margin:14px 0 6px">Composição corporal</h3>
-    <label class="field"><span>Como obter o % de gordura</span><select id="ev-proto">${Object.entries(EVO_PROTOCOLOS).map(([k, v]) => `<option value="${k}" ${(x.protocolo || 'manual') === k ? 'selected' : ''}>${v.label}</option>`).join('')}</select></label>
-    <div id="ev-perim" class="grid three"></div>
+    <h3 style="margin:14px 0 6px">1. Peso, altura e circunferências</h3>
+    <div class="grid three">${F(['peso', 'altura', 'cintura', 'abd1', 'abdome', 'quadril', 'crista', 'braco', 'coxa'])}</div>
+    <h3 style="margin:14px 0 6px">2. % de gordura</h3>
+    <label class="field"><span>Método</span><select id="ev-proto">${Object.entries(EVO_PROTOCOLOS).map(([k, v]) => `<option value="${k}" ${(x.protocolo || 'manual') === k ? 'selected' : ''}>${v.label}</option>`).join('')}</select></label>
     <div id="ev-dobras" class="grid three"></div>
     <div class="grid three" style="margin-top:6px">
-      <label class="field"><span>% de gordura <em class="unit">(%)</em></span><input type="text" inputmode="decimal" data-ev="gordura" id="ev-g" value="${esc(x.gordura ?? '')}" placeholder="${ph('gordura', prev.gordura)}"></label>
-      <div class="field"><span>Resultado do protocolo</span><div id="ev-res" class="small muted" style="padding-top:8px">—</div></div>
+      <label class="field"><span>% de gordura <em class="unit">(%)</em></span><input type="text" inputmode="decimal" data-ev="gordura" id="ev-g" value="${esc(x.gordura ?? '')}" placeholder="${ph(prev.gordura)}"></label>
+      <div class="field" style="grid-column:span 2"><span>Como foi calculado</span><div id="ev-res" class="small muted" style="padding-top:8px">—</div></div>
     </div>
-    <h3 style="margin:14px 0 6px">Medidas</h3>
-    <div class="grid three">
-      ${fields.map(([k, l, u]) => `<label class="field"><span>${l} <em class="unit">(${u})</em></span><input type="text" inputmode="decimal" data-ev="${k}" value="${esc(x[k] ?? '')}" placeholder="${ph(k, prev[k])}"></label>`).join('')}
-    </div>
+    <h3 style="margin:14px 0 6px">3. Resultados <span class="muted small" style="font-weight:400">(calculados)</span></h3>
+    <div class="aero-outs" id="ev-out"></div>
+    <h3 style="margin:14px 0 6px">Outras medidas <span class="muted small" style="font-weight:400">(opcional)</span></h3>
+    <div class="grid three">${F(['fcrep', 'pas', 'pad'])}</div>
     <label class="field"><span>Observações</span><input type="text" id="ev-obs" value="${esc(x.obs || '')}" placeholder="Ex.: reavaliação do fim do ciclo 1"></label>
     <div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="ev-save">Salvar avaliação</button></div>`);
   const proto = () => $('#ev-proto', body).value;
   const sex = () => $('#ev-sex', body).value;
+  const val = (k) => { const i = $(`[data-ev="${k}"]`, body); return i ? i.value.trim().replace(',', '.') : ''; };
   const readDobras = () => Object.fromEntries($$('[data-dob]', body).map((i) => [i.dataset.dob, i.value.trim().replace(',', '.')]).filter(([, v]) => v));
   let cur = { ...dob };
+  const results = () => {
+    const ev2 = Object.fromEntries(EVO_FIELDS.map(([k]) => [k, val(k)]));
+    const c = evoCalc(ev2, { sex: sex() });
+    const out = [['IMC', c.imc, 1, 'kg/m²'], ['% de gordura', c.gordura, 1, '%'], ['Massa gorda', c.mg, 1, 'kg'], ['Massa magra', c.mm, 1, 'kg'],
+      ['Gordura excedente', c.excedente, 1, 'kg'], ['Carência muscular', c.carencia, 1, 'kg'], ['Relação cintura/quadril', c.rcq, 2, '']];
+    const miss = !c.peso ? 'Preencha o peso.' : !sex() ? 'Informe o sexo (no topo) para calcular % de gordura, gordura excedente e carência muscular.' : c.gordura == null ? 'Falta o % de gordura (item 2).' : '';
+    $('#ev-out', body).innerHTML = out.map(([l, v, d, u]) => `<div class="aero-out"><span>${l}</span><b>${aeroFmt(v, d)}</b>${u ? `<em>${u}</em>` : ''}</div>`).join('')
+      + (miss ? `<div class="small" style="color:var(--gold-2);grid-column:1/-1">${miss}</div>` : '');
+  };
   const calc = () => {
     const P = EVO_PROTOCOLOS[proto()];
     const g = $('#ev-g', body), res = $('#ev-res', body);
-    if (proto() === 'manual') { g.readOnly = false; res.textContent = 'Digite o valor medido.'; return; }
+    if (proto() === 'manual') { g.readOnly = false; res.textContent = 'Digite o valor medido (bioimpedância ou outro método).'; results(); return; }
     g.readOnly = true;
     if (proto() === 'perim') {
-      const m = { idade: $('#ev-idade', body).value, abd1: ($('#ev-abd1', body) || {}).value, crista: ($('#ev-crista', body) || {}).value };
-      ['peso', 'altura', 'abdome', 'quadril'].forEach((k) => { m[k] = $(`[data-ev="${k}"]`, body).value; });
+      const m = { idade: $('#ev-idade', body).value };
+      ['peso', 'altura', 'abd1', 'abdome', 'quadril', 'crista'].forEach((k) => { m[k] = val(k); });
       const r = evoBodyFatPerim(sex(), m);
-      if (r.err) { res.textContent = (r.imc ? `IMC ${aeroFmt(r.imc, 1)}. ` : '') + r.err; g.value = ''; return; }
-      g.value = String(r.g).replace('.', ',');
-      res.innerHTML = `IMC <b>${aeroFmt(r.imc, 1)}</b> · <b>${esc(r.eq)}</b> · abdome médio ${aeroFmt(r.abd, 1)} cm${r.dc ? ` · densidade ${r.dc.toFixed(4).replace('.', ',')} g/ml (Siri)` : ''}`;
-      return;
+      if (r.err) { res.textContent = (r.imc ? `IMC ${aeroFmt(r.imc, 1)}. ` : '') + r.err; g.value = ''; }
+      else {
+        g.value = String(r.g).replace('.', ',');
+        res.innerHTML = `IMC <b>${aeroFmt(r.imc, 1)}</b> · <b>${esc(r.eq)}</b> · abdome médio ${aeroFmt(r.abd, 1)} cm${r.dc ? ` · densidade ${r.dc.toFixed(4).replace('.', ',')} g/ml (Siri)` : ''}`;
+      }
+      results(); return;
     }
-    if (!sex()) { res.textContent = 'Informe o sexo para calcular.'; g.value = ''; return; }
+    if (!sex()) { res.textContent = 'Informe o sexo para calcular.'; g.value = ''; results(); return; }
     const r = evoBodyFat(proto(), sex(), aeroNum($('#ev-idade', body).value), readDobras());
-    if (!r) { res.textContent = `Preencha ${P[sex()].length} dobras e a idade.`; g.value = ''; return; }
-    g.value = String(r.g).replace('.', ',');
-    res.innerHTML = `Soma das dobras: <b>${aeroFmt(r.soma, 1)} mm</b> · Densidade: <b>${r.dc.toFixed(4).replace('.', ',')} g/ml</b> · Siri`;
-  };
-  const drawDobras = () => {
-    cur = { ...cur, ...readDobras() };
-    const P = EVO_PROTOCOLOS[proto()];
-    const box = $('#ev-dobras', body);
-    const pbox = $('#ev-perim', body);
-    if (proto() === 'perim') {
-      box.innerHTML = '';
-      const a1 = ($('#ev-abd1', body) || {}).value ?? per.abd1 ?? '', cr = ($('#ev-crista', body) || {}).value ?? per.crista ?? '';
-      pbox.innerHTML = `<label class="field"><span>Abdome 1 <em class="unit">(cm · ponto médio xifoide–umbigo)</em></span><input type="text" inputmode="decimal" id="ev-abd1" value="${esc(a1)}" placeholder="${ph('abd1', pper.abd1)}"></label>
-        ${sex() === 'M' ? `<label class="field"><span>Crista ilíaca <em class="unit">(cm)</em></span><input type="text" inputmode="decimal" id="ev-crista" value="${esc(cr)}" placeholder="${ph('crista', pper.crista)}"></label>` : ''}
-        <div class="small muted" style="align-self:end;padding-bottom:10px">Usa também peso, altura, abdome 2 (campo Abdome, na cicatriz umbilical)${sex() === 'F' ? ', quadril e idade' : ' e quadril'}, preenchidos em Medidas.</div>`;
-      $$('input', pbox).forEach((i) => i.addEventListener('input', calc));
-      calc();
-      return;
+    if (!r) { res.textContent = `Preencha as ${P[sex()].length} dobras e a idade.`; g.value = ''; }
+    else {
+      g.value = String(r.g).replace('.', ',');
+      res.innerHTML = `Soma das dobras: <b>${aeroFmt(r.soma, 1)} mm</b> · Densidade: <b>${r.dc.toFixed(4).replace('.', ',')} g/ml</b> · Siri`;
     }
-    pbox.innerHTML = '';
-    if (proto() === 'manual') { box.innerHTML = ''; calc(); return; }
-    const keys = P[sex() || 'F'];
-    box.innerHTML = keys.map((k) => `<label class="field"><span>${EVO_DOBRAS.find((d) => d[0] === k)[1]} <em class="unit">(mm)</em></span><input type="text" inputmode="decimal" data-dob="${k}" value="${esc(cur[k] ?? '')}" placeholder="${ph(k, pdob[k])}"></label>`).join('');
-    $$('[data-dob]', box).forEach((i) => i.addEventListener('input', calc));
+    results();
+  };
+  const drawMethod = () => {
+    cur = { ...cur, ...readDobras() };
+    const box = $('#ev-dobras', body);
+    const P = EVO_PROTOCOLOS[proto()];
+    if (proto() === 'perim') {
+      box.innerHTML = `<div class="small muted" style="grid-column:1/-1">Usa peso, altura, abdome 1 e abdome 2${sex() === 'M' ? ', quadril e crista ilíaca' : sex() === 'F' ? ', quadril e idade' : ', quadril e (homens) crista ilíaca'} do item 1. IMC acima de 29,9 → Weltman; até 29,9 → Tran & Weltman.</div>`;
+    } else if (proto() === 'manual') {
+      box.innerHTML = '';
+    } else {
+      box.innerHTML = P[sex() || 'F'].map((k) => `<label class="field"><span>Dobra ${EVO_DOBRAS.find((d) => d[0] === k)[1].toLowerCase()} <em class="unit">(mm)</em></span><input type="text" inputmode="decimal" data-dob="${k}" value="${esc(cur[k] ?? '')}" placeholder="${ph(pdob[k])}"></label>`).join('');
+      $$('[data-dob]', box).forEach((i) => i.addEventListener('input', calc));
+    }
     calc();
   };
-  $('#ev-proto', body).addEventListener('change', drawDobras);
-  $('#ev-sex', body).addEventListener('change', drawDobras);
+  $('#ev-proto', body).addEventListener('change', drawMethod);
+  $('#ev-sex', body).addEventListener('change', drawMethod);
   $('#ev-idade', body).addEventListener('input', calc);
-  ['peso', 'altura', 'abdome', 'quadril'].forEach((k) => $(`[data-ev="${k}"]`, body).addEventListener('input', calc));
-  drawDobras();
+  $$('[data-ev]', body).forEach((i) => { if (i.id !== 'ev-g') i.addEventListener('input', calc); });
+  $('#ev-g', body).addEventListener('input', results);
+  drawMethod();
   $('#ev-save', body).onclick = async () => {
     const rec = { id: x.id, date: $('#ev-date', body).value || evoToday(), obs: $('#ev-obs', body).value.trim(), protocolo: proto() };
     const idade = $('#ev-idade', body).value.trim();
     if (idade) rec.idade = idade;
+    if (sex()) rec.sexo = sex();
     $$('[data-ev]', body).forEach((i) => { const v = i.value.trim().replace(',', '.'); if (v) rec[i.dataset.ev] = v; });
     if (proto() === 'jp3' || proto() === 'jp7') { const d = readDobras(); if (Object.keys(d).length) rec.dobras = d; }
-    if (proto() === 'perim') {
-      const pm = {};
-      [['abd1', '#ev-abd1'], ['crista', '#ev-crista']].forEach(([k, sel]) => { const i = $(sel, body); const v = i && i.value.trim().replace(',', '.'); if (v) pm[k] = v; });
-      if (Object.keys(pm).length) rec.perim = pm;
-    }
     if (!EVO_FIELDS.some(([k]) => rec[k])) { toast('Preencha ao menos uma medida'); return; }
     if (sex() && sex() !== st.sex) st.sex = sex();
     st.evals = (st.evals || []).filter((e) => e.id !== rec.id).concat(rec);
