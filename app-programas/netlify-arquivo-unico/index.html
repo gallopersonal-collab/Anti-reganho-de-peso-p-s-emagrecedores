@@ -2244,7 +2244,7 @@ function bindInputs(root) {
   $$('[data-bind]', root).forEach((inp) => {
     const path = inp.dataset.bind;
     const v = getPath(E.p, path);
-    if (inp.type === 'checkbox') inp.checked = !!v; else inp.value = v ?? '';
+    if (inp.type === 'checkbox') inp.checked = !!v; else inp.value = inp.dataset.mask === 'date' ? maskDate(v ?? '') : v ?? '';
     const evName = inp.tagName === 'SELECT' || inp.type === 'checkbox' ? 'change' : 'input';
     inp.addEventListener(evName, () => {
       setPath(E.p, path, inp.type === 'checkbox' ? inp.checked : inp.value);
@@ -5031,7 +5031,16 @@ function aeroTotals(p, c) {
 
 /* ---- Editor (personal) ---- */
 const AERO_TABS = [['aval', '1. Avaliação física'], ['hemo', '2. Hemodinâmica'], ['exames', '3. Exames'], ['exerc', '4. Exercício físico'], ['treinos', '5. Treino de força'], ['aerob', '6. Treinos aeróbicos']];
-const aeroField = (path, label, unit = '', ph = '') => `<label class="field"><span>${label}${unit ? ` <em class="unit">(${unit})</em>` : ''}</span><input type="text" inputmode="decimal" data-bind="${path}" placeholder="${esc(ph)}"></label>`;
+const aeroField = (path, label, unit = '', ph = '') => `<label class="field"><span>${label}${unit ? ` <em class="unit">(${unit})</em>` : ''}</span><input type="text" ${ph === 'dd/mm/aaaa' ? 'inputmode="numeric" maxlength="10" data-mask="date"' : 'inputmode="decimal"'} data-bind="${path}" placeholder="${esc(ph)}"></label>`;
+/** Máscara de data dd/mm/aaaa: roda antes do salvamento (fase de captura), então o valor já é gravado com barras. */
+const maskDate = (v) => { const d = String(v || '').replace(/\D/g, '').slice(0, 8); return d.length > 4 ? `${d.slice(0, 2)}/${d.slice(2, 4)}/${d.slice(4)}` : d.length > 2 ? `${d.slice(0, 2)}/${d.slice(2)}` : d; };
+document.addEventListener('input', (e) => {
+  const i = e.target;
+  if (!i || !i.matches || !i.matches('[data-mask="date"]')) return;
+  if (e.inputType && e.inputType.startsWith('delete')) return;
+  const m = maskDate(i.value);
+  if (m !== i.value) i.value = m;
+}, true);
 const aeroOut = (id, label, unit = '') => `<div class="aero-out"><span>${label}</span><b id="${id}">—</b>${unit ? `<em>${unit}</em>` : ''}</div>`;
 function aeroStudent(p) { return byId(S.students, p.studentId); }
 function aeroHead(p) {
@@ -5426,7 +5435,7 @@ const evoDate = (d) => (d ? new Date(d + 'T12:00:00').toLocaleDateString('pt-BR'
 /** Converte dd/mm/aaaa ou aaaa-mm-dd em aaaa-mm-dd */
 function evoISO(d) {
   const s = String(d || '').trim();
-  const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/) || s.match(/^(\d{2})(\d{2})(\d{4})$/);
   if (m) return `${m[3]}-${pad2(m[2])}-${pad2(m[1])}`;
   return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : '';
 }
