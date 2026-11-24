@@ -4890,7 +4890,10 @@ function aeroCalc(p, st) {
   r.mcmRef = sex === 'M' ? 81 : sex === 'F' ? 77 : null;
   r.carencia = r.mm != null && r.mcmRef != null ? Math.max(0, (r.mcmRef - r.mcmPct) / 100 * r.mm) : null;
   r.rcq = aeroNum(av.cintura) && aeroNum(av.quadril) ? aeroNum(av.cintura) / aeroNum(av.quadril) : null;
-  r.fcmaxCalc = idade != null ? 220 - idade : null;
+  // FC máxima estimada: homens 220 − idade; mulheres 226 − idade (desvio padrão ± 6 bpm)
+  r.fcmaxBase = sex === 'F' ? 226 : 220;
+  r.fcmaxCalc = idade != null ? r.fcmaxBase - idade : null;
+  r.fcmaxMedida = aeroNum(he.fcmax) != null;
   r.fcmax = aeroNum(he.fcmax) ?? r.fcmaxCalc;
   r.fcrep = aeroNum(he.fcrep);
   r.fcr = r.fcmax != null && r.fcrep != null ? r.fcmax - r.fcrep : null;
@@ -4959,7 +4962,7 @@ function tabAeroHemo(p) {
   return `<div class="section card"><h3>Medidas hemodinâmicas</h3>
     <div class="grid three">
       ${aeroField('aero.hemo.pas', 'Pressão arterial sistólica', 'mmHg')}${aeroField('aero.hemo.pad', 'Pressão arterial diastólica', 'mmHg')}${aeroField('aero.hemo.fcrep', 'FC de repouso', 'bpm')}
-      ${aeroField('aero.hemo.fcmax', 'FC máxima', 'bpm', 'automático: 220 − idade')}${aeroField('aero.hemo.vo2max', 'VO2 máximo', 'ml/kg/min')}
+      ${aeroField('aero.hemo.fcmax', 'FC máxima medida (opcional)', 'bpm', 'vazio = estimada pela idade')}${aeroField('aero.hemo.vo2max', 'VO2 máximo', 'ml/kg/min')}
       ${sel('aero.hemo.sono', 'Qualidade do sono', ['Boa', 'Regular', 'Ruim'])}
       ${sel('aero.hemo.intestino', 'Funcionamento do intestino', ['Regular', 'Preso', 'Solto', 'Irregular'])}
       ${sel('aero.hemo.estresse', 'Nível de estresse', ['Baixo', 'Moderado', 'Alto', 'Muito alto'])}
@@ -5040,7 +5043,8 @@ function aeroRefresh() {
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   set('o-imc', aeroFmt(c.imc)); set('o-mcm', aeroFmt(c.mcmPct)); set('o-mg', aeroFmt(c.mg)); set('o-mm', aeroFmt(c.mm));
   set('o-exc', aeroFmt(c.excedente)); set('o-car', aeroFmt(c.carencia)); set('o-rcq', aeroFmt(c.rcq, 2));
-  set('o-fcmax', c.fcmax != null ? String(Math.round(c.fcmax)) : '—'); set('o-fcr', c.fcr != null ? String(Math.round(c.fcr)) : '—'); set('o-vo2r', aeroFmt(c.vo2r));
+  set('o-fcmax', c.fcmax != null ? (c.fcmaxMedida ? String(Math.round(c.fcmax)) : `${Math.round(c.fcmax)} ± 6`) : '—');
+  { const em = $('#o-fcmax') && $('#o-fcmax').parentElement.querySelector('em'); if (em) em.textContent = c.fcmaxMedida ? 'bpm · medida em teste' : `bpm · estimada: ${c.fcmaxBase} − idade (${c.sex === 'F' ? 'mulheres' : c.sex === 'M' ? 'homens' : 'informe o sexo do aluno'}), desvio padrão ± 6`; } set('o-fcr', c.fcr != null ? String(Math.round(c.fcr)) : '—'); set('o-vo2r', aeroFmt(c.vo2r));
   const t = aeroTotals(p, c);
   const zc = {};
   p.aero.plano.flatMap((w) => w.dias).filter((d) => d.t === 'aero').forEach((d) => { zc[d.zona] = (zc[d.zona] || 0) + 1; });
