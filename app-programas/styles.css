@@ -67,7 +67,7 @@ h3 { font-size: 16px; }
   .topbar { padding: 10px 16px; }
   .main { padding: 16px 16px 110px; }
   .tabbar {
-    display: grid; grid-template-columns: repeat(5, 1fr);
+    display: grid; grid-template-columns: repeat(6, 1fr);
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
     background: rgba(11, 18, 32, .97); border-top: 1px solid var(--line);
     padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
@@ -603,3 +603,39 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .vo2-item em { font-style: normal; font-size: 12px; color: var(--muted); }
 .vo2-item:has(input:checked) { border-color: var(--gold); background: rgba(210,169,97,.08); }
 @media (max-width: 640px) { .vo2-how { grid-template-columns: 1fr; } }
+
+/* ============ Gestão: financeiro e alunos sumindo ============ */
+.grid.four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 900px) { .grid.four { grid-template-columns: repeat(2, 1fr); } }
+.fin-kpis .kpi { font-size: 26px; }
+.fin-month { align-items: center; gap: 10px; }
+.fin-month-label { font: 600 20px/1 Oswald, sans-serif; min-width: 170px; text-align: center; }
+.fin-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.fin-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 12px; background: var(--card-2); flex-wrap: wrap; }
+.fin-row.ok { border-left-color: var(--ok); }
+.fin-row.warn { border-left-color: #e0b04a; }
+.fin-row.bad { border-left-color: var(--danger); }
+.fin-who { flex: 1; min-width: 160px; }
+.fin-acts { gap: 6px; margin-left: auto; }
+.fin-bars { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; align-items: end; }
+.fin-bar { min-width: 0; }
+.fin-bar { text-align: center; }
+.fin-bar-val { font-size: 12px; color: var(--muted); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fin-bar-track { position: relative; height: 140px; border-radius: 8px; background: rgba(255,255,255,.03); margin-bottom: 6px; }
+.fin-bar-track i { position: absolute; left: 22%; right: 22%; bottom: 0; border-radius: 6px 6px 0 0; }
+.fin-bar-track i.exp { background: rgba(210,169,97,.22); left: 14%; right: 14%; }
+.fin-bar-track i.rec { background: var(--ok); }
+.fin-dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; vertical-align: middle; }
+.fin-dot.rec { background: var(--ok); }
+.fin-dot.exp { background: rgba(210,169,97,.4); }
+@media (max-width: 760px) {
+  .fin-acts { width: 100%; margin-left: 0; }
+  .fin-acts .btn { flex: 1; }
+  .fin-month-label { min-width: 0; font-size: 17px; }
+  .fin-bars { gap: 4px; }
+  .fin-bar-val, .fin-bar .small { font-size: 10px; }
+}
+.fin-tag { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.fin-tag.ok { color: var(--ok); border-color: rgba(79,191,138,.4); }
+.fin-tag.warn { color: #e0b04a; border-color: rgba(224,176,74,.45); }
+.fin-tag.bad { color: var(--danger); border-color: rgba(229,96,79,.5); }
