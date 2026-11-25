@@ -19,7 +19,7 @@ A primeira aba é a avaliação física. Digite peso, altura e circunferências.
 [TELA] Aba "1. Avaliação física" com resultados e o guia de medidas aberto.
 
 ## Bloco 4 — Hemodinâmica (1:05–1:50)
-Na aba hemodinâmica, informe a pressão arterial e a frequência cardíaca de repouso. O app já classifica cada valor: pressão normal, elevada ou hipertensão, e a FC de repouso de acordo com a idade.
+Na aba hemodinâmica, informe a pressão arterial e a frequência cardíaca de repouso. O app já classifica cada valor: pressão ótima, normal, pré-hipertensão ou hipertensão, e a FC de repouso de acordo com a idade.
 A frequência cardíaca máxima já vem calculada pelo sexo: duzentos e vinte menos a idade para homens e duzentos e vinte e seis menos a idade para mulheres, com variação de mais ou menos seis batimentos. Se você tiver a FC máxima medida em teste, digite no campo e o app passa a usar a sua.
 Para o VO2 máximo, clique em "calcular VO2 máximo". São cinco opções, do questionário sem esforço até o teste de Cooper. Eu explico cada uma na próxima aula.
 [TELA] Aba "2. Hemodinâmica": classificações coloridas, placeholder da FC máx, botão do VO2.
@@ -52,7 +52,7 @@ Na tela inicial, clique em programa aeróbico. Escolha o aluno e o objetivo: ema
 
 A primeira aba é a avaliação física. Digite peso, altura e circunferências. O app calcula na hora o IMC, o percentual de gordura, a massa magra, a gordura excedente e a carência muscular. Em cada medida tem o botão "como medir", com foto e passo a passo. E tudo o que você registrar aqui aparece também na avaliação do programa de musculação do mesmo aluno.
 
-Na aba hemodinâmica, informe a pressão arterial e a frequência cardíaca de repouso. O app já classifica cada valor: pressão normal, elevada ou hipertensão, e a FC de repouso de acordo com a idade. A frequência cardíaca máxima já vem calculada pelo sexo: duzentos e vinte menos a idade para homens e duzentos e vinte e seis menos a idade para mulheres, com variação de mais ou menos seis batimentos. Se você tiver a FC máxima medida em teste, digite no campo e o app passa a usar a sua. Para o VO2 máximo, clique em "calcular VO2 máximo". São cinco opções, do questionário sem esforço até o teste de Cooper. Eu explico cada uma na próxima aula.
+Na aba hemodinâmica, informe a pressão arterial e a frequência cardíaca de repouso. O app já classifica cada valor: pressão ótima, normal, pré-hipertensão ou hipertensão, e a FC de repouso de acordo com a idade. A frequência cardíaca máxima já vem calculada pelo sexo: duzentos e vinte menos a idade para homens e duzentos e vinte e seis menos a idade para mulheres, com variação de mais ou menos seis batimentos. Se você tiver a FC máxima medida em teste, digite no campo e o app passa a usar a sua. Para o VO2 máximo, clique em "calcular VO2 máximo". São cinco opções, do questionário sem esforço até o teste de Cooper. Eu explico cada uma na próxima aula.
 
 Na aba exames, registre colesterol, triglicerídeos, glicemia, hemoglobina glicada e outros. Cada valor recebe a classificação: desejável, limítrofe ou alto. Na aba exercício físico, escolha a modalidade, como caminhada, corrida, bike ou natação. Aparece a foto da modalidade, com mulher ou homem conforme o sexo do aluno, e o resumo do programa.
 

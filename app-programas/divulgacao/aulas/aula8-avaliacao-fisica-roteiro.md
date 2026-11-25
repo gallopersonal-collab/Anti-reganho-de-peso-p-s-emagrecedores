@@ -24,7 +24,7 @@ Se você mede dobras cutâneas, escolha Pollock três dobras ou Pollock sete dob
 
 ## Bloco 5 — Resultados na hora (2:25–3:15)
 Enquanto você digita, os resultados aparecem: IMC, percentual de gordura, massa gorda, massa magra, relação cintura-quadril, gordura excedente e carência muscular.
-Exemplo: aluno de quarenta anos, oitenta quilos, trinta e cinco por cento de gordura. Ele tem nove vírgula seis quilos de gordura excedente e seis vírgula dois quilos de carência muscular. Esse é o número que você mostra ao aluno. Ele entende onde está e onde precisa chegar.
+Exemplo: aluno de quarenta anos, oitenta quilos e um metro e setenta e cinco. Pela perimetria, ele tem trinta e quatro vírgula cinco por cento de gordura, quinze vírgula seis quilos de gordura excedente e oito vírgula um quilos de carência muscular. Esse é o número que você mostra ao aluno. Ele entende onde está e onde precisa chegar.
 Se esse aluno também tem programa aeróbico, as avaliações de lá já aparecem aqui. Você não digita nada duas vezes.
 [TELA] Painel "3. Resultados" com os números preenchidos.
 
@@ -44,6 +44,6 @@ Clique em "avaliação inicial". Primeiro vêm o peso, a altura e as circunferê
 
 Logo abaixo você escolhe o método do percentual de gordura. O padrão é a perimetria automática pelo IMC: acima de vinte e nove vírgula nove, o app usa a equação de Weltman; até vinte e nove vírgula nove, usa Tran e Weltman. Se preferir, fixe uma das duas para qualquer IMC. Se você mede dobras cutâneas, escolha Pollock três dobras ou Pollock sete dobras e digite as dobras. E se o aluno fez bioimpedância, escolha "informar o percentual" e digite o valor.
 
-Enquanto você digita, os resultados aparecem: IMC, percentual de gordura, massa gorda, massa magra, relação cintura-quadril, gordura excedente e carência muscular. Exemplo: aluno de quarenta anos, oitenta quilos, trinta e cinco por cento de gordura. Ele tem nove vírgula seis quilos de gordura excedente e seis vírgula dois quilos de carência muscular. Esse é o número que você mostra ao aluno. Ele entende onde está e onde precisa chegar. Se esse aluno também tem programa aeróbico, as avaliações de lá já aparecem aqui. Você não digita nada duas vezes.
+Enquanto você digita, os resultados aparecem: IMC, percentual de gordura, massa gorda, massa magra, relação cintura-quadril, gordura excedente e carência muscular. Exemplo: aluno de quarenta anos, oitenta quilos e um metro e setenta e cinco. Pela perimetria, ele tem trinta e quatro vírgula cinco por cento de gordura, quinze vírgula seis quilos de gordura excedente e oito vírgula um quilos de carência muscular. Esse é o número que você mostra ao aluno. Ele entende onde está e onde precisa chegar. Se esse aluno também tem programa aeróbico, as avaliações de lá já aparecem aqui. Você não digita nada duas vezes.
 
 Clique em salvar. A avaliação fica guardada no histórico do aluno, com a data. Na próxima aula eu te mostro a parte que mais ajuda a renovar o plano: a reavaliação, o comparativo e o relatório de evolução em PDF. Faça agora a avaliação do seu próximo aluno. Seu aluno vai sentir a diferença.
