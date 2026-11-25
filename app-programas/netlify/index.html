@@ -82,7 +82,7 @@ h3 { font-size: 16px; }
   .topbar { padding: 10px 16px; }
   .main { padding: 16px 16px 110px; }
   .tabbar {
-    display: grid; grid-template-columns: repeat(5, 1fr);
+    display: grid; grid-template-columns: repeat(6, 1fr);
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
     background: rgba(11, 18, 32, .97); border-top: 1px solid var(--line);
     padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
@@ -619,6 +619,42 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
 .vo2-item:has(input:checked) { border-color: var(--gold); background: rgba(210,169,97,.08); }
 @media (max-width: 640px) { .vo2-how { grid-template-columns: 1fr; } }
 
+/* ============ Gestão: financeiro e alunos sumindo ============ */
+.grid.four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 900px) { .grid.four { grid-template-columns: repeat(2, 1fr); } }
+.fin-kpis .kpi { font-size: 26px; }
+.fin-month { align-items: center; gap: 10px; }
+.fin-month-label { font: 600 20px/1 Oswald, sans-serif; min-width: 170px; text-align: center; }
+.fin-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.fin-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 12px; background: var(--card-2); flex-wrap: wrap; }
+.fin-row.ok { border-left-color: var(--ok); }
+.fin-row.warn { border-left-color: #e0b04a; }
+.fin-row.bad { border-left-color: var(--danger); }
+.fin-who { flex: 1; min-width: 160px; }
+.fin-acts { gap: 6px; margin-left: auto; }
+.fin-bars { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; align-items: end; }
+.fin-bar { min-width: 0; }
+.fin-bar { text-align: center; }
+.fin-bar-val { font-size: 12px; color: var(--muted); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fin-bar-track { position: relative; height: 140px; border-radius: 8px; background: rgba(255,255,255,.03); margin-bottom: 6px; }
+.fin-bar-track i { position: absolute; left: 22%; right: 22%; bottom: 0; border-radius: 6px 6px 0 0; }
+.fin-bar-track i.exp { background: rgba(210,169,97,.22); left: 14%; right: 14%; }
+.fin-bar-track i.rec { background: var(--ok); }
+.fin-dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; vertical-align: middle; }
+.fin-dot.rec { background: var(--ok); }
+.fin-dot.exp { background: rgba(210,169,97,.4); }
+@media (max-width: 760px) {
+  .fin-acts { width: 100%; margin-left: 0; }
+  .fin-acts .btn { flex: 1; }
+  .fin-month-label { min-width: 0; font-size: 17px; }
+  .fin-bars { gap: 4px; }
+  .fin-bar-val, .fin-bar .small { font-size: 10px; }
+}
+.fin-tag { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.fin-tag.ok { color: var(--ok); border-color: rgba(79,191,138,.4); }
+.fin-tag.warn { color: #e0b04a; border-color: rgba(224,176,74,.45); }
+.fin-tag.bad { color: var(--danger); border-color: rgba(229,96,79,.5); }
+
 </style>
 </head>
 <body>
@@ -631,6 +667,7 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
     <a href="#/" data-nav="inicio">Início</a>
     <a href="#/biblioteca" data-nav="biblioteca">Biblioteca</a>
     <a href="#/alunos" data-nav="alunos">Alunos</a>
+    <a href="#/gestao" data-nav="gestao">Gestão</a>
     <a href="#/pdfs" data-nav="pdfs">Meus PDFs</a>
     <a href="#/config" data-nav="config">Ajustes</a>
   </nav>
@@ -643,6 +680,7 @@ select.z-reg, select.z-lip, select.z-gli { font-weight: 700; }
   <a href="#/" data-nav="inicio"><span class="ti">⌂</span>Início</a>
   <a href="#/biblioteca" data-nav="biblioteca"><span class="ti">▤</span>Biblioteca</a>
   <a href="#/alunos" data-nav="alunos"><span class="ti">◉</span>Alunos</a>
+  <a href="#/gestao" data-nav="gestao"><span class="ti">$</span>Gestão</a>
   <a href="#/pdfs" data-nav="pdfs"><span class="ti">⎙</span>PDFs</a>
   <a href="#/config" data-nav="config"><span class="ti">⚙</span>Ajustes</a>
 </nav>
@@ -1620,7 +1658,7 @@ async function route() {
   closeModal();
   const parts = (location.hash.slice(1) || '/').split('/').filter(Boolean);
   const [r, id] = parts;
-  const navKey = { programa: 'inicio', novo: 'inicio', biblioteca: 'biblioteca', alunos: 'alunos', personais: 'config', pdfs: 'pdfs', pdf: 'pdfs', config: 'config' }[r] || 'inicio';
+  const navKey = { programa: 'inicio', novo: 'inicio', biblioteca: 'biblioteca', alunos: 'alunos', gestao: 'gestao', personais: 'config', pdfs: 'pdfs', pdf: 'pdfs', config: 'config' }[r] || 'inicio';
   $$('[data-nav]').forEach((a) => a.classList.toggle('active', a.dataset.nav === navKey));
   window.scrollTo(0, 0);
   if (r !== 'aluno') document.body.classList.remove('student-mode');
@@ -1633,6 +1671,7 @@ async function route() {
   if (r === 'programa' && id && parts[2] === 'slide' && parts[3]) return viewSlideEditor(id, parts[3]);
   if (r === 'programa' && id) return viewEditor(id, parts[2]);
   if (r === 'alunos') return viewPeople('students');
+  if (r === 'gestao') return viewGestao(id);
   if (r === 'personais') return viewPeople('trainers');
   if (r === 'pdfs') return viewPdfs();
   if (r === 'pdf' && id) return viewPdf(id);
@@ -1783,6 +1822,7 @@ function viewHome() {
     ${!S.trainers.length ? `<div class="card onboard row">
       <div style="flex:1;min-width:220px"><strong>Primeiro passo: cadastre seu perfil de personal</strong><div class="small muted">Seu nome, foto e CREF aparecem nos programas que você enviar.</div></div>
       <button class="btn primary" data-action="new-person" data-kind="trainers">Cadastrar meu perfil</button></div>` : ''}
+    ${gestaoHomeAlert()}
     <div class="hero card">
       <div>
         <h1>Programa pronto para o seu aluno em 1 minuto</h1>
@@ -3718,7 +3758,7 @@ async function cloudInit() {
 function softRefresh() {
   if ($('#modal-root').innerHTML || $('.busy')) return;
   const h = location.hash || '#/';
-  if (['#/', '#/biblioteca', '#/alunos', '#/config', '#/novo'].includes(h) || h === '#') route();
+  if (['#/', '#/biblioteca', '#/alunos', '#/config', '#/novo', '#/gestao', '#/gestao/financeiro'].includes(h) || h === '#') route();
 }
 function updateCloudBadge() {
   const b = $('#cloud-badge');
@@ -4507,7 +4547,7 @@ function viewPeople(kind) {
         <div class="info"><h3>${esc(x.name)}</h3><div class="small muted">${kind === 'trainers' && x.cref ? 'CREF ' + esc(x.cref) + ' · ' : ''}${count(x.id)} programa(s)</div>
           <div class="row" style="margin-top:8px">
             <button class="btn sm" data-action="edit-person" data-kind="${kind}" data-id="${esc(x.id)}">Editar</button>
-            ${kind === 'students' ? `<button class="btn sm primary" data-action="student-new-program" data-id="${esc(x.id)}">Novo programa</button>${count(x.id) || (x.evals || []).length ? `<button class="btn sm" data-action="evo-renew" data-sid="${esc(x.id)}">Reavaliar e novo ciclo</button>` : ''}<button class="btn sm" data-action="filter-student" data-id="${esc(x.id)}">Programas</button>` : ''}
+            ${kind === 'students' ? `<button class="btn sm primary" data-action="student-new-program" data-id="${esc(x.id)}">Novo programa</button>${count(x.id) || (x.evals || []).length ? `<button class="btn sm" data-action="evo-renew" data-sid="${esc(x.id)}">Reavaliar e novo ciclo</button>` : ''}<button class="btn sm" data-action="filter-student" data-id="${esc(x.id)}">Programas</button><button class="btn sm" data-action="fin-plan" data-id="${esc(x.id)}">${x.billing && x.billing.active ? 'Mensalidade ' + brl(x.billing.value).replace(',00', '') : '+ Mensalidade'}</button>` : ''}
             <button class="btn sm danger" data-action="del-person" data-kind="${kind}" data-id="${esc(x.id)}">✕</button>
           </div></div></div>`).join('')}</div>`
     : `<div class="empty"><h2>Nenhum ${K.one} cadastrado</h2><p>Cadastre nome e foto para aparecerem na capa do PDF.</p><button class="btn primary" data-action="new-person" data-kind="${kind}">+ Novo ${K.one}</button></div>`}`;
@@ -4565,6 +4605,377 @@ function personForm(kind, rec, assign, onSaved) {
       viewPeople(kind);
     }
   };
+}
+
+/* =========================================================
+ * Gestão: Financeiro (mensalidades) e Alunos sumindo
+ * ======================================================= */
+const G = { tab: 'financeiro', month: '', absent: null, absentErr: '' };
+const ymOf = (d) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}`;
+const ymAdd = (ym, n) => { const [y, m] = ym.split('-').map(Number); return ymOf(new Date(y, m - 1 + n, 1)); };
+const ymLabel = (ym, short) => { const [y, m] = ym.split('-').map(Number); const s = new Date(y, m - 1, 1).toLocaleDateString('pt-BR', { month: short ? 'short' : 'long', year: 'numeric' }); return s.charAt(0).toUpperCase() + s.slice(1); };
+const ymMonthName = (ym) => { const [y, m] = ym.split('-').map(Number); return new Date(y, m - 1, 1).toLocaleDateString('pt-BR', { month: 'long' }); };
+const brl = (v) => (Number(v) || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const todayYmd = () => { const d = new Date(); return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`; };
+const dmy = (ymd) => (ymd ? ymd.slice(8, 10) + '/' + ymd.slice(5, 7) : '');
+const daysBetween = (a, b) => Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / 86400000);
+const PAY_METHODS = { pix: 'Pix', cartao: 'Cartão', dinheiro: 'Dinheiro', transferencia: 'Transferência', boleto: 'Boleto' };
+const FIN_TPL = {
+  remind: 'Oi {nome}, tudo bem? Passando para lembrar que a mensalidade de {mes} ({valor}) vence em {vencimento}.{pix} Qualquer dúvida, é só me chamar. {personal}',
+  late: 'Oi {nome}, tudo bem? Notei que a mensalidade de {mes} ({valor}), com vencimento em {vencimento}, ainda está em aberto.{pix} Se você já pagou, me envia o comprovante, por favor. Obrigado! {personal}',
+  absent: 'Oi {nome}, tudo bem? Senti sua falta nos treinos! Seu último treino registrado no app foi há {dias} dias. Está tudo certo? Bora retomar esta semana? Me diz o melhor dia que eu te ajudo a encaixar. {personal}',
+  never: 'Oi {nome}, tudo bem? Vi que você ainda não registrou nenhum treino no app. Precisa de ajuda para acessar ou com algum exercício? Estou aqui para te ajudar a começar. {personal}',
+};
+const finCfg = () => ({ pixKey: '', payee: '', ...FIN_TPL, absentDays: 7, ...(S.settings.fin || {}) });
+function myName() {
+  const t = byId(S.trainers, S.settings.defaultTrainerId) || S.trainers[0];
+  return t ? t.name : '';
+}
+function fillMsg(tpl, vars) {
+  return tpl.replace(/\{(\w+)\}/g, (m, k) => (vars[k] != null ? vars[k] : m)).replace(/\s+$/, '').replace(/ {2,}/g, ' ');
+}
+/** Abre uma janela com a mensagem editável e o botão para enviar pelo WhatsApp. */
+function waCompose(st, msg, onSent) {
+  const num = waNumber(st);
+  const body = openModal(`Mensagem para ${st.name}`, `
+    <div class="stack">
+      ${num ? `<div class="small muted">WhatsApp: +${esc(num)}</div>` : '<div class="small" style="color:var(--danger)">Este aluno não tem WhatsApp cadastrado. Você pode copiar a mensagem ou cadastrar o número.</div>'}
+      <textarea id="wa-msg" rows="7">${esc(msg)}</textarea>
+      <div class="row"><button class="btn ghost" id="wa-copy">Copiar</button>${num ? '' : `<button class="btn" data-action="edit-person" data-kind="students" data-id="${esc(st.id)}">Cadastrar WhatsApp</button>`}<span class="spacer"></span>
+        <button class="btn" data-action="close-modal">Cancelar</button>${num ? '<button class="btn primary" id="wa-go">Abrir no WhatsApp</button>' : ''}</div>
+    </div>`);
+  $('#wa-copy', body).onclick = async () => { try { await navigator.clipboard.writeText($('#wa-msg', body).value); toast('Mensagem copiada'); } catch (e) { toast('Não foi possível copiar'); } };
+  if (num) $('#wa-go', body).onclick = () => {
+    window.open(`https://wa.me/${num}?text=${encodeURIComponent($('#wa-msg', body).value)}`, '_blank');
+    closeModal();
+    if (onSent) onSent();
+  };
+}
+
+/* ---- Financeiro ---- */
+function finDue(st, ym) {
+  const b = st.billing || {};
+  const [y, m] = ym.split('-').map(Number);
+  const last = new Date(y, m, 0).getDate();
+  return `${ym}-${pad2(Math.min(Math.max(1, Number(b.day) || 10), last))}`;
+}
+function finStatus(st, ym) {
+  const b = st.billing || {};
+  const pay = (st.payments || {})[ym];
+  const due = finDue(st, ym);
+  const value = pay && pay.value != null ? Number(pay.value) : Number(b.value) || 0;
+  if (pay && pay.paid) return { key: 'paid', label: 'Pago' + (pay.date ? ' em ' + dmy(pay.date) : ''), due, value, pay };
+  const d = daysBetween(todayYmd(), due);
+  if (d < 0) return { key: 'late', label: `Atrasado há ${-d} dia${d === -1 ? '' : 's'}`, due, value, late: -d };
+  if (d <= 3) return { key: 'soon', label: d === 0 ? 'Vence hoje' : `Vence em ${d} dia${d === 1 ? '' : 's'}`, due, value };
+  return { key: 'open', label: 'Em aberto', due, value };
+}
+const finBilled = (st, ym) => !!(st.billing && st.billing.active && Number(st.billing.value) > 0 && (!st.billing.start || st.billing.start <= ym));
+/** Mensalidades vencidas e não pagas, de todos os meses desde o início da cobrança até hoje. */
+function finOwed(st) {
+  const out = [];
+  const cur = ymOf(new Date());
+  if (!st.billing || !st.billing.active) return out;
+  let ym = st.billing.start || cur;
+  for (let i = 0; i < 36 && ym <= cur; i++, ym = ymAdd(ym, 1)) {
+    if (!finBilled(st, ym)) continue;
+    const s = finStatus(st, ym);
+    if (s.key === 'late') out.push({ ym, ...s });
+  }
+  return out;
+}
+function finSummary(ym) {
+  const rows = S.students.filter((st) => finBilled(st, ym)).map((st) => ({ st, s: finStatus(st, ym) }));
+  const sum = (f) => rows.filter(f).reduce((a, r) => a + r.s.value, 0);
+  return {
+    rows,
+    expected: sum(() => true),
+    received: sum((r) => r.s.key === 'paid'),
+    open: sum((r) => r.s.key === 'open' || r.s.key === 'soon'),
+    late: sum((r) => r.s.key === 'late'),
+    lateN: rows.filter((r) => r.s.key === 'late').length,
+    soonN: rows.filter((r) => r.s.key === 'soon').length,
+  };
+}
+function finMsgVars(st, ym, s) {
+  const c = finCfg();
+  return { nome: (st.name || '').split(' ')[0], valor: brl(s.value), vencimento: dmy(s.due), mes: ymMonthName(ym), pix: c.pixKey ? ` Chave Pix: ${c.pixKey}${c.payee ? ' (' + c.payee + ')' : ''}.` : '', personal: myName() };
+}
+
+function viewGestao(tab) {
+  G.tab = tab === 'sumidos' ? 'sumidos' : 'financeiro';
+  if (!G.month) G.month = ymOf(new Date());
+  app.innerHTML = `
+    <div class="page-head"><div><h1>Gestão</h1><p class="muted">Mensalidades, cobranças e alunos que pararam de treinar.</p></div>
+      <div class="tabs"><button class="${G.tab === 'financeiro' ? 'active' : ''}" data-action="gestao-tab" data-tab="financeiro">Financeiro</button><button class="${G.tab === 'sumidos' ? 'active' : ''}" data-action="gestao-tab" data-tab="sumidos">Alunos sumindo</button></div></div>
+    <div id="gestao-body"></div>`;
+  if (G.tab === 'financeiro') renderFinanceiro(); else renderSumidos();
+}
+actions['gestao-tab'] = (el) => { location.hash = '#/gestao/' + el.dataset.tab; };
+
+function renderFinanceiro() {
+  const host = $('#gestao-body');
+  const ym = G.month;
+  const F = finSummary(ym);
+  const order = { late: 0, soon: 1, open: 2, paid: 3 };
+  const rows = F.rows.slice().sort((a, b) => order[a.s.key] - order[b.s.key] || a.s.due.localeCompare(b.s.due) || a.st.name.localeCompare(b.st.name));
+  const owers = S.students.map((st) => ({ st, owed: finOwed(st) })).filter((x) => x.owed.length).sort((a, b) => b.owed.length - a.owed.length);
+  const noPlan = S.students.filter((st) => !(st.billing && st.billing.active)).sort((a, b) => a.name.localeCompare(b.name));
+  const hist = [];
+  for (let i = 5; i >= 0; i--) { const m = ymAdd(ymOf(new Date()), -i); const f = finSummary(m); hist.push({ m, rec: f.received, exp: f.expected }); }
+  const maxH = Math.max(1, ...hist.map((h) => Math.max(h.rec, h.exp)));
+  const cls = { paid: 'ok', late: 'bad', soon: 'warn', open: '' };
+  host.innerHTML = `
+    <div class="section row fin-month">
+      <button class="btn sm" data-action="fin-month" data-d="-1">‹</button><strong class="fin-month-label">${esc(ymLabel(ym))}</strong><button class="btn sm" data-action="fin-month" data-d="1">›</button>
+      ${ym !== ymOf(new Date()) ? '<button class="btn sm ghost" data-action="fin-month" data-d="0">Mês atual</button>' : ''}
+      <span class="spacer"></span><button class="btn sm ghost" data-action="fin-config">⚙ Pix e mensagens</button>
+    </div>
+    <div class="section grid four fin-kpis">
+      <div class="card"><div class="small muted">Faturamento previsto</div><div class="kpi">${brl(F.expected)}</div><div class="small muted">${F.rows.length} aluno(s) com mensalidade</div></div>
+      <div class="card"><div class="small muted">Recebido</div><div class="kpi" style="color:var(--ok)">${brl(F.received)}</div><div class="small muted">${F.expected ? Math.round(F.received / F.expected * 100) : 0}% do previsto</div></div>
+      <div class="card"><div class="small muted">A receber</div><div class="kpi">${brl(F.open)}</div><div class="small muted">${F.soonN ? F.soonN + ' vence(m) em até 3 dias' : 'no prazo'}</div></div>
+      <div class="card"><div class="small muted">Em atraso</div><div class="kpi" style="color:${F.late ? 'var(--danger)' : 'inherit'}">${brl(F.late)}</div><div class="small muted">${F.lateN} aluno(s)</div></div>
+    </div>
+    <div class="section card">
+      <div class="row"><h2 style="margin:0">Cobranças de ${esc(ymMonthName(ym))}</h2><span class="spacer"></span><button class="btn sm primary" data-action="fin-plan-pick">+ Mensalidade de aluno</button></div>
+      ${rows.length ? `<div class="fin-list">${rows.map(({ st, s }) => `
+        <div class="fin-row ${cls[s.key]}">
+          ${avatarHTML(st.photo, st.name)}
+          <div class="fin-who"><strong>${esc(st.name)}</strong><div class="small muted">${brl(s.value)} · vence ${dmy(s.due)}${st.billing.method ? ' · ' + esc(PAY_METHODS[st.billing.method] || st.billing.method) : ''}</div></div>
+          <span class="fin-tag ${cls[s.key]}">${esc(s.label)}</span>
+          <div class="row fin-acts">
+            ${s.key === 'paid' ? `<button class="btn sm ghost" data-action="fin-unpay" data-id="${esc(st.id)}">Desfazer</button>` : `<button class="btn sm" data-action="fin-remind" data-id="${esc(st.id)}">${s.key === 'late' ? 'Cobrar' : 'Lembrar'} no WhatsApp</button><button class="btn sm primary" data-action="fin-pay" data-id="${esc(st.id)}">Marcar pago</button>`}
+            <button class="btn sm ghost" data-action="fin-plan" data-id="${esc(st.id)}" title="Editar mensalidade">✎</button>
+          </div>
+        </div>`).join('')}</div>` : `<div class="empty" style="margin-top:12px">Nenhuma mensalidade neste mês. Clique em <b>+ Mensalidade de aluno</b> para definir valor e vencimento.</div>`}
+    </div>
+    ${owers.length ? `<div class="section card">
+      <h2 style="margin:0 0 4px">Inadimplentes</h2><p class="small muted" style="margin:0 0 10px">Mensalidades vencidas e não pagas, em todos os meses.</p>
+      <div class="fin-list">${owers.map(({ st, owed }) => `
+        <div class="fin-row bad">${avatarHTML(st.photo, st.name)}
+          <div class="fin-who"><strong>${esc(st.name)}</strong><div class="small muted">${owed.length} mensalidade(s): ${owed.map((o) => esc(ymLabel(o.ym, true))).join(', ')}</div></div>
+          <span class="fin-tag bad">${brl(owed.reduce((a, o) => a + o.value, 0))}</span>
+          <div class="row fin-acts"><button class="btn sm" data-action="fin-remind" data-id="${esc(st.id)}" data-ym="${esc(owed[0].ym)}" data-all="1">Cobrar no WhatsApp</button></div>
+        </div>`).join('')}</div></div>` : ''}
+    <div class="section card">
+      <h2 style="margin:0 0 12px">Faturamento dos últimos 6 meses</h2>
+      <div class="fin-bars">${hist.map((h) => `<div class="fin-bar" title="${esc(ymLabel(h.m))}: recebido ${brl(h.rec)} de ${brl(h.exp)}">
+        <div class="fin-bar-val">${h.rec ? brl(h.rec).replace(',00', '') : '—'}</div>
+        <div class="fin-bar-track"><i class="exp" style="height:${h.exp / maxH * 100}%"></i><i class="rec" style="height:${h.rec / maxH * 100}%"></i></div>
+        <div class="small muted">${esc(ymLabel(h.m, true).replace(' de ', '/'))}</div></div>`).join('')}</div>
+      <div class="small muted" style="margin-top:8px"><span class="fin-dot rec"></span> Recebido &nbsp; <span class="fin-dot exp"></span> Previsto</div>
+    </div>
+    ${noPlan.length ? `<div class="section card"><h2 style="margin:0 0 4px">Alunos sem mensalidade cadastrada</h2><p class="small muted" style="margin:0 0 10px">Defina valor e dia de vencimento para acompanhar o pagamento.</p>
+      <div class="row" style="flex-wrap:wrap">${noPlan.map((st) => `<button class="btn sm" data-action="fin-plan" data-id="${esc(st.id)}">+ ${esc(st.name)}</button>`).join('')}</div></div>` : ''}`;
+}
+actions['fin-month'] = (el) => { const d = Number(el.dataset.d); G.month = d ? ymAdd(G.month, d) : ymOf(new Date()); renderFinanceiro(); };
+actions['fin-pay'] = (el) => {
+  const st = byId(S.students, el.dataset.id);
+  const ym = G.month;
+  const s = finStatus(st, ym);
+  const b = st.billing || {};
+  const body = openModal(`Registrar pagamento · ${st.name}`, `
+    <div class="stack">
+      <div class="small muted">${esc(ymLabel(ym))} · vencimento ${dmy(s.due)}</div>
+      <div class="grid two" style="gap:12px">
+        <label class="field"><span>Valor recebido (R$)</span><input type="number" id="fp-val" step="0.01" min="0" value="${esc(s.value)}"></label>
+        <label class="field"><span>Data do pagamento</span><input type="date" id="fp-date" value="${todayYmd()}"></label>
+        <label class="field"><span>Forma</span><select id="fp-met">${Object.entries(PAY_METHODS).map(([k, v]) => `<option value="${k}" ${(b.method || 'pix') === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label>
+      </div>
+      <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="fp-ok">Confirmar pagamento</button></div>
+    </div>`);
+  $('#fp-ok', body).onclick = async () => {
+    st.payments = st.payments || {};
+    st.payments[ym] = { paid: true, value: Number($('#fp-val', body).value) || 0, date: $('#fp-date', body).value || todayYmd(), method: $('#fp-met', body).value };
+    await saveEntity('students', st);
+    closeModal(); toast('Pagamento registrado'); renderFinanceiro();
+  };
+};
+actions['fin-unpay'] = async (el) => {
+  const st = byId(S.students, el.dataset.id);
+  if (!confirm(`Desfazer o pagamento de ${st.name} em ${ymLabel(G.month)}?`)) return;
+  delete (st.payments || {})[G.month];
+  await saveEntity('students', st);
+  renderFinanceiro();
+};
+actions['fin-remind'] = (el) => {
+  const st = byId(S.students, el.dataset.id);
+  const ym = el.dataset.ym || G.month;
+  const s = finStatus(st, ym);
+  const c = finCfg();
+  const v = finMsgVars(st, ym, s);
+  if (el.dataset.all) {
+    const owed = finOwed(st);
+    if (owed.length > 1) { v.mes = owed.map((o) => ymMonthName(o.ym)).join(', ').replace(/, ([^,]*)$/, ' e $1'); v.valor = brl(owed.reduce((a, o) => a + o.value, 0)); v.vencimento = dmy(owed[0].due); }
+  }
+  waCompose(st, fillMsg(s.key === 'late' ? c.late : c.remind, v), async () => {
+    st.billing = st.billing || {};
+    st.billing.lastReminder = todayYmd();
+    await saveEntity('students', st);
+  });
+};
+actions['fin-plan-pick'] = () => {
+  if (!S.students.length) { toast('Cadastre um aluno primeiro'); location.hash = '#/alunos'; return; }
+  const body = openModal('Mensalidade de aluno', `
+    <div class="stack"><label class="field"><span>Aluno</span><select id="fpp-st">${S.students.slice().sort((a, b) => a.name.localeCompare(b.name)).map((st) => `<option value="${esc(st.id)}">${esc(st.name)}${st.billing && st.billing.active ? ' (já tem)' : ''}</option>`).join('')}</select></label>
+      <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="fpp-go">Continuar</button></div></div>`);
+  $('#fpp-go', body).onclick = () => finPlanForm(byId(S.students, $('#fpp-st', body).value));
+};
+actions['fin-plan'] = (el) => finPlanForm(byId(S.students, el.dataset.id));
+function finPlanForm(st) {
+  const firstYm = (day) => (Number(day) >= new Date().getDate() ? ymOf(new Date()) : ymAdd(ymOf(new Date()), 1));
+  const isNew = !st.billing;
+  const b = { active: true, value: '', day: 10, method: 'pix', ...(st.billing || {}) };
+  if (!b.start) b.start = firstYm(b.day);
+  const body = openModal(`Mensalidade · ${st.name}`, `
+    <div class="stack">
+      <div class="grid two" style="gap:12px">
+        <label class="field"><span>Valor mensal (R$)</span><input type="number" id="fb-val" step="0.01" min="0" value="${esc(b.value)}" placeholder="Ex.: 350"></label>
+        <label class="field"><span>Dia do vencimento</span><input type="number" id="fb-day" min="1" max="31" value="${esc(b.day)}"></label>
+        <label class="field"><span>Forma de pagamento</span><select id="fb-met">${Object.entries(PAY_METHODS).map(([k, v]) => `<option value="${k}" ${b.method === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label>
+        <label class="field"><span>Cobrar a partir de</span><input type="month" id="fb-start" value="${esc(b.start)}"></label>
+      </div>
+      <label class="row" style="gap:8px"><input type="checkbox" id="fb-act" ${b.active ? 'checked' : ''} style="width:auto"> Cobrança ativa (desmarque se o aluno pausou ou saiu)</label>
+      <div class="row"><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="fb-ok">Salvar</button></div>
+    </div>`);
+  let startTouched = !isNew;
+  $('#fb-start', body).addEventListener('input', () => { startTouched = true; });
+  $('#fb-day', body).addEventListener('input', (e) => { if (!startTouched) $('#fb-start', body).value = firstYm(e.target.value); });
+  $('#fb-ok', body).onclick = async () => {
+    const value = Number($('#fb-val', body).value);
+    if (!(value > 0)) { toast('Informe o valor da mensalidade'); return; }
+    st.billing = { ...(st.billing || {}), active: $('#fb-act', body).checked, value, day: Math.min(31, Math.max(1, Number($('#fb-day', body).value) || 10)), method: $('#fb-met', body).value, start: $('#fb-start', body).value || ymOf(new Date()) };
+    await saveEntity('students', st);
+    closeModal(); toast('Mensalidade salva');
+    if (location.hash.startsWith('#/gestao')) renderFinanceiro(); else if (location.hash.startsWith('#/alunos')) viewPeople('students');
+  };
+}
+actions['fin-config'] = () => {
+  const c = finCfg();
+  const body = openModal('Pix e mensagens', `
+    <div class="stack">
+      <div class="grid two" style="gap:12px">
+        <label class="field"><span>Chave Pix</span><input type="text" id="fc-pix" value="${esc(c.pixKey)}" placeholder="CPF, e-mail, celular ou chave aleatória"></label>
+        <label class="field"><span>Nome do recebedor (opcional)</span><input type="text" id="fc-payee" value="${esc(c.payee)}"></label>
+      </div>
+      <label class="field"><span>Lembrete antes do vencimento</span><textarea id="fc-remind" rows="3">${esc(c.remind)}</textarea></label>
+      <label class="field"><span>Cobrança em atraso</span><textarea id="fc-late" rows="3">${esc(c.late)}</textarea></label>
+      <label class="field"><span>Aluno sumindo</span><textarea id="fc-absent" rows="3">${esc(c.absent)}</textarea></label>
+      <label class="field"><span>Aluno que nunca registrou treino</span><textarea id="fc-never" rows="3">${esc(c.never)}</textarea></label>
+      <div class="small muted">Campos automáticos: {nome} {valor} {vencimento} {mes} {pix} {dias} {personal}</div>
+      <div class="row"><button class="btn ghost" id="fc-reset">Restaurar textos padrão</button><span class="spacer"></span><button class="btn" data-action="close-modal">Cancelar</button><button class="btn primary" id="fc-ok">Salvar</button></div>
+    </div>`, { wide: true });
+  $('#fc-reset', body).onclick = () => { ['remind', 'late', 'absent', 'never'].forEach((k) => { $('#fc-' + k, body).value = FIN_TPL[k]; }); };
+  $('#fc-ok', body).onclick = async () => {
+    S.settings.fin = { ...(S.settings.fin || {}), pixKey: $('#fc-pix', body).value.trim(), payee: $('#fc-payee', body).value.trim(), remind: $('#fc-remind', body).value.trim(), late: $('#fc-late', body).value.trim(), absent: $('#fc-absent', body).value.trim(), never: $('#fc-never', body).value.trim() };
+    await saveSettings();
+    closeModal(); toast('Salvo');
+    if (location.hash.startsWith('#/gestao')) viewGestao(G.tab);
+  };
+};
+
+/* ---- Alunos sumindo ---- */
+async function loadAbsent() {
+  const progs = S.programs.filter((p) => p.studentId && !p.isTemplate);
+  if (!progs.length) return [];
+  const acc = [];
+  for (let i = 0; i < progs.length; i += 150) {
+    const { data, error } = await sb.from('student_access').select('id,program_ref,active,expires_at,last_seen_at,created_at').in('program_ref', progs.slice(i, i + 150).map((p) => p.id));
+    if (error) throw error;
+    acc.push(...data);
+  }
+  const logs = [];
+  for (let i = 0; i < acc.length; i += 150) {
+    const { data, error } = await sb.from('workout_logs').select('access_id,log_date').in('access_id', acc.slice(i, i + 150).map((a) => a.id)).order('log_date', { ascending: false }).limit(3000);
+    if (error) throw error;
+    logs.push(...data);
+  }
+  const progStudent = Object.fromEntries(progs.map((p) => [p.id, p.studentId]));
+  const now = Date.now();
+  const by = {};
+  acc.forEach((a) => {
+    const sid = progStudent[a.program_ref];
+    if (!sid) return;
+    const o = (by[sid] = by[sid] || { sid, active: false, lastLog: '', lastSeen: '', since: '' });
+    if (a.active && (!a.expires_at || new Date(a.expires_at).getTime() > now)) o.active = true;
+    if (a.last_seen_at && a.last_seen_at > o.lastSeen) o.lastSeen = a.last_seen_at;
+    const c = (a.created_at || '').slice(0, 10);
+    if (c && (!o.since || c < o.since)) o.since = c;
+  });
+  const accStudent = Object.fromEntries(acc.map((a) => [a.id, progStudent[a.program_ref]]));
+  logs.forEach((l) => { const o = by[accStudent[l.access_id]]; if (o && l.log_date > o.lastLog) o.lastLog = l.log_date; });
+  return Object.values(by);
+}
+async function renderSumidos(force) {
+  const host = $('#gestao-body');
+  if (!CLOUD.user) {
+    host.innerHTML = `<div class="section empty"><h2>Alunos sumindo</h2><p>Entre na sua conta para ver quem parou de registrar treinos no app.</p><button class="btn primary" data-action="login">Entrar ou criar conta</button></div>`;
+    return;
+  }
+  if (!G.absent || force) {
+    host.innerHTML = '<div class="section muted">Carregando os treinos dos alunos…</div>';
+    try { G.absent = await loadAbsent(); G.absentErr = ''; } catch (e) { G.absentErr = e.message || String(e); G.absent = []; }
+  }
+  if (G.tab !== 'sumidos' || !document.body.contains(host)) return; // saiu da tela durante o carregamento
+  const c = finCfg();
+  const X = Number(c.absentDays) || 7;
+  const today = todayYmd();
+  const list = G.absent.filter((o) => o.active && byId(S.students, o.sid)).map((o) => {
+    const st = byId(S.students, o.sid);
+    const ref = o.lastLog || o.since || today;
+    return { ...o, st, days: daysBetween(ref, today), never: !o.lastLog };
+  });
+  const away = list.filter((o) => o.days >= X).sort((a, b) => b.days - a.days);
+  const ok = list.filter((o) => o.days < X).sort((a, b) => a.days - b.days);
+  const withProg = new Set(S.programs.filter((p) => p.studentId && !p.isTemplate).map((p) => p.studentId));
+  const noAccess = [...withProg].filter((sid) => !list.some((o) => o.sid === sid) && byId(S.students, sid)).map((sid) => byId(S.students, sid));
+  const row = (o, bad) => `
+    <div class="fin-row ${bad ? (o.days >= X * 2 ? 'bad' : 'warn') : 'ok'}">
+      ${avatarHTML(o.st.photo, o.st.name)}
+      <div class="fin-who"><strong>${esc(o.st.name)}</strong><div class="small muted">${o.never ? `Nunca registrou treino · acesso desde ${dmy(o.since)}` : `Último treino ${dmy(o.lastLog)}`}${o.lastSeen ? ` · abriu o app ${new Date(o.lastSeen).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })}` : ''}${o.st.lastNudge ? ` · contatado ${dmy(o.st.lastNudge)}` : ''}</div></div>
+      <span class="fin-tag ${bad ? (o.days >= X * 2 ? 'bad' : 'warn') : 'ok'}">${o.days === 0 ? 'Treinou hoje' : `${o.days} dia${o.days === 1 ? '' : 's'}`}</span>
+      ${bad ? `<div class="row fin-acts"><button class="btn sm primary" data-action="abs-msg" data-id="${esc(o.sid)}">Mensagem no WhatsApp</button></div>` : ''}
+    </div>`;
+  host.innerHTML = `
+    <div class="section row">
+      <label class="row" style="gap:8px">Mostrar quem está sem treinar há <select id="abs-days" style="width:auto">${[3, 5, 7, 10, 14, 21, 30].map((d) => `<option value="${d}" ${d === X ? 'selected' : ''}>${d} dias</option>`).join('')}</select> ou mais</label>
+      <span class="spacer"></span><button class="btn sm ghost" data-action="abs-refresh">Atualizar</button><button class="btn sm ghost" data-action="fin-config">⚙ Mensagens</button>
+    </div>
+    ${G.absentErr ? `<div class="section card" style="color:var(--danger)">Erro ao carregar: ${esc(G.absentErr)}</div>` : ''}
+    <div class="section grid three">
+      <div class="card"><div class="small muted">Sumindo (${X}+ dias)</div><div class="kpi" style="color:${away.length ? 'var(--danger)' : 'inherit'}">${away.length}</div></div>
+      <div class="card"><div class="small muted">Treinando em dia</div><div class="kpi" style="color:var(--ok)">${ok.length}</div></div>
+      <div class="card"><div class="small muted">Com programa, sem acesso ao app</div><div class="kpi">${noAccess.length}</div></div>
+    </div>
+    <div class="section card"><h2 style="margin:0 0 4px">Alunos sumindo</h2><p class="small muted" style="margin:0 0 10px">Com acesso ativo e sem registrar treino no app há ${X} dias ou mais. Vermelho: o dobro do prazo.</p>
+      ${away.length ? `<div class="fin-list">${away.map((o) => row(o, true)).join('')}</div>` : '<div class="empty">Nenhum aluno sumido. 👏</div>'}</div>
+    ${ok.length ? `<div class="section card"><h2 style="margin:0 0 10px">Treinando em dia</h2><div class="fin-list">${ok.map((o) => row(o, false)).join('')}</div></div>` : ''}
+    ${noAccess.length ? `<div class="section card"><h2 style="margin:0 0 4px">Sem acesso liberado ao app</h2><p class="small muted" style="margin:0 0 10px">Sem acesso, o app não sabe se o aluno está treinando. Libere o código no programa dele.</p>
+      <div class="row" style="flex-wrap:wrap">${noAccess.map((st) => `<button class="btn sm" data-action="filter-student" data-id="${esc(st.id)}">${esc(st.name)}</button>`).join('')}</div></div>` : ''}`;
+  $('#abs-days').onchange = async (e) => { S.settings.fin = { ...(S.settings.fin || {}), absentDays: Number(e.target.value) }; await saveSettings(); renderSumidos(); };
+}
+actions['abs-refresh'] = () => renderSumidos(true);
+actions['abs-msg'] = (el) => {
+  const o = (G.absent || []).find((x) => x.sid === el.dataset.id);
+  const st = byId(S.students, el.dataset.id);
+  const c = finCfg();
+  const days = o ? daysBetween(o.lastLog || o.since || todayYmd(), todayYmd()) : '';
+  waCompose(st, fillMsg(o && !o.lastLog ? c.never : c.absent, { nome: (st.name || '').split(' ')[0], dias: days, personal: myName() }), async () => {
+    st.lastNudge = todayYmd();
+    await saveEntity('students', st);
+    renderSumidos();
+  });
+};
+
+/* Aviso na tela inicial: cobranças em atraso ou vencendo */
+function gestaoHomeAlert() {
+  const F = finSummary(ymOf(new Date()));
+  const owers = S.students.filter((st) => finOwed(st).length).length;
+  if (!owers && !F.soonN) return '';
+  return `<div class="card onboard row">
+    <div style="flex:1;min-width:220px"><strong>Financeiro</strong><div class="small muted">${owers ? `${owers} aluno(s) com mensalidade em atraso` : ''}${owers && F.soonN ? ' · ' : ''}${F.soonN ? `${F.soonN} vence(m) em até 3 dias` : ''}</div></div>
+    <a class="btn primary" href="#/gestao/financeiro">Ver cobranças</a></div>`;
 }
 
 /* =========================================================
