@@ -3,6 +3,29 @@ TRAINER PRO STUDIO — BASE DE CONHECIMENTO PARA O ASSISTENTE DE DÚVIDAS
 O QUE É
 O Trainer Pro Studio é um aplicativo para personal trainers e profissionais de Educação Física, criado pelo Prof. José Carlos Gallo (Instituto Gallo Personal). Com ele o personal monta o programa de treino do aluno em minutos, com a sua marca, entrega o treino no celular do aluno, faz avaliação física com relatório de evolução, monta programas aeróbicos, controla as mensalidades e acompanha quem parou de treinar. Funciona no celular e no computador, direto no navegador, sem instalar nada.
 
+DIFERENÇA ENTRE A BIBLIOTECA DE TREINOS LUCRATIVOS PRO E O TRAINER PRO STUDIO (IMPORTANTE)
+São dois produtos diferentes do Prof. José Carlos Gallo. Um não substitui o outro, e a compra de um não dá acesso ao outro.
+
+Biblioteca de Treinos Lucrativos e Personalizáveis Pro (o produto em PDF)
+- É uma coleção de programas de musculação prontos em PDF editável, organizados por código (objetivo, sexo, faixa etária, local e duração).
+- O personal baixa os arquivos, edita no Canva ou em um editor de PDF, coloca a própria marca (nome, logo, foto, Instagram, WhatsApp) e a foto do aluno, e entrega o PDF ao aluno, normalmente pelo WhatsApp.
+- Vem com manual de utilização e curso de como escolher, editar, personalizar, vender e divulgar os programas.
+- Depois de entregue, o PDF é um arquivo estático: o aluno lê o treino, mas não registra cargas, e o personal não acompanha nada pelo PDF.
+- Não tem aplicativo do aluno, avaliação física, programa aeróbico, testes de VO2 nem controle de mensalidades.
+
+Trainer Pro Studio (o aplicativo, por assinatura)
+- É um aplicativo online, por assinatura mensal ou anual. Não é um arquivo para baixar.
+- Os programas Premium da Biblioteca já estão dentro do app, prontos para usar, junto com programas novos (69 no total). Não precisa editar PDF nem usar Canva: o app filtra os programas pelo perfil do aluno, o personal ajusta o que quiser no próprio app e a capa sai automaticamente com a marca do personal e a foto do aluno.
+- O aluno recebe o treino no celular, com um código, sem senha: vê o treino do dia com foto de cada exercício, registra séries e cargas, e o personal acompanha tudo.
+- Além dos programas, o app tem: avaliação física com cálculo automático e relatório de evolução em PDF, programa aeróbico com zonas de frequência cardíaca, 5 testes de VO2 máximo, controle de mensalidades e cobrança pelo WhatsApp, e alerta de aluno sumindo.
+
+Resumo da diferença
+- Biblioteca: programas em PDF para editar e entregar como arquivo. Compra separada.
+- Aplicativo: os programas já prontos dentro de um sistema completo, com o treino no celular do aluno, registro de cargas, avaliação, aeróbico e gestão do negócio. Assinatura.
+- Quem já tem a Biblioteca continua com ela e pode usar os dois juntos: a Biblioteca para quem prefere entregar em PDF, e o app para entregar o treino no celular e acompanhar o aluno.
+- Quem já comprou a Biblioteca tem uma condição especial para assinar o aplicativo. Essa condição é enviada diretamente aos compradores da Biblioteca. Se o comprador da Biblioteca não recebeu, deve falar com o suporte informando o e-mail usado na compra da Biblioteca.
+- Comprar a Biblioteca NÃO libera o aplicativo. Para usar o app é preciso assinar o Trainer Pro Studio e criar a conta com o e-mail dessa assinatura.
+
 COMO ACESSAR DEPOIS DA COMPRA
 1. Acesse treinerstudiopro.netlify.app
 2. Toque em Entrar e depois em Criar conta, usando o MESMO e-mail usado na compra na Kiwify, e crie uma senha.
@@ -85,6 +108,11 @@ Material de apoio: Guia Rápido Trainer Pro Studio em PDF (passo a passo das 11 
 Bônus: Kit de Mensagens para WhatsApp, Calculadora de Precificação de Horas de Trabalho e Guia de Renovação.
 
 DÚVIDAS FREQUENTES
+- Já comprei a Biblioteca de Treinos. Tenho acesso ao app? Não. São produtos diferentes. A Biblioteca são os programas em PDF editável; o app é uma assinatura separada. Compradores da Biblioteca têm uma condição especial para assinar o app (fale com o suporte se não recebeu).
+- Comprei a Biblioteca e não consigo entrar no app: o app só libera o acesso com o e-mail de uma assinatura do Trainer Pro Studio. A compra da Biblioteca não libera o app.
+- Qual a diferença entre a Biblioteca e o app? A Biblioteca entrega os programas em PDF para você editar no Canva e mandar ao aluno. O app já traz os programas prontos e coloca o treino no celular do aluno, com registro de cargas, acompanhamento, avaliação física, programa aeróbico e gestão de mensalidades.
+- Preciso da Biblioteca para usar o app? Não. Os programas já estão dentro do app.
+- Os programas do app são os mesmos da Biblioteca? O app traz os programas Premium da Biblioteca e programas novos, 69 no total, prontos para usar e editar dentro do app.
 - Funciona no celular? Sim, no celular e no computador, pelo navegador, com tudo salvo na nuvem.
 - Precisa instalar? Não. Basta acessar o link; pode salvar na tela inicial como um app.
 - O aluno paga alguma coisa ou precisa de conta? Não. O aluno entra com o link e o código liberado pelo personal.
