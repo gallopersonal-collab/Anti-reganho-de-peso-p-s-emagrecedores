@@ -7,7 +7,7 @@ DIFERENÇA ENTRE A BIBLIOTECA DE TREINOS LUCRATIVOS PRO E O TRAINER PRO STUDIO (
 São dois produtos diferentes do Prof. José Carlos Gallo. Um não substitui o outro, e a compra de um não dá acesso ao outro.
 
 Biblioteca de Treinos Lucrativos e Personalizáveis Pro (o produto em PDF)
-- É uma coleção de programas de musculação prontos em PDF editável, organizados por código (objetivo, sexo, faixa etária, local e duração).
+- É uma coleção de 68 programas de musculação prontos em PDF editável, organizados por código (objetivo, sexo, faixa etária, local e duração).
 - O personal baixa os arquivos, edita no Canva ou em um editor de PDF, coloca a própria marca (nome, logo, foto, Instagram, WhatsApp) e a foto do aluno, e entrega o PDF ao aluno, normalmente pelo WhatsApp.
 - Vem com manual de utilização e curso de como escolher, editar, personalizar, vender e divulgar os programas.
 - Depois de entregue, o PDF é um arquivo estático: o aluno lê o treino, mas não registra cargas, e o personal não acompanha nada pelo PDF.
@@ -124,4 +124,7 @@ DÚVIDAS FREQUENTES
 - Como cancelo? No plano mensal, cancele quando quiser pela Kiwify. Reembolso integral se pedido em até 7 dias.
 
 SUPORTE
-[Preencher com o canal de suporte: WhatsApp e/ou e-mail do Instituto Gallo Personal]
+Atendimento do Instituto Gallo Personal:
+- WhatsApp: (71) 99289-3333
+- E-mail: contato@institutogallopersonal.com
+Sempre que a dúvida não for resolvida aqui, ou em casos de acesso, pagamento, reembolso e condição especial para compradores da Biblioteca, oriente o cliente a falar com o suporte por esses canais.
