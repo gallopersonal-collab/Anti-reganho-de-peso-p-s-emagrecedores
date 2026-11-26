@@ -1,0 +1,4 @@
+# Site de vendas (sitetrainerstudiopro.netlify.app)
+[build]
+  publish = "."
+  functions = "netlify/functions"

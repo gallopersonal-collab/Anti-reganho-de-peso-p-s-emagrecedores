@@ -73,7 +73,8 @@ footer a{color:var(--gold2)}
 <!-- Meta Pixel (Pixel Gallo Personal) -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','359597814629044');fbq('track','PageView');fbq('track','ViewContent',{content_name:'Oferta Biblioteca'});
+window.tpsTrack=function(n,d,delay){var id=n+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);try{fbq('track',n,d||{},{eventID:id})}catch(e){}setTimeout(function(){try{var c=document.cookie,g=function(k){var m=c.match(new RegExp('(?:^|; )'+k+'=([^;]*)'));return m?decodeURIComponent(m[1]):''};var fbc=g('_fbc');if(!fbc){var p=new URLSearchParams(location.search).get('fbclid');if(p)fbc='fb.1.'+Date.now()+'.'+p}var body=JSON.stringify({event_name:n,event_id:id,event_source_url:location.href,custom_data:d||{},fbp:g('_fbp'),fbc:fbc});if(navigator.sendBeacon){navigator.sendBeacon('/.netlify/functions/capi',body)}else{fetch('/.netlify/functions/capi',{method:'POST',body:body,keepalive:true})}}catch(e){}},delay||0)};
+fbq('init','359597814629044');tpsTrack('PageView',{},1500);tpsTrack('ViewContent',{content_name:'Oferta Biblioteca'},1500);
 </script>
 </head>
 <body>
@@ -195,7 +196,7 @@ fbq('init','359597814629044');fbq('track','PageView');fbq('track','ViewContent',
     if (q) a.href += (a.href.indexOf('?') < 0 ? '?' : '&') + q;
     a.addEventListener('click', function(){
       var anual = a.dataset.plan === 'anual';
-      if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: anual ? 'Oferta Biblioteca anual' : 'Oferta Biblioteca mensal', value: anual ? 297 : 29.9, currency: 'BRL' });
+      if (window.tpsTrack) tpsTrack('InitiateCheckout', { content_name: anual ? 'Oferta Biblioteca anual' : 'Oferta Biblioteca mensal', value: anual ? 297 : 29.9, currency: 'BRL' });
     });
   });
 })();
