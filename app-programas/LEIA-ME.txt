@@ -54,5 +54,5 @@ Links de assinatura (Kiwify) exibidos na tela de acesso
             (anual R$ 497 à vista ou 12x de R$ 51,40; mensal R$ 57,90)
   Especial (quem tem a Biblioteca de Treinos Lucrativos Pro) - NÃO aparece no app;
   enviar só para a base de alunos da Biblioteca (e-mail / área de membros):
-            anual https://pay.kiwify.com.br/9tg3a34   mensal https://pay.kiwify.com.br/4HeJX92
+            anual https://pay.kiwify.com.br/9tg3a34   mensal https://pay.kiwify.com.br/Zayv4Mj (R$ 29,90 só no 1º mês, depois R$ 57,90)
   Para trocar: constante KIWIFY_OFFERS em app.js e rodar scripts/build_app_programas.py
